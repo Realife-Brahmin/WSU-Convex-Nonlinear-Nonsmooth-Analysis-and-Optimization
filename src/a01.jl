@@ -42,8 +42,8 @@ display(∇²f(x, y))
 x0, y0 = 0, 0;
 x1, y1 = -sqrt(1/19), 1/19;
 x2, y2 = sqrt(1/19), 1/19;
-xlist = [x0, x1, x2];
-ylist = [y0, y1, y2];
+xlist = [x0, x1, x2]
+ylist = [y0, y1, y2]
 f.(xlist, ylist)
 ∇f.(xlist, ylist)
 ∇²f.(xlist, ylist)

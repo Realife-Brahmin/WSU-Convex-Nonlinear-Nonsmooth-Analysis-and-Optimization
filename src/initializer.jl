@@ -12,7 +12,7 @@ function estimate_x0(df::DataFrame,
     x0[2] = 1
     x0[3] = 1
     x0[4] = estimate_omega(df)
-    x0[5] = 1
+    x0[5] = 0 # α decay is almost zero
     x0[6] = 1
 
     return x0

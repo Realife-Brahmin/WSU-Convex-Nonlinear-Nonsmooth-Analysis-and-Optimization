@@ -1,4 +1,4 @@
-module Initializer
+module initializer
 
 using DataFrames
 

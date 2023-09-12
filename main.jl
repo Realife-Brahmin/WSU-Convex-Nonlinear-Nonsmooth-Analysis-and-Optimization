@@ -6,8 +6,13 @@ using LinearAlgebra
 using Revise
 using Symbolics
 
-include("src/initializer.jl")
-include("src/objective.jl")
+push!(LOAD_PATH, "src");
+
+# include("initializer.jl")
+using .initializer
+# include("src/objective.jl");
+using .objective
+# using .optimize
 
 rawDataFolder = "rawData/";
 filename = rawDataFolder*"FFD.csv";

@@ -4,6 +4,20 @@ using DataFrames
 
 # export estimate_omega
 
+function estimate_x0(df::DataFrame, 
+    x::Vector{Num})::Vector{Float64}
+
+    x0 = zeros(Float64, length(x))
+    x0[1] = estimate_A0(df)
+    x0[2] = 1
+    x0[3] = 1
+    x0[4] = estimate_omega(df)
+    x0[5] = 1
+    x0[6] = 1
+
+    return x0
+end
+
 function estimate_omega(df::DataFrame)::Float64
     # Extract the time and value columns
     times = df.t
@@ -13,7 +27,7 @@ function estimate_omega(df::DataFrame)::Float64
     peak_times = Float64[]
     increasing = false
 
-    for i in 2:length(values)
+    for i in 2:lastindex(values)
         if increasing
             if values[i] < values[i-1]
                 # A peak is detected
@@ -38,6 +52,11 @@ function estimate_omega(df::DataFrame)::Float64
     # Calculate omega
     ω = 2 * π / T
     return ω
+end
+
+function estimate_A0(df::DataFrame)::Float64
+    A₀₀ = mean(df.V)
+    return A₀₀
 end
 
 # end

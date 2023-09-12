@@ -8,10 +8,16 @@ using Symbolics
 
 push!(LOAD_PATH, "src");
 
-# include("initializer.jl")
-using .initializer
+include("src/utilities.jl")
+# include("src/initializer.jl");
+# safe_import(:initializer)
+# safe_import(:objective)
+
+safe_using(:objective)
+safe_using(:initializer)
+# using .initializer
 # include("src/objective.jl");
-using .objective
+# using .objective
 # using .optimize
 
 rawDataFolder = "rawData/";

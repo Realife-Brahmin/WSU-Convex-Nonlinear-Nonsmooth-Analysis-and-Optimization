@@ -1,4 +1,4 @@
-import Base.eval
+# import Base.eval
 
 function safe_import(mod_name::Symbol)
     eval(:(import $mod_name))

@@ -1,9 +1,9 @@
-module objective
+# module objective
 
 using DataFrames
 using Symbolics
 
-export objFun
+# export objFun
 
 function objFun(df::DataFrame;getGradientToo=true)
     N = size(df, 1)
@@ -25,4 +25,4 @@ function objFun(df::DataFrame;getGradientToo=true)
     end
 end
 
-end
+# end

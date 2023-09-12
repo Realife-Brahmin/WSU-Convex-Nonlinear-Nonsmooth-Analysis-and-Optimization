@@ -1,8 +1,8 @@
-module initializer
+# module initializer
 
 using DataFrames
 
-export estimate_omega
+# export estimate_omega
 
 function estimate_omega(df::DataFrame)::Float64
     # Extract the time and value columns
@@ -40,4 +40,4 @@ function estimate_omega(df::DataFrame)::Float64
     return ω
 end
 
-end
+# end

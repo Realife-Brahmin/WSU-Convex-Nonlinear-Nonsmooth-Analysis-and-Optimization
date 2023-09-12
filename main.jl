@@ -6,17 +6,17 @@ using LinearAlgebra
 using Revise
 using Symbolics
 
-push!(LOAD_PATH, "src");
+# push!(LOAD_PATH, "src");
 
 include("src/utilities.jl")
-# include("src/initializer.jl");
+include("src/initializer.jl");
 # safe_import(:initializer)
 # safe_import(:objective)
 
-safe_using(:objective)
-safe_using(:initializer)
+# safe_using(:objective)
+# safe_using(:initializer)
 # using .initializer
-# include("src/objective.jl");
+include("src/objective.jl");
 # using .objective
 # using .optimize
 

@@ -79,4 +79,23 @@ function objFun(df::DataFrame;
     end
 end
 
+function findDirection(pr::NamedTuple, x_now::Vector{Float64}, ∇f;
+    verbose::Bool=false)::Vector{Float64}
+    method = pr.method
+    N = length(x_now)
+    if method == "GradientDescent"
+        Bₖ = I(n_now)
+        ∇f_now = ∇f(x_now)
+        pₖ = -Bₖ*∇f_now
+    else 
+        @error "Currently not formulated for this method"
+    end
+
+    return pₖ
+end
+
+function linesearch(pr::NamedTuple, x0::Vector{Float64};
+    verbose::Bool=false)::Float64
+
+end
 # end

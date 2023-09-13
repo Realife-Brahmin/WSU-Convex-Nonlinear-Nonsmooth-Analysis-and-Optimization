@@ -35,11 +35,12 @@ alg = (method = "GradientDescent",
 
 f, ∇f, fnum, ∇fnum, x = objFun(df);
 
-x0 = estimate_x0(df, x)
-x01 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
+# x0_mine = estimate_x0(df, x)
+
+x0_Good = [13.8, 8.3, 0.022, 1800, 900, 4.2]
 # fnum([x0[1], 1, 1, 1, 1, 1])
-fnum(x0) # should be close to A₀ ≈ 13.76
-fnum(x01)
+# fnum(x0_mine) # should be as close to 0.00 as possible
+fnum(x0_Good)
 # lol it got worse after I inserted a more sensible value of A?
 
 

@@ -9,10 +9,11 @@ using Plots
 using Revise
 using Symbolics
 
-include("src/utilities.jl");
 include("src/initializer.jl");
+include("src/helperFunctions.jl");
 include("src/objective.jl");
 include("src/plotter.jl");
+include("src/utilities.jl");
 
 rawDataFolder = "rawData/";
 filename = rawDataFolder*"FFD.csv";

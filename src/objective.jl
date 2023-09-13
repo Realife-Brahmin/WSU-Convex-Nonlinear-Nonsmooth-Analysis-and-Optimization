@@ -3,6 +3,8 @@
 using DataFrames
 using Symbolics
 
+include("helperFunctions.jl");
+
 # export objFun
 """
     objFun(df::DataFrame; getGradientToo=true, getFunctionsToo=true,
@@ -90,11 +92,10 @@ function buildFunctions_DampedSHM(;
     
     # ∇fnum = nothing
     if getGradientToo
-        println("I'm getting the gradient as asked.")
+        myprintln(verbose, "I'm getting the gradient as asked.")
         ∇f = Symbolics.gradient(f, x)
         ∇fnum = build_function(∇f, x, t, expression=Val{false})
-        ∇fnum = ∇fnum[1] # Only taking the first function from the tuple
-
+        ∇fnum = ∇fnum[1] # Only taking the first function from the tuple, no idea why there's a tuple being generated
     else
         ∇fnum = nothing
     end
@@ -110,16 +111,16 @@ function buildFunctions_DampedSHM(;
 end
 
 
-function dampedSHM(x::Vector, t;
-    getGradientToo::Bool=false,
+function dampedSHM(x::Vector{Float64}, t::Float64;
+    getGradientToo::Bool=true,
     printSymbolicEquations::Bool=false,
-    verbose::Bool=true)
+    verbose::Bool=false)
 
-    outputs = buildFunctions_DampedSHM(printSymbolicEquations=printSymbolicEquations, verbose=verbose)
+    fnum, ∇fnum = buildFunctions_DampedSHM(printSymbolicEquations=printSymbolicEquations, verbose=verbose)
 
-    fval = outputs.fnum(x, t)
+    fval = fnum(x, t)
     if getGradientToo 
-        ∇fval = outputs.∇fnum(x, t)
+        ∇fval = ∇fnum(x, t)
         return fval, ∇fval
     else
         return fval

@@ -21,7 +21,19 @@ rename!(df, [:t, :V]);
 
 scatter_voltage_vs_time(df)
 
-@btime f, ∇f, fnum, ∇fnum, x = objFun(df);
+alg = (method = "GradientDescent",
+        maxiter = 200,
+        ngtol = 1e-8,
+        dxtol = 1e-8,
+        lambda = 1,
+        lambdaMax = 100,
+        linesearch = "Armijo",
+        c1 = 0.0001,
+        c2 = 0.9,
+        progress = 10);
+
+
+f, ∇f, fnum, ∇fnum, x = objFun(df);
 
 x0 = estimate_x0(df, x)
 # fnum([x0[1], 1, 1, 1, 1, 1])

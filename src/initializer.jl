@@ -80,23 +80,6 @@ function estimate_A(df::DataFrame)::Float64
 end
 
 function estimate_phi(df::DataFrame, A₀::Float64, A::Float64, ω::Float64)
-    # adjusted_V = df.V .- A₀
-
-    # # Compute the first zero-crossing point after an upward slope
-    # # We find where the adjusted voltage crosses zero and has a positive slope
-    # zero_crossings = findall(x -> x > 0, diff(sign.(adjusted_V)))
-    
-    # if isempty(zero_crossings)
-    #     throw(ErrorException("Unable to determine zero-crossing from data."))
-    # end
-
-    # t_zero_crossing = df.t[zero_crossings[1]]
-
-    # # The phase shift φ would then be determined by comparing this t_zero_crossing to a standard sine function.
-    # # Specifically, for a standard sine function, sin(ω*t + φ) = 0 implies that ω*t + φ = 0 (mod π).
-    # # Hence, φ = -ω*t_zero_crossing (mod π).
-
-    # φ = mod(-ω * t_zero_crossing, π)
     ϕ = asin((df.V[1] - A₀)/A) - df.t[1]*ω
     return ϕ
 end

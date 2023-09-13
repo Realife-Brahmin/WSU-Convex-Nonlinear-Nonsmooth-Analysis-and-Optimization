@@ -88,10 +88,15 @@ function buildFunctions_DampedSHM(;
     f = A₀ + A*exp(-t/τ)sin((ω+α*t)t + ϕ)
     fnum = build_function(f, x, t, expression=Val{false})
     
-    ∇fnum = nothing
+    # ∇fnum = nothing
     if getGradientToo
+        println("I'm getting the gradient as asked.")
         ∇f = Symbolics.gradient(f, x)
         ∇fnum = build_function(∇f, x, t, expression=Val{false})
+        ∇fnum = ∇fnum[1] # Only taking the first function from the tuple
+
+    else
+        ∇fnum = nothing
     end
 
     if printSymbolicEquations
@@ -110,7 +115,7 @@ function dampedSHM(x::Vector, t;
     printSymbolicEquations::Bool=false,
     verbose::Bool=true)
 
-    outputs = buildFunctions_DampedSHM(printSymbolicEquations=false, verbose=verbose)
+    outputs = buildFunctions_DampedSHM(printSymbolicEquations=printSymbolicEquations, verbose=verbose)
 
     fval = outputs.fnum(x, t)
     if getGradientToo 

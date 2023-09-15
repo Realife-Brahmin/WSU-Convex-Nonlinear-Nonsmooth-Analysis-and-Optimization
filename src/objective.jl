@@ -127,14 +127,13 @@ function dampedSHM(x::Vector{Float64}, t::Float64;
     end
 end
 
-function findDirection(pr::NamedTuple, x_now::Vector{Float64}, ∇fobj;
+function findDirection(pr::NamedTuple, ∇fnow::Vector{Float64};
     verbose::Bool=false)::Vector{Float64}
-    method = pr.method
-    N = length(x_now)
+    method = pr.alg.method
+    n = length(∇fnow)
     if method == "GradientDescent"
-        Bₖ = I(n_now)
-        ∇f_now = ∇fobj(x_now)
-        pₖ = -Bₖ*∇f_now
+        Bₖ = I(n)
+        pₖ = -Bₖ*∇fnow
     else 
         @error "Currently not formulated for this method"
     end

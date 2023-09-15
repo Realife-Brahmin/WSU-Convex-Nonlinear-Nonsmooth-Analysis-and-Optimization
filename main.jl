@@ -34,7 +34,7 @@ alg = (method = "GradientDescent",
         c2 = 0.9,
         progress = 10);
 
-functionName = "dampedSHM"
+functionName = "dampedSHM";
 
 pr = (objective=functionName, x0=x0, alg=alg, df=df);
 
@@ -42,11 +42,11 @@ pr = (objective=functionName, x0=x0, alg=alg, df=df);
 # a single field NamedTuple, ignores the existence of the field.
 # pr == alg # true? bad.
 
-method = pr.alg.method
+# method = pr.alg.method;
 # f, ∇f, fnum, ∇fnum, x = objFun(df);
 # x0_mine = estimate_x0(df, x)
 
-x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
+x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2];
 # fnum([x0[1], 1, 1, 1, 1, 1])
 # fnum(x0_mine) # should be as close to 0.00 as possible
 # fnum(x0_Good)
@@ -55,7 +55,9 @@ x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
 
 # t0 = df.t[1]
 # f, g = dampedSHM(x0, t0)
-F, G = computeCost(pr, x0, t0)
+F, G = computeCost(pr, x0)
+pk = findDirection(pr, G)
+α = linesearch(pr, x0, pk, verbose=true)
 # pk = findDirection(pr, g)
 # α = linesearch(pr, x0, t0, pk, verbose=true)
 

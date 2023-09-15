@@ -107,7 +107,7 @@ xnow = [0.5, 0.5]
 t = 1.0
 Fval, Gval = computeCost(pr, xnow, t, getGradientToo=true)
 """
-function computeCost(pr::NamedTuple, xnow::Vector{Float64}, t::Float64; getGradientToo::Bool=true, verbose::Bool=false)
+function computeCost(pr::NamedTuple, xnow::Vector{Float64}; getGradientToo::Bool=true, verbose::Bool=false)
     
     df = pr.df
     M = length(df.V)
@@ -256,35 +256,38 @@ function findDirection(pr::NamedTuple, ∇fnow::Vector{Float64};
 end
 
 """
-    linesearch(pr::NamedTuple, xnow::Vector{Float64}, t::Float64, pₖ::Vector{Float64}; verbose::Bool=false) -> Float64
+    linesearch(pr::NamedTuple, xnow::Vector{Float64}, pₖ::Vector{Float64}; verbose::Bool=false)::Tuple{Float64, Vector{Float64}, Float64}
 
-Perform a line search to compute the step size `α` for optimization algorithms based on the provided search direction `pₖ`, current point `xnow`, and the line search method specified in `pr.alg.linesearch`.
+Performs line search to find an appropriate step size (`α`) that ensures the next parameter value `xnext` satisfies the specified conditions, and returns the objective function value `F` at that point.
 
 # Arguments
-- `pr::NamedTuple`: A named tuple containing problem configurations. Specifically, it should contain:
-    * `pr.objective`: Specifies the objective function to be optimized.
-    * `pr.alg.linesearch`: Defines the line search method to be used. Supported methods include "Armijo" and "StrongWolfe".
-    * `pr.alg.c1` and `pr.alg.c2`: Constants used in the line search criteria.
-- `xnow::Vector{Float64}`: The current point in the optimization space.
-- `t::Float64`: A parameter required by the objective function.
-- `pₖ::Vector{Float64}`: The search direction.
+- `pr::NamedTuple`: An object containing configurations, data, and algorithm settings.
+- `xnow::Vector{Float64}`: The current values of the model parameters.
+- `pₖ::Vector{Float64}`: The direction vector for the search.
 
 # Keyword Arguments
-- `verbose::Bool=false`: Enables additional print statements for debugging and information purposes.
+- `verbose::Bool`: A flag for printing additional information during execution. Default is `false`.
 
 # Returns
-- `Float64`: The computed step size `α`.
+- A tuple containing:
+    - `α`: The calculated step size.
+    - `x`: The next parameter value `xnow + α*pₖ`.
+    - `F`: The objective function value at `x`.
+
+### Notes:
+- The specific line search condition to use (e.g., "Armijo" or "StrongWolfe") is specified within the `pr` named tuple.
+- This function primarily uses the Armijo condition to determine the step size. 
+- It makes use of the `evaluateFunction` and `computeCost` functions.
 
 # Example
 ```julia
-pr = (objective="myObjectiveFunction", alg=(linesearch="Armijo", c1=0.1, c2=0.9, ...), ...)
-x_current = [1.0, 2.0, 3.0]
-t_value = 0.5
-direction = [-1.0, -2.0, -3.0]
-step_size = linesearch(pr, x_current, t_value, direction)
+pr = (alg=(linesearch="Armijo", c1=0.1, c2=0.9, ...), ...)
+x_values = [1.0, 2.0, 3.0]
+direction = [-0.5, -0.5, -0.5]
+result = linesearch(pr, x_values, direction, verbose=true)
 """
 function linesearch(pr::NamedTuple, xnow::Vector{Float64}, 
-    t::Float64, pₖ::Vector{Float64};
+    pₖ::Vector{Float64};
     verbose::Bool=false)::Float64
     f = Symbol(pr.objective)
     
@@ -293,17 +296,23 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
     c₂ = pr.alg.c2
     α = 1e-8
     β = 1
+    diff = β*pₖ
+    xnext = xnow+diff
+    Fnow, Gnow = computeCost(pr, xnow)
+    println("Current value of F, Fnow = $(Fnow)")
     armijoSatisfied = false
     if linesearch == "StrongWolfe"
         # sufficient decrease condition
     elseif linesearch == "Armijo"
-        fnow, ∇fₖ = evaluateFunction(pr, xnow, t)
+        # fnow, ∇fₖ = evaluateFunction(pr, xnow, t)
         while !armijoSatisfied
             diff = β*pₖ
+            println("Let's shift x by $(diff)")
             xnext = xnow+diff
-            fnext = evaluateFunction(pr, xnext, t, getGradientToo=false)
+            @show Fnext = computeCost(pr, xnext, getGradientToo=false)
             # println(c₁*β*∇fₖ'*pₖ)
-            if fnext ≤ fnow + c₁*β*∇fₖ'*pₖ
+            println("To be compared against: $(Fnow + c₁*β*Gnow'*pₖ)")
+            if Fnext ≤ Fnow + c₁*β*Gnow'*pₖ
                 myprintln(verbose, "Armijo condition satisfied for β = $(β)")
                 armijoSatisfied = true
             else
@@ -316,7 +325,7 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
     end
     
     α = β
-    return α
+    return (α=α, x=xnext, F=Fnext) 
 end
 
 """

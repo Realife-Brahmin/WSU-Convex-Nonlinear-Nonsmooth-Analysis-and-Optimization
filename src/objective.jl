@@ -288,44 +288,51 @@ result = linesearch(pr, x_values, direction, verbose=true)
 """
 function linesearch(pr::NamedTuple, xnow::Vector{Float64}, 
     pₖ::Vector{Float64};
-    verbose::Bool=false)::Float64
+    itrMax::Int64=50,
+    verbose::Bool=false)
     f = Symbol(pr.objective)
     
     linesearch = pr.alg.linesearch
     c₁ = pr.alg.c1
     c₂ = pr.alg.c2
-    α = 1e-8
     β = 1
     diff = β*pₖ
     xnext = xnow+diff
     Fnow, Gnow = computeCost(pr, xnow)
-    println("Current value of F, Fnow = $(Fnow)")
+    Fnext = Fnow
+    itr_search_for_α = 0
+    myprintln(verbose, "Current value of F, Fnow = $(Fnow)")
     armijoSatisfied = false
     if linesearch == "StrongWolfe"
         # sufficient decrease condition
     elseif linesearch == "Armijo"
         # fnow, ∇fₖ = evaluateFunction(pr, xnow, t)
-        while !armijoSatisfied
+        while !armijoSatisfied && itr_search_for_α ≤ itrMax
             diff = β*pₖ
-            println("Let's shift x by $(diff)")
+            myprintln(verbose, "Let's shift x by $(diff)")
             xnext = xnow+diff
-            @show Fnext = computeCost(pr, xnext, getGradientToo=false)
+            Fnext = computeCost(pr, xnext, getGradientToo=false)
             # println(c₁*β*∇fₖ'*pₖ)
-            println("To be compared against: $(Fnow + c₁*β*Gnow'*pₖ)")
+            myprintln(verbose, "To be compared against: $(Fnow + c₁*β*Gnow'*pₖ)")
             if Fnext ≤ Fnow + c₁*β*Gnow'*pₖ
                 myprintln(verbose, "Armijo condition satisfied for β = $(β)")
                 armijoSatisfied = true
             else
-                β /= 2
+                itr_search_for_α += 1
                 myprintln(verbose, "Armijo condition NOT satisfied for β = $(β)")
+                β /= 2
+                myprintln(verbose, "Line Search Iterations = $(itr_search_for_α)")
             end 
+        end
+        if itr_search_for_α > itrMax
+            @error "Line Search failed at point x = $(xnext) despite $(itr_search_for_α) iterations."
         end
     else 
         @error "Unknown linesearch condition"
     end
     
     α = β
-    return (α=α, x=xnext, F=Fnext) 
+    return (α=α, x=xnext, F=Fnext, backtracks=itr_search_for_α) 
 end
 
 """

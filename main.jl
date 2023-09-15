@@ -36,7 +36,7 @@ alg = (method = "GradientDescent",
 
 functionName = "dampedSHM"
 
-pr = (objective=functionName, x0=x0, alg=alg)
+pr = (objective=functionName, x0=x0, alg=alg, df=df);
 
 # pr = (alg=alg);
 pr == alg # returns true
@@ -50,8 +50,10 @@ x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
 # fnum(x0_Good)
 # lol it got worse after I inserted a more sensible value of A?
 
+
 t0 = df.t[1]
 f, g = dampedSHM(x0, t0)
+F, G = computeCost(pr, x0, t0)
 pk = findDirection(pr, g)
 α = linesearch(pr, x0, t0, pk, verbose=true)
 

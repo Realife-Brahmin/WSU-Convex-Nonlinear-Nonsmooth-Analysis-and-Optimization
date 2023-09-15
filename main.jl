@@ -38,8 +38,10 @@ functionName = "dampedSHM"
 
 pr = (objective=functionName, x0=x0, alg=alg, df=df);
 
-# pr = (alg=alg);
-pr == alg # returns true
+# pr = (alg=alg); # julia becomes oversmart when you define
+# a single field NamedTuple, ignores the existence of the field.
+# pr == alg # true? bad.
+
 method = pr.alg.method
 # f, ∇f, fnum, ∇fnum, x = objFun(df);
 # x0_mine = estimate_x0(df, x)
@@ -51,11 +53,11 @@ x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
 # lol it got worse after I inserted a more sensible value of A?
 
 
-t0 = df.t[1]
-f, g = dampedSHM(x0, t0)
+# t0 = df.t[1]
+# f, g = dampedSHM(x0, t0)
 F, G = computeCost(pr, x0, t0)
-pk = findDirection(pr, g)
-α = linesearch(pr, x0, t0, pk, verbose=true)
+# pk = findDirection(pr, g)
+# α = linesearch(pr, x0, t0, pk, verbose=true)
 
 
 

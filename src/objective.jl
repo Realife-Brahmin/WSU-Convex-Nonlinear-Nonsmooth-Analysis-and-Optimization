@@ -131,8 +131,26 @@ function computeCost(pr::NamedTuple, xnow::Vector{Float64}, t::Float64; getGradi
     end
 end
 
+"""
+    buildFunctions_DampedSHM(; getGradientToo::Bool=true, printSymbolicEquations::Bool=false, verbose::Bool=false)
 
+Build numerical functions for the damped simple harmonic motion (SHM) system based on symbolic representations using the `Symbolics.jl` package.
 
+# Keyword Arguments
+- `getGradientToo::Bool=true`: Whether to compute the gradient of the function along with its symbolic representation.
+- `printSymbolicEquations::Bool=false`: If set to true, the symbolic representation of the function (and its gradient, if computed) will be printed to the console.
+- `verbose::Bool=false`: Enables additional print statements for debugging and information purposes.
+
+# Returns
+- A named tuple containing:
+    - `fnum`: A numerical function representation of the damped SHM system.
+    - `∇fnum`: If `getGradientToo` is true, a numerical function representation of the gradient of the damped SHM system. Otherwise, it returns `nothing`.
+
+# Example
+```julia
+functions = buildFunctions_DampedSHM()
+val = functions.fnum([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], 0.5)
+"""
 function buildFunctions_DampedSHM(;
     getGradientToo::Bool=true,
     printSymbolicEquations::Bool=false,
@@ -163,7 +181,29 @@ function buildFunctions_DampedSHM(;
     return (fnum=fnum, ∇fnum=∇fnum)
 end
 
+"""
+    dampedSHM(x::Vector{Float64}, t::Float64;
+        getGradientToo::Bool=true,
+        printSymbolicEquations::Bool=false,
+        verbose::Bool=false)
 
+Computes the value of a damped simple harmonic motion (SHM) at a specific vector of parameters `x` and time `t`.
+
+# Arguments
+- `x::Vector{Float64}`: A vector of parameters for the damped SHM function.
+- `t::Float64`: The time at which the SHM function is evaluated.
+- `getGradientToo::Bool=true`: Determines whether the gradient of the function should be computed and returned. Defaults to `true`.
+- `printSymbolicEquations::Bool=false`: If `true`, the symbolic expressions for the function and its gradient will be printed to the console. Defaults to `false`.
+- `verbose::Bool=false`: If `true`, certain diagnostic messages during the function's execution will be printed. Defaults to `false`.
+
+# Returns
+- `fval`: The value of the damped SHM at `x` and `t`.
+- `∇fval`: The gradient of the function at `x` and `t`. Only returned if `getGradientToo=true`.
+
+# Example
+```julia
+value, gradient = dampedSHM([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], 2.5)
+"""
 function dampedSHM(x::Vector{Float64}, t::Float64;
     getGradientToo::Bool=true,
     printSymbolicEquations::Bool=false,
@@ -180,6 +220,27 @@ function dampedSHM(x::Vector{Float64}, t::Float64;
     end
 end
 
+"""
+    findDirection(pr::NamedTuple, ∇fnow::Vector{Float64}; verbose::Bool=false) -> Vector{Float64}
+
+Compute the search direction for optimization methods based on the provided gradient `∇fnow` and the method specified in `pr.alg.method`.
+
+# Arguments
+- `pr::NamedTuple`: A named tuple containing problem configurations. Specifically, it must have `pr.alg.method` which defines the optimization method to be used.
+- `∇fnow::Vector{Float64}`: The current gradient of the function to be optimized.
+
+# Keyword Arguments
+- `verbose::Bool=false`: Enables additional print statements for debugging and information purposes.
+
+# Returns
+- `Vector{Float64}`: The computed search direction.
+
+# Example
+```julia
+pr = (alg=(method="GradientDescent", ...), ...)
+gradient = [1.0, 2.0, 3.0]
+direction = findDirection(pr, gradient)
+"""
 function findDirection(pr::NamedTuple, ∇fnow::Vector{Float64};
     verbose::Bool=false)::Vector{Float64}
     method = pr.alg.method
@@ -194,6 +255,34 @@ function findDirection(pr::NamedTuple, ∇fnow::Vector{Float64};
     return pₖ
 end
 
+"""
+    linesearch(pr::NamedTuple, xnow::Vector{Float64}, t::Float64, pₖ::Vector{Float64}; verbose::Bool=false) -> Float64
+
+Perform a line search to compute the step size `α` for optimization algorithms based on the provided search direction `pₖ`, current point `xnow`, and the line search method specified in `pr.alg.linesearch`.
+
+# Arguments
+- `pr::NamedTuple`: A named tuple containing problem configurations. Specifically, it should contain:
+    * `pr.objective`: Specifies the objective function to be optimized.
+    * `pr.alg.linesearch`: Defines the line search method to be used. Supported methods include "Armijo" and "StrongWolfe".
+    * `pr.alg.c1` and `pr.alg.c2`: Constants used in the line search criteria.
+- `xnow::Vector{Float64}`: The current point in the optimization space.
+- `t::Float64`: A parameter required by the objective function.
+- `pₖ::Vector{Float64}`: The search direction.
+
+# Keyword Arguments
+- `verbose::Bool=false`: Enables additional print statements for debugging and information purposes.
+
+# Returns
+- `Float64`: The computed step size `α`.
+
+# Example
+```julia
+pr = (objective="myObjectiveFunction", alg=(linesearch="Armijo", c1=0.1, c2=0.9, ...), ...)
+x_current = [1.0, 2.0, 3.0]
+t_value = 0.5
+direction = [-1.0, -2.0, -3.0]
+step_size = linesearch(pr, x_current, t_value, direction)
+"""
 function linesearch(pr::NamedTuple, xnow::Vector{Float64}, 
     t::Float64, pₖ::Vector{Float64};
     verbose::Bool=false)::Float64
@@ -230,6 +319,30 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
     return α
 end
 
+"""
+    evaluateFunction(pr, x::Vector{Float64}, t::Float64; kwargs...)
+
+Dynamically evaluates a function specified by the `pr.objective` string, given the vector `x`, parameter `t`, and any additional keyword arguments.
+
+# Arguments
+- `pr`: An object (typically a NamedTuple) containing configurations. Specifically:
+    * `pr.objective`: A string that specifies the name of the function to be evaluated.
+- `x::Vector{Float64}`: The input vector for the function.
+- `t::Float64`: A parameter required by the function.
+
+# Keyword Arguments
+- `kwargs...`: Additional keyword arguments that might be required by the function being evaluated.
+
+# Returns
+- The result of the function evaluation.
+
+# Example
+```julia
+pr = (objective="myFunctionName", ...)
+x_values = [1.0, 2.0, 3.0]
+t_value = 0.5
+result = evaluateFunction(pr, x_values, t_value, arg1=value1, arg2=value2)
+"""
 function evaluateFunction(pr, x::Vector{Float64}, t::Float64; kwargs...)
     # Convert the string name to a function symbol
     func_sym = Symbol(pr.objective)

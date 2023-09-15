@@ -141,8 +141,49 @@ function findDirection(pr::NamedTuple, ∇fnow::Vector{Float64};
     return pₖ
 end
 
-function linesearch(pr::NamedTuple, x0::Vector{Float64};
+function linesearch(pr::NamedTuple, xnow::Vector{Float64}, 
+    t::Float64, pₖ::Vector{Float64};
     verbose::Bool=false)::Float64
-
+    f = Symbol(pr.objective)
+    
+    linesearch = pr.alg.linesearch
+    c₁ = pr.alg.c1
+    α = 1e-8
+    β = 1
+    armijoSatisfied = false
+    if linesearch == "StrongWolfe"
+        # sufficient decrease condition
+    elseif linesearch == "Armijo"
+        fnow, ∇fₖ = evaluateFunction(pr, xnow, t)
+        while !armijoSatisfied
+            diff = β*pₖ
+            xnext = xnow+diff
+            fnext = evaluateFunction(pr, xnext, t, getGradientToo=false)
+            # println(c₁*β*∇fₖ'*pₖ)
+            if fnext ≤ fnow + c₁*β*∇fₖ'*pₖ
+                myprintln(verbose, "Armijo condition satisfied for β = $(β)")
+                armijoSatisfied = true
+            else
+                β /= 2
+                myprintln(verbose, "Armijo condition NOT satisfied for β = $(β)")
+            end 
+        end
+    else 
+        @error "Unknown linesearch condition"
+    end
+    
+    α = β
+    return α
 end
+
+function evaluateFunction(pr, x::Vector{Float64}, t::Float64; kwargs...)
+    # Convert the string name to a function symbol
+    func_sym = Symbol(pr.objective)
+    
+    # Dynamically call the function with the provided arguments and keyword arguments
+    value = eval(:($func_sym($x, $t; $kwargs...)))
+    
+    return value
+end
+
 # end

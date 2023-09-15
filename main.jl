@@ -30,7 +30,7 @@ alg = (method = "GradientDescent",
         lambda = 1,
         lambdaMax = 100,
         linesearch = "Armijo",
-        c1 = 0.0001,
+        c1 = 1e-4, # Pg 33 (3.1 Step Length)
         c2 = 0.9,
         progress = 10);
 
@@ -52,8 +52,8 @@ x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
 
 t0 = df.t[1]
 f, g = dampedSHM(x0, t0)
-findDirection(pr, g)
-
+pk = findDirection(pr, g)
+α = linesearch(pr, x0, t0, pk, verbose=true)
 
 
 

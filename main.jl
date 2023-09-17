@@ -84,7 +84,7 @@ println("Begin with the solver:")
                 myprintln(printOrNot, "Iteration $(itr):", log=true)
                 fₖ, ∇fₖ = computeCost(pr, x)
                 pₖ = findDirection(pr, ∇fₖ)
-                α, x, fnext, backtrackNum = linesearch(pr, x, pₖ, verbose=true, itrStart=7)
+                α, x, fnext, backtrackNum = linesearch(pr, x, pₖ, verbose=printOrNot, itrStart=7)
                 fvals[itr] = fnext
                 αvals[itr] = α
                 backtrackVals[itr] = backtrackNum

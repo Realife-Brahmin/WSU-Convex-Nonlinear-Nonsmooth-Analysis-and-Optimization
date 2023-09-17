@@ -15,10 +15,10 @@ function buildFunctions_DampedSHM()
     ∇fnum = build_function(∇f, x, t, expression=Val{false})
     ∇fnum = ∇fnum[1] # Only taking the first function from the tuple
 
-    function dampedSHM(x::Vector{Float64}, t::Float64;
-        getGradientToo::Bool=true,
-        printSymbolicEquations::Bool=false,
-        verbose::Bool=false)
+    function dampedSHM(x::Vector{Float64},
+            t::Float64;
+            getGradientToo::Bool=true,printSymbolicEquations::Bool=false,
+            verbose::Bool=false)
 
         if printSymbolicEquations
             println("Function: ", f)
@@ -146,13 +146,13 @@ function computeCost(pr::NamedTuple, xnow::Vector{Float64}; getGradientToo::Bool
     M = length(df.V)
     
     # Calculate SSE
-    residuals = [df.V[i] - evaluateFunction(pr, xnow, df.t[i], getGradientToo=false) for i in 1:M]
+    residuals = [df.V[i] - pr.obj(xnow, df.t[i], getGradientToo=false) for i in 1:M]
     Fval = mean(residuals.^2)
 
     if getGradientToo
         gradient_contributions = [ 
             begin
-                fval, gval = evaluateFunction(pr, xnow, df.t[i])
+                fval, gval = pr.obj( xnow, df.t[i])
                 -2/M * (df.V[i] - fval) * gval
             end
             for i in 1:M
@@ -163,45 +163,6 @@ function computeCost(pr::NamedTuple, xnow::Vector{Float64}; getGradientToo::Bool
         return Fval
     end
 end
-
-"""
-    dampedSHM(x::Vector{Float64}, t::Float64;
-        getGradientToo::Bool=true,
-        printSymbolicEquations::Bool=false,
-        verbose::Bool=false)
-
-Computes the value of a damped simple harmonic motion (SHM) at a specific vector of parameters `x` and time `t`.
-
-# Arguments
-- `x::Vector{Float64}`: A vector of parameters for the damped SHM function.
-- `t::Float64`: The time at which the SHM function is evaluated.
-- `getGradientToo::Bool=true`: Determines whether the gradient of the function should be computed and returned. Defaults to `true`.
-- `printSymbolicEquations::Bool=false`: If `true`, the symbolic expressions for the function and its gradient will be printed to the console. Defaults to `false`.
-- `verbose::Bool=false`: If `true`, certain diagnostic messages during the function's execution will be printed. Defaults to `false`.
-
-# Returns
-- `fval`: The value of the damped SHM at `x` and `t`.
-- `∇fval`: The gradient of the function at `x` and `t`. Only returned if `getGradientToo=true`.
-
-# Example
-```julia
-value, gradient = dampedSHM([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], 2.5)
-"""
-# function dampedSHM(x::Vector{Float64}, t::Float64;
-#     getGradientToo::Bool=true,
-#     printSymbolicEquations::Bool=false,
-#     verbose::Bool=false)
-
-#     fnum, ∇fnum = buildFunctions_DampedSHM(printSymbolicEquations=printSymbolicEquations, verbose=verbose)
-
-#     fval = fnum(x, t)
-#     if getGradientToo 
-#         ∇fval = ∇fnum(x, t)
-#         return fval, ∇fval
-#     else
-#         return fval
-#     end
-# end
 
 """
     findDirection(pr::NamedTuple, ∇fnow::Vector{Float64}; verbose::Bool=false) -> Vector{Float64}
@@ -317,7 +278,7 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
             end 
         end
     elseif linesearch == "Armijo"
-        # fₖ, ∇fₖ = evaluateFunction(pr, xnow, t)
+        # fₖ, ∇fₖ = pr.obj( xnow, t)
         while !armijoSatisfied && itr_search_for_α ≤ itrMax
             diff = β*pₖ
             myprintln(verbose, "Let's shift x by $(diff)", log=log)

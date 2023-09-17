@@ -46,10 +46,10 @@ function showresults(res::NamedTuple)
     v = true
     myprintln(v, "****************************")
     myprintln(v, statusMessage)
-    if status == true
+    if converged == true
         fvalPrefix = "Optimal MSE value = "
         xvalMessage = "Nonzero Optimal Variables:"
-    elseif status == false
+    elseif converged == false
         fvalPrefix = "Best MSE value = "
         xvalMessage = "Nonzero Best Known Variables:"
     else

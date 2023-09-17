@@ -2,6 +2,16 @@ using Plots
 using DataFrames
 using LaTeXStrings
 
+# Extract fields from the 'res' structure and assign them to local variables.
+# The purpose of this macro is to avoid repetitive assignments.
+# Usage: @unpack_vars res status fvals αvals backtrackVals xvals
+macro unpack_vars(struct_var, fields...)
+    quote
+        # For each specified field, assign the field's value from the structure to a local variable.
+        $(Expr(:block, [:(local $(field) = $(struct_var).$(field)) for field in fields]...))
+    end
+end
+
 function scatter_voltage_vs_time(df::DataFrame)
     gr()  # Ensure you're using the GR backend for Plots.jl which supports LaTeX rendering
 
@@ -23,4 +33,36 @@ function scatter_voltage_vs_time(df::DataFrame)
     
     # Additional customization if needed
     # background_color_legend=:transparent
+end
+
+function showresults(res::NamedTuple)
+
+    nnztol = 1e-8
+    n = size(xvals, 1)
+    itr = size(xvals, 2)
+    x☆ = xvals[:, itr]
+    minBacktracks, maxBacktracks = extrema(backtrackVals)
+
+    v = true
+    myprintln(v, "****************************")
+    myprintln(v, statusMessage)
+    if status == true
+        fvalPrefix = "Optimal MSE value = "
+        xvalMessage = "Nonzero Optimal Variables:"
+    elseif status == false
+        fvalPrefix = "Best MSE value = "
+        xvalMessage = "Nonzero Best Known Variables:"
+    else
+        @error "bad condition"
+    end
+    fvalMessage = fvalPrefix*"$(fvals[itr])"
+    myprintln(v, fvalMessage)
+    myprintln(v, "***************************")
+    myprintln(v, xvalMessage)
+    for k in 1:n
+        if abs(x☆[k]) > nnztol     
+            myprintln(v, "x☆[$(k)] = $(x☆[k])")
+        end
+    end
+    myprintln(v, "***************************")
 end

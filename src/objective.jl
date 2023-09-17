@@ -146,13 +146,13 @@ function computeCost(pr::NamedTuple, xnow::Vector{Float64}; getGradientToo::Bool
     M = length(df.V)
     
     # Calculate SSE
-    residuals = [df.V[i] - pr.obj(xnow, df.t[i], getGradientToo=false) for i in 1:M]
+    residuals = [df.V[i] - pr.objective(xnow, df.t[i], getGradientToo=false) for i in 1:M]
     Fval = mean(residuals.^2)
 
     if getGradientToo
         gradient_contributions = [ 
             begin
-                fval, gval = pr.obj( xnow, df.t[i])
+                fval, gval = pr.objective( xnow, df.t[i])
                 -2/M * (df.V[i] - fval) * gval
             end
             for i in 1:M
@@ -234,6 +234,7 @@ result = linesearch(pr, x_values, direction, verbose=true)
 function linesearch(pr::NamedTuple, xnow::Vector{Float64}, 
     pₖ::Vector{Float64};
     itrMax::Int64=50,
+    itrStart::Int64=1,
     verbose::Bool=false,
     log::Bool=true)
     # f = Symbol(pr.objective)
@@ -241,12 +242,12 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
     linesearch = pr.alg.linesearch
     c₁ = pr.alg.c1
     c₂ = pr.alg.c2
-    β = 1
+    β = 1/2^(itrStart-1)
     diff = β*pₖ
     xnext = xnow+diff
     fₖ, ∇fₖ = computeCost(pr, xnow, verbose=verbose, log=log)
     fnext = fₖ
-    itr_search_for_α = 0
+    itr_search_for_α = itrStart-1
     myprintln(verbose, "Current value of F, fₖ = $(fₖ)", log=log)
     armijoSatisfied = false
     strongWolfeSatisfied = false
@@ -278,7 +279,7 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
             end 
         end
     elseif linesearch == "Armijo"
-        # fₖ, ∇fₖ = pr.obj( xnow, t)
+        # fₖ, ∇fₖ = pr.objective( xnow, t)
         while !armijoSatisfied && itr_search_for_α ≤ itrMax
             diff = β*pₖ
             myprintln(verbose, "Let's shift x by $(diff)", log=log)

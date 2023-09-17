@@ -93,11 +93,13 @@ println("Begin with the solver:")
         end
 end
 if itr > maxiter
-        status = "Failed to converge despite $(maxiter) iterations! 😢"
-        @warn status
+        converged = false
+        statusMessage = "Failed to converge despite $(maxiter) iterations! 😢"
+        @warn statusMessage
 else
-        status = "Convergence achieved in $(itr) iterations 😄"
-        println(status)
+        converged = true
+        statusMessage = "Convergence achieved in $(itr) iterations 😄"
+        println(statusMessage)
         # fvals = fvals[1:itr]
         # αvals = αvals[1:itr]
         # backtrackVals = backtrackVals[1:itr]
@@ -107,9 +109,9 @@ else
 
 end
 
-res = (status=status, fvals=fvals, αvals=αvals, backtrackVals=backtrackVals, xvals=xvals)
+res = (converged=converged, statusMessage=statusMessage, fvals=fvals, αvals=αvals, backtrackVals=backtrackVals, xvals=xvals)
 
-
+showresults(res)
 
 # For testing linesearch
 # fₖ, ∇fₖ = computeCost(pr, x0);

@@ -99,6 +99,6 @@ end
 # pₖ = findDirection(pr, ∇fₖ)
 # linesearch(pr, x0, pₖ, verbose=true)
 
-ProfileView.view()
+ProfileView.view();
 # pₖ = findDirection(pr, g)
 # α = linesearch(pr, x0, pₖ, verbose=true)

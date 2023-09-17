@@ -140,7 +140,7 @@ pr = (objective="someFunction", df=(t=[1,2,3], V=[4,5,6]))
 xnow = [0.5, 0.5]
 Fval, Gval = computeCost(pr, xnow, getGradientToo=true)
 """
-function computeCost(pr::NamedTuple, xnow::Vector{Float64}; getGradientToo::Bool=true, verbose::Bool=false)
+function computeCost(pr::NamedTuple, xnow::Vector{Float64}; getGradientToo::Bool=true, verbose::Bool=false, log=true)
     
     df = pr.df
     M = length(df.V)
@@ -163,56 +163,6 @@ function computeCost(pr::NamedTuple, xnow::Vector{Float64}; getGradientToo::Bool
         return Fval
     end
 end
-
-"""
-    buildFunctions_DampedSHM(; getGradientToo::Bool=true, printSymbolicEquations::Bool=false, verbose::Bool=false)
-
-Build numerical functions for the damped simple harmonic motion (SHM) system based on symbolic representations using the `Symbolics.jl` package.
-
-# Keyword Arguments
-- `getGradientToo::Bool=true`: Whether to compute the gradient of the function along with its symbolic representation.
-- `printSymbolicEquations::Bool=false`: If set to true, the symbolic representation of the function (and its gradient, if computed) will be printed to the console.
-- `verbose::Bool=false`: Enables additional print statements for debugging and information purposes.
-
-# Returns
-- A named tuple containing:
-    - `fnum`: A numerical function representation of the damped SHM system.
-    - `∇fnum`: If `getGradientToo` is true, a numerical function representation of the gradient of the damped SHM system. Otherwise, it returns `nothing`.
-
-# Example
-```julia
-functions = buildFunctions_DampedSHM()
-val = functions.fnum([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], 0.5)
-"""
-# function buildFunctions_DampedSHM(;
-#     getGradientToo::Bool=true,
-#     printSymbolicEquations::Bool=false,
-#     verbose::Bool=false)
-
-#     @variables t, A₀, A, τ, ω, α, ϕ
-#     x = [A₀, A, τ, ω, α, ϕ] 
-#     f = A₀ + A*exp(-t/τ)sin((ω+α*t)t + ϕ)
-#     fnum = build_function(f, x, t, expression=Val{false})
-    
-#     # ∇fnum = nothing
-#     if getGradientToo
-#         myprintln(verbose, "I'm getting the gradient as asked.")
-#         ∇f = Symbolics.gradient(f, x)
-#         ∇fnum = build_function(∇f, x, t, expression=Val{false})
-#         ∇fnum = ∇fnum[1] # Only taking the first function from the tuple, no idea why there's a tuple being generated
-#     else
-#         ∇fnum = nothing
-#     end
-
-#     if printSymbolicEquations
-#         println("Function: ", f)
-#         if getGradientToo
-#             println("Gradient: ", ∇f)
-#         end
-#     end
-
-#     return (fnum=fnum, ∇fnum=∇fnum)
-# end
 
 """
     dampedSHM(x::Vector{Float64}, t::Float64;
@@ -279,8 +229,9 @@ function findDirection(pr::NamedTuple, ∇fnow::Vector{Float64};
     method = pr.alg.method
     n = length(∇fnow)
     if method == "GradientDescent"
-        Bₖ = I(n)
-        pₖ = -Bₖ*∇fnow
+        # Bₖ = I(n)
+        # pₖ = -Bₖ*∇fnow
+        pₖ = -∇fnow
     else 
         @error "Currently not formulated for this method"
     end
@@ -322,8 +273,9 @@ result = linesearch(pr, x_values, direction, verbose=true)
 function linesearch(pr::NamedTuple, xnow::Vector{Float64}, 
     pₖ::Vector{Float64};
     itrMax::Int64=50,
-    verbose::Bool=false)
-    f = Symbol(pr.objective)
+    verbose::Bool=false,
+    log::Bool=true)
+    # f = Symbol(pr.objective)
     
     linesearch = pr.alg.linesearch
     c₁ = pr.alg.c1
@@ -331,69 +283,68 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
     β = 1
     diff = β*pₖ
     xnext = xnow+diff
-    fₖ, ∇fₖ = computeCost(pr, xnow)
-    Fnext = fₖ
+    fₖ, ∇fₖ = computeCost(pr, xnow, verbose=verbose, log=log)
+    fnext = fₖ
     itr_search_for_α = 0
-    myprintln(verbose, "Current value of F, fₖ = $(fₖ)")
+    myprintln(verbose, "Current value of F, fₖ = $(fₖ)", log=log)
     armijoSatisfied = false
-    curvatureSatisfied = false
+    strongWolfeSatisfied = false
     if linesearch == "StrongWolfe"
-        # sufficient decrease condition
-        while !armijoSatisfied && !curvatureSatisfied && itr_search_for_α ≤ itrMax
+        while !strongWolfeSatisfied && itr_search_for_α ≤ itrMax
             diff = β*pₖ
-            myprintln(verbose, "Let's shift x by $(diff)")
+            myprintln(verbose, "Let's shift x by $(diff)", log=log)
             xnext = xnow+diff
-            Fnext = computeCost(pr, xnext, getGradientToo=false)
+            fnext = computeCost(pr, xnext, getGradientToo=false)
             # println(c₁*β*∇fₖ'*pₖ)
-            myprintln(verbose, "To be compared against: $(fₖ + c₁*β*∇fₖ'*pₖ)")
-            if Fnext ≤ fₖ + c₁*β*∇fₖ'*pₖ
-                myprintln(verbose, "Armijo condition satisfied for β = $(β)")
-                armijoSatisfied = true
-                Fnext, ∇fnext = computeCost(pr, xnext)
-                if ∇fnext'*pₖ ≥ c₂*∇fₖ*pₖ
-                    myprintln(verbose, "Curvature condition satisfied for β = $(β)")
-                    curvatureSatisfied = true
+            myprintln(verbose, "To be compared against: $(fₖ + c₁*β*∇fₖ'*pₖ)", log=log)
+            if fnext ≤ fₖ + c₁*β*∇fₖ'*pₖ
+                myprintln(verbose, "Armijo condition satisfied for β = $(β)", log=log)
+                fnext, ∇fnext = computeCost(pr, xnext)
+                if abs(∇fnext'*pₖ) ≥ abs(c₂*∇fₖ'*pₖ)
+                    myprintln(verbose, "Curvature condition satisfied for β = $(β)", log=log)
+                    strongWolfeSatisfied = true
                 else
                     itr_search_for_α += 1
-                    myprintln(verbose, "Curvature condition NOT satisfied for β = $(β)")
+                    myprintln(verbose, "Curvature condition NOT satisfied for β = $(β)", log=log)
                     β /= 2
-                    myprintln(verbose, "Line Search Iterations = $(itr_search_for_α)")
+                    myprintln(verbose, "Line Search Iterations = $(itr_search_for_α)", log=log)
                 end
             else
                 itr_search_for_α += 1
-                myprintln(verbose, "Armijo condition NOT satisfied for β = $(β)")
+                myprintln(verbose, "Armijo condition NOT satisfied for β = $(β)", log=log)
                 β /= 2
-                myprintln(verbose, "Line Search Iterations = $(itr_search_for_α)")
+                myprintln(verbose, "Line Search Iterations = $(itr_search_for_α)", log=log)
             end 
         end
     elseif linesearch == "Armijo"
         # fₖ, ∇fₖ = evaluateFunction(pr, xnow, t)
         while !armijoSatisfied && itr_search_for_α ≤ itrMax
             diff = β*pₖ
-            myprintln(verbose, "Let's shift x by $(diff)")
+            myprintln(verbose, "Let's shift x by $(diff)", log=log)
             xnext = xnow+diff
-            Fnext = computeCost(pr, xnext, getGradientToo=false)
+            fnext = computeCost(pr, xnext, getGradientToo=false)
             # println(c₁*β*∇fₖ'*pₖ)
-            myprintln(verbose, "To be compared against: $(fₖ + c₁*β*∇fₖ'*pₖ)")
-            if Fnext ≤ fₖ + c₁*β*∇fₖ'*pₖ
-                myprintln(verbose, "Armijo condition satisfied for β = $(β)")
+            myprintln(verbose, "To be compared against: $(fₖ + c₁*β*∇fₖ'*pₖ)", log=log)
+            if fnext ≤ fₖ + c₁*β*∇fₖ'*pₖ
+                myprintln(verbose, "Armijo condition satisfied for β = $(β)", log=log)
                 armijoSatisfied = true
             else
                 itr_search_for_α += 1
-                myprintln(verbose, "Armijo condition NOT satisfied for β = $(β)")
+                myprintln(verbose, "Armijo condition NOT satisfied for β = $(β)", log=log)
                 β /= 2
-                myprintln(verbose, "Line Search Iterations = $(itr_search_for_α)")
+                myprintln(verbose, "Line Search Iterations = $(itr_search_for_α)", log=log)
             end 
-        end
-        if itr_search_for_α > itrMax
-            @error "Line Search failed at point x = $(xnext) despite $(itr_search_for_α) iterations."
         end
     else 
         @error "Unknown linesearch condition"
     end
     
+    if itr_search_for_α > itrMax
+        @error "Line Search failed at point x = $(xnext) despite $(itr_search_for_α) iterations."
+    end
+
     α = β
-    return (α=α, x=xnext, F=Fnext, backtracks=itr_search_for_α) 
+    return (α=α, x=xnext, f=fnext, backtracks=itr_search_for_α) 
 end
 
 """

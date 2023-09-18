@@ -6,6 +6,7 @@ using DataFrames
 using Latexify
 using LaTeXStrings
 using LinearAlgebra
+using Parameters
 using Plots
 using Profile
 using ProfileView
@@ -26,7 +27,8 @@ filename = rawDataFolder*"FFD.csv";
 df = CSV.File(filename) |> DataFrame;
 rename!(df, [:t, :V]);
 
-verbose = false
+# verbose = false
+verbose = true
 logging = true
 
 if logging
@@ -41,7 +43,7 @@ end
 scatter_voltage_vs_time(df)
 
 alg = (method = "GradientDescent",
-        maxiter = Int(1e3),
+        maxiter = Int(1e4),
         ngtol = 1e-10,
         dftol = 1e-12,
         dxtol = 1e-10,
@@ -62,21 +64,21 @@ else
         println("We'll be working with the $(nameof(obj)) function.")
 end
         
-
+p = [];
 x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2];
 
-pr = (objective=obj, x0=x0, alg=alg, df=df);
+pr = (alg=alg, df=df, objective=obj, p=p, x0=x0);
 
 # @profile begin
-        global res = optimize(pr, verbose=verbose, itrStart=7)
+res = optimize(pr, verbose=verbose, itrStart=7)
 # end
 showresults(res)
-
+plotresults(pr, res)
 # For testing linesearch
 # fₖ, ∇fₖ = computeCost(pr, x0);
 # pₖ = findDirection(pr, ∇fₖ);
 # linesearch(pr, x0, pₖ, verbose=true, itrStart=7);
 
-ProfileView.view();
+# ProfileView.view();
 # pₖ = findDirection(pr, g)
 # α = linesearch(pr, x0, pₖ, verbose=true)

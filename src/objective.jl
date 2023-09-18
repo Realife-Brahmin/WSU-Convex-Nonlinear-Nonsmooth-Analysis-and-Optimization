@@ -1,5 +1,6 @@
 # module objective
 
+using Base.Threads
 using DataFrames
 using Symbolics
 
@@ -164,6 +165,34 @@ function computeCost(pr::NamedTuple, xnow::Vector{Float64}; getGradientToo::Bool
     end
 end
 
+# Assuming you've set JULIA_NUM_THREADS environment variable appropriately before starting Julia
+
+function computeCostParallel(pr::NamedTuple, xnow::Vector{Float64}; getGradientToo::Bool=true, verbose::Bool=false, log=true)
+    
+    df = pr.df
+    M = length(df.V)
+    
+    # Calculate SSE
+    residuals = Vector{Float64}(undef, M)
+    @threads for i in 1:M
+        residuals[i] = df.V[i] - pr.objective(xnow, df.t[i], getGradientToo=false)
+    end
+    Fval = mean(residuals.^2)
+
+    if getGradientToo
+        gradient_contributions = Vector{Float64}(undef, M)
+        @threads for i in 1:M
+            fval, gval = pr.objective( xnow, df.t[i])
+            gradient_contributions[i] = -2/M * (df.V[i] - fval) * gval
+        end
+        Gval = sum(gradient_contributions)
+        return Fval, Gval
+    else
+        return Fval
+    end
+end
+
+
 """
     findDirection(pr::NamedTuple, ∇fnow::Vector{Float64}; verbose::Bool=false) -> Vector{Float64}
 
@@ -229,7 +258,7 @@ Performs line search to find an appropriate step size (`α`) that ensures the ne
 pr = (alg=(linesearch="Armijo", c1=0.1, c2=0.9, ...), ...)
 x_values = [1.0, 2.0, 3.0]
 direction = [-0.5, -0.5, -0.5]
-result = linesearch(pr, x_values, direction, verbose=true)
+result = linesearch(pr, x_values, direction, verbose=false)
 """
 function linesearch(pr::NamedTuple, xnow::Vector{Float64}, 
     pₖ::Vector{Float64};

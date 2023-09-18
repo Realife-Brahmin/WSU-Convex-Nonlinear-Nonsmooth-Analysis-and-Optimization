@@ -8,6 +8,7 @@ using LaTeXStrings
 using LinearAlgebra
 using Parameters
 using Plots
+using Printf
 using Profile
 using ProfileView
 using Revise

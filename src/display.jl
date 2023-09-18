@@ -1,6 +1,12 @@
-using Plots
+
 using DataFrames
 using LaTeXStrings
+using Parameters
+using Plots
+using Printf
+
+# include("utilities.jl")
+include("objective.jl")
 
 # Extract fields from the 'res' structure and assign them to local variables.
 # The purpose of this macro is to avoid repetitive assignments.
@@ -36,8 +42,8 @@ function scatter_voltage_vs_time(df::DataFrame)
 end
 
 function showresults(res::NamedTuple)
-
-    nnztol = 1e-8
+    @unpack converged, statusMessage, fvals, xvals, backtrackVals = res
+    nnztol = 1e-8 # variable having a value below this will NOT be counted in the list of non-zero variables. For printing purposes only. 
     n = size(xvals, 1)
     itr = size(xvals, 2)
     x☆ = xvals[:, itr]
@@ -66,3 +72,58 @@ function showresults(res::NamedTuple)
     end
     myprintln(v, "***************************")
 end
+
+
+using LaTeXStrings
+using Plots
+
+function plotresults(pr::NamedTuple, res::NamedTuple; savePlot::Bool=true, saveLocation::String="processedData/")
+    @unpack converged, statusMessage, fvals, xvals, backtrackVals = res
+    n = size(xvals, 1)
+    itr = size(xvals, 2)
+    x☆ = xvals[:, itr]
+
+    # Convert time to milliseconds
+    time_ms = pr.df.t .* 1000
+    
+    # Calculate dampedSHM values using optimal parameters
+    predicted_values = [pr.objective(x☆, t, getGradientToo=false) for t in pr.df.t]
+
+    # Plot
+    gr()  # Ensure you're using the GR backend for Plots.jl which supports LaTeX rendering
+    theme(:dark)  # Setting a dark theme
+
+    p = scatter(time_ms, pr.df.V, 
+        label=L"Original Data $(V)$",  # Using LaTeXStrings for original data label
+        xlabel=L"Time $(ms)$",  # Using LaTeXStrings 
+        ylabel=L"Voltage $(mV)$",  # Using LaTeXStrings 
+        title="Voltage vs Time",
+        markersize=4,
+        color=:purple,
+        alpha=0.8
+    )
+    
+    # Plot dampedSHM predictions
+    plot!(p, time_ms, predicted_values, 
+        label="Predicted with dampedSHM", 
+        linewidth=2,
+        color=:cyan,
+        alpha=0.8
+    )
+
+    # Save the plot if savePlot is true
+    if savePlot
+        # Create the filename using the provided logic
+        filename = saveLocation * string(pr.objective) * "_" * pr.alg.method * "_" * pr.alg.linesearch * "_$(@sprintf("%.0e", itr)).png"
+        
+        # Ensure directory exists
+        mkpath(dirname(filename))
+        
+        # Save the plot to the generated filename
+        savefig(p, filename)
+    end
+
+    # Display plot
+    display(p)
+end
+

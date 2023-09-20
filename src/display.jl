@@ -24,10 +24,10 @@ function scatter_voltage_vs_time(df::DataFrame)
     theme(:dark)  # Setting a dark theme
     
     # Convert time to milliseconds
-    time_ms = df.t .* 1000
+    time_ms = df.x .* 1000
 
     # Create the scatter plot
-    scatter(time_ms, df.V, 
+    scatter(time_ms, df.y, 
         label=L"Voltage $(V)$",  # Using LaTeXStrings with \text for regular text
         xlabel=L"Time $(ms)$",  # Using LaTeXStrings with \text for regular text
         ylabel=L"Voltage $(mV)$",  # Using LaTeXStrings with \text for regular text

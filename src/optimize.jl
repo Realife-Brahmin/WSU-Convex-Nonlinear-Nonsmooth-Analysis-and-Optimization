@@ -139,11 +139,11 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
     if linesearch == "StrongWolfe"
         while !strongWolfeSatisfied && itr_search_for_α ≤ itrMax
             diff = β*pₖ
-            myprintln(verbose, "Let's shift x by $(diff)", log=log)
+            myprintln(false, "Let's shift x by $(diff)", log=log)
             xnext = xnow+diff
             fnext = computeCost(pr, xnext, getGradientToo=false)
             # println(c₁*β*∇fₖ'*pₖ)
-            myprintln(verbose, "To be compared against: $(fₖ + c₁*β*∇fₖ'*pₖ)", log=log)
+            myprintln(false, "To be compared against: $(fₖ + c₁*β*∇fₖ'*pₖ)", log=log)
             if fnext ≤ fₖ + c₁*β*∇fₖ'*pₖ
                 myprintln(verbose, "Armijo condition satisfied for β = $(β)", log=log)
                 fnext, ∇fnext = computeCost(pr, xnext)
@@ -152,9 +152,9 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
                     strongWolfeSatisfied = true
                 else
                     itr_search_for_α += 1
-                    myprintln(verbose, "Curvature condition NOT satisfied for β = $(β)", log=log)
+                    myprintln(false, "Curvature condition NOT satisfied for β = $(β)", log=log)
                     β /= 2
-                    myprintln(verbose, "Line Search Iterations = $(itr_search_for_α)", log=log)
+                    myprintln(false, "Line Search Iterations = $(itr_search_for_α)", log=log)
                 end
             else
                 itr_search_for_α += 1

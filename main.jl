@@ -26,7 +26,7 @@ global const JULIA_NUM_THREADS = 16
 rawDataFolder = "rawData/";
 filename = rawDataFolder*"FFD.csv";
 df = CSV.File(filename) |> DataFrame;
-rename!(df, [:t, :V]);
+rename!(df, [:x, :y]);
 
 # verbose = false
 verbose = true

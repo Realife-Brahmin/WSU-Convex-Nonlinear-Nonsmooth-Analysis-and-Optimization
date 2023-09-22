@@ -53,8 +53,8 @@ alg = (method = "GradientDescent",
         dxtol = 1e-10,
         lambda = 1,
         lambdaMax = 100,
-        linesearch = "Armijo",
-        # linesearch = "StrongWolfe",
+        # linesearch = "Armijo",
+        linesearch = "StrongWolfe",
         c1 = 1e-4, # Pg 33 (3.1 Step Length)
         c2 = 0.9,
         progress = 50);

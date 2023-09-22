@@ -84,10 +84,10 @@ function plotresults(pr::NamedTuple, res::NamedTuple; savePlot::Bool=true, saveL
     x☆ = xvals[:, itr]
 
     # Convert time to milliseconds
-    time_ms = pr.df.t .* 1000
+    time_ms = pr.df.x .* 1000
     
     # Calculate dampedSHM values using optimal parameters
-    predicted_values = [pr.objective(x☆, t, getGradientToo=false) for t in pr.df.t]
+    predicted_values = [pr.objective(x☆, t, getGradientToo=false) for t in pr.df.x]
 
     # Plot
     gr()  # Ensure you're using the GR backend for Plots.jl which supports LaTeX rendering
@@ -97,7 +97,7 @@ function plotresults(pr::NamedTuple, res::NamedTuple; savePlot::Bool=true, saveL
 
     title_content = "Voltage vs Time\nMethod: $(pr.alg.method)\nLineSearch: $(pr.alg.linesearch)\nIterations: $formatted_iterations\nError (MSE): $(fvals[itr]) mV"
 
-    p = scatter(time_ms, pr.df.V, 
+    p = scatter(time_ms, pr.df.y, 
         label=L"Original Data $(V)$",  # Using LaTeXStrings for original data label
         xlabel=L"Time $(ms)$",  # Using LaTeXStrings 
         ylabel=L"Voltage $(mV)$",  # Using LaTeXStrings 
@@ -122,9 +122,9 @@ font_color = :white
 font_family = :courier
 
 # Calculate positions for annotations based on the data
-max_x = maximum(pr.df.t)
-max_y = minimum(pr.df.V)
-annotation_spacing = (maximum(pr.df.V) - max_y) * 0.05
+max_x = maximum(pr.df.x)
+max_y = minimum(pr.df.y)
+annotation_spacing = (maximum(pr.df.y) - max_y) * 0.05
 
 # Calculate starting positions for the annotations
 start_y = max_y + 4 * annotation_spacing
@@ -151,43 +151,5 @@ annotate!(p, [(max_x * 0.95, start_y, text("Method: $(pr.alg.method)", font_colo
 
     # Display plot
     display(p)
-end
-
-using Plots
-
-function plotresults2(pr::NamedTuple, res::NamedTuple; savePlot=true, saveLocation="processedData/")
-    @unpack converged, statusMessage, fvals, xvals, backtrackVals = res
-    n = size(xvals, 1)
-    itr = size(xvals, 2)
-    x☆ = xvals[:, itr]
-    minBacktracks, maxBacktracks = extrema(backtrackVals)
-
-    t_values = pr.df.t
-    V_values = pr.df.V
-    
-    model_vals = [pr.objective(x☆, t, getGradientToo=false) for t in t_values]
-    println(length(t_values))
-    println(length(model_vals))
-    p1 = scatter(t_values, V_values, label="Data", color=:purple, legend=false)
-    plot!(p1, t_values, model_vals, label="Model", color=:blue, linewidth=2)
-
-    title_text = "Voltage vs Time\n"
-    method_text = "Method: $(pr.alg.method)\n"
-    line_search_text = "LineSearch: $(pr.alg.linesearch)\n"
-    iterations_text = "Iterations: $(itr)\n"
-    error_text = "Error (MSE): $(fvals[itr]) mV"
-
-    p2 = plot(title=title_text, framestyle=:none, axis=false)
-    p3 = plot(title=method_text, framestyle=:none, axis=false)
-    p4 = plot(title=line_search_text, framestyle=:none, axis=false)
-    p5 = plot(title=iterations_text, framestyle=:none, axis=false)
-    p6 = plot(title=error_text, framestyle=:none, axis=false)
-
-    p7 = plot(p1, p2, p3, p4, p5, p6, layout=(6,1), size=(600,600), margin=5)
-
-    if savePlot
-        filename = saveLocation * string(pr.objective) * "_$(pr.alg.method)_$(@sprintf("%.0e", itr)).png"
-        savefig(p7, filename)
-    end
 end
 

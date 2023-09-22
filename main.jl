@@ -24,15 +24,15 @@ include("src/optimize.jl");
 include("src/display.jl");
 include("src/utilities.jl");
 
-global const JULIA_NUM_THREADS = 4;
+# global const JULIA_NUM_THREADS = 4;
 
 rawDataFolder = "rawData/";
 filename = rawDataFolder*"FFD.csv";
 df = CSV.File(filename) |> DataFrame;
 rename!(df, [:x, :y]);
 
-# verbose = false
-verbose = true;
+verbose = false
+# verbose = true;
 logging = true;
 
 if logging
@@ -47,7 +47,7 @@ end
 scatter_voltage_vs_time(df)
 
 alg = (method = "GradientDescent",
-        maxiter = Int(1e5),
+        maxiter = Int(1e4),
         ngtol = 1e-10,
         dftol = 1e-12,
         dxtol = 1e-10,
@@ -59,7 +59,8 @@ alg = (method = "GradientDescent",
         c2 = 0.9,
         progress = 50);
 
-functionName = "dampedSHM"
+# functionName = "dampedSHM"
+functionName = "dampedSHM_Parallel"
 
 if isdefined(Main, :obj)
         println("The obj function of name $(nameof(obj)) is already defined.")
@@ -77,15 +78,15 @@ pr = (alg=alg, objective=obj, p=p, x0=x0);
 println("You are currently using $(Threads.nthreads()) threads.")
 println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
-@btime begin
+# @btime begin
         # f, g = dampedSHM(x0, pr.p)
-        f, g = dampedSHM_Parallel(x0, pr.p)        
-end
+        # f, g = dampedSHM_Parallel(x0, pr.p)        
+# end
 
 # @profile begin
-# @btime begin
-        # res = optimize(pr, verbose=verbose, itrStart=7)
-# end
+@btime begin
+        res = optimize(pr, verbose=verbose, itrStart=7)
+end
 # end
 
 # showresults(res)

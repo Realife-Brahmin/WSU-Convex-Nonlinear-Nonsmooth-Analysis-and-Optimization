@@ -8,6 +8,8 @@ include("helperFunctions.jl");
 
 function dampedSHM(x::Vector{Float64}, 
     p::NamedTuple{(:df, :params), Tuple{DataFrame, Vector{Float64}}};
+    verbose::Bool=false,
+    log::Bool=true,
     getGradientToo::Bool=true)
 
     df = p.df

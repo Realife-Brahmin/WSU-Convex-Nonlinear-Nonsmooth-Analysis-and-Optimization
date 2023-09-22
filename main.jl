@@ -21,7 +21,7 @@ include("src/optimize.jl");
 include("src/display.jl");
 include("src/utilities.jl");
 
-global const JULIA_NUM_THREADS = 16
+global const JULIA_NUM_THREADS = 16;
 
 rawDataFolder = "rawData/";
 filename = rawDataFolder*"FFD.csv";
@@ -44,14 +44,14 @@ end
 scatter_voltage_vs_time(df)
 
 alg = (method = "GradientDescent",
-        maxiter = Int(1e4),
+        maxiter = Int(1e5),
         ngtol = 1e-10,
         dftol = 1e-12,
         dxtol = 1e-10,
         lambda = 1,
         lambdaMax = 100,
-        # linesearch = "Armijo",
-        linesearch = "StrongWolfe",
+        linesearch = "Armijo",
+        # linesearch = "StrongWolfe",
         c1 = 1e-4, # Pg 33 (3.1 Step Length)
         c2 = 0.9,
         progress = 50);
@@ -64,17 +64,23 @@ else
         const obj = eval(Symbol(functionName))
         println("We'll be working with the $(nameof(obj)) function.")
 end
-        
-p = [];
+
+params = Float64[];
+p = (df=df, params=params);
 x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2];
 
-pr = (alg=alg, df=df, objective=obj, p=p, x0=x0);
+pr = (alg=alg, objective=obj, p=p, x0=x0);
 
 # @profile begin
-res = optimize(pr, verbose=verbose, itrStart=7)
+# @btime begin
+        res = optimize(pr, verbose=verbose, itrStart=7)
 # end
+        # end
+
+t0 = df.x[1]
+dampedSHM(x0, t0)
 showresults(res)
-plotresults(pr, res)
+# plotresults(pr, res)
 # For testing linesearch
 # fₖ, ∇fₖ = computeCost(pr, x0);
 # pₖ = findDirection(pr, ∇fₖ);

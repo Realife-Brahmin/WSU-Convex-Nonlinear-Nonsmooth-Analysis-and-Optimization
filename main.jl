@@ -1,4 +1,7 @@
 # main.jl
+using Pkg
+Pkg.activate(".")
+
 using Base.Threads
 using BenchmarkTools
 using CSV
@@ -21,7 +24,7 @@ include("src/optimize.jl");
 include("src/display.jl");
 include("src/utilities.jl");
 
-global const JULIA_NUM_THREADS = 16;
+global const JULIA_NUM_THREADS = 4;
 
 rawDataFolder = "rawData/";
 filename = rawDataFolder*"FFD.csv";
@@ -29,8 +32,8 @@ df = CSV.File(filename) |> DataFrame;
 rename!(df, [:x, :y]);
 
 # verbose = false
-verbose = true
-logging = true
+verbose = true;
+logging = true;
 
 if logging
         if !isdir("./logging")
@@ -71,15 +74,21 @@ x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2];
 
 pr = (alg=alg, objective=obj, p=p, x0=x0);
 
+println("You are currently using $(Threads.nthreads()) threads.")
+println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
+
+@btime begin
+        # f, g = dampedSHM(x0, pr.p)
+        f, g = dampedSHM_Parallel(x0, pr.p)        
+end
+
 # @profile begin
 # @btime begin
-        res = optimize(pr, verbose=verbose, itrStart=7)
+        # res = optimize(pr, verbose=verbose, itrStart=7)
 # end
-        # end
+# end
 
-t0 = df.x[1]
-dampedSHM(x0, t0)
-showresults(res)
+# showresults(res)
 # plotresults(pr, res)
 # For testing linesearch
 # fₖ, ∇fₖ = computeCost(pr, x0);

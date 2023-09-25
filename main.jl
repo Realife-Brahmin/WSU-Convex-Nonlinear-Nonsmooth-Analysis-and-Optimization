@@ -54,8 +54,8 @@ alg = (method = "GradientDescent",
         dxtol = 1e-10,
         lambda = 1,
         lambdaMax = 100,
-        # linesearch = "Armijo",
-        linesearch = "StrongWolfe",
+        linesearch = "Armijo",
+        # linesearch = "StrongWolfe",
         c1 = 1e-4, # Pg 33 (3.1 Step Length)
         c2 = 0.9,
         progress = 50);
@@ -85,11 +85,11 @@ println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
         # f, g = dampedSHM_Parallel(x0, pr.p)        
 # end
 
-# @profile begin
-@btime begin
+@profile begin
+# @btime begin
         res = optimize(pr, verbose=verbose, itrStart=7)
-end
 # end
+end
 
 # showresults(res)
 # plotresults(pr, res)
@@ -98,6 +98,15 @@ end
 # pₖ = findDirection(pr, ∇fₖ);
 # linesearch(pr, x0, pₖ, verbose=true, itrStart=7);
 
-# ProfileView.view();
+ProfileView.view();
+
+# Open a file in write mode
+f = open("./logging/profile_results.txt", "w")
+
+# Redirect the output of Profile.print to the file
+Profile.print(f, mincount=100)
+
+# Close the file
+close(f)
 # pₖ = findDirection(pr, g)
 # α = linesearch(pr, x0, pₖ, verbose=true)

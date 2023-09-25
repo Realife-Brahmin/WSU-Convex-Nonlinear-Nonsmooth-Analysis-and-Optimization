@@ -77,7 +77,6 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
     itrStart::Int64=1,
     verbose::Bool=false,
     log::Bool=true)
-    # f = Symbol(pr.objective)
     
     obj = pr.objective
     p = pr.p

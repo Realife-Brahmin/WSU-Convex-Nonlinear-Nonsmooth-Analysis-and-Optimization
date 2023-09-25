@@ -48,7 +48,7 @@ end
 scatter_voltage_vs_time(df)
 
 alg = (method = "GradientDescent",
-        maxiter = Int(1e4),
+        maxiter = Int(1e5),
         ngtol = 1e-10,
         dftol = 1e-12,
         dxtol = 1e-10,

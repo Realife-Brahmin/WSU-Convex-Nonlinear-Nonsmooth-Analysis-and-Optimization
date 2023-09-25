@@ -20,7 +20,9 @@ using Symbolics
 # include("src/initializer.jl");
 include("src/helperFunctions.jl");
 include("src/objective.jl");
+include("src/objectiveParallel.jl");
 include("src/optimize.jl");
+include("src/optimizeParallel.jl");
 include("src/display.jl");
 include("src/utilities.jl");
 
@@ -60,8 +62,8 @@ alg = (method = "GradientDescent",
         c2 = 0.9,
         progress = 50);
 
-functionName = "dampedSHM"
-# functionName = "dampedSHM_Parallel"
+# functionName = "dampedSHM"
+functionName = "dampedSHM_Parallel"
 
 if isdefined(Main, :obj)
         println("The obj function of name $(nameof(obj)) is already defined.")
@@ -85,9 +87,10 @@ println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
         # f, g = dampedSHM_Parallel(x0, pr.p)        
 # end
 
-@profile begin
-# @btime begin
-        res = optimize(pr, verbose=verbose, itrStart=7)
+# @profile begin
+@btime begin
+        # res = optimize(pr, verbose=verbose, itrStart=7)
+        res = optimizeParallel(pr)
 # end
 end
 
@@ -98,15 +101,15 @@ end
 # pₖ = findDirection(pr, ∇fₖ);
 # linesearch(pr, x0, pₖ, verbose=true, itrStart=7);
 
-ProfileView.view();
+# ProfileView.view();
 
 # Open a file in write mode
-f = open("./logging/profile_results.txt", "w")
+# f = open("./logging/profile_results.txt", "w")
 
 # Redirect the output of Profile.print to the file
-Profile.print(f, mincount=100)
+# Profile.print(f, mincount=5000)
 
 # Close the file
-close(f)
+# close(f)
 # pₖ = findDirection(pr, g)
 # α = linesearch(pr, x0, pₖ, verbose=true)

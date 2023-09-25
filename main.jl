@@ -30,6 +30,7 @@ rawDataFolder = "rawData/";
 filename = rawDataFolder*"FFD.csv";
 df = CSV.File(filename) |> DataFrame;
 rename!(df, [:x, :y]);
+data = Matrix(df)
 
 verbose = false
 # verbose = true;
@@ -59,8 +60,8 @@ alg = (method = "GradientDescent",
         c2 = 0.9,
         progress = 50);
 
-# functionName = "dampedSHM"
-functionName = "dampedSHM_Parallel"
+functionName = "dampedSHM"
+# functionName = "dampedSHM_Parallel"
 
 if isdefined(Main, :obj)
         println("The obj function of name $(nameof(obj)) is already defined.")
@@ -70,7 +71,8 @@ else
 end
 
 params = Float64[];
-p = (df=df, params=params);
+# p = (df=df, params=params);
+p = (data=data, params=params)
 x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2];
 
 pr = (alg=alg, objective=obj, p=p, x0=x0);

@@ -7,16 +7,23 @@ using Symbolics
 include("helperFunctions.jl");
 
 function dampedSHM(x::Vector{Float64}, 
-    p::NamedTuple{(:df, :params), Tuple{DataFrame, Vector{Float64}}};
+    # p::NamedTuple{(:df, :params), Tuple{DataFrame, Vector{Float64}}};
+    p::NamedTuple{(:data, :params), Tuple{Matrix{Float64}, Vector{Float64}}};
     verbose::Bool=false,
     log::Bool=true,
     getGradientToo::Bool=true)
 
-    df = p.df
-    y = df.y
-    t = df.x
+    # df = p.df
+    data = p.data
+    M = size(data, 1)
+    nf = size(data, 2) - 1
+    y = data[:, nf+1]
+    xf = data[:, 1:nf]
+    t = xf
+    # y = df.y
+    # t = df.x
     n = length(x) # note that df's x (time) is different from function parameter x
-    M = length(y)
+    # M = length(y)
     A₀, A, τ, ω, α, ϕ = x
     f = 0.0;
     g = zeros(Float64, n)
@@ -44,14 +51,27 @@ function dampedSHM(x::Vector{Float64},
 end
 
 function dampedSHM_Parallel(x::Vector{Float64}, 
-    p::NamedTuple{(:df, :params), Tuple{DataFrame, Vector{Float64}}};
-    getGradientToo::Bool=true)
+    # p::NamedTuple{(:df, :params), Tuple{DataFrame, Vector{Float64}}};
+    p::NamedTuple{(:data, :params), Tuple{Matrix{Float64}, Vector{Float64}}};
+    getGradientToo::Bool=true,
+    verbose::Bool=false,
+    log::Bool=true)
 
-    df = p.df
-    y = df.y
-    t = df.x
+    # df = p.df
+    # y = df.y
+    # t = df.x
+    # M = length(y)
+    # df = p.df
+    data = p.data
+    M = size(data, 1)
+    nf = size(data, 2) - 1
+    y = data[:, nf+1]
+    xf = data[:, 1:nf]
+    t = xf
     n = length(x)
-    M = length(y)
+    A₀, A, τ, ω, α, ϕ = x
+    f = 0.0;
+    g = zeros(Float64, n)
     A₀, A, τ, ω, α, ϕ = x
     
     f_atomic = Threads.Atomic{Float64}(0.0)  # Make f atomic

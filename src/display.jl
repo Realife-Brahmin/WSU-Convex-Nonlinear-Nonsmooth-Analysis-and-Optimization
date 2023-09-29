@@ -41,28 +41,45 @@ function scatter_voltage_vs_time(df::DataFrame)
     # background_color_legend=:transparent
 end
 
-function showresults(res::NamedTuple)
-    @unpack converged, statusMessage, fvals, xvals, backtrackVals = res
+function showresults(res::NamedTuple;
+    pr=nothing)
+    @unpack converged, statusMessage, fvals, xvals, backtrackVals, M = res
     nnztol = 1e-8 # variable having a value below this will NOT be counted in the list of non-zero variables. For printing purposes only. 
+
+    v = true
+    if pr !== nothing
+        methodMsg = "Method Used: " * pr.alg.method
+        lsMsg = "Linesearch method used: " * pr.alg.linesearch
+        myprintln(v, "****************************")
+        myprintln(v, methodMsg)
+        myprintln(v, lsMsg)
+    else
+        methodMsg = ""
+        lsMsg = ""
+    end
+    
     n = size(xvals, 1)
     itr = size(xvals, 2)
     x☆ = xvals[:, itr]
     minBacktracks, maxBacktracks = extrema(backtrackVals)
 
-    v = true
     myprintln(v, "****************************")
     myprintln(v, statusMessage)
     if converged == true
-        fvalPrefix = "Optimal MSE value = "
-        xvalMessage = "Nonzero Optimal Variables:"
+        fvalPrefixMSE = "Optimal MSE value = "
+        fvalPrefixSSE = "Optimal SSE value = "
+        xvalMessage = "Optimal Nonzero Variables:"
     elseif converged == false
-        fvalPrefix = "Best MSE value = "
-        xvalMessage = "Nonzero Best Known Variables:"
+        fvalPrefixMSE = "Best MSE value = "
+        fvalPrefixSSE = "Best SSE value = "
+        xvalMessage = "Best Known Nonzero Variables:"
     else
         @error "bad condition"
     end
-    fvalMessage = fvalPrefix*"$(fvals[itr])"
-    myprintln(v, fvalMessage)
+    fvalMessageMSE = fvalPrefixMSE*"$(fvals[itr])"
+    fvalMessageSSE = fvalPrefixSSE*"$(fvals[itr]*M)"
+    myprintln(v, fvalMessageMSE)
+    myprintln(v, fvalMessageSSE)
     myprintln(v, "***************************")
     myprintln(v, xvalMessage)
     for k in 1:n

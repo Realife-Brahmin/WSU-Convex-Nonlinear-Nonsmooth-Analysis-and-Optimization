@@ -1,0 +1,240 @@
+function [out]=optimize(pr)
+% Function optimize finds a local minimizer of a function using gradient
+% based methods.
+% Author: Tom Asaki
+% Version: September 12, 2023
+%
+% Call:
+%
+%   [out]=optimize(pr)
+%
+% Inputs:
+%
+%   pr      a structure variable containing all necessary problem 
+%           information  -OR-  the name of a Matlab executable file 
+%           which sets the problem variables into a structure variable.
+%           The various fields and [default values] are as follows. 
+%       .progress   A positive intgeger.  Progress will be displayed
+%                   every (pr.progress) iterations.
+%       .objective  function handle to the objective/gradient computation
+%       .x0         vector of intial decision variable values.
+%       .par        variable to pass to objective function (for example
+%                   containing parameters in a structure variable).
+%       .method     string indicating optimization method.  Options:
+%                       'GradientDescent'
+%                       'ConjugateGradient' (with PR update and hard reset)
+%                       'BFGS' (quasi-Newton)
+%                       'TrustRegion  (with PosDef Dogleg)
+%       .maxiter [inf]  maximum number of decision variable updates 
+%       .ngtol [1E-8]  stop tolerance on gradient norm
+%       .dftol [1E-8]  stop tolerance on change in objective
+%       .dxtol [1E-8]  stop tolerance on change in decision varable norm
+%       .lambda [1]  line search initial step size multiplier
+%       .lambdamax [100] maximum line search step length
+%       .linesearch  string indicating the type of linesearch to perform
+%                       'Armijo'       (appropriate for GD)
+%                       'StrongWolfe'  (appropriate for CG and BFGS)
+%       .c1 [0.0001]  Armijo sufficient decrease parameter ( 0 < c1 < 1/2 )
+%       .c2 [0.9] Curvature condition parameter ( 0 < c1 < c2 < 1 )
+%                 If using Conjugate Gradient method ( 0 < c1 < c2 < 1/2 )
+%                 with default value [0.4]
+%       .deltamax [100] maximum trust region size
+%       .deltatol [sqrt(eps)] stop tolerance on trust region size.
+%       .eta [0.01 0.25 0.75]  trust region parameters 
+%                  [ sufficient decrease , shrink , expand ]
+%                  ( 0 <= eta1 < eta2 < eta3 < 1 )
+%       .maxcond [1000]  maximum condition number on approximate model
+%                   hessian for trust region method.
+%       
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Parse Input
+
+% In this section, the input is either an executable file that sets 
+% structure variable parameters, or it is a structure variable itself.
+out=struct();
+try
+    if ~isstruct(pr)
+        feval(pr);
+    else
+        [pr,msg]=setdefaults(pr);
+    end
+catch
+    disp('Function optimize requires one structure variable or file input.');
+    return
+end
+
+% If the input structure variable does not contain required inputs,
+% then post a message and terminate.
+if ~isempty(msg)
+    for k=1:length(msg), disp(msg{k}); end
+    return
+end
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Intialization
+
+% The output structure variable is initialized here
+out.pr=pr;
+out.x=pr.x0(:);
+
+% Make the initial call to the objective function
+% "ev" is a subfunction that makes the call correctly
+[out.f,out.g]=ev(pr.x0,pr,2);
+
+% Set iteration information
+out.msg='';         % terminate when the output message is not empty
+iter=1;             % counter
+n=length(pr.x0);    % dimension of decision variable space
+delta=1;            % always start TR with unit radius
+chk=true;
+
+% Initialize terminal output
+if pr.progress
+    fprintf('\n');
+    fprintf('    date      time    iter   log10(f)\n');
+    fprintf('-------------------------------------\n');
+    fprintf([char(datetime),' %5d  %8.4f\n'],iter,log10(out.f(end)))
+end
+
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Main Routines
+    
+while isempty(out.msg)
+
+    switch pr.method
+    
+        case 'GradientDescent'
+        
+    	% Compute the gradient descent search direction
+    	% and perform the line search
+            
+        case 'ConjugateGradient'
+
+    	% Compute the conjugate gradient search direction
+    	% and perform one line search iteration
+
+        case 'BFGS'
+            
+     	% Compute the BFGS search direction
+    	% and perform the line search
+           
+        case 'TrustRegion'
+            
+    	% Compute the Trust Region Step 
+ 
+    end
+           
+    % update the iteration counter, x, f and g
+
+    % check termination criteria and set output message
+    out.msg='';
+    % here is one example:
+    if iter>pr.maxiter
+        out.msg='Maximum number of iterations reached.';
+    end
+
+    % Print iteration status/result to terminal
+    if pr.progress 
+        if iter/pr.progress==round(iter/pr.progress) || ~isempty(out.msg)
+        fprintf([char(datetime),' %5d  %8.4f\n'],iter,log10(out.f(end)))
+        end
+    end
+
+
+end
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Wrap Up
+
+% closing terminal message
+if pr.progress
+    fprintf('\n%s\n\n',out.msg);
+end
+
+return
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function [pr,msg]=setdefaults(pr)
+msg={};
+df.par=[];
+df.maxiter=inf;
+df.ngtol=1E-8;
+df.dftol=1E-8;
+df.dxtol=1E-8;
+df.lambda=1;
+df.lambdamax=100;
+df.c1=0.001;
+df.c2=0.9;
+df.deltamax=100;
+df.eta=[0.01 0.25 0.75];
+df.maxcond=1000;
+df.deltatol=sqrt(eps);
+df.progress=true;
+fn=fieldnames(df);
+for k=1:length(fn)
+    if ~isfield(pr,fn{k}) || isempty(pr.(fn{k}))
+        pr.(fn{k})=df.(fn{k});
+    end
+end
+if ~isfield(pr,'objective') 
+    msg{end+1}='Specify an objective function handle.';
+end
+if ~isfield(pr,'x0') 
+    msg{end+1}='Specify an initial decision variable vector.';
+end
+if ~isfield(pr,'method')
+    msg{end+1}='Specify an optimization method.';
+end
+
+if strcmp(pr.method,'TrustRegion'), pr.dxtol=-1; pr.dftol=-1; end
+
+if strcmp(pr.method,'ConjugateGradient'), pr.c2=0.4; pr.c1=0.001; end
+
+return
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function [xnew,flag]=linesearch(x,f,g,p,pr)
+
+switch pr.linesearch
+
+    case 'Armijo'
+        
+        % Armijo Condition with backtracking
+
+    case 'StrongWolfe'
+        
+        % Strong Wolfe Conditions with interpolation
+        
+end    
+
+return
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function [f,g]=ev(x,pr,m)
+if isempty(pr.par)
+    if m>1
+        [f,g]=pr.objective(x); 
+    else
+        f=pr.objective(x);
+    end
+else
+    if m>1
+        [f,g]=pr.objective(x,pr.par); 
+    else
+        f=pr.objective(x,pr.par);
+    end
+end
+return
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function lambdastar=zoom(L,H,x,f,p,d0,fL,pr)
+
+	% This is the zoom function
+	
+return

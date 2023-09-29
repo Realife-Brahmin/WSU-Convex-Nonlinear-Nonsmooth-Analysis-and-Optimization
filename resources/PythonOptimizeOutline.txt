@@ -1,0 +1,233 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+MODULE: optimize contains functions for unconstrained minimization
+Version: September 12, 2023
+Author: Tom Asaki
+
+Functions:
+    minimize
+    LineSearch
+    zoom
+    TrustRegionStep
+    SetDefaults
+    TerminalUpdate
+    ShowResult
+"""
+
+
+#################################################################
+def minimize(alg):
+    
+    '''
+    optimize is the main minimization routine for unconstrained 
+    smooth-objective problems.
+    
+    INPUTS:
+        alg     dictionary containing all algorithmic parameters:
+            'obj' objective function (handle)
+            'x0'  initial guess
+            'params'   parameters to pass to the objective function
+            'progress' [1]  positive integer.  Progress will be displayed to
+                            the terminal after every (progress) iterations.
+            'method' [BFGS] string indicating the optimization method to use:
+                            'GradientDescent', 'ConjugateGradient', 'BFGS', 
+                            'TrustRegion'.
+            'linesearch' ['Armijo'] string indicating the type of line search
+                                    to perform: 'Armijo', 'StrongWolfe'.
+            'maxiter' [inf] maximum number of decision variable updates
+            'ngtol' [1E-8] stop tolerance on gradient norm
+            'dftol' [1E-8] stop tolerance on change in objective
+            'dxtol' [1E-8] stop tolerance on change in decision variable norm
+            'Lambda' [1] line search initial step length
+            'Lambdamax' [100] maximum line search step length
+            'c1' [0.001] Armijo sufficient decrease condition parameter
+                         ( 0 < c1 < 1/2 )  
+            'c2' [0.9] Curvature condition parameter
+                       ( 0 < c1 < c2 < 1) or
+                       ( 0 < c1 < c2 < 1/2) of ConjugateGradient
+            'deltamax' [100] maximum trust region size
+            'deltatol' [1E-8] stop tolerance on trust region size
+            'eta' [0.01 0.25 0.75] trust region parameters
+                                   ( sufficient decrease  shrink , expand )
+                                   ( 0 <= eta1 < eta2 < eta3 < 1)
+            'maxcond' [1000] maximum condition number on approximate model 
+                             hessian for trust region method
+    '''
+    
+    ##### INITIALIZATIONS ##################################################
+    
+    import numpy as np
+    
+    # Set Default Values for algorithmic parameters as needed
+    alg=SetDefaults(alg)
+    obj=alg['obj']
+    x0=alg['x0']
+    params=alg['params']
+    
+    # set initial values for output dictionary res
+    f,g=obj(x0,params,2)
+    f=np.array([f])
+    res={'x':x0 , 'f':f , 'g':g , 'alg':alg , 'msg':'' }
+    
+    # Initialize iterations
+    iter=0
+    n=len(x0)
+    delta=1
+    chk=True
+    
+    # Display Initialization
+    if alg['progress']:
+        TerminalUpdate('begin','','','')
+        TerminalUpdate('current','',0,f)
+    
+    ##### Main Routine #####################################################
+    
+    while len(res['msg'])==0:
+        
+        match alg['method']:
+        
+            case 'GradientDescent':
+            
+            	# choose descent direction and call linesearch                
+               
+            case 'ConjugateGradient':
+                
+             	# choose descent direction and call linesearch                
+             
+            case 'BFGS':
+                
+             	# choose descent direction and call linesearch                
+               
+            case 'TrustRegion':
+                
+            	# compute TR descent direction and call linesearch                
+                    
+
+        # Update iteration counter
+        iter+=1
+            
+        # Update x,f,g
+        res['x']=np.append(res['x'],xnew,1)
+        ff,gg=obj(xnew,params,2)
+        res['f']=np.append(res['f'],ff)
+        res['g']=np.append(res['g'],gg,1)
+        
+        # check termination criteria
+        if iter>alg['maxiter']:
+            res['msg']='Maximum number of iterations reached.'
+ 
+        # Show Progress
+        if alg['progress']:
+            if len(res['msg'])>0 or not np.mod(iter,alg['progress']):
+                TerminalUpdate('current','',iter,ff)
+            
+    # Finalize progress
+    if alg['progress'] and len(res['msg'])>0:
+        TerminalUpdate('end','','','')
+        TerminalUpdate('message',res['msg'],'','')
+   
+    return res
+    
+ 
+#################################################################
+def SetDefaults(alg):
+    import numpy as np
+    alg.setdefault( 'method',     'BFGS'  )
+    alg.setdefault( 'linesearch', 'Armijo')
+    alg.setdefault( 'maxiter',    np.inf  )
+    alg.setdefault( 'ngtol',      1E-8    )
+    alg.setdefault( 'dftol',      1E-8    )
+    alg.setdefault( 'dxtol',      1E-8    )
+    alg.setdefault( 'Lambda',     1       )
+    alg.setdefault( 'Lambdamax',  100     )
+    alg.setdefault( 'c1',         0.0001  )
+    alg.setdefault( 'c2',         0.9     )
+    alg.setdefault( 'deltamax',   100     )
+    alg.setdefault( 'eta',        [0.01,0.25,0.75]  )
+    alg.setdefault( 'maxcond',    1000    )
+    alg.setdefault( 'deltatol',   1E-8    )
+    alg.setdefault( 'progress',   1 )   
+    
+    if alg['method']=='TrustRegion':
+        alg['dxtol']=-1
+        alg['dftol']=-1
+    if alg['method']=='ConjugagteGradient' and alg['c2']>=0.5:
+        alg['c2']=0.4
+    return alg
+    
+#################################################################
+def TerminalUpdate(type,msg,iter,f):
+    from datetime import datetime
+    import numpy as np
+    match type:
+        case 'begin':
+            print('');
+            print('    date      time     iter   log10(f)');
+            print('----------------------------------------');
+        case 'current':
+            dt=datetime.now()
+            dtstr=dt.strftime("%Y-%m-%d  %H:%M:%S")
+            print('%s  %5d  %8.4f' % (dtstr,iter,np.log10(f)))
+        case 'end':
+            print('----------------------------------------');
+            print('')
+        case 'message':
+            print('')
+            dt=datetime.now()
+            dtstr=dt.strftime("%Y-%m-%d  %H:%M:%S")
+            print('%s  %s' % (dtstr,msg))
+        case _:
+            print('')
+    return
+
+#################################################################
+def LineSearch(x,f,g,d,alg,obj,p):
+    
+    import numpy as np
+    
+    match alg['linesearch']:
+        
+        case 'Armijo':
+            
+            
+            
+        case 'StrongWolfe':
+            
+            
+                    
+        case _:
+            
+    return
+
+
+#################################################################
+def zoom(L,H,x,f,d,d0,fL,p,c1,c2,dxtol,obj):
+    
+            
+    return lambdastar
+    
+#################################################################
+def TrustRegionStep(x,f,g,B,delta,obj,p):
+    
+       
+    return xnew,rho
+
+#################################################################
+def ShowResults(res):
+    import numpy as np
+    n,iter=res['x'].shape
+    print('')
+    print('---------------------------------')
+    print('')
+    print('Optimal Objective = %f' % (res['f'][iter-1]))
+    print('')
+    print('Nonzero Optimal Variables:')
+    for k in range(n):
+        if np.abs(res['x'][k,iter-1])>1E-8:
+            print(' x(%2d) = %f' % (k+1,res['x'][k,iter-1]))
+    print('')
+    print('---------------------------------')
+    print('')
+    return
+    

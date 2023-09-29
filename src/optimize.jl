@@ -2,7 +2,11 @@
 
 # export optimize
 
-function optimize(pr; verbose::Bool=false, log::Bool=true, itrStart::Int64=1)
+function optimize(pr; 
+    verbose::Bool=false, 
+    log::Bool=true, 
+    itrStart::Int64=1)
+
     # Initial settings
     dftol = pr.alg.dftol
     progress = pr.alg.progress
@@ -11,6 +15,7 @@ function optimize(pr; verbose::Bool=false, log::Bool=true, itrStart::Int64=1)
     x = x0
     obj = pr.objective
     p = pr.p
+    M = max(size(p.data, 1), 1)
     fnext = 1e10
     fₖ = obj(x0, p, getGradientToo=false)
     n = length(x)
@@ -48,7 +53,7 @@ function optimize(pr; verbose::Bool=false, log::Bool=true, itrStart::Int64=1)
         fvals, αvals, backtrackVals, xvals = [arr[1:itr] for arr in (fvals, αvals, backtrackVals, xvals)]
     end
     
-    res = (converged=converged, statusMessage=statusMessage, fvals=fvals, αvals=αvals, backtrackVals=backtrackVals, xvals=xvals)
+    res = (converged=converged, statusMessage=statusMessage, fvals=fvals, αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, M=M)
 
     return res
 end

@@ -49,6 +49,8 @@ function generate_pr(functionName::String)
     end
 
     p = (params=params, data=data)
+
+    println("Problem (pr::NamedTuple) generated")
     return (p=p, x0=x0, objective=objective, alg=alg)
 end
 

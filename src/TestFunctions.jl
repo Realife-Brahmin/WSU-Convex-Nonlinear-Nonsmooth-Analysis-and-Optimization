@@ -1,8 +1,14 @@
-function TestFunction1(x::Vector{Float64}, p::Float64; getGradientToo::Bool=true)
+FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
+
+function TestFunction1(x::Vector{Float64}, 
+    p::FuncParam; 
+    getGradientToo::Bool=true)
+
+    p = p.params
 
     a = 4 - 2.1 * x[1]^2 + (1/3) * x[1]^4
     c = 4 * x[2]^2 - 4
-    f = a * x[1]^2 + x[1] * x[2] + c * x[2]^2 + p
+    f = a * x[1]^2 + x[1] * x[2] + c * x[2]^2 + p[1]
 
     if getGradientToo
         g = zeros(Float64, 2)
@@ -59,21 +65,22 @@ function TestFunction3(x::Vector{Float64}, p::Float64; getGradientToo::Bool=true
     end
 end
 
-function rosenbrock(x, p; getGradientToo::Bool=true, verbose::Bool=false)
+function rosenbrock(x::Vector{Float64}, 
+    p::FuncParam; 
+    getGradientToo::Bool=true, verbose::Bool=false)
     """
     Generalized n-dim rosenbrock function with steepness parameter p[1]
     """
+
+    p = p.params
     scale = p[1]
     n = length(x)
     f = 0.0
-    
-    if getGradientToo
-        g = zeros(n)
-    end
+    g = zeros(Float64, n)
 
     for k = 1:n-1
         T = x[k+1] - x[k]^2
-        S = 1 - x[k]
+        S = 1.0 - x[k]
         f += scale * T^2 + S^2
         if getGradientToo
             g[k] = -4 * scale * x[k] * T - 2 * S

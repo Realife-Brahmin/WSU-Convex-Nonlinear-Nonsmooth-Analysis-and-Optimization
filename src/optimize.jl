@@ -14,7 +14,7 @@ function optimize(pr;
     x0 = pr.x0
     x = x0
     obj = pr.objective
-    p = pr.p
+    @show p = pr.p
     M = max(size(p.data, 1), 1)
     fnext = 1e10
     fₖ = obj(x0, p, getGradientToo=false)

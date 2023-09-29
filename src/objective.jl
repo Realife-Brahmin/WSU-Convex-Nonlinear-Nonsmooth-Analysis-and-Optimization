@@ -2,10 +2,11 @@
 
 using Base.Threads
 using DataFrames
-using Symbolics
 
 include("helperFunctions.jl");
 include("../alg.jl") # include alg.jl from parent directory
+
+FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
 
 function generate_pr(functionName::String)
     data = Matrix{Float64}(undef, 0, 0)
@@ -30,19 +31,19 @@ function generate_pr(functionName::String)
         
     elseif functionName == "TestFunction1"
         x0 = randn(2)
-        params = [2]
+        params = Float64.([2])
 
     elseif functionName == "TestFunction2"
         x0 = -2 .+ 2 .* rand(15)
-        params = [1, -16, 5]
+        params = Float64.([1, -16, 5])
 
     elseif functionName == "TestFunction3"
         x0 = sort!(rand(10).^2, rev=true)
-        params = [10]
+        params = Float64.([10])
 
     elseif functionName == "rosenbrock"
-        x0 = 0.1:0.1:10
-        params = [10]
+        x0 = collect(0.1:0.1:1)
+        params = Float64.([10])
 
     else
         @error "Unknown Function. If the function definition is known, please define data, params, x0 first!"
@@ -57,7 +58,7 @@ end
 
 
 function dampedSHM(x::Vector{Float64}, 
-    p::NamedTuple{ (:params, :data), Tuple{ Vector{Float64}, Matrix{Float64} } };
+    p::FuncParam;
     verbose::Bool=false,
     log::Bool=true,
     getGradientToo::Bool=true)

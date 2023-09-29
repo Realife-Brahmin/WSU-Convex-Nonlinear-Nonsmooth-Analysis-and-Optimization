@@ -58,3 +58,36 @@ function TestFunction3(x::Vector{Float64}, p::Float64; getGradientToo::Bool=true
         return f
     end
 end
+
+function rosenbrock(x, p; getGradientToo::Bool=true, verbose::Bool=false)
+    """
+    Generalized n-dim rosenbrock function with steepness parameter p[1]
+    """
+    scale = p[1]
+    n = length(x)
+    f = 0.0
+    
+    if getGradientToo
+        g = zeros(n)
+    end
+
+    for k = 1:n-1
+        T = x[k+1] - x[k]^2
+        S = 1 - x[k]
+        f += scale * T^2 + S^2
+        if getGradientToo
+            g[k] = -4 * scale * x[k] * T - 2 * S
+            if k > 1
+                g[k] += 2 * scale * (x[k] - x[k-1]^2)
+            end
+        end
+    end
+    
+    if getGradientToo
+        g[n] = 2 * scale * (x[n] - x[n-1]^2)
+        return f, g
+    else
+        return f
+    end
+end
+

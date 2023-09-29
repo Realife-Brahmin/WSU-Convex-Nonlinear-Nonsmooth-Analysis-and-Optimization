@@ -16,4 +16,17 @@ function initialize_logging(;log_path::String="./logging/logs.txt", overwrite::B
     end
 end
 
+function initialize_logging_directory(logging::Bool, log_dir::String="./logging")
+    if logging
+        if !isdir(log_dir)
+            println("Creating logging directory since it doesn't exist.")
+            mkdir(log_dir)
+        else 
+            println("No need to create logging directory, it already exists.")
+            initialize_logging(overwrite=true)
+        end
+    end
+end
+
+
 

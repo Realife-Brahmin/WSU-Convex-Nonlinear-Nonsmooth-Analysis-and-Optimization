@@ -6,34 +6,25 @@ println("You are currently using $(Threads.nthreads()) threads.")
 println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
 functionName = "dampedSHM";
-
-# functionName = "dampedSHM_Parallel"
 # functionName = "TestFunction1"
 
 pr = generate_pr(functionName);
 
-
 verbose = false
 # verbose = true;
 logging = true;
+profiling = false;
+benchmarking = false;
 
-if logging
-        if !isdir("./logging")
-                println("Creating logging directory since it doesn't exist.")
-                mkdir("./logging")
-        else 
-                println("No need to create logging directory, it already exists.")
-                initialize_logging(overwrite=true)
-        end
-end
+initialize_logging_directory(logging)
 
 # @profile begin
-# @btime begin
-        @time begin
-                res = optimize(pr, verbose=verbose, itrStart=7)
-        end
+# rumTime = @btime begin
+runTime = @elapsed begin
+        res = optimize(pr, verbose=verbose, itrStart=7)
+end
         
-showresults(res)
+showresults(res, pr=pr)
 # plotresults(pr, res)
 
 

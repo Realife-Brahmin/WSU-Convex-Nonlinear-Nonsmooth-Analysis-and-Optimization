@@ -105,11 +105,6 @@ pr = (alg=alg, objective=obj, p=p, x0=x0);
 println("You are currently using $(Threads.nthreads()) threads.")
 println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
-# @btime begin
-        # f, g = dampedSHM(x0, pr.p)
-        # f, g = dampedSHM_Parallel(x0, pr.p)        
-# end
-
 # @profile begin
 # @btime begin
 @time begin
@@ -130,14 +125,3 @@ showresults(res)
 
 # Close the file
 # close(f)
-
-
-
-# *****Testing Functions Only*******
-# pₖ = findDirection(pr, g)
-# α = linesearch(pr, x0, pₖ, verbose=true)
-
-# For testing linesearch
-# fₖ, ∇fₖ = computeCost(pr, x0);
-# pₖ = findDirection(pr, ∇fₖ);
-# linesearch(pr, x0, pₖ, verbose=true, itrStart=7);

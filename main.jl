@@ -17,21 +17,54 @@ using ProfileView
 using Revise
 using Symbolics
 
+include("src/display.jl");
 include("src/helperFunctions.jl");
 include("src/objective.jl");
 include("src/objectiveParallel.jl");
 include("src/optimize.jl");
 include("src/optimizeParallel.jl");
-include("src/display.jl");
+include("src/TestFunctions.jl");
 include("src/utilities.jl");
+
+
 
 # global const JULIA_NUM_THREADS = 4;
 
-rawDataFolder = "rawData/";
-filename = rawDataFolder*"FFD.csv";
-df = CSV.File(filename) |> DataFrame;
-rename!(df, [:x, :y]);
-data = Matrix(df)
+functionName = "dampedSHM"
+# functionName = "dampedSHM_Parallel"
+# functionName = "TestFunction1"
+
+if functionName == "dampedSHM" || functionName == "dampedSHM_Parallel"
+        rawDataFolder = "rawData/";
+        filename = rawDataFolder*"FFD.csv";
+        df = CSV.File(filename) |> DataFrame;
+        rename!(df, [:x, :y]);
+        data = Matrix(df)
+
+        params = []
+        x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2];
+
+        scatter_voltage_vs_time(df)
+elseif functionName == "TestFunction1"
+        data = []
+        params = [2]
+        x0 = randn(2)
+elseif functionName == "TestFunction2"
+        data = []
+        params = [1, -16, 5]
+        x0 = -2 .+ 2 .* rand(15)
+elseif functionName == "TestFunction3"
+        data = []
+        params == [10]
+        x0 = sort!(rand(10).^2, rev=true)
+elseif functionName = "rosenbrock"
+        data = []
+        params == [10]
+        x0 = 0.1:0.1:10
+else
+        @error "Unkown Function. If the function definition is known, 
+        please define data, params, x0 first!"
+end
 
 verbose = false
 # verbose = true;
@@ -46,7 +79,6 @@ if logging
                 initialize_logging(overwrite=true)
         end
 end
-scatter_voltage_vs_time(df)
 
 alg = (method = "GradientDescent",
         maxiter = Int(1e5),
@@ -61,9 +93,6 @@ alg = (method = "GradientDescent",
         c2 = 0.9,
         progress = 50);
 
-functionName = "dampedSHM"
-# functionName = "dampedSHM_Parallel"
-
 if isdefined(Main, :obj)
         println("The obj function of name $(nameof(obj)) is already defined.")
 else
@@ -71,10 +100,7 @@ else
         println("We'll be working with the $(nameof(obj)) function.")
 end
 
-params = Float64[];
-# p = (df=df, params=params);
 p = (data=data, params=params)
-x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2];
 
 pr = (alg=alg, objective=obj, p=p, x0=x0);
 

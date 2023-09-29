@@ -24,9 +24,7 @@ include("src/objectiveParallel.jl");
 include("src/optimize.jl");
 include("src/optimizeParallel.jl");
 include("src/TestFunctions.jl");
-include("src/utilities.jl");
-
-
+include("src/utilities.jl"); 
 
 # global const JULIA_NUM_THREADS = 4;
 

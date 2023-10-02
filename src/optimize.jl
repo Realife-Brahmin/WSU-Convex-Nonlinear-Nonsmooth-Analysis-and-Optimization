@@ -4,8 +4,11 @@
 
 function optimize(pr; 
     verbose::Bool=false, 
-    log::Bool=true, 
+    log::Bool=true,
+    log_path::String="./logging/",
     itrStart::Int64=1)
+
+    log_txt = log_path*"log_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
 
     # Initial settings
     dftol = pr.alg.dftol
@@ -24,16 +27,15 @@ function optimize(pr;
     backtrackVals = zeros(Int64, maxiter, 1)
     xvals = zeros(Float64, n, maxiter)
     
-    myprintln(true, "Begin with the solver:")
+    myprintln(true, "Begin with the solver:", log_path=log_txt)
     
     while abs(fnext - fₖ) ≥ dftol && itr ≤ maxiter
         printOrNot = verbose && (itr % progress == 0)
         # printOrNot = false
-        myprintln(printOrNot, "Iteration $(itr):", log=true)
+        myprintln(printOrNot, "Iteration $(itr):", log_path=log_txt)
         fₖ, ∇fₖ = obj(x, p)
         pₖ = findDirection(pr, ∇fₖ)
-        α, x, fnext, backtrackNum = linesearch(pr, x, pₖ, itrStart=itrStart)
-        # α, x, fnext, backtrackNum = linesearch_parallel(pr, x, pₖ, itrStart=itrStart)
+        α, x, fnext, backtrackNum = linesearch(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot)
         fvals[itr] = fnext
         αvals[itr] = α
         backtrackVals[itr] = backtrackNum
@@ -44,11 +46,12 @@ function optimize(pr;
     if itr > maxiter
         converged = false
         statusMessage = "Failed to converge despite $(maxiter) iterations! 😢"
+        myprintln(true, statusMessage, log_path=log_txt)
         @warn statusMessage
     else
         converged = true
         statusMessage = "Convergence achieved in $(itr) iterations 😄"
-        myprintln(true, statusMessage)
+        myprintln(true, statusMessage, log_path=log_txt)
         # truncating arrays as they weren't filled to capacity
         fvals, αvals, backtrackVals, xvals = [arr[1:itr] for arr in (fvals, αvals, backtrackVals, xvals)]
     end
@@ -81,7 +84,8 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
     itrMax::Int64=50,
     itrStart::Int64=1,
     verbose::Bool=false,
-    log::Bool=true)
+    log::Bool=true,
+    log_path::String="./logging/")
     
     obj = pr.objective
     p = pr.p
@@ -91,21 +95,27 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
     xnext = copy(xnow)
     fₖ, ∇fₖ = obj(xnow, p)
     fnext = fₖ
+    log_txt = log_path*"log_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
     itr_search_for_α = itrStart-1
 
     while itr_search_for_α ≤ itrMax
-        @inbounds xnext .= xnow .+ β .* pₖ
+        xnext .= xnow .+ β .* pₖ
+        myprintln(verbose, "Let's shift x to $(xnext)", log_path=log_txt)
         fnext, ∇fnext = obj(xnext, p)
         comparison_val = fₖ + c₁ * β * dot(∇fₖ, pₖ)
 
         if fnext ≤ comparison_val
+            myprintln(verbose, "Armijo condition satisfied for β = $(β)", log_path=log_txt)
             if isStrongWolfe && abs(dot(∇fnext, pₖ)) < abs(c₁ * dot(∇fₖ, pₖ))
+                myprintln(false, "Curvature condition NOT satisfied for β = $(β)", log_path=log_txt)
                 β /= 2
                 itr_search_for_α += 1
             else
+                myprintln(verbose, "Curvature condition satisfied for β = $(β)", log_path=log_txt)
                 break
             end
         else
+            myprintln(false, "Armijo condition NOT satisfied for β = $(β)", log=log)
             β /= 2
             itr_search_for_α += 1
         end

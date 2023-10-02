@@ -16,6 +16,8 @@ function optimize(pr;
     maxiter = pr.alg.maxiter
     x0 = pr.x0
     x = x0
+
+    myprintln(verbose, "Starting with initial point x = $(x).", log_path=log_txt)
     obj = pr.objective
     @show p = pr.p
     M = max(size(p.data, 1), 1)
@@ -36,6 +38,7 @@ function optimize(pr;
         fₖ, ∇fₖ = obj(x, p)
         pₖ = findDirection(pr, ∇fₖ)
         α, x, fnext, backtrackNum = linesearch(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot)
+        myprintln(printOrNot, "Iteration $(itr): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
         fvals[itr] = fnext
         αvals[itr] = α
         backtrackVals[itr] = backtrackNum
@@ -72,7 +75,9 @@ function findDirection(pr::NamedTuple, ∇fnow::Vector{Float64};
         pₖ = -∇fnow
     elseif method == "ConjugateGradientDescent"
         @error "Currently not formulated for this method"
-    else 
+    elseif method == "QuasiNewton"
+        @error "Currently not formulated for this method"
+    else
         @error "Currently not formulated for this method"
     end
 
@@ -100,7 +105,7 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
 
     while itr_search_for_α ≤ itrMax
         xnext .= xnow .+ β .* pₖ
-        myprintln(verbose, "Let's shift x to $(xnext)", log_path=log_txt)
+        myprintln(verbose, "Let's try shifting x to $(xnext)", log_path=log_txt)
         fnext, ∇fnext = obj(xnext, p)
         comparison_val = fₖ + c₁ * β * dot(∇fₖ, pₖ)
 
@@ -111,7 +116,6 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
                 β /= 2
                 itr_search_for_α += 1
             else
-                myprintln(verbose, "Curvature condition satisfied for β = $(β)", log_path=log_txt)
                 break
             end
         else
@@ -128,84 +132,5 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
     α = β
     return (α=α, x=xnext, f=fnext, backtracks=itr_search_for_α) 
 end
-
-# function linesearch(pr::NamedTuple, xnow::Vector{Float64}, 
-#     pₖ::Vector{Float64};
-#     itrMax::Int64=50,
-#     itrStart::Int64=1,
-#     verbose::Bool=false,
-#     log::Bool=true)
-    
-#     obj = pr.objective
-#     p = pr.p
-#     linesearch = pr.alg.linesearch
-#     c₁ = pr.alg.c1
-#     c₂ = pr.alg.c2
-#     β = 1/2^(itrStart-1)
-#     diff = β*pₖ
-#     xnext = xnow+diff
-#     fₖ, ∇fₖ = obj(xnow, p, verbose=verbose, log=log)
-#     fnext = fₖ
-#     itr_search_for_α = itrStart-1
-#     myprintln(verbose, "Current value of F, fₖ = $(fₖ)", log=log)
-#     armijoSatisfied = false
-#     strongWolfeSatisfied = false
-#     if linesearch == "StrongWolfe"
-#         while !strongWolfeSatisfied && itr_search_for_α ≤ itrMax
-#             diff = β*pₖ
-#             myprintln(false, "Let's shift x by $(diff)", log=log)
-#             xnext = xnow+diff
-#             fnext = obj(xnext, p, getGradientToo=false)
-#             # println(c₁*β*∇fₖ'*pₖ)
-#             myprintln(false, "To be compared against: $(fₖ + c₁*β*∇fₖ'*pₖ)", log=log)
-#             if fnext ≤ fₖ + c₁*β*∇fₖ'*pₖ
-#                 myprintln(verbose, "Armijo condition satisfied for β = $(β)", log=log)
-#                 fnext, ∇fnext = obj(xnext, p)
-#                 if abs(∇fnext'*pₖ) ≥ abs(c₂*∇fₖ'*pₖ)
-#                     myprintln(verbose, "Curvature condition satisfied for β = $(β)", log=log)
-#                     strongWolfeSatisfied = true
-#                 else
-#                     itr_search_for_α += 1
-#                     myprintln(false, "Curvature condition NOT satisfied for β = $(β)", log=log)
-#                     β /= 2
-#                     myprintln(false, "Line Search Iterations = $(itr_search_for_α)", log=log)
-#                 end
-#             else
-#                 itr_search_for_α += 1
-#                 myprintln(false, "Armijo condition NOT satisfied for β = $(β)", log=log)
-#                 β /= 2
-#                 myprintln(false, "Line Search Iterations = $(itr_search_for_α)", log=log)
-#             end 
-#         end
-#     elseif linesearch == "Armijo"
-#         # fₖ, ∇fₖ = obj(xnow, p)
-#         while !armijoSatisfied && itr_search_for_α ≤ itrMax
-#             diff = β*pₖ
-#             myprintln(false, "Let's shift x by $(diff)", log=log)
-#             xnext = xnow+diff
-#             fnext = obj(xnext, p, getGradientToo=false)
-#             # println(c₁*β*∇fₖ'*pₖ)
-#             myprintln(false, "To be compared against: $(fₖ + c₁*β*∇fₖ'*pₖ)", log=log)
-#             if fnext ≤ fₖ + c₁*β*∇fₖ'*pₖ
-#                 myprintln(verbose, "Armijo condition satisfied for β = $(β)", log=log)
-#                 armijoSatisfied = true
-#             else
-#                 itr_search_for_α += 1
-#                 myprintln(false, "Armijo condition NOT satisfied for β = $(β)", log=log)
-#                 β /= 2
-#                 myprintln(false, "Line Search Iterations = $(itr_search_for_α)", log=log)
-#             end 
-#         end
-#     else 
-#         @error "Unknown linesearch condition"
-#     end
-    
-#     if itr_search_for_α > itrMax
-#         @error "Line Search failed at point x = $(xnext) despite $(itr_search_for_α) iterations."
-#     end
-
-#     α = β
-#     return (α=α, x=xnext, f=fnext, backtracks=itr_search_for_α) 
-# end
 
 # end

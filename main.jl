@@ -1,4 +1,3 @@
-# main.jl
 include("setup.jl")
 
 # global const JULIA_NUM_THREADS = 4;
@@ -19,14 +18,8 @@ logging = true;
 profiling = false;
 benchmarking = false;
 
-initialize_logging_directory(logging)
+@time res = optimize(pr, verbose=verbose)
 
-# @profile begin
-# rumTime = @btime begin
-runTime = @elapsed begin
-        res = optimize(pr, verbose=verbose)
-end
-        
 showresults(res, pr=pr)
 # plotresults(pr, res)
 

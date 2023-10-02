@@ -30,7 +30,8 @@ function generate_pr(functionName::String)
         x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
         
     elseif functionName == "TestFunction1"
-        x0 = randn(2)
+        # x0 = randn(2)
+        x0 = [0.5, 0.5]
         params = Float64.([2])
 
     elseif functionName == "TestFunction2"

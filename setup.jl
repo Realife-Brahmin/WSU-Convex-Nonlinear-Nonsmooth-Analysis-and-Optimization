@@ -8,6 +8,7 @@ using DataFrames
 using Latexify
 using LaTeXStrings
 using LinearAlgebra
+using Optim
 using Parameters
 using Plots
 using Printf

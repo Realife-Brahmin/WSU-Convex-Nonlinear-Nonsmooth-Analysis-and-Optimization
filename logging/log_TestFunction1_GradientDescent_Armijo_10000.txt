@@ -1,2 +1,83 @@
+Starting with initial point x = [0.5, 0.5].
 Begin with the solver:
-Convergence achieved in 14 iterations 😄
+Iteration 1:
+Let's try shifting x to [-3.0125, 2.0]
+Let's try shifting x to [-1.25625, 1.25]
+Let's try shifting x to [-0.37812500000000004, 0.875]
+Armijo condition satisfied for β = 0.25
+Iteration 1: x = [-0.37812500000000004, 0.875] is a better point with new fval = 1.4813255489449952.
+Iteration 2:
+Let's try shifting x to [1.3331993995434048, -2.465625]
+Let's try shifting x to [0.4775371997717024, -0.7953125000000001]
+Let's try shifting x to [0.049706099885851174, 0.039843749999999956]
+Let's try shifting x to [-0.16420945005707444, 0.457421875]
+Armijo condition satisfied for β = 0.125
+Iteration 2: x = [-0.16420945005707444, 0.457421875] is a better point with new fval = 1.369403282111095.
+Iteration 3:
+Let's try shifting x to [0.6550889960526138, 2.749669339469001]
+Let's try shifting x to [0.2454397729977697, 1.6035456072345005]
+Let's try shifting x to [0.04061516147034763, 1.03048374111725]
+Let's try shifting x to [-0.0617971442933634, 0.7439528080586251]
+Armijo condition satisfied for β = 0.125
+Iteration 3: x = [-0.0617971442933634, 0.7439528080586251] is a better point with new fval = 0.9807051403111471.
+Iteration 4:
+Let's try shifting x to [-0.3133533645530017, 0.16933367033533786]
+Let's try shifting x to [-0.18757525442318257, 0.45664323919698147]
+Let's try shifting x to [-0.12468619935827298, 0.6002980236278033]
+Let's try shifting x to [-0.09324167182581819, 0.6721254158432142]
+Let's try shifting x to [-0.07751940805959079, 0.7080391119509196]
+Armijo condition satisfied for β = 0.0625
+Iteration 4: x = [-0.07751940805959079, 0.7080391119509196] is a better point with new fval = 0.9690814635957088.
+Iteration 5:
+Let's try shifting x to [-0.16931066393883953, 0.7706117118077095]
+Let's try shifting x to [-0.12341503599921516, 0.7393254118793146]
+Let's try shifting x to [-0.10046722202940297, 0.7236822619151171]
+Let's try shifting x to [-0.08899331504449688, 0.7158606869330184]
+Armijo condition satisfied for β = 0.125
+Iteration 5: x = [-0.08899331504449688, 0.7158606869330184] is a better point with new fval = 0.9684615311826139.
+Iteration 6:
+Let's try shifting x to [-0.0988167230179083, 0.6621798390902824]
+Let's try shifting x to [-0.09390501903120259, 0.6890202630116504]
+Let's try shifting x to [-0.09144916703784974, 0.7024404749723344]
+Let's try shifting x to [-0.09022124104117331, 0.7091505809526764]
+Let's try shifting x to [-0.0896072780428351, 0.7125056339428474]
+Armijo condition satisfied for β = 0.0625
+Iteration 6: x = [-0.0896072780428351, 0.7125056339428474] is a better point with new fval = 0.9683719120552532.
+Iteration 7:
+Let's try shifting x to [-0.09128692014916019, 0.714739447340572]
+Let's try shifting x to [-0.09044709909599764, 0.7136225406417097]
+Let's try shifting x to [-0.09002718856941637, 0.7130640872922785]
+Let's try shifting x to [-0.08981723330612573, 0.712784860617563]
+Armijo condition satisfied for β = 0.125
+Iteration 7: x = [-0.08981723330612573, 0.712784860617563] is a better point with new fval = 0.9683716872425945.
+Iteration 8:
+Let's try shifting x to [-0.09013890647254791, 0.7106556122173407]
+Let's try shifting x to [-0.08997806988933682, 0.7117202364174519]
+Let's try shifting x to [-0.08989765159773128, 0.7122525485175074]
+Let's try shifting x to [-0.0898574424519285, 0.7125187045675352]
+Let's try shifting x to [-0.08983733787902712, 0.7126517825925491]
+Armijo condition satisfied for β = 0.0625
+Iteration 8: x = [-0.08983733787902712, 0.7126517825925491] is a better point with new fval = 0.9683715467485587.
+Iteration 9:
+Let's try shifting x to [-0.08986917135755021, 0.7127227809340058]
+Let's try shifting x to [-0.08985325461828866, 0.7126872817632774]
+Let's try shifting x to [-0.08984529624865789, 0.7126695321779133]
+Let's try shifting x to [-0.0898413170638425, 0.7126606573852312]
+Armijo condition satisfied for β = 0.125
+Iteration 9: x = [-0.0898413170638425, 0.7126606573852312] is a better point with new fval = 0.968371546663193.
+Iteration 10:
+Let's try shifting x to [-0.08985099859809613, 0.7125902819007504]
+Let's try shifting x to [-0.08984615783096932, 0.7126254696429908]
+Let's try shifting x to [-0.08984373744740591, 0.712643063514111]
+Let's try shifting x to [-0.08984252725562421, 0.7126518604496711]
+Let's try shifting x to [-0.08984192215973336, 0.7126562589174512]
+Armijo condition satisfied for β = 0.0625
+Iteration 10: x = [-0.08984192215973336, 0.7126562589174512] is a better point with new fval = 0.9683715465103118.
+Iteration 11:
+Let's try shifting x to [-0.08984248714271076, 0.7126585281285112]
+Let's try shifting x to [-0.08984220465122206, 0.7126573935229812]
+Let's try shifting x to [-0.0898420634054777, 0.7126568262202162]
+Let's try shifting x to [-0.08984199278260553, 0.7126565425688337]
+Armijo condition satisfied for β = 0.125
+Iteration 11: x = [-0.08984199278260553, 0.7126565425688337] is a better point with new fval = 0.9683715465102867.
+Convergence achieved in 12 iterations 😄

@@ -1,0 +1,512 @@
+Begin with the solver:
+Convergence achieved in 10 iterations 😄
+Begin with the solver:
+Let's shift x to [1.787056038247501, 55.338826059082905]
+Let's shift x to [0.8827210348820007, 26.8514914963348]
+Let's shift x to [0.43055353319925055, 12.607824214960747]
+Let's shift x to [0.20446978235787547, 5.485990574273719]
+Let's shift x to [0.09142790693718791, 1.9250737539302065]
+Let's shift x to [0.03490696922684415, 0.14461534375844987]
+Armijo condition satisfied for β = 0.03125
+Curvature condition satisfied for β = 0.03125
+Let's shift x to [-0.388606946234731, 1.2182402907842471]
+Let's shift x to [-0.17684998850394346, 0.6814278172713485]
+Armijo condition satisfied for β = 0.5
+Curvature condition satisfied for β = 0.5
+Let's shift x to [0.5104064607370002, 1.2470310655387387]
+Let's shift x to [0.16677823611652842, 0.9642294414050435]
+Let's shift x to [-0.005035876193707517, 0.822828629338196]
+Let's shift x to [-0.09094293234882549, 0.7521282233047722]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.12183335022597234, 0.05247170259230394]
+Let's shift x to [-0.10638814128739892, 0.4022999629485381]
+Let's shift x to [-0.0986655368181122, 0.5772140931266552]
+Let's shift x to [-0.09480423458346884, 0.6646711582157137]
+Let's shift x to [-0.09287358346614716, 0.708399690760243]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.0649998701853044, 0.780529949967183]
+Let's shift x to [-0.07893672682572578, 0.744464820363713]
+Let's shift x to [-0.08590515514593647, 0.726432255561978]
+Let's shift x to [-0.08938936930604181, 0.7174159731611105]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.0976787752729298, 0.6382334966093233]
+Let's shift x to [-0.0935340722894858, 0.6778247348852169]
+Let's shift x to [-0.09146172079776381, 0.6976203540231637]
+Let's shift x to [-0.09042554505190281, 0.707518163592137]
+Let's shift x to [-0.0899074571789723, 0.7124670683766238]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.08920784849268559, 0.7156322468121578]
+Let's shift x to [-0.08955765283582895, 0.7140496575943908]
+Let's shift x to [-0.08973255500740063, 0.7132583629855073]
+Let's shift x to [-0.08982000609318647, 0.7128627156810655]
+Let's shift x to [-0.08986373163607939, 0.7126648920288446]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.08970287690658049, 0.7125475734342398]
+Let's shift x to [-0.08978330427132994, 0.7126062327315422]
+Let's shift x to [-0.08982351795370466, 0.7126355623801934]
+Let's shift x to [-0.08984362479489202, 0.712650227204519]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.08982488220301929, 0.7127529863423165]
+Let's shift x to [-0.08983425349895566, 0.7127016067734178]
+Let's shift x to [-0.08983893914692384, 0.7126759169889684]
+Let's shift x to [-0.08984128197090793, 0.7126630720967437]
+Let's shift x to [-0.08984245338289998, 0.7126566496506314]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.08983926702096445, 0.7126530505776522]
+Let's shift x to [-0.08984086020193222, 0.7126548501141418]
+Let's shift x to [-0.0898416567924161, 0.7126557498823866]
+Let's shift x to [-0.08984205508765804, 0.712656199766509]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Convergence achieved in 11 iterations 😄
+Begin with the solver:
+Let's shift x to [-1.8093985399825405, -2.4283031960496215]
+Let's shift x to [-0.5097829928867126, -1.3117986022154657]
+Let's shift x to [0.1400247806612014, -0.753546305298388]
+Armijo condition satisfied for β = 0.25
+Curvature condition satisfied for β = 0.25
+Let's shift x to [-0.20367297753032987, -0.07573782557519415]
+Let's shift x to [-0.03182409843456424, -0.41464206543679105]
+Let's shift x to [0.05410034111331857, -0.5840941853675895]
+Let's shift x to [0.09706256088725998, -0.6688202453329888]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.0029536146336454905, -1.3296124439515515]
+Let's shift x to [0.047054473126807245, -0.9992163446422702]
+Let's shift x to [0.07205851700703361, -0.8340182949876295]
+Let's shift x to [0.0845605389471468, -0.7514192701603091]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [0.16456590075472557, -0.05894111451921269]
+Let's shift x to [0.12456321985093619, -0.4051801923397609]
+Let's shift x to [0.10456187939904149, -0.578299731250035]
+Let's shift x to [0.09456120917309414, -0.6648595007051721]
+Let's shift x to [0.08956087406012048, -0.7081393854327406]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.08723614476853658, -0.7811423834813996]
+Let's shift x to [0.08839850941432853, -0.7446408844570701]
+Let's shift x to [0.0889796917372245, -0.7263901349449053]
+Let's shift x to [0.08927028289867249, -0.7172647601888229]
+Let's shift x to [0.08941557847939649, -0.7127020728107818]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.0927866729809542, -0.7115275779246926]
+Let's shift x to [0.09110112573017534, -0.7121148253677372]
+Let's shift x to [0.09025835210478592, -0.7124084490892595]
+Let's shift x to [0.0898369652920912, -0.7125552609500206]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [0.08977518228879125, -0.7142063882009259]
+Let's shift x to [0.08980607379044123, -0.7133808245754732]
+Let's shift x to [0.08982151954126621, -0.712968042762747]
+Let's shift x to [0.08982924241667871, -0.7127616518563837]
+Let's shift x to [0.08983310385438495, -0.7126584564032022]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.08990462501101806, -0.7126159163061528]
+Let's shift x to [0.0898688644327015, -0.7126371863546775]
+Let's shift x to [0.08985098414354323, -0.7126478213789399]
+Let's shift x to [0.08984204399896409, -0.7126531388910711]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [0.08983853894490709, -0.7127066299909854]
+Let's shift x to [0.08984029147193559, -0.7126798844410283]
+Let's shift x to [0.08984116773544984, -0.7126665116660497]
+Let's shift x to [0.08984160586720696, -0.7126598252785603]
+Let's shift x to [0.08984182493308553, -0.7126564820848157]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.08984337118372572, -0.7126549989901877]
+Let's shift x to [0.08984259805840562, -0.7126557405375017]
+Let's shift x to [0.08984221149574557, -0.7126561113111587]
+Let's shift x to [0.08984201821441555, -0.7126562966979872]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Convergence achieved in 11 iterations 😄
+Begin with the solver:
+Let's shift x to [-1.6249187343527998, -37.0680522845283]
+Let's shift x to [-0.8009704530905949, -17.801938226335455]
+Let's shift x to [-0.38899631245949234, -8.168881197239031]
+Let's shift x to [-0.1830092421439411, -3.3523526826908188]
+Let's shift x to [-0.08001570698616547, -0.9440884254167128]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [1.4999016006358519, 5.046720732006895]
+Let's shift x to [0.7099429468248433, 2.0513161532950908]
+Let's shift x to [0.31496361991933886, 0.553613863939189]
+Armijo condition satisfied for β = 0.25
+Curvature condition satisfied for β = 0.25
+Let's shift x to [-2.5020999575527867, 1.9527423116507285]
+Let's shift x to [-1.093568168816724, 1.2531780877949588]
+Let's shift x to [-0.3893022744486926, 0.9033959758670739]
+Armijo condition satisfied for β = 0.25
+Curvature condition satisfied for β = 0.25
+Let's shift x to [1.3439938915034246, -3.2766683216634824]
+Let's shift x to [0.47734580852736597, -1.1866361728982042]
+Let's shift x to [0.04402176703933669, -0.14162009851556523]
+Let's shift x to [-0.17264025370467795, 0.3808879386757543]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [0.7846784939296612, 2.7165108289796907]
+Let's shift x to [0.3060191201124916, 1.5486993838277225]
+Let's shift x to [0.06668943320390683, 0.9647936612517384]
+Let's shift x to [-0.05297541025038556, 0.6728407999637463]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.3032609207362767, 1.2348634222896129]
+Let's shift x to [-0.17811816549333115, 0.9538521111266797]
+Let's shift x to [-0.11554678787185835, 0.813346455545213]
+Let's shift x to [-0.08426109906112195, 0.7430936277544797]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.15828272367830148, 0.20686394300693123]
+Let's shift x to [-0.12127191136971172, 0.4749787853807055]
+Let's shift x to [-0.10276650521541683, 0.6090362065675926]
+Let's shift x to [-0.09351380213826939, 0.6760649171610362]
+Let's shift x to [-0.08888745059969566, 0.709579272457758]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.09325532268127074, 0.7586991315476813]
+Let's shift x to [-0.0910713866404832, 0.7341392020027196]
+Let's shift x to [-0.08997941862008943, 0.7218592372302388]
+Let's shift x to [-0.08943343460989255, 0.7157192548439983]
+Let's shift x to [-0.08916044260479411, 0.7126492636508782]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.09446871945799357, 0.7120846214331124]
+Let's shift x to [-0.09181458103139384, 0.7123669425419953]
+Let's shift x to [-0.09048751181809397, 0.7125081030964368]
+Let's shift x to [-0.08982397721144404, 0.7125786833736575]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.08988688858558587, 0.7138333487242626]
+Let's shift x to [-0.08985543289851496, 0.7132060160489601]
+Let's shift x to [-0.0898397050549795, 0.7128923497113088]
+Let's shift x to [-0.08983184113321177, 0.7127355165424831]
+Let's shift x to [-0.08982790917232791, 0.7126570999580704]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.08993857837444014, 0.712631581435073]
+Let's shift x to [-0.08988324377338403, 0.7126443406965717]
+Let's shift x to [-0.08985557647285597, 0.712650720327321]
+Let's shift x to [-0.08984174282259194, 0.7126539101426956]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.08984135736703791, 0.7126944685054284]
+Let's shift x to [-0.08984155009481493, 0.712674189324062]
+Let's shift x to [-0.08984164645870343, 0.7126640497333788]
+Let's shift x to [-0.08984169464064769, 0.7126589799380372]
+Let's shift x to [-0.08984171873161981, 0.7126564450403664]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.08984405601703946, 0.7126554624657927]
+Let's shift x to [-0.08984288737432963, 0.7126559537530796]
+Let's shift x to [-0.08984230305297472, 0.712656199396723]
+Let's shift x to [-0.08984201089229726, 0.7126563222185447]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Convergence achieved in 14 iterations 😄
+Begin with the solver:
+Let's shift x to [-1.5962263245662565, 1.2919752659744956]
+Let's shift x to [-0.5714587816903696, 0.22960840018309436]
+Let's shift x to [-0.05907501025242612, -0.3015750327126062]
+Let's shift x to [0.1971168754665456, -0.5671667491604565]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.7489110563731713, -2.382495468087293]
+Let's shift x to [-0.2758970904533129, -1.4748311086238748]
+Let's shift x to [-0.03939010749338365, -1.0209989288921657]
+Let's shift x to [0.07886338398658098, -0.794082839026311]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [0.24615312873291328, 0.7859570561326441]
+Let's shift x to [0.16250825635974714, -0.004062891446833472]
+Let's shift x to [0.12068582017316405, -0.39907286523657226]
+Let's shift x to [0.09977460207987252, -0.5965778521314417]
+Let's shift x to [0.08931899303322674, -0.6953303455788764]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.0760716666805886, -0.9683913338341474]
+Let's shift x to [0.08269532985690767, -0.8318608397065119]
+Let's shift x to [0.0860071614450672, -0.7635955926426942]
+Let's shift x to [0.08766307723914697, -0.7294629691107852]
+Let's shift x to [0.08849103513618686, -0.7123966573448308]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.09876928438689273, -0.7152975381612678]
+Let's shift x to [0.0936301597615398, -0.7138470977530493]
+Let's shift x to [0.09106059744886333, -0.7131218775489401]
+Armijo condition satisfied for β = 0.25
+Curvature condition satisfied for β = 0.25
+Let's shift x to [0.0820278235248997, -0.7067094141438737]
+Let's shift x to [0.08654421048688152, -0.7099156458464069]
+Let's shift x to [0.08880240396787242, -0.7115187616976735]
+Let's shift x to [0.08993150070836788, -0.7123203196233068]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [0.08889767830245245, -0.7179103848417248]
+Let's shift x to [0.08941458950541016, -0.7151153522325158]
+Let's shift x to [0.08967304510688902, -0.7137178359279113]
+Let's shift x to [0.08980227290762845, -0.713019077775609]
+Let's shift x to [0.08986688680799816, -0.7126696986994578]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.08968623742347749, -0.7124768070863072]
+Let's shift x to [0.08977656211573783, -0.7125732528928825]
+Let's shift x to [0.089821724461868, -0.7126214757961702]
+Let's shift x to [0.08984430563493308, -0.712645587247814]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [0.08981561441402387, -0.7128250186636599]
+Let's shift x to [0.08982996002447848, -0.712735302955737]
+Let's shift x to [0.08983713282970578, -0.7126904451017755]
+Let's shift x to [0.08984071923231943, -0.7126680161747947]
+Let's shift x to [0.08984251243362626, -0.7126568017113044]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.08983901769936062, -0.7126507712057091]
+Let's shift x to [0.08984076506649344, -0.7126537864585067]
+Let's shift x to [0.08984163875005985, -0.7126552940849056]
+Let's shift x to [0.08984207559184305, -0.712656047898105]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [0.08984123320732991, -0.7126619266545458]
+Let's shift x to [0.08984165439958648, -0.7126589872763254]
+Let's shift x to [0.08984186499571477, -0.7126575175872152]
+Let's shift x to [0.08984197029377891, -0.7126567827426601]
+Let's shift x to [0.08984202294281099, -0.7126564153203825]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.08984195849810053, -0.7126562237168708]
+Let's shift x to [0.08984199072045576, -0.7126563195186266]
+Let's shift x to [0.08984200683163338, -0.7126563674195046]
+Let's shift x to [0.08984201488722218, -0.7126563913699435]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Convergence achieved in 13 iterations 😄
+Begin with the solver:
+Let's shift x to [3.2682188148073337, 62.09874645299212]
+Let's shift x to [1.5128502899350622, 30.205008886187745]
+Let's shift x to [0.6351660274989264, 14.258140102785557]
+Let's shift x to [0.1963238962808584, 6.284705711084463]
+Let's shift x to [-0.02309716932817557, 2.297988515233916]
+Let's shift x to [-0.13280770213269255, 0.3046299173086424]
+Armijo condition satisfied for β = 0.03125
+Curvature condition satisfied for β = 0.03125
+Let's shift x to [0.6054300738064597, 2.4221654468429703]
+Let's shift x to [0.2363111858368836, 1.3633976820758065]
+Let's shift x to [0.05175174185209552, 0.8340137996922244]
+Armijo condition satisfied for β = 0.25
+Curvature condition satisfied for β = 0.25
+Let's shift x to [-1.1951124637603847, -1.8275875422642653]
+Let's shift x to [-0.5716803609541445, -0.4967868712860205]
+Let's shift x to [-0.2599643095510245, 0.16861346420310197]
+Let's shift x to [-0.10410628384946449, 0.5013136319476632]
+Let's shift x to [-0.026177270998684485, 0.6676637158199439]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.4845734731285681, 1.2731077634176318]
+Let's shift x to [-0.25537537206362626, 0.9703857396187878]
+Let's shift x to [-0.14077632153115538, 0.8190247277193659]
+Let's shift x to [-0.08347679626491994, 0.7433442217696549]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.16388480131003808, 0.20169074414247157]
+Let's shift x to [-0.12368079878747901, 0.4725174829560632]
+Let's shift x to [-0.10357879752619947, 0.607930852362859]
+Let's shift x to [-0.0935277968955597, 0.675637537066257]
+Let's shift x to [-0.08850229658023982, 0.709490879417956]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.09578689197860106, 0.7596544686885207]
+Let's shift x to [-0.09214459427942044, 0.7345726740532383]
+Let's shift x to [-0.09032344542983013, 0.7220317767355972]
+Let's shift x to [-0.08941287100503498, 0.7157613280767765]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.09586433681894463, 0.6641488466516021]
+Let's shift x to [-0.0926386039119898, 0.6899550873641893]
+Let's shift x to [-0.09102573745851239, 0.7028582077204829]
+Let's shift x to [-0.09021930423177368, 0.7093097678986298]
+Let's shift x to [-0.08981608761840433, 0.7125355479877031]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.08989738149635519, 0.7144885106995047]
+Let's shift x to [-0.08985673455737976, 0.7135120293436039]
+Let's shift x to [-0.08983641108789205, 0.7130237886656535]
+Let's shift x to [-0.08982624935314819, 0.7127796683266783]
+Let's shift x to [-0.08982116848577626, 0.7126576081571907]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.08998490521828728, 0.7126170255281796]
+Let's shift x to [-0.08990303685203177, 0.7126373168426852]
+Let's shift x to [-0.08986210266890401, 0.7126474624999379]
+Let's shift x to [-0.08984163557734014, 0.7126525353285643]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.08984071152558303, 0.7127155031265383]
+Let's shift x to [-0.08984117355146158, 0.7126840192275513]
+Let's shift x to [-0.08984140456440086, 0.7126682772780578]
+Let's shift x to [-0.0898415200708705, 0.7126604063033111]
+Let's shift x to [-0.08984157782410532, 0.7126564708159377]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.08984503957609338, 0.7126549251763121]
+Let's shift x to [-0.08984330870009935, 0.7126556979961249]
+Let's shift x to [-0.08984244326210233, 0.7126560844060313]
+Let's shift x to [-0.08984201054310383, 0.7126562776109846]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Convergence achieved in 12 iterations 😄
+Begin with the solver:
+Let's shift x to [0.9451719275052386, 3.2980634475242523]
+Let's shift x to [0.030897896049868923, 1.9109440046317971]
+Let's shift x to [-0.4262391196778159, 1.2173842831855697]
+Let's shift x to [-0.6548076275416583, 0.8706044224624558]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [1.5954005637012096, -2.0677752232323865]
+Let's shift x to [0.47029646807977565, -0.5985854003849653]
+Armijo condition satisfied for β = 0.5
+Curvature condition satisfied for β = 0.5
+Let's shift x to [-1.8657391430034713, -2.425951766732527]
+Let's shift x to [-0.6977213374618478, -1.5122685835587464]
+Let's shift x to [-0.11371243469103609, -1.0554269919718557]
+Let's shift x to [0.17829201669436978, -0.8270061961784105]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.3737907852181501, 1.4286041590369718]
+Let's shift x to [-0.09774938426189017, 0.30079898142928063]
+Let's shift x to [0.040271316216239805, -0.26310360737456495]
+Let's shift x to [0.1092816664553048, -0.5450549017764877]
+Let's shift x to [0.1437868415748373, -0.6860305489774492]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.2956292178816465, -1.1521099967652961]
+Let's shift x to [-0.0759211881534046, -0.9190702728713727]
+Let's shift x to [0.033932826710716346, -0.8025504109244109]
+Let's shift x to [0.08885983414277682, -0.74429047995093]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [0.12815436574456524, -0.1904606226946881]
+Let's shift x to [0.10850709994367103, -0.46737555132280906]
+Let's shift x to [0.09868346704322392, -0.6058330156368695]
+Let's shift x to [0.09377165059300037, -0.6750617477938998]
+Let's shift x to [0.09131574236788859, -0.7096761138724149]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.07684933340352246, -0.7596582005474145]
+Let's shift x to [0.08408253788570552, -0.7346671572099147]
+Let's shift x to [0.08769914012679705, -0.7221716355411648]
+Let's shift x to [0.08950744124734282, -0.7159238747067899]
+Let's shift x to [0.09041159180761571, -0.7127999942896024]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.08611476823202302, -0.7110171012473521]
+Let's shift x to [0.08826318001981937, -0.7119085477684772]
+Let's shift x to [0.08933738591371754, -0.7123542710290398]
+Let's shift x to [0.08987448886066662, -0.7125771326593211]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [0.0895419993306934, -0.7139076992401152]
+Let's shift x to [0.08970824409568001, -0.7132424159497182]
+Let's shift x to [0.08979136647817332, -0.7129097743045196]
+Let's shift x to [0.08983292766941997, -0.7127434534819204]
+Let's shift x to [0.0898537082650433, -0.7126602930706207]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.0897664085286472, -0.7126082757060801]
+Let's shift x to [0.08981005839684525, -0.7126342843883504]
+Let's shift x to [0.08983188333094427, -0.7126472887294856]
+Let's shift x to [0.08984279579799379, -0.7126537909000532]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [0.08983408079118646, -0.7126973551971074]
+Let's shift x to [0.08983843829459012, -0.7126755730485803]
+Let's shift x to [0.08984061704629195, -0.7126646819743168]
+Let's shift x to [0.08984170642214287, -0.712659236437185]
+Let's shift x to [0.08984225111006833, -0.7126565136686192]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [0.08984050593714393, -0.7126549394649446]
+Let's shift x to [0.08984137852360613, -0.7126557265667819]
+Let's shift x to [0.08984181481683723, -0.7126561201177005]
+Let's shift x to [0.08984203296345278, -0.7126563168931599]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Convergence achieved in 13 iterations 😄
+Begin with the solver:
+Let's shift x to [0.4347131571479131, 2.4673652577662284]
+Let's shift x to [0.14574948481287964, 1.5052990138129054]
+Let's shift x to [0.001267648645362912, 1.0242658918362442]
+Let's shift x to [-0.07097326943839545, 0.7837493308479133]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.289935901117501, -0.5781343669654286]
+Let's shift x to [-0.18045458527794822, 0.10280748194124234]
+Let's shift x to [-0.12571392735817183, 0.44327840639457783]
+Let's shift x to [-0.09834359839828365, 0.6135138686212456]
+Let's shift x to [-0.08465843391833955, 0.6986315997345794]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.11111057570268229, 0.916464730121917]
+Let's shift x to [-0.09788450481051092, 0.8075481649282482]
+Let's shift x to [-0.09127146936442523, 0.7530898823314138]
+Let's shift x to [-0.08796495164138239, 0.7258607410329967]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.11581307378517057, 0.5017193320182396]
+Let's shift x to [-0.10188901271327648, 0.6137900365256181]
+Let's shift x to [-0.09492698217732944, 0.6698253887793074]
+Let's shift x to [-0.09144596690935591, 0.697843064906152]
+Let's shift x to [-0.08970545927536916, 0.7118519029695743]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.08996574512067451, 0.7248694797281349]
+Let's shift x to [-0.08983560219802184, 0.7183606913488546]
+Let's shift x to [-0.0897705307366955, 0.7151062971592145]
+Let's shift x to [-0.08973799500603233, 0.7134791000643944]
+Let's shift x to [-0.08972172714070074, 0.7126655015169844]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.0906687575686868, 0.7123961957421897]
+Let's shift x to [-0.09019524235469377, 0.712530848629587]
+Let's shift x to [-0.08995848474769726, 0.7125981750732857]
+Let's shift x to [-0.089840105944199, 0.7126318382951351]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.08983041179506712, 0.7130322364653527]
+Let's shift x to [-0.08983525886963306, 0.7128320373802439]
+Let's shift x to [-0.08983768240691603, 0.7127319378376895]
+Let's shift x to [-0.08983889417555752, 0.7126818880664123]
+Let's shift x to [-0.08983950005987826, 0.7126568631807737]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.08985955503241758, 0.7126468135404165]
+Let's shift x to [-0.08984952754614792, 0.7126518383605951]
+Let's shift x to [-0.08984451380301309, 0.7126543507706844]
+Let's shift x to [-0.08984200693144567, 0.712655606975729]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Let's shift x to [-0.08984125898666001, 0.7126686385688874]
+Let's shift x to [-0.08984163295905284, 0.7126621227723082]
+Let's shift x to [-0.08984181994524926, 0.7126588648740186]
+Let's shift x to [-0.08984191343834746, 0.7126572359248738]
+Let's shift x to [-0.08984196018489657, 0.7126564214503015]
+Armijo condition satisfied for β = 0.0625
+Curvature condition satisfied for β = 0.0625
+Let's shift x to [-0.0898423912091029, 0.7126560666918345]
+Let's shift x to [-0.08984217569699973, 0.712656244071068]
+Let's shift x to [-0.08984206794094815, 0.7126563327606847]
+Let's shift x to [-0.08984201406292236, 0.7126563771054931]
+Armijo condition satisfied for β = 0.125
+Curvature condition satisfied for β = 0.125
+Convergence achieved in 11 iterations 😄

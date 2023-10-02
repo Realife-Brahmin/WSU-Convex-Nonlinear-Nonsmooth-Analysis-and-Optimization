@@ -1,4 +1,2 @@
-Begin with the solver:
-Convergence achieved in 34098 iterations 😄
 ****************************
-Convergence achieved in 34098 iterations 😄
+Convergence achieved in 11 iterations 😄

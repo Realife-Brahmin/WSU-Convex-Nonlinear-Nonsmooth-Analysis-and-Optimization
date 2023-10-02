@@ -1,0 +1,30 @@
+****************************
+Method Used: GradientDescent
+Linesearch method used: Armijo
+Best MSE value = 1.1305770114274698
+Best SSE value = 1.1305770114274698
+***************************
+Best Known Nonzero Variables:
+x☆[1] = 0.10337995419183857
+x☆[2] = 0.7435761177823952
+***************************
+****************************
+Method Used: GradientDescent
+Linesearch method used: Armijo
+Best MSE value = 0.9699641240186785
+Best SSE value = 0.9699641240186785
+***************************
+Best Known Nonzero Variables:
+x☆[1] = -0.08489694834425064
+x☆[2] = 0.698691106999616
+***************************
+****************************
+Method Used: GradientDescent
+Linesearch method used: Armijo
+Best MSE value = 1.8416143471866673
+Best SSE value = 1.8416143471866673
+***************************
+Best Known Nonzero Variables:
+x☆[1] = 1.7111210495273022
+x☆[2] = -0.7223361849056266
+***************************

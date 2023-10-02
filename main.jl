@@ -6,15 +6,15 @@ println("You are currently using $(Threads.nthreads()) threads.")
 println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
 # functionName = "dampedSHM";
-# functionName = "TestFunction1";
+functionName = "TestFunction1";
 # functionName = "TestFunction2";
-functionName = "TestFunction3";
+# functionName = "TestFunction3";
 # functionName = "rosenbrock";
 
 pr = generate_pr(functionName);
 
-verbose = false
-# verbose = true;
+# verbose = false
+verbose = true;
 logging = true;
 profiling = false;
 benchmarking = false;
@@ -24,7 +24,7 @@ initialize_logging_directory(logging)
 # @profile begin
 # rumTime = @btime begin
 runTime = @elapsed begin
-        res = optimize(pr, verbose=verbose, itrStart=7)
+        res = optimize(pr, verbose=verbose)
 end
         
 showresults(res, pr=pr)

@@ -65,12 +65,13 @@ function TestFunction3(x::Vector{Float64}, p::Float64; getGradientToo::Bool=true
     end
 end
 
+"""
+Generalized n-dim rosenbrock function with steepness parameter p[1]
+"""
 function rosenbrock(x::Vector{Float64}, 
     p::FuncParam; 
-    getGradientToo::Bool=true, verbose::Bool=false)
-    """
-    Generalized n-dim rosenbrock function with steepness parameter p[1]
-    """
+    getGradientToo::Bool=true, 
+    verbose::Bool=false)
 
     p = p.params
     scale = p[1]

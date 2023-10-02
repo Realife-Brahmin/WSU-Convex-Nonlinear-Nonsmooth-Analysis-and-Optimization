@@ -42,7 +42,12 @@ function scatter_voltage_vs_time(df::DataFrame)
 end
 
 function showresults(res::NamedTuple;
-    pr=nothing)
+    pr=nothing,
+    log::Bool=true,
+    log_path::String="./logging/")
+
+    result_txt = log_path*"results_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
+    
     @unpack converged, statusMessage, fvals, xvals, backtrackVals, M = res
     nnztol = 1e-8 # variable having a value below this will NOT be counted in the list of non-zero variables. For printing purposes only. 
 
@@ -50,9 +55,9 @@ function showresults(res::NamedTuple;
     if pr !== nothing
         methodMsg = "Method Used: " * pr.alg.method
         lsMsg = "Linesearch method used: " * pr.alg.linesearch
-        myprintln(v, "****************************")
-        myprintln(v, methodMsg)
-        myprintln(v, lsMsg)
+        myprintln(v, "****************************", log=log, log_path=result_txt)
+        myprintln(v, methodMsg, log=log, log_path=result_txt)
+        myprintln(v, lsMsg, log=log, log_path=result_txt)
     else
         methodMsg = ""
         lsMsg = ""
@@ -78,16 +83,16 @@ function showresults(res::NamedTuple;
     end
     fvalMessageMSE = fvalPrefixMSE*"$(fvals[itr])"
     fvalMessageSSE = fvalPrefixSSE*"$(fvals[itr]*M)"
-    myprintln(v, fvalMessageMSE)
-    myprintln(v, fvalMessageSSE)
-    myprintln(v, "***************************")
-    myprintln(v, xvalMessage)
+    myprintln(v, fvalMessageMSE, log=log, log_path=result_txt)
+    myprintln(v, fvalMessageSSE, log=log, log_path=result_txt)
+    myprintln(v, "***************************", log=log, log_path=result_txt)
+    myprintln(v, xvalMessage, log=log, log_path=result_txt)
     for k in 1:n
         if abs(x☆[k]) > nnztol     
-            myprintln(v, "x☆[$(k)] = $(x☆[k])")
+            myprintln(v, "x☆[$(k)] = $(x☆[k])", log=log, log_path=result_txt)
         end
     end
-    myprintln(v, "***************************")
+    myprintln(v, "***************************", log=log, log_path=result_txt)
 end
 
 

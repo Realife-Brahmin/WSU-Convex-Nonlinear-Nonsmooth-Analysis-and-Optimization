@@ -9,7 +9,7 @@ function optimize(pr;
     itrStart::Int64=1)
 
     log_txt = log_path*"log_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
-
+    rm(log_txt) # remove logfile if present for the run
     # Initial settings
     dftol = pr.alg.dftol
     progress = pr.alg.progress

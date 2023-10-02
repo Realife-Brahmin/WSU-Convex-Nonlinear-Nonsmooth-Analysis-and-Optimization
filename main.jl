@@ -7,7 +7,9 @@ println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
 # functionName = "dampedSHM";
 # functionName = "TestFunction1";
-functionName = "rosenbrock"
+# functionName = "TestFunction2";
+functionName = "TestFunction3";
+# functionName = "rosenbrock";
 
 pr = generate_pr(functionName);
 

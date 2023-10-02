@@ -21,7 +21,7 @@ function TestFunction1(x::Vector{Float64},
 end
 
 
-function TestFunction2(x::Vector{Float64}, p::Vector{Float64}; getGradientToo::Bool=true)
+function TestFunction2(x::Vector{Float64}, p::FuncParam; getGradientToo::Bool=true)
     
     a, b, c = p
     den = 2 * length(x)
@@ -36,16 +36,18 @@ function TestFunction2(x::Vector{Float64}, p::Vector{Float64}; getGradientToo::B
 end
 
 
-function TestFunction3(x::Vector{Float64}, p::Float64; getGradientToo::Bool=true)
+function TestFunction3(x::Vector{Float64}, p::FuncParam;
+    getGradientToo::Bool=true)
     
-    beta = p
+    p = p.params
+    beta = p[1]
     n = length(x)
     t = zeros(Float64, n)
     s = zeros(Float64, n, n)
     
     for i in 1:n
         for j in 1:n
-            s[i, j] = (j + 1 + beta) * (x[j]^(i) - (j + 1)^(-i))
+            s[i, j] = (j + 1 + beta) * (x[j]^(i) - 1/((j + 1)^(i)))
         end
         t[i] = sum(s[i, :])
     end

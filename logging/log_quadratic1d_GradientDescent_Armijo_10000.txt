@@ -1,0 +1,12 @@
+Starting with initial point x = [20.0].
+Begin with the solver:
+Iteration 1:
+Let's try shifting x to [-20.0]
+Let's try shifting x to [0.0]
+Armijo condition satisfied for β = 0.5
+Iteration 1: x = [0.0] is a better point with new fval = 0.0.
+Iteration 2:
+Let's try shifting x to [0.0]
+Armijo condition satisfied for β = 1.0
+Iteration 2: x = [0.0] is a better point with new fval = 0.0.
+Convergence achieved in 3 iterations 😄

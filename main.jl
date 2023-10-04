@@ -4,13 +4,30 @@ include("setup.jl")
 println("You are currently using $(Threads.nthreads()) threads.")
 println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
+function quadratic1d(x::Vector{Float64}, p::FuncParam;
+    getGradientToo::Bool=true,
+    verbose::Bool=false)
+    f = x[1]^2
+    if getGradientToo
+        g = 2x
+        return f, g
+    else
+        return f
+    end
+end
+
+functionName = "quadratic1d";
 # functionName = "dampedSHM";
-functionName = "TestFunction1";
+# functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";
 # functionName = "rosenbrock";
 
 pr = generate_pr(functionName);
+
+
+# @error "Okay stop now."
+
 
 # verbose = false
 verbose = true;

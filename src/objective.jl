@@ -8,6 +8,11 @@ include("../alg.jl") # include alg.jl from parent directory
 
 FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
 
+function empty_FuncParam()::FuncParam
+    return (params = Float64[], data = Matrix{Float64}(undef, 0, 0))
+end
+
+
 function generate_pr(functionName::String)
     data = Matrix{Float64}(undef, 0, 0)
     params = Vector{Float64}()
@@ -45,7 +50,9 @@ function generate_pr(functionName::String)
     elseif functionName == "rosenbrock"
         x0 = collect(0.1:0.1:1)
         params = Float64.([10])
-
+    elseif functionName == "quadratic1d"
+        x0 = Float64.([20])
+        params = Float64[]
     else
         @error "Unknown Function. If the function definition is known, please define data, params, x0 first!"
     end

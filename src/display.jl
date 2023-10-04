@@ -47,7 +47,9 @@ function showresults(res::NamedTuple;
     log_path::String="./logging/")
 
     result_txt = log_path*"results_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
-    rm(result_txt) # remove results log file if already present
+    if isfile(result_txt)
+        rm(result_txt) # remove results log file if already present
+    end
     @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M = res
     nnztol = 1e-8 # variable having a value below this will NOT be counted in the list of non-zero variables. For printing purposes only. 
 

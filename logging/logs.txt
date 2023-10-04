@@ -42,3 +42,11 @@ Convergence achieved in 3 iterations 😄
 Convergence achieved in 3 iterations 😄
 ****************************
 Convergence achieved in 3 iterations 😄
+****************************
+Convergence achieved in 3 iterations 😄
+****************************
+Convergence achieved in 8 iterations 😄
+****************************
+Convergence achieved in 5211 iterations 😄
+****************************
+Convergence achieved in 5211 iterations 😄

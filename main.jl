@@ -62,7 +62,21 @@ function rosenbrock2d(x::Vector{Float64}, p::FuncParam; getGradientToo::Bool=tru
     return f, g
 end
 
-functionName = "rosenbrock2d"
+function sphere(x::Vector{Float64}, p::FuncParam;
+    getGradientToo::Bool=true,
+    verbose::Bool=false)
+
+    f = dot(x, x)
+    if getGradientToo
+        g = 2x
+        return f, g
+    else
+        return f
+    end
+end
+
+functionName = "sphere"
+# functionName = "rosenbrock2d"
 # functionName = "quadratic1d";
 # functionName = "dampedSHM";
 # functionName = "TestFunction1";

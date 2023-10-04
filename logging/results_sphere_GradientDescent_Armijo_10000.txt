@@ -1,0 +1,8 @@
+****************************
+Method Used: GradientDescent
+Linesearch method used: Armijo
+Optimal MSE value = 0.0
+Optimal SSE value = 0.0
+***************************
+Optimal Nonzero Variables:
+***************************

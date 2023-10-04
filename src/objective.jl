@@ -50,15 +50,15 @@ function generate_pr(functionName::String)
     elseif functionName == "rosenbrock"
         x0 = collect(0.1:0.1:1)
         params = Float64.([10])
-    elseif functionName == "quadratic1d"
-        x0 = Float64.([-π])
-        params = Float64[]
+
     elseif functionName == "rosenbrock2d"
         x0 = Float64.([0.1, 0.2])
         params = Float64[]
+
     elseif functionName == "sphere"
         x0 = Float64.([0, -100, 11, -23])
         params = Float64[]
+        
     else
         @error "Unknown Function. If the function definition is known, please define data, params, x0 first!"
     end

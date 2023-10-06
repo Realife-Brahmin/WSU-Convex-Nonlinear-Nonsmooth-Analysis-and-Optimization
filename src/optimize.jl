@@ -166,4 +166,42 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
     return (α=α, x=xnext, f=fnext, backtracks=itr_search_for_α, fevals=fevals_ls, gevals=gevals_ls) 
 end
 
+function linesearchSW(pr::NamedTuple, xnow::Vector{Float64}, 
+    pₖ::Vector{Float64};
+    itrMax::Int64=50,
+    itrStart::Int64=1,
+    verbose::Bool=false,
+    log::Bool=true,
+    log_path::String="./logging/")
+    
+    fevals_ls = 0
+    gevals_ls = 0
+    obj = pr.objective
+    p = pr.p
+    isStrongWolfe = (pr.alg.linesearch == "StrongWolfe")
+    itr_search_for_α = 1
+    ϕ(α) = obj(xnow + α * pₖ, p, getGradientToo=false)
+    dϕ(α) = dot(obj(xnow + α * pₖ, p)[2], pₖ)
+
+    # Initial values
+    α0 = 1.0
+    ϕ0 = ϕ(0.0)
+    dϕ0 = dϕ(0.0)
+
+    # Perform the StrongWolfe line search
+    α, ϕα = strongWolfe(ϕ, dϕ, α0, ϕ0, dϕ0)
+
+    # Update x using the found α
+    xnext = xnow + α * pₖ
+    # fnext = obj(xnext, p, getGradientToo=false)
+    # α = β
+    return (α=α, x=xnext, f=ϕα, backtracks=itr_search_for_α, fevals=fevals_ls, gevals=gevals_ls) 
+end
+
+function strongWolfe(ϕ, dϕ, α0, ϕ0, dϕ0)
+    @warn "Unwritten function, Returns non-useful values"
+    α = α0
+    fnext = ϕ(α)
+    return (α=α, ϕα=fnext)
+end
 # end

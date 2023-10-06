@@ -1,22 +1,21 @@
 include("setup.jl")
 
-# global const JULIA_NUM_THREADS = 4;
 println("You are currently using $(Threads.nthreads()) threads.")
 println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
 
 # functionName = "sphere"
 # functionName = "rosenbrock2d"
-# functionName = "dampedSHM";
+functionName = "dampedSHM";
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";
-functionName = "rosenbrock";
+# functionName = "rosenbrock";
 
 pr = generate_pr(functionName);
 
-# verbose = false
-verbose = true;
+verbose = false
+# verbose = true;
 logging = true;
 profiling = false;
 benchmarking = false;
@@ -38,3 +37,5 @@ showresults(res, pr=pr)
 
 # Close the file
 # close(f)
+
+# linesearchSW(pr, pr.x0, findDirection(pr, pr.objective(pr.x0, pr.p)[2]))

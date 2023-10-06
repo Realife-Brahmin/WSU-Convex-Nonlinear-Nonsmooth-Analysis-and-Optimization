@@ -50,7 +50,7 @@ function showresults(res::NamedTuple;
     if isfile(result_txt)
         rm(result_txt) # remove results log file if already present
     end
-    @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M = res
+    @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals = res
     nnztol = 1e-8 # variable having a value below this will NOT be counted in the list of non-zero variables. For printing purposes only. 
 
     v = true
@@ -95,6 +95,8 @@ function showresults(res::NamedTuple;
         end
     end
     myprintln(v, "***************************", log=log, log_path=result_txt)
+    myprintln(v, "Number of fevals = $(fevals)", log=log, log_path=result_txt)
+    myprintln(v, "Number of gevals = $(gevals)", log=log, log_path=result_txt)
 end
 
 

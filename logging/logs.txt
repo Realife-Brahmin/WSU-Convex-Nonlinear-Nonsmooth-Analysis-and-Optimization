@@ -52,3 +52,53 @@ Convergence achieved in 5211 iterations 😄
 Convergence achieved in 5211 iterations 😄
 ****************************
 Convergence achieved in 3 iterations 😄
+****************************
+Convergence achieved in 3 iterations 😄
+****************************
+Convergence achieved in 5211 iterations 😄
+****************************
+Convergence achieved in 5211 iterations 😄
+****************************
+Convergence achieved in 5211 iterations 😄
+****************************
+Convergence achieved in 3 iterations 😄
+****************************
+Convergence achieved in 3 iterations 😄
+****************************
+Convergence achieved in 3 iterations 😄
+****************************
+Convergence achieved in 3 iterations 😄
+****************************
+Convergence achieved in 5211 iterations 😄
+****************************
+Convergence achieved in 5211 iterations 😄
+****************************
+Convergence achieved in 2 iterations 😄
+****************************
+Convergence achieved in 2 iterations 😄
+****************************
+Convergence achieved in 2 iterations 😄
+****************************
+Convergence achieved in 2 iterations 😄
+****************************
+Convergence achieved in 2 iterations 😄
+****************************
+Convergence achieved in 2 iterations 😄
+****************************
+Convergence achieved in 2 iterations 😄
+****************************
+Convergence achieved in 3 iterations 😄
+****************************
+Convergence achieved in 5211 iterations 😄
+****************************
+Failed to converge despite 100000 iterations! 😢
+****************************
+Convergence achieved in 1262 iterations 😄
+****************************
+Convergence achieved in 1297 iterations 😄
+****************************
+Convergence achieved in 592 iterations 😄
+****************************
+Convergence achieved in 482 iterations 😄
+****************************
+Convergence achieved in 877 iterations 😄

@@ -1,0 +1,16 @@
+****************************
+Method Used: GradientDescent
+Linesearch method used: Armijo
+Best MSE value = 0.7111468118604148
+Best SSE value = 142.22936237208296
+***************************
+Best Known Nonzero Variables:
+x☆[1] = 13.753334061522958
+x☆[2] = 8.795991349500033
+x☆[3] = 0.017300814002723194
+x☆[4] = 1800.7552746243618
+x☆[5] = 900.0255811816701
+x☆[6] = 4.581968638946771
+***************************
+Number of fevals = 1569890
+Number of gevals = 100000

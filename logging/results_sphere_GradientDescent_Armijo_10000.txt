@@ -6,3 +6,5 @@ Optimal SSE value = 0.0
 ***************************
 Optimal Nonzero Variables:
 ***************************
+Number of fevals = 8
+Number of gevals = 2

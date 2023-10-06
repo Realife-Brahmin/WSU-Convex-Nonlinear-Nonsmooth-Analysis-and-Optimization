@@ -5,20 +5,15 @@ println("You are currently using $(Threads.nthreads()) threads.")
 println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
 
-functionName = "sphere"
+# functionName = "sphere"
 # functionName = "rosenbrock2d"
-# functionName = "quadratic1d";
 # functionName = "dampedSHM";
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";
-# functionName = "rosenbrock";
+functionName = "rosenbrock";
 
 pr = generate_pr(functionName);
-
-
-# @error "Okay stop now."
-
 
 # verbose = false
 verbose = true;

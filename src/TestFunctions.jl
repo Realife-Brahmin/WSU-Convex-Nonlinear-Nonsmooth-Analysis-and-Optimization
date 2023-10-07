@@ -23,12 +23,13 @@ end
 
 function TestFunction2(x::Vector{Float64}, p::FuncParam; getGradientToo::Bool=true)
     
+    p = p.params
     a, b, c = p
     den = 2 * length(x)
-    f = sum(a .* x.^4 + b .* x.^2 + c .* x) / den + 40
+    f = sum(a* x.^4 + b* x.^2 + c*x) / den + 40
 
     if getGradientToo
-        g = (4*a .* x.^3 + 2*b .* x + c) / den
+        g = (4a* x.^3 + 2b* x + c*ones(length(x))) / den
         return f, g
     else
         return f

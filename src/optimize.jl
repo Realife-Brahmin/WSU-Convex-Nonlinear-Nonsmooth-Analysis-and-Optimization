@@ -1,6 +1,4 @@
-# module optimize
-
-# export optimize
+using DataFrames
 
 function optimize(pr; 
     verbose::Bool=false, 
@@ -9,6 +7,7 @@ function optimize(pr;
     itrStart::Int64=1)
 
     log_txt = log_path*"log_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
+
     if isfile(log_txt)
         rm(log_txt)
     end # remove logfile if present for the run
@@ -34,7 +33,7 @@ function optimize(pr;
     backtrackVals = zeros(Int64, maxiter, 1)
     xvals = zeros(Float64, n, maxiter)
     
-    myprintln(true, "Begin with the solver:", log_path=log_txt)
+    myprintln(true, "Begin with the solver:", log=log, log_path=log_txt)
     
     while abs(fnext - fₖ) ≥ dftol && itr ≤ maxiter
         printOrNot = verbose && (itr % progress == 0)
@@ -60,12 +59,12 @@ function optimize(pr;
     if itr > maxiter
         converged = false
         statusMessage = "Failed to converge despite $(maxiter) iterations! 😢"
-        myprintln(true, statusMessage, log_path=log_txt)
+        myprintln(true, statusMessage, log=log,  log_path=log_txt)
         @warn statusMessage
     else
         converged = true
         statusMessage = "Convergence achieved in $(itr) iterations 😄"
-        myprintln(true, statusMessage, log_path=log_txt)
+        myprintln(true, statusMessage, log=log, log_path=log_txt)
         # truncating arrays as they weren't filled to capacity
         fvals, αvals, backtrackVals = [arr[1:itr-1] for arr in (fvals, αvals, backtrackVals, xvals)]
         xvals = xvals[:, 1:itr-1]
@@ -152,7 +151,7 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
                 break
             end
         else
-            myprintln(false, "Armijo condition NOT satisfied for β = $(β)", log=log)
+            myprintln(false, "Armijo condition NOT satisfied for β = $(β)", log=log, log_path=log_txt)
             β *= ρ
             itr_search_for_α += 1
         end
@@ -165,43 +164,3 @@ function linesearch(pr::NamedTuple, xnow::Vector{Float64},
     α = β
     return (α=α, x=xnext, f=fnext, backtracks=itr_search_for_α, fevals=fevals_ls, gevals=gevals_ls) 
 end
-
-function linesearchSW(pr::NamedTuple, xnow::Vector{Float64}, 
-    pₖ::Vector{Float64};
-    itrMax::Int64=50,
-    itrStart::Int64=1,
-    verbose::Bool=false,
-    log::Bool=true,
-    log_path::String="./logging/")
-    
-    fevals_ls = 0
-    gevals_ls = 0
-    obj = pr.objective
-    p = pr.p
-    isStrongWolfe = (pr.alg.linesearch == "StrongWolfe")
-    itr_search_for_α = 1
-    ϕ(α) = obj(xnow + α * pₖ, p, getGradientToo=false)
-    dϕ(α) = dot(obj(xnow + α * pₖ, p)[2], pₖ)
-
-    # Initial values
-    α0 = 1.0
-    ϕ0 = ϕ(0.0)
-    dϕ0 = dϕ(0.0)
-
-    # Perform the StrongWolfe line search
-    α, ϕα = strongWolfe(ϕ, dϕ, α0, ϕ0, dϕ0)
-
-    # Update x using the found α
-    xnext = xnow + α * pₖ
-    # fnext = obj(xnext, p, getGradientToo=false)
-    # α = β
-    return (α=α, x=xnext, f=ϕα, backtracks=itr_search_for_α, fevals=fevals_ls, gevals=gevals_ls) 
-end
-
-function strongWolfe(ϕ, dϕ, α0, ϕ0, dϕ0)
-    @warn "Unwritten function, Returns non-useful values"
-    α = α0
-    fnext = ϕ(α)
-    return (α=α, ϕα=fnext)
-end
-# end

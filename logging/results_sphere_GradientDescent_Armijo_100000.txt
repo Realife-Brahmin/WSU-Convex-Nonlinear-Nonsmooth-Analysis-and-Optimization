@@ -1,16 +1,14 @@
 ****************************
 Solver run has concluded.
-Convergence achieved in 12 iterations 😄
+Convergence achieved in 3 iterations 😄
 ****************************
 Method Used: GradientDescent
 Linesearch method used: Armijo
 ****************************
-Optimal MSE value = 0.9683715465102867
-Optimal SSE value = 0.9683715465102867
+Optimal MSE value = 0.0
+Optimal SSE value = 0.0
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = -0.08984199278260553
-x☆[2] = 0.7126565425688337
 ***************************
-Number of fevals = 70
-Number of gevals = 11
+Number of fevals = 8
+Number of gevals = 2

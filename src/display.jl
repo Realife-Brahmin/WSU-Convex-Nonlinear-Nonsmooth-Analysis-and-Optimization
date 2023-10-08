@@ -54,6 +54,16 @@ function showresults(res::NamedTuple;
     nnztol = 1e-8 # variable having a value below this will NOT be counted in the list of non-zero variables. For printing purposes only. 
 
     v = true
+    myprintln(v, "****************************", log=log, log_path=result_txt)
+    myprintln(true, "Solver run has concluded.", log=log, log_path=result_txt)
+    if converged == true
+        myprintln(true, statusMessage, log_path=result_txt)
+    elseif converged == false
+        myprintln(true, statusMessage, log_path=result_txt)
+    else
+        @error "bad condition"
+    end
+
     if pr !== nothing
         methodMsg = "Method Used: " * pr.alg.method
         lsMsg = "Linesearch method used: " * pr.alg.linesearch
@@ -70,8 +80,7 @@ function showresults(res::NamedTuple;
     x☆ = xvals[:, itr]
     minBacktracks, maxBacktracks = extrema(backtrackVals)
 
-    myprintln(v, "****************************")
-    myprintln(v, statusMessage)
+    myprintln(v, "****************************", log=log, log_path=result_txt)
     if converged == true
         fvalPrefixMSE = "Optimal MSE value = "
         fvalPrefixSSE = "Optimal SSE value = "

@@ -1,6 +1,10 @@
 ****************************
+Solver run has concluded.
+Failed to converge despite 100000 iterations! 😢
+****************************
 Method Used: GradientDescent
 Linesearch method used: Armijo
+****************************
 Best MSE value = 0.7111468118604148
 Best SSE value = 142.22936237208296
 ***************************

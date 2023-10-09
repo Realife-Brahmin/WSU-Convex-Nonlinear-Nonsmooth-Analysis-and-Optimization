@@ -8,11 +8,6 @@ include("../alg.jl") # include alg.jl from parent directory
 
 FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
 
-function empty_FuncParam()::FuncParam
-    return (params = Float64[], data = Matrix{Float64}(undef, 0, 0))
-end
-
-
 function generate_pr(functionName::String)
     data = Matrix{Float64}(undef, 0, 0)
     params = Vector{Float64}()
@@ -69,8 +64,6 @@ function generate_pr(functionName::String)
     return (p=p, x0=x0, objective=objective, alg=alg)
 end
 
-
-
 function dampedSHM(x::Vector{Float64}, 
     p::FuncParam;
     verbose::Bool=false,
@@ -95,7 +88,6 @@ function dampedSHM(x::Vector{Float64},
         Sₖ = expₖ*sin((ω+α*tₖ)tₖ + ϕ)
         Cₖ = expₖ*cos((ω+α*tₖ)tₖ + ϕ)
 
-        # ŷₖ = A₀+ A*exp(-tₖ/τ)sin((ω+α*tₖ)tₖ + ϕ)
         ŷₖ = A₀ + A*Sₖ
         Δyₖ = ŷₖ - yₖ
         f += (1/M)*Δyₖ^2

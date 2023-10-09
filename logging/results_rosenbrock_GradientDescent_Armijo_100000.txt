@@ -1,6 +1,10 @@
 ****************************
+Solver run has concluded.
+Convergence achieved in 1262 iterations 😄
+****************************
 Method Used: GradientDescent
 Linesearch method used: Armijo
+****************************
 Optimal MSE value = 1.7453174645759751e-9
 Optimal SSE value = 1.7453174645759751e-9
 ***************************

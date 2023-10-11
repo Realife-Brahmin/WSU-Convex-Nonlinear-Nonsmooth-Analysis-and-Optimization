@@ -14,6 +14,9 @@ using Revise
 
 include("src/display.jl");
 include("src/helperFunctions.jl");
+
+include("src/LineSearchAlgos.jl");
+
 include("src/objective.jl");
 include("src/optimize.jl");
 include("src/TestFunctions.jl");

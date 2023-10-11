@@ -38,3 +38,44 @@ function sufficientDecrease(f, xnow, p, pk, αk, ϕ0, ϕprime0; c₁=1e-4)
         return false
     end
 end
+
+function strongWolfeBisection(f, g, xnow, pk, α_low, α_high, ϕ0, ϕprime0; c₁=1e-4, c₂=0.9, maxiter=100)
+    iteration = 0
+    
+    while iteration < maxiter
+        α_mid = 0.5 * (α_low + α_high)
+        
+        # Compute function value and gradient at α_mid
+        ϕ_mid = f(xnow + α_mid * pk)
+        ϕprime_mid = dot(g(xnow + α_mid * pk), pk)
+        
+        # Check the Armijo condition
+        if ϕ_mid > ϕ0 + c₁ * α_mid * ϕprime0
+            α_high = α_mid
+        else
+            # Check the curvature condition
+            if abs(ϕprime_mid) <= c₂ * abs(ϕprime0)
+                return α_mid
+            else
+                α_low = α_mid
+            end
+        end
+        
+        iteration += 1
+    end
+    
+    throw(ConvergenceException("Strong Wolfe line search did not converge in $maxiter iterations"))
+end
+
+# Example use:
+f(x) = sum((x - ones(Float64, length(x))).^2)
+g(x) = 2 * (x - ones(Float64, length(x)))
+xnow = [2.0, 2.0]
+pk = [-1.0, -1.0]
+
+α_low = 0.0
+α_high = 1.0
+ϕ0 = f(xnow)
+ϕprime0 = dot(g(xnow), pk)
+
+α = strongWolfeBisection(f, g, xnow, pk, α_low, α_high, ϕ0, ϕprime0)

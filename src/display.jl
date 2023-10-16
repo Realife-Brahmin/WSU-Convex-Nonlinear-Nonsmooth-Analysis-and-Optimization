@@ -42,20 +42,31 @@ function scatter_voltage_vs_time(df::DataFrame)
 end
 
 function showresults(res::NamedTuple;
-    pr=nothing,
     log::Bool=true,
     log_path::String="./logging/")
+
+    @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals, pr = res
+
+    dataFitting = isempty(pr.p.data) ? false : true
 
     result_txt = log_path*"results_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
     if isfile(result_txt)
         rm(result_txt) # remove results log file if already present
     end
-    @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals = res
+    
+    # println(res.pr)
+    
     nnztol = 1e-8 # variable having a value below this will NOT be counted in the list of non-zero variables. For printing purposes only. 
 
     v = true
     myprintln(v, "****************************", log=log, log_path=result_txt)
     myprintln(true, "Solver run has concluded.", log=log, log_path=result_txt)
+    myprintln(true, "Function solved for: $(pr.objective)()", log=log, log_path=result_txt)
+    if dataFitting
+        myprintln(true, "This was a data fitting problem.", log=log, log_path=result_txt)
+    else
+        myprintln(true, "This was a function minimization problem.", log=log, log_path=result_txt)
+    end
     if converged == true
         myprintln(true, statusMessage, log_path=result_txt)
     elseif converged == false
@@ -64,16 +75,12 @@ function showresults(res::NamedTuple;
         @error "bad condition"
     end
 
-    if pr !== nothing
-        methodMsg = "Method Used: " * pr.alg.method
-        lsMsg = "Linesearch method used: " * pr.alg.linesearch
-        myprintln(v, "****************************", log=log, log_path=result_txt)
-        myprintln(v, methodMsg, log=log, log_path=result_txt)
-        myprintln(v, lsMsg, log=log, log_path=result_txt)
-    else
-        methodMsg = ""
-        lsMsg = ""
-    end
+    methodMsg = "Method Used: " * pr.alg.method
+    lsMsg = "Linesearch method used: " * pr.alg.linesearch
+    myprintln(v, "****************************", log=log, log_path=result_txt)
+    myprintln(v, methodMsg, log=log, log_path=result_txt)
+    myprintln(v, lsMsg, log=log, log_path=result_txt)
+
     
     n = size(xvals, 1)
     itr = size(xvals, 2)
@@ -81,21 +88,31 @@ function showresults(res::NamedTuple;
     minBacktracks, maxBacktracks = extrema(backtrackVals)
 
     myprintln(v, "****************************", log=log, log_path=result_txt)
+    
     if converged == true
         fvalPrefixMSE = "Optimal MSE value = "
         fvalPrefixSSE = "Optimal SSE value = "
+        fvalPrefixMinimum = "Optimal function value = "
         xvalMessage = "Optimal Nonzero Variables:"
     elseif converged == false
         fvalPrefixMSE = "Best MSE value = "
         fvalPrefixSSE = "Best SSE value = "
+        fvalPrefixMinimum = "Best function value = "
         xvalMessage = "Best Known Nonzero Variables:"
     else
         @error "bad condition"
     end
     fvalMessageMSE = fvalPrefixMSE*"$(fvals[itr])"
     fvalMessageSSE = fvalPrefixSSE*"$(fvals[itr]*M)"
-    myprintln(v, fvalMessageMSE, log=log, log_path=result_txt)
-    myprintln(v, fvalMessageSSE, log=log, log_path=result_txt)
+    fvalMessageMinimum = fvalPrefixMinimum*"$(fvals[itr])"
+
+    if dataFitting
+        myprintln(v, fvalMessageMSE, log=log, log_path=result_txt)
+        myprintln(v, fvalMessageSSE, log=log, log_path=result_txt)
+    else
+        myprintln(v, fvalMessageMinimum, log=log, log_path=result_txt)
+    end
+
     myprintln(v, "***************************", log=log, log_path=result_txt)
     myprintln(v, xvalMessage, log=log, log_path=result_txt)
     for k in 1:n

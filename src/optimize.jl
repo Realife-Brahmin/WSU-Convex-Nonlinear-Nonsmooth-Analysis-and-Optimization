@@ -70,7 +70,7 @@ function optimize(pr;
         xvals = xvals[:, 1:itr-1]
     end
     
-    res = (converged=converged, statusMessage=statusMessage, fvals=fvals, αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, M=M, fevals=fevals, gevals=gevals)
+    res = (converged=converged, statusMessage=statusMessage, fvals=fvals, αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, M=M, fevals=fevals, gevals=gevals, pr=pr)
 
     return res
 end

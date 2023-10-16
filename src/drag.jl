@@ -8,6 +8,7 @@ function drag(x::Vector{Float64},
     getGradientToo::Bool=true)
 
     n = length(x)
+    δ = 1e-8
     Δz = 1.0/(n+1)
     D0 = subDrag(x, p, 0)
     Dn = subDrag(x, p, n)
@@ -19,7 +20,25 @@ function drag(x::Vector{Float64},
 
     f = D0 + sum(D) + Dn
 
-    return f
+    if getGradientToo
+        g = zeros(Float64, n)
+        for k = 1:n
+            xk_pert = copy(x)
+            xk_pert[k] += δ
+    
+            Dkm1pert = (k == 1) ? D0 : subDrag(xk_pert, p, k-1)
+            Dkpert = (k == n) ? Dn : subDrag(xk_pert, p, k)
+    
+            Dkm1 = (k == 1) ? D0 : D[k-1]
+            Dk = (k == n) ? Dn : D[k]
+            
+            g[k] = ((Dkm1pert - Dkm1) + (Dkpert - Dk)) / δ
+        end
+        return f, g
+    else
+        return f
+    end
+
 end
 
 function subDrag(x::Vector{Float64}, 

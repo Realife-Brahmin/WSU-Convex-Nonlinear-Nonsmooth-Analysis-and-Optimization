@@ -61,8 +61,8 @@ function subDrag(x::Vector{Float64},
     return Dk
 end
 
-n = 3;
-x = collect(LinRange(0.0, 1.0, n+2)[2:n+1]);
-p = empty_FuncParam();
-D = drag(x, p)
+# n = 3;
+# x = collect(LinRange(0.0, 1.0, n+2)[2:n+1]);
+# p = empty_FuncParam();
+# D = drag(x, p)
 

@@ -1,0 +1,16 @@
+****************************
+Solver run has concluded.
+Function solved for: drag()
+This was a function minimization problem.
+Convergence achieved in 2 iterations 😄
+****************************
+Method Used: GradientDescent
+Linesearch method used: Armijo
+****************************
+Optimal function value = 0.25
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 0.5
+***************************
+Number of fevals = 4
+Number of gevals = 1

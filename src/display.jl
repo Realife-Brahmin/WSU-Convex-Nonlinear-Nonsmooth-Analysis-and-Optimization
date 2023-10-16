@@ -53,38 +53,42 @@ function showresults(res::NamedTuple;
     if isfile(result_txt)
         rm(result_txt) # remove results log file if already present
     end
-    
+    log, log_path = log, result_txt  # or whatever default values you have
+
+    function myprintln1(v, message)
+        myprintln(v, message, log=log, log_path=result_txt)
+    end
     # println(res.pr)
     
     nnztol = 1e-8 # variable having a value below this will NOT be counted in the list of non-zero variables. For printing purposes only. 
 
     v = true
-    myprintln(v, "****************************", log=log, log_path=result_txt)
-    myprintln(true, "Solver run has concluded.", log=log, log_path=result_txt)
-    myprintln(true, "Function solved for: $(pr.objective)()", log=log, log_path=result_txt)
+    myprintln1(v, "****************************")
+    myprintln1(true, "Solver run has concluded.")
+    myprintln1(true, "Function solved for: $(pr.objective)()")
     if dataFitting
-        myprintln(true, "This was a data fitting problem.", log=log, log_path=result_txt)
+        myprintln1(true, "This was a data fitting problem.")
     else
-        myprintln(true, "This was a function minimization problem.", log=log, log_path=result_txt)
+        myprintln1(true, "This was a function minimization problem.")
     end
-    myprintln(true, "Cause(s) for stopping:", log=log, log_path=result_txt)
+    myprintln1(true, "Cause(s) for stopping:")
     causeForStopping = res.cause
     for msg ∈ causeForStopping
-        myprintln(true, msg, log=log, log_path=result_txt)
+        myprintln1(true, msg)
     end
     if converged == true
-        myprintln(true, statusMessage, log_path=result_txt)
+        myprintln1(true, statusMessage)
     elseif converged == false
-        myprintln(true, statusMessage, log_path=result_txt)
+        myprintln1(true, statusMessage)
     else
         @error "bad condition"
     end
 
     methodMsg = "Method Used: " * pr.alg.method
     lsMsg = "Linesearch method used: " * pr.alg.linesearch
-    myprintln(v, "****************************", log=log, log_path=result_txt)
-    myprintln(v, methodMsg, log=log, log_path=result_txt)
-    myprintln(v, lsMsg, log=log, log_path=result_txt)
+    myprintln1(v, "****************************")
+    myprintln1(v, methodMsg)
+    myprintln1(v, lsMsg)
 
     
     n = size(xvals, 1)
@@ -92,7 +96,7 @@ function showresults(res::NamedTuple;
     x☆ = xvals[:, itr]
     minBacktracks, maxBacktracks = extrema(backtrackVals)
 
-    myprintln(v, "****************************", log=log, log_path=result_txt)
+    myprintln1(v, "****************************")
     
     if converged == true
         fvalPrefixMSE = "Optimal MSE value = "
@@ -112,22 +116,27 @@ function showresults(res::NamedTuple;
     fvalMessageMinimum = fvalPrefixMinimum*"$(fvals[itr])"
 
     if dataFitting
-        myprintln(v, fvalMessageMSE, log=log, log_path=result_txt)
-        myprintln(v, fvalMessageSSE, log=log, log_path=result_txt)
+        myprintln1(v, fvalMessageMSE)
+        myprintln1(v, fvalMessageSSE)
     else
-        myprintln(v, fvalMessageMinimum, log=log, log_path=result_txt)
+        myprintln1(v, fvalMessageMinimum)
     end
 
-    myprintln(v, "***************************", log=log, log_path=result_txt)
-    myprintln(v, xvalMessage, log=log, log_path=result_txt)
+    myprintln1(v, "***************************")
+    myprintln1(v, xvalMessage)
     for k in 1:n
         if abs(x☆[k]) > nnztol     
-            myprintln(v, "x☆[$(k)] = $(x☆[k])", log=log, log_path=result_txt)
+            myprintln1(v, "x☆[$(k)] = $(x☆[k])")
         end
     end
-    myprintln(v, "***************************", log=log, log_path=result_txt)
-    myprintln(v, "Number of fevals = $(fevals)", log=log, log_path=result_txt)
-    myprintln(v, "Number of gevals = $(gevals)", log=log, log_path=result_txt)
+    myprintln1(v, "***************************")
+    myprintln1(v, "Number of fevals = $(fevals)")
+    myprintln1(v, "Number of gevals = $(gevals)")
+    myprintln1(v, "Number of evals = $(fevals+gevals*n)")
+
+    myprintln1(v, "*"^50)
+    myprintln1(v, "Tolerance critera used:")
+    myprintln1(v, "dftol = $(res.pr.alg.dftol)")
 
     # only if xopt given, below xopt is for rosenbrock function: a vector of ones
     # diffx = sum( abs.( res.xvals[:, end] - ones(Float64, length(res.xvals[:, end])) ) )

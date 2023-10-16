@@ -55,7 +55,7 @@ function ArmijoBackracking(pr::NamedTuple, xk::Vector{Float64},
 end
 
 function StrongWolfeBisection(pr::NamedTuple, xk, pk; 
-    α_min=0, α_max=100, 
+    α_min=0, α_max=1, 
     itrMax=50, tol=1e-8,
     itrStart::Int64=1,
     verbose::Bool=false,

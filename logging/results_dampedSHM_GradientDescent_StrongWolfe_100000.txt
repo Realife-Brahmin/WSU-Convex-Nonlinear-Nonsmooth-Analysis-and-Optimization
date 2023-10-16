@@ -5,18 +5,18 @@ This was a data fitting problem.
 Failed to converge despite 100000 iterations! 😢
 ****************************
 Method Used: GradientDescent
-Linesearch method used: Armijo
+Linesearch method used: StrongWolfe
 ****************************
-Best MSE value = 0.7111468118604148
-Best SSE value = 142.22936237208296
+Best MSE value = 0.7243004265898022
+Best SSE value = 144.86008531796045
 ***************************
 Best Known Nonzero Variables:
-x☆[1] = 13.753334061522958
-x☆[2] = 8.795991349500033
-x☆[3] = 0.017300814002723194
-x☆[4] = 1800.7552746243618
-x☆[5] = 900.0255811816701
-x☆[6] = 4.581968638946771
+x☆[1] = 13.752998916591457
+x☆[2] = 8.659054833743442
+x☆[3] = 0.017527842004744994
+x☆[4] = 1800.392759447903
+x☆[5] = 900.0133047042344
+x☆[6] = 4.586668049570551
 ***************************
-Number of fevals = 1569890
-Number of gevals = 100000
+Number of fevals = 2478472
+Number of gevals = 352941

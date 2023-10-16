@@ -1,12 +1,13 @@
 ****************************
 Solver run has concluded.
+Function solved for: rosenbrock()
+This was a function minimization problem.
 Convergence achieved in 1262 iterations 😄
 ****************************
 Method Used: GradientDescent
 Linesearch method used: Armijo
 ****************************
-Optimal MSE value = 1.7453174645759751e-9
-Optimal SSE value = 1.7453174645759751e-9
+Optimal function value = 1.7453174645759751e-9
 ***************************
 Optimal Nonzero Variables:
 x☆[1] = 0.9999999457077461

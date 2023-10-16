@@ -1,0 +1,22 @@
+****************************
+Solver run has concluded.
+Function solved for: dampedSHM()
+This was a data fitting problem.
+Failed to converge despite 50 iterations! 😢
+****************************
+Method Used: GradientDescent
+Linesearch method used: Armijo
+****************************
+Best MSE value = 1.4035440930735092
+Best SSE value = 280.70881861470184
+***************************
+Best Known Nonzero Variables:
+x☆[1] = 13.799829477044163
+x☆[2] = 8.300277188586815
+x☆[3] = 0.01491730446189952
+x☆[4] = 1800.0002682603706
+x☆[5] = 900.0000060571349
+x☆[6] = 4.217635288362704
+***************************
+Number of fevals = 817
+Number of gevals = 50

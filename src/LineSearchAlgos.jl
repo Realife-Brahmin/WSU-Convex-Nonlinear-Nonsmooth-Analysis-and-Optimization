@@ -1,4 +1,4 @@
-function linesearchArmijo(pr::NamedTuple, xk::Vector{Float64}, 
+function ArmijoBackracking(pr::NamedTuple, xk::Vector{Float64}, 
     pₖ::Vector{Float64};
     ρ = 0.5,
     itrMax::Int64=50,
@@ -54,7 +54,7 @@ function linesearchArmijo(pr::NamedTuple, xk::Vector{Float64},
     return (α=α, x=xnext, f=fnext, backtracks=itr_search_for_α, fevals=fevals_ls, gevals=gevals_ls) 
 end
 
-function strongWolfeBisection(pr::NamedTuple, xk, pk; 
+function StrongWolfeBisection(pr::NamedTuple, xk, pk; 
     α_min=0, α_max=100, 
     itrMax=50, tol=1e-8,
     itrStart::Int64=1,
@@ -114,37 +114,4 @@ function strongWolfeBisection(pr::NamedTuple, xk, pk;
     return (α=α_mid, x=xmid, f=ϕ_mid, backtracks=iteration, fevals=fevals_ls, gevals=gevals_ls)
 end
 
-# α_min = 0.0
-# α_max = 100.0
-
-# ϕ(x) = sum((x - π*ones(Float64, length(x))).^4)
-# dϕ(x) = 4*(x-π*ones(Float64, length(x))).^3
-# xk = [0.0]
-# xkp1, fkp1, αk = strongWolfeBisection(ϕ, dϕ, xk, -dϕ(xk), α_min, α_max, ϕ(xk),  -dϕ(xk)'*dϕ(xk))
-# println("x_k+1 = $xkp1,  f_k+1 = $fkp1,  α_k = $αk")
-# # plot(f, α_min, α_max, label="f(x)", xlabel="x", ylabel="f(x)", title="Plot of f(x)")
-
-# f(x) = sum((x - ones(Float64, length(x))).^2)
-# g(x) = 2 * (x - ones(Float64, length(x)))
-# xk = [2.0, 2.0]
-# xkp1, fkp1, αk,  = strongWolfeBisection(f, g, xk, -g(xk), α_min, α_max, f(xk), -g(xk)'*g(xk))
-# println("x_k+1 = $xkp1,  f_k+1 = $fkp1,  α_k = $αk")
-
-
-
-# f(x) = sum((x-4*ones(Float64, length(x))).^2)
-# g(x) = 2(x-4*ones(Float64, length(x)))
-# xk = [0]
-# xkp1, fkp1, αk = strongWolfeBisection(f, g, xk, -g(xk), α_min, α_max, f(xk),  -g(xk)'*g(xk))
-# xkp1, fkp1, αk = strongWolfeBisection(f, g, xkp1, -g(xkp1), α_min, α_max, f(xkp1),  -g(xkp1)'*g(xkp1))
-
-# println("x_k+1 = $xkp1,  f_k+1 = $fkp1,  α_k = $αk")
-# # plot(f, α_min, α_max, label="f(x)", xlabel="x", ylabel="f(x)", title="Plot of f(x)")
-
-# f(x) = sum(x.^4 - 8*x.^3 + 18*x.^2)
-# g(x) = 4*x.^3 - 24*x.^2 + 36*x
-# xk = [5]
-# xkp1, fkp1, αk = strongWolfeBisection(f, g, xk, -g(xk), α_min, α_max, f(xk),  -g(xk)'*g(xk))
-# println("x_k+1 = $xkp1,  f_k+1 = $fkp1,  α_k = $αk")
-# xkp1, fkp1, αk = strongWolfeBisection(f, g, xkp1, -g(xkp1), α_min, α_max, f(xkp1),  -g(xkp1)'*g(xkp1))
 

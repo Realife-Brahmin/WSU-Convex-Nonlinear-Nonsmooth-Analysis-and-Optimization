@@ -46,7 +46,7 @@ function optimize(pr;
         pₖ = findDirection(pr, ∇fₖ)
         
         
-        α, x, fnext, backtrackNum, fevals_ls, gevals_ls = (linesearchMethod == "Armijo") ? linesearchArmijo(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot) : strongWolfeBisection(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot)
+        α, x, fnext, backtrackNum, fevals_ls, gevals_ls = (linesearchMethod == "Armijo") ? ArmijoBackracking(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot) : StrongWolfeBisection(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot)
 
         myprintln(printOrNot, "Iteration $(itr): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
 

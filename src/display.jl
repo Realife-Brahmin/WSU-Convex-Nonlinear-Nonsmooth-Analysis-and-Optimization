@@ -123,6 +123,9 @@ function showresults(res::NamedTuple;
     myprintln(v, "***************************", log=log, log_path=result_txt)
     myprintln(v, "Number of fevals = $(fevals)", log=log, log_path=result_txt)
     myprintln(v, "Number of gevals = $(gevals)", log=log, log_path=result_txt)
+
+    # only if xopt given, below xopt is for rosenbrock function: a vector of ones
+    # diffx = sum( abs.( res.xvals[:, end] - ones(Float64, length(res.xvals[:, end])) ) )
 end
 
 

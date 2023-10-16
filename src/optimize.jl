@@ -17,6 +17,7 @@ function optimize(pr;
     dftol = pr.alg.dftol
     progress = pr.alg.progress
     maxiter = pr.alg.maxiter
+    linesearchMethod = pr.alg.linesearch
     x0 = pr.x0
     x = x0
 
@@ -43,8 +44,10 @@ function optimize(pr;
         fevals += 1
         gevals += 1
         pₖ = findDirection(pr, ∇fₖ)
-        α, x, fnext, backtrackNum, fevals_ls, gevals_ls = linesearch(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot)
         
+        
+        α, x, fnext, backtrackNum, fevals_ls, gevals_ls = (linesearchMethod == "Armijo") ? linesearchArmijo(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot) : strongWolfeBisection(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot)
+
         myprintln(printOrNot, "Iteration $(itr): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
 
         fevals += fevals_ls
@@ -95,72 +98,3 @@ function findDirection(pr::NamedTuple, ∇fnow::Vector{Float64};
     return pₖ
 end
 
-function linesearch(pr::NamedTuple, xnow::Vector{Float64}, 
-    pₖ::Vector{Float64};
-    itrMax::Int64=50,
-    itrStart::Int64=1,
-    verbose::Bool=false,
-    log::Bool=true,
-    log_path::String="./logging/")
-    
-    fevals_ls = 0
-    gevals_ls = 0
-    obj = pr.objective
-    p = pr.p
-    isStrongWolfe = (pr.alg.linesearch == "StrongWolfe")
-    c₁ = pr.alg.c1
-    c₂ = pr.alg.c2
-    ρ = 0.5
-    β = ρ^(itrStart-1)
-    xnext = copy(xnow)
-    if pr.alg.method == "GradientDescent"
-        fₖ = obj(xnow, p, getGradientToo=false)
-        ∇fₖ = -pₖ
-    else
-        fₖ, ∇fₖ = obj(xnow, p)
-        gevals_ls += 1
-    end
-    fevals_ls += 1
-    
-    fnext = fₖ
-    log_txt = log_path*"log_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
-    itr_search_for_α = itrStart-1
-
-    while itr_search_for_α ≤ itrMax
-        xnext .= xnow .+ β .* pₖ
-        myprintln(verbose, "Let's try shifting x to $(xnext)", log_path=log_txt)
-        
-        comparison_val = fₖ + c₁ * β * dot(∇fₖ, pₖ)
-        fnext = obj(xnext, p, getGradientToo=false)
-        fevals_ls += 1
-        
-        if fnext ≤ comparison_val
-            myprintln(verbose, "Armijo condition satisfied for β = $(β)", log_path=log_txt)
-            if isStrongWolfe
-                fnext, ∇fnext = obj(xnext, p)
-                gevals_ls += 1
-                fevals_ls += 1
-                if abs(dot(∇fnext, pₖ)) > c₂*abs(dot(∇fₖ, pₖ))
-                    myprintln(false, "Curvature condition NOT satisfied for β = $(β)", log_path=log_txt)
-                    β *= ρ
-                    itr_search_for_α += 1
-                else
-                    break
-                end
-            else
-                break
-            end
-        else
-            myprintln(false, "Armijo condition NOT satisfied for β = $(β)", log=log, log_path=log_txt)
-            β *= ρ
-            itr_search_for_α += 1
-        end
-    end
-
-    if itr_search_for_α > itrMax
-        @error "Line Search failed at point x = $(xnext) despite $(itr_search_for_α) iterations."
-    end
-
-    α = β
-    return (α=α, x=xnext, f=fnext, backtracks=itr_search_for_α, fevals=fevals_ls, gevals=gevals_ls) 
-end

@@ -12,7 +12,8 @@ using Plots
 using Printf
 using Revise
 
-include("src/approximateDerivatives.jl");
+# include("src/approximateDerivatives.jl");
+include("src/dampedSHM.jl")
 include("src/display.jl");
 include("src/helperFunctions.jl");
 

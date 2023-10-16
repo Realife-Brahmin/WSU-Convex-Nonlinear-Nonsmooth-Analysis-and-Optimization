@@ -1,4 +1,5 @@
 using DataFrames
+include("LineSearchAlgos.jl")
 
 function optimize(pr; 
     verbose::Bool=false, 
@@ -15,6 +16,7 @@ function optimize(pr;
     fevals = 0
     gevals = 0
     dftol = pr.alg.dftol
+    gtol = pr.alg.gtol
     progress = pr.alg.progress
     maxiter = pr.alg.maxiter
     linesearchMethod = pr.alg.linesearch
@@ -30,17 +32,19 @@ function optimize(pr;
     fevals += 1
     n = length(x)
     itr = 1
-    fvals, αvals = [zeros(Float64, maxiter) for _ in 1:2]
+    fvals, αvals, gmagvals = [zeros(Float64, maxiter) for _ in 1:3]
     backtrackVals = zeros(Int64, maxiter, 1)
-    xvals = zeros(Float64, n, maxiter)
+    xvals, gvals = [zeros(Float64, n, maxiter) for _ in 1:2]
     
     myprintln(true, "Begin with the solver:", log=log, log_path=log_txt)
-    
-    while abs(fnext - fₖ) ≥ dftol && itr ≤ maxiter
+    keepIterationsGoing = true
+    causeForStopping = []
+
+    while keepIterationsGoing
         printOrNot = verbose && (itr % progress == 0)
-        # printOrNot = false
         myprintln(printOrNot, "Iteration $(itr):", log_path=log_txt)
         fₖ, ∇fₖ = obj(x, p)
+        gmagval = sum(abs.(∇fₖ))
         fevals += 1
         gevals += 1
         pₖ = findDirection(pr, ∇fₖ)
@@ -50,10 +54,25 @@ function optimize(pr;
 
         myprintln(printOrNot, "Iteration $(itr): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
 
+        if abs(fnext - fₖ) < dftol
+            push!(causeForStopping, "Barely changing fval")
+            keepIterationsGoing = false
+        end
+        if gmagval < gtol
+            push!(causeForStopping, "Too small gradient")
+            keepIterationsGoing = false
+        end
+        if itr > maxiter
+            push!(causeForStopping, "Too many iterations")
+            keepIterationsGoing = false
+        end
+
         fevals += fevals_ls
         gevals += gevals_ls
         fvals[itr] = fnext
         αvals[itr] = α
+        gvals[:, itr] = ∇fₖ
+        gmagvals[itr] = gmagval
         backtrackVals[itr] = backtrackNum
         xvals[:, itr] = x
         itr += 1
@@ -69,11 +88,12 @@ function optimize(pr;
         statusMessage = "Convergence achieved in $(itr) iterations 😄"
         myprintln(true, statusMessage, log=log, log_path=log_txt)
         # truncating arrays as they weren't filled to capacity
-        fvals, αvals, backtrackVals = [arr[1:itr-1] for arr in (fvals, αvals, backtrackVals, xvals)]
-        xvals = xvals[:, 1:itr-1]
+        fvals, gmagvals, αvals, backtrackVals = [arr[1:itr-1] for arr in (fvals, αvals, backtrackVals, xvals)]
+        # xvals = xvals[:, 1:itr-1]
+        xvals, gvals = [arr[:, 1:itr-1] for arr in (xvals, gvals)]
     end
     
-    res = (converged=converged, statusMessage=statusMessage, fvals=fvals, αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, M=M, fevals=fevals, gevals=gevals, pr=pr)
+    res = (converged=converged, statusMessage=statusMessage, fvals=fvals, αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, gmagvals=gmagvals, gvals=gvals, M=M, fevals=fevals, gevals=gevals, cause=causeForStopping, pr=pr)
 
     return res
 end

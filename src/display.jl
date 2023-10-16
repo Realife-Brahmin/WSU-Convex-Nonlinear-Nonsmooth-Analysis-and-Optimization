@@ -45,7 +45,7 @@ function showresults(res::NamedTuple;
     log::Bool=true,
     log_path::String="./logging/")
 
-    @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals, pr = res
+    @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals, cause, pr = res
 
     dataFitting = isempty(pr.p.data) ? false : true
 
@@ -66,6 +66,11 @@ function showresults(res::NamedTuple;
         myprintln(true, "This was a data fitting problem.", log=log, log_path=result_txt)
     else
         myprintln(true, "This was a function minimization problem.", log=log, log_path=result_txt)
+    end
+    myprintln(true, "Cause(s) for stopping:", log=log, log_path=result_txt)
+    causeForStopping = res.cause
+    for msg ∈ causeForStopping
+        myprintln(true, msg, log=log, log_path=result_txt)
     end
     if converged == true
         myprintln(true, statusMessage, log_path=result_txt)

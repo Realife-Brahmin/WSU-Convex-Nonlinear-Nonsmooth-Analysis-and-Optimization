@@ -67,7 +67,11 @@ function generate_pr(functionName::String)
     elseif functionName == "hardFunction1"
         x0 = Float64.([-2, -2])
         params = Float64[]
-        
+
+    elseif functionName == "drag"
+        n = 1
+        x0 = Float64.(collect(LinRange(0.0, 1.0, n+2)[2:n+1]))
+        params = Float64[]
     else
         @error "Unknown Function. If the function definition is known, please define data, params, x0 first!"
     end
@@ -78,43 +82,6 @@ function generate_pr(functionName::String)
     return (p=p, x0=x0, objective=objective, alg=alg)
 end
 
-function dampedSHM(x::Vector{Float64}, 
-    p::FuncParam;
-    verbose::Bool=false,
-    log::Bool=true,
-    getGradientToo::Bool=true)
 
-    data = p.data
-    M = size(data, 1)
-    nf = size(data, 2) - 1
-    y = data[:, nf+1]
-    xf = data[:, 1:nf]
-    t = xf
-
-    n = length(x) # note that df's x (time) is different from function parameter x
-    A₀, A, τ, ω, α, ϕ = x
-    f = 0.0;
-    g = zeros(Float64, n)
-    for k = 1:M
-        tₖ = t[k]
-        yₖ = y[k]
-        expₖ = exp(-tₖ/τ)
-        Sₖ = expₖ*sin((ω+α*tₖ)tₖ + ϕ)
-        Cₖ = expₖ*cos((ω+α*tₖ)tₖ + ϕ)
-
-        ŷₖ = A₀ + A*Sₖ
-        Δyₖ = ŷₖ - yₖ
-        f += (1/M)*Δyₖ^2
-        if getGradientToo
-            g += (2/M)* Δyₖ * [1, Sₖ, A*tₖ*(τ^-2)*Sₖ, A*tₖ*Cₖ, A*tₖ^2*Cₖ, A*Cₖ]
-        end
-    end
-    
-    if getGradientToo
-        return f, g
-    else
-        return f
-    end
-end
 
 # end

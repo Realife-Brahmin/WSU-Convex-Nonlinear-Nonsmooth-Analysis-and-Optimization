@@ -15,6 +15,6 @@ alg = (method = "GradientDescent",
         c1 = 1e-4, # Pg 33 (3.1 Step Length)
         # c1 = 1e-2,
         c2 = 0.9,
-        progress = 50
+        progress = 100
         # progress = 1
         );

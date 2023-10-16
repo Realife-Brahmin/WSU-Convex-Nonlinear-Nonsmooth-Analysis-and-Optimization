@@ -30,7 +30,6 @@ benchmarking = false;
 # ϕprime0 = ∇f0
 
 # strongWolfe(pr.objective, pr.x0, pr.p, pk, α0, ϕ0, ϕprime0; pr=pr)
-
 @time res = optimize(pr, verbose=verbose)
 
 showresults(res)

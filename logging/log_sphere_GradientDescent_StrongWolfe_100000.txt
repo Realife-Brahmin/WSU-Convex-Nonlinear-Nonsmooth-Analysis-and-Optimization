@@ -1,2 +1,13 @@
+Starting with initial point x = [0.0, -100.0, 11.0, -23.0].
 Begin with the solver:
-Convergence achieved in 34 iterations 😄
+Iteration 1:
+Let's try shifting x to [0.0, 0.0, 0.0, 0.0]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition satisfied for α = 0.5
+Iteration 1: x = [0.0, 0.0, 0.0, 0.0] is a better point with new fval = 0.0.
+Iteration 2:
+Let's try shifting x to [0.0, 0.0, 0.0, 0.0]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition satisfied for α = 0.5
+Iteration 2: x = [0.0, 0.0, 0.0, 0.0] is a better point with new fval = 0.0.
+Convergence achieved in 3 iterations 😄

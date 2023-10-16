@@ -2,17 +2,14 @@
 Solver run has concluded.
 Function solved for: sphere()
 This was a function minimization problem.
-Convergence achieved in 34 iterations 😄
+Convergence achieved in 3 iterations 😄
 ****************************
 Method Used: GradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 3.431123698524642e-13
+Optimal function value = 0.0
 ***************************
 Optimal Nonzero Variables:
-x☆[2] = 5.676013031152135e-7
-x☆[3] = -6.243614334267351e-8
-x☆[4] = 1.3054829971649912e-7
 ***************************
-Number of fevals = 331
-Number of gevals = 99
+Number of fevals = 9
+Number of gevals = 6

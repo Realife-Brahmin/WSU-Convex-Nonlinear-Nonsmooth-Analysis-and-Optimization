@@ -7,9 +7,9 @@ println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 # functionName = "drag"
 # functionName = "hardFunction1"
 # functionName = "Rastrigin2d";
-# functionName = "rosenbrock";
+functionName = "rosenbrock";
 # functionName = "rosenbrock2d_oscillatory"
-functionName = "sphere"
+# functionName = "sphere"
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";
@@ -17,8 +17,8 @@ functionName = "sphere"
 pr = generate_pr(functionName);
 
 
-verbose = false
-# verbose = true;
+# verbose = false
+verbose = true;
 logging = true;
 profiling = false;
 benchmarking = false;

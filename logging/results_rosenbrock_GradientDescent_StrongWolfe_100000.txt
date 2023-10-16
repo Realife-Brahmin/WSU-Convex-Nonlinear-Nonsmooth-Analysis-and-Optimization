@@ -2,24 +2,30 @@
 Solver run has concluded.
 Function solved for: rosenbrock()
 This was a function minimization problem.
-Convergence achieved in 435 iterations 😄
+Cause(s) for stopping:
+Barely changing fval
+Convergence achieved in 931 iterations 😄
 ****************************
 Method Used: GradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 9.787275761612422e-8
+Optimal function value = 1.9481460107345753e-7
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.9999994078777488
-x☆[2] = 0.999998822601006
-x☆[3] = 0.9999938322425387
-x☆[4] = 0.9999968006824539
-x☆[5] = 0.9999815314096872
-x☆[6] = 0.9999716235104321
-x☆[7] = 0.9999357163615992
-x☆[8] = 0.9998740887098169
-x☆[9] = 0.9997345472461098
-x☆[10] = 0.9994617096579806
+x☆[1] = 0.9999981393678978
+x☆[2] = 0.9999990679402412
+x☆[3] = 0.9999926275543689
+x☆[4] = 0.9999924231533
+x☆[5] = 0.9999756126284706
+x☆[6] = 0.9999593180068329
+x☆[7] = 0.9999077541133057
+x☆[8] = 0.9998184280849414
+x☆[9] = 0.9996223501772512
+x☆[10] = 0.9992288238158916
 ***************************
-Number of fevals = 9200
-Number of gevals = 2003
+Number of fevals = 10830
+Number of gevals = 3390
+Number of evals = 44730
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-12

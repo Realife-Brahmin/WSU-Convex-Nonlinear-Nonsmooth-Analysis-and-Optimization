@@ -69,7 +69,7 @@ function generate_pr(functionName::String)
         params = Float64[]
 
     elseif functionName == "drag"
-        n = 200
+        n = 1000
         x0 = Float64.(collect(LinRange(0.0, 1.0, n+2)[2:n+1]))
         params = Float64[]
     else

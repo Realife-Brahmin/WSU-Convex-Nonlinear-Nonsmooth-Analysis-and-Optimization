@@ -26,10 +26,10 @@ function drag(x::Vector{Float64},
             xk_pert = copy(x)
             xk_pert[k] += δ
     
-            Dkm1pert = (k == 1) ? D0 : subDrag(xk_pert, p, k-1)
-            Dkpert = (k == n) ? Dn : subDrag(xk_pert, p, k)
-    
+            Dkm1pert = subDrag(xk_pert, p, k-1)
             Dkm1 = (k == 1) ? D0 : D[k-1]
+
+            Dkpert = subDrag(xk_pert, p, k)
             Dk = (k == n) ? Dn : D[k]
             
             g[k] = ((Dkm1pert - Dkm1) + (Dkpert - Dk)) / δ
@@ -52,7 +52,6 @@ function subDrag(x::Vector{Float64},
     end
     Δz = 1.0/(n+1)
     xk = (k == 0) ? 0.0 : x[k]
-    # xkm1 = (k == 1) ? 0.0 : x[k-1]
     xkp1 = (k == n) ? 1.0 : x[k+1]
     
     Sk = (xkp1 - xk)/Δz
@@ -60,9 +59,4 @@ function subDrag(x::Vector{Float64},
 
     return Dk
 end
-
-# n = 3;
-# x = collect(LinRange(0.0, 1.0, n+2)[2:n+1]);
-# p = empty_FuncParam();
-# D = drag(x, p)
 

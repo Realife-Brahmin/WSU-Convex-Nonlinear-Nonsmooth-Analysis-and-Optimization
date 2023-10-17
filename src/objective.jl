@@ -59,8 +59,6 @@ function generate_pr(functionName::String)
         params = Float64[]
         
     elseif functionName == "Rastrigin2d"
-        # x0 = Float64.([0.01, 0.01])
-        # x0 = Float64.([1, 1])
         x0 = Float64.([10, 12])
         params = Float64[]
 

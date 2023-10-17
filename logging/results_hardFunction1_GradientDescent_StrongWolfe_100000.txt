@@ -1,22 +1,23 @@
 ****************************
 Solver run has concluded.
-Function solved for: sphere()
+Function solved for: hardFunction1()
 This was a function minimization problem.
 Cause(s) for stopping:
-Barely changing fval
-Too small gradient
-Convergence achieved in 3 iterations 😄
+Too many iterations
+Failed to converge despite 100000 iterations! 😢
 ****************************
 Method Used: GradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 0.0
+Best function value = 0.6220973796760683
 ***************************
-Optimal Nonzero Variables:
+Best Known Nonzero Variables:
+x☆[1] = -8.568849613463794
+x☆[2] = 1.1052502009477438
 ***************************
-Number of fevals = 9
-Number of gevals = 6
-Number of evals = 33
+Number of fevals = 1557203
+Number of gevals = 374779
+Number of evals = 2306761
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

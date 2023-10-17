@@ -1,6 +1,6 @@
 ****************************
 Solver run has concluded.
-Function solved for: sphere()
+Function solved for: Rastrigin2d()
 This was a function minimization problem.
 Cause(s) for stopping:
 Barely changing fval
@@ -14,9 +14,9 @@ Optimal function value = 0.0
 ***************************
 Optimal Nonzero Variables:
 ***************************
-Number of fevals = 9
-Number of gevals = 6
-Number of evals = 33
+Number of fevals = 34
+Number of gevals = 5
+Number of evals = 44
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

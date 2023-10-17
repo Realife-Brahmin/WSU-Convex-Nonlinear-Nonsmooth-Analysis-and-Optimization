@@ -62,7 +62,7 @@ function optimize(pr;
             push!(causeForStopping, "Too small gradient")
             keepIterationsGoing = false
         end
-        if itr > maxiter
+        if itr == maxiter
             push!(causeForStopping, "Too many iterations")
             keepIterationsGoing = false
         end

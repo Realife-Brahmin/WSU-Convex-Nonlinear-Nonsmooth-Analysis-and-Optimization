@@ -13,9 +13,9 @@ functionName = "drag"
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";
-
-pr = generate_pr(functionName);
-
+if functionName != "drag"
+    pr = generate_pr(functionName);
+end
 
 verbose = false
 # verbose = true;

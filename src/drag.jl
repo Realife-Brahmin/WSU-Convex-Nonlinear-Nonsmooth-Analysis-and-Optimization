@@ -62,3 +62,13 @@ function subDrag(x::Vector{Float64},
     return Dk
 end
 
+objective = drag;
+data = Matrix{Float64}(undef, 0, 0)
+params = Vector{Float64}()
+x0 = Vector{Float64}()
+n = 300
+x0 = Float64.(collect(LinRange(0.0, 1.0, n+2)[2:n+1]))
+params = Float64[]
+p = (params=params, data=data)
+println("Problem (pr::NamedTuple) generated")
+pr = (p=p, x0=x0, objective=objective, alg=alg)

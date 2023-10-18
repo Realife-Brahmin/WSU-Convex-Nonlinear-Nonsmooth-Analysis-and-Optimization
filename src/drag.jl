@@ -55,7 +55,9 @@ function subDrag(x::Vector{Float64},
     xkp1 = (k == n) ? 1.0 : x[k+1]
     
     Sk = (xkp1 - xk)/Δz
-    Dk = (Sk^2/(1+Sk^2))*(xkp1^2 - xk^2)/2.0
+
+    violation = max(0, xk-xkp1)
+    Dk = (Sk^2/(1+Sk^2))*(xkp1^2 - xk^2)/2.0 + exp(violation) - 1
 
     return Dk
 end

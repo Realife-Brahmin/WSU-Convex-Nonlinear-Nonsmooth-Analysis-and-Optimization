@@ -1,5 +1,6 @@
 using DataFrames
 include("LineSearchAlgos.jl")
+include("findDirection.jl")
 
 function optimize(pr; 
     verbose::Bool=false, 
@@ -29,6 +30,7 @@ function optimize(pr;
     M = max(size(p.data, 1), 1)
     fnext = 1e10
     fₖ = obj(x0, p, getGradientToo=false)
+
     fevals += 1
     n = length(x)
     itr = 1
@@ -96,25 +98,5 @@ function optimize(pr;
     res = (converged=converged, statusMessage=statusMessage, fvals=fvals, αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, gmagvals=gmagvals, gvals=gvals, M=M, fevals=fevals, gevals=gevals, cause=causeForStopping, pr=pr)
 
     return res
-end
-
-
-function findDirection(pr::NamedTuple, ∇fnow::Vector{Float64};
-    verbose::Bool=false)::Vector{Float64}
-    method = pr.alg.method
-    n = length(∇fnow)
-    if method == "GradientDescent"
-        # Bₖ = I(n)
-        # pₖ = -Bₖ*∇fnow
-        pₖ = -∇fnow
-    elseif method == "ConjugateGradientDescent"
-        @error "Currently not formulated for this method"
-    elseif method == "QuasiNewton"
-        @error "Currently not formulated for this method"
-    else
-        @error "Currently not formulated for this method"
-    end
-
-    return pₖ
 end
 

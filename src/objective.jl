@@ -14,12 +14,8 @@ function generate_pr(functionName::String)
     x0 = Vector{Float64}()
     
     # Get the function reference from functionName
-    if isdefined(Main, :objective)
-        println("The objective function of name $(functionName) is already defined.")
-    else
-        objective = eval(Symbol(functionName))
-        println("We'll be working with the $(functionName) function.")
-    end
+    objective = eval(Symbol(functionName))
+    println("We'll be working with the $(functionName) function.")
 
     if functionName == "dampedSHM" || functionName == "dampedSHM_Parallel"
         rawDataFolder = "rawData/"

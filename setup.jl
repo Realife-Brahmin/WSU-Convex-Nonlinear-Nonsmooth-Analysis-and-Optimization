@@ -18,11 +18,11 @@ include("src/dampedSHM.jl");
 include("src/display.jl");
 include("src/drag.jl");
 include("src/helperFunctions.jl");
-
+include("src/findDirection.jl");
 include("src/LineSearchAlgos.jl");
 
 include("src/objective.jl");
 include("src/optimize.jl");
 include("src/TestFunctions.jl");
-include("src/TestFunctions_own.jl")
+include("src/TestFunctions_own.jl");
 include("src/utilities.jl"); 

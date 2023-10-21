@@ -30,7 +30,7 @@ function optimize(pr;
     M = max(size(p.data, 1), 1)
     fnext = 1e10
     fₖ = obj(x0, p, getGradientToo=false)
-
+    QNargs = constructorQNArgs(pr, fk=fₖ)
     fevals += 1
     n = length(x)
     itr = 1
@@ -49,8 +49,11 @@ function optimize(pr;
         gmagval = sum(abs.(∇fₖ))
         fevals += 1
         gevals += 1
-        pₖ = findDirection(pr, ∇fₖ)
-        
+        if pr.alg.method == "QuasiNewton"
+            pₖ, QNargs = findDirection(pr, ∇fₖ; QNargs=QNargs)
+        else
+            pₖ = findDirection(pr, ∇fₖ)
+        end
         
         α, x, fnext, backtrackNum, fevals_ls, gevals_ls = (linesearchMethod == "Armijo") ? ArmijoBackracking(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot) : StrongWolfeBisection(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot)
 

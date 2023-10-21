@@ -1,6 +1,17 @@
+function constructorQNargs(;)
+    k = 0
+    xk = pr.x0
+    xkp1 = similar(xk)
+    gk = similar(xk)
+    gkp1 = similar(xk)
+    Hk = pr.objective(pr.x0, pr.p, getGradientToo=false)
+    QNargs = (k=k, xk=xk, xkp1=xkp1, gk=gk, gkp1=gkp1, Hk=Hk)
+    return QNargs
+end
+
 function findDirection(
     pr::NamedTuple, ∇fk::Vector{Float64};
-    QNargs::NamedTuple=constructorQNargs(),
+    QNargs::NamedTuple=constructorQNArgs(),
     verbose::Bool=false)::Vector{Float64}
 
     method = pr.alg.method
@@ -14,7 +25,7 @@ function findDirection(
     elseif method == "QuasiNewton"
         k = QNargs.k
         if k == 0
-            H0 = QN.Hk
+            H0 = QNargs.Hk
             Bₖ = H0
         else
             @unpack xk, xkp1, ∇fk, ∇fkp1, Hk = QNargs

@@ -55,7 +55,7 @@ function optimize(pr;
             QNargs.fk = fₖ
             QNargs.gkp1 = ∇fₖ
             pₖ, QNargs = findDirection(pr, ∇fₖ; QNargs=QNargs)
-            @show pₖ, QNargs
+            pₖ, QNargs
         else
             pₖ = findDirection(pr, ∇fₖ)
         end

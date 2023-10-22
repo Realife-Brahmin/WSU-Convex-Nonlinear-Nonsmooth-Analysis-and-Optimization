@@ -1,3 +1,4 @@
+# For QasiNewton BFGS update
 mutable struct QNargsType
     k::Int
     xk::Vector{Float64}
@@ -7,6 +8,7 @@ mutable struct QNargsType
     gkp1::Vector{Float64}
     Hk::Matrix{Float64}
 end
+
 
 function constructorQNargs(
     pr::NamedTuple; 
@@ -35,7 +37,7 @@ function findDirection(
         @error "Currently not formulated for this method"
     elseif method == "QuasiNewton"
         k = QNargs.k
-        if k == 0
+        if k == 1
             H0 = QNargs.fk * I(n)
             Bₖ = H0
         else

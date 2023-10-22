@@ -9,13 +9,23 @@ Failed to converge despite 5 iterations! 😢
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Best function value = NaN
+Best function value = 7.776981951816253
 ***************************
 Best Known Nonzero Variables:
+x☆[1] = 0.6692157376458667
+x☆[2] = 0.33528233919053485
+x☆[3] = 0.33490145686123307
+x☆[4] = 0.5803974586010614
+x☆[5] = 0.8515156016245735
+x☆[6] = 1.0174055179059085
+x☆[7] = 1.012143025471762
+x☆[8] = 0.9756458374217956
+x☆[9] = 0.841639654223493
+x☆[10] = 0.6129262228058338
 ***************************
-Number of fevals = 281
-Number of gevals = 145
-Number of evals = 1731
+Number of fevals = 58
+Number of gevals = 15
+Number of evals = 208
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

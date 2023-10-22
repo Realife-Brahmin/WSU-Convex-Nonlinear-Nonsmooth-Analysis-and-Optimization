@@ -36,7 +36,7 @@ function findDirection(
     elseif method == "ConjugateGradientDescent"
         @error "Currently not formulated for this method"
     elseif method == "QuasiNewton"
-        k = QNargs.k
+        @show k = QNargs.k
         if k == 1
             H0 = QNargs.fk * I(n)
             Bₖ = H0

@@ -1450,3 +1450,11 @@ Error = 0.47247586486813975
 Least error happened at δ=1.0e-5 with error = 2.3058681397625236e-6
 Function being solved for drag
 Function being solved for: drag()
+Making a different H from current value of f.
+Making a different H from current value of f.
+Making a different H from current value of f.
+Making a different H from current value of f.
+Making a different H from current value of f.
+Making a different H from current value of f.
+Making a different H from current value of f.
+Making a different H from current value of f.

@@ -1,9 +1,9 @@
 alg = (
         # method = "GradientDescent",
         method = "QuasiNewton",
-        # maxiter = Int(1e5),
+        maxiter = Int(1e5),
         # maxiter = Int(1e4),
-        maxiter = Int(5),
+        # maxiter = Int(5),
         # maxiter = Int(50),
         gtol = 1e-10,
         dftol = 1e-12,
@@ -18,5 +18,10 @@ alg = (
         # c1 = 1e-2,
         c2 = 0.9,
         progress = 100
-        # progress = 1
         );
+
+if alg.method == "QasiNewton"
+        alg.progress = 5
+elseif alg.method == "GradientDescent"
+        alg.progress = 100
+end

@@ -1,3 +1,1389 @@
 Starting with initial point x = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0].
 Begin with the solver:
-Convergence achieved in 38 iterations 😄
+Iteration 1:
+Let's try shifting x to [13.39024, -0.4229799999999983, -0.11531999999999581, 2.684259999999993, 6.729800000000006, 10.775340000000005, 13.574920000000022, 13.882579999999976, 10.452360000000006, -18.727699999999995]
+Let's try shifting x to [6.74512, -0.11148999999999915, 0.09234000000000209, 1.5421299999999967, 3.614900000000003, 5.6876700000000024, 7.1374600000000115, 7.341289999999987, 5.676180000000003, -8.863849999999998]
+Let's try shifting x to [3.4225600000000003, 0.04425500000000043, 0.19617000000000104, 0.9710649999999983, 2.0574500000000016, 3.1438350000000015, 3.9187300000000054, 4.070644999999994, 3.2880900000000013, -3.931924999999999]
+Let's try shifting x to [1.7612800000000002, 0.12212750000000022, 0.2480850000000005, 0.6855324999999992, 1.2787250000000008, 1.8719175000000008, 2.3093650000000028, 2.435322499999997, 2.094045000000001, -1.4659624999999994]
+Let's try shifting x to [0.93064, 0.16106375000000012, 0.27404250000000024, 0.5427662499999996, 0.8893625000000004, 1.2359587500000004, 1.5046825000000013, 1.6176612499999985, 1.4970225000000004, -0.2329812499999997]
+Let's try shifting x to [0.51532, 0.18053187500000006, 0.2870212500000001, 0.4713831249999998, 0.6946812500000001, 0.9179793750000002, 1.1023412500000007, 1.2088306249999992, 1.1985112500000001, 0.38350937500000015]
+Let's try shifting x to [0.30766000000000004, 0.19026593750000004, 0.2935106250000001, 0.4356915624999999, 0.5973406250000001, 0.7589896875000001, 0.9011706250000003, 1.0044153124999997, 1.049255625, 0.6917546875]
+Let's try shifting x to [0.20383, 0.19513296875000002, 0.29675531250000003, 0.41784578125, 0.5486703125000001, 0.67949484375, 0.8005853125000001, 0.9022076562499999, 0.9746278125000001, 0.84587734375]
+StrongWolfe1 condition satisfied for α = 0.00390625
+StrongWolfe2 condition satisfied for α = 0.00390625
+Iteration 1: x = [0.20383, 0.19513296875000002, 0.29675531250000003, 0.41784578125, 0.5486703125000001, 0.67949484375, 0.8005853125000001, 0.9022076562499999, 0.9746278125000001, 0.84587734375] is a better point with new fval = 9.493009144234636.
+Iteration 2:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 2: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 3:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 3: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 4:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 4: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 5:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 5: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 6:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 6: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 7:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 7: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 8:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 8: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 9:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 9: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 10:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 10: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 11:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 11: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 12:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 12: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 13:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 13: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 14:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 14: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 15:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 15: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 16:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 16: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 17:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999847412109375
+StrongWolfe2 condition NOT satisfied for α = 0.9999847412109375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999923706054688
+StrongWolfe2 condition NOT satisfied for α = 0.9999923706054688
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999961853027344
+StrongWolfe2 condition NOT satisfied for α = 0.9999961853027344
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999980926513672
+StrongWolfe2 condition NOT satisfied for α = 0.9999980926513672
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999990463256836
+StrongWolfe2 condition NOT satisfied for α = 0.9999990463256836
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999995231628418
+StrongWolfe2 condition NOT satisfied for α = 0.9999995231628418
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999997615814209
+StrongWolfe2 condition NOT satisfied for α = 0.9999997615814209
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999998807907104
+StrongWolfe2 condition NOT satisfied for α = 0.9999998807907104
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999403953552
+StrongWolfe2 condition NOT satisfied for α = 0.9999999403953552
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999701976776
+StrongWolfe2 condition NOT satisfied for α = 0.9999999701976776
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999850988388
+StrongWolfe2 condition NOT satisfied for α = 0.9999999850988388
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9999999925494194
+StrongWolfe2 condition NOT satisfied for α = 0.9999999925494194
+Iteration 17: x = [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] is a better point with new fval = NaN.
+Iteration 18:
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition NOT satisfied for α = 0.75
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.875
+StrongWolfe2 condition NOT satisfied for α = 0.875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9375
+StrongWolfe2 condition NOT satisfied for α = 0.9375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.96875
+StrongWolfe2 condition NOT satisfied for α = 0.96875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.984375
+StrongWolfe2 condition NOT satisfied for α = 0.984375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9921875
+StrongWolfe2 condition NOT satisfied for α = 0.9921875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99609375
+StrongWolfe2 condition NOT satisfied for α = 0.99609375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.998046875
+StrongWolfe2 condition NOT satisfied for α = 0.998046875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9990234375
+StrongWolfe2 condition NOT satisfied for α = 0.9990234375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99951171875
+StrongWolfe2 condition NOT satisfied for α = 0.99951171875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999755859375
+StrongWolfe2 condition NOT satisfied for α = 0.999755859375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.9998779296875
+StrongWolfe2 condition NOT satisfied for α = 0.9998779296875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.99993896484375
+StrongWolfe2 condition NOT satisfied for α = 0.99993896484375
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+StrongWolfe1 condition satisfied for α = 0.999969482421875
+StrongWolfe2 condition NOT satisfied for α = 0.999969482421875
+Let's try shifting x to [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN]

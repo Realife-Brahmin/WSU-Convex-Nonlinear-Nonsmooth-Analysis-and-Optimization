@@ -83,9 +83,15 @@ function findDirection(
             Bₖ = H0
         else
             @unpack xk, xkp1, fk, gk, gkp1, Hk = QNargs
-            sk = xkp1 - xk
-            yk = gkp1 - gk
-            ρk = 1.0/(yk'*sk)
+            @show gk
+            @show gkp1
+            @show sk = xkp1 - xk
+            @show yk = gkp1 - gk
+            @show ρkinv = (yk'*sk)
+            if ρkinv == 0
+                @warn "So, Hkp1 is actuall the same as Hk?, Maybe stop this?"
+            end
+            ρk = 1.0/ρkinv
             if ρk < 0
                 @warn "QuasiNewton step problematic! y'*s < 0!"
                 myprintln(true, "Making a different H from current value of f.")

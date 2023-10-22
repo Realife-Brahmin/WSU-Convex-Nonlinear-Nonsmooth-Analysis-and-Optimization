@@ -49,8 +49,8 @@ function optimize(pr;
     while keepIterationsGoing
         printOrNot = verbose && (itr % progress == 0)
         myprintln(printOrNot, "Iteration $(itr):", log_path=log_txt)
-        fₖ, ∇fₖ = obj(x, p)
-        gmagval = sum(abs.(∇fₖ))
+        @show fₖ, ∇fₖ = obj(x, p)
+        @show gmagval = sum(abs.(∇fₖ))
         fevals += 1
         gevals += 1
         if pr.alg.method == "QuasiNewton"

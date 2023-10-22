@@ -4,7 +4,7 @@ Function solved for: rosenbrock()
 This was a function minimization problem.
 Cause(s) for stopping:
 Too many iterations
-Failed to converge despite 5 iterations! 😢
+Failed to converge despite 3 iterations! 😢
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
@@ -13,9 +13,9 @@ Best function value = NaN
 ***************************
 Best Known Nonzero Variables:
 ***************************
-Number of fevals = 236
-Number of gevals = 119
-Number of evals = 1426
+Number of fevals = 124
+Number of gevals = 61
+Number of evals = 734
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

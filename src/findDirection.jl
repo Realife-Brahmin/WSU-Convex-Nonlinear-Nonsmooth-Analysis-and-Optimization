@@ -1,3 +1,23 @@
+# For ConjugateGradientDescent update
+mutable struct CGargsType
+    k::Int
+    xk::Vector{Float64}
+    xkp1::Vector{Float64}
+    gk::Vector{Float64}
+    gkp1::Vector{Float64}
+end
+
+function constructorGCargs(
+    pr::NamedTuple)::CGargsType
+    k = 1
+    xk = pr.x0
+    xkp1 = similar(xk)
+    gk = similar(xk)
+    gkp1 = similar(xk)
+    CGargs = CGargsType(k, xk, xkp1, gk, gkp1)
+    return CGargs
+end
+
 # For QasiNewton BFGS update
 mutable struct QNargsType
     k::Int
@@ -13,7 +33,7 @@ end
 function constructorQNargs(
     pr::NamedTuple; 
     fk=pr.objective(pr.x0, pr.p, getGradientToo=false))::QNargsType
-    k = 0
+    k = 1
     xk = pr.x0
     n = length(xk)
     xkp1 = similar(xk)
@@ -26,7 +46,8 @@ end
 
 function findDirection(
     pr::NamedTuple, ∇fk::Vector{Float64};
-    QNargs::QNargsType=constructorQNArgs(pr),
+    QNargs::QNargsType=constructorQNargs(pr),
+    CGargs::CGargsType=constructorGCargs(pr),
     verbose::Bool=false)
 
     method = pr.alg.method
@@ -34,7 +55,27 @@ function findDirection(
     if method == "GradientDescent"
         Bₖ = I(n)
     elseif method == "ConjugateGradientDescent"
-        @error "Currently not formulated for this method"
+        @show k = CGargs.k
+        @show CGargs
+        if k == 1
+            # @show typeof(CGargs)
+            # println(CGargs)
+            ∇f0 = ∇fk
+            # ∇f0 = GGargs.gk
+            # @show pkp1 = -CGargs.gk
+            pkp1 = -∇f0 
+        else
+            ∇fkp1 = CGargs.gkp1
+            pk = CGargs.pk
+            βkp1 = max(0, ∇fkp1'*(∇fkp1-∇fk)/(∇fkp1'*∇fk))
+            pkp1 = -∇fkp1 + βkp1*pk
+        end
+        pₖ = pkp1
+        GCargs.pk = pₖ
+        CGargs.xk = xkp1
+        CGargs.gk = gkp1
+        return pₖ, CGargs
+
     elseif method == "QuasiNewton"
         @show k = QNargs.k
         if k == 1

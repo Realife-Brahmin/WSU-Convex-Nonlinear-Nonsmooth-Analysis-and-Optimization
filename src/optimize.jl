@@ -30,7 +30,11 @@ function optimize(pr;
     M = max(size(p.data, 1), 1)
     fnext = 1e10
     fₖ = obj(x0, p, getGradientToo=false)
-    QNargs = constructorQNargs(pr, fk=fₖ)
+    if pr.alg.method == "QuasiNewton"
+        QNargs = constructorQNargs(pr, fk=fₖ)
+    elseif pr.alg.method == "ConjugateGradientDescent"
+        CGargs = constructorGCargs(pr)
+    end
     fevals += 1
     n = length(x)
     itr = 1
@@ -54,8 +58,13 @@ function optimize(pr;
             QNargs.xkp1 = x
             QNargs.fk = fₖ
             QNargs.gkp1 = ∇fₖ
-            pₖ, QNargs = findDirection(pr, ∇fₖ; QNargs=QNargs)
-            pₖ, QNargs
+            pₖ, QNargs = findDirection(pr, ∇fₖ, QNargs=QNargs)
+            @show pₖ, QNargs
+        elseif pr.alg.method == "ConjugateGradientDescent"
+            CGargs.k = itr
+            CGargs.xkp1 = x
+            CGargs.gkp1 = ∇fₖ
+            pₖ, CGargs = findDirection(pr, ∇fₖ, CGargs=CGargs)
         else
             pₖ = findDirection(pr, ∇fₖ)
         end

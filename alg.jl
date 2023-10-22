@@ -1,9 +1,9 @@
 alg = (
-        method = "GradientDescent",
-        # method = "QuasiNewton",
-        maxiter = Int(1e5),
+        # method = "GradientDescent",
+        method = "QuasiNewton",
+        # maxiter = Int(1e5),
         # maxiter = Int(1e4),
-        # maxiter = Int(5),
+        maxiter = Int(5),
         # maxiter = Int(50),
         gtol = 1e-10,
         dftol = 1e-12,

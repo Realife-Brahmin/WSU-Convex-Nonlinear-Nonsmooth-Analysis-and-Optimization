@@ -1,0 +1,31 @@
+****************************
+Solver run has concluded.
+Function solved for: rosenbrock()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too many iterations
+Failed to converge despite 1 iterations! 😢
+****************************
+Method Used: QuasiNewton
+Linesearch method used: StrongWolfe
+****************************
+Best function value = 9.493009144234636
+***************************
+Best Known Nonzero Variables:
+x☆[1] = 0.20383
+x☆[2] = 0.19513296875000002
+x☆[3] = 0.29675531250000003
+x☆[4] = 0.41784578125
+x☆[5] = 0.5486703125000001
+x☆[6] = 0.67949484375
+x☆[7] = 0.8005853125000001
+x☆[8] = 0.9022076562499999
+x☆[9] = 0.9746278125000001
+x☆[10] = 0.84587734375
+***************************
+Number of fevals = 12
+Number of gevals = 3
+Number of evals = 42
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-12

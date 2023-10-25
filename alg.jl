@@ -1,3 +1,5 @@
+include("src/helperFunctions.jl")
+
 mutable struct AlgorithmSettings
         method::String
         maxiter::Int
@@ -19,6 +21,7 @@ mutable struct AlgorithmSettings
                 # maxiter=Int(1e5),
                 # maxiter = Int(5),
                 maxiter = Int(3),
+                # maxiter = Int(1),
                 gtol=1e-10,
                 dftol=1e-12,
                 dxtol=1e-10,
@@ -52,9 +55,3 @@ mutable struct AlgorithmSettings
 end
 
 alg = AlgorithmSettings();
-#     # Example usage:
-#     alg = AlgorithmSettings()
-#     println(alg)
-
-#     alg2 = AlgorithmSettings(method="GradientDescent", progress=10)
-#     println(alg2)

@@ -1,3 +1,5 @@
+include("helperFunctions.jl")
+
 # For ConjugateGradientDescent update
 mutable struct CGargsType
     k::Int
@@ -83,13 +85,18 @@ function findDirection(
             Bₖ = H0
         else
             @unpack xk, xkp1, fk, gk, gkp1, Hk = QNargs
-            @show gk
-            @show gkp1
-            @show sk = xkp1 - xk
-            @show yk = gkp1 - gk
-            @show ρkinv = (yk'*sk)
+            
+            checkForNaN(gk)
+            # @show gk
+            checkForNaN(gkp1)
+            # @show gkp1
+            checkForNaN(xk)
+            checkForNaN(xkp1)
+            sk = xkp1 - xk
+            yk = gkp1 - gk
+            ρkinv = (yk'*sk)
             if ρkinv == 0
-                @warn "So, Hkp1 is actuall the same as Hk?, Maybe stop this?"
+                @warn "So, Hkp1 is actualy the same as Hk?, Maybe stop this?"
             end
             ρk = 1.0/ρkinv
             if ρk < 0

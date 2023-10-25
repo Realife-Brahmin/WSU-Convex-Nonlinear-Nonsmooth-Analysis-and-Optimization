@@ -1527,3 +1527,190 @@ Method chosen: QuasiNewton
 Method chosen: QuasiNewton
 Method chosen: QuasiNewton
 Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Vector has NaN at index 8.
+Vector has NaN at index 1.
+Vector has NaN at index 2.
+Vector has NaN at index 3.
+Vector has NaN at index 4.
+Vector has NaN at index 5.
+Vector has NaN at index 6.
+Vector has NaN at index 7.
+Vector has NaN at index 8.
+Vector has NaN at index 9.
+Vector has NaN at index 10.
+Vector has NaN at index 1.
+Vector has NaN at index 2.
+Vector has NaN at index 3.
+Vector has NaN at index 4.
+Vector has NaN at index 5.
+Vector has NaN at index 6.
+Vector has NaN at index 7.
+Vector has NaN at index 8.
+Vector has NaN at index 9.
+Vector has NaN at index 10.
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Vector [1.5e-323, 1.5e-323, 2.0e-323, 2.0e-323, 2.5e-323, 2.5e-323, 5.0e-324, NaN, 2.121963665e-314, 7.1900474224e-312] has NaN at index 8.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 1.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 2.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 3.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 4.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 5.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 6.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 7.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 8.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 9.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 10.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 1.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 2.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 3.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 4.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 5.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 6.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 7.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 8.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 9.
+Vector [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN] has NaN at index 10.
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Vector vec has NaN at index 8.
+Vector vec has NaN at index 1.
+Vector vec has NaN at index 2.
+Vector vec has NaN at index 3.
+Vector vec has NaN at index 4.
+Vector vec has NaN at index 5.
+Vector vec has NaN at index 6.
+Vector vec has NaN at index 7.
+Vector vec has NaN at index 8.
+Vector vec has NaN at index 9.
+Vector vec has NaN at index 10.
+Vector vec has NaN at index 1.
+Vector vec has NaN at index 2.
+Vector vec has NaN at index 3.
+Vector vec has NaN at index 4.
+Vector vec has NaN at index 5.
+Vector vec has NaN at index 6.
+Vector vec has NaN at index 7.
+Vector vec has NaN at index 8.
+Vector vec has NaN at index 9.
+Vector vec has NaN at index 10.
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Method chosen: QuasiNewton
+Vector vec has NaN at index 8.
+Vector vec has NaN at index 1.
+Vector vec has NaN at index 2.
+Vector vec has NaN at index 3.
+Vector vec has NaN at index 4.
+Vector vec has NaN at index 5.
+Vector vec has NaN at index 6.
+Vector vec has NaN at index 7.
+Vector vec has NaN at index 8.
+Vector vec has NaN at index 9.
+Vector vec has NaN at index 10.
+Vector vec has NaN at index 1.
+Vector vec has NaN at index 2.
+Vector vec has NaN at index 3.
+Vector vec has NaN at index 4.
+Vector vec has NaN at index 5.
+Vector vec has NaN at index 6.
+Vector vec has NaN at index 7.
+Vector vec has NaN at index 8.
+Vector vec has NaN at index 9.
+Vector vec has NaN at index 10.

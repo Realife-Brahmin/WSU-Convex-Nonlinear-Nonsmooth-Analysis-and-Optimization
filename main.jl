@@ -16,8 +16,8 @@ if functionName != "drag"
     pr = generate_pr(functionName);
 end
 
-# verbose = false
-verbose = true;
+verbose = false
+# verbose = true;
 logging = true;
 profiling = false;
 benchmarking = false;

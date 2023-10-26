@@ -18,9 +18,9 @@ mutable struct AlgorithmSettings
                 # method="ConjugateGradientDescent",
                 # method = "GradientDescent",
                 method = "QuasiNewton",
-                # maxiter=Int(1e5),
+                maxiter=Int(1e5),
                 # maxiter = Int(5),
-                maxiter = Int(3),
+                # maxiter = Int(3),
                 # maxiter = Int(1),
                 gtol=1e-10,
                 dftol=1e-12,
@@ -40,7 +40,7 @@ mutable struct AlgorithmSettings
                 elseif alg.method == "QuasiNewton"
                         myprintln(true, "Method chosen: QuasiNewton")
                         alg.linesearch = "StrongWolfe"
-                        alg.progress = 1
+                        alg.progress = 100
                 elseif alg.method == "ConjugateGradientDescent"
                         myprintln(true, "Method chosen: ConjugateGradientDescent")
                         alg.linesearch = "StrongWolfe"

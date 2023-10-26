@@ -13,9 +13,6 @@ function empty_FuncParam()::FuncParam
     return (params = Float64[], data = Matrix{Float64}(undef, 0, 0))
 end
 
-macro varname(var)
-    return string(var)
-end
 
 macro checkForNaN(varname)
     vec = esc(varname)
@@ -28,5 +25,5 @@ macro checkForNaN(varname)
     end
 end
 
-
-
+# @checkForNaN([-7, 0, NaN])
+# @checkForNaN([10, 20])

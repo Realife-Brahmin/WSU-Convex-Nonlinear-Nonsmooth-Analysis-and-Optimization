@@ -60,11 +60,7 @@ function findDirection(
         @show k = CGargs.k
         @show CGargs
         if k == 1
-            # @show typeof(CGargs)
-            # println(CGargs)
             ∇f0 = ∇fk
-            # ∇f0 = GGargs.gk
-            # @show pkp1 = -CGargs.gk
             pkp1 = -∇f0 
         else
             ∇fkp1 = CGargs.gkp1
@@ -79,22 +75,24 @@ function findDirection(
         return pₖ, CGargs
 
     elseif method == "QuasiNewton"
-        @show k = QNargs.k
+        @unpack k, xk, xkp1, fk, gk, gkp1, Hk = QNargs
+        @show k
         if k == 1
             H0 = QNargs.fk * I(n)
+            QNargs.Hk = H0
+            QNargs.xk = xkp1
+            QNargs.gk = gkp1
             Bₖ = H0
         else
-            @unpack xk, xkp1, fk, gk, gkp1, Hk = QNargs
-            
-            checkForNaN(gk)
+            # @checkForNaN(gk)
             # @show gk
-            checkForNaN(gkp1)
+            # @checkForNaN(gkp1)
             # @show gkp1
-            checkForNaN(xk)
-            checkForNaN(xkp1)
+            # @checkForNaN(xk)
+            # @checkForNaN(xkp1)
             sk = xkp1 - xk
             yk = gkp1 - gk
-            ρkinv = (yk'*sk)
+            ρkinv = yk'*sk
             if ρkinv == 0
                 @warn "So, Hkp1 is actualy the same as Hk?, Maybe stop this?"
             end
@@ -103,6 +101,8 @@ function findDirection(
                 @warn "QuasiNewton step problematic! y'*s < 0!"
                 myprintln(true, "Making a different H from current value of f.")
                 Hkp1 = fk*I(n)
+            elseif isnan(ρk)
+                @error "NaN!"
             else
                 Hkp1 = (I(n) - ρk*sk*yk')*Hk'*(I-ρk*yk*sk') + ρk*sk*sk'
             end

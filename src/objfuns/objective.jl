@@ -3,8 +3,8 @@
 using Base.Threads
 using DataFrames
 
-include("helperFunctions.jl");
-include("../alg.jl") # include alg.jl from parent directory
+include("../helperFunctions.jl");
+include("../../alg.jl") # include alg.jl from parent directory
 
 FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
 

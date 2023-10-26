@@ -6,7 +6,7 @@ using Plots
 using Printf
 
 # include("utilities.jl")
-include("objective.jl")
+include("objfuns/objective.jl")
 
 # Extract fields from the 'res' structure and assign them to local variables.
 # The purpose of this macro is to avoid repetitive assignments.

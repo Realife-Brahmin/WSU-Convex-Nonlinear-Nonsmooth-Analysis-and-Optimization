@@ -84,12 +84,6 @@ function findDirection(
             QNargs.gk = gkp1
             Bₖ = H0
         else
-            # @checkForNaN(gk)
-            # @show gk
-            # @checkForNaN(gkp1)
-            # @show gkp1
-            # @checkForNaN(xk)
-            # @checkForNaN(xkp1)
             sk = xkp1 - xk
             yk = gkp1 - gk
             ρkinv = yk'*sk

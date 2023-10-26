@@ -1,9 +1,9 @@
-using DataFrames
 include("LineSearchAlgos.jl")
 include("findDirection.jl")
 
 function optimize(pr; 
     verbose::Bool=false, 
+    verbose_ls::Bool=false,
     log::Bool=true,
     log_path::String="./logging/",
     itrStart::Int64=1)
@@ -47,10 +47,16 @@ function optimize(pr;
     causeForStopping = []
 
     while keepIterationsGoing
+
         printOrNot = verbose && (itr % progress == 0)
+        printOrNot_ls = printOrNot & verbose_ls
+
         myprintln(printOrNot, "Iteration $(itr):", log_path=log_txt)
-        @show fₖ, ∇fₖ = obj(x, p)
-        @show gmagval = sum(abs.(∇fₖ))
+
+        fₖ, ∇fₖ = obj(x, p)
+        @checkForNaN fₖ
+        @checkForNaN ∇fₖ
+        gmagval = sum(abs.(∇fₖ))
         fevals += 1
         gevals += 1
         if pr.alg.method == "QuasiNewton"
@@ -59,17 +65,20 @@ function optimize(pr;
             QNargs.fk = fₖ
             QNargs.gkp1 = ∇fₖ
             pₖ, QNargs = findDirection(pr, ∇fₖ, QNargs=QNargs)
-            @show pₖ, QNargs
+            # @show pₖ, QNargs
+
         elseif pr.alg.method == "ConjugateGradientDescent"
             CGargs.k = itr
             CGargs.xkp1 = x
             CGargs.gkp1 = ∇fₖ
             pₖ, CGargs = findDirection(pr, ∇fₖ, CGargs=CGargs)
+
         else
             pₖ = findDirection(pr, ∇fₖ)
+
         end
         
-        α, x, fnext, backtrackNum, fevals_ls, gevals_ls = (linesearchMethod == "Armijo") ? ArmijoBackracking(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot) : StrongWolfeBisection(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot)
+        α, x, fnext, backtrackNum, fevals_ls, gevals_ls = (linesearchMethod == "Armijo") ? ArmijoBackracking(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot_ls) : StrongWolfeBisection(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot_ls)
 
         myprintln(printOrNot, "Iteration $(itr): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
 

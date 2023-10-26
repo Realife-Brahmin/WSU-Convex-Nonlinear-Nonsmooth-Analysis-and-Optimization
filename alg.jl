@@ -35,14 +35,14 @@ mutable struct AlgorithmSettings
                 alg = new(method, maxiter, gtol, dftol, dxtol, lambda, lambdaMax, linesearch, c1, c2, progress)
 
                 if alg.method == "GradientDescent"
-                        myprintln(true, "Method chosen: GradientDescent")
+                        myprintln(true, "Method chosen: GradientDescent", log=false)
                         alg.progress = 100
                 elseif alg.method == "QuasiNewton"
-                        myprintln(true, "Method chosen: QuasiNewton")
+                        myprintln(true, "Method chosen: QuasiNewton", log=false)
                         alg.linesearch = "StrongWolfe"
                         alg.progress = 100
                 elseif alg.method == "ConjugateGradientDescent"
-                        myprintln(true, "Method chosen: ConjugateGradientDescent")
+                        myprintln(true, "Method chosen: ConjugateGradientDescent", log=false)
                         alg.linesearch = "StrongWolfe"
                         alg.c2 = 0.5
                         alg.progress = 5

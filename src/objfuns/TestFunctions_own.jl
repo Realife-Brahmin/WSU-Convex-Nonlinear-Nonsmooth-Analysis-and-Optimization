@@ -32,19 +32,6 @@ function rosenbrock2d(x::Vector{Float64}, p::FuncParam; getGradientToo::Bool=tru
     return f, g
 end
 
-function sphere(x::Vector{Float64}, p::FuncParam;
-    getGradientToo::Bool=true,
-    verbose::Bool=false)
-
-    f = dot(x, x)
-    if getGradientToo
-        g = 2x
-        return f, g
-    else
-        return f
-    end
-end
-
 function Rastrigin2d(x::Vector{Float64}, p::FuncParam;
     getGradientToo::Bool=true,
     verbose::Bool=false)

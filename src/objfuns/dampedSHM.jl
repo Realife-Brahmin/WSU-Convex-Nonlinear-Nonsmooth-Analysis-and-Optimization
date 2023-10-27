@@ -1,5 +1,8 @@
 FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
 
+
+include("objective.jl")
+
 """
     dampedSHM(x::Vector{Float64}, p::FuncParam; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
 
@@ -80,3 +83,15 @@ function dampedSHM(x::Vector{Float64},
         return f
     end
 end
+
+
+rawDataFolder = "rawData/"
+filename = rawDataFolder * "FFD.csv"
+df = CSV.File(filename) |> DataFrame
+rename!(df, [:x, :y])
+data = Matrix(df)
+x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
+
+objective = dampedSHM;
+
+pr = generate_pr(objective, x0, data=data)

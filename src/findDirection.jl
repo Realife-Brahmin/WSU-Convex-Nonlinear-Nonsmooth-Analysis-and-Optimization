@@ -7,6 +7,7 @@ mutable struct CGargsType
     xkp1::Vector{Float64}
     gk::Vector{Float64}
     gkp1::Vector{Float64}
+    pk::Vector{Float64}
 end
 
 function constructorGCargs(
@@ -16,7 +17,8 @@ function constructorGCargs(
     xkp1 = similar(xk)
     gk = similar(xk)
     gkp1 = similar(xk)
-    CGargs = CGargsType(k, xk, xkp1, gk, gkp1)
+    pk = similar(xk)
+    CGargs = CGargsType(k, xk, xkp1, gk, gkp1, pk)
     return CGargs
 end
 
@@ -57,21 +59,23 @@ function findDirection(
     if method == "GradientDescent"
         Bₖ = I(n)
     elseif method == "ConjugateGradientDescent"
-        @show k = CGargs.k
-        @show CGargs
+        @unpack k, xk, xkp1, gk, gkp1, pk = CGargs
+        @show k
+        # @show CGargs
         if k == 1
             ∇f0 = ∇fk
             pkp1 = -∇f0 
         else
-            ∇fkp1 = CGargs.gkp1
-            pk = CGargs.pk
+            ∇fkp1 = gkp1
             βkp1 = max(0, ∇fkp1'*(∇fkp1-∇fk)/(∇fkp1'*∇fk))
             pkp1 = -∇fkp1 + βkp1*pk
         end
-        pₖ = pkp1
-        GCargs.pk = pₖ
+
+        GCargs.pk = pkp1
         CGargs.xk = xkp1
         CGargs.gk = gkp1
+
+        pₖ = pkp1
         return pₖ, CGargs
 
     elseif method == "QuasiNewton"

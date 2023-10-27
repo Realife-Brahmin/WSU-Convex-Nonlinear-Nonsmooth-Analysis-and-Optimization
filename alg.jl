@@ -1,5 +1,35 @@
 include("src/helperFunctions.jl")
 
+"""
+        AlgorithmSettings(; kwargs...)
+
+A mutable struct for holding the algorithm settings for an optimization solver.
+
+# Fields
+- `method::String`: The optimization method to be used. Supported methods include "GradientDescent", "QuasiNewton", and "ConjugateGradientDescent".
+- `maxiter::Int`: Maximum number of iterations for the solver.
+- `gtol::Float64`: Gradient tolerance.
+- `dftol::Float64`: Change in function value tolerance.
+- `dxtol::Float64`: Change in solution vector tolerance.
+- `lambda::Int`: Initial scaling parameter.
+- `lambdaMax::Int`: Maximum scaling parameter.
+- `linesearch::String`: Type of line search to be used, default is "StrongWolfe".
+- `c1::Float64`: Armijo condition constant.
+- `c2::Float64`: Wolfe condition constant.
+- `progress::Int`: Interval for logging progress.
+
+# Constructor
+
+The constructor allows for customization of the algorithm settings through keyword arguments, with default values provided for each field.
+
+# Notes
+- Based on the chosen method, the constructor will automatically set some fields to suitable values, e.g., for "GradientDescent", it will set progress to 100.
+- A warning will be raised if an unsupported method is provided.
+
+# Example
+```julia-repl
+algSettings = AlgorithmSettings(method = "GradientDescent", maxiter = 10000)
+"""
 mutable struct AlgorithmSettings
         method::String
         maxiter::Int

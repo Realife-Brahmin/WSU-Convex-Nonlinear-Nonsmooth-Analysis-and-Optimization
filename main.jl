@@ -4,8 +4,8 @@ println("You are currently using $(Threads.nthreads()) threads.")
 println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
 # functionName = "dampedSHM";
-# functionName = "drag"
-functionName = "rosenbrock";
+functionName = "drag"
+# functionName = "rosenbrock";
 # functionName = "sphere";
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";

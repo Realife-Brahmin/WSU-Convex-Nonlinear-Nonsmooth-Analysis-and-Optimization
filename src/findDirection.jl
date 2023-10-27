@@ -79,10 +79,7 @@ function findDirection(
         @show k
         if k == 1
             H0 = QNargs.fk * I(n)
-            QNargs.Hk = H0
-            QNargs.xk = xkp1
-            QNargs.gk = gkp1
-            Bₖ = H0
+            Hkp1 = H0
         else
             sk = xkp1 - xk
             yk = gkp1 - gk
@@ -101,11 +98,14 @@ function findDirection(
                 Hkp1 = (I(n) - ρk*sk*yk')*Hk'*(I-ρk*yk*sk') + ρk*sk*sk'
             end
 
-            QNargs.Hk = Hkp1
-            QNargs.xk = xkp1
-            QNargs.gk = gkp1
-            Bₖ = Hkp1
+            # Bₖ = Hkp1
         end
+
+        Bₖ = Hkp1
+        QNargs.Hk = Hkp1
+        QNargs.xk = xkp1
+        QNargs.gk = gkp1
+
         pₖ = -Bₖ*∇fk
         return pₖ, QNargs
     else

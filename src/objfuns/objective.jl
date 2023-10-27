@@ -1,5 +1,3 @@
-# module objective
-
 using Base.Threads
 using DataFrames
 
@@ -8,74 +6,42 @@ include("../../alg.jl") # include alg.jl from parent directory
 
 FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
 
-function generate_pr(functionName::String)
-    data = Matrix{Float64}(undef, 0, 0)
-    params = Vector{Float64}()
-    x0 = Vector{Float64}()
-    
-    # Get the function reference from functionName
-    objective = eval(Symbol(functionName))
-    println("We'll be working with the $(functionName) function.")
+"""
+    generate_pr(functionName::Function, x0::Vector{Float64};
+                data::Matrix{Float64} = Matrix{Float64}(undef, 0, 0),
+                params::Vector{Float64} = Float64[])
 
-    if functionName == "dampedSHM" || functionName == "dampedSHM_Parallel"
-        rawDataFolder = "rawData/"
-        filename = rawDataFolder * "FFD.csv"
-        df = CSV.File(filename) |> DataFrame
-        rename!(df, [:x, :y])
-        data = Matrix(df)
-        x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
-        
-    elseif functionName == "TestFunction1"
-        # x0 = randn(2)
-        x0 = [0.5, 0.5]
-        params = Float64.([2])
+Generate a named tuple `pr` representing a problem with the provided parameters.
 
-    elseif functionName == "TestFunction2"
-        x0 = -2 .+ 2 .* rand(15)
-        params = Float64.([1, -16, 5])
+# Arguments
+- `functionName::Function`: The objective function for the problem.
+- `x0::Vector{Float64}`: The initial point for the optimization problem.
 
-    elseif functionName == "TestFunction3"
-        x0 = sort!(rand(10).^2, rev=true)
-        params = Float64.([10])
+# Keyword Arguments
+- `data::Matrix{Float64}`: A matrix of data associated with the problem. Defaults to an empty matrix.
+- `params::Vector{Float64}`: A vector of parameters for the objective function. Defaults to an empty vector.
 
-    elseif functionName == "rosenbrock"
-        x0 = collect(0.1:0.1:1)
-        params = Float64.([10])
+# Returns
+- A named tuple `pr` with fields:
+    * `p`: A named tuple containing `params` and `data`.
+    * `x0`: The initial point for the optimization problem.
+    * `objective`: The objective function.
+    * `alg`: The algorithm settings (of type `AlgorithmSettings`) to be used for the optimization problem. It is assumed to be a globally accessible instance of `AlgorithmSettings`.
 
-    elseif functionName == "rosenbrock2d"
-        x0 = Float64.([0.1, 0.2])
-        params = Float64[]
-
-    elseif functionName == "rosenbrock2d_oscillatory"
-        x0 = Float64.([0.1, 0.2])
-        params = Float64[]
-
-    elseif functionName == "sphere"
-        x0 = Float64.([0, -100, 11, -23])
-        params = Float64[]
-        
-    elseif functionName == "Rastrigin2d"
-        x0 = Float64.([10, 12])
-        params = Float64[]
-
-    elseif functionName == "hardFunction1"
-        x0 = Float64.([-2, -2])
-        params = Float64[]
-
-    elseif functionName == "drag"
-        n = 1000
-        x0 = Float64.(collect(LinRange(0.0, 1.0, n+2)[2:n+1]))
-        params = Float64[]
-    else
-        @error "Unknown Function. If the function definition is known, please define data, params, x0 first!"
-    end
+# Example
+```julia-repl
+f(x) = sum(x.^2)
+x0 = [1.0, 2.0, 3.0]
+problem = generate_pr(f, x0)
+"""
+function generate_pr(functionName::Function,
+    x0::Vector{Float64};
+    data = Matrix{Float64}(undef, 0, 0),
+    params = Float64[])
 
     p = (params=params, data=data)
 
     println("Problem (pr::NamedTuple) generated")
-    return (p=p, x0=x0, objective=objective, alg=alg)
+    pr = (p=p, x0=x0, objective=functionName, alg=alg)
+    return pr
 end
-
-
-
-# end

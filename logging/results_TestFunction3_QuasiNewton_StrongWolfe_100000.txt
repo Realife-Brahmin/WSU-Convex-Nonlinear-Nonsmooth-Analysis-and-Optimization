@@ -1,0 +1,31 @@
+****************************
+Solver run has concluded.
+Function solved for: TestFunction3()
+This was a function minimization problem.
+Cause(s) for stopping:
+Barely changing fval
+Convergence achieved in 246 iterations 😄
+****************************
+Method Used: QuasiNewton
+Linesearch method used: StrongWolfe
+****************************
+Optimal function value = 6.770799468829876e-5
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 0.0565933192502946
+x☆[2] = 0.16857837092181963
+x☆[3] = 0.1680996577498871
+x☆[4] = 0.16038766384255987
+x☆[5] = 0.1751843852345585
+x☆[6] = 0.1671228905631657
+x☆[7] = 0.05676198845284531
+x☆[8] = 0.4701411427161026
+x☆[9] = 0.1616781763219763
+x☆[10] = 0.17794757034041964
+***************************
+Number of fevals = 1416
+Number of gevals = 823
+Number of evals = 9646
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-12

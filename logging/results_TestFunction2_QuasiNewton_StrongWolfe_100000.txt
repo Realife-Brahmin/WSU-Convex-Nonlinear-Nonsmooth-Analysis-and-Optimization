@@ -1,0 +1,36 @@
+****************************
+Solver run has concluded.
+Function solved for: TestFunction2()
+This was a function minimization problem.
+Cause(s) for stopping:
+Barely changing fval
+Convergence achieved in 55 iterations 😄
+****************************
+Method Used: QuasiNewton
+Linesearch method used: StrongWolfe
+****************************
+Optimal function value = 1.7762822327946068
+***************************
+Optimal Nonzero Variables:
+x☆[1] = -2.9035340319678666
+x☆[2] = 2.746802465272654
+x☆[3] = -2.9035340105219225
+x☆[4] = -2.9035339139801764
+x☆[5] = -2.9035338976412794
+x☆[6] = -2.9035339898503327
+x☆[7] = -2.9035340108065686
+x☆[8] = -2.9035340941691703
+x☆[9] = -2.9035340056735555
+x☆[10] = -2.9035340272158585
+x☆[11] = -2.9035338944976967
+x☆[12] = -2.9035341141123814
+x☆[13] = -2.903534144895854
+x☆[14] = -2.9035339778406253
+x☆[15] = -2.9035341312391734
+***************************
+Number of fevals = 391
+Number of gevals = 195
+Number of evals = 3316
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-12

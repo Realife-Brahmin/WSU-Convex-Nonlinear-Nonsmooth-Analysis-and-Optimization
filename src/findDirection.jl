@@ -10,7 +10,7 @@ mutable struct CGargsType
     pk::Vector{Float64}
 end
 
-function constructorGCargs(
+function constructorCGargs(
     pr::NamedTuple)::CGargsType
     k = 1
     xk = pr.x0
@@ -51,7 +51,7 @@ end
 function findDirection(
     pr::NamedTuple, ∇fk::Vector{Float64};
     QNargs::QNargsType=constructorQNargs(pr),
-    CGargs::CGargsType=constructorGCargs(pr),
+    CGargs::CGargsType=constructorCGargs(pr),
     verbose::Bool=false)
 
     method = pr.alg.method
@@ -71,7 +71,7 @@ function findDirection(
             pkp1 = -∇fkp1 + βkp1*pk
         end
 
-        GCargs.pk = pkp1
+        CGargs.pk = pkp1
         CGargs.xk = xkp1
         CGargs.gk = gkp1
 

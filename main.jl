@@ -5,8 +5,8 @@ println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
 # functionName = "dampedSHM";
 # functionName = "drag"
-# functionName = "rosenbrock";
-functionName = "sphere";
+functionName = "rosenbrock";
+# functionName = "sphere";
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";

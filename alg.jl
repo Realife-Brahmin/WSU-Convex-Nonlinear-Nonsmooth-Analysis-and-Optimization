@@ -75,7 +75,7 @@ mutable struct AlgorithmSettings
                         myprintln(true, "Method chosen: ConjugateGradientDescent", log=false)
                         alg.linesearch = "StrongWolfe"
                         alg.c2 = 0.5
-                        alg.progress = 5
+                        alg.progress = 1
                 else
                         @warn "Bad condition."
                 end

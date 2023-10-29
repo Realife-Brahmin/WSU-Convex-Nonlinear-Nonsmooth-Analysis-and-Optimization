@@ -1,0 +1,21 @@
+****************************
+Solver run has concluded.
+Function solved for: sphere()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too small gradient
+Convergence achieved in 3 iterations 😄
+****************************
+Method Used: ConjugateGradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Optimal function value = NaN
+***************************
+Optimal Nonzero Variables:
+***************************
+Number of fevals = 61
+Number of gevals = 32
+Number of evals = 381
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-12

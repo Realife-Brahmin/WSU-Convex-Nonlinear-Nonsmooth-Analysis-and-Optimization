@@ -66,34 +66,55 @@ function myfill(array, value)
     return fill(T(value), size(array))
 end
 
-# Sample data
-fvals = [i for i in 1:10]
-gmagvals = [i^2 for i in 1:10]
-αvals = [i^0.5 for i in 1:10]
-backtrackVals = [10-i for i in 1:10]
+"""
+    trim_array(nt::NamedTuple, n::Int) -> NamedTuple
 
-xvals = hcat(1:10, 11:20)
-gvals = hcat(21:30, 31:40)
+Trim arrays within a NamedTuple to a predetermined maximum length or size.
 
-data_1D = (fvals, gmagvals, αvals, backtrackVals)
-data_2D = (xvals, gvals)
+# Arguments
+- `nt::NamedTuple`: A NamedTuple containing arrays as values.
+- `n::Int`: Maximum size for arrays. 1D arrays exceeding this length will be trimmed. 
+For 2D arrays, both rows and columns will be trimmed if they exceed this size.
 
-# Trimming function for 1D arrays
-function trim_arrays(itr, data_tuple::Tuple...)
-    return tuple([arr[1:itr-1] for arr in data_tuple]...)
+# Returns
+- A new NamedTuple with trimmed arrays.
+
+# Example
+nt = (a = [1, 2, 3, 4, 5], b = [6, 7, 8, 9, 10], c = rand(10, 10), d = 11)
+trimmed_nt = trim_array(nt, 3)
+println(trimmed_nt)
+
+# Notes
+- This function is designed to handle 1D (vectors) and 2D arrays (matrices). 
+Other data structures remain unchanged.
+- It utilizes a dictionary as an intermediary data structure before converting back to a NamedTuple.
+"""
+function trim_array(nt::NamedTuple, n::Int)
+    # Create a dictionary to hold the trimmed arrays
+    trimmed_dict = Dict()
+
+    # Iterate over each key in the NamedTuple
+    for key in keys(nt)
+        # Get the array using getproperty
+        arr = getproperty(nt, key)
+        
+        # Check if it's a 1D array and trim it
+        if isa(arr, AbstractVector) && length(arr) > n
+            arr = arr[1:n]
+        # Check if it's a 2D array and trim it
+        elseif isa(arr, AbstractMatrix) && any(size(arr) .> n)
+            arr = arr[1:min(end,n), 1:min(end,n)]
+        end
+
+        # Store the trimmed array in the dictionary
+        trimmed_dict[key] = arr
+    end
+    
+    # Convert the dictionary back to a NamedTuple and return
+    return NamedTuple(trimmed_dict)
 end
 
-# Trimming function for 2D arrays
-function trim_arrays_2D(itr, data_tuple::Tuple...)
-    return tuple([arr[:, 1:itr-1] for arr in data_tuple]...)
-end
 
-# Example usage with itr = 5
-trimmed_data_1D = trim_arrays(5, data_1D)
-trimmed_data_2D = trim_arrays_2D(5, data_2D)
-
-println("Trimmed data_1D: ", trimmed_data_1D)
-println("Trimmed data_2D: ", trimmed_data_2D)
 
 
 

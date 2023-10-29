@@ -114,13 +114,11 @@ function optimize(pr;
         converged = true
         statusMessage = "Convergence achieved in $(itr) iterations 😄"
         myprintln(true, statusMessage, log=log, log_path=log_txt)
-        # truncating arrays as they weren't filled to capacity
-        fvals, gmagvals, αvals, backtrackVals = [arr[1:itr-1] for arr in (fvals, gmagvals, αvals, backtrackVals)]
-        xvals, gvals = [arr[:, 1:itr-1] for arr in (xvals, gvals)]
     end
     
     res = (converged=converged, statusMessage=statusMessage, fvals=fvals, αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, gmagvals=gmagvals, gvals=gvals, M=M, fevals=fevals, gevals=gevals, cause=causeForStopping, pr=pr)
 
+    res = trim_array(res, itr-1)
     return res
 end
 

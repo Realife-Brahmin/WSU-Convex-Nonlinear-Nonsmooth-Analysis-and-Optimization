@@ -53,10 +53,10 @@ function optimize(pr;
 
         myprintln(printOrNot, "Iteration $(itr):", log_path=log_txt)
 
-        fₖ, ∇fₖ = obj(x, p)
+        @show fₖ, ∇fₖ = obj(x, p)
         @checkForNaN fₖ
         @checkForNaN ∇fₖ
-        gmagval = sum(abs.(∇fₖ))
+        @show gmagval = sum(abs.(∇fₖ))
         fevals += 1
         gevals += 1
         if pr.alg.method == "QuasiNewton"
@@ -68,7 +68,7 @@ function optimize(pr;
 
         elseif pr.alg.method == "ConjugateGradientDescent"
             @show CGargs.k = itr
-            CGargs.xkp1 = x
+            # CGargs.xkp1 = x
             CGargs.gkp1 = ∇fₖ
             @show pₖ, CGargs = findDirection(pr, ∇fₖ, CGargs=CGargs)
 
@@ -77,7 +77,17 @@ function optimize(pr;
 
         end
         
-        α, x, fnext, backtrackNum, fevals_ls, gevals_ls = (linesearchMethod == "Armijo") ? ArmijoBackracking(pr, x, pₖ, verbose=printOrNot_ls) : StrongWolfeBisection(pr, x, pₖ, verbose=printOrNot_ls)
+        if linesearchMethod == "StrongWolfe"
+            α, x, fnext, gmagkp1, backtrackNum, fevals_ls, gevals_ls = StrongWolfeBisection(pr, x, pₖ, verbose=printOrNot_ls)
+
+        elseif linesearchMethod == "Armijo"
+            α, x, fnext, backtrackNum, fevals_ls, gevals_ls = ArmijoBackracking(pr, x, pₖ, verbose=printOrNot_ls)
+
+        else
+            @error "Unknown linesearch method"
+        end
+        
+        # α, x, fnext, backtrackNum, fevals_ls, gevals_ls = (linesearchMethod == "Armijo") ? ArmijoBackracking(pr, x, pₖ, verbose=printOrNot_ls) : StrongWolfeBisection(pr, x, pₖ, verbose=printOrNot_ls)
 
         myprintln(printOrNot, "Iteration $(itr): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
 
@@ -86,7 +96,11 @@ function optimize(pr;
             keepIterationsGoing = false
         end
         if gmagval < gtol
-            push!(causeForStopping, "Too small gradient")
+            push!(causeForStopping, "Too small gradient at previous step.")
+            keepIterationsGoing = false
+        end
+        if gmagkp1 < gtol
+            push!(causeForStopping, "Too small gradient at latest step.")
             keepIterationsGoing = false
         end
         if itr == maxiter

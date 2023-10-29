@@ -33,7 +33,7 @@ function optimize(pr;
     if pr.alg.method == "QuasiNewton"
         QNargs = constructorQNargs(pr, fk=fₖ)
     elseif pr.alg.method == "ConjugateGradientDescent"
-        CGargs = constructorGCargs(pr)
+        CGargs = constructorCGargs(pr)
     end
     fevals += 1
     n = length(x)

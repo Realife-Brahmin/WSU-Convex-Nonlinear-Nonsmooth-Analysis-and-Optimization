@@ -66,4 +66,34 @@ function myfill(array, value)
     return fill(T(value), size(array))
 end
 
+# Sample data
+fvals = [i for i in 1:10]
+gmagvals = [i^2 for i in 1:10]
+αvals = [i^0.5 for i in 1:10]
+backtrackVals = [10-i for i in 1:10]
+
+xvals = hcat(1:10, 11:20)
+gvals = hcat(21:30, 31:40)
+
+data_1D = (fvals, gmagvals, αvals, backtrackVals)
+data_2D = (xvals, gvals)
+
+# Trimming function for 1D arrays
+function trim_arrays(itr, data_tuple::Tuple...)
+    return tuple([arr[1:itr-1] for arr in data_tuple]...)
+end
+
+# Trimming function for 2D arrays
+function trim_arrays_2D(itr, data_tuple::Tuple...)
+    return tuple([arr[:, 1:itr-1] for arr in data_tuple]...)
+end
+
+# Example usage with itr = 5
+trimmed_data_1D = trim_arrays(5, data_1D)
+trimmed_data_2D = trim_arrays_2D(5, data_2D)
+
+println("Trimmed data_1D: ", trimmed_data_1D)
+println("Trimmed data_2D: ", trimmed_data_2D)
+
+
 

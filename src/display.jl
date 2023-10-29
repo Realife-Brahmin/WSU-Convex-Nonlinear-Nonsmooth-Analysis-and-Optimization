@@ -8,16 +8,6 @@ using Printf
 # include("utilities.jl")
 include("objfuns/objective.jl")
 
-# Extract fields from the 'res' structure and assign them to local variables.
-# The purpose of this macro is to avoid repetitive assignments.
-# Usage: @unpack_vars res status fvals αvals backtrackVals xvals
-macro unpack_vars(struct_var, fields...)
-    quote
-        # For each specified field, assign the field's value from the structure to a local variable.
-        $(Expr(:block, [:(local $(field) = $(struct_var).$(field)) for field in fields]...))
-    end
-end
-
 function scatter_voltage_vs_time(df::DataFrame)
     gr()  # Ensure you're using the GR backend for Plots.jl which supports LaTeX rendering
 
@@ -58,7 +48,7 @@ function showresults(res::NamedTuple;
     function myprintln1(v, message)
         myprintln(v, message, log=log, log_path=result_txt)
     end
-    # println(res.pr)
+
     
     nnztol = 1e-8 # variable having a value below this will NOT be counted in the list of non-zero variables. For printing purposes only. 
 

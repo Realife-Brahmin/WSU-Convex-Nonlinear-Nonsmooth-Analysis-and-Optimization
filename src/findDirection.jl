@@ -3,8 +3,8 @@ include("helperFunctions.jl")
 # For ConjugateGradientDescent update
 mutable struct CGargsType
     k::Int
-    xk::Vector{Float64}
-    xkp1::Vector{Float64}
+    # xk::Vector{Float64}
+    # xkp1::Vector{Float64}
     gk::Vector{Float64}
     gkp1::Vector{Float64}
     pk::Vector{Float64}
@@ -14,11 +14,12 @@ function constructorCGargs(
     pr::NamedTuple)::CGargsType
     k = 1
     xk = pr.x0
-    xkp1 = myzeros(xk)
+    # xkp1 = myzeros(xk)
     gk = myzeros(xk)
     gkp1 = myzeros(xk)
     pk = myzeros(xk)
-    CGargs = CGargsType(k, xk, xkp1, gk, gkp1, pk)
+    # CGargs = CGargsType(k, xk, xkp1, gk, gkp1, pk)
+    CGargs = CGargsType(k, gk, gkp1, pk)
     return CGargs
 end
 
@@ -59,20 +60,25 @@ function findDirection(
     if method == "GradientDescent"
         Bₖ = I(n)
     elseif method == "ConjugateGradientDescent"
-        @unpack k, xk, xkp1, gk, gkp1, pk = CGargs
+        @unpack k, gk, gkp1, pk = CGargs
         @show k
+        @show k, gk, gkp1, pk
         # @show CGargs
+        @show gkp1 = ∇fk
         if k == 1
-            @checkForNaN ∇f0 = ∇fk
-            @checkForNaN pkp1 = -∇f0 
+            @show ∇f0 = ∇fk
+            @show gkp1 = ∇f0
+            @show pkp1 = -∇f0 
         else
-            @checkForNaN ∇fkp1 = gkp1
-            @checkForNaN βkp1 = max(0, ∇fkp1'*(∇fkp1-∇fk)/(∇fkp1'*∇fk))
+            @show ∇fkp1 = gkp1
+            @show diff = ∇fkp1'*(∇fkp1-∇fk)
+            @show mag = ∇fk'*∇fk
+            # @checkForNaN βkp1 = max(0, ∇fkp1'*(∇fkp1-∇fk)/(∇fk'*∇fk))
+            @checkForNaN βkp1 = max(0, diff/mag)
             @checkForNaN pkp1 = -∇fkp1 + βkp1*pk
         end
 
         CGargs.pk = pkp1
-        CGargs.xk = xkp1
         CGargs.gk = gkp1
 
         pₖ = pkp1

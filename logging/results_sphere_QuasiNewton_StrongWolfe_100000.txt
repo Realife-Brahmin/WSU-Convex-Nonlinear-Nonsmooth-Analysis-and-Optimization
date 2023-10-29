@@ -4,28 +4,27 @@ Function solved for: sphere()
 This was a function minimization problem.
 Cause(s) for stopping:
 Barely changing fval
-Convergence achieved in 24 iterations 😄
+Convergence achieved in 25 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 3.312490096200459e-13
+Optimal function value = 9.192825574931556e-14
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = -6.054473078948711e-8
-x☆[2] = -4.840937611789003e-8
-x☆[3] = -1.1113272722340807e-7
-x☆[4] = -2.1035664756612897e-7
-x☆[5] = 5.878833042712832e-8
-x☆[6] = -1.1166915531077093e-7
-x☆[7] = 1.2336485497691364e-7
-x☆[8] = -1.6745661010067995e-7
-x☆[9] = 2.6936909254566463e-7
-x☆[10] = -3.6999066946503785e-7
+x☆[1] = -4.2474316430063636e-8
+x☆[2] = -8.788386049165103e-8
+x☆[3] = -1.0663229020997893e-7
+x☆[4] = -1.3907885887193263e-7
+x☆[6] = -1.1975557237529673e-7
+x☆[7] = 1.064552880582225e-8
+x☆[8] = -4.263455042257724e-8
+x☆[9] = 1.02655512893341e-7
+x☆[10] = -1.5762758149662418e-7
 ***************************
-Number of fevals = 131
-Number of gevals = 80
-Number of evals = 931
+Number of fevals = 135
+Number of gevals = 83
+Number of evals = 965
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

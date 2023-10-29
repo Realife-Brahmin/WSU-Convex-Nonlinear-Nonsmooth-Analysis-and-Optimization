@@ -67,10 +67,10 @@ function optimize(pr;
             pₖ, QNargs = findDirection(pr, ∇fₖ, QNargs=QNargs)
 
         elseif pr.alg.method == "ConjugateGradientDescent"
-            CGargs.k = itr
+            @show CGargs.k = itr
             CGargs.xkp1 = x
             CGargs.gkp1 = ∇fₖ
-            pₖ, CGargs = findDirection(pr, ∇fₖ, CGargs=CGargs)
+            @show pₖ, CGargs = findDirection(pr, ∇fₖ, CGargs=CGargs)
 
         else
             pₖ = findDirection(pr, ∇fₖ)

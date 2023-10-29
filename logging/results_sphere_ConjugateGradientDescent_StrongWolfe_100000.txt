@@ -15,7 +15,7 @@ Optimal Nonzero Variables:
 ***************************
 Number of fevals = 61
 Number of gevals = 32
-Number of evals = 381
+Number of evals = 125
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

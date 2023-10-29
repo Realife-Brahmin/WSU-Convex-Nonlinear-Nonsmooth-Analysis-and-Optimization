@@ -3,15 +3,16 @@ include("setup.jl")
 println("You are currently using $(Threads.nthreads()) threads.")
 println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
-functionName = "dampedSHM";
+# functionName = "dampedSHM";
 # functionName = "drag"
 # functionName = "rosenbrock";
-# functionName = "sphere";
+functionName = "sphere";
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";
 
 pr = include("src/objfuns/"*String(functionName)*".jl")
+
 # verbose = false
 verbose = true;
 verbose_ls = false;

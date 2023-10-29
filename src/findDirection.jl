@@ -63,12 +63,12 @@ function findDirection(
         @show k
         # @show CGargs
         if k == 1
-            ∇f0 = ∇fk
-            pkp1 = -∇f0 
+            @checkForNaN ∇f0 = ∇fk
+            @checkForNaN pkp1 = -∇f0 
         else
-            ∇fkp1 = gkp1
-            βkp1 = max(0, ∇fkp1'*(∇fkp1-∇fk)/(∇fkp1'*∇fk))
-            pkp1 = -∇fkp1 + βkp1*pk
+            @checkForNaN ∇fkp1 = gkp1
+            @checkForNaN βkp1 = max(0, ∇fkp1'*(∇fkp1-∇fk)/(∇fkp1'*∇fk))
+            @checkForNaN pkp1 = -∇fkp1 + βkp1*pk
         end
 
         CGargs.pk = pkp1

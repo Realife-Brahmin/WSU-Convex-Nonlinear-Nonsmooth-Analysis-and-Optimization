@@ -77,7 +77,7 @@ function optimize(pr;
 
         end
         
-        α, x, fnext, backtrackNum, fevals_ls, gevals_ls = (linesearchMethod == "Armijo") ? ArmijoBackracking(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot_ls) : StrongWolfeBisection(pr, x, pₖ, itrStart=itrStart, verbose=printOrNot_ls)
+        α, x, fnext, backtrackNum, fevals_ls, gevals_ls = (linesearchMethod == "Armijo") ? ArmijoBackracking(pr, x, pₖ, verbose=printOrNot_ls) : StrongWolfeBisection(pr, x, pₖ, verbose=printOrNot_ls)
 
         myprintln(printOrNot, "Iteration $(itr): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
 
@@ -115,8 +115,7 @@ function optimize(pr;
         statusMessage = "Convergence achieved in $(itr) iterations 😄"
         myprintln(true, statusMessage, log=log, log_path=log_txt)
         # truncating arrays as they weren't filled to capacity
-        fvals, gmagvals, αvals, backtrackVals = [arr[1:itr-1] for arr in (fvals, αvals, backtrackVals, xvals)]
-        # xvals = xvals[:, 1:itr-1]
+        fvals, gmagvals, αvals, backtrackVals = [arr[1:itr-1] for arr in (fvals, gmagvals, αvals, backtrackVals)]
         xvals, gvals = [arr[:, 1:itr-1] for arr in (xvals, gvals)]
     end
     

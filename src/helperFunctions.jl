@@ -27,3 +27,10 @@ end
 
 # @checkForNaN([-7, 0, NaN])
 # @checkForNaN([10, 20])
+function myzeros(array)
+    return zeros(eltype(array), size(array))
+end
+function myfill(array, value)
+    T = eltype(array)
+    return fill(T(value), size(array))
+end

@@ -14,10 +14,10 @@ function constructorCGargs(
     pr::NamedTuple)::CGargsType
     k = 1
     xk = pr.x0
-    xkp1 = similar(xk)
-    gk = similar(xk)
-    gkp1 = similar(xk)
-    pk = similar(xk)
+    xkp1 = myzeros(xk)
+    gk = myzeros(xk)
+    gkp1 = myzeros(xk)
+    pk = myzeros(xk)
     CGargs = CGargsType(k, xk, xkp1, gk, gkp1, pk)
     return CGargs
 end
@@ -40,9 +40,9 @@ function constructorQNargs(
     k = 1
     xk = pr.x0
     n = length(xk)
-    xkp1 = similar(xk)
-    gk = similar(xk)
-    gkp1 = similar(xk)
+    xkp1 = myzeros(xk)
+    gk = myzeros(xk)
+    gkp1 = myzeros(xk)
     Hk = fk*I(n)
     QNargs = QNargsType(k, xk, xkp1, fk, gk, gkp1, Hk)
     return QNargs

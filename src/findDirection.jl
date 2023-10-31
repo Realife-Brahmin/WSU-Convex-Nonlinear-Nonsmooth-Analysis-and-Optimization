@@ -3,23 +3,21 @@ include("helperFunctions.jl")
 # For ConjugateGradientDescent update
 mutable struct CGargsType
     k::Int
-    # xk::Vector{Float64}
-    # xkp1::Vector{Float64}
     gk::Vector{Float64}
-    gkp1::Vector{Float64}
+    # gkp1::Vector{Float64}
     pk::Vector{Float64}
+    justRestarted::Bool
 end
 
 function constructorCGargs(
     pr::NamedTuple)::CGargsType
     k = 1
     xk = pr.x0
-    # xkp1 = myzeros(xk)
     gk = myzeros(xk)
-    gkp1 = myzeros(xk)
+    # gkp1 = myzeros(xk)
     pk = myzeros(xk)
-    # CGargs = CGargsType(k, xk, xkp1, gk, gkp1, pk)
-    CGargs = CGargsType(k, gk, gkp1, pk)
+    justRestarted = false
+    CGargs = CGargsType(k, gk, pk, justRestarted)
     return CGargs
 end
 
@@ -57,29 +55,30 @@ function findDirection(
 
     method = pr.alg.method
     n = length(∇fk)
+    gkp1 = ∇fk
     if method == "GradientDescent"
         Bₖ = I(n)
     elseif method == "ConjugateGradientDescent"
-        @unpack k, gk, gkp1, pk = CGargs
+        @unpack k, gk, pk, justRestarted = CGargs
         @show k
-        @show k, gk, gkp1, pk
-        # @show CGargs
-        @show gkp1 = ∇fk
         if k == 1
-            @show ∇f0 = ∇fk
-            @show gkp1 = ∇f0
-            @show pkp1 = -∇f0 
+            pkp1 = -gkp1 
         else
-            @show ∇fkp1 = gkp1
-            @show diff = ∇fkp1'*(∇fkp1-∇fk)
-            @show mag = ∇fk'*∇fk
-            # @checkForNaN βkp1 = max(0, ∇fkp1'*(∇fkp1-∇fk)/(∇fk'*∇fk))
-            @checkForNaN βkp1 = max(0, diff/mag)
-            @checkForNaN pkp1 = -∇fkp1 + βkp1*pk
+            diff = gkp1'*(gkp1-gk)
+            mag = gk'*gk
+            @show βkp1 = max(0, diff/mag)
+            if βkp1 == 0
+                justRestarted = true
+                myprintln(true, "Restarted ConjugateGradientDescent.")
+            else
+                justRestarted = false
+            end
+            @checkForNaN pkp1 = -gkp1 + βkp1*pk
         end
 
         CGargs.pk = pkp1
         CGargs.gk = gkp1
+        CGargs.justRestarted = justRestarted
 
         pₖ = pkp1
         return pₖ, CGargs

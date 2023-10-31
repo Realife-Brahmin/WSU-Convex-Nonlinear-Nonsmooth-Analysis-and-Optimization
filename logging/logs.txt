@@ -1865,3 +1865,9 @@ Method chosen: QuasiNewton
 Method chosen: QuasiNewton
 Method chosen: QuasiNewton
 Method chosen: QuasiNewton
+CG Method on.
+CG Method on.
+CG Method on.
+Restarted ConjugateGradientDescent.
+Restarted ConjugateGradientDescent.
+Restarted ConjugateGradientDescent.

@@ -1,2 +1,1 @@
 Begin with the solver:
-Convergence achieved in 64010 iterations 😄

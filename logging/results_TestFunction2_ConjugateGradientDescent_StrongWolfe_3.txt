@@ -1,0 +1,36 @@
+****************************
+Solver run has concluded.
+Function solved for: TestFunction2()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too many iterations
+Failed to converge despite 3 iterations! 😢
+****************************
+Method Used: ConjugateGradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Best function value = 4.445282840692123
+***************************
+Best Known Nonzero Variables:
+x☆[1] = -2.875226259878838
+x☆[2] = -3.087736564900936
+x☆[3] = -2.546027466617788
+x☆[4] = -1.186695348134805
+x☆[5] = -3.2285060634642346
+x☆[6] = -3.0386635146739147
+x☆[7] = -2.9555495916573973
+x☆[8] = -2.6521495003969378
+x☆[9] = -3.0746981830346716
+x☆[10] = -3.160779222635742
+x☆[11] = -3.405717496398614
+x☆[12] = -2.597326086228363
+x☆[13] = -3.4520049268257287
+x☆[14] = -3.4217355216458403
+x☆[15] = -3.239940558751577
+***************************
+Number of fevals = 67
+Number of gevals = 36
+Number of evals = 607
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-12

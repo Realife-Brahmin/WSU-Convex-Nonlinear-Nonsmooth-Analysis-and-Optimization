@@ -1,0 +1,23 @@
+****************************
+Solver run has concluded.
+Function solved for: TestFunction1()
+This was a function minimization problem.
+Cause(s) for stopping:
+Barely changing fval
+Convergence achieved in 15 iterations 😄
+****************************
+Method Used: ConjugateGradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Optimal function value = 0.9683715496836651
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 0.08981395579681227
+x☆[2] = -0.7126586514022728
+***************************
+Number of fevals = 290
+Number of gevals = 75
+Number of evals = 440
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-12

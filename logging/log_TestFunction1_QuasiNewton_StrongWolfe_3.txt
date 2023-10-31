@@ -1,0 +1,70 @@
+Starting with initial point x = [0.5, 0.5].
+Begin with the solver:
+Iteration 1:
+Let's try shifting x to [-3.669264322916667, 2.28046875]
+Let's try shifting x to [-1.5846321614583334, 1.390234375]
+Let's try shifting x to [-0.5423160807291667, 0.9451171875]
+StrongWolfe1 condition satisfied for α = 0.125
+StrongWolfe2 condition NOT satisfied for α = 0.125
+Let's try shifting x to [-1.06347412109375, 1.16767578125]
+Let's try shifting x to [-0.8028951009114584, 1.056396484375]
+Let's try shifting x to [-0.6726055908203126, 1.0007568359375]
+Let's try shifting x to [-0.6074608357747395, 0.97293701171875]
+Let's try shifting x to [-0.5748884582519531, 0.959027099609375]
+StrongWolfe1 condition satisfied for α = 0.12890625
+StrongWolfe2 condition NOT satisfied for α = 0.12890625
+Let's try shifting x to [-0.5911746470133463, 0.9659820556640626]
+StrongWolfe1 condition satisfied for α = 0.130859375
+StrongWolfe2 condition NOT satisfied for α = 0.130859375
+Let's try shifting x to [-0.5993177413940429, 0.9694595336914062]
+Let's try shifting x to [-0.5952461942036946, 0.9677207946777344]
+StrongWolfe1 condition satisfied for α = 0.13134765625
+StrongWolfe2 condition NOT satisfied for α = 0.13134765625
+Let's try shifting x to [-0.5972819677988688, 0.9685901641845703]
+StrongWolfe1 condition satisfied for α = 0.131591796875
+StrongWolfe2 condition NOT satisfied for α = 0.131591796875
+Let's try shifting x to [-0.598299854596456, 0.9690248489379882]
+StrongWolfe1 condition satisfied for α = 0.1317138671875
+StrongWolfe2 condition NOT satisfied for α = 0.1317138671875
+Let's try shifting x to [-0.5988087979952494, 0.9692421913146974]
+StrongWolfe1 condition satisfied for α = 0.13177490234375
+StrongWolfe2 condition NOT satisfied for α = 0.13177490234375
+Let's try shifting x to [-0.5990632696946463, 0.9693508625030518]
+StrongWolfe1 condition satisfied for α = 0.131805419921875
+StrongWolfe2 condition NOT satisfied for α = 0.131805419921875
+Let's try shifting x to [-0.5991905055443447, 0.969405198097229]
+StrongWolfe1 condition satisfied for α = 0.1318206787109375
+StrongWolfe2 condition NOT satisfied for α = 0.1318206787109375
+Let's try shifting x to [-0.5992541234691937, 0.9694323658943176]
+Let's try shifting x to [-0.5992223145067692, 0.9694187819957734]
+Let's try shifting x to [-0.599206410025557, 0.9694119900465012]
+Let's try shifting x to [-0.5991984577849507, 0.9694085940718651]
+Let's try shifting x to [-0.5991944816646477, 0.969406896084547]
+Let's try shifting x to [-0.5991924936044961, 0.9694060470908881]
+Let's try shifting x to [-0.5991914995744203, 0.9694056225940586]
+Let's try shifting x to [-0.5991910025593825, 0.9694054103456438]
+StrongWolfe1 condition satisfied for α = 0.13182073831558228
+StrongWolfe2 condition NOT satisfied for α = 0.13182073831558228
+Let's try shifting x to [-0.5991912510669015, 0.9694055164698512]
+Let's try shifting x to [-0.599191126813142, 0.9694054634077475]
+StrongWolfe1 condition satisfied for α = 0.13182075321674347
+StrongWolfe2 condition NOT satisfied for α = 0.13182075321674347
+Let's try shifting x to [-0.5991911889400217, 0.9694054899387994]
+Iteration 1: x = [-0.5991911889400217, 0.9694054899387994] is a better point with new fval = 2.373501984332872.
+Iteration 2:
+Let's try shifting x to [-2.801869599924178, -0.9957240122321087]
+Let's try shifting x to [-1.7005303944320997, -0.013159261146654666]
+Let's try shifting x to [-1.1498607916860606, 0.47812311439607236]
+Let's try shifting x to [-0.8745259903130411, 0.7237643021674358]
+StrongWolfe1 condition satisfied for α = 0.0625
+StrongWolfe2 condition satisfied for α = 0.0625
+Iteration 2: x = [-0.8745259903130411, 0.7237643021674358] is a better point with new fval = 2.349301175326158.
+Iteration 3:
+Let's try shifting x to [-0.4826819662361517, 0.7967969143949958]
+StrongWolfe1 condition satisfied for α = 0.5
+StrongWolfe2 condition NOT satisfied for α = 0.5
+Let's try shifting x to [-0.28675995419770706, 0.8333132205087758]
+StrongWolfe1 condition satisfied for α = 0.75
+StrongWolfe2 condition satisfied for α = 0.75
+Iteration 3: x = [-0.28675995419770706, 0.8333132205087758] is a better point with new fval = 1.2271318396693158.
+Failed to converge despite 3 iterations! 😢

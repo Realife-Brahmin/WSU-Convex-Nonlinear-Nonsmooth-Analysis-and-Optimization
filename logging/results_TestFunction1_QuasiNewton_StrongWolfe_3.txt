@@ -1,0 +1,23 @@
+****************************
+Solver run has concluded.
+Function solved for: TestFunction1()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too many iterations
+Failed to converge despite 3 iterations! 😢
+****************************
+Method Used: QuasiNewton
+Linesearch method used: StrongWolfe
+****************************
+Best function value = 1.2271318396693158
+***************************
+Best Known Nonzero Variables:
+x☆[1] = -0.28675995419770706
+x☆[2] = 0.8333132205087758
+***************************
+Number of fevals = 54
+Number of gevals = 20
+Number of evals = 94
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-12

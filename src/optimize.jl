@@ -46,6 +46,8 @@ function optimize(pr;
     keepIterationsGoing = true
     causeForStopping = []
 
+    CGDRestartFlag = false # automatically false if not doing CGD, and if doing CGD and latest β was not zero.
+
     while keepIterationsGoing
 
         printOrNot = verbose && (itr % progress == 0)
@@ -68,17 +70,15 @@ function optimize(pr;
 
         elseif pr.alg.method == "ConjugateGradientDescent"
             CGargs.k = itr
-            # CGargs.xkp1 = x
-            CGargs.gkp1 = ∇fₖ
-            pₖ, CGargs = findDirection(pr, ∇fₖ, CGargs=CGargs)
-
+            @show pₖ, CGargs = findDirection(pr, ∇fₖ, CGargs=CGargs)
+            CGDRestartFlag = CGargs.justRestarted
         else
             pₖ = findDirection(pr, ∇fₖ)
 
         end
         
         if linesearchMethod == "StrongWolfe"
-            α, x, fnext, gmagkp1, backtrackNum, fevals_ls, gevals_ls = StrongWolfeBisection(pr, x, pₖ, verbose=printOrNot_ls)
+            @show α, x, fnext, gmagkp1, backtrackNum, fevals_ls, gevals_ls = StrongWolfeBisection(pr, x, pₖ, verbose=printOrNot_ls)
 
         elseif linesearchMethod == "Armijo"
             α, x, fnext, backtrackNum, fevals_ls, gevals_ls = ArmijoBackracking(pr, x, pₖ, verbose=printOrNot_ls)
@@ -91,15 +91,16 @@ function optimize(pr;
 
         myprintln(printOrNot, "Iteration $(itr): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
 
-        if abs(fnext - fₖ) < dftol
+        if !CGDRestartFlag && abs(fnext - fₖ) < dftol
             push!(causeForStopping, "Barely changing fval")
             keepIterationsGoing = false
         end
-        if gmagval < gtol
+        if !CGDRestartFlag && gmagval < gtol
             push!(causeForStopping, "Too small gradient at previous step.")
             keepIterationsGoing = false
         end
-        if gmagkp1 < gtol
+        if !CGDRestartFlag && gmagkp1 < gtol
+            @show gmagkp1
             push!(causeForStopping, "Too small gradient at latest step.")
             keepIterationsGoing = false
         end

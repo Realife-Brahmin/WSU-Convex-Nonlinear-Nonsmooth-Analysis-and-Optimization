@@ -1,0 +1,83 @@
+Starting with initial point x = [0.5, 0.5].
+Begin with the solver:
+Iteration 1:
+Let's try shifting x to [-1.25625, 1.25]
+Let's try shifting x to [-0.37812500000000004, 0.875]
+StrongWolfe1 condition satisfied for α = 0.25
+StrongWolfe2 condition NOT satisfied for α = 0.25
+Let's try shifting x to [-0.8171875000000002, 1.0625]
+Let's try shifting x to [-0.59765625, 0.96875]
+StrongWolfe1 condition satisfied for α = 0.3125
+StrongWolfe2 condition NOT satisfied for α = 0.3125
+Let's try shifting x to [-0.7074218750000001, 1.015625]
+Let's try shifting x to [-0.6525390625, 0.9921875]
+Let's try shifting x to [-0.6250976562500001, 0.98046875]
+Let's try shifting x to [-0.611376953125, 0.974609375]
+Let's try shifting x to [-0.6045166015625001, 0.9716796875]
+Let's try shifting x to [-0.60108642578125, 0.97021484375]
+Let's try shifting x to [-0.5993713378906251, 0.969482421875]
+Let's try shifting x to [-0.5985137939453125, 0.9691162109375]
+StrongWolfe1 condition satisfied for α = 0.312744140625
+StrongWolfe2 condition NOT satisfied for α = 0.312744140625
+Let's try shifting x to [-0.5989425659179688, 0.96929931640625]
+StrongWolfe1 condition satisfied for α = 0.3128662109375
+StrongWolfe2 condition NOT satisfied for α = 0.3128662109375
+Let's try shifting x to [-0.599156951904297, 0.969390869140625]
+StrongWolfe1 condition satisfied for α = 0.31292724609375
+StrongWolfe2 condition NOT satisfied for α = 0.31292724609375
+Let's try shifting x to [-0.5992641448974609, 0.9694366455078125]
+Let's try shifting x to [-0.599210548400879, 0.9694137573242188]
+Let's try shifting x to [-0.5991837501525878, 0.9694023132324219]
+StrongWolfe1 condition satisfied for α = 0.31293487548828125
+StrongWolfe2 condition NOT satisfied for α = 0.31293487548828125
+Let's try shifting x to [-0.5991971492767334, 0.9694080352783203]
+Let's try shifting x to [-0.5991904497146607, 0.9694051742553711]
+StrongWolfe1 condition satisfied for α = 0.31293678283691406
+StrongWolfe2 condition NOT satisfied for α = 0.31293678283691406
+Let's try shifting x to [-0.5991937994956971, 0.9694066047668457]
+Let's try shifting x to [-0.5991921246051788, 0.9694058895111084]
+Let's try shifting x to [-0.5991912871599199, 0.9694055318832397]
+Let's try shifting x to [-0.5991908684372902, 0.9694053530693054]
+StrongWolfe1 condition satisfied for α = 0.3129369020462036
+StrongWolfe2 condition NOT satisfied for α = 0.3129369020462036
+Let's try shifting x to [-0.5991910777986049, 0.9694054424762726]
+StrongWolfe1 condition satisfied for α = 0.3129369616508484
+StrongWolfe2 condition NOT satisfied for α = 0.3129369616508484
+Let's try shifting x to [-0.5991911824792624, 0.9694054871797562]
+Let's try shifting x to [-0.5991911301389337, 0.9694054648280144]
+StrongWolfe1 condition satisfied for α = 0.3129369765520096
+StrongWolfe2 condition NOT satisfied for α = 0.3129369765520096
+Let's try shifting x to [-0.5991911563090981, 0.9694054760038853]
+StrongWolfe1 condition satisfied for α = 0.3129369840025902
+StrongWolfe2 condition NOT satisfied for α = 0.3129369840025902
+Iteration 1: x = [-0.5991911563090981, 0.9694054760038853] is a better point with new fval = 2.3735018267779084.
+Iteration 2:
+Let's try shifting x to [-6.783028325254094, 0.9631116819227352]
+Let's try shifting x to [-3.691109740781596, 0.9662585789633102]
+Let's try shifting x to [-2.1451504485453468, 0.9678320274835978]
+Let's try shifting x to [-1.3721708024272226, 0.9686187517437415]
+Let's try shifting x to [-0.9856809793681603, 0.9690121138738134]
+Let's try shifting x to [-0.7924360678386293, 0.9692087949388494]
+Let's try shifting x to [-0.6958136120738637, 0.9693071354713673]
+Let's try shifting x to [-0.6475023841914809, 0.9693563057376263]
+Let's try shifting x to [-0.6233467702502895, 0.9693808908707557]
+Let's try shifting x to [-0.6112689632796938, 0.9693931834373205]
+Let's try shifting x to [-0.605230059794396, 0.9693993297206029]
+Let's try shifting x to [-0.6022106080517471, 0.9694024028622441]
+Let's try shifting x to [-0.6007008821804226, 0.9694039394330647]
+Let's try shifting x to [-0.5999460192447603, 0.969404707718475]
+Let's try shifting x to [-0.5995685877769292, 0.9694050918611801]
+Let's try shifting x to [-0.5993798720430137, 0.9694052839325327]
+Let's try shifting x to [-0.5992855141760559, 0.969405379968209]
+Let's try shifting x to [-0.5992383352425771, 0.9694054279860471]
+Let's try shifting x to [-0.5992147457758376, 0.9694054519949662]
+Let's try shifting x to [-0.5992029510424679, 0.9694054639994257]
+Let's try shifting x to [-0.599197053675783, 0.9694054700016556]
+Let's try shifting x to [-0.5991941049924405, 0.9694054730027704]
+Let's try shifting x to [-0.5991926306507693, 0.9694054745033278]
+Let's try shifting x to [-0.5991918934799337, 0.9694054752536065]
+Let's try shifting x to [-0.599191524894516, 0.9694054756287459]
+Let's try shifting x to [-0.599191340601807, 0.9694054758163156]
+Let's try shifting x to [-0.5991912484554526, 0.9694054759101004]
+Iteration 2: x = [-0.5991912484554526, 0.9694054759101004] is a better point with new fval = 2.373502026292657.
+Convergence achieved in 3 iterations 😄

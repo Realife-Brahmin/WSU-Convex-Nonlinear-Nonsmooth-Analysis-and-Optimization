@@ -4,19 +4,19 @@ println("You are currently using $(Threads.nthreads()) threads.")
 println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
 # functionName = "dampedSHM";
-# functionName = "drag"
+functionName = "drag"
 # functionName = "rosenbrock";
 # functionName = "sphere";
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";
-functionName = "signalDenoise";
+# functionName = "signalDenoise";
 
 pr = include("src/objfuns/"*String(functionName)*".jl")
 
-verbose = false
-# verbose = true;
-verbose_ls = false;
+# verbose = false
+verbose = true;
+# verbose_ls = false;
 verbose_ls = true;
 verbose_ls = verbose & verbose_ls
 logging = true;

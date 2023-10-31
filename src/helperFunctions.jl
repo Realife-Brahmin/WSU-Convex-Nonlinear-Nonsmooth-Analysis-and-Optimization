@@ -98,8 +98,6 @@ function trim_array(nt::NamedTuple, itrMax::Int)
         # Get the array using getproperty
         arr = getproperty(nt, key)
         
-        println(typeof(arr))
-        println(key)
         # Check if it's a 1D array and trim it
         if eltype(arr) ∈ (Int64, Float64) && isa(arr, AbstractVector)
             arr = arr[1:itrMax]

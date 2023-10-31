@@ -1,0 +1,31 @@
+****************************
+Solver run has concluded.
+Function solved for: rosenbrock()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too small gradient at latest step.
+Convergence achieved in 3 iterations 😄
+****************************
+Method Used: ConjugateGradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Optimal function value = 10.382670964267222
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 0.29910957505057195
+x☆[2] = 0.1906667511895533
+x☆[3] = 0.29377782901332067
+x☆[4] = 0.4342219638357346
+x☆[5] = 0.5933326207243648
+x☆[6] = 0.7524432707844383
+x☆[7] = 0.8928873877726288
+x☆[8] = 0.9959984543900134
+x☆[9] = 1.043109865560705
+x☆[10] = 0.7044468105935131
+***************************
+Number of fevals = 72
+Number of gevals = 17
+Number of evals = 242
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-12

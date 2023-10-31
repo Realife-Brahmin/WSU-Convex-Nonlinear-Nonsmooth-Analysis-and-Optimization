@@ -53,10 +53,10 @@ function optimize(pr;
 
         myprintln(printOrNot, "Iteration $(itr):", log_path=log_txt)
 
-        @show fₖ, ∇fₖ = obj(x, p)
+        fₖ, ∇fₖ = obj(x, p)
         @checkForNaN fₖ
         @checkForNaN ∇fₖ
-        @show gmagval = sum(abs.(∇fₖ))
+        gmagval = sum(abs.(∇fₖ))
         fevals += 1
         gevals += 1
         if pr.alg.method == "QuasiNewton"
@@ -67,10 +67,10 @@ function optimize(pr;
             pₖ, QNargs = findDirection(pr, ∇fₖ, QNargs=QNargs)
 
         elseif pr.alg.method == "ConjugateGradientDescent"
-            @show CGargs.k = itr
+            CGargs.k = itr
             # CGargs.xkp1 = x
             CGargs.gkp1 = ∇fₖ
-            @show pₖ, CGargs = findDirection(pr, ∇fₖ, CGargs=CGargs)
+            pₖ, CGargs = findDirection(pr, ∇fₖ, CGargs=CGargs)
 
         else
             pₖ = findDirection(pr, ∇fₖ)
@@ -83,11 +83,11 @@ function optimize(pr;
         elseif linesearchMethod == "Armijo"
             α, x, fnext, backtrackNum, fevals_ls, gevals_ls = ArmijoBackracking(pr, x, pₖ, verbose=printOrNot_ls)
 
+            @error "Armijo no longer supported. It has to do with the checking of the latest gradient at each turn."
+
         else
             @error "Unknown linesearch method"
         end
-        
-        # α, x, fnext, backtrackNum, fevals_ls, gevals_ls = (linesearchMethod == "Armijo") ? ArmijoBackracking(pr, x, pₖ, verbose=printOrNot_ls) : StrongWolfeBisection(pr, x, pₖ, verbose=printOrNot_ls)
 
         myprintln(printOrNot, "Iteration $(itr): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
 

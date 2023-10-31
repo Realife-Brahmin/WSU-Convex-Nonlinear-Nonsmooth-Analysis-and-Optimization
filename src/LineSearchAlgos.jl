@@ -97,7 +97,7 @@ function StrongWolfeBisection(pr::NamedTuple, xk, pk;
                 myprintln(verbose, "StrongWolfe2 condition satisfied for α = $(α_mid)", log_path=log_txt)
                 strongWolfeSatisfied = true
 
-                ans = (α=α_mid, x=xmid, f=ϕ_mid, gmag=ϕprime_mid, backtracks=iteration, fevals=fevals_ls, gevals=gevals_ls)
+                ans = (α=α_mid, x=xmid, f=ϕ_mid, gmag=abs(ϕprime_mid), backtracks=iteration, fevals=fevals_ls, gevals=gevals_ls)
 
                 return ans
             else
@@ -115,7 +115,7 @@ function StrongWolfeBisection(pr::NamedTuple, xk, pk;
 
     end
     
-    ans = (α=α_mid, x=xmid, f=ϕ_mid, gmag=ϕprime_mid, backtracks=iteration, fevals=fevals_ls, gevals=gevals_ls)
+    ans = (α=α_mid, x=xmid, f=ϕ_mid, gmag=abs(ϕprime_mid), backtracks=iteration, fevals=fevals_ls, gevals=gevals_ls)
 
     return ans
 

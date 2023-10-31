@@ -4,7 +4,7 @@ include("objective.jl")
 Generalized n-dim rosenbrock function with steepness parameter p[1]
 """
 function rosenbrock(x::Vector{Float64}, 
-    p::FuncParam; 
+    p; 
     getGradientToo::Bool=true, 
     verbose::Bool=false)
 

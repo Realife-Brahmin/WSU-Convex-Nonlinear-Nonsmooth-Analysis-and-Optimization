@@ -46,7 +46,7 @@ The function computes the predicted damped harmonic motion using the model:
     function dampedSHM(x::Vector{Float64}, p::FuncParam; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
 """
 function dampedSHM(x::Vector{Float64}, 
-    p::FuncParam;
+    p;
     verbose::Bool=false,
     log::Bool=true,
     getGradientToo::Bool=true)

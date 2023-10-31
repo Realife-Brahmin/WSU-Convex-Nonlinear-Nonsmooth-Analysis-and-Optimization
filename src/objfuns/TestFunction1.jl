@@ -3,7 +3,7 @@ FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}
 include("objective.jl")
 
 function TestFunction1(x::Vector{Float64}, 
-    p::FuncParam; 
+    p; 
     getGradientToo::Bool=true)
 
     p = p.params

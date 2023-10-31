@@ -1,3 +1,2 @@
-Starting with initial point x = [13.8, 8.3, 0.022, 1800.0, 900.0, 4.2].
 Begin with the solver:
-Convergence achieved in 77 iterations 😄
+Convergence achieved in 74 iterations 😄

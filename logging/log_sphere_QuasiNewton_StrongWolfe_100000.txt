@@ -1,3 +1,2 @@
-Starting with initial point x = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0].
 Begin with the solver:
-Convergence achieved in 25 iterations 😄
+Convergence achieved in 21 iterations 😄

@@ -1,3 +1,2 @@
-Starting with initial point x = [1.0, 2.0, 3.0].
 Begin with the solver:
 Convergence achieved in 2 iterations 😄

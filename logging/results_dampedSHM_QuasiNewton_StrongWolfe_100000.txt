@@ -3,26 +3,26 @@ Solver run has concluded.
 Function solved for: dampedSHM()
 This was a data fitting problem.
 Cause(s) for stopping:
-Barely changing fval
-Convergence achieved in 77 iterations 😄
+Too small gradient at latest step.
+Convergence achieved in 74 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal MSE value = 0.028953725320701975
-Optimal SSE value = 5.790745064140395
+Optimal MSE value = 0.02895372532699226
+Optimal SSE value = 5.790745065398452
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 13.781404128838952
-x☆[2] = 8.279361256384309
-x☆[3] = 0.02180257257774227
-x☆[4] = 1835.5478526042052
-x☆[5] = 932.6023913382336
-x☆[6] = 4.248886665084758
+x☆[1] = 13.781403908102883
+x☆[2] = 8.279357786572957
+x☆[3] = 0.02180259713688815
+x☆[4] = 1835.5476731492508
+x☆[5] = 932.6066568517405
+x☆[6] = 4.248887595309423
 ***************************
-Number of fevals = 337
-Number of gevals = 231
-Number of evals = 1723
+Number of fevals = 325
+Number of gevals = 222
+Number of evals = 1657
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

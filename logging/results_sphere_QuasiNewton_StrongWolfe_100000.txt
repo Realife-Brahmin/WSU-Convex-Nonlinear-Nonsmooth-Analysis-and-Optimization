@@ -3,28 +3,29 @@ Solver run has concluded.
 Function solved for: sphere()
 This was a function minimization problem.
 Cause(s) for stopping:
-Barely changing fval
-Convergence achieved in 25 iterations 😄
+Too small gradient at latest step.
+Convergence achieved in 21 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 9.192825574931556e-14
+Optimal function value = 2.353363347245632e-11
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = -4.2474316430063636e-8
-x☆[2] = -8.788386049165103e-8
-x☆[3] = -1.0663229020997893e-7
-x☆[4] = -1.3907885887193263e-7
-x☆[6] = -1.1975557237529673e-7
-x☆[7] = 1.064552880582225e-8
-x☆[8] = -4.263455042257724e-8
-x☆[9] = 1.02655512893341e-7
-x☆[10] = -1.5762758149662418e-7
+x☆[1] = -6.795891516880247e-7
+x☆[2] = -1.4061412733704525e-6
+x☆[3] = -1.7061166819880964e-6
+x☆[4] = -2.2252619138278747e-6
+x☆[5] = -8.793222598043539e-8
+x☆[6] = -1.9160899878026784e-6
+x☆[7] = 1.703274612110538e-7
+x☆[8] = -6.821537179910626e-7
+x☆[9] = 1.6424860885385896e-6
+x☆[10] = -2.5220419209877253e-6
 ***************************
-Number of fevals = 135
-Number of gevals = 83
-Number of evals = 965
+Number of fevals = 119
+Number of gevals = 71
+Number of evals = 829
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

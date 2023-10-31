@@ -14,10 +14,12 @@ Optimal SSE value = 3.0
 ***************************
 Optimal Nonzero Variables:
 x☆[1] = 1.0000000074505806
+x☆[2] = 2.0
+x☆[3] = 2.9999999925494194
 ***************************
 Number of fevals = 30
 Number of gevals = 2
-Number of evals = 32
+Number of evals = 36
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

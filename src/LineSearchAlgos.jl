@@ -73,6 +73,7 @@ function StrongWolfeBisection(pr::NamedTuple, xk, pk;
     iteration = 0
     xmid = xk
     ϕ_mid = ϕ0
+    ϕprime_mid = 0
     α_mid = 0
     strongWolfeSatisfied = false
     while iteration < itrMax && abs(α_max - α_min) > tol
@@ -111,12 +112,15 @@ function StrongWolfeBisection(pr::NamedTuple, xk, pk;
     
     if abs(α_max - α_min) > tol
         @warn "Strong Wolfe line search did not converge in $itrMax iterations, Returning best α with tolerance gap of $(abs(α_max - α_min)) between αmax and αmin"
+
     end
     
-    # ans = (α=α_mid, x=xmid, f=ϕ_mid, backtracks=iteration, fevals=fevals_ls, gevals=gevals_ls)
     ans = (α=α_mid, x=xmid, f=ϕ_mid, gmag=ϕprime_mid, backtracks=iteration, fevals=fevals_ls, gevals=gevals_ls)
 
     return ans
+
+    @error "floc"
+
 end
 
 

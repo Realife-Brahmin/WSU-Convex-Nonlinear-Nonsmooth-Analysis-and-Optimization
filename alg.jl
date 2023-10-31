@@ -45,9 +45,9 @@ mutable struct AlgorithmSettings
 
         # Constructor with default values
         function AlgorithmSettings(; 
-                method="ConjugateGradientDescent",
+                # method="ConjugateGradientDescent",
                 # method = "GradientDescent",
-                # method = "QuasiNewton",
+                method = "QuasiNewton",
                 maxiter=Int(1e5),
                 # maxiter = Int(5),
                 # maxiter = Int(3),
@@ -70,7 +70,8 @@ mutable struct AlgorithmSettings
                 elseif alg.method == "QuasiNewton"
                         myprintln(true, "Method chosen: QuasiNewton", log=false)
                         alg.linesearch = "StrongWolfe"
-                        alg.progress = 100
+                        # alg.progress = 100
+                        alg.progress = 1
                 elseif alg.method == "ConjugateGradientDescent"
                         myprintln(true, "Method chosen: ConjugateGradientDescent", log=false)
                         alg.linesearch = "StrongWolfe"

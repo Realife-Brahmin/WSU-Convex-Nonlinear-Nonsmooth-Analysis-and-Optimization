@@ -4,7 +4,7 @@ using DataFrames
 include("../helperFunctions.jl");
 include("../../alg.jl") # include alg.jl from parent directory
 
-FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
+FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Array{Float64}}}
 
 """
     generate_pr(functionName::Function, x0::Vector{Float64};

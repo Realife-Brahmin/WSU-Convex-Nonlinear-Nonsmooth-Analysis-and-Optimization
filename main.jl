@@ -10,13 +10,14 @@ functionName = "rosenbrock";
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";
+# functionName = "signalDenoise";
 
 pr = include("src/objfuns/"*String(functionName)*".jl")
 
 # verbose = false
 verbose = true;
-verbose_ls = false;
-# verbose_ls = true;
+# verbose_ls = false;
+verbose_ls = true;
 verbose_ls = verbose & verbose_ls
 logging = true;
 profiling = false;

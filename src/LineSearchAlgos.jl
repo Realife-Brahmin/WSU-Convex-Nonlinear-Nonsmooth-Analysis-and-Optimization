@@ -110,9 +110,12 @@ function StrongWolfeBisection(pr::NamedTuple, xk, pk;
         iteration += 1
     end
     
-    if abs(α_max - α_min) > tol
-        @warn "Strong Wolfe line search did not converge in $itrMax iterations, Returning best α with tolerance gap of $(abs(α_max - α_min)) between αmax and αmin"
-
+    if abs(α_max - α_min) < tol && iteration < itrMax
+        @warn "Strong Wolfe line search did not converge in $(iteration) iterations, Returning best α with tolerance gap of $(abs(α_max - α_min)) between αmax and αmin"
+    elseif abs(α_max - α_min) > tol && iteration == itrMax
+        @warn "Strong Wolfe line search did not converge in $(itrMax) iterations, Returning best α with tolerance gap of $(abs(α_max - α_min)) between αmax and αmin"
+    else
+        @error "Bad condition"
     end
     
     ans = (α=α_mid, x=xmid, f=ϕ_mid, gmag=abs(ϕprime_mid), backtracks=iteration, fevals=fevals_ls, gevals=gevals_ls)

@@ -39,7 +39,7 @@ function optimize(pr;
     n = length(x)
     itr = 1
     fvals, αvals, gmagvals = [zeros(Float64, maxiter) for _ in 1:3]
-    backtrackVals = zeros(Int64, maxiter, 1)
+    backtrackVals = zeros(Int64, maxiter)
     xvals, gvals = [zeros(Float64, n, maxiter) for _ in 1:2]
     
     myprintln(true, "Begin with the solver:", log=log, log_path=log_txt)

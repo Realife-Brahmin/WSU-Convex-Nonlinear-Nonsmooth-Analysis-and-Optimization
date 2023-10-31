@@ -67,13 +67,13 @@ function myfill(array, value)
 end
 
 """
-    trim_array(nt::NamedTuple, n::Int) -> NamedTuple
+    trim_array(nt::NamedTuple, itrMax::Int) -> NamedTuple
 
 Trim arrays within a NamedTuple to a predetermined maximum length or size.
 
 # Arguments
 - `nt::NamedTuple`: A NamedTuple containing arrays as values.
-- `n::Int`: Maximum size for arrays. 1D arrays exceeding this length will be trimmed. 
+- `itrMax::Int`: Maximum size for arrays. 1D arrays exceeding this length will be trimmed. 
 For 2D arrays, both rows and columns will be trimmed if they exceed this size.
 
 # Returns
@@ -89,7 +89,7 @@ println(trimmed_nt)
 Other data structures remain unchanged.
 - It utilizes a dictionary as an intermediary data structure before converting back to a NamedTuple.
 """
-function trim_array(nt::NamedTuple, n::Int)
+function trim_array(nt::NamedTuple, itrMax::Int)
     # Create a dictionary to hold the trimmed arrays
     trimmed_dict = Dict()
 
@@ -99,11 +99,11 @@ function trim_array(nt::NamedTuple, n::Int)
         arr = getproperty(nt, key)
         
         # Check if it's a 1D array and trim it
-        if isa(arr, AbstractVector) && length(arr) > n
-            arr = arr[1:n]
+        if isa(arr, AbstractVector) && length(arr) > itrMax
+            arr = arr[1:itrMax]
         # Check if it's a 2D array and trim it
-        elseif isa(arr, AbstractMatrix) && any(size(arr) .> n)
-            arr = arr[1:min(end,n), 1:min(end,n)]
+        elseif isa(arr, AbstractMatrix) && any(size(arr) .> itrMax)
+            arr = arr[:, 1:itrMax]
         end
 
         # Store the trimmed array in the dictionary

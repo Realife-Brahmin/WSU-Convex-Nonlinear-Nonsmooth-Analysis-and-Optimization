@@ -4,25 +4,25 @@ Function solved for: dampedSHM()
 This was a data fitting problem.
 Cause(s) for stopping:
 Too many iterations
-Failed to converge despite 100000 iterations! 😢
+Failed to converge despite 10000 iterations! 😢
 ****************************
 Method Used: ConjugateGradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Best MSE value = 0.5874945429145703
-Best SSE value = 117.49890858291405
+Best MSE value = 0.38300901914542745
+Best SSE value = 76.6018038290855
 ***************************
 Best Known Nonzero Variables:
-x☆[1] = 13.754876136696902
-x☆[2] = 8.288472654409242
-x☆[3] = 0.018704428761679527
-x☆[4] = 1805.1149683366864
-x☆[5] = 900.1735927219091
-x☆[6] = 4.555813867722166
+x☆[1] = 13.759628843424533
+x☆[2] = 8.620011332268026
+x☆[3] = 0.019367518734272133
+x☆[4] = 1812.0519512682768
+x☆[5] = 900.419497645631
+x☆[6] = -1.7905611255633616
 ***************************
-Number of fevals = 4111587
-Number of gevals = 720104
-Number of evals = 8432211
+Number of fevals = 1680867
+Number of gevals = 468085
+Number of evals = 4489377
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

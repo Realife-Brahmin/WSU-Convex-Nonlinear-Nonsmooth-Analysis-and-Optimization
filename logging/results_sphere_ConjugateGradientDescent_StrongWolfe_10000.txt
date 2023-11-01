@@ -1,23 +1,21 @@
 ****************************
 Solver run has concluded.
-Function solved for: TestFunction1()
+Function solved for: sphere()
 This was a function minimization problem.
 Cause(s) for stopping:
 Too small gradient at latest step.
-Convergence achieved in 20 iterations 😄
+Convergence achieved in 2 iterations 😄
 ****************************
 Method Used: ConjugateGradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 0.9683715465103391
+Optimal function value = 0.0
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.0898417938737176
-x☆[2] = -0.7126563286487685
 ***************************
-Number of fevals = 432
-Number of gevals = 120
-Number of evals = 672
+Number of fevals = 5
+Number of gevals = 3
+Number of evals = 35
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

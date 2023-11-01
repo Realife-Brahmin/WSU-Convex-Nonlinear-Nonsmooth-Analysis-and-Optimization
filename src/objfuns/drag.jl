@@ -66,7 +66,9 @@ end
 objective = drag;
 data = Matrix{Float64}(undef, 0, 0)
 # n = 800
-n = 300
+# n = 300
+# n = 100
+n = 200
 # n = 2^10
 # n = 2048
 x0 = Float64.(collect(LinRange(0.0, 1.0, n+2)[2:n+1]))

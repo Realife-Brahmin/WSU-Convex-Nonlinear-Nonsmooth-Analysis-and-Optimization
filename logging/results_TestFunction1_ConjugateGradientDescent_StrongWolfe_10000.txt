@@ -12,12 +12,12 @@ Linesearch method used: StrongWolfe
 Optimal function value = 0.9683715465103391
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.0898417938737176
-x☆[2] = -0.7126563286487685
+x☆[1] = 0.0898417938735959
+x☆[2] = -0.7126563286487452
 ***************************
-Number of fevals = 432
-Number of gevals = 120
-Number of evals = 672
+Number of fevals = 2017
+Number of gevals = 776
+Number of evals = 3569
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

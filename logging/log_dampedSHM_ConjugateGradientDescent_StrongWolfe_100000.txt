@@ -1,2 +1,2 @@
 Begin with the solver:
-Convergence achieved in 8 iterations 😄
+Failed to converge despite 100000 iterations! 😢

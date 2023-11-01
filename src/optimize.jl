@@ -70,7 +70,7 @@ function optimize(pr;
 
         elseif pr.alg.method == "ConjugateGradientDescent"
             CGargs.k = itr
-            @show pₖ, CGargs = findDirection(pr, ∇fₖ, CGargs=CGargs)
+            pₖ, CGargs = findDirection(pr, ∇fₖ, CGargs=CGargs)
             CGDRestartFlag = CGargs.justRestarted
         else
             pₖ = findDirection(pr, ∇fₖ)
@@ -78,8 +78,10 @@ function optimize(pr;
         end
         
         if linesearchMethod == "StrongWolfe"
-            @show α, x, fnext, gmagkp1, backtrackNum, fevals_ls, gevals_ls = StrongWolfeBisection(pr, x, pₖ, verbose=printOrNot_ls)
-
+            α, x, fnext, gmagkp1, backtrackNum, fevals_ls, gevals_ls, success = StrongWolfeBisection(pr, x, pₖ, verbose=printOrNot_ls)
+            if success == false && pr.alg.method == "ConjugateGradientDescent"
+                CGDRestartFlag = true
+            end
         elseif linesearchMethod == "Armijo"
             α, x, fnext, backtrackNum, fevals_ls, gevals_ls = ArmijoBackracking(pr, x, pₖ, verbose=printOrNot_ls)
 
@@ -100,7 +102,6 @@ function optimize(pr;
             keepIterationsGoing = false
         end
         if !CGDRestartFlag && gmagkp1 < gtol
-            @show gmagkp1
             push!(causeForStopping, "Too small gradient at latest step.")
             keepIterationsGoing = false
         end

@@ -3,24 +3,23 @@ Solver run has concluded.
 Function solved for: signalDenoise()
 This was a data fitting problem.
 Cause(s) for stopping:
-Barely changing fval
-Too small gradient at latest step.
-Convergence achieved in 2 iterations 😄
+Too many iterations
+Failed to converge despite 100000 iterations! 😢
 ****************************
 Method Used: ConjugateGradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal MSE value = 1.0
-Optimal SSE value = 3.0
+Best MSE value = 1.0000000000338811
+Best SSE value = 3.000000000101643
 ***************************
-Optimal Nonzero Variables:
-x☆[1] = 1.0000000074505806
+Best Known Nonzero Variables:
+x☆[1] = 1.0000058207507867
 x☆[2] = 2.0
-x☆[3] = 2.9999999925494194
+x☆[3] = 2.9999941792492133
 ***************************
-Number of fevals = 30
-Number of gevals = 2
-Number of evals = 36
+Number of fevals = 3600001
+Number of gevals = 200000
+Number of evals = 4200001
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

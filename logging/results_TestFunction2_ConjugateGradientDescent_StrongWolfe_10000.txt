@@ -1,0 +1,36 @@
+****************************
+Solver run has concluded.
+Function solved for: TestFunction2()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too small gradient at latest step.
+Convergence achieved in 17 iterations 😄
+****************************
+Method Used: ConjugateGradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Optimal function value = 0.833834296228801
+***************************
+Optimal Nonzero Variables:
+x☆[1] = -2.9035340177196014
+x☆[2] = -2.903534024183304
+x☆[3] = -2.9035340369029403
+x☆[4] = -2.90353400764525
+x☆[5] = -2.9035340085084624
+x☆[6] = -2.9035340134637915
+x☆[7] = -2.9035340172477326
+x☆[8] = -2.9035340094105893
+x☆[9] = -2.9035341315152174
+x☆[10] = -2.903534038981655
+x☆[11] = -2.9035340272728374
+x☆[12] = -2.903534018824135
+x☆[13] = -2.9035336097334774
+x☆[14] = -2.903534038401985
+x☆[15] = -2.903534013265272
+***************************
+Number of fevals = 733
+Number of gevals = 200
+Number of evals = 3733
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-12

@@ -9,7 +9,7 @@ Convergence achieved in 34 iterations 😄
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 2.009689889804131e-11
+Optimal function value = 2.0096898899238128e-11
 ***************************
 Optimal Nonzero Variables:
 x☆[1] = 0.9999999657289351
@@ -19,9 +19,9 @@ x☆[4] = 0.999999942426702
 x☆[5] = 1.0000001492116497
 x☆[6] = 1.0000000933792665
 x☆[7] = 0.9999996182895926
-x☆[8] = 0.9999988458398449
+x☆[8] = 0.9999988458398448
 x☆[9] = 0.9999975135115845
-x☆[10] = 0.9999946378485591
+x☆[10] = 0.999994637848559
 ***************************
 Number of fevals = 257
 Number of gevals = 112

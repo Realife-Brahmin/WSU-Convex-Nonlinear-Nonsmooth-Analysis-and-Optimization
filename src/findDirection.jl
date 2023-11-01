@@ -66,7 +66,7 @@ function findDirection(
         else
             diff = gkp1'*(gkp1-gk)
             mag = gk'*gk
-            @show βkp1 = max(0, diff/mag)
+            βkp1 = max(0, diff/mag)
             if βkp1 == 0
                 justRestarted = true
                 myprintln(true, "Restarted ConjugateGradientDescent.")
@@ -94,7 +94,7 @@ function findDirection(
             yk = gkp1 - gk
             ρkinv = yk'*sk
             if ρkinv == 0
-                @warn "So, Hkp1 is actualy the same as Hk?, Maybe stop this?"
+                @warn "So, Hkp1 is actually the same as Hk?, Maybe stop this?"
             end
             ρk = 1.0/ρkinv
             if ρk < 0

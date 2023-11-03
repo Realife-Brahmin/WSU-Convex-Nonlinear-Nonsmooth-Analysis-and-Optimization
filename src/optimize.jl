@@ -1,5 +1,6 @@
 include("LineSearchAlgos.jl")
 include("findDirection.jl")
+include("types.jl")
 
 function optimize(pr; 
     verbose::Bool=false, 
@@ -37,7 +38,7 @@ function optimize(pr;
     end
     fevals += 1
     n = length(x)
-    itr = 1
+    k = 1
     fvals, αvals, gmagvals = [zeros(Float64, maxiter) for _ in 1:3]
     backtrackVals = zeros(Int64, maxiter)
     xvals, gvals = [zeros(Float64, n, maxiter) for _ in 1:2]
@@ -50,10 +51,10 @@ function optimize(pr;
 
     while keepIterationsGoing
 
-        printOrNot = verbose && (itr % progress == 0)
+        printOrNot = verbose && (k % progress == 0)
         printOrNot_ls = printOrNot & verbose_ls
 
-        myprintln(printOrNot, "Iteration $(itr):", log_path=log_txt)
+        myprintln(printOrNot, "Iteration $(k):", log_path=log_txt)
 
         fk, gk = obj(x, p)
         @checkForNaN fk
@@ -62,14 +63,14 @@ function optimize(pr;
         fevals += 1
         gevals += 1
         if pr.alg.method == "QuasiNewton"
-            QNargs.k = itr
+            QNargs.k = k
             QNargs.xkp1 = x
             QNargs.fk = fk
             QNargs.gkp1 = gk
             pk, QNargs = findDirection(pr, gk, QNargs=QNargs)
 
         elseif pr.alg.method == "ConjugateGradientDescent"
-            CGargs.k = itr
+            CGargs.k = k
             pk, CGargs = findDirection(pr, gk, CGargs=CGargs)
             CGDRestartFlag = CGargs.justRestarted
         else
@@ -78,7 +79,7 @@ function optimize(pr;
         end
         
         if linesearchMethod == "StrongWolfe"
-            α, x, fnext, gmagkp1, backtrackNum, fevals_ls, gevals_ls, success = StrongWolfeBisection(pr, x, pk, verbose=printOrNot_ls)
+            α, x, fnext, gmagkp1, backtrackNum, fevals_ls, gevals_ls, success = StrongWolfeBisection(pr, x, fk, gk, pk, verbose=printOrNot_ls) # under construction
             if success == false && pr.alg.method == "ConjugateGradientDescent"
                 CGDRestartFlag = true
             end
@@ -90,7 +91,7 @@ function optimize(pr;
             @error "Unknown linesearch method"
         end
 
-        myprintln(printOrNot, "Iteration $(itr): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
+        myprintln(printOrNot, "Iteration $(k): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
 
         if !CGDRestartFlag && abs(fnext - fk) < dftol
             push!(causeForStopping, "Barely changing fval")
@@ -104,36 +105,36 @@ function optimize(pr;
             push!(causeForStopping, "Too small gradient at latest step.")
             keepIterationsGoing = false
         end
-        if itr == maxiter
+        if k == maxiter
             push!(causeForStopping, "Too many iterations")
             keepIterationsGoing = false
         end
 
         fevals += fevals_ls
         gevals += gevals_ls
-        fvals[itr] = fnext
-        αvals[itr] = α
-        gvals[:, itr] = gk
-        gmagvals[itr] = gmagval
-        backtrackVals[itr] = backtrackNum
-        xvals[:, itr] = x
-        itr += 1
+        fvals[k] = fnext
+        αvals[k] = α
+        gvals[:, k] = gk
+        gmagvals[k] = gmagval
+        backtrackVals[k] = backtrackNum
+        xvals[:, k] = x
+        k += 1
     end
     
-    if itr > maxiter
+    if k > maxiter
         converged = false
         statusMessage = "Failed to converge despite $(maxiter) iterations! 😢"
         myprintln(true, statusMessage, log=log,  log_path=log_txt)
         @warn statusMessage
     else
         converged = true
-        statusMessage = "Convergence achieved in $(itr) iterations 😄"
+        statusMessage = "Convergence achieved in $(k) iterations 😄"
         myprintln(true, statusMessage, log=log, log_path=log_txt)
     end
     
     res = (converged=converged, statusMessage=statusMessage, fvals=fvals, αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, gmagvals=gmagvals, gvals=gvals, M=M, fevals=fevals, gevals=gevals, cause=causeForStopping, pr=pr)
 
-    res = trim_array(res, itr-1)
+    res = trim_array(res, k-1)
     return res
 end
 

@@ -1,13 +1,13 @@
-macro unpack_vars(namedtuple_var)
-    exprs = []
-    fields = fieldnames(typeof(namedtuple_var))
-    for field in fields
-        push!(exprs, :( $(Symbol(field)) = $namedtuple_var.$(Symbol(field)) ))
-    end
-    return esc(quote
-        $(exprs...)
-    end)
-end
+# macro unpack_vars(namedtuple_var)
+#     exprs = []
+#     fields = fieldnames(typeof(namedtuple_var))
+#     for field in fields
+#         push!(exprs, :( $(Symbol(field)) = $namedtuple_var.$(Symbol(field)) ))
+#     end
+#     return esc(quote
+#         $(exprs...)
+#     end)
+# end
 
 # a = "aa2"
 # b = "baba2"

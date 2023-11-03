@@ -38,15 +38,25 @@ mutable struct SolverStateType
     SolverStateType() = new(1, 0, 0, 0, 0, false)
 end
 
-# using Parameters
-solState = SolStateType()
-# @unpack fk, gk, Hk = solState
-# println("$fk, $gk, $Hk")
-# fk = 3.2; 
-# gk = [-1.0, 1.0]; 
-# Hk = Float64.([5 -5;-5 5]);
-# @pack! solState = fk, gk, Hk
-# @unpack fk, gk, Hk = solState
-# println("$fk, $gk, $Hk")
+mutable struct InterpolParams
+    j::Int
+    alphaj::Float64
+    alphaLo::Float64
+    alphaHi::Float64
+    alphatol::Float64
+    alphatolBreached::Bool
+    dir::String
 
-solverState = SolverStateType()
+    InterpolParams() = new(
+        1, # j
+        100, 0, 100, # alphaj, alphaLo, alphaHi
+        1e-10, # alphatol
+        false, # alphatolBreached
+        "noChange" # dir
+    )
+
+end
+
+# solState = SolStateType()
+# solverState = SolverStateType()
+interpolParams = InterpolParams()

@@ -66,19 +66,19 @@ function optimize(pr;
             QNargs.xkp1 = x
             QNargs.fk = fk
             QNargs.gkp1 = gk
-            pₖ, QNargs = findDirection(pr, gk, QNargs=QNargs)
+            pk, QNargs = findDirection(pr, gk, QNargs=QNargs)
 
         elseif pr.alg.method == "ConjugateGradientDescent"
             CGargs.k = itr
-            pₖ, CGargs = findDirection(pr, gk, CGargs=CGargs)
+            pk, CGargs = findDirection(pr, gk, CGargs=CGargs)
             CGDRestartFlag = CGargs.justRestarted
         else
-            pₖ = findDirection(pr, gk)
+            pk = findDirection(pr, gk)
 
         end
         
         if linesearchMethod == "StrongWolfe"
-            α, x, fnext, gmagkp1, backtrackNum, fevals_ls, gevals_ls, success = StrongWolfeBisection(pr, x, pₖ, verbose=printOrNot_ls)
+            α, x, fnext, gmagkp1, backtrackNum, fevals_ls, gevals_ls, success = StrongWolfeBisection(pr, x, pk, verbose=printOrNot_ls)
             if success == false && pr.alg.method == "ConjugateGradientDescent"
                 CGDRestartFlag = true
             end

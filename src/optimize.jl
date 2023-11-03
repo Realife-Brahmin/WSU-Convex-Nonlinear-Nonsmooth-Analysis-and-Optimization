@@ -82,11 +82,10 @@ function optimize(pr;
             if success == false && pr.alg.method == "ConjugateGradientDescent"
                 CGDRestartFlag = true
             end
+
         elseif linesearchMethod == "Armijo"
-            α, x, fnext, backtrackNum, fevals_ls, gevals_ls = ArmijoBackracking(pr, x, pₖ, verbose=printOrNot_ls)
-
-            @error "Armijo no longer supported. It has to do with the checking of the latest gradient at each turn."
-
+            @error "Armijo no longer supported."
+        
         else
             @error "Unknown linesearch method"
         end

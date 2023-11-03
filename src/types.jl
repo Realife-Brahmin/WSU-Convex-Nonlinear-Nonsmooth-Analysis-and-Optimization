@@ -6,6 +6,7 @@ mutable struct SolStateType
     fk::Float64
     gkm1::Vector{Float64}
     gk::Vector{Float64}
+    gmagkm1::Float64
     gmagk::Float64
     pkm1::Vector{Float64}
     pk::Vector{Float64}
@@ -18,7 +19,7 @@ mutable struct SolStateType
         Float64[], Float64[], # xkm1, xk
         0.0, 0.0,  # fkm1, fk
         Float64[], Float64[], # gkm1, gk 
-        0.0, # gmagk
+        0.0, 0.0, # gmagkm1, gmagk
         Float64[], Float64[], # pkm1, pk  
         Matrix{Float64}(undef, 0, 0), Matrix{Float64}(undef, 0, 0), # Hkm1, Hk 
         0.0 # alphak

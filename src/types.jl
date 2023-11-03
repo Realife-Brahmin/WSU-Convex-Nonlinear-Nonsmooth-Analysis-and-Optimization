@@ -1,3 +1,5 @@
+using Parameters
+
 mutable struct SolStateType
     k::Int
     xkm1::Vector{Float64}
@@ -14,16 +16,19 @@ mutable struct SolStateType
     Hk::Matrix{Float64}
     alphak::Float64
     
-    SolStateType() = new(
-        1, # k 
-        Float64[], Float64[], # xkm1, xk
-        0.0, 0.0,  # fkm1, fk
-        Float64[], Float64[], # gkm1, gk 
-        0.0, 0.0, # gmagkm1, gmagk
-        Float64[], Float64[], # pkm1, pk  
-        Matrix{Float64}(undef, 0, 0), Matrix{Float64}(undef, 0, 0), # Hkm1, Hk 
-        0.0 # alphak
-    )
+
+    function SolStateType(;
+        k=0, 
+        xkm1=Float64[], xk=Float64[],
+        fkm1=0.0, fk=0.0,
+        gkm1=Float64[], gk=Float64[],
+        gmagkm1=0.0, gmagk=0.0, 
+        pkm1=Float64[], pk=Float64[], 
+        Hkm1=Matrix{Float64}(undef, 0, 0), Hk=Matrix{Float64}(undef, 0, 0), 
+        alphak=0.0)
+
+        new(k, xkm1, xk, fkm1, fk, gkm1, gk, gmagkm1, gmagk, pkm1, pk, Hkm1, Hk, alphak)
+    end
 
 end
 
@@ -35,7 +40,14 @@ mutable struct SolverStateType
     alpha_evals::Int # only current evals
     success_ls::Bool
 
-    SolverStateType() = new(1, 0, 0, 0, 0, false)
+    function SolverStateType(;
+        k=0, 
+        fevals=0, 
+        gevals=0, 
+        Hevals=0, 
+        success_ls=false)
+        new(k, fevals, gevals, Hevals, success_ls)
+    end
 end
 
 mutable struct InterpolParams
@@ -47,16 +59,12 @@ mutable struct InterpolParams
     alphatolBreached::Bool
     dir::String
 
-    InterpolParams() = new(
-        1, # j
-        100, 0, 100, # alphaj, alphaLo, alphaHi
-        1e-10, # alphatol
-        false, # alphatolBreached
-        "noChange" # dir
-    )
+    function InterpolParams(;j=1, alphaj=100.0, alphaLo=0.0, alphaHi=100.0, alphatol=1e-10, alphatolBreached=false, dir="noChange")
+        new(j, alphaj, alphaLo, alphaHi, alphatol, alphatolBreached, dir)
+    end
 
 end
 
 # solState = SolStateType()
 # solverState = SolverStateType()
-# interpolParams = InterpolParams()
+# interpolParams = InterpolParams(alphatol=33)

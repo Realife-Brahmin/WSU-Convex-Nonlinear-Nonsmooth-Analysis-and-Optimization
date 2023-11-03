@@ -29,9 +29,9 @@ function optimize(pr;
     p = pr.p
     M = max(size(p.data, 1), 1)
     fnext = 1e10
-    fₖ = obj(x0, p, getGradientToo=false)
+    fk = obj(x0, p, getGradientToo=false)
     if pr.alg.method == "QuasiNewton"
-        QNargs = constructorQNargs(pr, fk=fₖ)
+        QNargs = constructorQNargs(pr, fk=fk)
     elseif pr.alg.method == "ConjugateGradientDescent"
         CGargs = constructorCGargs(pr)
     end
@@ -55,25 +55,25 @@ function optimize(pr;
 
         myprintln(printOrNot, "Iteration $(itr):", log_path=log_txt)
 
-        fₖ, ∇fₖ = obj(x, p)
-        @checkForNaN fₖ
-        @checkForNaN ∇fₖ
-        gmagval = sum(abs.(∇fₖ))
+        fk, gk = obj(x, p)
+        @checkForNaN fk
+        @checkForNaN gk
+        gmagval = sum(abs.(gk))
         fevals += 1
         gevals += 1
         if pr.alg.method == "QuasiNewton"
             QNargs.k = itr
             QNargs.xkp1 = x
-            QNargs.fk = fₖ
-            QNargs.gkp1 = ∇fₖ
-            pₖ, QNargs = findDirection(pr, ∇fₖ, QNargs=QNargs)
+            QNargs.fk = fk
+            QNargs.gkp1 = gk
+            pₖ, QNargs = findDirection(pr, gk, QNargs=QNargs)
 
         elseif pr.alg.method == "ConjugateGradientDescent"
             CGargs.k = itr
-            pₖ, CGargs = findDirection(pr, ∇fₖ, CGargs=CGargs)
+            pₖ, CGargs = findDirection(pr, gk, CGargs=CGargs)
             CGDRestartFlag = CGargs.justRestarted
         else
-            pₖ = findDirection(pr, ∇fₖ)
+            pₖ = findDirection(pr, gk)
 
         end
         
@@ -93,7 +93,7 @@ function optimize(pr;
 
         myprintln(printOrNot, "Iteration $(itr): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
 
-        if !CGDRestartFlag && abs(fnext - fₖ) < dftol
+        if !CGDRestartFlag && abs(fnext - fk) < dftol
             push!(causeForStopping, "Barely changing fval")
             keepIterationsGoing = false
         end
@@ -114,7 +114,7 @@ function optimize(pr;
         gevals += gevals_ls
         fvals[itr] = fnext
         αvals[itr] = α
-        gvals[:, itr] = ∇fₖ
+        gvals[:, itr] = gk
         gmagvals[itr] = gmagval
         backtrackVals[itr] = backtrackNum
         xvals[:, itr] = x

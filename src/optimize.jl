@@ -14,6 +14,10 @@ function optimize(pr;
     if isfile(log_txt)
         rm(log_txt)
     end # remove logfile if present for the run
+
+    solverState = SolverStateType()
+    solState = SolStateType()
+
     # Initial settings
     fevals = 0
     gevals = 0
@@ -31,14 +35,17 @@ function optimize(pr;
     M = max(size(p.data, 1), 1)
     fnext = 1e10
     fk = obj(x0, p, getGradientToo=false)
+    solState.fk = fk
     if pr.alg.method == "QuasiNewton"
         QNargs = constructorQNargs(pr, fk=fk)
     elseif pr.alg.method == "ConjugateGradientDescent"
         CGargs = constructorCGargs(pr)
     end
+    
     fevals += 1
+    @pack! solState = fevals
     n = length(x)
-    k = 1
+
     fvals, αvals, gmagvals = [zeros(Float64, maxiter) for _ in 1:3]
     backtrackVals = zeros(Int64, maxiter)
     xvals, gvals = [zeros(Float64, n, maxiter) for _ in 1:2]
@@ -51,17 +58,26 @@ function optimize(pr;
 
     while keepIterationsGoing
 
+        k = solverState.k
+
         printOrNot = verbose && (k % progress == 0)
         printOrNot_ls = printOrNot & verbose_ls
+
 
         myprintln(printOrNot, "Iteration $(k):", log_path=log_txt)
 
         fk, gk = obj(x, p)
         @checkForNaN fk
         @checkForNaN gk
-        gmagval = sum(abs.(gk))
+
+        gmagk = sum(abs.(gk))
+        
         fevals += 1
         gevals += 1
+
+        @pack! solState = fk, gk, gmagk
+        @pack! solverState = fevals, gevals
+
         if pr.alg.method == "QuasiNewton"
             QNargs.k = k
             QNargs.xkp1 = x
@@ -72,17 +88,22 @@ function optimize(pr;
         elseif pr.alg.method == "ConjugateGradientDescent"
             CGargs.k = k
             pk, CGargs = findDirection(pr, gk, CGargs=CGargs)
-            CGDRestartFlag = CGargs.justRestarted
+            # CGDRestartFlag = CGargs.justRestarted
+            CGDRestartFlag = false # temporary until new types are inserted
         else
             pk = findDirection(pr, gk)
 
         end
         
+        @pack! solState = pk 
+
         if linesearchMethod == "StrongWolfe"
-            α, x, fnext, gmagkp1, backtrackNum, fevals_ls, gevals_ls, success = StrongWolfeBisection(pr, x, fk, gk, pk, verbose=printOrNot_ls) # under construction
-            if success == false && pr.alg.method == "ConjugateGradientDescent"
-                CGDRestartFlag = true
-            end
+            # α, x, fnext, gmagkp1, backtrackNum, fevals_ls, gevals_ls, success = StrongWolfeBisection(pr, x, fk, gk, pk, verbose=printOrNot_ls) # deprecated before reconstruction
+
+            solState, solverState = StrongWolfeBisection(pr, solState, solverState, verbose=printOrNot_ls) # under construction
+            # if success == false && pr.alg.method == "ConjugateGradientDescent"
+            #     CGDRestartFlag = true
+            # end
 
         elseif linesearchMethod == "Armijo"
             @error "Armijo no longer supported."
@@ -91,17 +112,19 @@ function optimize(pr;
             @error "Unknown linesearch method"
         end
 
-        myprintln(printOrNot, "Iteration $(k): x = $(x) is a better point with new fval = $(fnext).", log_path=log_txt)
+        @unpack xkm1, xk, fkm1, fk, gkm1, gk, gmagkm1, gmagk = solState
 
-        if !CGDRestartFlag && abs(fnext - fk) < dftol
+        myprintln(printOrNot, "Iteration $(k): x = $(x) is a better point with new fval = $(fk).", log_path=log_txt)
+
+        if !CGDRestartFlag && abs(fk - fkm1) < dftol
             push!(causeForStopping, "Barely changing fval")
             keepIterationsGoing = false
         end
-        if !CGDRestartFlag && gmagval < gtol
+        if !CGDRestartFlag && gmagkm1 < gtol
             push!(causeForStopping, "Too small gradient at previous step.")
             keepIterationsGoing = false
         end
-        if !CGDRestartFlag && gmagkp1 < gtol
+        if !CGDRestartFlag && gmagk < gtol
             push!(causeForStopping, "Too small gradient at latest step.")
             keepIterationsGoing = false
         end
@@ -110,18 +133,23 @@ function optimize(pr;
             keepIterationsGoing = false
         end
 
-        fevals += fevals_ls
-        gevals += gevals_ls
-        fvals[k] = fnext
-        αvals[k] = α
+        @unpack Hk, alphak = solState
+        @unpack alpha_evals = solverState
+
+        fvals[k] = fk
+        αvals[k] = alphak
         gvals[:, k] = gk
-        gmagvals[k] = gmagval
-        backtrackVals[k] = backtrackNum
-        xvals[:, k] = x
+        gmagvals[k] = gmagk
+        backtrackVals[k] = alpha_evals
+        xvals[:, k] = xk
+
         k += 1
+
+        @pack! solverState = k
+
     end
     
-    if k > maxiter
+    if k ≥ maxiter
         converged = false
         statusMessage = "Failed to converge despite $(maxiter) iterations! 😢"
         myprintln(true, statusMessage, log=log,  log_path=log_txt)

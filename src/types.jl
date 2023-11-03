@@ -20,6 +20,15 @@ mutable struct SolverStateType
     SolverStateType() = new(0, 0, 0, 0, 0, false)
 end
 
+# using Parameters
 # solState = SolStateType()
+# @unpack fk, gk, Hk = solState
+# println("$fk, $gk, $Hk")
+# fk = 3.2; 
+# gk = [-1.0, 1.0]; 
+# Hk = Float64.([5 -5;-5 5]);
+# @pack! solState = fk, gk, Hk
+# @unpack fk, gk, Hk = solState
+# println("$fk, $gk, $Hk")
 
 # solverState = SolverStateType()

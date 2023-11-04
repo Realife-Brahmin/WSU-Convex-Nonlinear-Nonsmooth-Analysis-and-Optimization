@@ -1,4 +1,3 @@
-include("LineSearchAlgos.jl")
 include("linesearches.jl")
 include("findDirection.jl")
 include("types.jl")

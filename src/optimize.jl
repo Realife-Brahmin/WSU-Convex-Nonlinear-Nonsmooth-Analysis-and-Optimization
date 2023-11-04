@@ -27,15 +27,16 @@ function optimize(pr;
     maxiter = pr.alg.maxiter
     linesearchMethod = pr.alg.linesearch
     x0 = pr.x0
-    x = x0
+    xk = x0
 
-    myprintln(verbose, "Starting with initial point x = $(x).", log_path=log_txt)
+    myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     obj = pr.objective
     p = pr.p
     M = max(size(p.data, 1), 1)
-    fnext = 1e10
+
     fk = obj(x0, p, getGradientToo=false)
-    solState.fk = fk
+    @pack! solState = fk
+
     if pr.alg.method == "QuasiNewton"
         QNargs = constructorQNargs(pr, fk=fk)
     elseif pr.alg.method == "ConjugateGradientDescent"
@@ -44,7 +45,8 @@ function optimize(pr;
     
     fevals += 1
     @pack! solverState = fevals
-    n = length(x)
+
+    n = length(xk)
 
     fvals, αvals, gmagvals = [zeros(Float64, maxiter) for _ in 1:3]
     backtrackVals = zeros(Int64, maxiter)
@@ -58,7 +60,7 @@ function optimize(pr;
 
     while keepIterationsGoing
 
-        k = solverState.k
+        @unpack k = solverState
 
         printOrNot = verbose && (k % progress == 0)
         printOrNot_ls = printOrNot & verbose_ls
@@ -66,7 +68,7 @@ function optimize(pr;
 
         myprintln(printOrNot, "Iteration $(k):", log_path=log_txt)
 
-        fk, gk = obj(x, p)
+        fk, gk = obj(xk, p)
         @checkForNaN fk
         @checkForNaN gk
 
@@ -113,7 +115,7 @@ function optimize(pr;
 
         @unpack xkm1, xk, fkm1, fk, gkm1, gk, gmagkm1, gmagk = solState
 
-        myprintln(printOrNot, "Iteration $(k): x = $(x) is a better point with new fval = $(fk).", log_path=log_txt)
+        myprintln(printOrNot, "Iteration $(k): x = $(xk) is a better point with new fval = $(fk).", log_path=log_txt)
 
         if !CGDRestartFlag && abs(fk - fkm1) < dftol
             push!(causeForStopping, "Barely changing fval")
@@ -145,11 +147,12 @@ function optimize(pr;
         k += 1
 
         @pack! solverState = k
+        @pack! solState = k
 
     end
     
     @unpack k = solverState
-    
+
     if k ≥ maxiter
         converged = false
         statusMessage = "Failed to converge despite $(maxiter) iterations! 😢"

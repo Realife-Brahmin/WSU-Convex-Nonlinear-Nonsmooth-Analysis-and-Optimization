@@ -1,0 +1,23 @@
+****************************
+Solver run has concluded.
+Function solved for: sphere()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too many iterations
+Failed to converge despite 10 iterations! 😢
+****************************
+Method Used: GradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Best function value = 5.028292580818748e-5
+***************************
+Best Known Nonzero Variables:
+x☆[1] = 0.0031712119389339932
+x☆[2] = 0.0063424238778679864
+***************************
+Number of fevals = 11
+Number of gevals = 10
+Number of evals = 31
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-12

@@ -8,7 +8,9 @@ function StrongWolfe(pr::NamedTuple,
     solState::SolStateType, 
     solverState::SolverStateType;
 
-    alphaLo::Float64=0.0, alphaHi::Float64=100.0, 
+    alphaLo::Float64=0.0, 
+    alphaHi::Float64=100.0,
+    # alphaHi::Float64=1.0, 
     alphatol::Float64=1e-10,
     verbose::Bool=false,
     log::Bool=true,
@@ -39,7 +41,7 @@ function StrongWolfe(pr::NamedTuple,
     while keepSearching
 
         @unpack alphaj = interpolParams
-        @show xk, alphaj, pk
+        # @show xk, alphaj
         xj = xk + alphaj*pk
         fj = obj(xj, p, getGradientToo=false)
         fevals += 1
@@ -77,7 +79,8 @@ function StrongWolfe(pr::NamedTuple,
     fkm1 = fk
     gkm1 = gk
     pkm1 = pk
-    @pack! solState = xkm1, fkm1, gkm1, pkm1
+    gmagkm1 = sum(abs.(gk))
+    @pack! solState = xkm1, fkm1, gkm1, pkm1, gmagkm1
     alphak = alphaj
     xk = xj
     fk = fj
@@ -87,8 +90,8 @@ function StrongWolfe(pr::NamedTuple,
     alpha_evals = j
     @pack! solverState = fevals, gevals, alpha_evals, success_ls
 
-    println(solState)
-    println(solverState)
+    # println(solState)
+    # println(solverState)
     return (solState=solState, solverState=solverState)
 end
 

@@ -1,2 +1,59 @@
+Starting with initial point x = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0].
 Begin with the solver:
-Convergence achieved in 931 iterations 😄
+Iteration 100:
+SW1 satisfied for αⱼ = 0.048828125
+SW2 satisfied for αⱼ = 0.048828125
+Iteration 100: x = [0.999920485164219, 0.9998333106322537, 0.9991086967295418, 0.99951483099165, 0.9974281480380801, 0.9958514410052388, 0.990901709962189, 0.9820698207169577, 0.9626892965129333, 0.9255550531008372] is a better point with new fval = 0.0019298083868618896.
+Iteration 200:
+SW1 satisfied for αⱼ = 0.01220703125
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.01239776611328125
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012409687042236328
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012415647506713867
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012418627738952637
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012419372797012329
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012419745326042175
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.01241976860910654
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012419780250638723
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012419783161021769
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.01241978352481965
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.01241978370671859
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.01241978379766806
+SW2 NOT satisfied. αⱼ ↑
+Iteration 200: x = [0.9999416815618964, 1.0000079357152674, 0.9998215703144342, 0.9998478977517458, 0.9994487670601426, 0.9991579711244897, 0.997969418235498, 0.9960874333717022, 0.9918590021605689, 0.9834203539326838] is a better point with new fval = 9.285306957021817e-5.
+Iteration 300:
+SW1 satisfied for αⱼ = 0.01220703125
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012302398681640625
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012350082397460938
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.01235026866197586
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012350291945040226
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012350294855423272
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012350296310614794
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012350297038210556
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.012350297220109496
+SW2 NOT satisfied. αⱼ ↑
+Iteration 300: x = [0.9999864819126769, 1.00000154926761, 0.9999580332664423, 0.999964164071198, 0.999869899524736, 0.9998013105325424, 0.9995201582270619, 0.9990761245688662, 0.9980725741558695, 0.9960648287583725] is a better point with new fval = 5.1981574723198e-6.
+Iteration 400:
+SW1 satisfied for αⱼ = 0.006103515625
+SW2 satisfied for αⱼ = 0.006103515625
+Iteration 400: x = [0.9999986978043363, 0.9999969515984367, 0.9999932121957715, 0.9999883430837917, 0.9999731724189271, 0.9999470188143096, 0.9998904991873092, 0.9997765314585639, 0.9995401305128296, 0.9990591096122772] is a better point with new fval = 2.838749535624142e-7.
+Convergence achieved in 453 iterations 😄

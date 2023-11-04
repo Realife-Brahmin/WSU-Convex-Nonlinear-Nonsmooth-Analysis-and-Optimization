@@ -18,7 +18,7 @@ mutable struct SolStateType
     
 
     function SolStateType(;
-        k=0, 
+        k=1, 
         xkm1=Float64[], xk=Float64[],
         fkm1=0.0, fk=0.0,
         gkm1=Float64[], gk=Float64[],
@@ -41,7 +41,7 @@ mutable struct SolverStateType
     success_ls::Bool
 
     function SolverStateType(;
-        k=0, 
+        k=1, 
         fevals=0, 
         gevals=0, 
         Hevals=0, 
@@ -57,10 +57,10 @@ mutable struct InterpolParams
     alphaHi::Float64
     alphatol::Float64
     alphatolBreached::Bool
-    dir::String
+    change::String
 
-    function InterpolParams(;j=1, alphaj=100.0, alphaLo=0.0, alphaHi=100.0, alphatol=1e-10, alphatolBreached=false, dir="noChange")
-        new(j, alphaj, alphaLo, alphaHi, alphatol, alphatolBreached, dir)
+    function InterpolParams(;j=1, alphaj=100.0, alphaLo=0.0, alphaHi=100.0, alphatol=1e-10, alphatolBreached=false, change="noChange")
+        new(j, alphaj, alphaLo, alphaHi, alphatol, alphatolBreached, change)
     end
 
 end

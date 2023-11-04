@@ -3,14 +3,14 @@ using Parameters
 include("types.jl")
 
 function bisection(interpolParams::InterpolParams)
-    @unpack j, alphaj, alphaLo, alphaHi, alphatol, dir = interpolParams
+    @unpack j, alphaj, alphaLo, alphaHi, alphatol, change = interpolParams
     alphatolBreached = false
 
-    if dir == "Increase"
+    if change == "increase"
         alphaLo = alphaj
-    elseif dir == "Decrease"
+    elseif change == "decrease"
         alphaHi = alphaj
-    elseif dir == "noChange"
+    elseif change == "noChange"
         @error "Why is bisection even being performed if there's no change?"
     else
         @error "Bad condition"

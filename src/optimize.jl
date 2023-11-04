@@ -1,4 +1,5 @@
 include("LineSearchAlgos.jl")
+include("linesearches.jl")
 include("findDirection.jl")
 include("types.jl")
 
@@ -16,7 +17,7 @@ function optimize(pr;
     end # remove logfile if present for the run
 
     solverState = SolverStateType()
-    solState = SolStateType()
+    solState = SolStateType(xk=pr.x0)
 
     # Initial settings
     fevals = 0
@@ -43,7 +44,7 @@ function optimize(pr;
     end
     
     fevals += 1
-    @pack! solState = fevals
+    @pack! solverState = fevals
     n = length(x)
 
     fvals, αvals, gmagvals = [zeros(Float64, maxiter) for _ in 1:3]
@@ -98,9 +99,8 @@ function optimize(pr;
         @pack! solState = pk 
 
         if linesearchMethod == "StrongWolfe"
-            # α, x, fnext, gmagkp1, backtrackNum, fevals_ls, gevals_ls, success = StrongWolfeBisection(pr, x, fk, gk, pk, verbose=printOrNot_ls) # deprecated before reconstruction
 
-            solState, solverState = StrongWolfeBisection(pr, solState, solverState, verbose=printOrNot_ls) # under construction
+            solState, solverState = StrongWolfe(pr, solState, solverState, verbose=printOrNot_ls) # under construction
             # if success == false && pr.alg.method == "ConjugateGradientDescent"
             #     CGDRestartFlag = true
             # end
@@ -148,6 +148,8 @@ function optimize(pr;
         @pack! solverState = k
 
     end
+    
+    @unpack k = solverState
     
     if k ≥ maxiter
         converged = false

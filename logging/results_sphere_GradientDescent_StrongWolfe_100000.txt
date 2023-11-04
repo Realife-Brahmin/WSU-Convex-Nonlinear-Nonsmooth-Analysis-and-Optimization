@@ -3,20 +3,29 @@ Solver run has concluded.
 Function solved for: sphere()
 This was a function minimization problem.
 Cause(s) for stopping:
-Barely changing fval
-Too small gradient
-Convergence achieved in 3 iterations 😄
+Too small gradient at previous step.
+Convergence achieved in 2 iterations 😄
 ****************************
 Method Used: GradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 0.0
+Optimal function value = 1.2181640625
 ***************************
 Optimal Nonzero Variables:
+x☆[1] = -0.056249999999999994
+x☆[2] = -0.11249999999999999
+x☆[3] = -0.16875
+x☆[4] = -0.22499999999999998
+x☆[5] = -0.28125
+x☆[6] = -0.3375
+x☆[7] = -0.39375000000000004
+x☆[8] = -0.44999999999999996
+x☆[9] = -0.50625
+x☆[10] = -0.5625
 ***************************
-Number of fevals = 9
-Number of gevals = 6
-Number of evals = 33
+Number of fevals = 2
+Number of gevals = 1
+Number of evals = 12
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

@@ -106,11 +106,19 @@ function optimize(pr;
             #     CGDRestartFlag = true
             # end
 
+
         elseif linesearchMethod == "Armijo"
             @error "Armijo no longer supported."
         
         else
             @error "Unknown linesearch method"
+        end
+
+        @unpack success_ls = solverState
+        if ~success_ls
+            myprintln(true, "Line search failed... Bad direction or optimal point?")
+            push!(causeForStopping, "LineSearch failed.")
+            keepIterationsGoing = false
         end
 
         @unpack xkm1, xk, fkm1, fk, gkm1, gk, gmagkm1, gmagk = solState

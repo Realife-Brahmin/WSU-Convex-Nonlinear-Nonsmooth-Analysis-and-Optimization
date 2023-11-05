@@ -111,8 +111,8 @@ function StrongWolfe1(fk, fj, gk, pk, alphaj; c1=1e-4)
     @error "floc"
 end 
 
-function StrongWolfe2(gk, gj, pk, alphaj; c2=0.9)
-    if abs(gj'*pk) ≤ c2*abs(gk'*pk)
+function StrongWolfe2(gk, gj, pk, c2=0.9)
+    if gj'*pk ≥ c2*gk'*pk
         return true
     else
         return false

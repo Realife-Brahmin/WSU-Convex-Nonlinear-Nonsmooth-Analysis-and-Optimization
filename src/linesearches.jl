@@ -10,8 +10,8 @@ function StrongWolfe(pr::NamedTuple,
 
     alphaLo::Float64=0.0, 
     alphaHi::Float64=100.0,
-    # alphaHi::Float64=1.0, 
-    alphatol::Float64=1e-10,
+    alpha0=nothing,
+    alphatol::Float64=1e-13,
     verbose::Bool=false,
     log::Bool=true,
     log_path::String="./logging/")
@@ -27,10 +27,16 @@ function StrongWolfe(pr::NamedTuple,
     obj = pr.objective
     p = pr.p
 
+    if isnothing(alpha0)
+        alphaj = min((alphaLo + alphaHi) / 2, 1.0)
+    else
+        alphaj = alpha0
+    end
+
     @unpack xkm1, xk, fkm1 ,fk, gkm1, gk, pkm1, pk = solState
     
     @unpack fevals, gevals = solverState
-    interpolParams = InterpolParams(j=1, alphaj=alphaHi, alphaHi=alphaHi, alphaLo=alphaLo, alphatol=alphatol)
+    interpolParams = InterpolParams(j=1, alphaj=alphaj, alphaHi=alphaHi, alphaLo=alphaLo, alphatol=alphatol)
 
     keepSearching = true # for the while loop
     success_ls = false # a field of solverState useful outside

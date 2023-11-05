@@ -73,7 +73,7 @@ function StrongWolfe(pr::NamedTuple,
 
         @unpack alphatolBreached = interpolParams
         if alphatolBreached
-            @warn "LineSearch failed. Returning best obtained xⱼ."
+            @warn "LineSearch failed. Returning best obtained xⱼ obtained at αⱼ = $(alphaj)"
             keepSearching = false
         end
 

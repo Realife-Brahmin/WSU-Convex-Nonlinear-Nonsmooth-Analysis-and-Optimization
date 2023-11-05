@@ -40,6 +40,8 @@ function StrongWolfe(pr::NamedTuple,
 
     keepSearching = true # for the while loop
     success_ls = false # a field of solverState useful outside
+    SW1_satisfied_once = false # to cover a special case where the initial point is already optimal
+    
 
     j = 1
     xj = xk; fj = fk; gj = gk
@@ -54,6 +56,7 @@ function StrongWolfe(pr::NamedTuple,
 
         if StrongWolfe1(fk, fj, gk, pk, alphaj)
             myprintln1(verbose, "SW1 satisfied for αⱼ = $(alphaj)")
+            SW1_satisfied_once = true
             fj, gj = obj(xj, p)
             fevals += 1; gevals += 1
             if StrongWolfe2(gk, gj, pk)
@@ -87,12 +90,17 @@ function StrongWolfe(pr::NamedTuple,
     pkm1 = pk
     gmagkm1 = sum(abs.(gk))
     @pack! solState = xkm1, fkm1, gkm1, pkm1, gmagkm1
-    alphak = alphaj
-    xk = xj
-    fk = fj
-    gk = gj
-    gmagk = sum(abs.(gj))
-    @pack! solState = xk, fk, gk, gmagk, alphak
+    if SW1_satisfied_once
+        alphak = alphaj
+        xk = xj
+        fk = fj
+        gk = gj
+        gmagk = sum(abs.(gj))
+        @pack! solState = xk, fk, gk, gmagk, alphak
+    else
+        @warn "Function didn't decrease for any step length. Is it already optimal?"
+    end
+
     alpha_evals = j
     @pack! solverState = fevals, gevals, alpha_evals, success_ls
 

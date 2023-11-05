@@ -3,29 +3,29 @@ Solver run has concluded.
 Function solved for: TestFunction3()
 This was a function minimization problem.
 Cause(s) for stopping:
-Too small gradient at latest step.
-Convergence achieved in 267 iterations 😄
+Barely changing fval
+Convergence achieved in 191 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 0.00020185618542613423
+Optimal function value = 6.095749034731361e-7
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.1553688116244705
-x☆[2] = 0.15547172031837833
-x☆[3] = 0.02523985692256383
-x☆[4] = 0.1550745444716328
-x☆[5] = 0.15444346625062141
-x☆[6] = 0.15571227144956623
-x☆[7] = 0.15409061516476275
-x☆[8] = 0.15547022076787367
-x☆[9] = 0.15536013849856803
-x☆[10] = 0.46099032786864147
+x☆[1] = 0.1717980767807408
+x☆[2] = 0.27166452952657405
+x☆[3] = 0.4918100284423455
+x☆[4] = 0.21191451449175341
+x☆[5] = 0.26210065453415204
+x☆[6] = 0.10780841062990802
+x☆[7] = 0.10740111259438477
+x☆[8] = 0.10682903252701254
+x☆[9] = 0.11297943395901479
+x☆[10] = 0.10917041629596762
 ***************************
-Number of fevals = 1473
-Number of gevals = 885
-Number of evals = 10323
+Number of fevals = 191
+Number of gevals = 190
+Number of evals = 2091
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

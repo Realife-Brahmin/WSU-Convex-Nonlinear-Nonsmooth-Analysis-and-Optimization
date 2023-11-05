@@ -3,8 +3,8 @@ Solver run has concluded.
 Function solved for: signalDenoise()
 This was a data fitting problem.
 Cause(s) for stopping:
+LineSearch failed.
 Barely changing fval
-Too small gradient at latest step.
 Convergence achieved in 2 iterations 😄
 ****************************
 Method Used: QuasiNewton
@@ -14,13 +14,13 @@ Optimal MSE value = 1.0
 Optimal SSE value = 3.0
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 1.0000000000582077
+x☆[1] = 1.0
 x☆[2] = 2.0
-x☆[3] = 2.9999999999417923
+x☆[3] = 3.0
 ***************************
-Number of fevals = 37
-Number of gevals = 2
-Number of evals = 43
+Number of fevals = 2
+Number of gevals = 1
+Number of evals = 5
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

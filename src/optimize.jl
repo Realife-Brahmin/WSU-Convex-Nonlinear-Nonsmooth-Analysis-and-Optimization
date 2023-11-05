@@ -83,7 +83,7 @@ function optimize(pr;
 
         if pr.alg.method == "QuasiNewton"
             QNargs.k = k
-            QNargs.xkp1 = x
+            QNargs.xkp1 = xk
             QNargs.fk = fk
             QNargs.gkp1 = gk
             pk, QNargs = findDirection(pr, gk, QNargs=QNargs)

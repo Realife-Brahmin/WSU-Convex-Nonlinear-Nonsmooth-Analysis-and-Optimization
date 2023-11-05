@@ -1,166 +1,44 @@
 Starting with initial point x = [0.5, 0.5].
+which has fval = 2.3739583333333334
 Begin with the solver:
 Iteration 1:
-Let's try shifting x to [-3.669264322916667, 2.28046875]
-Let's try shifting x to [-1.5846321614583334, 1.390234375]
-Let's try shifting x to [-0.5423160807291667, 0.9451171875]
-StrongWolfe1 condition satisfied for α = 0.125
-StrongWolfe2 condition NOT satisfied for α = 0.125
-Let's try shifting x to [-1.06347412109375, 1.16767578125]
-Let's try shifting x to [-0.8028951009114584, 1.056396484375]
-Let's try shifting x to [-0.6726055908203126, 1.0007568359375]
-Let's try shifting x to [-0.6074608357747395, 0.97293701171875]
-Let's try shifting x to [-0.5748884582519531, 0.959027099609375]
-StrongWolfe1 condition satisfied for α = 0.12890625
-StrongWolfe2 condition NOT satisfied for α = 0.12890625
-Let's try shifting x to [-0.5911746470133463, 0.9659820556640626]
-StrongWolfe1 condition satisfied for α = 0.130859375
-StrongWolfe2 condition NOT satisfied for α = 0.130859375
-Let's try shifting x to [-0.5993177413940429, 0.9694595336914062]
-Let's try shifting x to [-0.5952461942036946, 0.9677207946777344]
-StrongWolfe1 condition satisfied for α = 0.13134765625
-StrongWolfe2 condition NOT satisfied for α = 0.13134765625
-Let's try shifting x to [-0.5972819677988688, 0.9685901641845703]
-StrongWolfe1 condition satisfied for α = 0.131591796875
-StrongWolfe2 condition NOT satisfied for α = 0.131591796875
-Let's try shifting x to [-0.598299854596456, 0.9690248489379882]
-StrongWolfe1 condition satisfied for α = 0.1317138671875
-StrongWolfe2 condition NOT satisfied for α = 0.1317138671875
-Let's try shifting x to [-0.5988087979952494, 0.9692421913146974]
-StrongWolfe1 condition satisfied for α = 0.13177490234375
-StrongWolfe2 condition NOT satisfied for α = 0.13177490234375
-Let's try shifting x to [-0.5990632696946463, 0.9693508625030518]
-StrongWolfe1 condition satisfied for α = 0.131805419921875
-StrongWolfe2 condition NOT satisfied for α = 0.131805419921875
-Let's try shifting x to [-0.5991905055443447, 0.969405198097229]
-StrongWolfe1 condition satisfied for α = 0.1318206787109375
-StrongWolfe2 condition NOT satisfied for α = 0.1318206787109375
-Let's try shifting x to [-0.5992541234691937, 0.9694323658943176]
-Let's try shifting x to [-0.5992223145067692, 0.9694187819957734]
-Let's try shifting x to [-0.599206410025557, 0.9694119900465012]
-Let's try shifting x to [-0.5991984577849507, 0.9694085940718651]
-Let's try shifting x to [-0.5991944816646477, 0.969406896084547]
-Let's try shifting x to [-0.5991924936044961, 0.9694060470908881]
-Let's try shifting x to [-0.5991914995744203, 0.9694056225940586]
-Let's try shifting x to [-0.5991910025593825, 0.9694054103456438]
-StrongWolfe1 condition satisfied for α = 0.13182073831558228
-StrongWolfe2 condition NOT satisfied for α = 0.13182073831558228
-Let's try shifting x to [-0.5991912510669015, 0.9694055164698512]
-Let's try shifting x to [-0.599191126813142, 0.9694054634077475]
-StrongWolfe1 condition satisfied for α = 0.13182075321674347
-StrongWolfe2 condition NOT satisfied for α = 0.13182075321674347
-Let's try shifting x to [-0.5991911889400217, 0.9694054899387994]
-Iteration 1: x = [-0.5991911889400217, 0.9694054899387994] is a better point with new fval = 2.373501984332872.
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+Iteration 1: x = [-0.5423160807291667, 0.9451171875] is a better point with new fval = 2.1092784507212636.
 Iteration 2:
-Let's try shifting x to [-2.801869599924178, -0.9957240122321087]
-Let's try shifting x to [-1.7005303944320997, -0.013159261146654666]
-Let's try shifting x to [-1.1498607916860606, 0.47812311439607236]
-Let's try shifting x to [-0.8745259903130411, 0.7237643021674358]
-StrongWolfe1 condition satisfied for α = 0.0625
-StrongWolfe2 condition satisfied for α = 0.0625
-Iteration 2: x = [-0.8745259903130411, 0.7237643021674358] is a better point with new fval = 2.349301175326158.
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+Iteration 2: x = [-0.6542675913802011, 0.8323239004088521] is a better point with new fval = 1.9576733445140484.
 Iteration 3:
-Let's try shifting x to [-0.4826819662361517, 0.7967969143949958]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition NOT satisfied for α = 0.5
-Let's try shifting x to [-0.28675995419770706, 0.8333132205087758]
-StrongWolfe1 condition satisfied for α = 0.75
-StrongWolfe2 condition satisfied for α = 0.75
-Iteration 3: x = [-0.28675995419770706, 0.8333132205087758] is a better point with new fval = 1.2271318396693158.
+SW1 satisfied for αⱼ = 1.0
+SW2 satisfied for αⱼ = 1.0
+Iteration 3: x = [0.03078659134380579, 0.8161494604846989] is a better point with new fval = 1.139272593216381.
 Iteration 4:
-Let's try shifting x to [0.19110452075327278, 0.8504228024169247]
-Let's try shifting x to [-0.04782771672221714, 0.8418680114628503]
-StrongWolfe1 condition satisfied for α = 0.25
-StrongWolfe2 condition satisfied for α = 0.25
-Iteration 4: x = [-0.04782771672221714, 0.8418680114628503] is a better point with new fval = 1.1431668233229293.
+SW1 satisfied for αⱼ = 1.0
+SW2 satisfied for αⱼ = 1.0
+Iteration 4: x = [-0.1702362813845001, 0.7519889089827609] is a better point with new fval = 1.003304527107197.
 Iteration 5:
-Let's try shifting x to [-0.078347697878805, 0.8111282178926716]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 5: x = [-0.078347697878805, 0.8111282178926716] is a better point with new fval = 1.0606906269744703.
+SW1 satisfied for αⱼ = 1.0
+SW2 satisfied for αⱼ = 1.0
+Iteration 5: x = [-0.09648846590842992, 0.7231793733739211] is a better point with new fval = 0.9693937433915591.
 Iteration 6:
-Let's try shifting x to [-0.0872717693792435, 0.7723370061442835]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 6: x = [-0.0872717693792435, 0.7723370061442835] is a better point with new fval = 1.0001929945803578.
+SW1 satisfied for αⱼ = 1.0
+SW2 satisfied for αⱼ = 1.0
+Iteration 6: x = [-0.08911798645353033, 0.7141797702672162] is a better point with new fval = 0.9683937378153586.
 Iteration 7:
-Let's try shifting x to [-0.08949638179659533, 0.7474504891220144]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 7: x = [-0.08949638179659533, 0.7474504891220144] is a better point with new fval = 0.9787841617222182.
+SW1 satisfied for αⱼ = 1.0
+SW2 satisfied for αⱼ = 1.0
+Iteration 7: x = [-0.08971698300419492, 0.7127335622336607] is a better point with new fval = 0.9683716658635484.
 Iteration 8:
-Let's try shifting x to [-0.08999733503613835, 0.7319537549073267]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 8: x = [-0.08999733503613835, 0.7319537549073267] is a better point with new fval = 0.9715006581421364.
+SW1 satisfied for αⱼ = 1.0
+SW2 satisfied for αⱼ = 1.0
+Iteration 8: x = [-0.08983842345727096, 0.7126557455031506] is a better point with new fval = 0.9683715465615388.
 Iteration 9:
-Let's try shifting x to [-0.09002864830795396, 0.7229560640764762]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 9: x = [-0.09002864830795396, 0.7229560640764762] is a better point with new fval = 0.9692509880281748.
+SW1 satisfied for αⱼ = 1.0
+SW2 satisfied for αⱼ = 1.0
+Iteration 9: x = [-0.08984193861406878, 0.7126563483396835] is a better point with new fval = 0.9683715465101648.
 Iteration 10:
-Let's try shifting x to [-0.08996862698719507, 0.7180062189752375]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 10: x = [-0.08996862698719507, 0.7180062189752375] is a better point with new fval = 0.9686070571886092.
-Iteration 11:
-Let's try shifting x to [-0.0899147802269598, 0.7153879767538536]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 11: x = [-0.0899147802269598, 0.7153879767538536] is a better point with new fval = 0.9684327039346861.
-Iteration 12:
-Let's try shifting x to [-0.08988094868791062, 0.7140374007888322]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 12: x = [-0.08988094868791062, 0.7140374007888322] is a better point with new fval = 0.968387146577391.
-Iteration 13:
-Let's try shifting x to [-0.08986214697094594, 0.7133508536628247]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 13: x = [-0.08986214697094594, 0.7133508536628247] is a better point with new fval = 0.9683754872172741.
-Iteration 14:
-Let's try shifting x to [-0.08985225051785074, 0.7130046363317568]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 14: x = [-0.08985225051785074, 0.7130046363317568] is a better point with new fval = 0.9683725368982241.
-Iteration 15:
-Let's try shifting x to [-0.0898471749671288, 0.7128307742804327]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 15: x = [-0.0898471749671288, 0.7128307742804327] is a better point with new fval = 0.968371794766703.
-Iteration 16:
-Let's try shifting x to [-0.0898446048942527, 0.7127436526342058]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 16: x = [-0.0898446048942527, 0.7127436526342058] is a better point with new fval = 0.9683716086572318.
-Iteration 17:
-Let's try shifting x to [-0.08984331172164124, 0.7127000438653894]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 17: x = [-0.08984331172164124, 0.7127000438653894] is a better point with new fval = 0.9683715620573032.
-Iteration 18:
-Let's try shifting x to [-0.08984266309325281, 0.7126782274578236]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 18: x = [-0.08984266309325281, 0.7126782274578236] is a better point with new fval = 0.9683715503982202.
-Iteration 19:
-Let's try shifting x to [-0.08984233826750457, 0.7126673162436332]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 19: x = [-0.08984233826750457, 0.7126673162436332] is a better point with new fval = 0.96837154748231.
-Iteration 20:
-Let's try shifting x to [-0.08984217572661021, 0.7126618598833572]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 20: x = [-0.08984217572661021, 0.7126618598833572] is a better point with new fval = 0.9683715467531899.
-Iteration 21:
-Let's try shifting x to [-0.08984209442414127, 0.7126591315148514]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 21: x = [-0.08984209442414127, 0.7126591315148514] is a better point with new fval = 0.968371546570892.
-Iteration 22:
-Let's try shifting x to [-0.08984205376489926, 0.7126577672834976]
-StrongWolfe1 condition satisfied for α = 0.5
-StrongWolfe2 condition satisfied for α = 0.5
-Iteration 22: x = [-0.08984205376489926, 0.7126577672834976] is a better point with new fval = 0.9683715465253153.
-Convergence achieved in 23 iterations 😄
+SW1 satisfied for αⱼ = 1.0
+SW2 satisfied for αⱼ = 1.0
+Iteration 10: x = [-0.08984201321174572, 0.7126564025507527] is a better point with new fval = 0.9683715465101226.
+Convergence achieved in 11 iterations 😄

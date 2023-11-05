@@ -91,8 +91,8 @@ function optimize(pr;
         elseif pr.alg.method == "ConjugateGradientDescent"
             CGargs.k = k
             pk, CGargs = findDirection(pr, gk, CGargs=CGargs)
-            # CGDRestartFlag = CGargs.justRestarted
-            CGDRestartFlag = false # temporary until new types are inserted
+            CGDRestartFlag = CGargs.justRestarted
+            # CGDRestartFlag = false # temporary until new types are inserted
         else
             pk = findDirection(pr, gk)
 

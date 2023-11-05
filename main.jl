@@ -14,7 +14,7 @@ benchmarking = false;
 
 # functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
-# functionName = "rosenbrock";
+functionName = "rosenbrock";
 # functionName = "sphere";
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";

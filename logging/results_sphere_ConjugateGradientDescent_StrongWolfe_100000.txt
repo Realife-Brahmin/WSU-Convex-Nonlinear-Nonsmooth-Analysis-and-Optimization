@@ -13,9 +13,9 @@ Optimal function value = 0.0
 ***************************
 Optimal Nonzero Variables:
 ***************************
-Number of fevals = 5
-Number of gevals = 3
-Number of evals = 35
+Number of fevals = 2
+Number of gevals = 1
+Number of evals = 12
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

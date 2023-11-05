@@ -35,6 +35,7 @@ function optimize(pr;
     M = max(size(p.data, 1), 1)
 
     fk = obj(x0, p, getGradientToo=false)
+    myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
     @pack! solState = fk
 
     if pr.alg.method == "QuasiNewton"
@@ -101,10 +102,8 @@ function optimize(pr;
 
         if linesearchMethod == "StrongWolfe"
 
-            solState, solverState = StrongWolfe(pr, solState, solverState, verbose=printOrNot_ls) # under construction
-            # if success == false && pr.alg.method == "ConjugateGradientDescent"
-            #     CGDRestartFlag = true
-            # end
+            solState, solverState = StrongWolfe(pr, solState, solverState,
+            verbose=printOrNot_ls)
 
 
         elseif linesearchMethod == "Armijo"

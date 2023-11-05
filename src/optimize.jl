@@ -62,7 +62,7 @@ function optimize(pr;
 
         @unpack k = solverState
 
-        printOrNot = verbose && (k % progress == 0)
+        printOrNot = verbose && ( (k - 1) % progress == 0)
         printOrNot_ls = printOrNot & verbose_ls
 
 

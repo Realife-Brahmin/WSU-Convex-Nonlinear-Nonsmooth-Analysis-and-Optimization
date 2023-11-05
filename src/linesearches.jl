@@ -104,13 +104,12 @@ function StrongWolfe(pr::NamedTuple,
     alpha_evals = j
     @pack! solverState = fevals, gevals, alpha_evals, success_ls
 
-    # println(solState)
-    # println(solverState)
     return (solState=solState, solverState=solverState)
 end
 
 function StrongWolfe1(fk, fj, gk, pk, alphaj; c1=1e-4)
-    if fk - fj ≥ c1*alphaj*gk'*pk
+    # println(gk'*pk)
+    if fj - fk < c1*alphaj*gk'*pk
         return true
     else
         return false

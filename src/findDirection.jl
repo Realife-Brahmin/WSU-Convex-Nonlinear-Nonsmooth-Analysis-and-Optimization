@@ -1,4 +1,5 @@
 include("helperFunctions.jl")
+include("types.jl")
 
 # For ConjugateGradientDescent update
 mutable struct CGargsType
@@ -21,35 +22,8 @@ function constructorCGargs(
     return CGargs
 end
 
-# For QasiNewton BFGS update
-mutable struct QNargsType
-    k::Int
-    xk::Vector{Float64}
-    xkp1::Vector{Float64}
-    fk::Float64
-    gk::Vector{Float64}
-    gkp1::Vector{Float64}
-    Hk::Matrix{Float64}
-end
-
-
-function constructorQNargs(
-    pr::NamedTuple; 
-    fk=pr.objective(pr.x0, pr.p, getGradientToo=false))::QNargsType
-    k = 1
-    xk = pr.x0
-    n = length(xk)
-    xkp1 = myzeros(xk)
-    gk = myzeros(xk)
-    gkp1 = myzeros(xk)
-    Hk = fk*I(n)
-    QNargs = QNargsType(k, xk, xkp1, fk, gk, gkp1, Hk)
-    return QNargs
-end
-
 function findDirection(
     pr::NamedTuple, ∇fk::Vector{Float64};
-    QNargs::QNargsType=constructorQNargs(pr),
     CGargs::CGargsType=constructorCGargs(pr),
     CGState::CGStateType=CGStateType(),
     QNState::QNStateType=QNStateType(),
@@ -59,7 +33,6 @@ function findDirection(
     n = length(∇fk)
     
 
-    # gkp1 = ∇fk
     gk = ∇fk
 
     if method == "GradientDescent"
@@ -92,7 +65,6 @@ function findDirection(
         return pₖ, CGargs
 
     elseif method == "QuasiNewton"
-        # @unpack k, xk, xkp1, fk, gk, gkp1, Hk = QNargs
         @unpack k, xkm1, xk, fkm1, fk, gkm1, gk, Hkm1, Hk = QNState
 
         @show k
@@ -100,35 +72,24 @@ function findDirection(
             H0 = fk * I(n)
             Hk = H0
         else
-            # sk = xkp1 - xk
             sk = xk - xkm1
-            # yk = gkp1 - gk
             yk = gk - gkm1
             ρkinv = yk'*sk
             if ρkinv == 0
-                # @warn "So, Hkp1 is actually the same as Hk?, Maybe stop this?"
                 @warn "So, Hk is actually the same as Hkm1?, Maybe stop this?"
             end
             ρk = 1.0/ρkinv
             if ρk < 0
                 @warn "QuasiNewton step problematic! y'*s < 0!"
                 myprintln(true, "Making a different H from current value of f.")
-                # Hkp1 = fk*I(n)
                 Hk = fk*I(n)
             elseif isnan(ρk)
                 @error "NaN!"
             else
-                # Hkp1 = (I(n) - ρk*sk*yk')*Hk'*(I-ρk*yk*sk') + ρk*sk*sk'
                 Hk = (I(n) - ρk*sk*yk')*Hkm1'*(I-ρk*yk*sk') + ρk*sk*sk'
             end
-
-            # Bₖ = Hkp1
         end
 
-        # Bₖ = Hkp1
-        # QNargs.Hk = Hkp1
-        # QNargs.xk = xkp1
-        # QNargs.gk = gkp1
         Bₖ = Hk
         pₖ = -Bₖ*∇fk
 
@@ -139,7 +100,6 @@ function findDirection(
         pkm1 = pₖ
         
         @pack! QNState = xkm1, fkm1, gkm1, pkm1, Hkm1
-        # return pₖ, QNargs
         return pₖ, QNState
 
     else

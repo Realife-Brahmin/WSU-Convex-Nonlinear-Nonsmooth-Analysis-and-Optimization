@@ -74,7 +74,7 @@ function optimize(pr;
         @checkForNaN gk
 
         gmagk = sum(abs.(gk))
-        
+        usingCGD = false
         fevals += 1
         gevals += 1
 
@@ -86,8 +86,10 @@ function optimize(pr;
             pk, QNState = findDirection(pr, gk, QNState=QNState)
 
         elseif pr.alg.method == "ConjugateGradientDescent"
-            @pack! CGState = k, xk, gk
+            usingCGD = true
+            @pack! CGState = k, gk
             pk, CGState = findDirection(pr, gk, CGState=CGState)
+
             @unpack justRestarted = CGState 
         else
             pk = findDirection(pr, gk)
@@ -119,11 +121,11 @@ function optimize(pr;
 
         myprintln(printOrNot, "Iteration $(k): x = $(xk) is a better point with new fval = $(fk).", log_path=log_txt)
 
-        if !justRestarted && abs(fk - fkm1) < dftol
+        if !usingCGD && !justRestarted && abs(fk - fkm1) < dftol
             push!(causeForStopping, "Barely changing fval")
             keepIterationsGoing = false
         end
-        if !justRestarted && gmagkm1 < gtol
+        if !usingCGD && !justRestarted && gmagkm1 < gtol
             push!(causeForStopping, "Too small gradient at previous step.")
             keepIterationsGoing = false
         end

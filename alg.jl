@@ -45,11 +45,11 @@ mutable struct AlgorithmSettings
 
         # Constructor with default values
         function AlgorithmSettings(; 
-                method="ConjugateGradientDescent",
-                # method = "GradientDescent",
+                # method="ConjugateGradientDescent",
+                method = "GradientDescent",
                 # method = "QuasiNewton",
                 maxiter=Int(1e5),
-                # maxiter=Int(2e4),
+                # maxiter=Int(3e4),
                 # maxiter=Int(1e3),
                 # maxiter = Int(10),
                 # maxiter = Int(5),
@@ -90,3 +90,6 @@ mutable struct AlgorithmSettings
 end
 
 alg = AlgorithmSettings();
+
+
+

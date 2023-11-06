@@ -108,7 +108,6 @@ function StrongWolfe(pr::NamedTuple,
 end
 
 function StrongWolfe1(fk, fj, gk, pk, alphaj; c1=1e-4)
-    # println(gk'*pk)
     if fj - fk < c1*alphaj*gk'*pk
         return true
     else

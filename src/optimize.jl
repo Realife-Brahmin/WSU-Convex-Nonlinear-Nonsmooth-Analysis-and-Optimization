@@ -6,8 +6,7 @@ function optimize(pr;
     verbose::Bool=false, 
     verbose_ls::Bool=false,
     log::Bool=true,
-    log_path::String="./logging/",
-    itrStart::Int64=1)
+    log_path::String="./logging/")
 
     log_txt = log_path*"log_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
 
@@ -168,7 +167,10 @@ function optimize(pr;
         myprintln(true, statusMessage, log=log, log_path=log_txt)
     end
     
-    res = (converged=converged, statusMessage=statusMessage, fvals=fvals, αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, gmagvals=gmagvals, gvals=gvals, M=M, fevals=fevals, gevals=gevals, cause=causeForStopping, pr=pr)
+    res = (converged=converged, statusMessage=statusMessage, fvals=fvals, 
+    αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, gmagvals=gmagvals, 
+    gvals=gvals, M=M, fevals=fevals, gevals=gevals, cause=causeForStopping, 
+    pr=pr)
 
     res = trim_array(res, k-1)
     return res

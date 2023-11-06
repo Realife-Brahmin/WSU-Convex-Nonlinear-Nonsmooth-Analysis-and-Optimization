@@ -212,7 +212,39 @@ mutable struct CGStateType
 
 end
 
-# under testing
+"""
+    QNStateType
+
+A mutable struct that holds the state of a Quasi-Newton (QN) optimization algorithm at each iteration.
+
+Fields:
+- `k`: The current iteration number.
+- `xkm1`: The vector representing the solution at the previous iteration (`k-1`).
+- `xk`: The vector representing the current solution at iteration `k`.
+- `fkm1`: The value of the objective function at the previous iteration (`k-1`).
+- `fk`: The value of the objective function at the current iteration (`k`).
+- `gkm1`: The gradient vector of the objective function at the previous iteration (`k-1`).
+- `gk`: The gradient vector of the objective function at the current iteration (`k`).
+- `pkm1`: The search direction used in the previous iteration (`k-1`).
+- `pk`: The search direction used in the current iteration (`k`).
+- `Hkm1`: The approximation to the Hessian matrix or its inverse at the previous iteration (`k-1`).
+- `Hk`: The approximation to the Hessian matrix or its inverse at the current iteration (`k`).
+
+Constructor:
+- The constructor for `QNStateType` can be called with keyword arguments for each field. If a field is not specified, it defaults to initial values such as `1` for `k`, `0.0` for scalar fields, empty arrays for vector fields, and an undefined `0x0` matrix for matrix fields.
+
+Example Usage:
+- To create a new instance of `QNStateType` with default initial values, you can simply call:
+    ```julia
+    qnState = QNStateType()
+    ```
+- To initialize with custom values for the current iteration, you could use:
+    ```julia
+    qnState = QNStateType(k=2, xkm1=[1.0, 1.0], xk=[1.5, 1.5], fkm1=10.0, fk=5.0)
+    ```
+
+This struct is instrumental in carrying forward information from one iteration to the next in a QN optimization routine, allowing for efficient updates of the solution vector and the approximation of the Hessian matrix.
+"""
 mutable struct QNStateType
     k::Int
     xkm1::Vector{Float64}

@@ -3,34 +3,35 @@ Solver run has concluded.
 Function solved for: TestFunction2()
 This was a function minimization problem.
 Cause(s) for stopping:
-Too small gradient at latest step.
-Convergence achieved in 21 iterations 😄
+LineSearch failed.
+Barely changing fval
+Convergence achieved in 3 iterations 😄
 ****************************
 Method Used: ConjugateGradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 0.83383429622873
+Optimal function value = 28.00746172763117
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = -2.903534030895848
-x☆[2] = -2.903534021488282
-x☆[3] = -2.903534029567911
-x☆[4] = -2.903533998610144
-x☆[5] = -2.9035340075249265
-x☆[6] = -2.90353403045406
-x☆[7] = -2.9035340280568627
-x☆[8] = -2.9035340137494727
-x☆[9] = -2.9035340305880313
-x☆[10] = -2.903534017507252
-x☆[11] = -2.9035340287656455
-x☆[12] = -2.903533673547749
-x☆[13] = -2.9035340307380872
-x☆[14] = -2.903534014955718
-x☆[15] = -2.9035340308361617
+x☆[1] = -5.1237697808776135
+x☆[2] = -2.53151837358657
+x☆[3] = -0.8707457810577757
+x☆[4] = -3.886699367898358
+x☆[5] = -3.224625069802577
+x☆[6] = -2.7051922235213155
+x☆[7] = -2.1475774724440146
+x☆[8] = -1.201968114548147
+x☆[9] = -3.9187686935500547
+x☆[10] = -3.1942930919702466
+x☆[11] = -3.402616934202338
+x☆[12] = -1.2537142896373576
+x☆[13] = -3.8937180633705237
+x☆[14] = -4.3284900870334075
+x☆[15] = -3.8734945959198943
 ***************************
-Number of fevals = 399
-Number of gevals = 111
-Number of evals = 2064
+Number of fevals = 3
+Number of gevals = 2
+Number of evals = 33
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

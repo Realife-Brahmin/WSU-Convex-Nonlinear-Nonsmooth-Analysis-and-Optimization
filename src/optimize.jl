@@ -39,9 +39,8 @@ function optimize(pr;
     @pack! solState = fk
 
     if pr.alg.method == "QuasiNewton"
-        @show QNState = QNStateType()
+        QNState = QNStateType()
     elseif pr.alg.method == "ConjugateGradientDescent"
-        # CGargs = constructorCGargs(pr)
         CGState = CGStateType()
     end
     
@@ -59,8 +58,6 @@ function optimize(pr;
     causeForStopping = []
 
     justRestarted = false # automatically false if not doing CGD, and if doing CGD and latest β was not zero.
-
-    # CGDRestartFlag = false # automatically false if not doing CGD, and if doing CGD and latest β was not zero.
 
     while keepIterationsGoing
 
@@ -89,16 +86,11 @@ function optimize(pr;
             pk, QNState = findDirection(pr, gk, QNState=QNState)
 
         elseif pr.alg.method == "ConjugateGradientDescent"
-            @pack! CGState = k, xk, fk, gk, gmagk
-            # CGargs.k = k
-            # pk, CGargs = findDirection(pr, gk, CGargs=CGargs)
+            @pack! CGState = k, xk, gk
             pk, CGState = findDirection(pr, gk, CGState=CGState)
             @unpack justRestarted = CGState 
-            # CGDRestartFlag = CGargs.justRestarted
-            # CGDRestartFlag = false # temporary until new types are inserted
         else
             pk = findDirection(pr, gk)
-
         end
         
         @pack! solState = pk 

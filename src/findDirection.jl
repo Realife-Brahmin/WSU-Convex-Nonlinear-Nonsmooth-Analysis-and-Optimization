@@ -1,68 +1,45 @@
 include("helperFunctions.jl")
 include("types.jl")
 
-# For ConjugateGradientDescent update
-mutable struct CGargsType
-    k::Int
-    gk::Vector{Float64}
-    # gkp1::Vector{Float64}
-    pk::Vector{Float64}
-    justRestarted::Bool
-end
-
-function constructorCGargs(
-    pr::NamedTuple)::CGargsType
-    k = 1
-    xk = pr.x0
-    gk = myzeros(xk)
-    # gkp1 = myzeros(xk)
-    pk = myzeros(xk)
-    justRestarted = false
-    CGargs = CGargsType(k, gk, pk, justRestarted)
-    return CGargs
-end
-
 function findDirection(
-    pr::NamedTuple, ∇fk::Vector{Float64};
-    CGargs::CGargsType=constructorCGargs(pr),
+    pr::NamedTuple, gk::Vector{Float64};
     CGState::CGStateType=CGStateType(),
     QNState::QNStateType=QNStateType(),
     verbose::Bool=false)
 
+    n = length(gk)
     method = pr.alg.method
-    n = length(∇fk)
     
-
-    gk = ∇fk
-
     if method == "GradientDescent"
         Bₖ = I(n)
+        pₖ = -Bₖ*gk
+        return pₖ
+
     elseif method == "ConjugateGradientDescent"
-        # @unpack k, gk, pk, justRestarted = CGargs
-        @unpack k, fk, gk, gkmag, pk = CGState
+        @unpack k, gk, pk, justRestarted = CGState
 
         @show k
         if k == 1
-            pkp1 = -gkp1 
+            pk = -gk 
+            betak = 0.0
         else
-            diff = gkp1'*(gkp1-gk)
-            mag = gk'*gk
-            βkp1 = max(0, diff/mag)
-            if βkp1 == 0
+            @unpack gkm1, pkm1 = CGState
+            diff = gk'*(gk-gkm1)
+            mag = gkm1'*gkm1
+            @show betak = max(0, diff/mag)
+            if betak == 0
                 justRestarted = true
                 myprintln(true, "Restarted ConjugateGradientDescent.")
-            else
-                justRestarted = false
             end
-            @checkForNaN pkp1 = -gkp1 + βkp1*pk
+            @checkForNaN pk = -gk + betak*pkm1
         end
 
-        CGargs.pk = pkp1
-        CGargs.gk = gkp1
-        CGargs.justRestarted = justRestarted
-
-        pₖ = pkp1
-        return pₖ, CGargs
+        gkm1 = gk
+        pkm1 = pk
+        betakm1 = betak
+        @pack! CGState = gkm1, pkm1, betakm1
+        pₖ = pk
+        return pₖ, CGState
 
     elseif method == "QuasiNewton"
         @unpack k, xkm1, xk, fkm1, fk, gkm1, gk, Hkm1, Hk = QNState
@@ -91,7 +68,7 @@ function findDirection(
         end
 
         Bₖ = Hk
-        pₖ = -Bₖ*∇fk
+        pₖ = -Bₖ*gk
 
         Hkm1 = Hk
         xkm1 = xk
@@ -103,9 +80,10 @@ function findDirection(
         return pₖ, QNState
 
     else
+
         @error "Currently not formulated for this method"
     end
 
-    pₖ = -Bₖ*∇fk
-    return pₖ
+    @error "floc"
+
 end

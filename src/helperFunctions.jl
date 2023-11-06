@@ -165,12 +165,6 @@ function extrapolate(xopt::Vector{Float64}, factor::Int)
     return new_xopt
 end
 
-# # Example usage:
-# xopt = [0.1, 0.5, 0.7]
-# factor = 2  # We want to insert 2 values between each pair in xopt
-# x0 = extrapolate(xopt, factor)
-# println(x0)  # Expected output: [0.1, 0.233..., 0.366..., 0.5, 0.6, 0.7, 0.8, 0.9]
-
 
 
 

@@ -176,3 +176,59 @@ function optimize(pr;
     return res
 end
 
+"""
+    warm_start_optimize(pr; verbose=false, verbose_ls=false) -> NamedTuple
+
+Conducts warm start optimization for estimating a monotonic function that minimizes a drag function, progressively refining the solution by increasing the number of points defining the function. This approach is currently specialized for the 'drag' objective function and will perform a standard single-shot optimization for other objectives.
+
+# Arguments
+- `pr`: A NamedTuple containing the problem definition and settings for optimization.
+- `verbose`: A Boolean flag for verbose output during optimization.
+- `verbose_ls`: A Boolean flag for verbose output during line search.
+
+# Behavior
+For the 'drag' objective function, the method starts with `nStart` points, optimizes, and then uses the result to extrapolate a finer initial guess for the next round, doubling the number of points each time. This continues until `nMax` points are reached, which depends on the optimization method used:
+- `QuasiNewton`: `nMax` is set to 2048.
+- `ConjugateGradientDescent`: `nMax` is set to 256.
+- Other methods default to `nMax` of 128.
+
+For objective functions other than 'drag', `warm_start_optimize` performs a single-shot optimization using the `optimize` function.
+
+# Returns
+- `res`: A NamedTuple containing the results of the optimization process.
+
+# Notes
+This function is designed for use with optimization problems where a good initial guess can significantly speed up convergence. The current implementation is tuned for the 'drag' function; using it with other objectives will not leverage the warm start capability.
+
+Example usage:
+```julia
+pr = (objective=drag, alg=alg, x0=[0.25, 0.5, 0.75], ...)
+result = warm_start_optimize(pr, verbose=true, verbose_ls=false)
+"""
+function warm_start_optimize(pr; verbose=false, verbose_ls=false)
+    if warmStart && string(pr.objective) == "drag"
+        factor = 2
+        nStart = 4
+        if pr.alg.method == "QuasiNewton"
+            nMax = 2048
+        elseif pr.alg.method == "ConjugateGradientDescent"
+            nMax = 256
+        else
+            nMax = 128
+        end
+
+        n = nStart
+        x0 = Float64.(collect(LinRange(0.0, 1.0, n+2)[2:n+1]))
+        while n <= nMax
+            pr = replace_field(pr, :x0, x0)
+            res = optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
+            xopt = res.xvals[:, end]
+            x0 = extrapolate(xopt, factor)
+            n = length(x0)
+        end
+    else
+        @time res = optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
+    end
+    return res
+end
+

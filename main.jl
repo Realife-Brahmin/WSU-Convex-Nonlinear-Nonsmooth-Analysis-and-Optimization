@@ -12,7 +12,9 @@ logging = true;
 profiling = false;
 benchmarking = false;
 
-functionName = "dampedSHM";
+warmStart = true
+
+# functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
 # functionName = "rosenbrock";
 # functionName = "sphere";
@@ -23,6 +25,7 @@ functionName = "dampedSHM";
 
 pr = include("src/objfuns/"*String(functionName)*".jl")
 
-@time res = optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
+# Call the function with the initial problem setup
+res = warm_start_optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
 
 showresults(res)

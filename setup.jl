@@ -18,7 +18,7 @@ include("src/objfuns/objective.jl");
 include("src/display.jl");
 include("src/helperFunctions.jl");
 include("src/findDirection.jl");
-include("src/LineSearchAlgos.jl");
 
 include("src/optimize.jl");
+include("src/types.jl");
 include("src/utilities.jl"); 

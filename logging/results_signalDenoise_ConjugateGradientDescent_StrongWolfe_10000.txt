@@ -1,0 +1,25 @@
+****************************
+Solver run has concluded.
+Function solved for: signalDenoise()
+This was a data fitting problem.
+Cause(s) for stopping:
+LineSearch failed.
+Convergence achieved in 2 iterations 😄
+****************************
+Method Used: ConjugateGradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Optimal MSE value = 1.0
+Optimal SSE value = 3.0
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 1.0
+x☆[2] = 2.0
+x☆[3] = 3.0
+***************************
+Number of fevals = 2
+Number of gevals = 1
+Number of evals = 5
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-12

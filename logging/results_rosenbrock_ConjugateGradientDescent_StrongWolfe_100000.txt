@@ -3,30 +3,29 @@ Solver run has concluded.
 Function solved for: rosenbrock()
 This was a function minimization problem.
 Cause(s) for stopping:
-LineSearch failed.
 Barely changing fval
-Convergence achieved in 10 iterations 😄
+Convergence achieved in 155 iterations 😄
 ****************************
 Method Used: ConjugateGradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 1.89323867308537
+Optimal function value = 9.81441001844444e-12
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 1.02880945108115
-x☆[2] = 1.0581945611506174
-x☆[3] = 1.156244308748747
-x☆[4] = 0.9527377414461262
-x☆[5] = 0.8952801603607102
-x☆[6] = 0.9134589764222387
-x☆[7] = 0.9017943861013651
-x☆[8] = 0.8152729245445685
-x☆[9] = 0.708528358119612
-x☆[10] = 0.5608018129721823
+x☆[1] = 0.9999999984949787
+x☆[2] = 0.9999999618914072
+x☆[3] = 0.9999999919401037
+x☆[4] = 0.9999998784166461
+x☆[5] = 0.9999998436156828
+x☆[6] = 0.9999996881676908
+x☆[7] = 0.999999354540082
+x☆[8] = 0.9999987440773243
+x☆[9] = 0.999997330213543
+x☆[10] = 0.9999945949238299
 ***************************
-Number of fevals = 10
-Number of gevals = 9
-Number of evals = 100
+Number of fevals = 155
+Number of gevals = 154
+Number of evals = 1695
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

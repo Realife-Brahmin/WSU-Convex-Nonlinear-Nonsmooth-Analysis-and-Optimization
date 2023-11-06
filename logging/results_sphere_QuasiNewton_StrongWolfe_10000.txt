@@ -4,28 +4,18 @@ Function solved for: sphere()
 This was a function minimization problem.
 Cause(s) for stopping:
 Too small gradient at latest step.
-Convergence achieved in 21 iterations 😄
+Convergence achieved in 3 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 1.468876631296355e-11
+Optimal function value = 1.3073212462500557e-30
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = -4.540206718832571e-7
-x☆[2] = -9.265667287648167e-7
-x☆[3] = -6.33961631924636e-7
-x☆[4] = -1.9034116170129642e-6
-x☆[5] = 5.322760296804065e-8
-x☆[6] = -6.180803824874978e-7
-x☆[7] = 1.1355120780737719e-6
-x☆[8] = -1.336822326120861e-6
-x☆[9] = -2.1075416197195444e-7
-x☆[10] = -2.4684948937138025e-6
 ***************************
-Number of fevals = 452
-Number of gevals = 231
-Number of evals = 2762
+Number of fevals = 3
+Number of gevals = 2
+Number of evals = 23
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

@@ -49,7 +49,7 @@ mutable struct AlgorithmSettings
                 # method = "GradientDescent",
                 # method = "QuasiNewton",
                 maxiter=Int(1e5),
-                # maxiter=Int(1e4),
+                # maxiter=Int(2e4),
                 # maxiter=Int(1e3),
                 # maxiter = Int(10),
                 # maxiter = Int(5),

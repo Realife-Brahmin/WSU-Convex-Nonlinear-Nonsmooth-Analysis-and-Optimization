@@ -9,20 +9,20 @@ Failed to converge despite 10000 iterations! 😢
 Method Used: ConjugateGradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Best MSE value = 0.38300901914542745
-Best SSE value = 76.6018038290855
+Best MSE value = 0.3240127382686826
+Best SSE value = 64.80254765373653
 ***************************
 Best Known Nonzero Variables:
-x☆[1] = 13.759628843424533
-x☆[2] = 8.620011332268026
-x☆[3] = 0.019367518734272133
-x☆[4] = 1812.0519512682768
-x☆[5] = 900.419497645631
-x☆[6] = -1.7905611255633616
+x☆[1] = 13.76131894892754
+x☆[2] = 8.569307855775639
+x☆[3] = 0.01960383818613207
+x☆[4] = 1814.3784844634115
+x☆[5] = 900.5013921738345
+x☆[6] = 4.472046965293619
 ***************************
-Number of fevals = 1680867
-Number of gevals = 468085
-Number of evals = 4489377
+Number of fevals = 10001
+Number of gevals = 10000
+Number of evals = 70001
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

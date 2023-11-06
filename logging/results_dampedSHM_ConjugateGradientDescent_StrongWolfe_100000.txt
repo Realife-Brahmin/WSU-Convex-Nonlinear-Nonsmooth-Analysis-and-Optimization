@@ -4,26 +4,25 @@ Function solved for: dampedSHM()
 This was a data fitting problem.
 Cause(s) for stopping:
 LineSearch failed.
-Barely changing fval
-Convergence achieved in 8 iterations 😄
+Convergence achieved in 28647 iterations 😄
 ****************************
 Method Used: ConjugateGradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal MSE value = 0.8360528820760582
-Optimal SSE value = 167.21057641521165
+Optimal MSE value = 0.029103615472532294
+Optimal SSE value = 5.820723094506459
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 13.796621446478403
-x☆[2] = 8.305926879898854
-x☆[3] = 0.015067996034105705
-x☆[4] = 1800.0054781394888
-x☆[5] = 900.0001226300097
-x☆[6] = 4.565528255331671
+x☆[1] = 13.781539304717763
+x☆[2] = 8.277177214398776
+x☆[3] = 0.021808598280372193
+x☆[4] = 1836.6734368268555
+x☆[5] = 901.337732437957
+x☆[6] = 4.243582473022564
 ***************************
-Number of fevals = 8
-Number of gevals = 7
-Number of evals = 50
+Number of fevals = 28647
+Number of gevals = 28646
+Number of evals = 200523
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

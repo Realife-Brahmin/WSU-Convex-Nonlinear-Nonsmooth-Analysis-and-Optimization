@@ -1,2 +1,2 @@
 Begin with the solver:
-Convergence achieved in 21 iterations 😄
+Convergence achieved in 3 iterations 😄

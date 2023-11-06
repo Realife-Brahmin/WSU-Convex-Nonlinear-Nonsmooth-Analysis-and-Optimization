@@ -114,6 +114,63 @@ function trim_array(nt::NamedTuple, itrMax::Int)
     return NamedTuple(trimmed_dict)
 end
 
+"""
+    extrapolate(xopt::Vector{Float64}, factor::Int) -> Vector{Float64}
+
+Generate a new vector that extrapolates a set of monotonically increasing values `xopt` by inserting `factor - 1` evenly spaced points between each consecutive pair of values. The new vector will have `factor * length(xopt)` elements.
+
+# Arguments
+- `xopt::Vector{Float64}`: The original vector of monotonically increasing values, not including `0.0` but including the end point `1.0`.
+- `factor::Int`: The number of points to be included between each pair of the original vector, including one of the bounds.
+
+# Returns
+- `Vector{Float64}`: A new vector containing the original and the inserted points.
+
+# Example
+```julia
+xopt = [0.1, 0.5, 0.7]
+factor = 3  # This will insert 2 evenly spaced values between each pair in xopt
+x0 = extrapolate(xopt, factor)
+# Output: [0.1, 0.233..., 0.366..., 0.5, 0.6, 0.7, 0.8, 0.9]
+```
+The function ensures that the new points are distributed evenly between the existing points from xopt, with the spacing determined by the factor. The original points in xopt are included in the output, and the interpolation considers the natural boundary at 1.0.
+
+## Note
+This function assumes that xopt does not include the boundary point 0.0 and that the last point is less than 1.0. The interpolation will add points up to the boundary at 1.0.
+"""
+function extrapolate(xopt::Vector{Float64}, factor::Int)
+    n = length(xopt)
+    # The new array will have the original points plus (factor - 1) points between each
+    new_length = n * factor
+    new_xopt = Vector{Float64}(undef, new_length)
+
+    # Fill the first element with xopt[1]
+    new_xopt[1] = xopt[1]
+    
+    # Fill in the rest of the points
+    for i in 1:n-1
+        # Calculate the interpolated values
+        for j in 1:factor-1
+            new_xopt[(i-1)*factor + j + 1] = ((factor - j) * xopt[i] + j * xopt[i + 1]) / factor
+        end
+        # Place the original value
+        new_xopt[i*factor + 1] = xopt[i + 1]
+    end
+    
+    # Handle the last segment between xopt[end] and 1.0
+    for j in 1:factor-1
+        new_xopt[(n-1)*factor + j + 1] = ((factor - j) * xopt[end] + j) / factor
+    end
+    
+    return new_xopt
+end
+
+# # Example usage:
+# xopt = [0.1, 0.5, 0.7]
+# factor = 2  # We want to insert 2 values between each pair in xopt
+# x0 = extrapolate(xopt, factor)
+# println(x0)  # Expected output: [0.1, 0.233..., 0.366..., 0.5, 0.6, 0.7, 0.8, 0.9]
+
 
 
 

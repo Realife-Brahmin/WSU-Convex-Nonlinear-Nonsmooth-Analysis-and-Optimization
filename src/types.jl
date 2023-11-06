@@ -212,7 +212,35 @@ mutable struct CGStateType
 
 end
 
+# under testing
+mutable struct QNStateType
+    k::Int
+    xkm1::Vector{Float64}
+    xk::Vector{Float64}
+    fkm1::Float64
+    fk::Float64
+    gkm1::Vector{Float64}
+    gk::Vector{Float64}
+    pkm1::Vector{Float64}
+    pk::Vector{Float64}
+    Hkm1::Matrix{Float64}
+    Hk::Matrix{Float64}
+
+    function QNStateType(;
+        k=1, 
+        xkm1=Float64[], xk=Float64[],
+        fkm1=0.0, fk=0.0,
+        gkm1=Float64[], gk=Float64[],
+        pkm1=Float64[], pk=Float64[], 
+        Hkm1=Matrix{Float64}(undef, 0, 0), Hk=Matrix{Float64}(undef, 0, 0))
+
+        new(k, xkm1, xk, fkm1, fk, gkm1, gk, pkm1, pk, Hkm1, Hk)
+    end
+
+end
+
 # solState = SolStateType()
 # solverState = SolverStateType()
 # interpolParams = InterpolParams(alphatol=33)
 # CGState = CGStateType()
+# QNState = QNStateType()

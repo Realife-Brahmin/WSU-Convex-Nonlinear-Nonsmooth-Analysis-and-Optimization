@@ -52,11 +52,16 @@ function findDirection(
     QNargs::QNargsType=constructorQNargs(pr),
     CGargs::CGargsType=constructorCGargs(pr),
     CGState::CGStateType=CGStateType(),
+    QNState::QNStateType=QNStateType(),
     verbose::Bool=false)
 
     method = pr.alg.method
     n = length(∇fk)
-    gkp1 = ∇fk
+    
+
+    # gkp1 = ∇fk
+    gk = ∇fk
+
     if method == "GradientDescent"
         Bₖ = I(n)
     elseif method == "ConjugateGradientDescent"
@@ -87,42 +92,60 @@ function findDirection(
         return pₖ, CGargs
 
     elseif method == "QuasiNewton"
-        @unpack k, xk, xkp1, fk, gk, gkp1, Hk = QNargs
+        # @unpack k, xk, xkp1, fk, gk, gkp1, Hk = QNargs
+        @unpack k, xkm1, xk, fkm1, fk, gkm1, gk, Hkm1, Hk = QNState
+
         @show k
         if k == 1
-            H0 = QNargs.fk * I(n)
-            Hkp1 = H0
+            H0 = fk * I(n)
+            Hk = H0
         else
-            sk = xkp1 - xk
-            yk = gkp1 - gk
+            # sk = xkp1 - xk
+            sk = xk - xkm1
+            # yk = gkp1 - gk
+            yk = gk - gkm1
             ρkinv = yk'*sk
             if ρkinv == 0
-                @warn "So, Hkp1 is actually the same as Hk?, Maybe stop this?"
+                # @warn "So, Hkp1 is actually the same as Hk?, Maybe stop this?"
+                @warn "So, Hk is actually the same as Hkm1?, Maybe stop this?"
             end
             ρk = 1.0/ρkinv
             if ρk < 0
                 @warn "QuasiNewton step problematic! y'*s < 0!"
                 myprintln(true, "Making a different H from current value of f.")
-                Hkp1 = fk*I(n)
+                # Hkp1 = fk*I(n)
+                Hk = fk*I(n)
             elseif isnan(ρk)
                 @error "NaN!"
             else
-                Hkp1 = (I(n) - ρk*sk*yk')*Hk'*(I-ρk*yk*sk') + ρk*sk*sk'
+                # Hkp1 = (I(n) - ρk*sk*yk')*Hk'*(I-ρk*yk*sk') + ρk*sk*sk'
+                Hk = (I(n) - ρk*sk*yk')*Hkm1'*(I-ρk*yk*sk') + ρk*sk*sk'
             end
 
             # Bₖ = Hkp1
         end
 
-        Bₖ = Hkp1
-        QNargs.Hk = Hkp1
-        QNargs.xk = xkp1
-        QNargs.gk = gkp1
-
+        # Bₖ = Hkp1
+        # QNargs.Hk = Hkp1
+        # QNargs.xk = xkp1
+        # QNargs.gk = gkp1
+        Bₖ = Hk
         pₖ = -Bₖ*∇fk
-        return pₖ, QNargs
+
+        Hkm1 = Hk
+        xkm1 = xk
+        fkm1 = fk
+        gkm1 = gk
+        pkm1 = pₖ
+        
+        @pack! QNState = xkm1, fkm1, gkm1, pkm1, Hkm1
+        # return pₖ, QNargs
+        return pₖ, QNState
+
     else
         @error "Currently not formulated for this method"
     end
+
     pₖ = -Bₖ*∇fk
     return pₖ
 end

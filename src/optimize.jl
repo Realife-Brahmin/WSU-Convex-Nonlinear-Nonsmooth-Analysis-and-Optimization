@@ -39,7 +39,8 @@ function optimize(pr;
     @pack! solState = fk
 
     if pr.alg.method == "QuasiNewton"
-        QNargs = constructorQNargs(pr, fk=fk)
+        # QNargs = constructorQNargs(pr, fk=fk)
+        @show QNState = QNStateType()
     elseif pr.alg.method == "ConjugateGradientDescent"
         # CGargs = constructorCGargs(pr)
         CGState = CGStateType()
@@ -85,11 +86,13 @@ function optimize(pr;
         @pack! solverState = fevals, gevals
 
         if pr.alg.method == "QuasiNewton"
-            QNargs.k = k
-            QNargs.xkp1 = xk
-            QNargs.fk = fk
-            QNargs.gkp1 = gk
-            pk, QNargs = findDirection(pr, gk, QNargs=QNargs)
+            # QNargs.k = k
+            # QNargs.xkp1 = xk
+            # QNargs.fk = fk
+            # QNargs.gkp1 = gk
+            @pack! QNState = k, xk, fk, gk
+            # pk, QNargs = findDirection(pr, gk, QNargs=QNargs)
+            pk, QNState = findDirection(pr, gk, QNState=QNState)
 
         elseif pr.alg.method == "ConjugateGradientDescent"
             @pack! CGState = k, xk, fk, gk, gmagk

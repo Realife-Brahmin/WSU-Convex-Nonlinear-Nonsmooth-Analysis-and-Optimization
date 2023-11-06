@@ -8,16 +8,17 @@ using Printf
 # include("utilities.jl")
 include("objfuns/objective.jl")
 
-function scatter_voltage_vs_time(df::DataFrame)
+function scatter_voltage_vs_time(df)
     gr()  # Ensure you're using the GR backend for Plots.jl which supports LaTeX rendering
 
     theme(:dark)  # Setting a dark theme
-    
+    x = df[:, 1]
+    y = df[:, 2]
     # Convert time to milliseconds
-    time_ms = df.x .* 1000
+    time_ms = x .* 1000
 
     # Create the scatter plot
-    scatter(time_ms, df.y, 
+    scatter(time_ms, y, 
         label=L"Voltage $(V)$",  # Using LaTeXStrings with \text for regular text
         xlabel=L"Time $(ms)$",  # Using LaTeXStrings with \text for regular text
         ylabel=L"Voltage $(mV)$",  # Using LaTeXStrings with \text for regular text
@@ -130,85 +131,5 @@ function showresults(res::NamedTuple;
 
     # only if xopt given, below xopt is for rosenbrock function: a vector of ones
     # diffx = sum( abs.( res.xvals[:, end] - ones(Float64, length(res.xvals[:, end])) ) )
-end
-
-
-using LaTeXStrings
-using Plots
-
-function plotresults(pr::NamedTuple, res::NamedTuple; savePlot::Bool=true, saveLocation::String="processedData/")
-    @unpack converged, statusMessage, fvals, xvals, backtrackVals = res
-    n = size(xvals, 1)
-    itr = size(xvals, 2)
-    x☆ = xvals[:, itr]
-
-    # Convert time to milliseconds
-    time_ms = pr.df.x .* 1000
-    
-    # Calculate dampedSHM values using optimal parameters
-    predicted_values = [pr.objective(x☆, t, getGradientToo=false) for t in pr.df.x]
-
-    # Plot
-    gr()  # Ensure you're using the GR backend for Plots.jl which supports LaTeX rendering
-    theme(:dark)  # Setting a dark theme
-
-    formatted_iterations = @sprintf("%.0e", itr)
-
-    title_content = "Voltage vs Time\nMethod: $(pr.alg.method)\nLineSearch: $(pr.alg.linesearch)\nIterations: $formatted_iterations\nError (MSE): $(fvals[itr]) mV"
-
-    p = scatter(time_ms, pr.df.y, 
-        label=L"Original Data $(V)$",  # Using LaTeXStrings for original data label
-        xlabel=L"Time $(ms)$",  # Using LaTeXStrings 
-        ylabel=L"Voltage $(mV)$",  # Using LaTeXStrings 
-        title="Voltage vs Time",
-        # title=title_content,
-        markersize=4,
-        color=:purple,
-        alpha=0.8
-    )
-    
-    # Plot dampedSHM predictions
-    plot!(p, time_ms, predicted_values, 
-        label="Predicted with dampedSHM", 
-        linewidth=2,
-        color=:cyan,
-        alpha=0.8
-    )
-
-# Define formatting variables
-font_size = 8
-font_color = :white
-font_family = :courier
-
-# Calculate positions for annotations based on the data
-max_x = maximum(pr.df.x)
-max_y = minimum(pr.df.y)
-annotation_spacing = (maximum(pr.df.y) - max_y) * 0.05
-
-# Calculate starting positions for the annotations
-start_y = max_y + 4 * annotation_spacing
-
-# Add annotations for method details with monospace font
-annotate!(p, [(max_x * 0.95, start_y, text("Method: $(pr.alg.method)", font_color, :right, font_size, font_family)),
-             (max_x * 0.95, start_y - annotation_spacing, text("LineSearch: $(pr.alg.linesearch)", font_color, :right, font_size, font_family)),
-             (max_x * 0.95, start_y - 2 * annotation_spacing, text("Iterations: $formatted_iterations", font_color, :right, font_size, font_family)),
-             (max_x * 0.95, start_y - 3 * annotation_spacing, text("Error (MSE): $(fvals[itr]) mV", font_color, :right, font_size, font_family))])
-
-
-
-    # Save the plot if savePlot is true
-    if savePlot
-        # Create the filename using the provided logic
-        filename = saveLocation * string(pr.objective) * "_" * pr.alg.method * "_" * pr.alg.linesearch * "_$(@sprintf("%.0e", itr)).png"
-        
-        # Ensure directory exists
-        mkpath(dirname(filename))
-        
-        # Save the plot to the generated filename
-        savefig(p, filename)
-    end
-
-    # Display plot
-    display(p)
 end
 

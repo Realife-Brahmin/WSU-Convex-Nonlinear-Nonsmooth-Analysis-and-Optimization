@@ -11,7 +11,7 @@ This repo contains a solver in julia , and different types of optimization probl
 - ???
 
 ## LineSearch/TrustRegion Methods Used:
-- Conjugate Gradient Descent (not working, currently under investigation)
+- Conjugate Gradient Descent
 - Gradient Descent
 - Quasi Newton BFGS
 - SR1 based Trust Region Method

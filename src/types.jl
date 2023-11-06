@@ -1,5 +1,38 @@
 using Parameters
 
+"""
+    SolStateType
+
+A mutable struct used to maintain the state of the solution in an optimization solver.
+
+# Fields
+- `k::Int`: The current iteration number.
+- `xkm1::Vector{Float64}`: The solution vector from the previous iteration.
+- `xk::Vector{Float64}`: The current solution vector.
+- `fkm1::Float64`: The objective function value at the previous iteration.
+- `fk::Float64`: The current objective function value.
+- `gkm1::Vector{Float64}`: The gradient of the objective function at the previous iteration.
+- `gk::Vector{Float64}`: The current gradient of the objective function.
+- `gmagkm1::Float64`: The magnitude of the gradient at the previous iteration.
+- `gmagk::Float64`: The current magnitude of the gradient.
+- `pkm1::Vector{Float64}`: The search direction used in the previous iteration.
+- `pk::Vector{Float64}`: The current search direction.
+- `Hkm1::Matrix{Float64}`: The inverse approximate Hessian from the previous iteration.
+- `Hk::Matrix{Float64}`: The current approximate inverse Hessian.
+- `alphak::Float64`: The step size used in the current iteration.
+
+# Constructor
+The constructor for `SolStateType` can be called with keyword arguments corresponding to each field. If a field is not specified, it defaults to a pre-defined value such as `1` for `k`, `0.0` for scalar values, an empty `Float64` array for vector fields, or an undefined `0x0` `Float64` matrix for matrix fields.
+
+# Example Usage
+```julia
+    solState = SolStateType(k=5, xkm1=[1.0, 2.0], xk=[1.5, 2.5])
+```
+This will create a `SolStateType` instance with the iteration number set to `5`, previous solution vector as `[1.0, 2.0]`, and current solution vector as `[1.5, 2.5]`. All other fields will be set to their default values.
+
+Please note that the fields `Hkm1` and `Hk` are initialized with undefined matrices. It is expected that the user will provide properly sized and initialized matrices if these fields are to be used.
+
+"""
 mutable struct SolStateType
     k::Int
     xkm1::Vector{Float64}
@@ -32,6 +65,30 @@ mutable struct SolStateType
 
 end
 
+"""
+    SolverStateType
+
+A mutable struct that holds the state of the optimization solver. It tracks the iteration count and the number of function, gradient, and Hessian evaluations, as well as the success of the line search.
+
+Fields:
+
+- k: The current iteration number.
+- fevals: The cumulative number of function evaluations performed.
+- gevals: The cumulative number of gradient evaluations performed.
+- Hevals: The cumulative number of Hessian evaluations performed.
+- alpha_evals: The number of evaluations for the current step size.
+- success_ls: A Boolean flag indicating whether the last line search was successful.
+
+Constructor:
+
+The constructor accepts keyword arguments for each of the fields. Default values are provided for all fields.
+Example Usage:
+
+Create a new instance by specifying any of the fields. For example:
+```julia
+solverState = SolverStateType(k=10, fevals=50, gevals=50)
+```
+"""
 mutable struct SolverStateType
     k::Int
     fevals::Int
@@ -50,6 +107,33 @@ mutable struct SolverStateType
     end
 end
 
+"""
+    InterpolParams
+
+A mutable struct used within the line search algorithm to manage interpolation parameters, specifically focused on determining an acceptable step size, alphaj.
+
+Fields:
+
+- j: The current interpolation iteration.
+- alphaj: The trial step size being evaluated.
+- alphaLo: The current lower bound on the step size.
+- alphaHi: The current upper bound on the step size.
+- alphatol: The tolerance within which the step size is considered acceptable.
+- alphatolBreached: A Boolean flag indicating whether the tolerance criterion has been breached.
+- change: A string indicating if the next step size should be increased, decreased, or remain unchanged.
+
+Constructor:
+
+The constructor for InterpolParams accepts keyword arguments for each of the fields. Default values are assumed for all fields except change, which should be explicitly specified.
+Example Usage:
+
+An instance of InterpolParams can be created and used to control the bisection process within a line search method. For example:
+```julia
+interpolParams = InterpolParams(j=2, alphaj=50.0, change="decrease")
+```
+Ensure to correctly initialize and update all fields within these structures as per the requirements of your optimization algorithm.
+
+"""
 mutable struct InterpolParams
     j::Int
     alphaj::Float64
@@ -100,4 +184,4 @@ end
 # solState = SolStateType()
 # solverState = SolverStateType()
 # interpolParams = InterpolParams(alphatol=33)
-CGState = CGStateType()
+# CGState = CGStateType()

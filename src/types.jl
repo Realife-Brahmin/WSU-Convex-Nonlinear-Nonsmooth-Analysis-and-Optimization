@@ -149,39 +149,40 @@ mutable struct InterpolParams
 
 end
 
-## under testing
 """
     CGStateType
 
 A mutable struct designed to encapsulate the state and parameters pertinent to the Conjugate Gradient (CG) optimization method.
 
 Fields:
-- `k`: The iteration counter for the CG method.
-- `gkm1`: The gradient vector at the previous iteration (`k-1`).
-- `gk`: The gradient vector at the current iteration (`k`).
-- `pkm1`: The search direction used in the previous iteration (`k-1`).
-- `pk`: The search direction for the current iteration (`k`).
-- `betakm1`: The β parameter value from the previous iteration used to compute `pkm1`.
-- `betak`: The β parameter for the current iteration used to compute `pk`.
-- `justRestarted`: A Boolean flag to indicate whether the CG method was restarted in the last iteration.
+- `k`: The global iteration counter across all optimization methods.
+- `kCGD`: The iteration counter specific to the CG method.
+- `gkm1`: The gradient vector at the previous CG iteration (`kCGD-1`).
+- `gk`: The gradient vector at the current CG iteration (`kCGD`).
+- `pkm1`: The search direction used in the previous CG iteration (`kCGD-1`).
+- `pk`: The search direction for the current CG iteration (`kCGD`).
+- `betakm1`: The β parameter value from the previous CG iteration used to compute `pkm1`.
+- `betak`: The β parameter for the current CG iteration used to compute `pk`.
+- `justRestarted`: A Boolean flag to indicate whether the CG method was restarted in the last CG iteration.
 
 Constructor:
-- The `CGStateType` constructor initializes the struct with the provided values or with default values if none are given. Default values are 1 for `k`, zero vectors for `gkm1` and `gk`, zero vectors for `pkm1` and `pk`, and 0.0 for `betakm1` and `betak`. The `justRestarted` flag defaults to `false`.
+- The `CGStateType` constructor initializes the struct with the provided values or with default values if none are given. Default values are 1 for `k` and `kCGD`, zero vectors for `gkm1` and `gk`, zero vectors for `pkm1` and `pk`, and 0.0 for `betakm1` and `betak`. The `justRestarted` flag defaults to `false`.
 
 Example Usage:
 - To instantiate a `CGStateType` with default values:
     ```julia
     cgState = CGStateType()
     ```
-- To set up with specific initial values:
+- To set up with specific initial values for the CG method:
     ```julia
-    cgState = CGStateType(k=2, gkm1=[-1.0, -1.0], gk=[-0.5, -0.5], betakm1=0.5, betak=0.3, justRestarted=true)
+    cgState = CGStateType(k=3, kCGD=2, gkm1=[-1.0, -1.0], gk=[-0.5, -0.5], betakm1=0.5, betak=0.3, justRestarted=true)
     ```
 
 This struct is utilized in each step of the CG method to maintain the necessary data for computing new search directions and for deciding when to restart the algorithm based on the `justRestarted` flag.
 """
 mutable struct CGStateType
     k::Int
+    kCGD::Int
     gkm1::Vector{Float64}
     gk::Vector{Float64}
     pkm1::Vector{Float64}
@@ -191,13 +192,13 @@ mutable struct CGStateType
     justRestarted::Bool
 
     function CGStateType(;
-        k=1, 
+        k=1, kCGD=1,
         gkm1=Float64[], gk=Float64[],
         pkm1=Float64[], pk=Float64[], 
         betakm1=0.0, betak=0.0,
         justRestarted=false)
 
-        new(k, gkm1, gk, pkm1, pk, betakm1, betak, justRestarted)
+        new(k, kCGD, gkm1, gk, pkm1, pk, betakm1, betak, justRestarted)
 
     end
 

@@ -16,12 +16,15 @@ function findDirection(
         return pₖ
 
     elseif method == "ConjugateGradientDescent"
-        @unpack k, gk, pk, justRestarted = CGState
+        @unpack k, kCGD = CGState
 
         @show k
-        if k == 1
+        
+        if kCGD == 1
             pk = -gk 
             betak = 0.0
+            justRestarted = false
+            kCGD += 1
         else
             @unpack gkm1, pkm1 = CGState
             diff = gk'*(gk-gkm1)
@@ -29,17 +32,24 @@ function findDirection(
             @show betak = max(0, diff/mag)
             if betak == 0
                 justRestarted = true
+                myprintln(true, "β = 0.")
                 myprintln(true, "Restarted ConjugateGradientDescent.")
+                kCGD = 1
             end
             @checkForNaN pk = -gk + betak*pkm1
+            if pk'*gk >= 0
+                myprintln(true, "No longer a descent direction.")
+                justRestarted = true
+                myprintln(true, "Restarting ConjugateGradientDescent.")
+                kCGD = 1
+                pk = -gk
+            end
         end
 
         gkm1 = gk
         pkm1 = pk
         betakm1 = betak
-        @pack! CGState = gkm1, pkm1, betakm1
-        pₖ = pk
-        return pₖ, CGState
+        @pack! CGState = kCGD, gkm1, pkm1, betakm1, justRestarted
 
     elseif method == "QuasiNewton"
         @unpack k, xkm1, xk, fkm1, fk, gkm1, gk, Hkm1, Hk = QNState

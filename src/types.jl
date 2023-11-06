@@ -72,12 +72,12 @@ A mutable struct that holds the state of the optimization solver. It tracks the 
 
 Fields:
 
-- k: The current iteration number.
-- fevals: The cumulative number of function evaluations performed.
-- gevals: The cumulative number of gradient evaluations performed.
-- Hevals: The cumulative number of Hessian evaluations performed.
-- alpha_evals: The number of evaluations for the current step size.
-- success_ls: A Boolean flag indicating whether the last line search was successful.
+- `k`: The current iteration number.
+- `fevals`: The cumulative number of function evaluations performed.
+- `gevals`: The cumulative number of gradient evaluations performed.
+- `Hevals`: The cumulative number of Hessian evaluations performed.
+- `alpha_evals`: The number of evaluations for the current step size.
+- `success_ls`: A Boolean flag indicating whether the last line search was successful.
 
 Constructor:
 
@@ -114,13 +114,13 @@ A mutable struct used within the line search algorithm to manage interpolation p
 
 Fields:
 
-- j: The current interpolation iteration.
-- alphaj: The trial step size being evaluated.
-- alphaLo: The current lower bound on the step size.
-- alphaHi: The current upper bound on the step size.
-- alphatol: The tolerance within which the step size is considered acceptable.
-- alphatolBreached: A Boolean flag indicating whether the tolerance criterion has been breached.
-- change: A string indicating if the next step size should be increased, decreased, or remain unchanged.
+- `j`: The current interpolation iteration.
+- `alphaj`: The trial step size being evaluated.
+- `alphaLo`: The current lower bound on the step size.
+- `alphaHi`: The current upper bound on the step size.
+- `alphatol`: The tolerance within which the step size is considered acceptable.
+- `alphatolBreached`: A Boolean flag indicating whether the tolerance criterion has been breached.
+- `change`: A string indicating if the next step size should be increased, decreased, or remain unchanged.
 
 Constructor:
 
@@ -150,6 +150,37 @@ mutable struct InterpolParams
 end
 
 ## under testing
+"""
+    CGStateType
+
+A mutable struct that encapsulates the state of the Conjugate Gradient (CG) method during optimization iterations.
+
+Fields:
+- `k`: The current iteration number in the CG method.
+- `xkm1`: The solution vector at the previous iteration (k-1).
+- `xk`: The current solution vector at iteration k.
+- `fkm1`: The value of the objective function at the previous iteration (k-1).
+- `fk`: The current value of the objective function at iteration k.
+- `gkm1`: The gradient vector of the objective function at the previous iteration (k-1).
+- `gk`: The current gradient vector of the objective function at iteration k.
+- `gmagkm1`: The magnitude of the gradient at the previous iteration (k-1).
+- `gmagk`: The current magnitude of the gradient at iteration k.
+- `pkm1`: The search direction used in the previous iteration (k-1).
+- `pk`: The current search direction at iteration k.
+- `betakm1`: The beta coefficient used to update the search direction in the previous iteration (k-1).
+- `betak`: The current beta coefficient used to update the search direction at iteration k.
+- `justRestarted`: A Boolean flag indicating if the CG method was just restarted.
+
+Constructor:
+The constructor can be invoked with keyword arguments for all the fields. Default values are used when specific values are not provided by the caller.
+
+Example Usage:
+Instantiate the CGStateType with the desired initial values or use the defaults for starting a new CG optimization routine.
+```julia
+cgState = CGStateType(k=2, xkm1=[0.0, 0.0], xk=[1.0, 2.0], fkm1=5.0, fk=3.0)
+```
+This instance `cgState` now contains all the necessary state information for the second iteration of a CG optimization process. The fields `xkm1` and `xk` are initialized to vectors representing positions in the parameter space, `fkm1` and `fk` are initialized to the respective objective function values, and all other vector and scalar fields are set according to the provided values. The justRestarted flag is set to `false`, indicating that the CG method is continuing from the previous state.
+"""
 mutable struct CGStateType
     k::Int
     xkm1::Vector{Float64}

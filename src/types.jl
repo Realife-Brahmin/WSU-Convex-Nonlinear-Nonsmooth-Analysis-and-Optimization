@@ -185,12 +185,12 @@ mutable struct CGStateType
     k::Int
     xkm1::Vector{Float64}
     xk::Vector{Float64}
-    fkm1::Float64
-    fk::Float64
+    # fkm1::Float64
+    # fk::Float64
     gkm1::Vector{Float64}
     gk::Vector{Float64}
-    gmagkm1::Float64
-    gmagk::Float64
+    # gmagkm1::Float64
+    # gmagk::Float64
     pkm1::Vector{Float64}
     pk::Vector{Float64}
     betakm1::Float64
@@ -200,14 +200,13 @@ mutable struct CGStateType
     function CGStateType(;
         k=1, 
         xkm1=Float64[], xk=Float64[],
-        fkm1=0.0, fk=0.0,
         gkm1=Float64[], gk=Float64[],
-        gmagkm1=0.0, gmagk=0.0, 
         pkm1=Float64[], pk=Float64[], 
         betakm1=0.0, betak=0.0,
         justRestarted=false)
 
-        new(k, xkm1, xk, fkm1, fk, gkm1, gk, gmagkm1, gmagk, pkm1, pk, betakm1, betak, justRestarted)
+        new(k, xkm1, xk, gkm1, gk, pkm1, pk, betakm1, betak, justRestarted)
+
     end
 
 end

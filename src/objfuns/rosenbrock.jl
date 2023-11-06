@@ -34,8 +34,10 @@ function rosenbrock(x::Vector{Float64},
     end
 end
 
-objective = rosenbrock;
-x0 = collect(0.1:0.1:1)
-params = Float64.([10])
 
+objective = rosenbrock;
+n = 2
+# x0 = collect(0.1:0.1:1)
+params = Float64.([n])
+x0 = collect(1.0/params[1]:1.0/params[1]:1.0)
 pr = generate_pr(objective, x0, params=params)

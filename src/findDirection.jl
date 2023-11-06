@@ -51,6 +51,7 @@ function findDirection(
     pr::NamedTuple, ∇fk::Vector{Float64};
     QNargs::QNargsType=constructorQNargs(pr),
     CGargs::CGargsType=constructorCGargs(pr),
+    CGState::CGStateType=CGStateType(),
     verbose::Bool=false)
 
     method = pr.alg.method
@@ -59,7 +60,9 @@ function findDirection(
     if method == "GradientDescent"
         Bₖ = I(n)
     elseif method == "ConjugateGradientDescent"
-        @unpack k, gk, pk, justRestarted = CGargs
+        # @unpack k, gk, pk, justRestarted = CGargs
+        @unpack k, fk, gk, gkmag, pk = CGState
+
         @show k
         if k == 1
             pkp1 = -gkp1 

@@ -11,9 +11,9 @@ function findDirection(
     method = pr.alg.method
     
     if method == "GradientDescent"
-        Bₖ = I(n)
-        pₖ = -Bₖ*gk
-        return pₖ
+        Bk = I(n)
+        pk = -Bk*gk
+        return pk
 
     elseif method == "ConjugateGradientDescent"
         @unpack k, kCGD = CGState
@@ -26,10 +26,10 @@ function findDirection(
             justRestarted = false
             kCGD += 1
         else
-            @unpack gkm1, pkm1 = CGState
+            @unpack gkm1, pkm1, justRestarted = CGState
             diff = gk'*(gk-gkm1)
             mag = gkm1'*gkm1
-            @show betak = max(0, diff/mag)
+            betak = max(0, diff/mag)
             if betak == 0
                 justRestarted = true
                 myprintln(true, "β = 0.")
@@ -50,6 +50,7 @@ function findDirection(
         pkm1 = pk
         betakm1 = betak
         @pack! CGState = kCGD, gkm1, pkm1, betakm1, justRestarted
+        return pk, CGState
 
     elseif method == "QuasiNewton"
         @unpack k, xkm1, xk, fkm1, fk, gkm1, gk, Hkm1, Hk = QNState
@@ -77,17 +78,17 @@ function findDirection(
             end
         end
 
-        Bₖ = Hk
-        pₖ = -Bₖ*gk
+        Bk = Hk
+        pk = -Bk*gk
 
         Hkm1 = Hk
         xkm1 = xk
         fkm1 = fk
         gkm1 = gk
-        pkm1 = pₖ
+        pkm1 = pk
         
         @pack! QNState = xkm1, fkm1, gkm1, pkm1, Hkm1
-        return pₖ, QNState
+        return pk, QNState
 
     else
 

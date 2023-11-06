@@ -153,44 +153,37 @@ end
 """
     CGStateType
 
-A mutable struct that encapsulates the state of the Conjugate Gradient (CG) method during optimization iterations.
+A mutable struct designed to encapsulate the state and parameters pertinent to the Conjugate Gradient (CG) optimization method.
 
 Fields:
-- `k`: The current iteration number in the CG method.
-- `xkm1`: The solution vector at the previous iteration (k-1).
-- `xk`: The current solution vector at iteration k.
-- `fkm1`: The value of the objective function at the previous iteration (k-1).
-- `fk`: The current value of the objective function at iteration k.
-- `gkm1`: The gradient vector of the objective function at the previous iteration (k-1).
-- `gk`: The current gradient vector of the objective function at iteration k.
-- `gmagkm1`: The magnitude of the gradient at the previous iteration (k-1).
-- `gmagk`: The current magnitude of the gradient at iteration k.
-- `pkm1`: The search direction used in the previous iteration (k-1).
-- `pk`: The current search direction at iteration k.
-- `betakm1`: The beta coefficient used to update the search direction in the previous iteration (k-1).
-- `betak`: The current beta coefficient used to update the search direction at iteration k.
-- `justRestarted`: A Boolean flag indicating if the CG method was just restarted.
+- `k`: The iteration counter for the CG method.
+- `gkm1`: The gradient vector at the previous iteration (`k-1`).
+- `gk`: The gradient vector at the current iteration (`k`).
+- `pkm1`: The search direction used in the previous iteration (`k-1`).
+- `pk`: The search direction for the current iteration (`k`).
+- `betakm1`: The β parameter value from the previous iteration used to compute `pkm1`.
+- `betak`: The β parameter for the current iteration used to compute `pk`.
+- `justRestarted`: A Boolean flag to indicate whether the CG method was restarted in the last iteration.
 
 Constructor:
-The constructor can be invoked with keyword arguments for all the fields. Default values are used when specific values are not provided by the caller.
+- The `CGStateType` constructor initializes the struct with the provided values or with default values if none are given. Default values are 1 for `k`, zero vectors for `gkm1` and `gk`, zero vectors for `pkm1` and `pk`, and 0.0 for `betakm1` and `betak`. The `justRestarted` flag defaults to `false`.
 
 Example Usage:
-Instantiate the CGStateType with the desired initial values or use the defaults for starting a new CG optimization routine.
-```julia
-cgState = CGStateType(k=2, xkm1=[0.0, 0.0], xk=[1.0, 2.0], fkm1=5.0, fk=3.0)
-```
-This instance `cgState` now contains all the necessary state information for the second iteration of a CG optimization process. The fields `xkm1` and `xk` are initialized to vectors representing positions in the parameter space, `fkm1` and `fk` are initialized to the respective objective function values, and all other vector and scalar fields are set according to the provided values. The justRestarted flag is set to `false`, indicating that the CG method is continuing from the previous state.
+- To instantiate a `CGStateType` with default values:
+    ```julia
+    cgState = CGStateType()
+    ```
+- To set up with specific initial values:
+    ```julia
+    cgState = CGStateType(k=2, gkm1=[-1.0, -1.0], gk=[-0.5, -0.5], betakm1=0.5, betak=0.3, justRestarted=true)
+    ```
+
+This struct is utilized in each step of the CG method to maintain the necessary data for computing new search directions and for deciding when to restart the algorithm based on the `justRestarted` flag.
 """
 mutable struct CGStateType
     k::Int
-    xkm1::Vector{Float64}
-    xk::Vector{Float64}
-    # fkm1::Float64
-    # fk::Float64
     gkm1::Vector{Float64}
     gk::Vector{Float64}
-    # gmagkm1::Float64
-    # gmagk::Float64
     pkm1::Vector{Float64}
     pk::Vector{Float64}
     betakm1::Float64
@@ -199,13 +192,12 @@ mutable struct CGStateType
 
     function CGStateType(;
         k=1, 
-        xkm1=Float64[], xk=Float64[],
         gkm1=Float64[], gk=Float64[],
         pkm1=Float64[], pk=Float64[], 
         betakm1=0.0, betak=0.0,
         justRestarted=false)
 
-        new(k, xkm1, xk, gkm1, gk, pkm1, pk, betakm1, betak, justRestarted)
+        new(k, gkm1, gk, pkm1, pk, betakm1, betak, justRestarted)
 
     end
 
@@ -273,5 +265,5 @@ end
 # solState = SolStateType()
 # solverState = SolverStateType()
 # interpolParams = InterpolParams(alphatol=33)
-# CGState = CGStateType()
+CGState = CGStateType()
 # QNState = QNStateType()

@@ -115,11 +115,22 @@ function showresults(res::NamedTuple;
 
     myprintln1(v, "***************************")
     myprintln1(v, xvalMessage)
-    for k in 1:n
-        if abs(x☆[k]) > nnztol     
-            myprintln1(v, "x☆[$(k)] = $(x☆[k])")
+    if n <= 15
+        # If the vector is short enough, print all elements
+        for k in 1:n
+            myprintln1(v, "x☆[$k] = $(x☆[k])")
+        end
+    else
+        # If the vector is long, print an even distribution of elements
+        myprintln1(v, "Only upto 15 values will be printed.")
+
+        mid_indices = round.(Int, LinRange(6, n-5, 7)[2:end-1])
+        indices_to_print = unique([1:5; mid_indices; n-4:n])
+        for k in indices_to_print
+            myprintln1(v, "x☆[$k] = $(x☆[k])")
         end
     end
+
     myprintln1(v, "***************************")
     myprintln1(v, "Number of fevals = $(fevals)")
     myprintln1(v, "Number of gevals = $(gevals)")

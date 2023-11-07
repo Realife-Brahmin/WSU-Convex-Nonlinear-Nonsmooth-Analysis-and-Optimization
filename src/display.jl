@@ -133,3 +133,27 @@ function showresults(res::NamedTuple;
     # diffx = sum( abs.( res.xvals[:, end] - ones(Float64, length(res.xvals[:, end])) ) )
 end
 
+function plotDragCurve(res)
+    theme(:dao)
+    f = res.fvals[end]
+    r = res.xvals[:, end]
+    n = length(r)
+    z = collect(0.0:1.0/(n+1):1.0)[2:end-1]
+    p1 = plot(z, r,
+        title = "Drag Functional Estimate: $(L"f_{min} =") $(round(f, digits=5)) \n using $(pr.alg.method) with $(n) points.",
+        titlefont = font(12,"Computer Modern"),
+        guidefont = font(15,"Computer Modern"),
+        label = L"r(z)",
+        ylabel = L"r(z)",
+        xlabel = L"z",
+        line = :stem,
+        # linestyle = :dot,
+        # bar_width = 0.01,
+        linewidth = 0.3,
+        marker = :circle,
+        markersize = 2,
+        alpha = 1.0
+    )
+    return p1
+end
+

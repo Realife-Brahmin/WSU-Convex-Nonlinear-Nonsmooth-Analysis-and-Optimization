@@ -27,11 +27,11 @@ functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verb
 pr = include("src/objfuns/"*String(functionName)*".jl")
 
 # Call the function with the initial problem setup
-res = @btime begin
-# @time begin
+# res = @btime begin
+@time begin
     res = warm_start_optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
 end
 
 showresults(res)
 
-plotDragCurve(res)
+plotDragCurve(res, savePlot=true)

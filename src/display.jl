@@ -1,5 +1,6 @@
 
 using DataFrames
+using GR
 using LaTeXStrings
 using Parameters
 using Plots
@@ -154,7 +155,9 @@ function plotDragCurve(res;
     r = res.xvals[:, end]
     n = length(r)
     z = collect(0.0:1.0/(n+1):1.0)[2:end-1]
-    p1 = plot(z, r, dpi = 7000,
+
+    gr()
+    p1 = Plots.plot(z, r, dpi = 7000,
         title = "Drag Functional Estimate: $(L"f_{min} =") $(round(f, digits=5)) \n using $(pr.alg.method) with $(n) points.",
         titlefont = font(12,"Computer Modern"),
         guidefont = font(15,"Computer Modern"),
@@ -172,14 +175,16 @@ function plotDragCurve(res;
     )
 
     folderName = string(dirname(@__DIR__))*"/processedData/"
-    filename = folderName*"dragFunction_"*pr.alg.method*"_"*string(n)*".png"
+    filename = folderName*"dragFunction_"*pr.alg.method*"_"*string(n)*".pdf"
 
-    if isfile(filename)
-        rm(filename)
-    end
 
     if savePlot
-        savefig(filename)
+        
+        if isfile(filename)
+            rm(filename)
+        end
+    
+        Plots.savefig(p1, filename)
     end
 
     return p1

@@ -219,7 +219,7 @@ function warm_start_optimize(pr;
         elseif pr.alg.method == "ConjugateGradientDescent"
             nMax = 1024
         elseif pr.alg.method == "GradientDescent"
-            nMax = 512
+            nMax = 1024
         else
             @error "Unkown method"
         end

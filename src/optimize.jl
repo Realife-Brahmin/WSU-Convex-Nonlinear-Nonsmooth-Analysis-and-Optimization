@@ -177,20 +177,22 @@ function optimize(pr;
 end
 
 """
-    warm_start_optimize(pr; verbose=false, verbose_ls=false) -> NamedTuple
+    warm_start_optimize(pr; nStart::Int = 4, factor::Int = 2, verbose=false, verbose_ls=false) -> NamedTuple
 
 Conducts warm start optimization for estimating a monotonic function that minimizes a drag function, progressively refining the solution by increasing the number of points defining the function. This approach is currently specialized for the 'drag' objective function and will perform a standard single-shot optimization for other objectives.
 
 # Arguments
 - `pr`: A NamedTuple containing the problem definition and settings for optimization.
+- `nStart::Int`: The starting number of points for the warm start optimization process.
+- `factor::Int`: The factor by which the number of points is increased in each extrapolation step.
 - `verbose`: A Boolean flag for verbose output during optimization.
 - `verbose_ls`: A Boolean flag for verbose output during line search.
 
 # Behavior
-For the 'drag' objective function, the method starts with `nStart` points, optimizes, and then uses the result to extrapolate a finer initial guess for the next round, doubling the number of points each time. This continues until `nMax` points are reached, which depends on the optimization method used:
-- `QuasiNewton`: `nMax` is set to 2048.
-- `ConjugateGradientDescent`: `nMax` is set to 256.
-- Other methods default to `nMax` of 128.
+For the 'drag' objective function, the method starts with `nStart` points, optimizes, and then uses the result to extrapolate a finer initial guess for the next round, increasing the number of points each time by the specified `factor`. This continues until `nMax` points are reached, which depends on the optimization method used:
+- `QuasiNewton`: `nMax` is set to 1024.
+- `ConjugateGradientDescent`: `nMax` is set to 1024.
+- Other methods default to `nMax` of 512.
 
 For objective functions other than 'drag', `warm_start_optimize` performs a single-shot optimization using the `optimize` function.
 
@@ -205,16 +207,21 @@ Example usage:
 pr = (objective=drag, alg=alg, x0=[0.25, 0.5, 0.75], ...)
 result = warm_start_optimize(pr, verbose=true, verbose_ls=false)
 """
-function warm_start_optimize(pr; verbose=false, verbose_ls=false)
+function warm_start_optimize(pr; 
+    nStart::Int = 4,
+    factor::Int = 2,
+    verbose=false, 
+    verbose_ls=false)
+
     if warmStart && string(pr.objective) == "drag"
-        factor = 2
-        nStart = 4
         if pr.alg.method == "QuasiNewton"
-            nMax = 2048
+            nMax = 1024
         elseif pr.alg.method == "ConjugateGradientDescent"
-            nMax = 256
+            nMax = 1024
+        elseif pr.alg.method == "GradientDescent"
+            nMax = 512
         else
-            nMax = 128
+            @error "Unkown method"
         end
 
         n = nStart

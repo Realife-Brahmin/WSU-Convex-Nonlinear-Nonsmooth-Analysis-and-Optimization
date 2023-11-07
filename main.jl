@@ -10,12 +10,13 @@ verbose_ls = false;
 verbose_ls = verbose & verbose_ls
 logging = true;
 profiling = false;
-benchmarking = false;
+# benchmarking = false;
+benchmarking = true;
 
 warmStart = true
 
 # functionName = "dampedSHM";
-# functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
+functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
 # functionName = "rosenbrock";
 # functionName = "sphere";
 # functionName = "TestFunction1";
@@ -26,6 +27,11 @@ warmStart = true
 pr = include("src/objfuns/"*String(functionName)*".jl")
 
 # Call the function with the initial problem setup
-res = warm_start_optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
+res = @btime begin
+# @time begin
+    res = warm_start_optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
+end
 
 showresults(res)
+
+plotDragCurve(res)

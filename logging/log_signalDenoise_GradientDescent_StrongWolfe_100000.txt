@@ -1,2 +1,4 @@
+Starting with initial point x = [1.0, 1.01, 1.05, 0.93, 0.96, 1.1].
+which has fval = 1.8300000000000018
 Begin with the solver:
-Convergence achieved in 2 iterations 😄
+Iteration 1:

@@ -28,7 +28,7 @@ function signalDenoise(x::Vector{Float64},
     
 
     f = (1/2)*sum( (x-d).^2 )
-    xdiff = diff(xfull)
+    @show xdiff = diff(xfull)[2:n]
     if mod(p, 2) == 0
         f += (α/p)*sum(xdiff.^p)
     else
@@ -38,14 +38,22 @@ function signalDenoise(x::Vector{Float64},
     if getGradientToo
         g = x - d
         if mod(p, 2) == 0
+            println("Even integral p value.")
             for i = 1:n
-                g[i] += α * ((-xdiff[i+1])^(p-1) + xdiff[i]^p)
+                g[i] += α * (
+                    -(xdiff[i+1])^(p-1) 
+                    + xdiff[i]^p
+                    )
             end 
         else
+            println("NOT even integral p value.")
             for i = 1:n
                 
                 # @show xdiff[i], xdiff[i+1]
-                g[i] += α *( xdiff[i+1]*((-xdiff[i+1])^2 + β^2)^(p/2-1) + xdiff[i]*(xdiff[i]^2 + β^2)^(p/2-1))
+                g[i] += α *(
+                    -xdiff[i+1]*((-xdiff[i+1])^2 + β^2)^(p/2-1) 
+                    + xdiff[i]*(xdiff[i]^2 + β^2)^(p/2-1)
+                    )
             end
         end
         return f, g

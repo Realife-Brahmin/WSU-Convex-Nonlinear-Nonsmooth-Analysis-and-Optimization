@@ -1,4 +1,5 @@
 include("plotDragCurve.jl")
+include("plotDenoisedSignal.jl")
 
 function plotresults(res;
     savePlot::Bool=true)
@@ -7,7 +8,8 @@ function plotresults(res;
     if functionName == "drag"
         plotDragCurve(res, savePlot=savePlot)
     elseif functionName == "signalDenoise"
-        println("Plotting under construction.")
+        @error "Plotting under construction."
+        plotDenoisedSignal(res, savePlot=savePlot)
     else
         println("Nothing to plot.")
     end

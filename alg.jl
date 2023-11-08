@@ -69,8 +69,8 @@ mutable struct AlgorithmSettings
 
                 if alg.method == "GradientDescent"
                         myprintln(true, "Method chosen: GradientDescent", log=false)
-                        alg.progress = 100
-                        # alg.progress = 1
+                        # alg.progress = 100
+                        alg.progress = 1
                 elseif alg.method == "QuasiNewton"
                         myprintln(true, "Method chosen: QuasiNewton", log=false)
                         alg.linesearch = "StrongWolfe"

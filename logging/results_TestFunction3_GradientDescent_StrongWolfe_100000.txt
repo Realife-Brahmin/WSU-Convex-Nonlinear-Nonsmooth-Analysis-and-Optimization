@@ -4,28 +4,28 @@ Function solved for: TestFunction3()
 This was a function minimization problem.
 Cause(s) for stopping:
 Barely changing fval
-Convergence achieved in 22725 iterations 😄
+Convergence achieved in 30104 iterations 😄
 ****************************
 Method Used: GradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 2.7877502757799996e-5
+Optimal function value = 2.0470610538015803e-5
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.08576784341981644
-x☆[2] = 0.1354497573616536
-x☆[3] = 0.48906979233448045
-x☆[4] = 0.31204513499647185
-x☆[5] = 0.20820408758952963
-x☆[6] = 0.18720049849255374
-x☆[7] = 0.16556516816216782
-x☆[8] = 0.10733933693587895
-x☆[9] = 0.10632952086948647
-x☆[10] = 0.10578426129553954
+x☆[1] = 0.11379977718697723
+x☆[2] = 0.12368925741488979
+x☆[3] = 0.48969318097680137
+x☆[4] = 0.30426472060718235
+x☆[5] = 0.23012676038286134
+x☆[6] = 0.18532275059031483
+x☆[7] = 0.14322008916291779
+x☆[8] = 0.13107482168772985
+x☆[9] = 0.09400271741676539
+x☆[10] = 0.09641559934467218
 ***************************
-Number of fevals = 22725
-Number of gevals = 22724
-Number of evals = 249965
+Number of fevals = 30104
+Number of gevals = 30103
+Number of evals = 331134
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

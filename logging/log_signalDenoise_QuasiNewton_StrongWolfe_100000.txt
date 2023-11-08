@@ -1,6 +1,2 @@
-Starting with initial point x = [1.0, 2.0, 3.0].
-which has fval = 1.0
 Begin with the solver:
-Iteration 1:
-Iteration 1: x = [1.0, 2.0, 3.0] is a better point with new fval = 1.0.
 Convergence achieved in 2 iterations 😄

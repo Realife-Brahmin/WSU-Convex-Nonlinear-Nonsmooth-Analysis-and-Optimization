@@ -4,20 +4,28 @@ Function solved for: rosenbrock()
 This was a function minimization problem.
 Cause(s) for stopping:
 Barely changing fval
-Convergence achieved in 215 iterations 😄
+Convergence achieved in 1262 iterations 😄
 ****************************
 Method Used: GradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 7.44191794694263e-11
+Optimal function value = 1.7453174645759751e-9
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.9999913965684326
-x☆[2] = 0.9999832405053816
+x☆[1] = 0.9999999457077461
+x☆[2] = 0.9999996192680882
+x☆[3] = 0.9999997368311953
+x☆[4] = 0.9999987490257983
+x☆[5] = 0.9999982728758345
+x☆[6] = 0.9999955789384388
+x☆[7] = 0.999991774460991
+x☆[8] = 0.9999824252053754
+x☆[9] = 0.9999644896735821
+x☆[10] = 0.9999269329013836
 ***************************
-Number of fevals = 215
-Number of gevals = 214
-Number of evals = 643
+Number of fevals = 1262
+Number of gevals = 1261
+Number of evals = 13872
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

@@ -1,16 +1,2 @@
-Starting with initial point x = [0.5, 1.0].
-which has fval = 1.375
 Begin with the solver:
-Iteration 1:
-SW1 satisfied for αⱼ = 0.125
-SW2 satisfied for αⱼ = 0.125
-Iteration 1: x = [1.0, 0.625] is a better point with new fval = 0.28125.
-Iteration 101:
-SW1 satisfied for αⱼ = 0.125
-SW2 satisfied for αⱼ = 0.125
-Iteration 101: x = [0.9990310768060143, 0.9976704213851474] is a better point with new fval = 1.2471932456402873e-6.
-Iteration 201:
-SW1 satisfied for αⱼ = 0.0625
-SW2 satisfied for αⱼ = 0.0625
-Iteration 201: x = [0.9999862260760202, 0.9999687868866289] is a better point with new fval = 2.1659210445772104e-10.
-Convergence achieved in 215 iterations 😄
+Convergence achieved in 1262 iterations 😄

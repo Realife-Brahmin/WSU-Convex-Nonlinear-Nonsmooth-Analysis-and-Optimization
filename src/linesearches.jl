@@ -36,7 +36,7 @@ function StrongWolfe(pr::NamedTuple,
     @unpack xkm1, xk, fkm1 ,fk, gkm1, gk, pkm1, pk = solState
     
     @unpack fevals, gevals = solverState
-    interpolParams = InterpolParams(j=1, alphaj=alphaj, alphaHi=alphaHi, alphaLo=alphaLo, alphatol=alphatol)
+    @show interpolParams = InterpolParams(j=1, alphaj=alphaj, alphaHi=alphaHi, alphaLo=alphaLo, alphatol=alphatol)
 
     keepSearching = true # for the while loop
     success_ls = false # a field of solverState useful outside

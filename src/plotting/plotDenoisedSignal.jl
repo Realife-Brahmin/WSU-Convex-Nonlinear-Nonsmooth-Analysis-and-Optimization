@@ -13,11 +13,14 @@ function plotDenoisedSignal(res;
 
     p1 = Plots.scatter(t, d,
         title = "Denoised Signal",
-        label = "insertTwoLabels",
-        xlabel = "instance [unit]",
-        ylabel = "signal value")
+        label = "data-point",
+        xlabel = "Time Instance [unit]",
+        ylabel = "Signal value [unit]")
 
-    p2 = Plots.plot!(p1, w)
+    p2 = Plots.plot!(p1, w,
+        label = "fitted-function",
+        linewidth = 3.0,
+        linestyle = :dash)
 
     folderName = string(dirname(dirname(@__DIR__)))*"/processedData/"
     filename = folderName*"denoisedSignal_"*pr.alg.method*"_"*string(n)*".png"

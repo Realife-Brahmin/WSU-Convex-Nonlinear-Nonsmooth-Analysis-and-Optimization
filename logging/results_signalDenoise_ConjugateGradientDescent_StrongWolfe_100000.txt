@@ -4,23 +4,25 @@ Function solved for: signalDenoise()
 This was a data fitting problem.
 Cause(s) for stopping:
 LineSearch failed.
-Barely changing fval
 Convergence achieved in 2 iterations 😄
 ****************************
 Method Used: ConjugateGradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal MSE value = 1.0
-Optimal SSE value = 3.0
+Optimal MSE value = 1.8300000000000018
+Optimal SSE value = 10.980000000000011
 ***************************
 Optimal Nonzero Variables:
 x☆[1] = 1.0
-x☆[2] = 2.0
-x☆[3] = 3.0
+x☆[2] = 1.01
+x☆[3] = 1.05
+x☆[4] = 0.93
+x☆[5] = 0.96
+x☆[6] = 1.1
 ***************************
 Number of fevals = 2
 Number of gevals = 1
-Number of evals = 5
+Number of evals = 8
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

@@ -10,17 +10,29 @@ Convergence achieved in 2 iterations 😄
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal MSE value = 1.0
-Optimal SSE value = 3.0
+Optimal MSE value = 58400.002000004475
+Optimal SSE value = 876000.0300000671
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 1.0
-x☆[2] = 2.0
-x☆[3] = 3.0
+x☆[1] = 52.0
+x☆[2] = 79.0
+x☆[3] = 73.0
+x☆[4] = 43.0
+x☆[5] = 46.0
+x☆[6] = 123.0
+x☆[7] = 113.0
+x☆[8] = 66.0
+x☆[9] = 41.0
+x☆[10] = 66.0
+x☆[11] = 101.0
+x☆[12] = 22.0
+x☆[13] = 121.0
+x☆[14] = 20.0
+x☆[15] = 0.0
 ***************************
 Number of fevals = 2
 Number of gevals = 1
-Number of evals = 5
+Number of evals = 17
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

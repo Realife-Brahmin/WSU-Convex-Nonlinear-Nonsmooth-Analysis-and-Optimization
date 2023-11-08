@@ -34,4 +34,4 @@ end
 
 showresults(res)
 
-plotDragCurve(res, savePlot=true)
+plotresults(res, savePlot=true)

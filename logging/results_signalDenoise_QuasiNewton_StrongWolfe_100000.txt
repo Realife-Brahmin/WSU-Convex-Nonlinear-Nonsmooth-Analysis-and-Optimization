@@ -5,34 +5,35 @@ This was a data fitting problem.
 Cause(s) for stopping:
 LineSearch failed.
 Barely changing fval
-Convergence achieved in 2 iterations 😄
+Convergence achieved in 5 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal MSE value = 58400.002000004475
-Optimal SSE value = 876000.0300000671
+Optimal MSE value = 8.97469100994572
+Optimal SSE value = 179.49382019891442
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 52.0
-x☆[2] = 79.0
-x☆[3] = 73.0
-x☆[4] = 43.0
-x☆[5] = 46.0
-x☆[6] = 123.0
-x☆[7] = 113.0
-x☆[8] = 66.0
-x☆[9] = 41.0
-x☆[10] = 66.0
-x☆[11] = 101.0
-x☆[12] = 22.0
-x☆[13] = 121.0
-x☆[14] = 20.0
-x☆[15] = 0.0
+Only upto 15 values will be printed.
+x☆[1] = 6.068191854027655
+x☆[2] = 9.343760226911417
+x☆[3] = 12.721787096696882
+x☆[4] = 13.95487095196259
+x☆[5] = 15.31815580775815
+x☆[8] = 13.896026265316193
+x☆[9] = 13.217694506590792
+x☆[10] = 13.394223310192192
+x☆[12] = 13.08465541452457
+x☆[14] = 13.588764636877023
+x☆[16] = 14.358121990348742
+x☆[17] = 14.075092427847142
+x☆[18] = 14.200979905143937
+x☆[19] = 13.811804509893541
+x☆[20] = 13.618364676131678
 ***************************
-Number of fevals = 2
-Number of gevals = 1
-Number of evals = 17
+Number of fevals = 5
+Number of gevals = 4
+Number of evals = 85
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-12

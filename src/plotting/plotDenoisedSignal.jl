@@ -26,7 +26,7 @@ function plotDenoisedSignal(res;
         alpha = 0.5)
 
     folderName = string(dirname(dirname(@__DIR__)))*"/processedData/"
-    filename = folderName*"denoisedSignal_"*pr.alg.method*"_"*string(n)*".png"
+    filename = folderName*"denoisedSignal_"*pr.alg.method*"_"*string(n)*"_p_$(replace(string(p), "." => "-"))_alpha_$(replace(string(alpha), "." => "-")).png"
 
 
     if savePlot

@@ -5,6 +5,8 @@ function plotDenoisedSignal(res;
 
     pr = res.pr
     d = pr.x0
+    params = pr.p.params
+    p, alpha = params[1:2]
     n = length(d)
     w = res.xvals[:, end]
     t = collect(1:1:n)
@@ -12,7 +14,7 @@ function plotDenoisedSignal(res;
     theme(:dao)
 
     p1 = Plots.scatter(t, d,
-        title = "Denoised Signal",
+        title = "Denoised Signal \n"*"using "*L"p = "*"$(p) and α = $(alpha)",
         label = "data-point",
         xlabel = "Time Instance [unit]",
         ylabel = "Signal value [unit]")
@@ -20,7 +22,8 @@ function plotDenoisedSignal(res;
     p2 = Plots.plot!(p1, w,
         label = "fitted-function",
         linewidth = 3.0,
-        linestyle = :dash)
+        linestyle = :solid,
+        alpha = 0.5)
 
     folderName = string(dirname(dirname(@__DIR__)))*"/processedData/"
     filename = folderName*"denoisedSignal_"*pr.alg.method*"_"*string(n)*".png"

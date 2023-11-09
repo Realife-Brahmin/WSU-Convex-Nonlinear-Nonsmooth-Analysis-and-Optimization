@@ -72,12 +72,12 @@ filename = rawDataFolder * "FFD.csv"
 df = CSV.File(filename) |> DataFrame
 rename!(df, [:x, :y])
 
-
+data = df.y
 # data = vec(df.y) # dampedSHM data
 # data = [1.00, 1.01, 1.05, 0.93, 0.96, 1.10]; 
 # data = Float64.(abs.(rand(Int8, 15)))
 # data = [1.00, 1, 1, 1, 1]
-data = [1, 2, 3]
+# data = [1, 2, 3]
 # data = [0.01, 0.02, 0.03]
 x0 = Float64.(data)
 
@@ -85,8 +85,8 @@ x0 = Float64.(data)
 # p = 1
 p = 2
 
-# alpha = 0
-alpha = 0.5
+alpha = 0
+# alpha = 0.5
 # alpha = 1
 # alpha = 100
 

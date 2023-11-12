@@ -22,7 +22,8 @@ warmStart = true
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";
-functionName = "signalDenoise";
+# functionName = "signalDenoise";
+# functionName = "nnloss";
 
 pr = include("src/objfuns/"*String(functionName)*".jl")
 

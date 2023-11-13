@@ -11,7 +11,7 @@ function getNumWeights(dims::Vector{Int})
     # Loop through the dimensions vector
     for i in 1:length(dims)-1
         # Multiply each pair of adjacent dimensions and add to the sum
-        numWeights += dim[i] * dim[i+1]
+        numWeights += dims[i] * dims[i+1]
     end
 
     return numWeights

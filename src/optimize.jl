@@ -68,7 +68,7 @@ function optimize(pr;
 
         myprintln(printOrNot, "Iteration $(k):", log_path=log_txt)
 
-        @show fk, gk = obj(xk, p)
+        fk, gk = obj(xk, p)
         @checkForNaN fk
         @checkForNaN gk
 

@@ -4,8 +4,6 @@ using DataFrames
 include("../helperFunctions.jl");
 include("../../alg.jl") # include alg.jl from parent directory
 
-FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Array{Float64}}}
-
 """
     generate_pr(functionName::Function, x0::Vector{Float64};
                 data::Matrix{Float64} = Matrix{Float64}(undef, 0, 0),
@@ -19,7 +17,7 @@ Generate a named tuple `pr` representing a problem with the provided parameters.
 
 # Keyword Arguments
 - `data::Matrix{Float64}`: A matrix of data associated with the problem. Defaults to an empty matrix.
-- `params::Vector{Float64}`: A vector of parameters for the objective function. Defaults to an empty vector.
+- `params`: Parameters for the objective function. Defaults to an empty vector.
 
 # Returns
 - A named tuple `pr` with fields:

@@ -1,6 +1,4 @@
-FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
-
-function rosenbrock2d(x::Vector{Float64}, p::FuncParam; getGradientToo::Bool=true, verbose::Bool=false)
+function rosenbrock2d(x::Vector{Float64}, p; getGradientToo::Bool=true, verbose::Bool=false)
     # Ensure x is of length 2
     if length(x) != 2
         throw(ArgumentError("Input vector x should be of length 2 for the 2D Rosenbrock function."))
@@ -32,7 +30,7 @@ function rosenbrock2d(x::Vector{Float64}, p::FuncParam; getGradientToo::Bool=tru
     return f, g
 end
 
-function Rastrigin2d(x::Vector{Float64}, p::FuncParam;
+function Rastrigin2d(x::Vector{Float64}, p;
     getGradientToo::Bool=true,
     verbose::Bool=false)
 
@@ -48,7 +46,7 @@ function Rastrigin2d(x::Vector{Float64}, p::FuncParam;
     end
 end
 
-function rosenbrock2d_oscillatory(x::Vector{Float64}, p::FuncParam; getGradientToo::Bool=true, verbose::Bool=false)
+function rosenbrock2d_oscillatory(x::Vector{Float64}, p; getGradientToo::Bool=true, verbose::Bool=false)
     # Ensure x is of length 2
     if length(x) != 2
         throw(ArgumentError("Input vector x should be of length 2 for the 2D Rosenbrock function."))
@@ -80,7 +78,7 @@ function rosenbrock2d_oscillatory(x::Vector{Float64}, p::FuncParam; getGradientT
     return f, g
 end
 
-function rosenbrock2d_oscillatory(x::Vector{Float64}, p::FuncParam; getGradientToo::Bool=true, verbose::Bool=false)
+function rosenbrock2d_oscillatory(x::Vector{Float64}, p; getGradientToo::Bool=true, verbose::Bool=false)
     # Ensure x is of length 2
     if length(x) != 2
         throw(ArgumentError("Input vector x should be of length 2 for the 2D Rosenbrock function."))
@@ -112,7 +110,7 @@ function rosenbrock2d_oscillatory(x::Vector{Float64}, p::FuncParam; getGradientT
     return f, g
 end
 
-function hardFunction1(x::Vector{Float64}, p::FuncParam; getGradientToo::Bool=true, verbose::Bool=false)
+function hardFunction1(x::Vector{Float64}, p; getGradientToo::Bool=true, verbose::Bool=false)
     # Ensure x is of length 2
     if length(x) != 2
         throw(ArgumentError("Input vector x should be of length 2 for the 2D Rosenbrock function."))

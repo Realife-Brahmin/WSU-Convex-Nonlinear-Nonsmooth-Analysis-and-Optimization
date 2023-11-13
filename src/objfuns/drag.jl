@@ -1,8 +1,5 @@
-FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
-
-
 function drag(x::Vector{Float64}, 
-    p::FuncParam;
+    p;
     verbose::Bool=false,
     log::Bool=true,
     getGradientToo::Bool=true)
@@ -42,7 +39,7 @@ function drag(x::Vector{Float64},
 end
 
 function subDrag(x::Vector{Float64}, 
-    p::FuncParam, k::Int64;
+    p, k::Int64;
     verbose::Bool=false,
     log::Bool=true)
 

@@ -1,7 +1,5 @@
 include("objective.jl")
 
-# FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
-
 function sphere(x::Vector{Float64}, p;
     getGradientToo::Bool=true,
     verbose::Bool=false)

@@ -3,8 +3,6 @@ using DataFrames
 
 include("objective.jl")
 
-FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
-
 function signalDenoise(x::Vector{Float64}, 
     p;
     verbose::Bool=false,
@@ -28,7 +26,7 @@ function signalDenoise(x::Vector{Float64},
     
 
     f = (1/2n)*sum( (x-d).^2 )
-    @show xdiff = diff(xfull)
+    xdiff = diff(xfull)
     if mod(p, 2) == 0
         # println("Even integral p value.")
         f += (alpha/(p*n)) * sum(xdiff.^p)
@@ -51,7 +49,6 @@ function signalDenoise(x::Vector{Float64},
             println("NOT even integral p value.")
             for i = 1:n
                 
-                # @show xdiff[i], xdiff[i+1]
                 g[i] += alpha/n *( 
                         xdiff[i]*(xdiff[i]^2 + beta^2)^(p/2-1)
                         -xdiff[i+1]*(xdiff[i+1]^2 + beta^2)^(p/2-1)

@@ -21,6 +21,7 @@ function nnloss(w::Vector{Float64},
     classify = p[:classify]
     
     nf, M = size(X)
+    n = length(w)
 
     if M != length(y)
         @error "Incompatible sizes of X and y"
@@ -28,9 +29,9 @@ function nnloss(w::Vector{Float64},
         @error "Make sure first element of dims matches the number of used features from X"
     elseif dims[end] != 1
         @error "Currently only single class classification is supported. Make sure that dim[end] = 1."
+    elseif n != getNumWeights(dims)
+        @error "Mismatch between supplied w and the number of weights corresponding to dims."
     end
-
-    n = length(w) # this time w is the main hero
 
     d = length(dims) - 1
 
@@ -48,9 +49,12 @@ function nnloss(w::Vector{Float64},
         firstIdx = weightsRetrieved + 1
         lastIdx = weightsRetrieved + nW
         W = reshape(w[firstIdx:lastIdx], szW)
+        @show size(W)
         Ws[layer] = W
         L = activation.(W'*L)
         Ls[layer] = L
+        @show size(L)
+        weightsRetrieved += nW
     end
 
     ypred = vec(Ls[d])
@@ -58,12 +62,62 @@ function nnloss(w::Vector{Float64},
 
     if getGradientToo && classify == false
         g = zeros(n)
-        Gs = Vector{VecOrMat{Float64}}(undef, d)
         hs = Vector{VecOrMat{Float64}}(undef, d)
+        
+        for layer = d:-1:1
+            L = Ls[layer]
+            @show size(L)
+            @show size(y)
+            @show size(h)
+            h = (L-y).*L.*(1 .- L)
+            if layer == 1
+                # Ld = ypred
+                # h = (Ld-y).*Ld.*(1 .- Ld)
+                G = h*X'
+            else
+                Wp1 = Ws[layer+1]
+                hp1 = hs[layer+1]
+                h = Wp1'*hp1*L*(I-L)
+                Lm1 = Ls[layer-1]
+                G = h*Lm1
+            end
+
+            hs[layer] = h
+
+            Gs[layer] = G
+            nG = prod(size(G))
+            lastIdx = n - gradientElementsInserted
+            firstIdx = n - gradientElementsInserted - nG + 1
+            g[firstIdx:lastIdx] = vec(G)
+        end
+
+        Gs = Vector{VecOrMat{Float64}}(undef, d)
+
+        gradientElementsInserted = 0
+
+        for layer = d:-1:1
+            h = hs[layer]
+            if layer == 1
+                G = h*X'
+            else
+                Lm1 = Ls[layer-1]
+                G = h*Lm1
+            end
+
+            # Gs[layer] = G
+            # nG = prod(size(G))
+            # lastIdx = n - gradientElementsInserted
+            # firstIdx = n - gradientElementsInserted - nG + 1
+            # g[firstIdx:lastIdx] = vec(G)
+        end
+
         return f, g
 
-    elseif !getGradientToo || classify == true
+    elseif !getGradientToo || classify == false
         return f
+    
+    elseif classify == true
+        return ypred
 
     else
         @error "floc"
@@ -73,6 +127,7 @@ end
 
 dims = [10, 10, 10, 1]
 classify = true
+# classify = false
 
 
 # describe(df)

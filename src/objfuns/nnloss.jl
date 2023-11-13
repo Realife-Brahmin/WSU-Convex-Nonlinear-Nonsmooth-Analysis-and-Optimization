@@ -2,6 +2,8 @@ using CSV
 using DataFrames
 import MLJ as MLJ
 
+include("activation.jl")
+include("construct_w0_from_dims.jl")
 include("objective.jl")
 include("preprocessLiverData.jl")
 
@@ -11,38 +13,75 @@ function nnloss(w::Vector{Float64},
     log::Bool=true,
     getGradientToo::Bool=true)
 
-    X = p[:trainData]
+    p = p.params
+    X = p[:trainData]' # note the transpose
     y = p[:classData]
     
     dims = p[:dims]
     classify = p[:classify]
     
-
     nf, M = size(X)
+
+    if M != length(y)
+        @error "Incompatible sizes of X and y"
+    elseif dims[1] != nf
+        @error "Make sure first element of dims matches the number of used features from X"
+    elseif dims[end] != 1
+        @error "Currently only single class classification is supported. Make sure that dim[end] = 1."
+    end
 
     n = length(w) # this time w is the main hero
 
+    d = length(dims) - 1
+
     f = 0.0
-    g = zeros(n)
+
+    Ws = Vector{VecOrMat{Float64}}(undef, d)
+    Ls = Vector{VecOrMat{Float64}}(undef, d)
     
-    if getGradientToo
-        return f, g
-    else
-        return f
+    weightsRetrieved = 0
+    L = X
+
+    for layer = 1:d
+        szW = ( dims[layer], dims[layer+1] )
+        nW = prod(szW)
+        firstIdx = weightsRetrieved + 1
+        lastIdx = weightsRetrieved + nW
+        W = reshape(w[firstIdx:lastIdx], szW)
+        Ws[layer] = W
+        L = activation.(W'*L)
+        Ls[layer] = L
     end
+
+    ypred = vec(Ls[d])
+    f = (0.5/M)*sum((y - ypred).^2)
+
+    if getGradientToo && classify == false
+        g = zeros(n)
+        Gs = Vector{VecOrMat{Float64}}(undef, d)
+        hs = Vector{VecOrMat{Float64}}(undef, d)
+        return f, g
+
+    elseif !getGradientToo || classify == true
+        return f
+
+    else
+        @error "floc"
+    end
+
 end
 
 dims = [10, 10, 10, 1]
+classify = true
+
+
+# describe(df)
+
 
 w0 = construct_w0_from_dims(dims)
-
-classify = true
 df = preprocessLiverData()
 
-
-# DF.describe(df)
-
-MLJ.schema(df)
+# MLJ.schema(df)
 
 # vscodedisplay(df)
 
@@ -53,8 +92,8 @@ classData = Vector(yTrain)
 
 params = Dict(:trainData=>trainData, :classData=>classData, :dims=>dims, :classify=>classify)
 
-
-
 objective = nnloss;
 
 pr = generate_pr(objective, w0, params=params)
+
+f = nnloss(pr.x0, pr.p)

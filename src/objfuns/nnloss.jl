@@ -18,7 +18,7 @@ function nnloss(w::Vector{Float64},
     if size(trainData, 2) == 1
         X = reshape(trainData, length(trainData), 1)
     else
-        X = trainData
+        X = trainData'
     end
 
     classData = p[:classData]
@@ -26,7 +26,7 @@ function nnloss(w::Vector{Float64},
     if size(classData) == ()
         y = fill(classData, 1, 1)
     else
-        y = reshape(classData, length(classData), 1)
+        y = reshape(classData, 1, length(classData))
     end
     
     dims = p[:dims]
@@ -60,21 +60,22 @@ function nnloss(w::Vector{Float64},
         firstIdx = weightsRetrieved + 1
         lastIdx = weightsRetrieved + nW
         W = reshape(w[firstIdx:lastIdx], szW)
-        @show size(W)
+        # @show size(W)
         Ws[layer] = W
         weightsRetrieved += nW
     end
 
     t = Ws[1]*X
     Ls[1] = activation.(t)
-    @show size(Ls[1])
+    # @show size(Ls[1])
     for layer = 2:d
         t = Ws[layer]*Ls[layer-1]
         Ls[layer] = activation.(t)
-        @show size(Ls[layer])
+        # @show size(Ls[layer])
     end
 
     # ypred = vec(Ls[d])
+    # @show size(y)
     ypred = Ls[d]
     f = (0.5/M)*sum((y - ypred).^2)
 
@@ -86,13 +87,13 @@ function nnloss(w::Vector{Float64},
         gradientElementsInserted = 0
 
         t = ypred - y
-        @show size(t)
+        # @show size(t)
         
         for layer = d:-1:1
             h = t.*( Ls[layer].*(1 .- Ls[layer]) )
-            @show size(h)
+            # @show size(h)
             t = Ws[layer]'*h
-            @show size(t)
+            # @show size(t)
 
             if layer == 1
                 G = h*X'
@@ -100,7 +101,7 @@ function nnloss(w::Vector{Float64},
                 G = h*Ls[layer-1]'
             end
 
-            @show size(G)
+            # @show size(G)
             hs[layer] = h
 
             Gs[layer] = G
@@ -143,11 +144,11 @@ df = preprocessLiverData()
 
 df_train, df_test = MLJ.partition(df, 0.7, rng=123);
 yTrain, XTrain = MLJ.unpack(df_train, ==(:Diagnosis));
-# trainData = Matrix(XTrain)
-# classData = Vector(yTrain)
+trainData = Matrix(XTrain)
+classData = Vector(yTrain)
 
-trainData = Matrix(XTrain)[1, :]
-classData = Vector(yTrain)[1]
+# trainData = Matrix(XTrain)[1, :]
+# classData = Vector(yTrain)[1]
 
 params = Dict(:trainData=>trainData, :classData=>classData, :dims=>dims, :classify=>classify)
 

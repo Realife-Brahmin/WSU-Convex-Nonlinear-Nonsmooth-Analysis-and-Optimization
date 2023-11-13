@@ -60,24 +60,20 @@ function nnloss(w::Vector{Float64},
         firstIdx = weightsRetrieved + 1
         lastIdx = weightsRetrieved + nW
         W = reshape(w[firstIdx:lastIdx], szW)
-        # @show size(W)
         Ws[layer] = W
         weightsRetrieved += nW
     end
 
     t = Ws[1]*X
     Ls[1] = activation.(t)
-    # @show size(Ls[1])
     for layer = 2:d
         t = Ws[layer]*Ls[layer-1]
         Ls[layer] = activation.(t)
-        # @show size(Ls[layer])
     end
 
-    # ypred = vec(Ls[d])
-    # @show size(y)
     ypred = Ls[d]
-    f = (0.5/M)*sum((y - ypred).^2)
+    # f = (0.5/M)*sum((y - ypred).^2)
+    f = 0.5*sum((y - ypred).^2)
 
     if getGradientToo && classify == false
         g = zeros(n)
@@ -87,13 +83,10 @@ function nnloss(w::Vector{Float64},
         gradientElementsInserted = 0
 
         t = ypred - y
-        # @show size(t)
         
         for layer = d:-1:1
             h = t.*( Ls[layer].*(1 .- Ls[layer]) )
-            # @show size(h)
             t = Ws[layer]'*h
-            # @show size(t)
 
             if layer == 1
                 G = h*X'
@@ -101,7 +94,6 @@ function nnloss(w::Vector{Float64},
                 G = h*Ls[layer-1]'
             end
 
-            # @show size(G)
             hs[layer] = h
 
             Gs[layer] = G
@@ -130,16 +122,12 @@ end
 dims = [10, 10, 10, 1]
 classify = true
 classify = false
-
-
 # describe(df)
-
 
 w0 = construct_w0_from_dims(dims)
 df = preprocessLiverData()
 
 # MLJ.schema(df)
-
 # vscodedisplay(df)
 
 df_train, df_test = MLJ.partition(df, 0.7, rng=123);
@@ -156,4 +144,4 @@ objective = nnloss;
 
 pr = generate_pr(objective, w0, params=params)
 
-f = nnloss(pr.x0, pr.p)
+# f = nnloss(pr.x0, pr.p)

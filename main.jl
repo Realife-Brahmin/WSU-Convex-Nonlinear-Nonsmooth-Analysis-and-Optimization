@@ -58,10 +58,51 @@ true_negatives = sum((binary_predictions .== 0) .& (binary_actual .== 0))
 false_negatives = sum((binary_predictions .== 0) .& (binary_actual .== 1))
 
 # Create the confusion matrix
-confusion_matrix = [true_positives false_positives;
-                    false_negatives true_negatives]
+confusion_matrix_tr = [true_negatives false_negatives;
+                    false_positives true_positives]
 
 # Plot the confusion matrix
-Plots.heatmap(["Actual Positive", "Actual Negative"], ["Predicted Positive", "Predicted Negative"], confusion_matrix, color=:blues, aspect_ratio=1)
+pTrain = Plots.heatmap(["Actual Negative", "Actual Positive"], ["Predicted Negative", "Predicted Positive"], confusion_matrix, color=:blues, aspect_ratio=1,
+title = "Fit of FFNN on the Training Data")
 
+# df_train, df_test = MLJ.partition(df, 0.7, rng=123);
+# yTrain, XTrain = MLJ.unpack(df_train, ==(:Diagnosis));
+yTest, XTest = MLJ.unpack(df_test, ==(:Diagnosis));
+
+# trainData = Matrix(XTrain)
+# classData = Vector(yTrain)
+
+trainData = Matrix(XTest);
+classData = Vector(yTest);
+# trainData = Matrix(XTrain)[1, :]
+# classData = Vector(yTrain)[1]
+
+# params = Dict(:trainData=>trainData, :classData=>classData, :dims=>dims, :classify=>classify)
+
+p.params[:trainData] = trainData
+p.params[:classData] = classData
+
+y_pred_test = vec(nnloss(w_trained, p))
+
+y_test = pr.p.params[:classData]
+
+binary_predictions = Int.(y_pred_test .> threshold)
+binary_actual = Int.(y_test .> threshold)  # Convert to Int if not already
+
+# Calculate the elements of the confusion matrix
+true_positives = sum((binary_predictions .== 1) .& (binary_actual .== 1))
+false_positives = sum((binary_predictions .== 1) .& (binary_actual .== 0))
+true_negatives = sum((binary_predictions .== 0) .& (binary_actual .== 0))
+false_negatives = sum((binary_predictions .== 0) .& (binary_actual .== 1))
+
+# Create the confusion matrix
+confusion_matrix_test = [true_negatives false_negatives;
+                    false_positives true_positives]
+
+# Plot the confusion matrix
+pTest = Plots.heatmap(["Actual Negative", "Actual Positive"], ["Predicted Negative", "Predicted Positive"], confusion_matrix, color=:blues, aspect_ratio=1,
+title = "Fit of FFNN on the Testing Data")
+# objective = nnloss;
+
+# pr = generate_pr(objective, w0, params=params)
 # plotresults(res, savePlot=true)

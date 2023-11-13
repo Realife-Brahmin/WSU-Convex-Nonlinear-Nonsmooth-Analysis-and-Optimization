@@ -1,6 +1,8 @@
 function construct_w0_from_dims(dims::Vector{Int})
     numWeights = getNumWeights(dims)
-    w0 = ones(numWeights)
+    sz = 1.0/sqrt(dims[1])
+    w0 = 2*sz*rand(numWeights) .- sz
+    # w0 = ones(numWeights)
     return w0
 end
 

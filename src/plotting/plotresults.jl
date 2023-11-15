@@ -1,3 +1,4 @@
+include("plot_fval_vs_iterations.jl")
 include("plotDragCurve.jl")
 include("plotDenoisedSignal.jl")
 include("plotNeuralNetworkEvaluation.jl")
@@ -5,6 +6,8 @@ include("plotNeuralNetworkEvaluation.jl")
 function plotresults(res;
     savePlot::Bool=true)
     
+    plot_fval_vs_iterations(res, savePlot=savePlot)
+
     pr = res.pr
     functionName = string(pr.objective)
     if functionName == "drag"

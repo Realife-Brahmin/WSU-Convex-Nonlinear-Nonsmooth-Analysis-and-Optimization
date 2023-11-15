@@ -39,7 +39,9 @@ function showresults(res::NamedTuple;
 
     @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals, cause, pr = res
 
-    dataFitting = isempty(pr.p.data) ? false : true
+    params = pr.p[:params]
+    data = pr.p[:data]
+    dataFitting = isempty(data) ? false : true
 
     result_txt = log_path*"results_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
     if isfile(result_txt)

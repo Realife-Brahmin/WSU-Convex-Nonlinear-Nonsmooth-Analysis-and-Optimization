@@ -37,7 +37,8 @@ function generate_pr(functionName::Function,
     data = Matrix{Float64}(undef, 0, 0),
     params = Float64[])
 
-    p = (params=params, data=data)
+    # p = (params=params, data=data)
+    p = Dict(:params=>params, :data=>data)
 
     println("Problem (pr::NamedTuple) generated")
     pr = (p=p, x0=x0, objective=functionName, alg=alg)

@@ -13,15 +13,16 @@ function nnloss(w::Vector{Float64},
     log::Bool=true,
     getGradientToo::Bool=true)
 
-    p = p.params
-    trainData = p[:trainData]
+    # p = p.params
+    params = p[:params]
+    trainData = params[:trainData]
     if size(trainData, 2) == 1
         X = reshape(trainData, length(trainData), 1)
     else
         X = trainData'
     end
 
-    classData = p[:classData]
+    classData = params[:classData]
 
     if size(classData) == ()
         y = fill(classData, 1, 1)
@@ -29,8 +30,8 @@ function nnloss(w::Vector{Float64},
         y = reshape(classData, 1, length(classData))
     end
     
-    dims = p[:dims]
-    classify = p[:classify]
+    dims = params[:dims]
+    classify = params[:classify]
     
     nf, M = size(X, 1), size(X, 2)
     n = length(w)
@@ -119,13 +120,14 @@ function nnloss(w::Vector{Float64},
 
 end
 
-dims = [10, 10, 10, 1]
 classify = true
 classify = false
 # describe(df)
 
-w0 = construct_w0_from_dims(dims)
 df = preprocessLiverData()
+
+hiddenNodes = [10, 10]
+# dims = [10, 10, 10, 1]
 
 # MLJ.schema(df)
 # vscodedisplay(df)
@@ -135,10 +137,17 @@ yTrain, XTrain = MLJ.unpack(df_train, ==(:Diagnosis));
 trainData = Matrix(XTrain)
 classData = Vector(yTrain)
 
-# trainData = Matrix(XTrain)[1, :]
-# classData = Vector(yTrain)[1]
+nf = size(trainData, 2)
+dims = vcat(nf, hiddenNodes, 1)
 
-params = Dict(:trainData=>trainData, :classData=>classData, :dims=>dims, :classify=>classify)
+w0 = construct_w0_from_dims(dims)
+
+yTest, XTest = MLJ.unpack(df_test, ==(:Diagnosis));
+testData = Matrix(XTest);
+testClassData = Vector(yTest);
+
+params = Dict(:trainData=>trainData, :classData=>classData, :dims=>dims, 
+    :classify=>classify, :testData=>testData, :testClassData=>testClassData)
 
 objective = nnloss;
 

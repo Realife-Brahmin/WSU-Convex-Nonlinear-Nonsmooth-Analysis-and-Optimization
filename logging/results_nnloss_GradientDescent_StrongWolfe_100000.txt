@@ -1,0 +1,37 @@
+****************************
+Solver run has concluded.
+Function solved for: nnloss()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too many iterations
+Failed to converge despite 100000 iterations! 😢
+****************************
+Method Used: GradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Best function value = 3.475476639059481
+***************************
+Best Known Nonzero Variables:
+Only upto 15 values will be printed.
+x☆[1] = 1.0655337814038124
+x☆[2] = -1.1397734347438928
+x☆[3] = -0.28017304135318094
+x☆[4] = -0.03494019307695321
+x☆[5] = 0.8347297050432916
+x☆[39] = -0.2982902763096046
+x☆[72] = 0.25438522971462385
+x☆[106] = -1.3770199795367422
+x☆[139] = 1.4861290419858668
+x☆[172] = -0.4392978741092176
+x☆[206] = 3.742729050056229
+x☆[207] = 2.2290484287335572
+x☆[208] = -2.0065870151421636
+x☆[209] = -2.794032956261509
+x☆[210] = 1.8704564692077597
+***************************
+Number of fevals = 100001
+Number of gevals = 100000
+Number of evals = 21100001
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

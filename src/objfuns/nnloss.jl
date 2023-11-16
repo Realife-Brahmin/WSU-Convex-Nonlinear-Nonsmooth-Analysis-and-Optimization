@@ -127,6 +127,12 @@ classify = false
 df = preprocessLiverData()
 
 hiddenNodes = [10, 10]
+# hiddenNodes = [5, 5]
+# hiddenNodes = [8, 8]
+# hiddenNodes = [8, 5]
+# hiddenNodes = [8, 8, 5]
+# hiddenNodes = [10, 10]
+
 # dims = [10, 10, 10, 1]
 
 # MLJ.schema(df)

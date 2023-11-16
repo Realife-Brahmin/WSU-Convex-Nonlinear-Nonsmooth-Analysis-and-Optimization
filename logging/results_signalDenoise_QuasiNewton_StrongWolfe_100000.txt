@@ -36,4 +36,4 @@ Number of gevals = 4
 Number of evals = 85
 **************************************************
 Tolerance critera used:
-dftol = 1.0e-12
+dftol = 1.0e-15

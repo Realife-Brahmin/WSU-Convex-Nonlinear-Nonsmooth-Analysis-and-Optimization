@@ -17,13 +17,13 @@ warmStart = true
 
 # functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
-# functionName = "rosenbrock";
+functionName = "rosenbrock";
 # functionName = "sphere";
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";
 # functionName = "signalDenoise";
-functionName = "nnloss";
+# functionName = "nnloss";
 
 pr = include("src/objfuns/"*String(functionName)*".jl")
 

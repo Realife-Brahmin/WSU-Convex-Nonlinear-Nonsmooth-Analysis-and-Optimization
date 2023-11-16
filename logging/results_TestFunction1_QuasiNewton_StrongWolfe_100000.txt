@@ -3,8 +3,9 @@ Solver run has concluded.
 Function solved for: TestFunction1()
 This was a function minimization problem.
 Cause(s) for stopping:
+LineSearch failed.
 Barely changing fval
-Convergence achieved in 11 iterations 😄
+Convergence achieved in 12 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
@@ -15,9 +16,9 @@ Optimal Nonzero Variables:
 x☆[1] = -0.08984201321174572
 x☆[2] = 0.7126564025507527
 ***************************
-Number of fevals = 11
-Number of gevals = 10
-Number of evals = 31
+Number of fevals = 12
+Number of gevals = 11
+Number of evals = 34
 **************************************************
 Tolerance critera used:
-dftol = 1.0e-12
+dftol = 1.0e-15

@@ -4,8 +4,10 @@ function plotDenoisedSignal(res;
     savePlot::Bool=true)
 
     pr = res.pr
+    # p = pr.p
     d = pr.x0
-    params = pr.p.params
+    # params = pr.p.params
+    params = pr.p[:params]
     p, alpha = params[1:2]
     n = length(d)
     w = res.xvals[:, end]

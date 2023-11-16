@@ -8,7 +8,7 @@ function rosenbrock(x::Vector{Float64},
     getGradientToo::Bool=true, 
     verbose::Bool=false)
 
-    p = p.params
+    p = p[:params]
     scale = p[1]
     n = length(x)
     f = 0.0

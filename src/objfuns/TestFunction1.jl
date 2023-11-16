@@ -4,7 +4,8 @@ function TestFunction1(x::Vector{Float64},
     p; 
     getGradientToo::Bool=true)
 
-    p = p.params
+    # p = p.params
+    p = p[:params]
 
     a = 4 - 2.1 * x[1]^2 + (1/3) * x[1]^4
     c = 4 * x[2]^2 - 4

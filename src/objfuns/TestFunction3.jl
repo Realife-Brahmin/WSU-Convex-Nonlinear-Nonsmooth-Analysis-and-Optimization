@@ -3,7 +3,8 @@ include("objective.jl")
 function TestFunction3(x::Vector{Float64}, p;
     getGradientToo::Bool=true)
     
-    p = p.params
+    # p = p.params
+    p = p[:params]
     beta = p[1]
     n = length(x)
     t = zeros(Float64, n)

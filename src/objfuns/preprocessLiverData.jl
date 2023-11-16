@@ -19,6 +19,8 @@ function preprocessLiverData()
         df[!, col] = map(x -> (x - min_val) / (max_val - min_val), df[!, col]);
     end
 
+    select!(df, Not(["ALB", "A/G Ratio"]))
+
     return df
     
 end

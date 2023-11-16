@@ -60,10 +60,7 @@ function check_training_accuracy(res;
 
     confusion_matrix_tr, accuracy, specificity, sensitivity = calculate_confusion_matrix(y_pred_tr, y_tr, threshold)
     
-    println("Training Data:
-            Accuracy: $accuracy
-            Specificity: $specificity
-            Sensitivity: $sensitivity")
+    println("Training Data:\n"*"Accuracy: $accuracy\n"*"Specificity: $specificity\n"*"Sensitivity: $sensitivity")
 
     if plotHeatMap
         plot_and_save_heatmap(confusion_matrix_tr, "Fit of FFNN on the Training Data",  "training_data_heatmap.png", savePlot=savePlot, saveLocation=saveLocation)

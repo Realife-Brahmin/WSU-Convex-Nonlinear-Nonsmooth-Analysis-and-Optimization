@@ -1,0 +1,37 @@
+****************************
+Solver run has concluded.
+Function solved for: nnloss()
+This was a function minimization problem.
+Cause(s) for stopping:
+Barely changing fval
+Convergence achieved in 13437 iterations 😄
+****************************
+Method Used: QuasiNewton
+Linesearch method used: StrongWolfe
+****************************
+Optimal function value = 2.1006912851249817
+***************************
+Optimal Nonzero Variables:
+Only upto 15 values will be printed.
+x☆[1] = 582.9820323015725
+x☆[2] = 2.439770752919421
+x☆[3] = 3.1232840142195113
+x☆[4] = -28.5578116374132
+x☆[5] = -1343.5239654413776
+x☆[22] = -1252.3284705349515
+x☆[39] = 2724.002643366783
+x☆[55] = -36.18657466418719
+x☆[71] = -3055.637857988746
+x☆[88] = -5.272030054584145
+x☆[105] = 1490.2028506506783
+x☆[106] = -1.1850224510621774
+x☆[107] = -951.3491277712644
+x☆[108] = 664.2077400695127
+x☆[109] = -1202.4555554252613
+***************************
+Number of fevals = 13437
+Number of gevals = 13436
+Number of evals = 1477961
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

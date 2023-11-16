@@ -17,7 +17,7 @@ warmStart = true
 
 # functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
-# functionName = "rosenbrock";
+functionName = "rosenbrock";
 # functionName = "sphere";
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
@@ -27,7 +27,6 @@ warmStart = true
 
 pr = include("src/objfuns/"*String(functionName)*".jl")
 
-# Call the function with the initial problem setup
 # res = @btime begin
 @time begin
     res = warm_start_optimize(pr, verbose=verbose, verbose_ls=verbose_ls)

@@ -1,7 +1,11 @@
 using CSV
 using DataFrames
+import MLJ as MLJ
 
+include("activation.jl")
+include("construct_w0_from_dims.jl")
 include("objective.jl")
+include("preprocessLiverData.jl")
 
 function nnloss(w::Vector{Float64}, 
     p;
@@ -9,76 +13,150 @@ function nnloss(w::Vector{Float64},
     log::Bool=true,
     getGradientToo::Bool=true)
 
-    trainData = p.trainData
-    trainClass = p.trainClass
-    testData = p.testData
-    testClass = p.testClass
-    
-    dims = p.dims
-    classify = p.classify
-
-
-    data = p.data
-    M = size(data, 1)
-    nf = size(data, 2) - 1
-    y = data[:, nf+1]
-    xf = data[:, 1:nf]
-    t = xf
-
-    n = length(x) # note that df's x (time) is different from function parameter x
-    f = 0.0
-    g = zeros(n)
-    
-    if getGradientToo
-        return f, g
+    # p = p.params
+    params = p[:params]
+    trainData = params[:trainData]
+    if size(trainData, 2) == 1
+        X = reshape(trainData, length(trainData), 1)
     else
-        return f
+        X = trainData'
     end
+
+    classData = params[:classData]
+
+    if size(classData) == ()
+        y = fill(classData, 1, 1)
+    else
+        y = reshape(classData, 1, length(classData))
+    end
+    
+    dims = params[:dims]
+    classify = params[:classify]
+    
+    nf, M = size(X, 1), size(X, 2)
+    n = length(w)
+
+    if M != length(y)
+        @error "Incompatible sizes of X and y"
+    elseif dims[1] != nf
+        @error "Make sure first element of dims matches the number of used features from X"
+    elseif dims[end] != 1
+        @error "Currently only single class classification is supported. Make sure that dim[end] = 1."
+    elseif n != getNumWeights(dims)
+        @error "Mismatch between supplied w and the number of weights corresponding to dims."
+    end
+
+    d = length(dims) - 1
+
+    f = 0.0
+
+    Ws = Vector{}(undef, d)
+    Ls = Vector{}(undef, d)
+    
+    weightsRetrieved = 0
+
+    for layer = 1:d
+        szW = ( dims[layer+1], dims[layer] )
+        nW = prod(szW)
+        firstIdx = weightsRetrieved + 1
+        lastIdx = weightsRetrieved + nW
+        W = reshape(w[firstIdx:lastIdx], szW)
+        Ws[layer] = W
+        weightsRetrieved += nW
+    end
+
+    t = Ws[1]*X
+    Ls[1] = activation.(t)
+    for layer = 2:d
+        t = Ws[layer]*Ls[layer-1]
+        Ls[layer] = activation.(t)
+    end
+
+    ypred = Ls[d]
+    # f = (0.5/M)*sum((y - ypred).^2)
+    f = 0.5*sum((y - ypred).^2)
+
+    if getGradientToo && classify == false
+        g = zeros(n)
+        hs = Vector{VecOrMat{Float64}}(undef, d)
+        Gs = Vector{VecOrMat{Float64}}(undef, d)
+
+        gradientElementsInserted = 0
+
+        t = ypred - y
+        
+        for layer = d:-1:1
+            h = t.*( Ls[layer].*(1 .- Ls[layer]) )
+            t = Ws[layer]'*h
+
+            if layer == 1
+                G = h*X'
+            else
+                G = h*Ls[layer-1]'
+            end
+
+            hs[layer] = h
+
+            Gs[layer] = G
+            nG = prod(size(G))
+            lastIdx = n - gradientElementsInserted
+            firstIdx = n - gradientElementsInserted - nG + 1
+            g[firstIdx:lastIdx] = vec(G)
+
+            gradientElementsInserted += nG
+        end
+
+        return f, g
+
+    elseif !getGradientToo || classify == false
+        return f
+    
+    elseif classify == true
+        return ypred
+
+    else
+        @error "floc"
+    end
+
 end
 
-import MLJ as MLJ
-# using  CSV
-# import DataFrames as DF
+classify = true
+classify = false
+# describe(df)
 
-rawDataFolder = "rawData/";
-filename = rawDataFolder * "Indian Liver Patient Dataset (ILPD).csv";
+df = preprocessLiverData()
 
-header = ["Age", "Gender", "TB", "DB", "Alkphos", "Sgpt", "Sgot", "TP", "ALB", "A/G Ratio", "Diagnosis"];
+hiddenNodes = [10, 10]
+# hiddenNodes = [5, 5]
+# hiddenNodes = [8, 8]
+# hiddenNodes = [8, 5]
+# hiddenNodes = [8, 8, 5]
+# hiddenNodes = [10, 10]
 
-df00 = CSV.File(filename, header=header) |> DataFrame;
+# dims = [10, 10, 10, 1]
 
-
-# df0 = DF.dropmissing(df00);
-df0 = dropmissing(df00);
-
-df = deepcopy(df0);
-# Convert "Gender" to 0 and 1
-df.Gender = map(gender -> gender == "Male" ? 0 : 1, df.Gender);
-
-# Convert "Diagnosis" from 1 to 1/3 and 2 to 2/3
-df.Diagnosis = map(diagnosis -> diagnosis == 1 ? 1/3 : 2/3, df.Diagnosis);
-
-# Normalize the first 10 columns
-for col in names(df)[1:10]  # Adjust the 10 here if the number of columns to normalize changes
-    min_val, max_val = minimum(df[!, col]), maximum(df[!, col]);
-    df[!, col] = map(x -> (x - min_val) / (max_val - min_val), df[!, col]);
-end
-
-# DF.describe(df)
-
-MLJ.schema(df)
-
+# MLJ.schema(df)
 # vscodedisplay(df)
 
 df_train, df_test = MLJ.partition(df, 0.7, rng=123);
+yTrain, XTrain = MLJ.unpack(df_train, ==(:Diagnosis));
+trainData = Matrix(XTrain)
+classData = Vector(yTrain)
 
-yTrain, xTrain = MLJ.unpack(df_train, ==(:Diagnosis));
+nf = size(trainData, 2)
+dims = vcat(nf, hiddenNodes, 1)
 
-data = Matrix(df)
+w0 = construct_w0_from_dims(dims)
 
+yTest, XTest = MLJ.unpack(df_test, ==(:Diagnosis));
+testData = Matrix(XTest);
+testClassData = Vector(yTest);
 
-# x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
+params = Dict(:trainData=>trainData, :classData=>classData, :dims=>dims, 
+    :classify=>classify, :testData=>testData, :testClassData=>testClassData)
 
 objective = nnloss;
 
-pr = generate_pr(objective, x0, data=data)
+pr = generate_pr(objective, w0, params=params)
+
+# f = nnloss(pr.x0, pr.p)

@@ -2,7 +2,8 @@ include("objective.jl")
 
 function TestFunction2(x::Vector{Float64}, p; getGradientToo::Bool=true)
     
-    p = p.params
+    # p = p.params
+    p = p[:params]
     a, b, c = p
     den = 2 * length(x)
     f = sum(a* x.^4 + b* x.^2 + c*x) / den + 40

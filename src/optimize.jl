@@ -31,7 +31,8 @@ function optimize(pr;
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     obj = pr.objective
     p = pr.p
-    M = max(size(p.data, 1), 1)
+    data = p[:data]
+    M = max(size(data, 1), 1)
 
     fk = obj(x0, p, getGradientToo=false)
     myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)

@@ -10,8 +10,12 @@ function signalDenoise(x::Vector{Float64},
     getGradientToo::Bool=true)
 
     n = length(x)
-    params = p.params
-    d = p.data
+    # params = p.params
+    params = p[:params]
+
+    # d = p.data
+    d = p[:data]
+    
     if length(params) == 5
         p, alpha, beta, L, R = params
     elseif length(params) == 3

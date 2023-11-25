@@ -10,11 +10,10 @@ function pathtime(x::Vector{Float64},
     getGradientToo::Bool=true)
 
     n = length(x)/2
-    # params = p.params
     params = p[:params]
 
     w = x[1:n]
-    z = x[n+1:end]
+    z = x[n+1:2n]
 
     v = params[:v]
     my, mx = size(v)
@@ -33,7 +32,8 @@ function pathtime(x::Vector{Float64},
         yy += z[k]*S
     end
     
-    
+    xxm = 1 .+ xx*(mx-1)
+    yym = 1 .+ yy*(my-1)
 
     f = (1/2n)*sum( (x-d).^2 )
     xdiff = diff(xfull)
@@ -46,25 +46,7 @@ function pathtime(x::Vector{Float64},
     end
     
     if getGradientToo
-        g = x - d
-        if mod(p, 2) == 0
-            # println("Even integral p value.")
-            for i = 1:n
-                g[i] += alpha/n * (
-                    xdiff[i]^(p-1)
-                    -1*(xdiff[i+1])^(p-1) 
-                )
-            end 
-        else
-            println("NOT even integral p value.")
-            for i = 1:n
-                
-                g[i] += alpha/n *( 
-                        xdiff[i]*(xdiff[i]^2 + beta^2)^(p/2-1)
-                        -xdiff[i+1]*(xdiff[i+1]^2 + beta^2)^(p/2-1)
-                )
-            end
-        end
+        g = zeros(n,)
         return f, g
     else
         return f

@@ -62,17 +62,20 @@ function pathtime(x::Vector{Float64},
 end
 
 rawDataFolder = "rawData/"
-filename = rawDataFolder * "FFD.csv"
+filename = rawDataFolder * "SpeedData.csv"
 df = CSV.File(filename) |> DataFrame
-rename!(df, [:x, :y])
 
-x0 = Float64.(data)
-
+v = Matrix(df)
+# rename!(df, [:x, :y])
+n = 4
+x0 = Float64.(0.1*randn(2*n))
+A = (0.05, 0.05)
+B = (0.95, 0.95)
 params = Dict()
 params = Dict(:v => v, :A=>A, :B=>B)
 
 objective = pathtime;
 
-pr = generate_pr(objective, x0, data=data, params=params)
+pr = generate_pr(objective, x0, params=params)
 
 # signalDenoise(pr.x0, pr.p)

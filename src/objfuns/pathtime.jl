@@ -34,19 +34,8 @@ function pathtime(x::Vector{Float64},
     
     xxm = 1 .+ xx*(mx-1)
     yym = 1 .+ yy*(my-1)
-
-    f = (1/2n)*sum( (x-d).^2 )
-    xdiff = diff(xfull)
-    if mod(p, 2) == 0
-        # println("Even integral p value.")
-        f += (alpha/(p*n)) * sum(xdiff.^p)
-    else
-        println("NOT even integral p value.")
-        f += (alpha/(p*n)) * sum( (xdiff.^2 + myfill(xdiff, beta).^2).^(p/2) )
-    end
     
     if getGradientToo
-        g = zeros(n,)
         return f, g
     else
         return f

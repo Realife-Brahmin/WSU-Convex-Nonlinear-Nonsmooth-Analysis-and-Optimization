@@ -9,7 +9,7 @@ function pathtime(x::Vector{Float64},
     log::Bool=true,
     getGradientToo::Bool=true)
 
-    n = length(x)/2
+    n = Int(length(x)/2)
     params = p[:params]
 
     w = x[1:n]
@@ -21,13 +21,11 @@ function pathtime(x::Vector{Float64},
     B = params[:B] # B is a tuple (x_b, y_b)
 
     s = LinRange(0, 1, 1000)
-    xx = (1 .- s)*A(1) + s*B(1)
-    yy = (1 .- s)*A(2) + s*B(2)
+    xx = (1 .- s)*A[1] + s*B[1]
+    yy = (1 .- s)*A[2] + s*B[2]
 
-    k = 1:n
-    S = sin.(π*k*s)
     for k = 1:n
-        S = sin(k*π*s)
+        S = sin.(k*π*s)
         xx += w[k]*S
         yy += z[k]*S
     end
@@ -36,8 +34,8 @@ function pathtime(x::Vector{Float64},
     yym = 1 .+ yy*(my-1)
     xxm = (xxm[2:end]+xxm[1:end-1])/2
     yym = (yym[2:end]+yym[1:end-1])/2
-    xxm = max(min(xxm, mx), 1)
-    yym = max(min(yym, my), 1)
+    xxm = max.(min.(xxm, mx), 1)
+    yym = max.(min.(yym, my), 1)
 
     dist = sqrt(diff(xx).^2 + diff(yy).^2)
     vel = interp2(v, xxm, yym)
@@ -49,7 +47,7 @@ function pathtime(x::Vector{Float64},
         for j = 1:2*n
             y = x
             y[j] += del
-            df = pathtime(y, p)
+            df = pathtime(y, p, getGradientToo=false)
             g[j] = (df-f)/del
         end
         return f, g
@@ -77,5 +75,4 @@ params = Dict(:v => v, :A=>A, :B=>B)
 objective = pathtime;
 
 pr = generate_pr(objective, x0, params=params)
-
 # signalDenoise(pr.x0, pr.p)

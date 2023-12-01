@@ -34,8 +34,24 @@ function pathtime(x::Vector{Float64},
     
     xxm = 1 .+ xx*(mx-1)
     yym = 1 .+ yy*(my-1)
-    
+    xxm = (xxm[2:end]+xxm[1:end-1])/2
+    yym = (yym[2:end]+yym[1:end-1])/2
+    xxm = max(min(xxm, mx), 1)
+    yym = max(min(yym, my), 1)
+
+    dist = sqrt(diff(xx).^2 + diff(yy).^2)
+    vel = interp2(v, xxm, yym)
+    f = sum(dist./vel)
+
     if getGradientToo
+        del = sqrt(eps)
+        g = zeros(2*n)
+        for j = 1:2*n
+            y = x
+            y[j] += del
+            df = pathtime(y, p)
+            g[j] = (df-f)/del
+        end
         return f, g
     else
         return f

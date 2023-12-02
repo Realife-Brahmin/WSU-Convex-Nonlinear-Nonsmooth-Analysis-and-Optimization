@@ -10,8 +10,9 @@ function pathtime(x::Vector{Float64},
     getGradientToo::Bool=true)
 
     n = Int(length(x)/2)
-    params = p[:params]
 
+    params = p[:params]
+    m = params[:m]
     w = x[1:n]
     z = x[n+1:2n]
 
@@ -20,15 +21,17 @@ function pathtime(x::Vector{Float64},
     A = params[:A] # A is a tuple (x_a, y_a)
     B = params[:B] # B is a tuple (x_b, y_b)
 
-    s = LinRange(0, 1, 1000)
-    xx = (1 .- s)*A[1] + s*B[1]
-    yy = (1 .- s)*A[2] + s*B[2]
-
-    for k = 1:n
-        S = sin.(k*π*s)
-        xx += w[k]*S
-        yy += z[k]*S
-    end
+    s = LinRange(0, 1, m)
+    # xx = (1 .- s)*A[1] + s*B[1]
+    # yy = (1 .- s)*A[2] + s*B[2]
+    pi_array = [1:n]*π
+    xx = (1 .- s)*A[1] + s*B[1] + vec(sin.(s * pi_array') * w)
+    yy = (1 .- s)*A[2] + s*B[2] + vec(sin.(s * pi_array') * z)
+    # for k = 1:n
+    #     S = sin.(k*π*s)
+    #     xx += w[k]*S
+    #     yy += z[k]*S
+    # end
     
     xxm = 1 .+ xx*(mx-1)
     yym = 1 .+ yy*(my-1)
@@ -67,6 +70,7 @@ v = Matrix(df)
 # rename!(df, [:x, :y])
 n = 4
 x0 = Float64.(0.1*randn(2*n))
+m = 1000
 A = (0.05, 0.05)
 B = (0.95, 0.95)
 params = Dict()

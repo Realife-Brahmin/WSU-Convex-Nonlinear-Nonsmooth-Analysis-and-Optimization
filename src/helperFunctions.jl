@@ -165,6 +165,49 @@ function extrapolate(xopt::Vector{Float64}, factor::Int)
     return new_xopt
 end
 
+"""
+    interpolate_velocity(v::Array{Float64,2}, xxm::Vector{Float64}, yym::Vector{Float64}) -> Vector{Float64}
+
+Performs bilinear interpolation on a 2D grid of velocity data.
+
+# Arguments
+- `v::Array{Float64,2}`: A 2D array representing velocity values on a grid. The array can be of any rectangular shape.
+- `xxm::Vector{Float64}`: A vector containing the x-coordinates at which to interpolate the velocity. The values should correspond to the indices of the grid and can be floating-point numbers.
+- `yym::Vector{Float64}`: A vector containing the y-coordinates at which to interpolate the velocity, similar to `xxm`.
+
+# Returns
+- `Vector{Float64}`: A vector of interpolated velocity values corresponding to each pair of coordinates in `xxm` and `yym`.
+
+# Notes
+- The function uses bilinear interpolation, which is suitable for continuous and smoothly varying velocity fields.
+- The length of `xxm` and `yym` must be the same, as they represent pairs of coordinates in the velocity grid.
+- This function scales the interpolation object to match the index coordinates of the original matrix, allowing for direct use of the original floating-point coordinates.
+
+# Examples
+To use this function, ensure that `v` is a 2D array of velocity values, and `xxm` and `yym` are vectors containing the coordinates for interpolation. The function will return a vector of interpolated values.
+
+```julia
+v = [sin(i + j) for i in 1:256, j in 1:300]
+xxm = rand(1:256, 1000) 
+yym = rand(1:300, 1000)
+vel = interpolate_velocity(v, xxm, yym)
+```
+"""
+function interpolate_velocity(v, xxm, yym)
+    # Check if the length of xxm and yym are the same
+    if length(xxm) != length(yym)
+        error("Length of xxm and yym must be the same")
+    end
+
+    # Create an interpolation object for bilinear interpolation
+    interp_v = interpolate(v, BSpline(Linear()), OnGrid())
+
+    # Scale the interpolation object to match the index coordinates of the original matrix
+    scaled_interp_v = scale(interp_v, 1:size(v, 1), 1:size(v, 2))
+
+    # Perform interpolation
+    [scaled_interp_v[x, y] for (x, y) in zip(xxm, yym)]
+end
 
 
 

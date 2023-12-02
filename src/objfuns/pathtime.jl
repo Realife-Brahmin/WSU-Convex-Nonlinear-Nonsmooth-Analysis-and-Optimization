@@ -37,7 +37,7 @@ function pathtime(x::Vector{Float64},
     yym = max.(min.(yym, my), 1)
 
     dist = sqrt.(diff(xx).^2 + diff(yy).^2)
-    vel = interp2(v, xxm, yym)
+    vel = interpolate_velocity(v, xxm, yym)
     f = sum(dist./vel)
 
     if getGradientToo

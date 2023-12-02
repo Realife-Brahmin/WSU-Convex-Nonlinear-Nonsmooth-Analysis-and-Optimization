@@ -21,31 +21,27 @@ function pathtime(x::Vector{Float64},
     A = params[:A] # A is a tuple (x_a, y_a)
     B = params[:B] # B is a tuple (x_b, y_b)
 
-    s = LinRange(0, 1, m)
-    # xx = (1 .- s)*A[1] + s*B[1]
-    # yy = (1 .- s)*A[2] + s*B[2]
-    pi_array = [1:n]*π
-    xx = (1 .- s)*A[1] + s*B[1] + vec(sin.(s * pi_array') * w)
-    yy = (1 .- s)*A[2] + s*B[2] + vec(sin.(s * pi_array') * z)
-    # for k = 1:n
-    #     S = sin.(k*π*s)
-    #     xx += w[k]*S
-    #     yy += z[k]*S
-    # end
+    s = collect(LinRange(0, 1, m))
+    pi_array = collect(1:n)*π
+    xx = (1 .- s)*A[1] + s*B[1] + sin.(s * pi_array') * w
+    yy = (1 .- s)*A[2] + s*B[2] + sin.(s * pi_array') * z
+
     
+    # From normalized trajectory, computing corresponding matrix element positions
     xxm = 1 .+ xx*(mx-1)
-    yym = 1 .+ yy*(my-1)
+    yym = 1 .+ yy*(my-1) 
     xxm = (xxm[2:end]+xxm[1:end-1])/2
     yym = (yym[2:end]+yym[1:end-1])/2
+    # ensuring that xxm, yym do not escape matrix bounds
     xxm = max.(min.(xxm, mx), 1)
     yym = max.(min.(yym, my), 1)
 
-    dist = sqrt(diff(xx).^2 + diff(yy).^2)
+    dist = sqrt.(diff(xx).^2 + diff(yy).^2)
     vel = interp2(v, xxm, yym)
     f = sum(dist./vel)
 
     if getGradientToo
-        del = sqrt(eps)
+        del = sqrt(eps())
         g = zeros(2*n)
         for j = 1:2*n
             y = x
@@ -64,7 +60,7 @@ end
 
 rawDataFolder = "rawData/"
 filename = rawDataFolder * "SpeedData.csv"
-df = CSV.File(filename) |> DataFrame
+df = CSV.File(filename, header=false) |> DataFrame
 
 v = Matrix(df)
 # rename!(df, [:x, :y])

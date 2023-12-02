@@ -1,0 +1,29 @@
+****************************
+Solver run has concluded.
+Function solved for: pathtime()
+This was a function minimization problem.
+Cause(s) for stopping:
+LineSearch failed.
+Convergence achieved in 9 iterations 😄
+****************************
+Method Used: GradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Optimal function value = 0.6886455554266783
+***************************
+Optimal Nonzero Variables:
+x☆[1] = -0.014787688888435575
+x☆[2] = -0.036458011074910576
+x☆[3] = -0.07255764525392583
+x☆[4] = -0.0003405528742610048
+x☆[5] = 0.002834179377138299
+x☆[6] = 0.012454675351573956
+x☆[7] = -0.01236249152678845
+x☆[8] = 0.019677256892587452
+***************************
+Number of fevals = 9
+Number of gevals = 8
+Number of evals = 73
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

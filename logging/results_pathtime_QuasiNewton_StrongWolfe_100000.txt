@@ -1,0 +1,29 @@
+****************************
+Solver run has concluded.
+Function solved for: pathtime()
+This was a function minimization problem.
+Cause(s) for stopping:
+LineSearch failed.
+Convergence achieved in 4 iterations 😄
+****************************
+Method Used: QuasiNewton
+Linesearch method used: StrongWolfe
+****************************
+Optimal function value = 0.7465240526928163
+***************************
+Optimal Nonzero Variables:
+x☆[1] = -0.04160969953357756
+x☆[2] = -0.025318416572772565
+x☆[3] = 0.06848980106513967
+x☆[4] = 0.07249581996299159
+x☆[5] = 0.07120159998800621
+x☆[6] = 0.15728677199446395
+x☆[7] = 0.10211675583684672
+x☆[8] = 0.022336427313220632
+***************************
+Number of fevals = 4
+Number of gevals = 3
+Number of evals = 28
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

@@ -70,9 +70,12 @@ m = 1000
 A = (0.05, 0.05)
 B = (0.95, 0.95)
 params = Dict()
-params = Dict(:v => v, :A=>A, :B=>B)
+params = Dict(:v => v, :A=>A, :B=>B, :m=>m)
 
 objective = pathtime;
 
 pr = generate_pr(objective, x0, params=params)
 # signalDenoise(pr.x0, pr.p)
+
+# obj = pr.objective
+# obj(x0, pr.p)

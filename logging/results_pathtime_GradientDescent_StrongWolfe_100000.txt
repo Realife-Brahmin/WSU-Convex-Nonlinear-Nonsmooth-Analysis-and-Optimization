@@ -4,26 +4,26 @@ Function solved for: pathtime()
 This was a function minimization problem.
 Cause(s) for stopping:
 LineSearch failed.
-Convergence achieved in 9 iterations 😄
+Convergence achieved in 12 iterations 😄
 ****************************
 Method Used: GradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 0.6886455554266783
+Optimal function value = 0.6792386506899456
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = -0.014787688888435575
-x☆[2] = -0.036458011074910576
-x☆[3] = -0.07255764525392583
-x☆[4] = -0.0003405528742610048
-x☆[5] = 0.002834179377138299
-x☆[6] = 0.012454675351573956
-x☆[7] = -0.01236249152678845
-x☆[8] = 0.019677256892587452
+x☆[1] = 0.042858135094083157
+x☆[2] = -0.04793526860645316
+x☆[3] = 0.018093351239489137
+x☆[4] = 0.025774511715778384
+x☆[5] = -0.04459582295605086
+x☆[6] = 0.040734457824480964
+x☆[7] = -0.019236332452655318
+x☆[8] = -0.005577100219643284
 ***************************
-Number of fevals = 9
-Number of gevals = 8
-Number of evals = 73
+Number of fevals = 12
+Number of gevals = 11
+Number of evals = 100
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-15

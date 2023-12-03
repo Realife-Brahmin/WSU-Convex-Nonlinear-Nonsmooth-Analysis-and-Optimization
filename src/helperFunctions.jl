@@ -200,10 +200,10 @@ function interpolate_velocity(v, xxm, yym)
     end
 
     # Create an interpolation object for bilinear interpolation
-    interp_v = interpolate(v, BSpline(Linear()), OnGrid())
+    interp_v = Interpolations.interpolate(v, BSpline(Linear()), OnGrid())
 
     # Scale the interpolation object to match the index coordinates of the original matrix
-    scaled_interp_v = scale(interp_v, 1:size(v, 1), 1:size(v, 2))
+    scaled_interp_v = Interpolations.scale(interp_v, 1:size(v, 1), 1:size(v, 2))
 
     # Perform interpolation
     [scaled_interp_v[x, y] for (x, y) in zip(xxm, yym)]

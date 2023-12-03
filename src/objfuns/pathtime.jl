@@ -94,7 +94,9 @@ df = CSV.File(filename, header=false) |> DataFrame
 
 v = Matrix(df)
 # rename!(df, [:x, :y])
-n = 4
+# n = 21
+# n = 3
+n = 12
 x0 = Float64.(0.1*randn(2*n))
 m = 1000
 A = (0.05, 0.05)

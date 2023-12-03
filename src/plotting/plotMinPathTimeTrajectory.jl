@@ -12,7 +12,6 @@ function plotMinPathTimeTrajectory(res;
     mx, my = size(v)
     A = params[:A]
     B = params[:B]
-    @show params
     speedMatrixID = params[:speedMatrixID]
     Am = 1 .+ (mx-1, my-1).*A
     Bm = 1 .+ (mx-1, my-1).*B
@@ -36,7 +35,7 @@ function plotMinPathTimeTrajectory(res;
     # legend!(:outertopright)
     xlabel!("X-axis")
     ylabel!("Y-axis")
-    title!("Minimum Pathtime Trajectory\n"*"Optimal Time = $(fval) units\n"*"Method: $(pr.alg.method)\n"*"n = $(n)")
+    title!("Minimum Pathtime Trajectory for $(speedMatrixID)\n"*"Optimal Time = $(fval) units\n"*"Method: $(pr.alg.method)\n"*"n = $(n)")
 
     xxm_int, yym_int = computeOptimalTrajectoryIndices(res)
     h2 = Plots.plot(h12,

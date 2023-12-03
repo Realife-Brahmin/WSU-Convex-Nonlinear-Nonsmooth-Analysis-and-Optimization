@@ -1,0 +1,2 @@
+Begin with the solver:
+Convergence achieved in 123 iterations 😄

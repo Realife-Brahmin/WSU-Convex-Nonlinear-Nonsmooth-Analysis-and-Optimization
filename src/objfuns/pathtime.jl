@@ -91,28 +91,42 @@ end
 rawDataFolder = "rawData/"
 ext = ".csv"
 # filename = rawDataFolder * "SpeedData.csv"
-speedMatrixID = "SpeedData"
-speedMatrixID = "SpeedData_Spiral"
+# speedMatrixID = "SpeedData"
+# speedMatrixID = "SpeedData_I"
+speedMatrixID = "SpeedData_Serpentine"
+# speedMatrixID = "SpeedData_Spiral"
 filename = rawDataFolder * speedMatrixID * ext
 df = CSV.File(filename, header=false) |> DataFrame
 
 v = Matrix(df)
 # rename!(df, [:x, :y])
+n = 1
+n = 2
+n = 3
+n = 5
+n = 8
+n = 13
 # n = 21
-# n = 3
-n = 12
 x0 = Float64.(0.1*randn(2*n))
+# m = 250
 m = 1000
 # m = 2000
-A = (0.05, 0.05)
-B = (0.95, 0.95)
+if speedMatrixID == "SpeedData_Spiral"
+    A = (0.5, 0.5)
+    B = (0.5, 0.42)
+elseif speedMatrixID == "SpeedData_I"
+    A = (0.5, 0.25)
+    B = (0.5, 0.75)
+elseif speedMatrixID == "SpeedData_Serpentine"
+    A = (0.1, 0.55)
+    B = (0.9, 0.45)
+else
+    A = (0.05, 0.05)
+    B = (0.95, 0.95)
+end
 # params = Dict()
 params = Dict(:v => v, :A=>A, :B=>B, :m=>m, :speedMatrixID=>speedMatrixID)
 
 objective = pathtime;
 
 pr = generate_pr(objective, x0, params=params)
-# signalDenoise(pr.x0, pr.p)
-
-# obj = pr.objective
-# obj(x0, pr.p)

@@ -35,7 +35,7 @@ problem = generate_pr(f, x0)
 function generate_pr(functionName::Function,
     x0::Vector{Float64};
     data = Matrix{Float64}(undef, 0, 0),
-    params)
+    params = Dict())
 
     # p = (params=params, data=data)
     p = Dict(:params=>params, :data=>data)

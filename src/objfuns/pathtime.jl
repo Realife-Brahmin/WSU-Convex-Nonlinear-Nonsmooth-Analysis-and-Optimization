@@ -44,7 +44,7 @@ function pathtime(x::Vector{Float64},
         del = sqrt(eps())
         g = zeros(2*n)
         for j = 1:2*n
-            y = x
+            y = deepcopy(x)
             y[j] += del
             df = pathtime(y, p, getGradientToo=false)
             g[j] = (df-f)/del

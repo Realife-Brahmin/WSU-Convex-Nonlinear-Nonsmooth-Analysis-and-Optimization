@@ -3,6 +3,7 @@ using Plots
 function plotMinPathTimeTrajectory(res;
     plotTrajectory=false,
     savePlot=savePlot)
+
     Plots.theme(:dao)
     pr = res.pr
     p = pr[:p]
@@ -11,6 +12,8 @@ function plotMinPathTimeTrajectory(res;
     mx, my = size(v)
     A = params[:A]
     B = params[:B]
+    @show params
+    speedMatrixID = params[:speedMatrixID]
     Am = 1 .+ (mx-1, my-1).*A
     Bm = 1 .+ (mx-1, my-1).*B
 
@@ -46,7 +49,7 @@ function plotMinPathTimeTrajectory(res;
     legend=:topright)
 
     folderName = string(dirname(dirname(@__DIR__)))*"/processedData/"
-    filename = folderName*"minTimePath_"*pr.alg.method*"_n_"*string(n)*".png"
+    filename = folderName*"minTimePath_"*speedMatrixID*"_"*pr.alg.method*"_n_"*string(n)*".png"
 
     if savePlot
         
@@ -61,4 +64,4 @@ function plotMinPathTimeTrajectory(res;
 
 end
 
-plotresults(res, savePlot=true)
+# plotresults(res, savePlot=true)

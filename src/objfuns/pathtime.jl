@@ -89,7 +89,11 @@ function computeOptimalTrajectoryIndices(res)
 end
 
 rawDataFolder = "rawData/"
-filename = rawDataFolder * "SpeedData.csv"
+ext = ".csv"
+# filename = rawDataFolder * "SpeedData.csv"
+speedMatrixID = "SpeedData"
+speedMatrixID = "SpeedData_Spiral"
+filename = rawDataFolder * speedMatrixID * ext
 df = CSV.File(filename, header=false) |> DataFrame
 
 v = Matrix(df)
@@ -99,10 +103,11 @@ v = Matrix(df)
 n = 12
 x0 = Float64.(0.1*randn(2*n))
 m = 1000
+# m = 2000
 A = (0.05, 0.05)
 B = (0.95, 0.95)
-params = Dict()
-params = Dict(:v => v, :A=>A, :B=>B, :m=>m)
+# params = Dict()
+params = Dict(:v => v, :A=>A, :B=>B, :m=>m, :speedMatrixID=>speedMatrixID)
 
 objective = pathtime;
 

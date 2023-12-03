@@ -5,26 +5,26 @@ This was a function minimization problem.
 Cause(s) for stopping:
 LineSearch failed.
 Barely changing fval
-Convergence achieved in 58 iterations 😄
+Convergence achieved in 66 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 0.6596812771589992
+Optimal function value = 0.6596816656159447
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = -0.03868906803827458
-x☆[2] = -0.05717534123796806
-x☆[3] = -0.012620009399561916
-x☆[4] = 0.01066270819677335
-x☆[5] = -0.13202165480795164
-x☆[6] = 0.053797256503986944
-x☆[7] = -0.0213298377572355
-x☆[8] = -0.004795351103152794
+x☆[1] = -0.04106736603464307
+x☆[2] = -0.0558190141336503
+x☆[3] = -0.012363538811366676
+x☆[4] = 0.011087003111396331
+x☆[5] = -0.13395076611913256
+x☆[6] = 0.05582658926858918
+x☆[7] = -0.022320065850628873
+x☆[8] = -0.0036699118186263413
 ***************************
-Number of fevals = 58
-Number of gevals = 57
-Number of evals = 514
+Number of fevals = 66
+Number of gevals = 65
+Number of evals = 586
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-15

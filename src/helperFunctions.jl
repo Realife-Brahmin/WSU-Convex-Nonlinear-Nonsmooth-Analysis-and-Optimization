@@ -165,6 +165,7 @@ function extrapolate(xopt::Vector{Float64}, factor::Int)
     return new_xopt
 end
 
+import Interpolations
 """
     interpolate_velocity(v::Array{Float64,2}, xxm::Vector{Float64}, yym::Vector{Float64}) -> Vector{Float64}
 

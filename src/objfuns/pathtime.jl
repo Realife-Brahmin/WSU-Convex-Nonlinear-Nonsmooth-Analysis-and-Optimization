@@ -91,22 +91,22 @@ end
 rawDataFolder = "rawData/"
 ext = ".csv"
 # filename = rawDataFolder * "SpeedData.csv"
-# speedMatrixID = "SpeedData"
+speedMatrixID = "SpeedData"
 # speedMatrixID = "SpeedData_I"
-speedMatrixID = "SpeedData_Serpentine"
+# speedMatrixID = "SpeedData_Serpentine"
 # speedMatrixID = "SpeedData_Spiral"
 filename = rawDataFolder * speedMatrixID * ext
 df = CSV.File(filename, header=false) |> DataFrame
 
 v = Matrix(df)
 # rename!(df, [:x, :y])
-n = 1
-n = 2
-n = 3
-n = 5
-n = 8
-n = 13
-# n = 21
+# n = 1
+# n = 2
+# n = 3
+# n = 5
+# n = 8
+# n = 13
+n = 21
 x0 = Float64.(0.1*randn(2*n))
 # m = 250
 m = 1000

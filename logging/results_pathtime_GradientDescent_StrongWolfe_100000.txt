@@ -1,0 +1,37 @@
+****************************
+Solver run has concluded.
+Function solved for: pathtime()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too many iterations
+Failed to converge despite 100000 iterations! 😢
+****************************
+Method Used: GradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Best function value = 0.6596763955671695
+***************************
+Best Known Nonzero Variables:
+Only upto 15 values will be printed.
+x☆[1] = -0.035617512172092185
+x☆[2] = -0.029995872600149767
+x☆[3] = 0.00573069012098331
+x☆[4] = -0.05587208953274922
+x☆[5] = 0.00034580661543122393
+x☆[8] = -0.0029465818559041845
+x☆[10] = -0.00016010276538091367
+x☆[12] = 0.001853473950759174
+x☆[15] = 0.005384235161081295
+x☆[17] = 0.014770619673123625
+x☆[20] = 0.0051399914893756685
+x☆[21] = -0.0012432503931208566
+x☆[22] = 0.003139985455816667
+x☆[23] = -0.001036471953449497
+x☆[24] = 0.0006771136194531763
+***************************
+Number of fevals = 100001
+Number of gevals = 100000
+Number of evals = 2500001
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

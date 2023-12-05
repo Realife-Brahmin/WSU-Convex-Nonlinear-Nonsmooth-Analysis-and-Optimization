@@ -51,7 +51,8 @@ function dampedSHM(x::Vector{Float64},
     log::Bool=true,
     getGradientToo::Bool=true)
 
-    data = p.data
+    # data = p.data
+    data = p[:data]
     M = size(data, 1)
     nf = size(data, 2) - 1
     y = data[:, nf+1]

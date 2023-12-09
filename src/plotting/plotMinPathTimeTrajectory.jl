@@ -40,8 +40,9 @@ function plotMinPathTimeTrajectory(res;
     xxm_int, yym_int = computeOptimalTrajectoryIndices(res)
     h2 = Plots.plot(h12,
     yflip = true, 
-    xxm_int, 
+    # xxm_int, 
     yym_int, 
+    xxm_int,
     linecolor=:antiquewhite2, 
     linewidth=2, 
     label="Optimal Path",

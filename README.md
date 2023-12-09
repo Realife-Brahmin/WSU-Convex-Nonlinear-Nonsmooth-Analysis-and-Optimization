@@ -8,8 +8,9 @@ This repo contains a solver in julia , and different types of optimization probl
 - Functional Estimation (Estimating a function which minimizes drag force)
 - Signal Denosing (Fitting a curve to data, choosing between abiding smoothness of curve or accuracy of fitting)
 - Neural Network Training (Detecting Liver Disease in a dataset of patients based on 10 features)
-- ???
-
+- Minimum Time Trajectory (for a 2D Speed Matrix, and given points A and B on the plane, compute the trajectory minimizing the time of travel)
+- Final Project (Computing the optimal placement of a receiver, given the location of several transmitters)
+  
 ## LineSearch/TrustRegion Methods Used:
 - Conjugate Gradient Descent
 - Gradient Descent

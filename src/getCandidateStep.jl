@@ -1,0 +1,91 @@
+using LinearAlgebra
+using Parameters
+
+include("helperFunctions.jl")
+include("types.jl")
+
+function getCandidateStep(SR1params::Dict,
+    TRparams::Dict;
+    itrMax::Int = 50)
+
+    @unpack Delta = TRparams
+    gk = SR1params[:gkm1] # it is now gk from updateModelParams()
+    eps_k = min(1/2, sqrt(norm(gk)))*norm(gk)
+
+    Bk = SR1params[:Bkm1] # Bkm1 was updated with Bk after the last updateTRModelParams
+
+    j = 1
+    keepFindingCandidate = true
+
+    rj = gk
+    dj = -rj
+    zj = myzeros(gk)
+
+    while keepFindingCandidate
+        @checkForNaN ρinv = dj*Bk*dj
+        if ρinv ≤ 0
+            pj = getBoundaryIntersection(zj, dj, Delta)
+            keepFindingCandidate =  false
+            return pj
+        else
+            ρ = 1.0/ρinv
+            alphaj = ρ*rj'*rj
+            zjp1 = zj + alphaj*dj
+        end
+
+        if norm(zjp1) ≥ Delta # We've stepped outside the TRegion, so let's backup along this step to the boundary
+            pj = getBoundaryIntersection(zj, dj, Delta)
+            keepFindingCandidate = false
+            return pj
+        else
+            zj = zjp1
+            rjp1 = rj + alphaj*Bk*dj
+        end
+
+        if norm(rjp1) < eps_k
+            pj = zj
+            keepFindingCandidate = false
+            return pj
+        else
+            ρinv2 = rj'*rj
+            if ρinv2 == 0 || isnan(ρinv2)
+                @error "Invalid ρinv2"
+            else
+                ρ2 = 1.0/ρinv2
+                betaj = ρ2*rjp1'*rjp1
+                dj = -rjp1 + betaj*dj
+            end
+        end
+
+        j += 1
+
+        if j > itrMax
+            @error "Failed to find TRegion step despite $(itrMax) iterations."
+            keepFindingCandidate = false
+        end
+
+    end
+
+    @error "floc"
+end
+
+function getBoundaryIntersection(v1::Vector{Float64},
+    v2::Vector{Float64},
+    Delta::Float64)
+
+    if length(v1) != length(v2)
+        @error "Cannot perform interpolation if vectors have mismatched lengths"
+    else
+        ρinv = v2'*v2
+        if isnan(ρinv) || ρinv == 0
+            @error "problematic ρinv"
+        else
+            ρ = 1.0/ρinv
+            alpha = -ρ*v1'*v2 + sqrt( (ρ*v1'*v2)^2 - 4*ρ*(v1'*v1 - Delta^2))
+            p = v1 + alpha*v2
+            return p
+        end
+    end
+
+    @error "floc"
+end

@@ -9,10 +9,15 @@ function checkQualityOfCandidateStep(mk::Function,
     f::Function,
     xk::Vector{Float64},
     fk::Float64,
-    pj::Vector{Float64})
+    pj::Vector{Float64},
+    solverState::SolverStateType)
+
+    @unpack fevals = solverState
 
     Delta_mk = fk - mk(pj)
-    Delta_fk = fk - f(xk+pj)
+    Delta_fk = fk - f(xk+pj); fevals += 1
+
+    @pack! fevals = solverState
 
     if Delta_mk < 0
         @error "problematic prediction which shouldn't even have been possible!"
@@ -20,8 +25,9 @@ function checkQualityOfCandidateStep(mk::Function,
         @error "zero Delta_mk? I'll never get my quality index value."
     else
         ρk = Delta_fk/Delta_mk
-        return ρk
+        return (ρk=ρk, solverState=solverState)
     end
-
+    
     @error "floc"
 end
+

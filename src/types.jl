@@ -292,6 +292,22 @@ function TRparamsType(;
     return TRparams
 end
 
+function SR1paramsType(;
+    xkm1 = [],
+    gkm1 = [],
+    Bkm1 = []
+    )
+
+    SR1params = Dict(
+        :xkm1 => xkm1,
+        :gkm1 => gkm1,
+        :Bkm1 => Bkm1
+    )
+
+    return SR1params
+end
+
+# SR1params = SR1paramsType()
 # TRparams = TRparamsType()
 # solState = SolStateType()
 # solverState = SolverStateType()

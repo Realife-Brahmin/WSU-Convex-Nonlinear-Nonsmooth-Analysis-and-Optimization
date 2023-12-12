@@ -1,8 +1,10 @@
 using LinearAlgebra
 using Parameters
+using Test
 
 include("helperFunctions.jl")
 include("types.jl")
+
 
 function getCandidateStep(SR1params::Dict,
     TRparams::Dict;
@@ -69,6 +71,31 @@ function getCandidateStep(SR1params::Dict,
     @error "floc"
 end
 
+"""
+    getBoundaryIntersection(v1::Vector{Float64}, v2::Vector{Float64}, Delta::Float64)
+
+Calculate the intersection point of the line defined by `v1 + alpha * v2` with the boundary of a trust region of radius `Delta`.
+
+# Arguments
+- `v1::Vector{Float64}`: Starting point of the vector.
+- `v2::Vector{Float64}`: Direction vector.
+- `Delta::Float64`: Radius of the trust region.
+
+# Returns
+- `(p, alpha)`: A tuple where `p` is the intersection point on the boundary of the trust region, and `alpha` is the scalar multiplier for `v2`.
+
+# Errors
+- Throws an error if `v1` and `v2` have mismatched lengths.
+- Throws an error if `ρinv` (inverse of the dot product of `v2` with itself) is zero or NaN, indicating a problematic calculation.
+
+# Example
+```julia
+v1 = [1.0, 2.0]
+v2 = [3.0, 4.0]
+Delta = 5.0
+intersection = getBoundaryIntersection(v1, v2, Delta)
+```
+"""
 function getBoundaryIntersection(v1::Vector{Float64},
     v2::Vector{Float64},
     Delta::Float64)
@@ -81,11 +108,17 @@ function getBoundaryIntersection(v1::Vector{Float64},
             @error "problematic ρinv"
         else
             ρ = 1.0/ρinv
-            alpha = -ρ*v1'*v2 + sqrt( (ρ*v1'*v2)^2 - 4*ρ*(v1'*v1 - Delta^2))
+            alpha = -ρ*v1'*v2 + sqrt( (ρ*v1'*v2)^2 - ρ*(v1'*v1 - Delta^2))
             p = v1 + alpha*v2
-            return p
+            return (p=p, alpha=alpha)
         end
     end
 
     @error "floc"
 end
+
+# Delta = 1.0
+# v1 = Float64.([1/sqrt(2), 1/sqrt(2)])
+# v2 = Float64.([1, 4])
+# p, alpha = getBoundaryIntersection(v1, v2, Delta)
+# @test norm(p) == Delta

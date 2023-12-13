@@ -6,9 +6,8 @@ function plotDenoisedSignal(res;
 
     pr = res.pr
     method = pr.alg.method
-    d = pr.x0
     params = pr.p[:params]
-    @unpack p, alpha, magnitudeString = params
+    @unpack d, p, alpha, magnitudeString = params
     n = length(d)
     w = res.xvals[:, end]
     t = collect(1:1:n)

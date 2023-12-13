@@ -1,0 +1,39 @@
+****************************
+Solver run has concluded.
+Function solved for: signalDenoise()
+This was a data fitting problem.
+Cause(s) for stopping:
+LineSearch failed.
+Barely changing fval
+Convergence achieved in 4 iterations 😄
+****************************
+Method Used: QuasiNewton
+Linesearch method used: StrongWolfe
+****************************
+Optimal MSE value = 4.379425376793686
+Optimal SSE value = 87.58850753587373
+***************************
+Optimal Nonzero Variables:
+Only upto 15 values will be printed.
+x☆[1] = 7.591310289394814
+x☆[2] = 9.747006276823509
+x☆[3] = 12.32890547705352
+x☆[4] = 14.977920742979519
+x☆[5] = 16.322448703131375
+x☆[8] = 13.773601844513875
+x☆[9] = 12.690737578562212
+x☆[10] = 12.161739626349968
+x☆[12] = 13.07133309394256
+x☆[14] = 14.356434899905924
+x☆[16] = 14.556661542542052
+x☆[17] = 14.394879368368176
+x☆[18] = 14.050146413581924
+x☆[19] = 13.82357229876936
+x☆[20] = 13.637058543923567
+***************************
+Number of fevals = 4
+Number of gevals = 3
+Number of evals = 64
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

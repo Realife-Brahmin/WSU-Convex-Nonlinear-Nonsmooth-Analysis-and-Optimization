@@ -109,9 +109,10 @@ p = 2
 # alpha = 0.5
 # alpha = 1
 # alpha = 2.0
-# alpha = 5.0
-alpha = 10.0
-# alpha = 100
+alpha = 5.0
+# alpha = 10.0
+# alpha = 100.0
+# alpha = 1000.0
 
 beta = minimum(abs.(x0))*1e-5
 

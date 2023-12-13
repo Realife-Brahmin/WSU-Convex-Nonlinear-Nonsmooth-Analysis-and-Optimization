@@ -6,11 +6,9 @@ function plotDenoisedSignal(res;
 
     pr = res.pr
     method = pr.alg.method
-    # p = pr.p
     d = pr.x0
-    # params = pr.p.params
     params = pr.p[:params]
-    p, alpha = params[1:2]
+    @unpack p, alpha, magnitudeString = params
     n = length(d)
     w = res.xvals[:, end]
     t = collect(1:1:n)
@@ -20,10 +18,18 @@ function plotDenoisedSignal(res;
     theme(:dao)
 
     p1 = Plots.scatter(t, d,
-        title = "Denoised Signal \n "*"using "*L"p = "*"$(p) and α = $(alpha) \n"* "Method: $(method)",
+        title = "Denoised Signal  $(magnitudeString) \n "*"using "*L"p = "*"$(p) and α = $(alpha) \n"* "Method: $(method)",
         label = "data-point",
         xlabel = "Time Instance [unit]",
         ylabel = "Signal value [unit]")
+
+    if magnitudeString == ""
+        size = (450, 400)
+        aspect_ratio = :equal
+    else
+        size = (450, 400)
+        aspect_ratio = :auto
+    end
 
     p2 = Plots.plot!(p1, w,
         label = "fitted-function",
@@ -31,8 +37,8 @@ function plotDenoisedSignal(res;
         linestyle = :solid,
         alpha = 0.5,
         legend = :topright,
-        aspect_ratio = :equal,
-        size=(450,400), 
+        aspect_ratio = aspect_ratio,
+        size = size,
         xlims=(minx*0.95, maxx*1.05), 
         ylims=(miny*0.95, maxy*1.05))
 

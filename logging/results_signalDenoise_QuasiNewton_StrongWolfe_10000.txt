@@ -1,39 +1,38 @@
 ****************************
 Solver run has concluded.
 Function solved for: signalDenoise()
-This was a data fitting problem.
+This was a function minimization problem.
 Cause(s) for stopping:
 LineSearch failed.
 Barely changing fval
-Convergence achieved in 112 iterations 😄
+Convergence achieved in 108 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal MSE value = 300.4440601271871
-Optimal SSE value = 6008.881202543742
+Optimal function value = 0.19044893221344167
 ***************************
 Optimal Nonzero Variables:
 Only upto 15 values will be printed.
-x☆[1] = 5.453700162874273
-x☆[2] = 5.453700326813802
-x☆[3] = 13.500998843901401
-x☆[4] = 13.50099899359238
-x☆[5] = 13.500999102726173
-x☆[8] = 13.500999274089729
-x☆[9] = 13.50099931741104
-x☆[10] = 13.500999382049052
-x☆[12] = 13.500999507272384
-x☆[14] = 13.500999664414554
-x☆[16] = 13.500999787680016
-x☆[17] = 13.500999835638158
-x☆[18] = 13.500999880132236
-x☆[19] = 13.500999923243295
-x☆[20] = 13.500999962618845
+x☆[1] = 0.08834456062159438
+x☆[2] = 0.08834456294024107
+x☆[3] = 0.21870284501485168
+x☆[4] = 0.21870284742314067
+x☆[5] = 0.21870284959973169
+x☆[8] = 0.2187028547769858
+x☆[9] = 0.2187028564960108
+x☆[10] = 0.21870285813660864
+x☆[12] = 0.21870286169566033
+x☆[14] = 0.21870286557602098
+x☆[16] = 0.21870286909899722
+x☆[17] = 0.21870287072814126
+x☆[18] = 0.21870287233809027
+x☆[19] = 0.21870287392013163
+x☆[20] = 0.2187028755518983
 ***************************
-Number of fevals = 112
-Number of gevals = 111
-Number of evals = 2332
+Number of fevals = 108
+Number of gevals = 107
+Number of evals = 2248
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-15

@@ -3,29 +3,6 @@ using DataFrames
 
 include("objective.jl")
 
-"""
-    signalDenoise(x::Vector{Float64}, p; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
-
-Denoises a signal vector `x` based on provided parameters and returns the denoised signal. Optionally, it also returns the gradient of the denoising function.
-
-# Arguments
-- `x::Vector{Float64}`: The input signal vector to be denoised.
-- `p`: A dictionary containing parameters and data for the denoising process. 
-- `verbose::Bool` (optional): If `true`, enables verbose logging. Defaults to `false`.
-- `log::Bool` (optional): If `true`, logs certain information. Defaults to `true`.
-- `getGradientToo::Bool` (optional): If `true`, the function also returns the gradient along with the denoised signal. Defaults to `true`.
-
-# Returns
-- If `getGradientToo` is `true`, returns a tuple `(f, g)` where `f` is the denoised signal and `g` is the gradient.
-- If `getGradientToo` is `false`, returns only the denoised signal `f`.
-
-# Examples
-```julia
-x = [1.0, 2.0, 3.0, 4.0]
-p = Dict(:params => [1.5, 0.1, 0.1, 1.0, 2.0], :data => [1.0, 2.0, 3.0, 4.0])
-denoised_signal = signalDenoise(x, p)
-```
-"""
 function signalDenoise(x::Vector{Float64}, 
     p;
     verbose::Bool=false,
@@ -33,20 +10,16 @@ function signalDenoise(x::Vector{Float64},
     getGradientToo::Bool=true)
 
     n = length(x)
-    # params = p.params
     params = p[:params]
-
-    # d = p.data
-    d = p[:data]
     
-    if length(params) == 5
-        p, alpha, beta, L, R = params
-    elseif length(params) == 3
+    @unpack d, p, alpha, beta, L, R, magnitudeString = params
+
+    if isempty(L) 
         L = d[1]
+    end
+    
+    if isempty(R)
         R = d[end]
-        p, alpha, beta = params
-    else
-        @error "Couldn't define parameters correctly."
     end
 
     xfull = vcat(L, x, R)
@@ -96,32 +69,38 @@ filename = rawDataFolder * "FFD.csv"
 df = CSV.File(filename) |> DataFrame
 rename!(df, [:x, :y])
 
-data0 = df.y
+d0 = df.y
 downsampling_rate = 10
-data = data0[1:downsampling_rate:length(data0)] 
-x0 = Float64.(data)
+d = d0[1:downsampling_rate:length(d0)] 
+magnitudeString = ""
+
+# normalize!(x0)
+normalize!(d)
+magnitudeString = "Normalized"
+
+x0 = Float64.(d)
+
 
 p = 0.5
 # p = 1
 # p = 2
 
-alpha = 0
+# alpha = 0
+# alpha = 0.05
 alpha = 0.5
-alpha = 1
-alpha = 2.0
-alpha = 5.0
-alpha = 10.0
-alpha = 100.0
-alpha = 1000.0
+# alpha = 1
+# alpha = 2.0
+# alpha = 5.0
+# alpha = 10.0
+# alpha = 100.0
+# alpha = 1000.0
 
 beta = minimum(abs.(x0))*1e-5
 
 L = Float64[]
 R = Float64[]
 
-params = vcat([p, alpha, beta], L, R)
+params = Dict(:d => d, :p => p, :alpha => alpha, :beta => beta, :L => L, :R => R, :magnitudeString => magnitudeString)
 objective = signalDenoise;
 
-pr = generate_pr(objective, x0, data=data, params=params)
-
-# signalDenoise(pr.x0, pr.p)
+pr = generate_pr(objective, x0, params=params)

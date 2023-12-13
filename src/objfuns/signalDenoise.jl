@@ -10,20 +10,16 @@ function signalDenoise(x::Vector{Float64},
     getGradientToo::Bool=true)
 
     n = length(x)
-    # params = p.params
     params = p[:params]
-
-    # d = p.data
-    d = p[:data]
     
-    if length(params) == 5
-        p, alpha, beta, L, R = params
-    elseif length(params) == 3
+    @unpack d, p, alpha, beta, L, R, magnitudeString = params
+
+    if isempty(L) 
         L = d[1]
+    end
+    
+    if isempty(R)
         R = d[end]
-        p, alpha, beta = params
-    else
-        @error "Couldn't define parameters correctly."
     end
 
     xfull = vcat(L, x, R)
@@ -73,37 +69,38 @@ filename = rawDataFolder * "FFD.csv"
 df = CSV.File(filename) |> DataFrame
 rename!(df, [:x, :y])
 
-data0 = df.y
+d0 = df.y
 downsampling_rate = 10
-data = data0[1:downsampling_rate:length(data0)] 
-# data = vec(df.y) # dampedSHM data
-# data = [1.00, 1.01, 1.05, 0.93, 0.96, 1.10]; 
-# data = Float64.(abs.(rand(Int8, 15)))
-# data = [1.00, 1, 1, 1, 1]
-# data = [1, 2, 3]
-# data = [0.01, 0.02, 0.03]
-x0 = Float64.(data)
+d = d0[1:downsampling_rate:length(d0)] 
+magnitudeString = ""
 
-# p = 0.5
+# normalize!(x0)
+normalize!(d)
+magnitudeString = "Normalized"
+
+x0 = Float64.(d)
+
+
+p = 0.5
 # p = 1
-p = 2
+# p = 2
 
 # alpha = 0
-# alpha = 0.5
+# alpha = 0.05
+alpha = 0.5
 # alpha = 1
 # alpha = 2.0
 # alpha = 5.0
-alpha = 10.0
-# alpha = 100
+# alpha = 10.0
+# alpha = 100.0
+# alpha = 1000.0
 
-beta = 1e-5
+beta = minimum(abs.(x0))*1e-5
 
 L = Float64[]
 R = Float64[]
 
-params = vcat([p, alpha, beta], L, R)
+params = Dict(:d => d, :p => p, :alpha => alpha, :beta => beta, :L => L, :R => R, :magnitudeString => magnitudeString)
 objective = signalDenoise;
 
-pr = generate_pr(objective, x0, data=data, params=params)
-
-# signalDenoise(pr.x0, pr.p)
+pr = generate_pr(objective, x0, params=params)

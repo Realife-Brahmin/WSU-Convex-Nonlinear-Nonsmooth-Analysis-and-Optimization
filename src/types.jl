@@ -263,8 +263,54 @@ mutable struct QNStateType
 
 end
 
+function TRparamsType(;
+    Delta = 50.0,
+    Delta_min = 1e-3,
+    Delta_max = 100.0,
+    etta1 = 0.01,
+    etta2 = 0.25,
+    etta3 = 0.75,
+    delta1 = 0.25,
+    delta2 = 2.0,
+    updateRadius = "uninitialized",
+    accept = false
+    )
+
+    TRparams = Dict(
+        :Delta => Delta,
+        :Delta_min => Delta_min,
+        :Delta_max => Delta_max,
+        :etta1 => etta1,
+        :etta2 => etta2,
+        :etta3 => etta3,
+        :delta1 => delta1,
+        :delta2 => delta2,
+        :updateRadius => updateRadius,
+        :accept => accept
+    )
+
+    return TRparams
+end
+
+function SR1paramsType(;
+    xkm1 = [],
+    gkm1 = [],
+    Bkm1 = []
+    )
+
+    SR1params = Dict(
+        :xkm1 => xkm1,
+        :gkm1 => gkm1,
+        :Bkm1 => Bkm1
+    )
+
+    return SR1params
+end
+
+# SR1params = SR1paramsType()
+# TRparams = TRparamsType()
 # solState = SolStateType()
 # solverState = SolverStateType()
 # interpolParams = InterpolParams(alphatol=33)
-CGState = CGStateType()
+# CGState = CGStateType()
 # QNState = QNStateType()

@@ -1,9 +1,11 @@
 using Plots
+using Plots.PlotMeasures
 
 function plotDenoisedSignal(res;
     savePlot::Bool=true)
 
     pr = res.pr
+    method = pr.alg.method
     # p = pr.p
     d = pr.x0
     # params = pr.p.params
@@ -16,16 +18,18 @@ function plotDenoisedSignal(res;
     theme(:dao)
 
     p1 = Plots.scatter(t, d,
-        title = "Denoised Signal \n"*"using "*L"p = "*"$(p) and α = $(alpha)",
+        title = "Denoised Signal \n "*"using "*L"p = "*"$(p) and α = $(alpha) \n"* "Method: $(method)",
         label = "data-point",
         xlabel = "Time Instance [unit]",
-        ylabel = "Signal value [unit]")
+        ylabel = "Signal value [unit]",
+        aspect = 1.0)
 
     p2 = Plots.plot!(p1, w,
         label = "fitted-function",
         linewidth = 3.0,
         linestyle = :solid,
-        alpha = 0.5)
+        alpha = 0.5,
+        topmargin = 5mm)
 
     folderName = string(dirname(dirname(@__DIR__)))*"/processedData/"
     filename = folderName*"denoisedSignal_"*pr.alg.method*"_"*string(n)*"_p_$(replace(string(p), "." => "-"))_alpha_$(replace(string(alpha), "." => "-")).png"

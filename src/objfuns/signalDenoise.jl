@@ -3,6 +3,29 @@ using DataFrames
 
 include("objective.jl")
 
+"""
+    signalDenoise(x::Vector{Float64}, p; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
+
+Denoises a signal vector `x` based on provided parameters and returns the denoised signal. Optionally, it also returns the gradient of the denoising function.
+
+# Arguments
+- `x::Vector{Float64}`: The input signal vector to be denoised.
+- `p`: A dictionary containing parameters and data for the denoising process. 
+- `verbose::Bool` (optional): If `true`, enables verbose logging. Defaults to `false`.
+- `log::Bool` (optional): If `true`, logs certain information. Defaults to `true`.
+- `getGradientToo::Bool` (optional): If `true`, the function also returns the gradient along with the denoised signal. Defaults to `true`.
+
+# Returns
+- If `getGradientToo` is `true`, returns a tuple `(f, g)` where `f` is the denoised signal and `g` is the gradient.
+- If `getGradientToo` is `false`, returns only the denoised signal `f`.
+
+# Examples
+```julia
+x = [1.0, 2.0, 3.0, 4.0]
+p = Dict(:params => [1.5, 0.1, 0.1, 1.0, 2.0], :data => [1.0, 2.0, 3.0, 4.0])
+denoised_signal = signalDenoise(x, p)
+```
+"""
 function signalDenoise(x::Vector{Float64}, 
     p;
     verbose::Bool=false,

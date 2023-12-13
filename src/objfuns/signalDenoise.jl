@@ -99,12 +99,6 @@ rename!(df, [:x, :y])
 data0 = df.y
 downsampling_rate = 10
 data = data0[1:downsampling_rate:length(data0)] 
-# data = vec(df.y) # dampedSHM data
-# data = [1.00, 1.01, 1.05, 0.93, 0.96, 1.10]; 
-# data = Float64.(abs.(rand(Int8, 15)))
-# data = [1.00, 1, 1, 1, 1]
-# data = [1, 2, 3]
-# data = [0.01, 0.02, 0.03]
 x0 = Float64.(data)
 
 # p = 0.5
@@ -119,7 +113,7 @@ p = 2
 alpha = 10.0
 # alpha = 100
 
-beta = 1e-5
+beta = minimum(abs.(x0))*1e-5
 
 L = Float64[]
 R = Float64[]

@@ -26,7 +26,7 @@ function getCandidateStep(SR1params::Dict,
     while keepFindingCandidate
         @checkForNaN ρinv = dj'*Bk*dj
         if ρinv ≤ 0
-            pj = getBoundaryIntersection(zj, dj, Delta)
+            pj, alphaj = getBoundaryIntersection(zj, dj, Delta)
             keepFindingCandidate =  false
             return pj
         else
@@ -36,7 +36,7 @@ function getCandidateStep(SR1params::Dict,
         end
 
         if norm(zjp1) ≥ Delta # We've stepped outside the TRegion, so let's backup along this step to the boundary
-            pj = getBoundaryIntersection(zj, dj, Delta)
+            pj, alphaj = getBoundaryIntersection(zj, dj, Delta)
             keepFindingCandidate = false
             return pj
         else

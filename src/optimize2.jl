@@ -1,4 +1,11 @@
-include("types.jl")
+include("linesearches.jl");
+include("findDirection.jl");
+include("types.jl");
+
+include("getCandidateStep.jl");
+include("checkQualityOfCandidateStep.jl");
+include("updateTRegionParams.jl");
+include("updateTRModelParams.jl");
 
 function optimize2(pr; 
     verbose::Bool=false, 
@@ -95,11 +102,10 @@ function optimize2(pr;
             usingCGD = true
             @pack! CGState = k, gk
             pk, CGState = findDirection(pr, gk, CGState=CGState)
-
             @unpack justRestarted = CGState 
+        
         elseif method == "TrustRegion"
-            xkm1, gkm1 = xk, gk
-            @pack! SR1params = xkm1, gkm1
+            SR1params = updateTRModelParams(SR1params, solState)
 
         else
             pk = findDirection(pr, gk)
@@ -107,25 +113,62 @@ function optimize2(pr;
         
         @pack! solState = pk 
 
-        if 
-        if linesearchMethod == "StrongWolfe"
-
-            solState, solverState = StrongWolfe(pr, solState, solverState,
-            verbose=printOrNot_ls)
-
-
-        elseif linesearchMethod == "Armijo"
-            @error "Armijo no longer supported."
+        if method != "TrustRegion"
         
-        else
-            @error "Unknown linesearch method"
-        end
+            if linesearchMethod == "StrongWolfe"
 
-        @unpack success_ls = solverState
-        if ~success_ls
-            myprintln(true, "Line search failed... Bad direction or optimal point?")
-            push!(causeForStopping, "LineSearch failed.")
-            keepIterationsGoing = false
+                solState, solverState = StrongWolfe(pr, solState, solverState,
+                verbose=printOrNot_ls)
+
+
+            elseif linesearchMethod == "Armijo"
+                @error "Armijo no longer supported."
+            
+            else
+                @error "Unknown linesearch method"
+            end
+
+            @unpack success_ls = solverState
+            if ~success_ls
+                myprintln(true, "Line search failed... Bad direction or optimal point?")
+                push!(causeForStopping, "LineSearch failed.")
+                keepIterationsGoing = false
+            end
+
+        elseif method == "TrustRegion"
+
+            @unpack xk = solState
+            y = xk
+
+            keepFindingCandidate = true
+            
+            while keepFindingCandidate
+                pj = getCandidateStep(SR1params, TRparams)
+                ρk = checkQualityOfCandidateStep(SR1params, pr, solState, pj, solverState)
+                
+                y, TRparams = updateTRegionParams(TRparams, ρk)
+
+                @unpack Delta, Delta_min = TRparams
+                @unpack xk = solState
+                
+                if y != xk
+                    keepFindingCandidate = false
+                    myprintln(verbose_ls, "A new valid candidate step has been found")
+                    xkm1 = xk
+                    xk = y
+                    @pack! solState = xkm1, xk
+
+                elseif Delta < Delta_min
+                    keepFindingCandidate = false
+                    myprintln(verbose_ls, "Trust Region Radius too small now.")
+                else
+                    myprintln(verbose_ls, "Keep Finding Candidate")
+                end
+
+            end
+
+        else
+            @error "floc"
         end
 
         @unpack xkm1, xk, fkm1, fk, gkm1, gk, gmagkm1, gmagk = solState
@@ -143,6 +186,13 @@ function optimize2(pr;
         if !justRestarted && gmagk < gtol
             push!(causeForStopping, "Too small gradient at latest step.")
             keepIterationsGoing = false
+        end
+        if method == "TrustRegion"
+            @unpack Delta, Delta_min = TRparams
+            if Delta < Delta_min
+                push!(causeForStopping, "Trust Region Radius too small")
+                keepIterationsGoing = false
+            end
         end
         if k == maxiter
             push!(causeForStopping, "Too many iterations")

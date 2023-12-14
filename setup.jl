@@ -20,6 +20,8 @@ include("src/helperFunctions.jl");
 include("src/findDirection.jl");
 
 include("src/optimize.jl");
+include("src/optimize2.jl");
+
 include("src/plotting/plotresults.jl");
 include("src/types.jl");
 include("src/utilities.jl"); 

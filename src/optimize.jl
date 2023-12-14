@@ -232,7 +232,9 @@ function warm_start_optimize(pr;
         x0 = Float64.(collect(LinRange(0.0, 1.0, n+2)[2:n+1]))
         while n <= nMax
             pr = replace_field(pr, :x0, x0)
-            res = optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
+            # res = optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
+            res = optimize2(pr, verbose=verbose, verbose_ls=verbose_ls)
+
             xopt = res.xvals[:, end]
             x0 = extrapolate(xopt, factor)
             n = length(x0)

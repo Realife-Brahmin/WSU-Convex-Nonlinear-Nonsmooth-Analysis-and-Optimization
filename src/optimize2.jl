@@ -111,7 +111,8 @@ function optimize2(pr;
             pk = findDirection(pr, gk)
         end
         
-        @pack! solState = pk 
+        # @show fieldnames(solState)
+        # @pack! solState = pk 
 
         if method != "TrustRegion"
         
@@ -144,9 +145,9 @@ function optimize2(pr;
             
             while keepFindingCandidate
                 pj = getCandidateStep(SR1params, TRparams)
-                ρk = checkQualityOfCandidateStep(SR1params, pr, solState, pj, solverState)
+                ρk, solverState = checkQualityOfCandidateStep(SR1params, pr, solState, pj, solverState)
                 
-                y, TRparams = updateTRegionParams(TRparams, ρk)
+                y, TRparams = updateTRegionParams(TRparams, ρk, pj, y)
 
                 @unpack Delta, Delta_min = TRparams
                 @unpack xk = solState

@@ -6,40 +6,47 @@ include("helperFunctions.jl")
 include("types.jl")
 
 """
-    checkQualityOfCandidateStep(SR1params, pr, xk, fk, pj, solverState)
+    checkQualityOfCandidateStep(SR1params, pr, solState, pj, solverState)
 
 Evaluate the quality of a candidate step in a numerical optimization algorithm.
 
 # Arguments
-- `SR1params`: Parameters for SR1 (Symmetric Rank 1) update, often used in quasi-Newton methods.
-    It should contain at least `gk` (gradient at `xk`) and `Bk` (approximation to the Hessian matrix).
-- `pr`: Problem-related structure, specifics of which depend on the problem being solved.
-- `xk::Vector{Float64}`: Current point in the optimization space.
-- `fk::Float64`: Function value at `xk`.
-- `pj::Vector{Float64}`: The step to be evaluated, proposed from `xk`.
-- `solverState::SolverStateType`: Contains state information of the solver, like function evaluation count.
+- `SR1params`: Parameters for the SR1 (Symmetric Rank 1) update, typically used in quasi-Newton methods.
+  It should contain at least `gkm1` (previous gradient) and `Bkm1` (previous Hessian approximation).
+- `pr`: A structure related to the problem being solved, which includes at least the objective function `f`.
+- `solState::SolStateType`: Contains the current solution state, including `xk` (current point) and `fk` (function value at `xk`).
+- `pj::Vector{Float64}`: The step to be evaluated, proposed from the current point `xk`.
+- `solverState::SolverStateType`: Contains state information of the solver, like the count of function evaluations.
 
 # Returns
-- A tuple with the ratio `ρk` (indicating the quality of the step) and the updated `solverState`.
+- A tuple with the quality ratio `ρk` and the updated `solverState`. The ratio `ρk` indicates the quality of the step based on the actual and predicted decrease in the function value.
 
 # Description
-This function assesses the quality of a candidate step (`pj`) in an optimization process. 
-It uses the SR1 update parameters and the current state of the solver to evaluate the step.
-If the step improves the solution, it calculates the ratio `ρk` of actual decrease in the 
-objective function to the predicted decrease. If `ρk` is significantly positive, it implies 
-a good quality step. The function also updates the solver state, particularly the count of 
-function evaluations.
+This function assesses the quality of a candidate step (`pj`) in an optimization process by comparing the actual decrease in the objective function to the decrease predicted by a quadratic model. It uses the SR1 update parameters and the current state of the solution and the solver to perform this evaluation. 
+
+The function first updates the gradient and Hessian approximation. Then, it computes the predicted decrease in the objective function value (`Delta_mk`) and the actual decrease (`Delta_fk`). Based on these values, it calculates the quality ratio `ρk`.
 
 # Errors
-Throws an error if the predicted decrease (`Delta_mk`) is negative or zero, indicating 
-anomalies in the optimization process.
+- Throws an error if `Delta_mk` is negative, which suggests an issue with the model's prediction.
+- Throws an error if `Delta_mk` is zero, as it indicates no predicted improvement from the step, which is problematic for calculating the quality index value.
+- A general error labeled `@error "floc"` is included as a catch-all for any unexpected scenarios.
+
 """
 function checkQualityOfCandidateStep(SR1params, pr,
-    xk::Vector{Float64},
-    fk::Float64,
+    solState::SolStateType,
+    pj::Vector{Float64},
+    solverState::SolverStateType)
+    # Function implementation...
+end
+
+function checkQualityOfCandidateStep(SR1params, pr,
+    # xk::Vector{Float64},
+    # fk::Float64,
+    solState::SolStateType,
     pj::Vector{Float64},
     solverState::SolverStateType)
 
+    @unpack xk, fk = solState
     @unpack gkm1, Bkm1 = SR1params
     gk, Bk = gkm1, Bk
     mk(pk) = fk + gk'*pk + 1/2*pk'*Bk*pk

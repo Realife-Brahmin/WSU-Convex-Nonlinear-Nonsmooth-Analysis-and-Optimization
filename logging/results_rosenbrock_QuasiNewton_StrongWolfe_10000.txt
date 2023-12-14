@@ -4,28 +4,28 @@ Function solved for: rosenbrock()
 This was a function minimization problem.
 Cause(s) for stopping:
 Barely changing fval
-Convergence achieved in 26 iterations 😄
+Convergence achieved in 27 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 3.303521179196547e-16
+Optimal function value = 4.659806963481988e-19
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 1.0000000010017274
-x☆[2] = 1.0000000001875815
-x☆[3] = 0.999999999490707
-x☆[4] = 0.9999999992937683
-x☆[5] = 0.999999999701669
-x☆[6] = 1.0000000005629797
-x☆[7] = 0.999999997963708
-x☆[8] = 0.9999999978206054
-x☆[9] = 0.9999999990200128
-x☆[10] = 0.9999999982963271
+x☆[1] = 1.0000000000371185
+x☆[2] = 1.0000000000075824
+x☆[3] = 1.0000000000151796
+x☆[4] = 1.0000000000426887
+x☆[5] = 1.000000000077862
+x☆[6] = 1.0000000000637903
+x☆[7] = 1.0000000001249105
+x☆[8] = 1.0000000001038367
+x☆[9] = 1.0000000002509528
+x☆[10] = 1.0000000004996454
 ***************************
-Number of fevals = 26
-Number of gevals = 25
-Number of evals = 276
+Number of fevals = 27
+Number of gevals = 26
+Number of evals = 287
 **************************************************
 Tolerance critera used:
-dftol = 1.0e-12
+dftol = 1.0e-15

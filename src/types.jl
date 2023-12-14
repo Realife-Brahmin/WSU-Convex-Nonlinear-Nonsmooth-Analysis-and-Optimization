@@ -293,9 +293,9 @@ function TRparamsType(;
 end
 
 function SR1paramsType(;
-    xkm1 = [],
-    gkm1 = [],
-    Bkm1 = []
+    xkm1 = Vector{Float64}(undef, 0),
+    gkm1 = Vector{Float64}(undef, 0),
+    Bkm1 = Matrix{Float64}(undef, 0, 0)
     )
 
     SR1params = Dict(

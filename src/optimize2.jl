@@ -6,7 +6,13 @@ function optimize2(pr;
     log::Bool=true,
     log_path::String="./logging/")
 
-    log_txt = log_path*"log_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
+    method = pr.alg.method
+    linesearchMethod = pr.alg.linesearch
+    if method == "TrustRegion"
+        linesearchMethod = "QuasiNewton-SR1"
+    end
+
+    log_txt = log_path*"log_"*string(pr.objective)*"_"*method*"_"*linesearchMethod*"_"*string(pr.alg.maxiter)*".txt"
 
     if isfile(log_txt)
         rm(log_txt)
@@ -22,7 +28,6 @@ function optimize2(pr;
     gtol = pr.alg.gtol
     progress = pr.alg.progress
     maxiter = pr.alg.maxiter
-    linesearchMethod = pr.alg.linesearch
     x0 = pr.x0
     xk = x0
 
@@ -36,11 +41,11 @@ function optimize2(pr;
     myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
     @pack! solState = fk
 
-    if pr.alg.method == "QuasiNewton"
+    if method == "QuasiNewton"
         QNState = QNStateType()
-    elseif pr.alg.method == "ConjugateGradientDescent"
+    elseif method == "ConjugateGradientDescent"
         CGState = CGStateType()
-    elseif pr.alg.method == "TrustRegion"
+    elseif method == "TrustRegion"
         SR1params = SR1paramsType()
         TRparams = TRparamsType()
     end
@@ -82,22 +87,27 @@ function optimize2(pr;
         @pack! solState = fk, gk, gmagk
         @pack! solverState = fevals, gevals
 
-        if pr.alg.method == "QuasiNewton"
+        if method == "QuasiNewton"
             @pack! QNState = k, xk, fk, gk
             pk, QNState = findDirection(pr, gk, QNState=QNState)
 
-        elseif pr.alg.method == "ConjugateGradientDescent"
+        elseif method == "ConjugateGradientDescent"
             usingCGD = true
             @pack! CGState = k, gk
             pk, CGState = findDirection(pr, gk, CGState=CGState)
 
             @unpack justRestarted = CGState 
+        elseif method == "TrustRegion"
+            xkm1, gkm1 = xk, gk
+            @pack! SR1params = xkm1, gkm1
+
         else
             pk = findDirection(pr, gk)
         end
         
         @pack! solState = pk 
 
+        if 
         if linesearchMethod == "StrongWolfe"
 
             solState, solverState = StrongWolfe(pr, solState, solverState,

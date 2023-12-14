@@ -4,11 +4,14 @@ include("helperFunctions.jl")
 include("types.jl")
 
 function updateTRModelParams(SR1params::Dict,
-    k::Int,
-    xk::Vector{Float64},
-    fk::Float64,
-    gk::Vector{Float64})
+    # k::Int,
+    # xk::Vector{Float64},
+    # fk::Float64,
+    # gk::Vector{Float64}
+    solState::SolStateType
+    )
 
+    @unpack k, xk, fk, gk = solState
     n = length(xk)
     if k == 1
         Bk = fk*I(n)

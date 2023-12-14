@@ -24,7 +24,7 @@ function getCandidateStep(SR1params::Dict,
     zj = myzeros(gk)
 
     while keepFindingCandidate
-        @checkForNaN ρinv = dj*Bk*dj
+        @checkForNaN ρinv = dj'*Bk*dj
         if ρinv ≤ 0
             pj = getBoundaryIntersection(zj, dj, Delta)
             keepFindingCandidate =  false

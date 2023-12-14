@@ -18,8 +18,8 @@ warmStart = true
 # functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
 # functionName = "pathtime"
-functionName = "rosenbrock";
-# functionName = "sphere";
+# functionName = "rosenbrock";
+functionName = "sphere";
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";

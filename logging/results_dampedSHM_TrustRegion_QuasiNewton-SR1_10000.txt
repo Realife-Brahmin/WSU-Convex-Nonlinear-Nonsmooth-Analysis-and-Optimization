@@ -1,0 +1,28 @@
+****************************
+Solver run has concluded.
+Function solved for: dampedSHM()
+This was a data fitting problem.
+Cause(s) for stopping:
+Too small gradient at previous step.
+Convergence achieved in 2 iterations 😄
+****************************
+Method Used: TrustRegion
+Linesearch method used: QuasiNewton-SR1
+****************************
+Optimal MSE value = 1.8849813694070017
+Optimal SSE value = 376.9962738814003
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 13.799995589413115
+x☆[2] = 8.299972834740574
+x☆[3] = 0.009805278658214735
+x☆[4] = 1800.000009642257
+x☆[5] = 900.0000002471413
+x☆[6] = 4.20054729598563
+***************************
+Number of fevals = 2
+Number of gevals = 1
+Number of evals = 8
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

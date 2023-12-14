@@ -1,0 +1,31 @@
+****************************
+Solver run has concluded.
+Function solved for: rosenbrock()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too small gradient at previous step.
+Convergence achieved in 2 iterations 😄
+****************************
+Method Used: TrustRegion
+Linesearch method used: QuasiNewton-SR1
+****************************
+Optimal function value = 10.383000000000001
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 0.17680863097307303
+x☆[2] = 0.19639959542313723
+x☆[3] = 0.29759973028209147
+x☆[4] = 0.4132014834484969
+x☆[5] = 0.536004045768628
+x☆[6] = 0.658806608088759
+x☆[7] = 0.7744083612551645
+x☆[8] = 0.8756084961141186
+x☆[9] = 0.9552062035118962
+x☆[10] = 0.8859871883993448
+***************************
+Number of fevals = 2
+Number of gevals = 1
+Number of evals = 12
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

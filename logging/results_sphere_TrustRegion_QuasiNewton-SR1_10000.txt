@@ -1,0 +1,31 @@
+****************************
+Solver run has concluded.
+Function solved for: sphere()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too small gradient at previous step.
+Convergence achieved in 2 iterations 😄
+****************************
+Method Used: TrustRegion
+Linesearch method used: QuasiNewton-SR1
+****************************
+Optimal function value = 3.85
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 0.04805194805194806
+x☆[2] = 0.09610389610389612
+x☆[3] = 0.14415584415584418
+x☆[4] = 0.19220779220779224
+x☆[5] = 0.24025974025974028
+x☆[6] = 0.28831168831168835
+x☆[7] = 0.33636363636363636
+x☆[8] = 0.3844155844155845
+x☆[9] = 0.4324675324675325
+x☆[10] = 0.48051948051948057
+***************************
+Number of fevals = 2
+Number of gevals = 1
+Number of evals = 12
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

@@ -32,7 +32,9 @@ The function first updates the gradient and Hessian approximation. Then, it comp
 - A general error labeled `@error "floc"` is included as a catch-all for any unexpected scenarios.
 
 """
-function checkQualityOfCandidateStep(SR1params, pr,
+function checkQualityOfCandidateStep(
+    SR1params, 
+    pr,
     solState::SolStateType,
     pj::Vector{Float64},
     solverState::SolverStateType)

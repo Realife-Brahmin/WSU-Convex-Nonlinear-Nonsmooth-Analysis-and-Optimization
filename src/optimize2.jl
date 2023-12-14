@@ -1,8 +1,6 @@
-include("linesearches.jl")
-include("findDirection.jl")
 include("types.jl")
 
-function optimize(pr; 
+function optimize2(pr; 
     verbose::Bool=false, 
     verbose_ls::Bool=false,
     log::Bool=true,
@@ -179,67 +177,3 @@ function optimize(pr;
     res = trim_array(res, k-1)
     return res
 end
-
-"""
-    warm_start_optimize(pr; nStart::Int = 4, factor::Int = 2, verbose=false, verbose_ls=false) -> NamedTuple
-
-Conducts warm start optimization for estimating a monotonic function that minimizes a drag function, progressively refining the solution by increasing the number of points defining the function. This approach is currently specialized for the 'drag' objective function and will perform a standard single-shot optimization for other objectives.
-
-# Arguments
-- `pr`: A NamedTuple containing the problem definition and settings for optimization.
-- `nStart::Int`: The starting number of points for the warm start optimization process.
-- `factor::Int`: The factor by which the number of points is increased in each extrapolation step.
-- `verbose`: A Boolean flag for verbose output during optimization.
-- `verbose_ls`: A Boolean flag for verbose output during line search.
-
-# Behavior
-For the 'drag' objective function, the method starts with `nStart` points, optimizes, and then uses the result to extrapolate a finer initial guess for the next round, increasing the number of points each time by the specified `factor`. This continues until `nMax` points are reached, which depends on the optimization method used:
-- `QuasiNewton`: `nMax` is set to 1024.
-- `ConjugateGradientDescent`: `nMax` is set to 1024.
-- Other methods default to `nMax` of 512.
-
-For objective functions other than 'drag', `warm_start_optimize` performs a single-shot optimization using the `optimize` function.
-
-# Returns
-- `res`: A NamedTuple containing the results of the optimization process.
-
-# Notes
-This function is designed for use with optimization problems where a good initial guess can significantly speed up convergence. The current implementation is tuned for the 'drag' function; using it with other objectives will not leverage the warm start capability.
-
-Example usage:
-```julia
-pr = (objective=drag, alg=alg, x0=[0.25, 0.5, 0.75], ...)
-result = warm_start_optimize(pr, verbose=true, verbose_ls=false)
-"""
-function warm_start_optimize(pr; 
-    nStart::Int = 4,
-    factor::Int = 2,
-    verbose=false, 
-    verbose_ls=false)
-
-    if warmStart && string(pr.objective) == "drag"
-        if pr.alg.method == "QuasiNewton"
-            nMax = 1024
-        elseif pr.alg.method == "ConjugateGradientDescent"
-            nMax = 1024
-        elseif pr.alg.method == "GradientDescent"
-            nMax = 1024
-        else
-            @error "Unkown method"
-        end
-
-        n = nStart
-        x0 = Float64.(collect(LinRange(0.0, 1.0, n+2)[2:n+1]))
-        while n <= nMax
-            pr = replace_field(pr, :x0, x0)
-            res = optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
-            xopt = res.xvals[:, end]
-            x0 = extrapolate(xopt, factor)
-            n = length(x0)
-        end
-    else
-        @time res = optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
-    end
-    return res
-end
-

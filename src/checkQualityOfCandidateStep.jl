@@ -36,29 +36,20 @@ function checkQualityOfCandidateStep(SR1params, pr,
     solState::SolStateType,
     pj::Vector{Float64},
     solverState::SolverStateType)
-    # Function implementation...
-end
-
-function checkQualityOfCandidateStep(SR1params, pr,
-    # xk::Vector{Float64},
-    # fk::Float64,
-    solState::SolStateType,
-    pj::Vector{Float64},
-    solverState::SolverStateType)
 
     @unpack xk, fk = solState
     @unpack gkm1, Bkm1 = SR1params
-    gk, Bk = gkm1, Bk
+    gk, Bk = gkm1, Bkm1
     mk(pk) = fk + gk'*pk + 1/2*pk'*Bk*pk
 
     @unpack fevals = solverState
 
-    f = pr.obj
+    f = pr.objective
     p = pr.p
     Delta_mk = fk - mk(pj)
     Delta_fk = fk - f(xk+pj, p, getGradientToo=false); fevals += 1
 
-    @pack! fevals = solverState
+    @pack! solverState = fevals
 
     if Delta_mk < 0
         @error "problematic prediction which shouldn't even have been possible!"

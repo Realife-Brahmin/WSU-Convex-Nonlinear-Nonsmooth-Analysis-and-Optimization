@@ -8,9 +8,10 @@ include("types.jl")
 function updateTRegionParams(TRparams, ρk, pk, y)
     @unpack Delta, Delta_min, Delta_max, etta_1, etta_2, etta_3, delta_1, delta_2, updateRadius, accept = TRparams
 
-    if ρk > etta_3 && norm(ρk) >= 0.99*Delta
+    @show ρk, etta_3, pk, Delta
+    if ρk > etta_3 && norm(pk) >= 0.99*Delta
         updateRadius = "Increase"
-        Delta = min.(delta2*Delta, Delta_max)
+        Delta = min.(delta_2*Delta, Delta_max)
         accept = true
         y += pk
         return y, TRparams

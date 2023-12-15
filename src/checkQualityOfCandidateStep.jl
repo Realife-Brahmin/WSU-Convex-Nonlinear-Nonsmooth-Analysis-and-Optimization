@@ -49,7 +49,8 @@ function checkQualityOfCandidateStep(
     f = pr.objective
     p = pr.p
     Delta_mk = fk - mk(pj)
-    Delta_fk = fk - f(xk+pj, p, getGradientToo=false); fevals += 1
+    fj = f(xk+pj, p, getGradientToo=false)
+    Delta_fk = fk - fj; fevals += 1
 
     @pack! solverState = fevals
 
@@ -59,7 +60,7 @@ function checkQualityOfCandidateStep(
         @error "zero Delta_mk? I'll never get my quality index value."
     else
         ρk = Delta_fk/Delta_mk
-        return (ρk=ρk, solverState=solverState)
+        return (ρk=ρk, fj=fj, solverState=solverState)
     end
     
     @error "floc"

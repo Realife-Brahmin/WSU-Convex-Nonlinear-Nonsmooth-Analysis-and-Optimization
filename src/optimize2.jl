@@ -110,9 +110,6 @@ function optimize2(pr;
         else
             pk = findDirection(pr, gk)
         end
-        
-        # @show fieldnames(solState)
-        # @pack! solState = pk 
 
         if method != "TrustRegion"
         
@@ -145,7 +142,7 @@ function optimize2(pr;
             
             while keepFindingCandidate
                 pj = getCandidateStep(SR1params, TRparams)
-                ρk, solverState = checkQualityOfCandidateStep(SR1params, pr, solState, pj, solverState)
+                ρk, fj, solverState = checkQualityOfCandidateStep(SR1params, pr, solState, pj, solverState)
                 
                 y, TRparams = updateTRegionParams(TRparams, ρk, pj, y)
 
@@ -173,7 +170,7 @@ function optimize2(pr;
         end
 
         @unpack xkm1, xk, fkm1, fk, gkm1, gk, gmagkm1, gmagk = solState
-
+        @show xkm1, xk, fkm1, fk, gkm1, gk, gmagkm1, gmagk
         myprintln(printOrNot, "Iteration $(k): x = $(xk) is a better point with new fval = $(fk).", log_path=log_txt)
 
         if !usingCGD && !justRestarted && abs(fk - fkm1) < dftol

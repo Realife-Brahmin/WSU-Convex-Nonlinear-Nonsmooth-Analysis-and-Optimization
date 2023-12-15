@@ -116,9 +116,3 @@ function getBoundaryIntersection(v1::Vector{Float64},
 
     @error "floc"
 end
-
-# Delta = 1.0
-# v1 = Float64.([1/sqrt(2), 1/sqrt(2)])
-# v2 = Float64.([1, 4])
-# p, alpha = getBoundaryIntersection(v1, v2, Delta)
-# @test norm(p) == Delta

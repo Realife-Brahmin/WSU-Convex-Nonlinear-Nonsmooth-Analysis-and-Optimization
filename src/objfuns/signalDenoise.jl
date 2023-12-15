@@ -81,16 +81,16 @@ magnitudeString = ""
 x0 = Float64.(d)
 
 
-# p = 0.5
+p = 0.5
 # p = 1
-p = 2
+# p = 2
 
 # alpha = 0
 # alpha = 0.05
 # alpha = 0.5
 # alpha = 1
 # alpha = 2.0
-# alpha = 5.0
+alpha = 5.0
 # alpha = 10.0
 # alpha = 100.0
 # alpha = 1000.0

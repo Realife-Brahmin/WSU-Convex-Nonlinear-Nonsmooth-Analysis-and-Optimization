@@ -4,35 +4,34 @@ Function solved for: signalDenoise()
 This was a function minimization problem.
 Cause(s) for stopping:
 LineSearch failed.
-Barely changing fval
-Convergence achieved in 5 iterations 😄
+Convergence achieved in 29 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 8.97469100994572
+Optimal function value = 6.801809491260739
 ***************************
 Optimal Nonzero Variables:
 Only upto 15 values will be printed.
-x☆[1] = 6.068191854027655
-x☆[2] = 9.343760226911417
-x☆[3] = 12.721787096696882
-x☆[4] = 13.95487095196259
-x☆[5] = 15.31815580775815
-x☆[8] = 13.896026265316193
-x☆[9] = 13.217694506590792
-x☆[10] = 13.394223310192192
-x☆[12] = 13.08465541452457
-x☆[14] = 13.588764636877023
-x☆[16] = 14.358121990348742
-x☆[17] = 14.075092427847142
-x☆[18] = 14.200979905143937
-x☆[19] = 13.811804509893541
-x☆[20] = 13.618364676131678
+x☆[1] = 5.460598424153185
+x☆[2] = 8.191548378000075
+x☆[3] = 12.992150543338383
+x☆[4] = 17.239472099263978
+x☆[5] = 18.153377702370566
+x☆[8] = 12.498932197659284
+x☆[9] = 12.489887378111323
+x☆[10] = 12.48713439233846
+x☆[12] = 12.484065967204142
+x☆[14] = 14.118797484172612
+x☆[16] = 14.086355663646692
+x☆[17] = 14.073068731138413
+x☆[18] = 14.08284932116045
+x☆[19] = 13.524173217620689
+x☆[20] = 13.500960784011959
 ***************************
-Number of fevals = 5
-Number of gevals = 4
-Number of evals = 85
+Number of fevals = 29
+Number of gevals = 28
+Number of evals = 589
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-15

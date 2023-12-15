@@ -75,19 +75,19 @@ d = d0[1:downsampling_rate:length(d0)]
 magnitudeString = ""
 
 # normalize!(x0)
-normalize!(d)
-magnitudeString = "Normalized"
+# normalize!(d)
+# magnitudeString = "Normalized"
 
 x0 = Float64.(d)
 
 
-p = 0.5
+# p = 0.5
 # p = 1
-# p = 2
+p = 2
 
 # alpha = 0
 # alpha = 0.05
-alpha = 0.5
+# alpha = 0.5
 # alpha = 1
 # alpha = 2.0
 # alpha = 5.0

@@ -49,7 +49,6 @@ function StrongWolfe(pr::NamedTuple,
     while keepSearching
 
         @unpack alphaj = interpolParams
-        # @show alphaj
         xj = xk + alphaj*pk
         fj = obj(xj, p, getGradientToo=false)
         fevals += 1

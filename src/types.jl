@@ -267,11 +267,11 @@ function TRparamsType(;
     Delta = 50.0,
     Delta_min = 1e-3,
     Delta_max = 100.0,
-    etta1 = 0.01,
-    etta2 = 0.25,
-    etta3 = 0.75,
-    delta1 = 0.25,
-    delta2 = 2.0,
+    etta_1 = 0.01,
+    etta_2 = 0.25,
+    etta_3 = 0.75,
+    delta_1 = 0.25,
+    delta_2 = 2.0,
     updateRadius = "uninitialized",
     accept = false
     )
@@ -280,11 +280,11 @@ function TRparamsType(;
         :Delta => Delta,
         :Delta_min => Delta_min,
         :Delta_max => Delta_max,
-        :etta1 => etta1,
-        :etta2 => etta2,
-        :etta3 => etta3,
-        :delta1 => delta1,
-        :delta2 => delta2,
+        :etta_1 => etta_1,
+        :etta_2 => etta_2,
+        :etta_3 => etta_3,
+        :delta_1 => delta_1,
+        :delta_2 => delta_2,
         :updateRadius => updateRadius,
         :accept => accept
     )
@@ -293,9 +293,9 @@ function TRparamsType(;
 end
 
 function SR1paramsType(;
-    xkm1 = [],
-    gkm1 = [],
-    Bkm1 = []
+    xkm1 = Vector{Float64}(undef, 0),
+    gkm1 = Vector{Float64}(undef, 0),
+    Bkm1 = Matrix{Float64}(undef, 0, 0)
     )
 
     SR1params = Dict(

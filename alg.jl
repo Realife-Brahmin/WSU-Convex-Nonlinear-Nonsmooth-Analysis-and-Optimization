@@ -47,7 +47,8 @@ mutable struct AlgorithmSettings
         function AlgorithmSettings(; 
                 # method="ConjugateGradientDescent",
                 # method = "GradientDescent",
-                method = "QuasiNewton",
+                # method = "QuasiNewton",
+                method = "TrustRegion",
                 # maxiter=Int(1e5),
                 maxiter=Int(1e4),
                 # maxiter=Int(1e3),
@@ -83,6 +84,11 @@ mutable struct AlgorithmSettings
                         myprintln(false, "Method chosen: ConjugateGradientDescent", log=false)
                         alg.linesearch = "StrongWolfe"
                         alg.c2 = 0.5
+                        alg.progress = 1
+                elseif alg.method == "TrustRegion"
+                        myprintln(false, "Method Chosen: TrustRegion", log=false)
+                        alg.linesearch = "QuasiNewton-SR1"
+                        alg.c2 = -1.0
                         alg.progress = 1
                 else
                         @warn "Bad condition."

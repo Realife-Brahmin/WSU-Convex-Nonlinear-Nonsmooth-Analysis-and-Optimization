@@ -1,0 +1,6 @@
+Starting with initial point x = [13.8, 8.3, 0.022, 1800.0, 900.0, 4.2].
+which has fval = 1.8849813694070017
+Begin with the solver:
+Iteration 1:
+Iteration 1: x = [13.799995589413115, 8.299972834740574, 0.009805278658214735, 1800.000009642257, 900.0000002471413, 4.20054729598563] is a better point with new fval = 1.8849813694070017.
+Convergence achieved in 2 iterations 😄

@@ -97,6 +97,7 @@ function optimize2(pr;
         if method == "QuasiNewton"
             @pack! QNState = k, xk, fk, gk
             pk, QNState = findDirection(pr, gk, QNState=QNState)
+            # @show pk
 
         elseif method == "ConjugateGradientDescent"
             usingCGD = true
@@ -113,6 +114,8 @@ function optimize2(pr;
 
         if method != "TrustRegion"
         
+            @pack! solState = pk 
+
             if linesearchMethod == "StrongWolfe"
 
                 solState, solverState = StrongWolfe(pr, solState, solverState,
@@ -170,7 +173,7 @@ function optimize2(pr;
         end
 
         @unpack xkm1, xk, fkm1, fk, gkm1, gk, gmagkm1, gmagk = solState
-        @show xkm1, xk, fkm1, fk, gkm1, gk, gmagkm1, gmagk
+        # @show xkm1, xk, fkm1, fk, gkm1, gk, gmagkm1, gmagk
         myprintln(printOrNot, "Iteration $(k): x = $(xk) is a better point with new fval = $(fk).", log_path=log_txt)
 
         if !usingCGD && !justRestarted && abs(fk - fkm1) < dftol

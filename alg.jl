@@ -47,8 +47,8 @@ mutable struct AlgorithmSettings
         function AlgorithmSettings(; 
                 # method="ConjugateGradientDescent",
                 # method = "GradientDescent",
-                # method = "QuasiNewton",
-                method = "TrustRegion",
+                method = "QuasiNewton",
+                # method = "TrustRegion",
                 # maxiter=Int(1e5),
                 maxiter=Int(1e4),
                 # maxiter=Int(1e3),

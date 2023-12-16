@@ -58,6 +58,9 @@ P = df[2:n+1, 1:m]
 
 pmean = vec(mean(P, dims=2))
 x0 = Float64.(pmean)
+@show rec1 = rand(1:Int(m/2))
+@show rec2 = rand(Int(m/2+1):m)
+x0 = mean( [ P[:, rec1], P[:, rec2] ] )
 
 params = Dict(:pmean => pmean, :P => P, :μ => μ, :datasetName => datasetName)
 objective = receiverLocation;

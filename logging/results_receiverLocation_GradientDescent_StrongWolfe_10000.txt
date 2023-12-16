@@ -1,0 +1,37 @@
+****************************
+Solver run has concluded.
+Function solved for: receiverLocation()
+This was a function minimization problem.
+Cause(s) for stopping:
+Barely changing fval
+Convergence achieved in 51 iterations 😄
+****************************
+Method Used: GradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Optimal function value = -5.652789255539622
+***************************
+Optimal Nonzero Variables:
+Only upto 15 values will be printed.
+x☆[1] = 0.5080238886028642
+x☆[2] = 0.4805180875676213
+x☆[3] = 0.5097693267667367
+x☆[4] = 0.4348985263653083
+x☆[5] = 0.6503344695515619
+x☆[11] = 0.46418075727183744
+x☆[17] = 0.5017141043409855
+x☆[22] = 0.6345708334510771
+x☆[27] = 0.5634802329066525
+x☆[33] = -0.2912556216411096
+x☆[39] = 0.4657186981875152
+x☆[40] = 0.5099293507257084
+x☆[41] = 0.5154022523034719
+x☆[42] = 0.5091957784626369
+x☆[43] = 0.43582402911519663
+***************************
+Number of fevals = 51
+Number of gevals = 50
+Number of evals = 2201
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

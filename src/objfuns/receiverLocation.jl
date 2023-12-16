@@ -27,7 +27,12 @@ function receiverLocation(
         for i = 1:n
             g[i] = (x[i] - pmean[i])
             for k = 1:m
-                g[i] -= (1/m)*μ[k]*(1/( sum( (x-P[:, k]).^2)) )*(x[i] - P[i, k])
+                squaredDistanceFrom_pk = sum( (x-P[:, k]).^2 )
+                if squaredDistanceFrom_pk == 0
+                    g[i] = Inf
+                else
+                    g[i] -= (1/m)*μ[k]*(1/squaredDistanceFrom_pk) *(x[i] - P[i, k])
+                end
             end
         end
         return f, g

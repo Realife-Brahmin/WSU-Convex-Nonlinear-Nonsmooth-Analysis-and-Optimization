@@ -14,8 +14,8 @@ function plotresults(res;
     functionName = string(pr.objective)
     if functionName == "drag"
         plotDragCurve(res, savePlot=savePlot)
-    elseif functionName == "receiverLocation"
-        plotReceiverLocationPlot(res, savePlot=savePlot)
+    # elseif functionName == "receiverLocation"
+    #     plotReceiverLocationPlot(res, savePlot=savePlot)
     elseif functionName == "signalDenoise"
         plotDenoisedSignal(res, savePlot=savePlot)
     elseif functionName == "nnloss"

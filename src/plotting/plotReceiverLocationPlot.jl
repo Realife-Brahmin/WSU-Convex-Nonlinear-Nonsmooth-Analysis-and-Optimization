@@ -9,6 +9,8 @@ function plotReceiverLocationPlot(
     p = pr[:p]
     params = p[:params]
     
+    f = pr.objective
+    
     @unpack pmean, P, μ, datasetName = params
 
     folderName = string(dirname(dirname(@__DIR__)))*"/processedData/"

@@ -19,7 +19,7 @@ function receiverLocation(
 
     f = 0.5*sum((x - pmean).^2)
     for k = 1:m
-        f -= 1/(2*m)*μ[k]*ln(sum((x - P[:, k]).^2))
+        f -= 1/(2*m)*μ[k]*Base.log(sum((x - P[:, k]).^2))
     end
 
     if getGradientToo

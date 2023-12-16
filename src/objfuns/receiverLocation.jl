@@ -1,6 +1,7 @@
 using CSV
 using DataFrames
 using Parameters
+using Statistics
 
 include("objective.jl")
 
@@ -43,16 +44,29 @@ end
 
 rawDataFolder = "rawData/"
 datasetName = "SD05"
+# datasetName = "SD10" 
 ext = ".csv"
+
 filename = rawDataFolder * datasetName * ext
-df = CSV.File(filename, header=false) |> DataFrame
-# rename!(df, [:x, :y])
+df0 = CSV.File(filename, header=false) |> DataFrame
+df = Matrix(df0)
+println(size(df))
+m = size(df, 2)
+n = size(df, 1) - 1
+μ = df[1, 1:m]
+P = df[2:n+1, 1:m]
 
+pmean = vec(mean(P, dims=2))
+x0 = Float64.(pmean)
 
-# # x0 = Float64.(d)
+params = Dict(:pmean => pmean, :P => P, :μ => μ, :datasetName => datasetName)
+objective = receiverLocation;
 
-# params = Dict(:pmean => pmean, :P => P, :mu => μ, :datasetName => datasetName)
-# objective = receiverLocation;
+pr = generate_pr(objective, x0, params=params)
 
-# pr = generate_pr(objective, x0, params=params)
+obj = pr.objective
 
+# Testing for f, g values for x = p_k for some k ∈ 1:m
+# x0 = P[:, rand(1:m)]
+# x0 = pmean
+# f, g = obj(x0, pr.p)

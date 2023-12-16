@@ -7,7 +7,7 @@ include("objective.jl")
 
 function receiverLocation(
     x::Vector{Float64}, 
-    p,
+    p;
     verbose::Bool = false,
     log::Bool = true,
     getGradientToo::Bool = true)
@@ -50,7 +50,7 @@ ext = ".csv"
 filename = rawDataFolder * datasetName * ext
 df0 = CSV.File(filename, header=false) |> DataFrame
 df = Matrix(df0)
-println(size(df))
+# println(size(df))
 m = size(df, 2)
 n = size(df, 1) - 1
 μ = df[1, 1:m]
@@ -64,7 +64,7 @@ objective = receiverLocation;
 
 pr = generate_pr(objective, x0, params=params)
 
-obj = pr.objective
+# obj = pr.objective
 
 # Testing for f, g values for x = p_k for some k ∈ 1:m
 # x0 = P[:, rand(1:m)]

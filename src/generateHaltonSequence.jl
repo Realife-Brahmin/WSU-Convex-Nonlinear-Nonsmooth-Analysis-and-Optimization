@@ -41,8 +41,30 @@ function generateHaltonSequence(key, len; discard::Int=0)
     return halton
 end
 
-halt = generateHaltonSequence(2, 62, discard=22)
+# halt = generateHaltonSequence(2, 62, discard=22)
 
+"""
+    sampleSpaceWithHalton(n::Int, p::Int; discard::Int=0) -> Matrix{Float64}
+
+Generate a sample space using Halton sequences with varying bases. This function is useful for quasi-random sampling in high-dimensional spaces, particularly in numerical integration and optimization problems.
+
+# Arguments
+- `n::Int`: The dimension of the sample space. Each dimension will use a different prime number as the base for its Halton sequence.
+- `p::Int`: The number of points to generate in each dimension of the sample space.
+- `discard::Int=0` (optional): The number of initial values in each Halton sequence to discard. Default is 0, meaning no values are discarded.
+
+# Returns
+- `Matrix{Float64}`: A `n x p` matrix where each row represents a dimension of the sample space, populated with values from the corresponding Halton sequence.
+
+# Details
+The function creates a matrix `sampledSpace` of zeros with dimensions `n x p`. It then generates `n` distinct prime numbers using the first `n` primes greater than `10 * n`. Each of these primes serves as the base for a Halton sequence for each dimension of the sample space. The `generateHaltonSequence` function is called for each dimension with the respective prime number as the base and `p` as the number of points, along with the specified `discard` value.
+
+# Examples
+```julia
+# Generate a 2-dimensional sample space with 100 points in each dimension, discarding the first 5 values of each Halton sequence
+sample_space = sampleSpaceWithHalton(2, 100, discard=5)
+```
+"""
 function sampleSpaceWithHalton(n, p;
     discard::Int = 0)
 
@@ -54,35 +76,4 @@ function sampleSpaceWithHalton(n, p;
     end
 
     return sampledSpace
-end
-
-n = 2
-p = 62
-discard = 20
-ss = sampleSpaceWithHalton(n, p, discard=discard)
-Plots.theme(:dao)
-p1 = scatter(ss[1, :], ss[2, :],
-        aspect_ratio=:equal,
-        xlims=[0.0, 1.0],
-        ylims=[0.0, 1.0],
-        label=:none)
-display(p1)
-
-function sampleSpace(n, p; 
-    method::String="Halton",
-    discard::Int=0)
-
-    space = zeros(n, p)
-    if method == "Halton"
-        sampledSpace = sampleSpaceWithHalton(n, p, discard=discard)
-        qs = primes(10*n)[1:n]
-
-    elseif method == "Latin Hypercube"
-        @error "not implemented"
-    elseif method == "Random"
-        @error "not implemented"
-    else
-        @error "floc"
-    end
-
 end

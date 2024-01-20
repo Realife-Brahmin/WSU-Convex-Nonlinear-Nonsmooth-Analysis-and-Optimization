@@ -1,5 +1,8 @@
-# MATH-564-Convex-and-Nonlinear-Optimization
-Convex and Nonlinear Optimization | Fall 2023 | Washington State University | Prof. Thomas Asaki
+# MATH 564: Convex and Nonlinear Optimization and MATH 565 Nonsmooth Analysis and Optimization
+## Prof. Thomas Asaki | Fall 2023 and Spring 2024
+ <img src = "https://user-images.githubusercontent.com/24756405/237030072-5b15d383-9fec-4af8-bf5d-572b6db31e37.png" width = 35% height = 30%> <img src = "https://user-images.githubusercontent.com/24756405/237032599-14edd7bc-5b4c-4f0d-84a3-3ff7e9f963ec.png" width = 50% height = 100%>
+
+## Julia implementations for the two courses at Washington State University, Pullman.
 
 This repo contains a solver in julia , and different types of optimization problems to solve for.
 
@@ -19,4 +22,7 @@ This repo contains a solver in julia , and different types of optimization probl
 
 ## Step-selection Algorithms Used:
 - Strong Wolfe + Bisection Interpolation
-- Armijo + Backtracking (support removed, always use Strong Wolfe henceforth)
+- Armijo + Backtracking (support removed, always use Strong Wolfe henceforth
+
+<img src = "https://user-images.githubusercontent.com/24756405/237028282-16ffc864-98f8-4c6f-a663-dfb04d191623.png" width = 15% height = 15%>
+

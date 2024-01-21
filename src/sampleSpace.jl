@@ -1,16 +1,20 @@
+using Plots
+
 include("./generateHaltonSequence.jl")
+include("./generateRandomSequence.jl")
 
 function sampleSpace(n, p; 
     method::String="Halton",
-    discard::Int=0)
+    discard::Int=0,
+    seed::Int=1)
 
-    space = zeros(n, p)
     if method == "Halton"
-        sampledSpace = sampleSpaceWithHalton(n, p, discard=discard)
+        sampledSpace = sampleSpaceHalton(n, p, discard=discard)
     elseif method == "Latin Hypercube"
         @error "not implemented"
     elseif method == "Random"
-        @error "not implemented"
+        sampledSpace = sampleSpaceRandom(n, p, seed=seed)
+        # @error "not implemented"
     else
         @error "floc"
     end
@@ -19,14 +23,22 @@ function sampleSpace(n, p;
 end
 
 n = 2
-p = 27
+p = 62
+method = "Random"
+method = "Halton"
 discard = 20
-ss = sampleSpace(n, p, discard=discard)
+seed = 1234
+ss = sampleSpace(n, p, method=method, seed=seed, discard=discard)
 # ss = sampleSpaceWithHalton(n, p, discard=discard)
 Plots.theme(:dao)
 p1 = scatter(ss[1, :], ss[2, :],
         aspect_ratio=:equal,
+        title="Sampled Space using $(method) method",
         xlims=[0.0, 1.0],
         ylims=[0.0, 1.0],
         label=:none);
 display(p1)
+ext = ".png"
+filename = method*"_n_"*string(n)*"_p_"*string(p)*ext
+fullAdd = joinpath("processedData", filename)
+savefig(p1, fullAdd)

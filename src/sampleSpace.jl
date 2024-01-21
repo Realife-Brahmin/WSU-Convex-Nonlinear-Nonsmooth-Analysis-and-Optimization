@@ -2,6 +2,7 @@ using Plots
 
 include("./generateHaltonSequence.jl")
 include("./generateRandomSequence.jl")
+include("./generateLatinHypercubeSequence.jl")
 include("./plotSampledSpace.jl")
 
 function sampleSpace(n, p; 
@@ -12,7 +13,7 @@ function sampleSpace(n, p;
     if method == "Halton"
         sampledSpace = sampleSpaceHalton(n, p, discard=discard)
     elseif method == "Latin Hypercube"
-        @error "not implemented"
+        sampledSpace = sampleSpaceLatinHypercube(n, p, seed=seed)
     elseif method == "Random"
         sampledSpace = sampleSpaceRandom(n, p, seed=seed)
         # @error "not implemented"
@@ -25,8 +26,10 @@ end
 
 n = 2
 p = 62
+# p = 5
 method = "Random"
 method = "Halton"
+method = "Latin Hypercube"
 discard = 20
 seed = 1234
 ss = sampleSpace(n, p, method=method, seed=seed, discard=discard)

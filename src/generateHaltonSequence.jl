@@ -44,7 +44,7 @@ end
 # halt = generateHaltonSequence(2, 62, discard=22)
 
 """
-    sampleSpaceWithHalton(n::Int, p::Int; discard::Int=0) -> Matrix{Float64}
+    sampleSpaceHalton(n::Int, p::Int; discard::Int=0) -> Matrix{Float64}
 
 Generate a sample space using Halton sequences with varying bases. This function is useful for quasi-random sampling in high-dimensional spaces, particularly in numerical integration and optimization problems.
 
@@ -62,10 +62,10 @@ The function creates a matrix `sampledSpace` of zeros with dimensions `n x p`. I
 # Examples
 ```julia
 # Generate a 2-dimensional sample space with 100 points in each dimension, discarding the first 5 values of each Halton sequence
-sample_space = sampleSpaceWithHalton(2, 100, discard=5)
+sample_space = sampleSpaceHalton(2, 100, discard=5)
 ```
 """
-function sampleSpaceWithHalton(n, p;
+function sampleSpaceHalton(n, p;
     discard::Int = 0)
 
     sampledSpace = zeros(n, p)

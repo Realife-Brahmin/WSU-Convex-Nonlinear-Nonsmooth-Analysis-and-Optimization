@@ -1,5 +1,26 @@
 using Plots
 
+"""
+    plotSampledSpace(ss, method; view::Bool=true, savePlot::Bool=true)
+
+Plot a sampled space of data points in 2D.
+
+This function generates a scatter plot to visualize a sampled space of data points in two dimensions (R^2). It provides options to control whether the plot is displayed and whether it is saved as an image.
+
+# Arguments:
+- `ss::Matrix{Float64}`: A 2D matrix containing the sampled data points. Each column of `ss` represents a data point with two dimensions (x and y coordinates).
+- `method::String`: A string indicating the method used for sampling the data.
+- `view::Bool=true`: (Optional) If `true`, the plot is displayed. If `false`, the plot is not displayed. Default is `true`.
+- `savePlot::Bool=true`: (Optional) If `true`, the plot is saved as an image. If `false`, the plot is not saved. Default is `true`.
+
+# Example:
+```julia
+# Create a sampled space matrix
+ss = rand(2, 100)
+
+# Plot the sampled space using the "Halton" method, display it, and save it as an image
+plotSampledSpace(ss, "Halton", view=true, savePlot=true)
+"""
 function plotSampledSpace(ss, method;
         view::Bool=true,
         savePlot::Bool=true)

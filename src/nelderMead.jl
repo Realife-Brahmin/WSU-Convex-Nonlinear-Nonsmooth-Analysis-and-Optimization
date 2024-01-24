@@ -61,6 +61,40 @@ function extend(xc, xw;
     return xe
 end
 
+"""
+    insertSortedSimplex!(matrix::Matrix{T}, new_vector::Vector{T}, f::Function) where T
+
+Insert a vector into a simplex (represented as a matrix with vectors as columns) 
+such that the columns remain sorted based on the value of a given function `f`, 
+applied to these vectors. After insertion, if the matrix exceeds its original 
+number of columns, the last column is removed to maintain a constant size.
+
+# Arguments
+- `matrix::Matrix{T}`: The simplex matrix with vectors as columns.
+- `new_vector::Vector{T}`: The vector to be inserted into the simplex.
+- `f::Function`: A function that is applied to vectors to determine their order.
+
+# Returns
+- `Matrix{T}`: The updated simplex matrix with the new vector inserted and the 
+last column removed if necessary to maintain size.
+
+# Examples
+```julia
+# Define a function f() to apply to vectors (e.g., sum of elements)
+f(v) = sum(v)
+
+# Create a simplex matrix
+simplex = [1 3 5; 2 4 6]  # 2x3 matrix, with columns as vectors
+
+# Define a new vector to insert
+new_vector = [7, 8]  # The new vector to be inserted
+
+# Insert the new vector into the simplex
+updated_simplex = insertSortedSimplex!(simplex, new_vector, f)
+
+# The updated simplex is now [1 3 7; 2 4 8] if f is sum of elements
+```
+"""
 function insertSortedSimplex!(matrix::Matrix{T}, new_vector::Vector{T}, f::Function) where T
     values = [f(matrix[:, i]) for i in 1:size(matrix, 2)]
     new_value = f(new_vector)

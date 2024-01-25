@@ -47,13 +47,15 @@ function nelderMead(simplex, f::Function;
             if F_xr < F_xw
                 # this point is technically better than the worst point in the simplex, but not particularly useful. Can perform some contracts on it.
                 myprintln(verbose, "Reflection only better than worst point. Trying outside contract.")
-                xoc = outsideContract(xc, xr, beta=beta)
+                @show xoc = outsideContract(xc, xr, beta=beta)
+                @show length(xoc)
                 F_xoc = f(xoc)
                 if F_xoc < F_xr
                     myprintln(verbose, "Outside Contract a success! Adding it to simplex.")
                     # choosing outside contracted point (it may or may not be a useful addition to the simplex)
                     action = "outsideContract"
                     insertSortedSimplex!(simplex, xoc, f)
+                    display(simplex)
                 else
                     # outside contract didn't help, but choosing reflected point anyway
                     myprintln(verbose, "Outside Contract a failure. Still adding the reflection to simplex.")
@@ -113,39 +115,6 @@ function shrinkSortedSimplex!(simplex;
     return simplex
 end
 
-"""
-    insertSortedSimplex!(matrix::Matrix{T}, new_vector::Vector{T}, f::Function) where T
-
-Insert a vector into a simplex (represented as a matrix with vectors as columns) 
-such that the columns remain sorted based on the value of a given function `f`, 
-applied to these vectors. After insertion, the last column (represening the worst point) is removed to maintain a constant size.
-
-# Arguments
-- `matrix::Matrix{T}`: The simplex matrix with vectors as columns.
-- `new_vector::Vector{T}`: The vector to be inserted into the simplex.
-- `f::Function`: A function that is applied to vectors to determine their order.
-
-# Returns
-- `Matrix{T}`: The updated simplex matrix with the new vector inserted and the 
-last column removed if necessary to maintain size.
-
-# Examples
-```julia
-# Define a function f() to apply to vectors (e.g., sum of elements)
-f(v) = sum(v)
-
-# Create a simplex matrix
-simplex = [1 3 5; 2 4 6]  # 2x3 matrix, with columns as vectors
-
-# Define a new vector to insert
-new_vector = [7, 8]  # The new vector to be inserted
-
-# Insert the new vector into the simplex
-updated_simplex = insertSortedSimplex!(simplex, new_vector, f)
-
-# The updated simplex is now [1 3 7; 2 4 8] if f is sum of elements
-```
-"""
 function insertSortedSimplex!(matrix, new_vector, f::Function)
     values = [f(matrix[:, i]) for i in 1:size(matrix, 2)]
     new_value = f(new_vector)
@@ -154,21 +123,22 @@ function insertSortedSimplex!(matrix, new_vector, f::Function)
     insert_index = searchsortedfirst(values, new_value)
 
     # Insert the new vector and then trim the last column if necessary
-    new_matrix = hcat(matrix[:, 1:insert_index-1], new_vector, matrix[:, insert_index:end])
-    if size(new_matrix, 2) > size(matrix, 2)
-        return new_matrix[:, 1:end-1]  # Keep the matrix size constant by trimming the last column
-    else
-        return new_matrix
-    end
+    matrix .= hcat(matrix[:, 1:insert_index-1], new_vector, matrix[:, insert_index:end-1])
+
+    return nothing
+    
+    # return matrix  # Keep the matrix size constant by trimming the last column
 end
 
+function f(v)
+    x, y = v[1], v[2]
+    f = (x-1)*x + (y+1)*y
+    return f
+end
 
-# Define the function f()
-
-f(v) = sum(v.^2)  # For example, f() could be the sum of the elements of the vector
-
+simplex = Float64.([0 1 3;0 2 4])
 # Create a sample simplex matrix
-simplex = Float64.([1 3 5; 2 4 6])  # 2x3 matrix, with vectors [1, 2], [3, 4], [5, 6] as columns
+# simplex = Float64.([1 3 5; 2 4 6])  # 2x3 matrix, with vectors [1, 2], [3, 4], [5, 6] as columns
 println("originalSimplex:")
 display(simplex)
 v3 = [9, 12]
@@ -183,13 +153,10 @@ v2 = [0.5, 2.3]
 # insertSortedSimplex!(simplex, v3, f)
 verbose = true
 # verbose = false
-simplex, action = nelderMead(simplex, f, verbose=verbose)
-println("Action performed: $(action)")
+insertSortedSimplex!(simplex, [-0.75, -0.5], f)
 println("Latest Simplex:")
 display(simplex)
-
-
-
-# xc = [1, 2, 3]
-# xw = [4, 5, 6]
-# xr = reflect(xc, xw, alpha=0.5)
+# simplex, action = nelderMead(simplex, f, verbose=verbose)
+# println("Action performed: $(action)")
+# println("Latest Simplex:")
+# display(simplex)

@@ -9,6 +9,7 @@ function nelderMead(simplex, f::Function;
     beta = 0.5,
     delta = 0.5,
     verbose::Bool = false)
+
     n, p = size(simplex)
     action = "unselected"
     # it is assumed that the simplex is sorted, best (most optimal) point first
@@ -19,9 +20,11 @@ function nelderMead(simplex, f::Function;
     F_xr, F_xb = f(xr), f(xb)
     if F_xr < F_xb
         # better point than the best
+        myprintln(verbose, "Extending good reflection.")
         xe = extend(xc, xw, gamma=gamma)
         F_xe = f(xe)
         if F_xe < F_xr
+            myprintln(verbose, "Extension a success!")
             # extended point is even better! 
             # add it to the top of the simplex
             simplex = hcat(xe, simplex[:, 2:p-1])
@@ -29,40 +32,47 @@ function nelderMead(simplex, f::Function;
         else 
             # extended point is a worse point than reflection
             # add reflected point to the top of the list
-            simplex = hcat(xr, simplex[:, 2:p-1])
+            myprintln(verbose, "Extension a failure. Reverting to reflection.")
+            simplex = hcat(xr, simplex[:, 1:p-1])
         end
     else
         F_xsw = f(xsw)
         if F_xr < F_xsw 
             # point satisfies minimum required criterion for addition to simplex
             # just select it and move on
+            myprintln(verbose, "Reflection better than second-worst point, so adding it to simplex")
             !insertSortedSimplex!(simplex, xr, f)
         else
             F_xw = f(xw)
             if F_xr < F_xw
                 # this point is technically better than the worst point in the simplex, but not particularly useful. Can perform some contracts on it.
+                myprintln(verbose, "Reflection only better than worst point. Trying outside contract.")
                 xoc = outsideContract(xc, xr, beta=beta)
                 F_xoc = f(xoc)
                 if F_xoc < F_xr
+                    myprintln(verbose, "Outside Contract a success! Adding it to simplex.")
                     # choosing outside contracted point (it may or may not be a useful addition to the simplex)
                     action = "outsideContract"
                     insertSortedSimplex!(simplex, xoc, f)
                 else
                     # outside contract didn't help, but choosing reflected point anyway
+                    myprintln(verbose, "Outside Contract a failure. Still adding the reflection to simplex.")
                     simplex = hcat(simplex[1:p-1], xr)
                 end
             else
                 # oh no the point is even worse than the current worst point
                 # Let's try an inside contract
+                myprintln(verbose, "Worse than the worst point. Trying an Inside Contract.")
                 xic = insideContract(xc, xw, beta=beta)
                 action = "insideContract"
                 F_xic = f(xic)
                 if F_xic < F_xw
-                    # technically okay
+                    myprintln(verbose, "Inside Contract better than worst point, so adding it.")
                     insertSortedSimplex!(simplex, xic, f)
                 else
                     # okay no improvment this time
                     # let's shrink the simplex
+                    myprintln(verobse, "No improvement. Shrink the simplex.")
                     shrinkSortedSimplex!(simplex, delta=delta)
                     action = "shrink"
                 end
@@ -171,7 +181,9 @@ v2 = [0.5, 2.3]
 # Display the updated simplex
 # insertSortedSimplex!(simplex, v2, f)
 # insertSortedSimplex!(simplex, v3, f)
-simplex, action = nelderMead(simplex, f)
+verbose = true
+# verbose = false
+simplex, action = nelderMead(simplex, f, verbose=verbose)
 println("Action performed: $(action)")
 println("Latest Simplex:")
 display(simplex)

@@ -41,7 +41,7 @@ function nelderMead(simplex, f::Function;
             # point satisfies minimum required criterion for addition to simplex
             # just select it and move on
             myprintln(verbose, "Reflection better than second-worst point, so adding it to simplex")
-            !insertSortedSimplex!(simplex, xr, f)
+            simplex = insertSortedSimplex(simplex, xr, f)
         else
             F_xw = f(xw)
             if F_xr < F_xw
@@ -54,7 +54,7 @@ function nelderMead(simplex, f::Function;
                     myprintln(verbose, "Outside Contract a success! Adding it to simplex.")
                     # choosing outside contracted point (it may or may not be a useful addition to the simplex)
                     action = "outsideContract"
-                    insertSortedSimplex!(simplex, xoc, f)
+                    simplex = insertSortedSimplex(simplex, xoc, f)
                     display(simplex)
                 else
                     # outside contract didn't help, but choosing reflected point anyway
@@ -70,12 +70,12 @@ function nelderMead(simplex, f::Function;
                 F_xic = f(xic)
                 if F_xic < F_xw
                     myprintln(verbose, "Inside Contract better than worst point, so adding it.")
-                    insertSortedSimplex!(simplex, xic, f)
+                    simplex = insertSortedSimplex(simplex, xic, f)
                 else
                     # okay no improvment this time
                     # let's shrink the simplex
                     myprintln(verobse, "No improvement. Shrink the simplex.")
-                    shrinkSortedSimplex!(simplex, delta=delta)
+                    simplex = shrinkSortedSimplex(simplex, delta=delta)
                     action = "shrink"
                 end
             end
@@ -109,13 +109,13 @@ function insideContract(xc, xw;
     return xic
 end
 
-function shrinkSortedSimplex!(simplex;
+function shrinkSortedSimplex(simplex;
     delta = 0.5)
     simplex += delta*(simplex[1, :] .- simplex[:, :])
     return simplex
 end
 
-function insertSortedSimplex!(matrix, new_vector, f::Function)
+function insertSortedSimplex(matrix, new_vector, f::Function)
     values = [f(matrix[:, i]) for i in 1:size(matrix, 2)]
     new_value = f(new_vector)
 
@@ -125,9 +125,8 @@ function insertSortedSimplex!(matrix, new_vector, f::Function)
     # Insert the new vector and then trim the last column if necessary
     matrix .= hcat(matrix[:, 1:insert_index-1], new_vector, matrix[:, insert_index:end-1])
 
-    return nothing
+    return matrix
     
-    # return matrix  # Keep the matrix size constant by trimming the last column
 end
 
 function f(v)
@@ -153,7 +152,7 @@ v2 = [0.5, 2.3]
 # insertSortedSimplex!(simplex, v3, f)
 verbose = true
 # verbose = false
-insertSortedSimplex!(simplex, [-0.75, -0.5], f)
+simplex = insertSortedSimplex(simplex, [-0.75, -0.5], f)
 println("Latest Simplex:")
 display(simplex)
 # simplex, action = nelderMead(simplex, f, verbose=verbose)

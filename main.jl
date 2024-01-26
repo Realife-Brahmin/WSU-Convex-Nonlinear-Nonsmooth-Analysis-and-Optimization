@@ -6,7 +6,7 @@ println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 verbose = false
 verbose = true;
 verbose_ls = false;
-verbose_ls = true;
+# verbose_ls = true;
 # verbose_ls = verbose & verbose_ls
 logging = true; 
 profiling = false;
@@ -18,7 +18,7 @@ warmStart = true
 # functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
 # functionName = "pathtime"
-functionName = "receiverLocation"
+# functionName = "receiverLocation"
 # functionName = "rosenbrock";
 # functionName = "signalDenoise";
 # functionName = "sphere";
@@ -33,6 +33,7 @@ pr = include("src/objfuns/"*String(functionName)*".jl")
 @time begin
     res = warm_start_optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
 end
+
 
 showresults(res)
 

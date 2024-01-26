@@ -65,6 +65,25 @@ mutable struct SolStateType
 
 end
 
+
+function SolStateNMType(; k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),
+    Fkm1=zeros(0), Fk=zeros(0), Delta=0.0)
+return Dict(:k => k, :Xkm1 => Xkm1, :Xk => Xk, :Fkm1 => Fkm1, :Fk => Fk, :Delta => Delta)
+end
+
+
+# # Example usage:
+# sol_state = SolStateNMType(k=0, Xkm1=Matrix{Float64}(undef, 3, 3), Xk=Matrix{Float64}(undef, 3, 3),
+#     Fkm1=Float64[], Fk=Float64[], Delta=0.1)
+
+# # Mutate the SolStateNMType instance within an iteration (if needed)
+# sol_state[:k] = 1
+# sol_state[:Xkm1] = rand(3, 3)
+# sol_state[:Xk] = rand(3, 3)
+# sol_state[:Fkm1] = rand(3)
+# sol_state[:Fk] = rand(3)
+# sol_state[:Delta] = 0.2
+# sol_state
 """
     SolverStateType
 

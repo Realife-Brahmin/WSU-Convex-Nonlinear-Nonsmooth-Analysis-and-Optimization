@@ -1,18 +1,14 @@
-FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
-
-
 include("objective.jl")
 
 """
-    dampedSHM(x::Vector{Float64}, p::FuncParam; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
+    dampedSHM(x::Vector{Float64}, p::Dict; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
 
 Computes the mean squared deviation of the predicted damped simple harmonic motion from the given data. The motion is modeled using a combination of exponential decay and sinusoidal functions.
 
 # Arguments
 - `x::Vector{Float64}`: A vector of parameters for the motion model. They are in the order [A₀, A, τ, ω, α, ϕ].
 
-- `p::FuncParam`: A named tuple encapsulating the parameters and data. It has two fields:
-- `params::Vector{Float64}`: A vector of additional parameters (not currently used in the function).
+- `p`: A Dict encapsulating the parameters and data.
 - `data::Matrix{Float64}`: A matrix where columns correspond to different features, and rows are individual observations. The last column is the target value y, while the other columns represent the feature values (in this case, time values).
 
 # Keyword Arguments
@@ -31,7 +27,7 @@ Computes the mean squared deviation of the predicted damped simple harmonic moti
 ```julia
 data_matrix = [...]
 params_vector = [...]
-p = FuncParam(params=params_vector, data=data_matrix)
+p = Dict(:params=>params_vector, :data=>data_matrix)
 x_values = [A₀_value, A_value, τ_value, ω_value, α_value, ϕ_value]
 f, g = dampedSHM(x_values, p)
 ```
@@ -39,11 +35,8 @@ f, g = dampedSHM(x_values, p)
 The function computes the predicted damped harmonic motion using the model:
     ŷ(t) = A₀ + A * exp(-t/τ) * sin((ω+α*t) * t + ϕ)
     and then finds the mean squared deviation from the provided data.
-    
-    
-    FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
-    
-    function dampedSHM(x::Vector{Float64}, p::FuncParam; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
+        
+    function dampedSHM(x::Vector{Float64}, p::Dict; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
 """
 function dampedSHM(x::Vector{Float64}, 
     p;

@@ -44,8 +44,8 @@ function dampedSHM(x::Vector{Float64},
     log::Bool=true,
     getGradientToo::Bool=true)
 
-    # data = p.data
-    data = p[:data]
+    # data = p[:data]
+    data = p[:params][:data]
     M = size(data, 1)
     nf = size(data, 2) - 1
     y = data[:, nf+1]
@@ -53,7 +53,8 @@ function dampedSHM(x::Vector{Float64},
     t = xf
 
     n = length(x) # note that df's x (time) is different from function parameter x
-    A₀, A, τ, ω, α, ϕ = x
+    mags = p[:params][:mags]
+    A₀, A, τ, ω, α, ϕ = x.*mags
     f = 0.0;
     g = zeros(Float64, n)
     for k = 1:M
@@ -84,8 +85,23 @@ filename = rawDataFolder * "FFD.csv"
 df = CSV.File(filename) |> DataFrame
 rename!(df, [:x, :y])
 data = Matrix(df)
-x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
+x00 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
+
+mags = Float64[]
+
+for x in x00
+    magnitude = 1.0
+    while x / magnitude >= 1.0
+        magnitude *= 10.0
+    end
+    push!(mags, magnitude)
+end
+
+n = length(x00)
+mags = ones(n)
+x0 = x00./mags;
+params = Dict(:data=>data, :x00=>x00, :mags=>mags);
 
 objective = dampedSHM;
 
-pr = generate_pr(objective, x0, data=data)
+pr = generate_pr(objective, x0, params=params)

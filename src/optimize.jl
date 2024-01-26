@@ -241,7 +241,7 @@ function warm_start_optimize(pr;
         end
     else
         @time res = optimize2(pr, verbose=verbose, verbose_ls=verbose_ls)
-        @time res = optimize2(pr, verbose=verbose, verbose_ls=verbose_ls)
+        # @time res = optimize2(pr, verbose=verbose, verbose_ls=verbose_ls)
     end
     return res
 end

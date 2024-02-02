@@ -9,23 +9,15 @@ Convergence achieved in 3 iterations 😄
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 1.3073212462500557e-30
+Optimal function value = 6.162975822039155e-32
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = -1.3877787807814457e-16
-x☆[2] = -1.6653345369377348e-16
-x☆[3] = -1.6653345369377348e-16
-x☆[4] = 3.3306690738754696e-16
-x☆[5] = -1.1102230246251565e-16
-x☆[6] = -3.3306690738754696e-16
-x☆[7] = 0.0
-x☆[8] = -6.661338147750939e-16
-x☆[9] = 3.3306690738754696e-16
-x☆[10] = 6.661338147750939e-16
+x☆[1] = -2.220446049250313e-16
+x☆[2] = -1.1102230246251565e-16
 ***************************
 Number of fevals = 3
 Number of gevals = 2
-Number of evals = 23
+Number of evals = 7
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-15

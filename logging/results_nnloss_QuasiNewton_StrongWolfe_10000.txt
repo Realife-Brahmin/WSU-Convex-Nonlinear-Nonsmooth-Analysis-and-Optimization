@@ -1,0 +1,37 @@
+****************************
+Solver run has concluded.
+Function solved for: nnloss()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too many iterations
+Failed to converge despite 10000 iterations! 😢
+****************************
+Method Used: QuasiNewton
+Linesearch method used: StrongWolfe
+****************************
+Best function value = 0.8535438371627173
+***************************
+Best Known Nonzero Variables:
+Only upto 15 values will be printed.
+x☆[1] = -15.89364258103909
+x☆[2] = -4.922077726018317
+x☆[3] = -0.2984477201115105
+x☆[4] = 3.9850820579469843
+x☆[5] = 7.525470063239287
+x☆[36] = 396.947067535188
+x☆[66] = -155.13646530290717
+x☆[96] = 26.940342173626608
+x☆[125] = -135.35950045087608
+x☆[155] = -135.00987470693553
+x☆[186] = 14.270289276233001
+x☆[187] = -14.30260988927503
+x☆[188] = 3.505878175373081
+x☆[189] = 13.97757335081015
+x☆[190] = 3.232149280234026
+***************************
+Number of fevals = 10001
+Number of gevals = 10000
+Number of evals = 1910001
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

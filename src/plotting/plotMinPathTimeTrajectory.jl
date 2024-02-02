@@ -35,7 +35,7 @@ function plotMinPathTimeTrajectory(res;
     # legend!(:outertopright)
     xlabel!("X-axis")
     ylabel!("Y-axis")
-    title!("Minimum Pathtime Trajectory for $(speedMatrixID)\n"*"Optimal Time = $(fval) units\n"*"Method: $(pr.alg.method)\n"*"n = $(n)")
+    title!("Minimum Pathtime Trajectory for $(speedMatrixID)\n"*"Optimal Time = $(fval) units\n"*"Method: $(pr.alg[:method])\n"*"n = $(n)")
 
     xxm_int, yym_int = computeOptimalTrajectoryIndices(res)
     h2 = Plots.plot(h12,
@@ -49,7 +49,7 @@ function plotMinPathTimeTrajectory(res;
     legend=:topright)
 
     folderName = string(dirname(dirname(@__DIR__)))*"/processedData/"
-    filename = folderName*"minTimePath_"*speedMatrixID*"_"*pr.alg.method*"_n_"*string(n)*".png"
+    filename = folderName*"minTimePath_"*speedMatrixID*"_"*pr.alg[:method]*"_n_"*string(n)*".png"
 
     if savePlot
         

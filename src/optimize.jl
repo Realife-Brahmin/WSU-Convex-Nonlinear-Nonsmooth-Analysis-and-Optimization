@@ -8,7 +8,7 @@ function optimize(pr;
     log::Bool=true,
     log_path::String="./logging/")
 
-    log_txt = log_path*"log_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
+    log_txt = log_path*"log_"*string(pr.objective)*"_"*pr.alg[:method]*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
 
     if isfile(log_txt)
         rm(log_txt)
@@ -38,11 +38,11 @@ function optimize(pr;
     myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
     @pack! solState = fk
 
-    if pr.alg.method == "QuasiNewton"
+    if pr.alg[:method] == "QuasiNewton"
         QNState = QNStateType()
-    elseif pr.alg.method == "ConjugateGradientDescent"
+    elseif pr.alg[:method] == "ConjugateGradientDescent"
         CGState = CGStateType()
-    elseif pr.alg.method == "TrustRegion"
+    elseif pr.alg[:method] == "TrustRegion"
         SR1params = SR1paramsType()
         TRparams = TRparamsType()
     end
@@ -84,11 +84,11 @@ function optimize(pr;
         @pack! solState = fk, gk, gmagk
         @pack! solverState = fevals, gevals
 
-        if pr.alg.method == "QuasiNewton"
+        if pr.alg[:method] == "QuasiNewton"
             @pack! QNState = k, xk, fk, gk
             pk, QNState = findDirection(pr, gk, QNState=QNState)
 
-        elseif pr.alg.method == "ConjugateGradientDescent"
+        elseif pr.alg[:method] == "ConjugateGradientDescent"
             usingCGD = true
             @pack! CGState = k, gk
             pk, CGState = findDirection(pr, gk, CGState=CGState)
@@ -124,10 +124,10 @@ function optimize(pr;
 
         myprintln(printOrNot, "Iteration $(k): x = $(xk) is a better point with new fval = $(fk).", log_path=log_txt)
 
-        if !usingCGD && !justRestarted && abs(fk - fkm1) < dftol
-            push!(causeForStopping, "Barely changing fval")
-            keepIterationsGoing = false
-        end
+        # if !usingCGD && !justRestarted && abs(fk - fkm1) < dftol
+        #     push!(causeForStopping, "Barely changing fval")
+        #     keepIterationsGoing = false
+        # end
         if !usingCGD && !justRestarted && gmagkm1 < gtol
             push!(causeForStopping, "Too small gradient at previous step.")
             keepIterationsGoing = false
@@ -218,11 +218,11 @@ function warm_start_optimize(pr;
     verbose_ls=false)
 
     if warmStart && string(pr.objective) == "drag"
-        if pr.alg.method == "QuasiNewton"
+        if pr.alg[:method] == "QuasiNewton"
             nMax = 1024
-        elseif pr.alg.method == "ConjugateGradientDescent"
+        elseif pr.alg[:method] == "ConjugateGradientDescent"
             nMax = 1024
-        elseif pr.alg.method == "GradientDescent"
+        elseif pr.alg[:method] == "GradientDescent"
             nMax = 1024
         else
             @error "Unkown method"
@@ -239,8 +239,10 @@ function warm_start_optimize(pr;
             x0 = extrapolate(xopt, factor)
             n = length(x0)
         end
+    elseif pr.alg[:method] == "NelderMead"
+        @time res = optimizeNM(pr, verbose=verbose, verbose_ls=verbose_ls)
     else
-        @time res = optimize2(pr, verbose=verbose, verbose_ls=verbose_ls)
+        # @time res = optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
         @time res = optimize2(pr, verbose=verbose, verbose_ls=verbose_ls)
     end
     return res

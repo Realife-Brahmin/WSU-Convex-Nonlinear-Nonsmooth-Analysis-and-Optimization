@@ -11,7 +11,7 @@ function plotDragCurve(res;
 
     gr()
     p1 = Plots.plot(z, r, dpi = 7000,
-        title = "Drag Functional Estimate: $(L"f_{min} =") $(round(f, digits=5)) \n using $(pr.alg.method) with $(n) points.",
+        title = "Drag Functional Estimate: $(L"f_{min} =") $(round(f, digits=5)) \n using $(pr.alg[:method]) with $(n) points.",
         titlefont = font(12,"Computer Modern"),
         guidefont = font(15,"Computer Modern"),
         label = L"r(z)",
@@ -28,7 +28,7 @@ function plotDragCurve(res;
     )
 
     folderName = string(dirname(dirname(@__DIR__)))*"/processedData/"
-    filename = folderName*"dragFunction_"*pr.alg.method*"_"*string(n)*".pdf"
+    filename = folderName*"dragFunction_"*pr.alg[:method]*"_"*string(n)*".pdf"
 
 
     if savePlot

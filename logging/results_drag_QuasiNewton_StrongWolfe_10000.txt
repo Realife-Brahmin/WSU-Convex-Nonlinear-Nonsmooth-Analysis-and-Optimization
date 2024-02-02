@@ -1,0 +1,37 @@
+****************************
+Solver run has concluded.
+Function solved for: drag()
+This was a function minimization problem.
+Cause(s) for stopping:
+LineSearch failed.
+Convergence achieved in 56 iterations 😄
+****************************
+Method Used: QuasiNewton
+Linesearch method used: StrongWolfe
+****************************
+Optimal function value = 0.18757915372173217
+***************************
+Optimal Nonzero Variables:
+Only upto 15 values will be printed.
+x☆[1] = 0.35214464230550535
+x☆[2] = 0.3531182239850974
+x☆[3] = 0.35409030877799863
+x☆[4] = 0.3550579773609361
+x☆[5] = 0.3560237660837536
+x☆[175] = 0.4971026118528377
+x☆[344] = 0.6141188439826362
+x☆[512] = 0.7188823678217855
+x☆[681] = 0.816697864273825
+x☆[850] = 0.908948046732952
+x☆[1020] = 0.997451193692824
+x☆[1021] = 0.9979611647467441
+x☆[1022] = 0.9984710461200029
+x☆[1023] = 0.9989808172942336
+x☆[1024] = 0.9994904478290186
+***************************
+Number of fevals = 56
+Number of gevals = 55
+Number of evals = 56376
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

@@ -1,18 +1,14 @@
-FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
-
-
 include("objective.jl")
 
 """
-    dampedSHM(x::Vector{Float64}, p::FuncParam; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
+    dampedSHM(x::Vector{Float64}, p::Dict; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
 
 Computes the mean squared deviation of the predicted damped simple harmonic motion from the given data. The motion is modeled using a combination of exponential decay and sinusoidal functions.
 
 # Arguments
 - `x::Vector{Float64}`: A vector of parameters for the motion model. They are in the order [A₀, A, τ, ω, α, ϕ].
 
-- `p::FuncParam`: A named tuple encapsulating the parameters and data. It has two fields:
-- `params::Vector{Float64}`: A vector of additional parameters (not currently used in the function).
+- `p`: A Dict encapsulating the parameters and data.
 - `data::Matrix{Float64}`: A matrix where columns correspond to different features, and rows are individual observations. The last column is the target value y, while the other columns represent the feature values (in this case, time values).
 
 # Keyword Arguments
@@ -31,7 +27,7 @@ Computes the mean squared deviation of the predicted damped simple harmonic moti
 ```julia
 data_matrix = [...]
 params_vector = [...]
-p = FuncParam(params=params_vector, data=data_matrix)
+p = Dict(:params=>params_vector, :data=>data_matrix)
 x_values = [A₀_value, A_value, τ_value, ω_value, α_value, ϕ_value]
 f, g = dampedSHM(x_values, p)
 ```
@@ -39,11 +35,8 @@ f, g = dampedSHM(x_values, p)
 The function computes the predicted damped harmonic motion using the model:
     ŷ(t) = A₀ + A * exp(-t/τ) * sin((ω+α*t) * t + ϕ)
     and then finds the mean squared deviation from the provided data.
-    
-    
-    FuncParam = NamedTuple{(:params, :data), Tuple{Vector{Float64}, Matrix{Float64}}}
-    
-    function dampedSHM(x::Vector{Float64}, p::FuncParam; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
+        
+    function dampedSHM(x::Vector{Float64}, p::Dict; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
 """
 function dampedSHM(x::Vector{Float64}, 
     p;
@@ -51,8 +44,8 @@ function dampedSHM(x::Vector{Float64},
     log::Bool=true,
     getGradientToo::Bool=true)
 
-    # data = p.data
-    data = p[:data]
+    # data = p[:data]
+    data = p[:params][:data]
     M = size(data, 1)
     nf = size(data, 2) - 1
     y = data[:, nf+1]
@@ -60,7 +53,8 @@ function dampedSHM(x::Vector{Float64},
     t = xf
 
     n = length(x) # note that df's x (time) is different from function parameter x
-    A₀, A, τ, ω, α, ϕ = x
+    mags = p[:params][:mags]
+    A₀, A, τ, ω, α, ϕ = x.*mags
     f = 0.0;
     g = zeros(Float64, n)
     for k = 1:M
@@ -91,8 +85,23 @@ filename = rawDataFolder * "FFD.csv"
 df = CSV.File(filename) |> DataFrame
 rename!(df, [:x, :y])
 data = Matrix(df)
-x0 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
+x00 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
+
+# mags = ones(n)
+
+# for x in x00
+#     magnitude = 1.0
+#     while x / magnitude >= 1.0
+#         magnitude *= 10.0
+#     end
+#     push!(mags, magnitude)
+# end
+
+n = length(x00)
+mags = ones(n)
+x0 = x00./mags;
+params = Dict(:data=>data, :x00=>x00, :mags=>mags);
 
 objective = dampedSHM;
 
-pr = generate_pr(objective, x0, data=data)
+pr = generate_pr(objective, x0, params=params)

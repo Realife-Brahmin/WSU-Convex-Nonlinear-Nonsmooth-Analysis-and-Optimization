@@ -1,0 +1,6 @@
+Starting with initial point x = [0.5, 0.5].
+which has fval = 2.3739583333333334
+Begin with the solver:
+Iteration 1:
+Iteration 1: x = [-0.37812500000000004, 0.875] is a better point with new fval = 1.4813255489449952.
+Convergence achieved in 14 iterations 😄

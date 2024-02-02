@@ -5,7 +5,7 @@ function plotDenoisedSignal(res;
     savePlot::Bool=true)
 
     pr = res.pr
-    method = pr.alg.method
+    method = pr.alg[:method]
     params = pr.p[:params]
     @unpack d, p, alpha, magnitudeString = params
     n = length(d)
@@ -42,7 +42,7 @@ function plotDenoisedSignal(res;
         ylims=(miny*0.95, maxy*1.05))
 
     folderName = string(dirname(dirname(@__DIR__)))*"/processedData/"
-    filename = folderName*"denoisedSignal$(magnitudeString)_"*pr.alg.method*"_"*string(n)*"_p_$(replace(string(p), "." => "-"))_alpha_$(replace(string(alpha), "." => "-")).png"
+    filename = folderName*"denoisedSignal$(magnitudeString)_"*pr.alg[:method]*"_"*string(n)*"_p_$(replace(string(p), "." => "-"))_alpha_$(replace(string(alpha), "." => "-")).png"
 
 
     if savePlot

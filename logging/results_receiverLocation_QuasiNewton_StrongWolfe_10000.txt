@@ -5,34 +5,34 @@ This was a function minimization problem.
 Cause(s) for stopping:
 LineSearch failed.
 Barely changing fval
-Convergence achieved in 8 iterations 😄
+Convergence achieved in 2 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = -5.372817155055779
+Optimal function value = -5.702840839724704
 ***************************
 Optimal Nonzero Variables:
 Only upto 15 values will be printed.
-x☆[1] = 0.14670136133819886
-x☆[2] = 0.5183493484450186
-x☆[3] = 0.4705622701079943
-x☆[4] = 0.7252725648632448
-x☆[5] = 0.7678744723065938
-x☆[11] = 0.7494565582285749
-x☆[17] = 0.14503446100036074
-x☆[22] = 0.45439690854812526
-x☆[27] = 0.512099449112521
-x☆[33] = 1.17041089839171
-x☆[39] = 0.5954928137297022
-x☆[40] = 0.9482558145248831
-x☆[41] = 0.5422184131026745
-x☆[42] = 0.3538214566723955
-x☆[43] = 0.2842399331757402
+x☆[1] = 0.583515
+x☆[2] = 0.50893
+x☆[3] = 0.0781165
+x☆[4] = 0.3619
+x☆[5] = 0.730065
+x☆[12] = 0.1411405
+x☆[19] = 0.410215
+x☆[26] = 0.587
+x☆[32] = 0.42309949999999996
+x☆[38] = 0.685215
+x☆[46] = 0.176044
+x☆[47] = 0.44483500000000004
+x☆[48] = 0.629365
+x☆[49] = 0.44055999999999995
+x☆[50] = 0.324305
 ***************************
-Number of fevals = 8
-Number of gevals = 7
-Number of evals = 309
+Number of fevals = 2
+Number of gevals = 1
+Number of evals = 52
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-15

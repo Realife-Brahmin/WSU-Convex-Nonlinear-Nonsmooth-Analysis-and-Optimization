@@ -1,7 +1,7 @@
 ****************************
 Solver run has concluded.
 Function solved for: dampedSHM()
-This was a data fitting problem.
+This was a function minimization problem.
 Cause(s) for stopping:
 Too many iterations
 Failed to converge despite 10000 iterations! 😢
@@ -9,20 +9,19 @@ Failed to converge despite 10000 iterations! 😢
 Method Used: ConjugateGradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Best MSE value = 0.3240127382686826
-Best SSE value = 64.80254765373653
+Best function value = 0.3529979768410317
 ***************************
 Best Known Nonzero Variables:
-x☆[1] = 13.76131894892754
-x☆[2] = 8.569307855775639
-x☆[3] = 0.01960383818613207
-x☆[4] = 1814.3784844634115
-x☆[5] = 900.5013921738345
-x☆[6] = 4.472046965293619
+x☆[1] = 13.760488935060872
+x☆[2] = 8.589187474159626
+x☆[3] = 0.01943091280423819
+x☆[4] = 1813.212801013621
+x☆[5] = 900.4532531582012
+x☆[6] = 4.48250902825125
 ***************************
 Number of fevals = 10001
 Number of gevals = 10000
 Number of evals = 70001
 **************************************************
 Tolerance critera used:
-dftol = 1.0e-12
+dftol = 1.0e-15

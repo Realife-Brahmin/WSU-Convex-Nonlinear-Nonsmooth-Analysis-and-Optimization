@@ -109,19 +109,19 @@ pr = generate_pr(objective, x0, params=params)
 # f, g = obj(x0, pr.p)
 # f = obj(x0, pr.p, getGradientToo=false)
 
-min_value = Inf
-min_x0 = nothing
+# min_value = Inf
+# min_x0 = nothing
 
-for i in 1:10000
-    global min_value, min_x0, f, x0
-    x0 = rand(n)  # Random starting point
-    f = obj(x0, pr.p, getGradientToo=false)
+# for i in 1:10000
+#     global min_value, min_x0, f, x0
+#     x0 = rand(n)  # Random starting point
+#     f = obj(x0, pr.p, getGradientToo=false)
 
-    if f < min_value
-        min_value = f
-        min_x0 = x0
-    end
-end
+#     if f < min_value
+#         min_value = f
+#         min_x0 = x0
+#     end
+# end
 
-println("Minimum value: ", min_value)
+# println("Minimum value: ", min_value)
 # println("Corresponding x0: ", min_x0)

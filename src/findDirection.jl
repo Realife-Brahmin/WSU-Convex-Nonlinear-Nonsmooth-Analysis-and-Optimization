@@ -8,7 +8,7 @@ function findDirection(
     verbose::Bool=false)
 
     n = length(gk)
-    method = pr.alg.method
+    method = pr.alg[:method]
     
     if method == "GradientDescent"
         Bk = I(n)

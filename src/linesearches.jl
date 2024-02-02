@@ -16,14 +16,14 @@ function StrongWolfe(pr::NamedTuple,
     log::Bool=true,
     log_path::String="./logging/")
 
-    log_txt = log_path*"log_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
+    log_txt = log_path*"log_"*string(pr.objective)*"_"*pr.alg[:method]*"_"*pr.alg[:linesearch]*"_"*string(pr.alg[:maxiter])*".txt"
 
     function myprintln1(v, message)
         myprintln(v, message, log=log, log_path=log_txt)
     end
 
-    c1 = pr.alg.c1
-    c2 = pr.alg.c2
+    c1 = pr.alg[:c1]
+    c2 = pr.alg[:c2]
     obj = pr.objective
     p = pr.p
 

@@ -13,13 +13,13 @@ function optimize2(pr;
     log::Bool=true,
     log_path::String="./logging/")
 
-    method = pr.alg.method
-    linesearchMethod = pr.alg.linesearch
+    method = pr.alg[:method]
+    linesearchMethod = pr.alg[:linesearch]
     if method == "TrustRegion"
         linesearchMethod = "QuasiNewton-SR1"
     end
 
-    log_txt = log_path*"log_"*string(pr.objective)*"_"*method*"_"*linesearchMethod*"_"*string(pr.alg.maxiter)*".txt"
+    log_txt = log_path*"log_"*string(pr.objective)*"_"*method*"_"*linesearchMethod*"_"*string(pr.alg[:maxiter])*".txt"
 
     if isfile(log_txt)
         rm(log_txt)
@@ -31,10 +31,10 @@ function optimize2(pr;
     # Initial settings
     fevals = 0
     gevals = 0
-    dftol = pr.alg.dftol
-    gtol = pr.alg.gtol
-    progress = pr.alg.progress
-    maxiter = pr.alg.maxiter
+    dftol = pr.alg[:dftol]
+    gtol = pr.alg[:gtol]
+    progress = pr.alg[:progress]
+    maxiter = pr.alg[:maxiter]
     x0 = pr.x0
     xk = x0
 

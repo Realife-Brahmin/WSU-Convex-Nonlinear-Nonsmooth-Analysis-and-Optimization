@@ -129,32 +129,32 @@ function insertSortedSimplex(matrix, new_vector, f::Function)
     
 end
 
-function f(v)
-    x, y = v[1], v[2]
-    f = (x-1)*x + (y+1)*y
-    return f
-end
+# function f(v)
+#     x, y = v[1], v[2]
+#     f = (x-1)*x + (y+1)*y
+#     return f
+# end
 
-simplex = Float64.([0 1 3;0 2 4])
-# Create a sample simplex matrix
-# simplex = Float64.([1 3 5; 2 4 6])  # 2x3 matrix, with vectors [1, 2], [3, 4], [5, 6] as columns
-println("originalSimplex:")
-display(simplex)
-v3 = [9, 12]
-# Define a new vector to insert
-new_vector = [2.5, 3.5]  # A new vector
+# simplex = Float64.([0 1 3;0 2 4])
+# # Create a sample simplex matrix
+# # simplex = Float64.([1 3 5; 2 4 6])  # 2x3 matrix, with vectors [1, 2], [3, 4], [5, 6] as columns
+# println("originalSimplex:")
+# display(simplex)
+# v3 = [9, 12]
+# # Define a new vector to insert
+# new_vector = [2.5, 3.5]  # A new vector
 
-# Use the function to insert the new vector
-# insertSortedSimplex!(simplex, new_vector, f)
-v2 = [0.5, 2.3]
-# Display the updated simplex
-# insertSortedSimplex!(simplex, v2, f)
-# insertSortedSimplex!(simplex, v3, f)
-verbose = true
-# verbose = false
-simplex = insertSortedSimplex(simplex, [-0.75, -0.5], f)
-println("Latest Simplex:")
-display(simplex)
+# # Use the function to insert the new vector
+# # insertSortedSimplex!(simplex, new_vector, f)
+# v2 = [0.5, 2.3]
+# # Display the updated simplex
+# # insertSortedSimplex!(simplex, v2, f)
+# # insertSortedSimplex!(simplex, v3, f)
+# verbose = true
+# # verbose = false
+# simplex = insertSortedSimplex(simplex, [-0.75, -0.5], f)
+# println("Latest Simplex:")
+# display(simplex)
 # simplex, action = nelderMead(simplex, f, verbose=verbose)
 # println("Action performed: $(action)")
 # println("Latest Simplex:")

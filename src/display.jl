@@ -43,7 +43,7 @@ function showresults(res::NamedTuple;
     data = pr.p[:data]
     dataFitting = isempty(data) ? false : true
 
-    result_txt = log_path*"results_"*string(pr.objective)*"_"*pr.alg.method*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
+    result_txt = log_path*"results_"*string(pr.objective)*"_"*pr.alg[:method]*"_"*pr.alg[:linesearch]*"_"*string(pr.alg[:maxiter])*".txt"
     if isfile(result_txt)
         rm(result_txt) # remove results log file if already present
     end
@@ -78,8 +78,8 @@ function showresults(res::NamedTuple;
         @error "bad condition"
     end
 
-    methodMsg = "Method Used: " * pr.alg.method
-    lsMsg = "Linesearch method used: " * pr.alg.linesearch
+    methodMsg = "Method Used: " * pr.alg[:method]
+    lsMsg = "Linesearch method used: " * pr.alg[:linesearch]
     myprintln1(v, "****************************")
     myprintln1(v, methodMsg)
     myprintln1(v, lsMsg)
@@ -141,7 +141,7 @@ function showresults(res::NamedTuple;
 
     myprintln1(v, "*"^50)
     myprintln1(v, "Tolerance critera used:")
-    myprintln1(v, "dftol = $(res.pr.alg.dftol)")
+    myprintln1(v, "dftol = $(res.pr.alg[:dftol])")
 
     # only if xopt given, below xopt is for rosenbrock function: a vector of ones
     # diffx = sum( abs.( res.xvals[:, end] - ones(Float64, length(res.xvals[:, end])) ) )

@@ -3,7 +3,7 @@ include("src/helperFunctions.jl")
 
 
 """
-    create_algorithm_settings(; kwargs...)
+        create_algorithm_settings(; kwargs...)
 
 Create a dictionary to store algorithm settings for optimization methods.
 
@@ -33,7 +33,8 @@ alg_custom = create_algorithm_settings(method="GradientDescent", maxiter=500)
 """
 function create_algorithm_settings(;
         # method="QuasiNewton",
-        method = "ConjugateGradientDescent",
+        # method = "ConjugateGradientDescent",
+        method = "GradientDescent",
         maxiter=Int(1e4),
         gtol=1e-12,
         dftol=1e-15,

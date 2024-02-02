@@ -1,0 +1,37 @@
+****************************
+Solver run has concluded.
+Function solved for: signalDenoise()
+This was a function minimization problem.
+Cause(s) for stopping:
+Too many iterations
+Failed to converge despite 10000 iterations! 😢
+****************************
+Method Used: GradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Best function value = 8.612541957900916
+***************************
+Best Known Nonzero Variables:
+Only upto 15 values will be printed.
+x☆[1] = 5.453700241640342
+x☆[2] = 8.231789766539725
+x☆[3] = 12.898495133753027
+x☆[4] = 16.786098235006968
+x☆[5] = 18.381442684103604
+x☆[8] = 12.919347886060542
+x☆[9] = 11.916022329331344
+x☆[10] = 11.91602385638164
+x☆[12] = 12.96430463835268
+x☆[14] = 14.583351411785214
+x☆[16] = 14.683241388331796
+x☆[17] = 14.381237061317936
+x☆[18] = 14.05313557381069
+x☆[19] = 13.533109083545666
+x☆[20] = 13.501002250508524
+***************************
+Number of fevals = 10001
+Number of gevals = 10000
+Number of evals = 210001
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

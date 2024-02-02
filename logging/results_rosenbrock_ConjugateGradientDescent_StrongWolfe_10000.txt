@@ -4,28 +4,28 @@ Function solved for: rosenbrock()
 This was a function minimization problem.
 Cause(s) for stopping:
 Too small gradient at latest step.
-Convergence achieved in 300 iterations 😄
+Convergence achieved in 372 iterations 😄
 ****************************
 Method Used: ConjugateGradientDescent
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 8.304733179714202e-28
+Optimal function value = 5.028495232718187e-28
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.9999999999999994
-x☆[2] = 0.9999999999999997
-x☆[3] = 1.0
-x☆[4] = 1.0000000000000009
-x☆[5] = 1.0000000000000013
-x☆[6] = 1.0000000000000033
-x☆[7] = 1.000000000000006
-x☆[8] = 1.0000000000000124
-x☆[9] = 1.0000000000000242
-x☆[10] = 1.000000000000049
+x☆[1] = 0.9999999999999998
+x☆[2] = 0.9999999999999996
+x☆[3] = 0.9999999999999978
+x☆[4] = 0.9999999999999991
+x☆[5] = 0.9999999999999988
+x☆[6] = 1.0000000000000007
+x☆[7] = 0.9999999999999981
+x☆[8] = 0.9999999999999977
+x☆[9] = 0.9999999999999961
+x☆[10] = 0.9999999999999953
 ***************************
-Number of fevals = 300
-Number of gevals = 299
-Number of evals = 3290
+Number of fevals = 372
+Number of gevals = 371
+Number of evals = 4082
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-15

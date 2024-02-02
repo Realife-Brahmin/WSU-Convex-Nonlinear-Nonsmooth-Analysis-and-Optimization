@@ -14,18 +14,10 @@ Optimal function value = 0.0
 Optimal Nonzero Variables:
 x☆[1] = 0.0
 x☆[2] = 0.0
-x☆[3] = 0.0
-x☆[4] = 0.0
-x☆[5] = 0.0
-x☆[6] = 0.0
-x☆[7] = 0.0
-x☆[8] = 0.0
-x☆[9] = 0.0
-x☆[10] = 0.0
 ***************************
 Number of fevals = 2
 Number of gevals = 1
-Number of evals = 12
+Number of evals = 4
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-15

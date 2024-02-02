@@ -1,2 +1,30 @@
+Starting with initial point x = [0.5, 0.5].
+which has fval = 2.3739583333333334
 Begin with the solver:
-Convergence achieved in 20 iterations 😄
+Iteration 1:
+Iteration 1: x = [-0.37812500000000004, 0.875] is a better point with new fval = 1.4813255489449952.
+Iteration 2:
+Iteration 2: x = [-0.16420945005707444, 0.457421875] is a better point with new fval = 1.369403282111095.
+Iteration 3:
+Iteration 3: x = [-0.0617971442933634, 0.7439528080586251] is a better point with new fval = 0.9807051403111471.
+Iteration 4:
+Iteration 4: x = [-0.07751940805959079, 0.7080391119509196] is a better point with new fval = 0.9690814635957088.
+Iteration 5:
+Iteration 5: x = [-0.08899331504449688, 0.7158606869330184] is a better point with new fval = 0.9684615311826139.
+Iteration 6:
+Iteration 6: x = [-0.09213402717925107, 0.7142280775583856] is a better point with new fval = 0.9684086885613508.
+Iteration 7:
+Iteration 7: x = [-0.09009805094128398, 0.7112863594777279] is a better point with new fval = 0.968387494645726.
+Iteration 8:
+Iteration 8: x = [-0.08988765804418927, 0.7127007792785849] is a better point with new fval = 0.9683715687345291.
+Iteration 9:
+Iteration 9: x = [-0.08983671723764271, 0.7126963012100036] is a better point with new fval = 0.968371559867429.
+Iteration 10:
+Iteration 10: x = [-0.0898410146726276, 0.7126550572281811] is a better point with new fval = 0.9683715465274971.
+Iteration 11:
+Iteration 11: x = [-0.0898420892435484, 0.7126550994954485] is a better point with new fval = 0.9683715465241591.
+Iteration 12:
+Iteration 12: x = [-0.08984199730164061, 0.712656439635737] is a better point with new fval = 0.9683715465101352.
+Iteration 13:
+Iteration 13: x = [-0.08984199730164757, 0.7126564396357387] is a better point with new fval = 0.9683715465101352.
+Convergence achieved in 14 iterations 😄

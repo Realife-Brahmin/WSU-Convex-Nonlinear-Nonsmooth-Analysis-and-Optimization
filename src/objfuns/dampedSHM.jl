@@ -87,15 +87,15 @@ rename!(df, [:x, :y])
 data = Matrix(df)
 x00 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
 
-mags = Float64[]
+# mags = ones(n)
 
-for x in x00
-    magnitude = 1.0
-    while x / magnitude >= 1.0
-        magnitude *= 10.0
-    end
-    push!(mags, magnitude)
-end
+# for x in x00
+#     magnitude = 1.0
+#     while x / magnitude >= 1.0
+#         magnitude *= 10.0
+#     end
+#     push!(mags, magnitude)
+# end
 
 n = length(x00)
 mags = ones(n)

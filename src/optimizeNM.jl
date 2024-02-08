@@ -14,7 +14,10 @@ function optimizeNM(pr;
 
     
     solverState = SolverStateType()
-    solState = SolStateNMType(xk=pr.x0)
+
+    X0 = createInitialSimplexFromOnePoint(x0, deviationFactor=deviationFactor)
+
+    solState = SolStateNMType(Xk=X0)
 
     fevals = 0
     alpha, beta, gamma, delta = pr.alg.alpha, pr.alg.beta, pr.alg.gamma, pr.alg.delta

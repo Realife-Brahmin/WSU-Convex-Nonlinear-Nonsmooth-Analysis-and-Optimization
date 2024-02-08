@@ -3,7 +3,7 @@ using Statistics
 include("helperFunctions.jl")
 include("sampleSpace.jl")
 
-function nelderMead(simplex, f::Function;
+function nelderMead(simplex, f::Function, params;
     alpha = 1.0,
     gamma = 2.0,
     beta = 0.5,
@@ -17,12 +17,12 @@ function nelderMead(simplex, f::Function;
     xc = mean(simplex[:, 1:p-1], dims=2)
     xr = reflect(xc, xw, alpha=alpha)
     action = "reflect"
-    F_xr, F_xb = f(xr), f(xb)
+    F_xr, F_xb = f(xr, params), f(xb, params)
     if F_xr < F_xb
         # better point than the best
         myprintln(verbose, "Extending good reflection.")
         xe = extend(xc, xw, gamma=gamma)
-        F_xe = f(xe)
+        F_xe = f(xe, params)
         if F_xe < F_xr
             myprintln(verbose, "Extension a success!")
             # extended point is even better! 
@@ -36,25 +36,25 @@ function nelderMead(simplex, f::Function;
             simplex = hcat(xr, simplex[:, 1:p-1])
         end
     else
-        F_xsw = f(xsw)
+        F_xsw = f(xsw, params)
         if F_xr < F_xsw 
             # point satisfies minimum required criterion for addition to simplex
             # just select it and move on
             myprintln(verbose, "Reflection better than second-worst point, so adding it to simplex")
-            simplex = insertSortedSimplex(simplex, xr, f)
+            simplex = insertSortedSimplex(simplex, xr, f, params)
         else
-            F_xw = f(xw)
+            F_xw = f(xw, params)
             if F_xr < F_xw
                 # this point is technically better than the worst point in the simplex, but not particularly useful. Can perform some contracts on it.
                 myprintln(verbose, "Reflection only better than worst point. Trying outside contract.")
                 @show xoc = outsideContract(xc, xr, beta=beta)
                 @show length(xoc)
-                F_xoc = f(xoc)
+                F_xoc = f(xoc, params)
                 if F_xoc < F_xr
                     myprintln(verbose, "Outside Contract a success! Adding it to simplex.")
                     # choosing outside contracted point (it may or may not be a useful addition to the simplex)
                     action = "outsideContract"
-                    simplex = insertSortedSimplex(simplex, xoc, f)
+                    simplex = insertSortedSimplex(simplex, xoc, f, params)
                     display(simplex)
                 else
                     # outside contract didn't help, but choosing reflected point anyway
@@ -67,16 +67,17 @@ function nelderMead(simplex, f::Function;
                 myprintln(verbose, "Worse than the worst point. Trying an Inside Contract.")
                 xic = insideContract(xc, xw, beta=beta)
                 action = "insideContract"
-                F_xic = f(xic)
+                F_xic = f(xic, params)
                 if F_xic < F_xw
                     myprintln(verbose, "Inside Contract better than worst point, so adding it.")
-                    simplex = insertSortedSimplex(simplex, xic, f)
+                    simplex = insertSortedSimplex(simplex, xic, f, params)
                 else
                     # okay no improvment this time
                     # let's shrink the simplex
                     myprintln(verobse, "No improvement. Shrink the simplex.")
                     simplex = shrinkSortedSimplex(simplex, delta=delta)
                     action = "shrink"
+                    simplex = sortSimplex(simplex, f, params)
                 end
             end
         end             
@@ -115,9 +116,9 @@ function shrinkSortedSimplex(simplex;
     return simplex
 end
 
-function insertSortedSimplex(matrix, new_vector, f::Function)
-    values = [f(matrix[:, i]) for i in 1:size(matrix, 2)]
-    new_value = f(new_vector)
+function insertSortedSimplex(matrix, new_vector, f::Function, params)
+    values = [f(matrix[:, i], params) for i in 1:size(matrix, 2)]
+    new_value = f(new_vector, params)
 
     # Find the insertion index
     insert_index = searchsortedfirst(values, new_value)
@@ -127,6 +128,38 @@ function insertSortedSimplex(matrix, new_vector, f::Function)
 
     return matrix
     
+end
+
+function sortSimplex(simplex, f::Function, params)
+    n, p = size(simplex)
+    # Create an array to store the function values for each column of the simplex
+    fValues = zeros(p)
+
+    # Evaluate the function `f` for each column and store the results
+    for i in 1:p
+        fValues[i] = f(simplex[:, i], params)
+    end
+
+    # Sort the simplex based on the evaluated function values
+    # `sortperm` gives the permutation of indices that will sort the array
+    sortedIndices = sortperm(fValues)
+
+    # Apply the sorted indices to the simplex columns
+    sortedSimplex = simplex[:, sortedIndices]
+
+    return sortedSimplex
+end
+
+function simplexDiameter(simplex)
+    n, p = size(simplex)
+    maxDiameter = 0.0
+    for i in 1:p-1
+        for j in i+1:p
+            dist = norm(simplex[:, i] - simplex[:, j])
+            maxDiameter = max(maxDiameter, dist)
+        end
+    end
+    return maxDiameter
 end
 
 # function f(v)

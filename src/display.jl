@@ -1,6 +1,6 @@
 
 using DataFrames
-using GR
+# using GR
 using LaTeXStrings
 using Parameters
 using Plots

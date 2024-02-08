@@ -34,7 +34,8 @@ alg_custom = create_algorithm_settings(method="GradientDescent", maxiter=500)
 function create_algorithm_settings(;
         # method="QuasiNewton",
         # method = "ConjugateGradientDescent",
-        method = "GradientDescent",
+        # method = "GradientDescent",
+        method = "NelderMead",
         maxiter=Int(1e4),
         gtol=1e-12,
         dftol=1e-15,

@@ -1,4 +1,5 @@
 include("types.jl")
+include("nelderMead.jl")
 
 function optimizeNM(pr; 
     verbose::Bool=false, 
@@ -15,10 +16,6 @@ function optimizeNM(pr;
     
     solverState = SolverStateType()
 
-    X0 = createInitialSimplexFromOnePoint(x0, deviationFactor=deviationFactor)
-
-    solState = SolStateNMType(Xk=X0)
-
     fevals = 0
     alpha, beta, gamma, delta = pr.alg.alpha, pr.alg.beta, pr.alg.gamma, pr.alg.delta
 
@@ -28,10 +25,29 @@ function optimizeNM(pr;
     x0 = pr.x0
     xk = x0
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
-    obj = pr.objective
+    f = pr.objective
     p = pr.p
-    fk = obj(x0, p, getGradientToo=false)
+    fk = f(x0, p, getGradientToo=false)
     myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
-    @pack! solState = fk
 
+    X00 = createInitialSimplexFromOnePoint(x0, deviationFactor=deviationFactor) # this simplex is currently unsorted
+
+    X0 = sortSimplex(X00, f, p)
+    solState = SolStateNMType(Xk=X0)
+
+    # @pack! solState = fk
+
+    keepIterationsGoing = true
+
+    while keepIterationsGoing
+        Xkp1, action = nelderMead(Xk, f, p)
+        k += 1
+
+        if k >= maxiter
+            keepIterationsGoing = false
+        elseif diameterSimplex < sizeTol
+            keepIterationsGoing = false
+        end
+
+    end
 end

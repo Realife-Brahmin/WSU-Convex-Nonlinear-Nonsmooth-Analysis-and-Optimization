@@ -39,7 +39,20 @@ function optimizeNM(pr;
 
     keepIterationsGoing = true
 
+
+
+    # function SolStateNMType(; k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),
+    #     Fkm1=zeros(0), Fk=zeros(0), Delta=0.0)
+    #     return Dict(:k => k, :Xkm1 => Xkm1, :Xk => Xk, :Fkm1 => Fkm1, :Fk => Fk, :Delta => Delta)
+    # end
+
     while keepIterationsGoing
+
+        @unpack k = solverState
+        
+        printOrNot = verbose && ((k - 1) % progress == 0)
+        printOrNot_ls = printOrNot & verbose_ls
+
         Xkp1, action = nelderMead(Xk, f, p)
         k += 1
 

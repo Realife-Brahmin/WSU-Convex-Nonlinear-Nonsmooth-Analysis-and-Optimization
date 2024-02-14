@@ -2,13 +2,18 @@
 
 julia_version = "1.10.0"
 manifest_format = "2.0"
-project_hash = "a31f479ba15f3fba2fdcfbba596e28dd726ed165"
+project_hash = "387c3de33825dd9b73d4f4725961db4787649b15"
 
 [[deps.ARFFFiles]]
 deps = ["CategoricalArrays", "Dates", "Parsers", "Tables"]
 git-tree-sha1 = "e8c8e0a2be6eb4f56b1672e46004463033daa409"
 uuid = "da404889-ca92-49ff-9e8b-0aa6b4d38dc8"
 version = "1.4.1"
+
+[[deps.AbstractTrees]]
+git-tree-sha1 = "faa260e4cb5aba097a73fab382dd4b5819d8ec8c"
+uuid = "1520ce14-60c1-5f80-bbc7-55ef81b5835c"
+version = "0.4.4"
 
 [[deps.Adapt]]
 deps = ["LinearAlgebra", "Requires"]
@@ -289,6 +294,12 @@ version = "1.0.0"
 [[deps.Dates]]
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
+
+[[deps.DecisionTree]]
+deps = ["AbstractTrees", "DelimitedFiles", "LinearAlgebra", "Random", "ScikitLearnBase", "Statistics"]
+git-tree-sha1 = "526ca14aaaf2d5a0e242f3a8a7966eb9065d7d78"
+uuid = "7806a523-6efd-50cb-b5f6-3fa6f1930dbb"
+version = "0.12.4"
 
 [[deps.DefineSingletons]]
 git-tree-sha1 = "0fba8b706d0178b4dc7fd44a96a92382c9065c2c"
@@ -831,6 +842,12 @@ weakdeps = ["StatisticalMeasures"]
     [deps.MLJBase.extensions]
     DefaultMeasuresExt = "StatisticalMeasures"
 
+[[deps.MLJDecisionTreeInterface]]
+deps = ["CategoricalArrays", "DecisionTree", "MLJModelInterface", "Random", "Tables"]
+git-tree-sha1 = "8059d088428cbe215ea0eb2199a58da2d806d446"
+uuid = "c6f25543-311c-4c74-83dc-3ea6d1015661"
+version = "0.4.0"
+
 [[deps.MLJEnsembles]]
 deps = ["CategoricalArrays", "CategoricalDistributions", "ComputationalResources", "Distributed", "Distributions", "MLJModelInterface", "ProgressMeter", "Random", "ScientificTypesBase", "StatisticalMeasuresBase", "StatsBase"]
 git-tree-sha1 = "94403b2c8f692011df6731913376e0e37f6c0fe9"
@@ -1233,6 +1250,12 @@ version = "3.0.2"
 git-tree-sha1 = "a8e18eb383b5ecf1b5e6fc237eb39255044fd92b"
 uuid = "30f210dd-8aff-4c5f-94ba-8e64358c1161"
 version = "3.0.0"
+
+[[deps.ScikitLearnBase]]
+deps = ["LinearAlgebra", "Random", "Statistics"]
+git-tree-sha1 = "7877e55c1523a4b336b433da39c8e8c08d2f221f"
+uuid = "6e75b9c4-186b-50bd-896f-2d2496a4843e"
+version = "0.5.0"
 
 [[deps.Scratch]]
 deps = ["Dates"]

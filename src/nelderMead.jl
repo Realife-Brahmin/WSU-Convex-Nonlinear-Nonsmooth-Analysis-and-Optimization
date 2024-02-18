@@ -213,6 +213,26 @@ function simplexDiameter(simplex)
     return maxDiameter
 end
 
+function createInitialSimplexFromOnePoint(x0, deviationFactor=0.5)
+    n = length(x0)
+    # Generate n x (n+1) matrix using Halton sequence
+    haltonMatrix = sampleSpaceHalton(n, n + 1)  # Assuming this function exists
+
+    # Adjust the matrix to fit the deviation factor and center around x0
+    adjustedSimplex = zeros(n, n + 1)
+    for i in 1:n
+        for j = 1:(n+1)
+            # Scale and shift the Halton sequence points
+            adjustedSimplex[i, j] = x0[i] * (1 - deviationFactor) + (x0[i] * 2 * deviationFactor) * haltonMatrix[i, j]
+        end
+    end
+
+    # Ensure that x0 is included in the simplex
+    adjustedSimplex[:, end] = x0  # Setting the last column to x0
+
+    return adjustedSimplex
+end
+
 # function f(v)
 #     x, y = v[1], v[2]
 #     f = (x-1)*x + (y+1)*y

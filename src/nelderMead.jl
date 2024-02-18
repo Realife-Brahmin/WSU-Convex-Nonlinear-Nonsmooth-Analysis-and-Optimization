@@ -179,6 +179,28 @@ function sortSimplex(simplex, f::Function, params)
 end
 
 
+"""
+    simplexDiameter(simplex) -> Float64
+
+Calculates the diameter of a simplex, defined as the maximum Euclidean distance between any two points (vertices) within the simplex.
+
+# Arguments
+- `simplex::Matrix`: A matrix representing the simplex, where each column corresponds to a point (vertex) in the simplex. The matrix should have dimensions `n x p`, where `n` is the dimensionality of the space the simplex resides in, and `p` is the number of points in the simplex.
+
+# Returns
+- `Float64`: The diameter of the simplex, which is the greatest distance between any two points in the simplex.
+
+# Details
+The function iterates over all unique pairs of points in the simplex, calculating the Euclidean distance between each pair. It keeps track of the maximum distance found during these comparisons, which is returned as the diameter of the simplex.
+
+This measurement can be particularly useful in optimization algorithms and numerical methods that utilize simplices (e.g., the Nelder-Mead algorithm), as it provides a quantitative measure of the simplex's size. A decreasing diameter over iterations can indicate convergence towards a solution.
+
+# Example
+```julia
+simplex = [1 2 3; 4 5 6]  # A 2x3 matrix representing a simplex in 2D space
+diameter = simplexDiameter(simplex)
+```
+"""
 function simplexDiameter(simplex)
     n, p = size(simplex)
     maxDiameter = 0.0

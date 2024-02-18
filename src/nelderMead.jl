@@ -213,7 +213,8 @@ function simplexDiameter(simplex)
     return maxDiameter
 end
 
-function createInitialSimplexFromOnePoint(x0, deviationFactor=0.5)
+function createInitialSimplexFromOnePoint(x0; 
+    deviationFactor=0.5)
     n = length(x0)
     # Generate n x (n+1) matrix using Halton sequence
     haltonMatrix = sampleSpaceHalton(n, n + 1)  # Assuming this function exists

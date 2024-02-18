@@ -130,7 +130,31 @@ function insertSortedSimplex(matrix, new_vector, f::Function, params)
     
 end
 
+"""
+    sortSimplex(simplex, f::Function, params) -> Tuple{Matrix, Vector}
+
+Sorts a simplex based on the evaluation of a provided function `f` on each point (column) of the simplex, and returns both the sorted simplex and the corresponding sorted function values.
+
+# Arguments
+- `simplex::Matrix`: A matrix representing the simplex, where each column is a point in the simplex.
+- `f::Function`: A function to be evaluated at each point of the simplex. The function should take two arguments: a point (column of the simplex) and `params`.
+- `params`: Parameters to be passed to the function `f` along with each point of the simplex.
+
+# Returns
+- `Tuple{Matrix, Vector}`: A tuple containing the sorted simplex (Matrix) and the sorted function values (Vector).
+
+# Details
+The function evaluates `f` once for each point in the simplex to obtain the function values. It then sorts the simplex based on these values. The sorting is done by computing a permutation of indices that sorts the function values, and then applying this permutation to both the simplex and the function values array. This method ensures that the simplex points are aligned with their corresponding function evaluations in ascending order.
+
+The function directly returns the sorted simplex and the sorted function values without requiring additional evaluations of `f` beyond the initial computation for each point.
+
+# Example
+```julia
+sortedSimplex, F = sortSimplex(simplex, myFunction, params)
+```
+"""
 function sortSimplex(simplex, f::Function, params)
+
     n, p = size(simplex)
     # Create an array to store the function values for each column of the simplex
     fValues = zeros(p)
@@ -147,8 +171,13 @@ function sortSimplex(simplex, f::Function, params)
     # Apply the sorted indices to the simplex columns
     sortedSimplex = simplex[:, sortedIndices]
 
-    return sortedSimplex
+    # Sort the function values array using the sorted indices
+    sortedFValues = fValues[sortedIndices]
+
+    # Return both the sorted simplex and the sorted function values
+    return sortedSimplex, sortedFValues
 end
+
 
 function simplexDiameter(simplex)
     n, p = size(simplex)

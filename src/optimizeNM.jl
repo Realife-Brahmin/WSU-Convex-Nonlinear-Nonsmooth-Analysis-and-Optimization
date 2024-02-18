@@ -32,7 +32,11 @@ function optimizeNM(pr;
 
     X00 = createInitialSimplexFromOnePoint(x0, deviationFactor=deviationFactor) # this simplex is currently unsorted
 
-    X0 = sortSimplex(X00, f, p)
+    X0, F0 = sortSimplex(X00, f, p)
+    @unpack actions = solverState
+    actions[:sort] += 1
+    @pack! solverState = actions
+
     solState = SolStateNMType(Xk=X0)
 
     # @pack! solState = fk

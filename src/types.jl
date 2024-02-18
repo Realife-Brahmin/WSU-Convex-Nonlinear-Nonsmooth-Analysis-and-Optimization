@@ -72,6 +72,28 @@ return Dict(:k => k, :Xkm1 => Xkm1, :Xk => Xk, :Fkm1 => Fkm1, :Fk => Fk, :Delta 
 end
 
 
+function SolverStateNMType(; k=0, fevals=0, actions = Dict(:extend => 0, :insideContract => 0, :outsideContract => 0, :reflect => 0, :shrink => 0, :sort => 0))
+    return Dict(:k => k, :)
+end
+
+mutable struct SolverStateType
+    k::Int
+    fevals::Int
+    gevals::Int
+    Hevals::Int
+    alpha_evals::Int # only current evals
+    success_ls::Bool
+
+    function SolverStateType(;
+        k=1,
+        fevals=0,
+        gevals=0,
+        Hevals=0,
+        success_ls=false)
+        new(k, fevals, gevals, Hevals, success_ls)
+    end
+end
+
 # # Example usage:
 # sol_state = SolStateNMType(k=0, Xkm1=Matrix{Float64}(undef, 3, 3), Xk=Matrix{Float64}(undef, 3, 3),
 #     Fkm1=Float64[], Fk=Float64[], Delta=0.1)

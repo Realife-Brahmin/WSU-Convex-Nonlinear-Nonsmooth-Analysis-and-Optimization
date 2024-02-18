@@ -13,7 +13,6 @@ function optimizeNM(pr;
         rm(log_txt)
     end # remove logfile if present for the run
 
-    
     solverState = SolverStateType()
 
     fevals = 0
@@ -24,6 +23,7 @@ function optimizeNM(pr;
 
     x0 = pr.x0
     xk = x0
+    # doing this even though NM requires multiple f evals
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     f = pr.objective
     p = pr.p

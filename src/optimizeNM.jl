@@ -13,7 +13,7 @@ function optimizeNM(pr;
         rm(log_txt)
     end # remove logfile if present for the run
 
-    solverState = SolverStateType()
+    solverState = SolverStateNMType()
 
     fevals = 0
     alpha, beta, gamma, delta = pr.alg.alpha, pr.alg.beta, pr.alg.gamma, pr.alg.delta

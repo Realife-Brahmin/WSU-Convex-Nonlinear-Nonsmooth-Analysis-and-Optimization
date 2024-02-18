@@ -117,6 +117,7 @@ Create and return a dictionary representing the state of a solver at a given ite
 # Example
 ```julia
 solver_state = SolverStateNMType(k=1, fevals=5, actions=Dict(:extend => 1, :reflect => 2))
+```
 """
 function SolverStateNMType(; 
     k=0, 

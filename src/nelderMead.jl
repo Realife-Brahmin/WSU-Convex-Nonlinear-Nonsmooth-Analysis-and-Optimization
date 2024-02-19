@@ -14,8 +14,10 @@ function nelderMead(simplex, f::Function, pDict;
     action = "unselected"
     # it is assumed that the simplex is sorted, best (most optimal) point first
     xb, xw, xsw = simplex[:, 1], simplex[:, p], simplex[:, p-1] 
-    @show xc = mean(simplex[:, 1:p-1], dims=2)
+    @show xc = vec(mean(simplex[:, 1:p-1], dims=2))
+    @show length(xc)
     @show xr = reflect(xc, xw, alpha=alpha)
+    @show length(xr)
     action = "reflect"
     F_xr, F_xb = f(xr, pDict, getGradientToo = false), f(xb, pDict, getGradientToo = false)
     if F_xr < F_xb

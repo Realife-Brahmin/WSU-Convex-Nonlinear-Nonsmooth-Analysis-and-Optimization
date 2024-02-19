@@ -3,7 +3,7 @@ using Statistics
 include("helperFunctions.jl")
 include("sampleSpace.jl")
 
-function nelderMead(simplex, f::Function, params;
+function nelderMead(simplex, f::Function, pDict;
     alpha = 1.0,
     gamma = 2.0,
     beta = 0.5,
@@ -14,15 +14,15 @@ function nelderMead(simplex, f::Function, params;
     action = "unselected"
     # it is assumed that the simplex is sorted, best (most optimal) point first
     xb, xw, xsw = simplex[:, 1], simplex[:, p], simplex[:, p-1] 
-    xc = mean(simplex[:, 1:p-1], dims=2)
-    xr = reflect(xc, xw, alpha=alpha)
+    @show xc = mean(simplex[:, 1:p-1], dims=2)
+    @show xr = reflect(xc, xw, alpha=alpha)
     action = "reflect"
-    F_xr, F_xb = f(xr, params), f(xb, params)
+    F_xr, F_xb = f(xr, pDict, getGradientToo = false), f(xb, pDict, getGradientToo = false)
     if F_xr < F_xb
         # better point than the best
         myprintln(verbose, "Extending good reflection.")
         xe = extend(xc, xw, gamma=gamma)
-        F_xe = f(xe, params)
+        F_xe = f(xe, pDict, getGradientToo = false)
         if F_xe < F_xr
             myprintln(verbose, "Extension a success!")
             # extended point is even better! 
@@ -36,25 +36,25 @@ function nelderMead(simplex, f::Function, params;
             simplex = hcat(xr, simplex[:, 1:p-1])
         end
     else
-        F_xsw = f(xsw, params)
+        F_xsw = f(xsw, pDict, getGradientToo = false)
         if F_xr < F_xsw 
             # point satisfies minimum required criterion for addition to simplex
             # just select it and move on
             myprintln(verbose, "Reflection better than second-worst point, so adding it to simplex")
-            simplex = insertSortedSimplex(simplex, xr, f, params)
+            simplex = insertSortedSimplex(simplex, xr, f, pDict)
         else
-            F_xw = f(xw, params)
+            F_xw = f(xw, pDict, getGradientToo = false)
             if F_xr < F_xw
                 # this point is technically better than the worst point in the simplex, but not particularly useful. Can perform some contracts on it.
                 myprintln(verbose, "Reflection only better than worst point. Trying outside contract.")
                 @show xoc = outsideContract(xc, xr, beta=beta)
                 @show length(xoc)
-                F_xoc = f(xoc, params)
+                F_xoc = f(xoc, pDict, getGradientToo = false)
                 if F_xoc < F_xr
                     myprintln(verbose, "Outside Contract a success! Adding it to simplex.")
                     # choosing outside contracted point (it may or may not be a useful addition to the simplex)
                     action = "outsideContract"
-                    simplex = insertSortedSimplex(simplex, xoc, f, params)
+                    simplex = insertSortedSimplex(simplex, xoc, f, pDict)
                     display(simplex)
                 else
                     # outside contract didn't help, but choosing reflected point anyway
@@ -67,17 +67,17 @@ function nelderMead(simplex, f::Function, params;
                 myprintln(verbose, "Worse than the worst point. Trying an Inside Contract.")
                 xic = insideContract(xc, xw, beta=beta)
                 action = "insideContract"
-                F_xic = f(xic, params)
+                F_xic = f(xic, pDict, getGradientToo = false)
                 if F_xic < F_xw
                     myprintln(verbose, "Inside Contract better than worst point, so adding it.")
-                    simplex = insertSortedSimplex(simplex, xic, f, params)
+                    simplex = insertSortedSimplex(simplex, xic, f, pDict)
                 else
                     # okay no improvment this time
                     # let's shrink the simplex
                     myprintln(verobse, "No improvement. Shrink the simplex.")
                     simplex = shrinkSortedSimplex(simplex, delta=delta)
                     action = "shrink"
-                    simplex = sortSimplex(simplex, f, params)
+                    simplex = sortSimplex(simplex, f, pDict)
                 end
             end
         end             
@@ -116,9 +116,9 @@ function shrinkSortedSimplex(simplex;
     return simplex
 end
 
-function insertSortedSimplex(matrix, new_vector, f::Function, params)
-    values = [f(matrix[:, i], params) for i in 1:size(matrix, 2)]
-    new_value = f(new_vector, params)
+function insertSortedSimplex(matrix, new_vector, f::Function, pDict)
+    values = [f(matrix[:, i], pDict, getGradientToo = false) for i in 1:size(matrix, 2)]
+    new_value = f(new_vector, pDict, getGradientToo = false)
 
     # Find the insertion index
     insert_index = searchsortedfirst(values, new_value)
@@ -131,14 +131,14 @@ function insertSortedSimplex(matrix, new_vector, f::Function, params)
 end
 
 """
-    sortSimplex(simplex, f::Function, params) -> Tuple{Matrix, Vector}
+    sortSimplex(simplex, f::Function, pDict) -> Tuple{Matrix, Vector}
 
 Sorts a simplex based on the evaluation of a provided function `f` on each point (column) of the simplex, and returns both the sorted simplex and the corresponding sorted function values.
 
 # Arguments
 - `simplex::Matrix`: A matrix representing the simplex, where each column is a point in the simplex.
-- `f::Function`: A function to be evaluated at each point of the simplex. The function should take two arguments: a point (column of the simplex) and `params`.
-- `params`: Parameters to be passed to the function `f` along with each point of the simplex.
+- `f::Function`: A function to be evaluated at each point of the simplex. The function should take two arguments: a point (column of the simplex) and `pDict`.
+- `pDict`: Parameters to be passed to the function `f` along with each point of the simplex.
 
 # Returns
 - `Tuple{Matrix, Vector}`: A tuple containing the sorted simplex (Matrix) and the sorted function values (Vector).
@@ -150,10 +150,10 @@ The function directly returns the sorted simplex and the sorted function values 
 
 # Example
 ```julia
-sortedSimplex, F = sortSimplex(simplex, myFunction, params)
+sortedSimplex, F = sortSimplex(simplex, myFunction, pDict)
 ```
 """
-function sortSimplex(simplex, f::Function, params)
+function sortSimplex(simplex, f::Function, pDict)
 
     n, p = size(simplex)
     # Create an array to store the function values for each column of the simplex
@@ -161,7 +161,7 @@ function sortSimplex(simplex, f::Function, params)
 
     # Evaluate the function `f` for each column and store the results
     for i in 1:p
-        fValues[i] = f(simplex[:, i], params)
+        fValues[i] = f(simplex[:, i], pDict, getGradientToo=false)
     end
 
     # Sort the simplex based on the evaluated function values

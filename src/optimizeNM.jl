@@ -59,7 +59,7 @@ function optimizeNM(pr;
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_ls = printOrNot & verbose_ls
 
-        Xkp1, action = nelderMead(Xk, f, pDict)
+        Xkp1, actions = nelderMead(Xk, f, pDict)
         k += 1
 
         Deltak = simplexDiameter(Xk)

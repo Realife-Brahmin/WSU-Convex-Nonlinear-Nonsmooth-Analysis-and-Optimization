@@ -11,13 +11,18 @@ function nelderMead(simplex, f::Function, pDict;
     verbose::Bool = false)
 
     n, p = size(simplex)
+
+    actions = Dict(:extend => 0, :insideContract => 0, :outsideContract => 0, :reflect => 0, :shrink => 0, :sort => 0, :insertIntoSorted => 0)
+
     action = "unselected"
     # it is assumed that the simplex is sorted, best (most optimal) point first
     xb, xw, xsw = simplex[:, 1], simplex[:, p], simplex[:, p-1] 
-    @show xc = vec(mean(simplex[:, 1:p-1], dims=2))
-    @show length(xc)
-    @show xr = reflect(xc, xw, alpha=alpha)
-    @show length(xr)
+    xc = vec(mean(simplex[:, 1:p-1], dims=2))
+    # @show xc = vec(mean(simplex[:, 1:p-1], dims=2))
+    # @show length(xc)
+    xr = reflect(xc, xw, alpha=alpha)
+    # @show xr = reflect(xc, xw, alpha=alpha)
+    # @show length(xr)
     action = "reflect"
     F_xr, F_xb = f(xr, pDict, getGradientToo = false), f(xb, pDict, getGradientToo = false)
     if F_xr < F_xb
@@ -85,7 +90,7 @@ function nelderMead(simplex, f::Function, pDict;
         end             
     end
 
-    return (simplex=simplex, action=action)
+    return (simplex=simplex, actions=actions)
 end
 
 function reflect(xc, xw;

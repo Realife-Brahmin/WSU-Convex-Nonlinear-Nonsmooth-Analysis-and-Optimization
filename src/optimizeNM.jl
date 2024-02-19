@@ -59,11 +59,17 @@ function optimizeNM(pr;
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_ls = printOrNot & verbose_ls
 
-        Xkp1, actions = nelderMead(Xk, f, pDict)
+        Xkp1, actions_1NM = nelderMead(Xk, f, pDict)
+        
+        @unpack actions = solverState
+        actions = merge(+, actions, actions_1NM)
+        @pack! solverState = actions
+
         k += 1
 
         Deltak = simplexDiameter(Xk)
         
+        @show k, Deltak
         Xk = Xkp1
 
         @pack! solState = Deltak, Xk
@@ -77,4 +83,5 @@ function optimizeNM(pr;
         @pack! solverState = k
 
     end
+    
 end

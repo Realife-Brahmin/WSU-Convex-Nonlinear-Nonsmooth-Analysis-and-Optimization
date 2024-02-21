@@ -12,12 +12,13 @@ function nelderMead(Xk, f::Function, pDict;
 
     fevals_NM = 0
     n, p = size(Xk)
-
+    
     actions = Dict(:extend => 0, :insideContract => 0, :outsideContract => 0, :reflect => 0, :shrink => 0, :sort => 0, :insertIntoSorted => 0)
 
     action = "unselected"
     # it is assumed that the simplex is sorted, best (most optimal) point first
-    xb, xw, xsw = Xk[:, 1], Xk[:, p], Xk[:, p-1] 
+    xb, xw, xsw = Xk[:, 1], Xk[:, p], Xk[:, p-1]
+
     xc = vec(mean(Xk[:, 1:p-1], dims=2))
     # @show xc = vec(mean(Xk[:, 1:p-1], dims=2))
     # @show length(xc)
@@ -30,8 +31,11 @@ function nelderMead(Xk, f::Function, pDict;
     F_xr, F_xb = f(xr, pDict, getGradientToo = false), f(xb, pDict, getGradientToo = false)
     fevals_NM += 2
 
+    fbest = F_xb
+
     if F_xr < F_xb
         # better point than the best
+        fbest = F_xr
         myprintln(verbose, "Extending good reflection.")
         xe = extend(xc, xw, gamma=gamma)
         actions[:extend] += 1
@@ -41,6 +45,7 @@ function nelderMead(Xk, f::Function, pDict;
             # extended point is even better! 
             # add it to the top of the simplex
             Xk = hcat(xe, Xk[:, 2:p-1])
+            fbest = F_xe
             action = "extend"
         else 
             # extended point is a worse point than reflection
@@ -56,6 +61,7 @@ function nelderMead(Xk, f::Function, pDict;
             # just select it and move on
             myprintln(verbose, "Reflection better than second-worst point, so adding it to simplex")
             Xk = insertSortedSimplex(Xk, xr, f, pDict)
+            fbest = f(Xk[:, 1], pDict, getGradientToo=false)
             actions[:insertIntoSorted] += 1
         else
             F_xw = f(xw, pDict, getGradientToo = false)
@@ -72,6 +78,7 @@ function nelderMead(Xk, f::Function, pDict;
                     # choosing outside contracted point (it may or may not be a useful addition to the simplex)
                     action = "outsideContract"
                     Xk = insertSortedSimplex(Xk, xoc, f, pDict)
+                    fbest = f(Xk[:, 1], pDict, getGradientToo=false)
                     actions[:insertIntoSorted] += 1
                     # display(Xk)
                 else
@@ -91,6 +98,7 @@ function nelderMead(Xk, f::Function, pDict;
                 if F_xic < F_xw
                     myprintln(verbose, "Inside Contract better than worst point, so adding it.")
                     Xk = insertSortedSimplex(Xk, xic, f, pDict)
+                    fbest = f(Xk[:, 1], pDict, getGradientToo=false)
                     actions[:insertIntoSorted] += 1
                 else
                     # okay no improvment this time
@@ -100,13 +108,15 @@ function nelderMead(Xk, f::Function, pDict;
                     action = "shrink"
                     actions[:shrink] += 1
                     Xk = sortSimplex(Xk, f, pDict)
+                    Fk = f(Xk, pDict, getGradientToo=false)
+                    fbest = Fk[:, 1]
                     actions[:sort] += 1
                 end
             end
         end             
     end
 
-    return (Xk=Xk, actions=actions)
+    return (Xk=Xk, fb=fbest, actions=actions)
 end
 
 function reflect(xc, xw;

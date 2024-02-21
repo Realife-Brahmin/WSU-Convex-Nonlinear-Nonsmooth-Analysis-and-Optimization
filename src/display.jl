@@ -37,13 +37,25 @@ function showresults(res::NamedTuple;
     log::Bool=true,
     log_path::String="./logging/")
 
-    @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals, cause, pr = res
+    @unpack pr = res
+    @unpack method = pr[:alg]
+
+    if method == "NelderMead"
+        @unpack converged, statusMessage, fevals, cause = res
+        result_txt = log_path * "results_" * string(pr.objective) * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
+        lsMsg = ""
+    else
+        # @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals, cause, pr = res
+        @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals, cause = res
+        result_txt = log_path * "results_" * string(pr.objective) * "_" * pr.alg[:method] * "_" * pr.alg[:linesearch] * "_" * string(pr.alg[:maxiter]) * ".txt"
+        lsMsg = "Linesearch method used: " * pr.alg[:linesearch]
+    end
 
     params = pr.p[:params]
-    data = pr.p[:data]
-    dataFitting = isempty(data) ? false : true
+    # data = pr.p[:data]
+    # dataFitting = isempty(data) ? false : true
 
-    result_txt = log_path*"results_"*string(pr.objective)*"_"*pr.alg[:method]*"_"*pr.alg[:linesearch]*"_"*string(pr.alg[:maxiter])*".txt"
+    # result_txt = log_path*"results_"*string(pr.objective)*"_"*pr.alg[:method]*"_"*pr.alg[:linesearch]*"_"*string(pr.alg[:maxiter])*".txt"
     if isfile(result_txt)
         rm(result_txt) # remove results log file if already present
     end
@@ -60,11 +72,11 @@ function showresults(res::NamedTuple;
     myprintln1(v, "****************************")
     myprintln1(true, "Solver run has concluded.")
     myprintln1(true, "Function solved for: $(pr.objective)()")
-    if dataFitting
-        myprintln1(true, "This was a data fitting problem.")
-    else
-        myprintln1(true, "This was a function minimization problem.")
-    end
+    # if dataFitting
+    #     myprintln1(true, "This was a data fitting problem.")
+    # else
+    #     myprintln1(true, "This was a function minimization problem.")
+    # end
     myprintln1(true, "Cause(s) for stopping:")
     causeForStopping = res.cause
     for msg ∈ causeForStopping
@@ -79,7 +91,7 @@ function showresults(res::NamedTuple;
     end
 
     methodMsg = "Method Used: " * pr.alg[:method]
-    lsMsg = "Linesearch method used: " * pr.alg[:linesearch]
+    # lsMsg = "Linesearch method used: " * pr.alg[:linesearch]
     myprintln1(v, "****************************")
     myprintln1(v, methodMsg)
     myprintln1(v, lsMsg)

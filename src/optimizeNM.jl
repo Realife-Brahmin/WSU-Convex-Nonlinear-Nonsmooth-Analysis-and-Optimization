@@ -47,6 +47,7 @@ function optimizeNM(pr;
     solState = SolStateNMType(Xk=X0, Fk=Fk, Delta=Delta0)
 
     keepIterationsGoing = true
+    causeForStopping = []
 
     while keepIterationsGoing
 
@@ -75,13 +76,37 @@ function optimizeNM(pr;
         @pack! solState = Deltak, Xk
 
         if k >= maxiter
+            push!(causeForStopping, "Iteration limit reached!")
             keepIterationsGoing = false
         elseif Deltak < DeltaTol
+            push!(causeForStopping, "Simplex size lower limit reached!")
             keepIterationsGoing = false
         end
 
+        @pack! solState = k
         @pack! solverState = k
 
     end
+
+    @unpack k = solverState
+
+    if k ≥ maxiter
+        converged = false
+        statusMessage = "Failed to converge despite $(maxiter) iterations! 😢"
+        myprintln(true, statusMessage, log=log, log_path=log_txt)
+        @warn statusMessage
+    else
+        converged = true
+        statusMessage = "Convergence achieved in $(k) iterations 😄"
+        myprintln(true, statusMessage, log=log, log_path=log_txt)
+    end
+
+    res = (converged=converged, statusMessage=statusMessage,
+        fevals=fevals, cause=causeForStopping,
+        pr=pr)
+
+    res = trim_array(res, k - 1)
+
+    return res
     
 end

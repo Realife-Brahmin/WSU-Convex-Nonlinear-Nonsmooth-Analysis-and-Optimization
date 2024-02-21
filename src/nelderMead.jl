@@ -3,6 +3,53 @@ using Statistics
 include("helperFunctions.jl")
 include("sampleSpace.jl")
 
+"""
+    nelderMead(Xk, f::Function, pDict; alpha = 1.0, gamma = 2.0, beta = 0.5, delta = 0.5, verbose::Bool = false)
+
+Implements the Nelder-Mead optimization algorithm, a heuristic search method used for finding the minimum of an objective function in a multidimensional space. The algorithm is well-suited for problems where the objective function does not have derivatives or the derivatives are not reliable.
+
+# Arguments
+- `Xk`: Initial simplex, represented as an `n x p` matrix, where `n` is the dimension of the space and `p` is the number of points in the simplex. Each column of `Xk` is a vertex of the simplex in the space.
+- `f`: The objective function to be minimized. It must be a function that accepts a vector representing a point in the space and a dictionary `pDict` of parameters, and returns a scalar value representing the function's value at that point.
+- `pDict`: A dictionary of parameters that will be passed to the objective function `f` at each evaluation. This allows for flexible specification of additional information required by `f`.
+- `alpha`, `gamma`, `beta`, `delta`: Coefficients that control the reflection (`alpha`), extension (`gamma`), contraction (`beta`), and shrinking (`delta`) operations of the algorithm. These parameters allow the algorithm to be tuned for specific types of objective functions or optimization problems.
+- `verbose`: A boolean flag that, when set to `true`, enables the printing of detailed information about the algorithm's progress at each step. This is useful for debugging or understanding the algorithm's behavior on specific problems.
+
+# Key Components
+- `fbest`: Keeps a record of the best function value found during the algorithm's execution. This is crucial for tracking the progress of the optimization and determining when the algorithm has converged to a solution.
+- `Xk`: The current state of the simplex. The simplex is a geometric figure consisting of `p` points in `n`-dimensional space, which the algorithm adjusts iteratively to explore the space and hone in on the minimum of the objective function.
+- `actions`: A dictionary that records the number of times each type of action has been taken during the algorithm's execution. The actions include `extend`, `insideContract`, `outsideContract`, `reflect`, `shrink`, `sort`, and `insertIntoSorted`. This provides insights into the behavior of the algorithm and can help in diagnosing issues or adjusting parameters for better performance.
+
+# Returns
+- `Xk`: The updated simplex after the execution of the algorithm, representing the final state of the search for the minimum.
+- `fbest`: The best function value found by the algorithm, which is the minimum value of the objective function within the explored region of the space.
+- `actions`: A detailed record of the actions taken during the algorithm's execution, useful for analysis and debugging.
+
+# Notes
+- The initial simplex `Xk` should be chosen carefully, as it can significantly influence the algorithm's efficiency and its ability to find the global minimum.
+- The choice of parameters `alpha`, `gamma`, `beta`, and `delta` can affect the convergence rate and stability of the algorithm. These should be adjusted based on the nature of the objective function and the specific optimization problem.
+- The `verbose` option can generate a lot of output for problems with many iterations; use it judiciously to avoid overwhelming the console with information.
+
+# Examples
+```julia
+# Define an objective function
+f(x, pDict) = sum((x .- pDict[:offset]).^2)
+
+# Create an initial simplex
+Xk = [1.0 2.0 3.0; 4.0 5.0 6.0]
+
+# Define parameters for the objective function
+pDict = Dict(:offset => [1.0, 2.0])
+
+# Execute the Nelder-Mead algorithm
+result = nelderMead(Xk, f, pDict, verbose=true)
+
+# Access the results
+println("Best point: ", result.Xk[:, 1])
+println("Best function value: ", result.fb)
+println("Actions taken: ", result.actions)
+```
+"""
 function nelderMead(Xk, f::Function, pDict;
     alpha = 1.0,
     gamma = 2.0,

@@ -41,7 +41,8 @@ function showresults(res::NamedTuple;
     @unpack method = pr[:alg]
 
     if method == "NelderMead"
-        @unpack converged, statusMessage, fevals, cause = res
+        @unpack converged, statusMessage, xvals, fvals, fevals, cause = res
+        gevals = 0
         result_txt = log_path * "results_" * string(pr.objective) * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
         lsMsg = ""
     else
@@ -100,7 +101,8 @@ function showresults(res::NamedTuple;
     n = size(xvals, 1)
     itr = size(xvals, 2)
     x☆ = xvals[:, itr]
-    minBacktracks, maxBacktracks = extrema(backtrackVals)
+
+    # minBacktracks, maxBacktracks = extrema(backtrackVals)
 
     myprintln1(v, "****************************")
     
@@ -117,16 +119,16 @@ function showresults(res::NamedTuple;
     else
         @error "bad condition"
     end
-    fvalMessageMSE = fvalPrefixMSE*"$(fvals[itr])"
-    fvalMessageSSE = fvalPrefixSSE*"$(fvals[itr]*M)"
-    fvalMessageMinimum = fvalPrefixMinimum*"$(fvals[itr])"
+    # fvalMessageMSE = fvalPrefixMSE*"$(fvals[itr])"
+    # fvalMessageSSE = fvalPrefixSSE*"$(fvals[itr]*M)"
+    # fvalMessageMinimum = fvalPrefixMinimum*"$(fvals[itr])"
 
-    if dataFitting
-        myprintln1(v, fvalMessageMSE)
-        myprintln1(v, fvalMessageSSE)
-    else
-        myprintln1(v, fvalMessageMinimum)
-    end
+    # if dataFitting
+    #     myprintln1(v, fvalMessageMSE)
+    #     myprintln1(v, fvalMessageSSE)
+    # else
+    #     myprintln1(v, fvalMessageMinimum)
+    # end
 
     myprintln1(v, "***************************")
     myprintln1(v, xvalMessage)

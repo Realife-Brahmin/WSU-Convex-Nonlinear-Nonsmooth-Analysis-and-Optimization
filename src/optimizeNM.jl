@@ -13,6 +13,7 @@ function optimizeNM(pr;
         rm(log_txt)
     end # remove logfile if present for the run
 
+    
     solverState = SolverStateNMType()
 
     @unpack alpha, beta, gamma, delta = pr.alg
@@ -24,6 +25,10 @@ function optimizeNM(pr;
     x0 = pr.x0
     n = length(x0)
     xk = x0
+
+    fvals = zeros(Float64, maxiter)
+    xvals = zeros(Float64, n, maxiter)
+
     # doing this even though NM requires multiple f evals
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     f = pr.objective
@@ -68,6 +73,9 @@ function optimizeNM(pr;
 
         k += 1
 
+        xvals[:, k] = Xkp1[:, 1]
+
+
         Deltak = simplexDiameter(Xk)
         
         @show k, Deltak
@@ -101,7 +109,8 @@ function optimizeNM(pr;
         myprintln(true, statusMessage, log=log, log_path=log_txt)
     end
 
-    res = (converged=converged, statusMessage=statusMessage,
+    res = (converged=converged, statusMessage=statusMessage, xvals=xvals, 
+        fvals=fvals,
         fevals=fevals, cause=causeForStopping,
         pr=pr)
 

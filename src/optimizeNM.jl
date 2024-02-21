@@ -57,6 +57,7 @@ function optimizeNM(pr;
     while keepIterationsGoing
 
         @unpack k = solverState
+        @show k
         @unpack Xk, Fk = solState
 
         Xkm1, Fkm1 = Xk, Fk
@@ -66,6 +67,7 @@ function optimizeNM(pr;
         printOrNot_ls = printOrNot & verbose_ls
 
         Xkp1, fkp1, actions_1NM = nelderMead(Xk, f, pDict)
+        @show actions_1NM
         
         @unpack actions = solverState
         actions = merge(+, actions, actions_1NM)

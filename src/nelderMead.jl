@@ -59,19 +59,20 @@ function nelderMead(Xk, f::Function, pDict;
 
     fevals_NM = 0
     n, p = size(Xk)
-    
+    if p != n+1
+        error("p = $p != n+1 = $(n+1) shouldn't happen in Nelder Mead")
+    end
     actions = Dict(:extend => 0, :insideContract => 0, :outsideContract => 0, :reflect => 0, :shrink => 0, :sort => 0, :insertIntoSorted => 0)
 
     action = "unselected"
     # it is assumed that the simplex is sorted, best (most optimal) point first
+
     xb, xw, xsw = Xk[:, 1], Xk[:, p], Xk[:, p-1]
 
     xc = vec(mean(Xk[:, 1:p-1], dims=2))
-    # @show xc = vec(mean(Xk[:, 1:p-1], dims=2))
-    # @show length(xc)
+
     xr = reflect(xc, xw, alpha=alpha)
-    # @show xr = reflect(xc, xw, alpha=alpha)
-    # @show length(xr)
+
     action = "reflect"
     actions[:reflect] += 1
 
@@ -150,13 +151,13 @@ function nelderMead(Xk, f::Function, pDict;
                 else
                     # okay no improvment this time
                     # let's shrink the simplex
-                    myprintln(verobse, "No improvement. Shrink the simplex.")
+                    myprintln(verbose, "No improvement. Shrink the simplex.")
                     Xk = shrinkSortedSimplex(Xk, delta=delta)
                     action = "shrink"
                     actions[:shrink] += 1
-                    Xk = sortSimplex(Xk, f, pDict)
-                    Fk = f(Xk, pDict, getGradientToo=false)
-                    fbest = Fk[:, 1]
+                    Xk, Fk = sortSimplex(Xk, f, pDict)
+
+                    fbest = Fk[1]
                     actions[:sort] += 1
                 end
             end
@@ -192,7 +193,10 @@ end
 
 function shrinkSortedSimplex(simplex;
     delta = 0.5)
-    simplex += delta*(simplex[1, :] .- simplex[:, :])
+    println("Shrinking the simplex")
+    println("Previous size: $(size(simplex))")
+    simplex += delta*(simplex[:, 1] .- simplex[:, :])
+    println("New size $(size(simplex))")
     return simplex
 end
 
@@ -252,7 +256,7 @@ function sortSimplex(simplex, f::Function, pDict)
     sortedSimplex = simplex[:, sortedIndices]
 
     # Sort the function values array using the sorted indices
-    sortedFValues = fValues[sortedIndices]
+    sortedFValues = vec(fValues[sortedIndices])
 
     # Return both the sorted simplex and the sorted function values
     return sortedSimplex, sortedFValues

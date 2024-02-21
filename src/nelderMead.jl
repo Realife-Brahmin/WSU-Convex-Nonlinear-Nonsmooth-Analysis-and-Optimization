@@ -3,7 +3,7 @@ using Statistics
 include("helperFunctions.jl")
 include("sampleSpace.jl")
 
-function nelderMead(simplex, f::Function, pDict;
+function nelderMead(Xk, f::Function, pDict;
     alpha = 1.0,
     gamma = 2.0,
     beta = 0.5,
@@ -11,15 +11,15 @@ function nelderMead(simplex, f::Function, pDict;
     verbose::Bool = false)
 
     fevals_NM = 0
-    n, p = size(simplex)
+    n, p = size(Xk)
 
     actions = Dict(:extend => 0, :insideContract => 0, :outsideContract => 0, :reflect => 0, :shrink => 0, :sort => 0, :insertIntoSorted => 0)
 
     action = "unselected"
     # it is assumed that the simplex is sorted, best (most optimal) point first
-    xb, xw, xsw = simplex[:, 1], simplex[:, p], simplex[:, p-1] 
-    xc = vec(mean(simplex[:, 1:p-1], dims=2))
-    # @show xc = vec(mean(simplex[:, 1:p-1], dims=2))
+    xb, xw, xsw = Xk[:, 1], Xk[:, p], Xk[:, p-1] 
+    xc = vec(mean(Xk[:, 1:p-1], dims=2))
+    # @show xc = vec(mean(Xk[:, 1:p-1], dims=2))
     # @show length(xc)
     xr = reflect(xc, xw, alpha=alpha)
     # @show xr = reflect(xc, xw, alpha=alpha)
@@ -40,13 +40,13 @@ function nelderMead(simplex, f::Function, pDict;
             myprintln(verbose, "Extension a success!")
             # extended point is even better! 
             # add it to the top of the simplex
-            simplex = hcat(xe, simplex[:, 2:p-1])
+            Xk = hcat(xe, Xk[:, 2:p-1])
             action = "extend"
         else 
             # extended point is a worse point than reflection
             # add reflected point to the top of the list
             myprintln(verbose, "Extension a failure. Reverting to reflection.")
-            simplex = hcat(xr, simplex[:, 1:p-1])
+            Xk = hcat(xr, Xk[:, 1:p-1])
         end
     else
         F_xsw = f(xsw, pDict, getGradientToo = false)
@@ -55,7 +55,7 @@ function nelderMead(simplex, f::Function, pDict;
             # point satisfies minimum required criterion for addition to simplex
             # just select it and move on
             myprintln(verbose, "Reflection better than second-worst point, so adding it to simplex")
-            simplex = insertSortedSimplex(simplex, xr, f, pDict)
+            Xk = insertSortedSimplex(Xk, xr, f, pDict)
             actions[:insertIntoSorted] += 1
         else
             F_xw = f(xw, pDict, getGradientToo = false)
@@ -71,13 +71,13 @@ function nelderMead(simplex, f::Function, pDict;
                     myprintln(verbose, "Outside Contract a success! Adding it to simplex.")
                     # choosing outside contracted point (it may or may not be a useful addition to the simplex)
                     action = "outsideContract"
-                    simplex = insertSortedSimplex(simplex, xoc, f, pDict)
+                    Xk = insertSortedSimplex(Xk, xoc, f, pDict)
                     actions[:insertIntoSorted] += 1
-                    # display(simplex)
+                    # display(Xk)
                 else
                     # outside contract didn't help, but choosing reflected point anyway
                     myprintln(verbose, "Outside Contract a failure. Still adding the reflection to simplex.")
-                    simplex = hcat(simplex[1:p-1], xr)
+                    Xk = hcat(Xk[1:p-1], xr)
                 end
             else
                 # oh no the point is even worse than the current worst point
@@ -90,23 +90,23 @@ function nelderMead(simplex, f::Function, pDict;
                 fevals_NM += 1
                 if F_xic < F_xw
                     myprintln(verbose, "Inside Contract better than worst point, so adding it.")
-                    simplex = insertSortedSimplex(simplex, xic, f, pDict)
+                    Xk = insertSortedSimplex(Xk, xic, f, pDict)
                     actions[:insertIntoSorted] += 1
                 else
                     # okay no improvment this time
                     # let's shrink the simplex
                     myprintln(verobse, "No improvement. Shrink the simplex.")
-                    simplex = shrinkSortedSimplex(simplex, delta=delta)
+                    Xk = shrinkSortedSimplex(Xk, delta=delta)
                     action = "shrink"
                     actions[:shrink] += 1
-                    simplex = sortSimplex(simplex, f, pDict)
+                    Xk = sortSimplex(Xk, f, pDict)
                     actions[:sort] += 1
                 end
             end
         end             
     end
 
-    return (simplex=simplex, actions=actions)
+    return (Xk=Xk, actions=actions)
 end
 
 function reflect(xc, xw;

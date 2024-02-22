@@ -201,7 +201,10 @@ function shrinkSortedSimplex(simplex;
 end
 
 function insertSortedSimplex(matrix, new_vector, f::Function, pDict)
-    values = [f(matrix[:, i], pDict, getGradientToo = false) for i in 1:size(matrix, 2)]
+    # values = [f(matrix[:, i], pDict, getGradientToo = false) for i in 1:size(matrix, 2)]
+    # values = [f(col, pDict, getGradientToo=false) for col in eachcol(matrix)]
+    values = [f(collect(col), pDict, getGradientToo=false) for col in eachcol(matrix)]
+
     new_value = f(new_vector, pDict, getGradientToo = false)
 
     # Find the insertion index

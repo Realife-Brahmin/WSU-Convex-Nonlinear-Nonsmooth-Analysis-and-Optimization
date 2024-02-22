@@ -64,7 +64,8 @@ function nelderMead(Xk, f::Function, pDict;
     end
     actions = Dict(:extend => 0, :extensionFailure => 0, 
     :extensionSuccess => 0, :insideContract => 0, 
-    :outsideContract => 0, :reflect => 0, :shrink => 0, 
+    :outsideContract => 0, :outsideContractFailure => 0,
+    :outsideContractSuccess =>0, :reflect => 0, :shrink => 0, 
     :sort => 0, :insertIntoSorted => 0)
 
     action = "unselected"
@@ -128,6 +129,7 @@ function nelderMead(Xk, f::Function, pDict;
                 fevals_NM += 1
                 if F_xoc < F_xr
                     myprintln(verbose, "Outside Contract a success! Adding it to simplex.")
+                    actions[:outsideContractSuccess] += 1
                     # choosing outside contracted point (it may or may not be a useful addition to the simplex)
                     action = "outsideContract"
                     Xk = insertSortedSimplex(Xk, xoc, f, pDict)
@@ -137,6 +139,7 @@ function nelderMead(Xk, f::Function, pDict;
                 else
                     # outside contract didn't help, but choosing reflected point anyway
                     myprintln(verbose, "Outside Contract a failure. Still adding the reflection to simplex.")
+                    actions[:outsideContractFailure] += 1
                     Xk = hcat(Xk[1:p-1], xr)
                 end
             else

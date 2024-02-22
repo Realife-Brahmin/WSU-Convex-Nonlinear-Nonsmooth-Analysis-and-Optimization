@@ -295,9 +295,6 @@ Shrinks the simplex towards its best point, scaling all points (except the best 
 - `simplex`: The current simplex, an `n x (n+1)` matrix where `n` is the dimensionality of the space.
 - `delta`: Shrinkage coefficient, typically between `0.0` and `1.0`. A value of `0.5` halves the distance from each point to the best point.
 
-# Side Effects
-- Prints the size of the simplex before and after the shrinkage operation.
-
 # Returns
 - The shrunk simplex.
 
@@ -309,10 +306,9 @@ shrinkSortedSimplex(simplex, delta = 0.5)
 """
 function shrinkSortedSimplex(simplex;
     delta = 0.5)
-    println("Shrinking the simplex")
-    println("Previous size: $(size(simplex))")
+
     simplex += delta*(simplex[:, 1] .- simplex[:, :])
-    println("New size $(size(simplex))")
+
     return simplex
 end
 

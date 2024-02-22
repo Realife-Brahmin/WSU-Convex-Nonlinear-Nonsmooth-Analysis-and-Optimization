@@ -57,7 +57,7 @@ function optimizeNM(pr;
     while keepIterationsGoing
 
         @unpack k = solverState
-        @show k
+        # @show k
         @unpack Xk, Fk = solState
 
         # saving the current iterates to solState
@@ -67,12 +67,12 @@ function optimizeNM(pr;
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_ls = printOrNot & verbose_ls
 
-        println("Size of simplex before insertion = $(size(Xk))")
+        # println("Size of simplex before insertion = $(size(Xk))")
 
         Xkp1, fkp1, actions_1NM = nelderMead(Xk, f, pDict)
-        @show actions_1NM
+        # @show actions_1NM
 
-        println("Size of simplex after insertion = $(size(Xkp1))")
+        # println("Size of simplex after insertion = $(size(Xkp1))")
         
         @unpack actions = solverState
         actions = merge(+, actions, actions_1NM)

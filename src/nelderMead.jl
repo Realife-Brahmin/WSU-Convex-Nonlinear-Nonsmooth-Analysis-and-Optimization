@@ -62,7 +62,10 @@ function nelderMead(Xk, f::Function, pDict;
     if p != n+1
         error("p = $p != n+1 = $(n+1) shouldn't happen in Nelder Mead")
     end
-    actions = Dict(:extend => 0, :insideContract => 0, :outsideContract => 0, :reflect => 0, :shrink => 0, :sort => 0, :insertIntoSorted => 0)
+    actions = Dict(:extend => 0, :extensionFailure => 0, 
+    :extensionSuccess => 0, :insideContract => 0, 
+    :outsideContract => 0, :reflect => 0, :shrink => 0, 
+    :sort => 0, :insertIntoSorted => 0)
 
     action = "unselected"
     # it is assumed that the simplex is sorted, best (most optimal) point first
@@ -90,6 +93,7 @@ function nelderMead(Xk, f::Function, pDict;
         F_xe = f(xe, pDict, getGradientToo = false)
         if F_xe < F_xr
             myprintln(verbose, "Extension a success!")
+            actions[:extensionSuccess] += 1
             # extended point is even better! 
             # add it to the top of the simplex
             Xk = hcat(xe, Xk[:, 2:p-1])
@@ -99,6 +103,7 @@ function nelderMead(Xk, f::Function, pDict;
             # extended point is a worse point than reflection
             # add reflected point to the top of the list
             myprintln(verbose, "Extension a failure. Reverting to reflection.")
+            actions[:extensionFailure] += 1
             Xk = hcat(xr, Xk[:, 1:p-1])
         end
     else

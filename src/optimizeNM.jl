@@ -73,7 +73,7 @@ function optimizeNM(pr;
 
         println("Size of simplex after insertion = $(size(Xkp1))")
 
-        # @show actions_1NM
+        @show actions_1NM
         
         @unpack actions = solverState
         actions = merge(+, actions, actions_1NM)

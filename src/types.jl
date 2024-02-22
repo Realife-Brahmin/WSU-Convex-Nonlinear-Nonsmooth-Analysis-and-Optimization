@@ -122,7 +122,8 @@ solver_state = SolverStateNMType(k=1, fevals=5, actions=Dict(:extend => 1, :refl
 function SolverStateNMType(; 
     k=0, 
     fevals=0, 
-    actions = Dict(:extend => 0, :insideContract => 0, :outsideContract => 0, 
+    actions=Dict(:extend => 0, :extensionFailure => 0 , :extensionSuccess => 0,
+    :insideContract => 0, :outsideContract => 0, 
     :reflect => 0, :shrink => 0, :sort => 0, :insertIntoSorted => 0))
 
     return Dict(:k => k, :fevals => fevals, :actions => actions)

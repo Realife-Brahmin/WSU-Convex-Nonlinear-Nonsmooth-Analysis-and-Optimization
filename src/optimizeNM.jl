@@ -67,12 +67,8 @@ function optimizeNM(pr;
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_ls = printOrNot & verbose_ls
 
-        # println("Size of simplex before insertion = $(size(Xk))")
-
         Xkp1, fkp1, actions_1NM = nelderMead(Xk, f, pDict)
-        # @show actions_1NM
 
-        # println("Size of simplex after insertion = $(size(Xkp1))")
         
         @unpack actions = solverState
         actions = merge(+, actions, actions_1NM)
@@ -85,7 +81,6 @@ function optimizeNM(pr;
 
         Deltak = simplexDiameter(Xk)
         
-        # @show k, Deltak
         Xk, fk = Xkp1, fkp1
 
         @pack! solState = Deltak, Xk, fk

@@ -63,7 +63,7 @@ function nelderMead(Xk, f::Function, pDict;
         error("p = $p != n+1 = $(n+1) shouldn't happen in Nelder Mead")
     end
     actions = Dict(:extend => 0, :extensionFailure => 0, 
-    :extensionSuccess => 0, :insideContract => 0, 
+    :extensionSuccess => 0, :insideContract => 0, :insideContractFailure => 0, :insideContractSuccess => 0,
     :outsideContract => 0, :outsideContractFailure => 0,
     :outsideContractSuccess =>0, :reflect => 0, :shrink => 0, 
     :sort => 0, :insertIntoSorted => 0)
@@ -153,6 +153,7 @@ function nelderMead(Xk, f::Function, pDict;
                 fevals_NM += 1
                 if F_xic < F_xw
                     myprintln(verbose, "Inside Contract better than worst point, so adding it.")
+                    actions[:insideContractSuccess] += 1
                     Xk = insertSortedSimplex(Xk, xic, f, pDict)
                     fbest = f(Xk[:, 1], pDict, getGradientToo=false)
                     actions[:insertIntoSorted] += 1
@@ -160,6 +161,7 @@ function nelderMead(Xk, f::Function, pDict;
                     # okay no improvment this time
                     # let's shrink the simplex
                     myprintln(verbose, "No improvement. Shrink the simplex.")
+                    actions[:insideContractFailure] += 1
                     Xk = shrinkSortedSimplex(Xk, delta=delta)
                     action = "shrink"
                     actions[:shrink] += 1

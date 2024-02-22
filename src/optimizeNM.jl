@@ -33,11 +33,13 @@ function optimizeNM(pr;
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     f = pr.objective
     pDict = pr.p
+
     fk = f(x0, pDict, getGradientToo=false)
-    myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
     @unpack fevals = solverState
     fevals += 1
     @pack! solverState = fevals
+
+    myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
 
     X00 = createInitialSimplexFromOnePoint(x0, deviationFactor=0.1) # this simplex is currently unsorted
 
@@ -65,25 +67,26 @@ function optimizeNM(pr;
         @pack! solState = Xkm1, Fkm1
         
         printOrNot = verbose && ((k - 1) % progress == 0)
-        printOrNot_ls = printOrNot & verbose_ls
+        printOrNot_NM = printOrNot & verbose_ls
 
-        Xkp1, fkp1, actions_1NM = nelderMead(Xk, f, pDict)
+        Xkp1, fkp1, actions_1NM = nelderMead(Xk, f, pDict, verbose=printOrNot_NM)
 
         
         @unpack actions = solverState
         actions = merge(+, actions, actions_1NM)
         @pack! solverState = actions
 
+        # I prefer to only number a completed iteration, as opposed to numbering an in-process/about-to-begin iteration
         k += 1
 
         xvals[:, k] = Xkp1[:, 1]
         fvals[k] = fkp1
 
         Deltak = simplexDiameter(Xk)
-        
-        Xk, fk = Xkp1, fkp1
+        @pack! solState = Deltak
 
-        @pack! solState = Deltak, Xk, fk
+        Xk, fk = Xkp1, fkp1
+        @pack! solState = Xk, fk
 
         if k >= maxiter
             push!(causeForStopping, "Iteration limit reached!")
@@ -111,10 +114,9 @@ function optimizeNM(pr;
         myprintln(true, statusMessage, log=log, log_path=log_txt)
     end
 
-    res = (converged=converged, statusMessage=statusMessage, xvals=xvals, 
-        fvals=fvals,
-        fevals=fevals, cause=causeForStopping,
-        pr=pr)
+    @unpack fevals = solverState
+
+    res = (converged=converged, statusMessage=statusMessage,    xvals=xvals, fvals=fvals, fevals=fevals, cause=causeForStopping, pr=pr)
 
     res = trim_array(res, k - 1)
 

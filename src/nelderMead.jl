@@ -211,8 +211,9 @@ function insertSortedSimplex(matrix, new_vector, f::Function, pDict)
     insert_index = searchsortedfirst(values, new_value)
 
     # Insert the new vector and then trim the last column if necessary
+    # println("Size of matrix before insertion = $(size(matrix))")
     matrix .= hcat(matrix[:, 1:insert_index-1], new_vector, matrix[:, insert_index:end-1])
-
+    # println("Size of matrix after insertion = $(size(matrix))")
     return matrix
     
 end

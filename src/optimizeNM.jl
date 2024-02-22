@@ -60,14 +60,20 @@ function optimizeNM(pr;
         @show k
         @unpack Xk, Fk = solState
 
+        # saving the current iterates to solState
         Xkm1, Fkm1 = Xk, Fk
         @pack! solState = Xkm1, Fkm1
         
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_ls = printOrNot & verbose_ls
 
+        println("Size of simplex before insertion = $(size(Xk))")
+
         Xkp1, fkp1, actions_1NM = nelderMead(Xk, f, pDict)
-        @show actions_1NM
+
+        println("Size of simplex after insertion = $(size(Xkp1))")
+
+        # @show actions_1NM
         
         @unpack actions = solverState
         actions = merge(+, actions, actions_1NM)
@@ -81,9 +87,9 @@ function optimizeNM(pr;
         Deltak = simplexDiameter(Xk)
         
         # @show k, Deltak
-        Xk = Xkp1
+        Xk, fk = Xkp1, fkp1
 
-        @pack! solState = Deltak, Xk
+        @pack! solState = Deltak, Xk, fk
 
         if k >= maxiter
             push!(causeForStopping, "Iteration limit reached!")

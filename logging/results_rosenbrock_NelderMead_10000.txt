@@ -2,24 +2,24 @@
 Solver run has concluded.
 Function solved for: rosenbrock()
 Cause(s) for stopping:
-Simplex size lower limit reached!
-Convergence achieved in 609 iterations 😄
+Iteration limit reached!
+Failed to converge despite 10000 iterations! 😢
 ****************************
 Method Used: NelderMead
 
 ****************************
 ***************************
-Optimal Nonzero Variables:
-x☆[1] = 0.9985956456086493
-x☆[2] = 0.9971229469164637
-x☆[3] = 0.9940746544366801
-x☆[4] = 0.9877960938943792
-x☆[5] = 0.974926819672298
-x☆[6] = 1.015765805227836
-x☆[7] = 0.9523292995270064
-x☆[8] = 0.9973838465140092
-x☆[9] = 0.9707323506130496
-x☆[10] = 0.9133521295551916
+Best Known Nonzero Variables:
+x☆[1] = 1.0000000000000902
+x☆[2] = 0.9999999999999802
+x☆[3] = 1.00000000000004
+x☆[4] = 1.0000000000001301
+x☆[5] = 1.00000000000002
+x☆[6] = 1.0000000000000955
+x☆[7] = 1.0000000000000844
+x☆[8] = 1.0000000000000742
+x☆[9] = 1.0000000000002316
+x☆[10] = 1.0000000000005391
 ***************************
 Number of fevals = 12
 Number of gevals = 0

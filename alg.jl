@@ -95,7 +95,7 @@ function create_algorithm_settings(;
                 alg_settings[:c2] = "NA"
                 alg_settings[:lambda] = "NA"
                 alg_settings[:lambdaMax] = "NA"
-                alg_settings[:DeltaTol] = 1e-8
+                alg_settings[:DeltaTol] = 1e-12
                 alg_settings[:Delta] = 100.0
                 alg_settings[:progress] = 10
                 alg_settings[:alpha] = 1.0

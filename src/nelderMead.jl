@@ -124,6 +124,7 @@ function nelderMead(Xk, f::Function, pDict;
                 # this point is technically better than the worst point in the simplex, but not particularly useful. Can perform some contracts on it.
                 myprintln(verbose, "Reflection only better than worst point. Trying outside contract.")
                 xoc = outsideContract(xc, xr, beta=beta)
+                action = "outsideContract"
                 actions[:outsideContract] += 1
                 F_xoc = f(xoc, pDict, getGradientToo = false)
                 fevals_NM += 1
@@ -131,7 +132,6 @@ function nelderMead(Xk, f::Function, pDict;
                     myprintln(verbose, "Outside Contract a success! Adding it to simplex.")
                     actions[:outsideContractSuccess] += 1
                     # choosing outside contracted point (it may or may not be a useful addition to the simplex)
-                    action = "outsideContract"
                     Xk = insertSortedSimplex(Xk, xoc, f, pDict)
                     fbest = f(Xk[:, 1], pDict, getGradientToo=false)
                     actions[:insertIntoSorted] += 1
@@ -140,7 +140,7 @@ function nelderMead(Xk, f::Function, pDict;
                     # outside contract didn't help, but choosing reflected point anyway
                     myprintln(verbose, "Outside Contract a failure. Still adding the reflection to simplex.")
                     actions[:outsideContractFailure] += 1
-                    Xk = hcat(Xk[1:p-1], xr)
+                    Xk = hcat(Xk[:, 1:p-1], xr)
                 end
             else
                 # oh no the point is even worse than the current worst point

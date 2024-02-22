@@ -70,10 +70,9 @@ function optimizeNM(pr;
         println("Size of simplex before insertion = $(size(Xk))")
 
         Xkp1, fkp1, actions_1NM = nelderMead(Xk, f, pDict)
+        @show actions_1NM
 
         println("Size of simplex after insertion = $(size(Xkp1))")
-
-        @show actions_1NM
         
         @unpack actions = solverState
         actions = merge(+, actions, actions_1NM)

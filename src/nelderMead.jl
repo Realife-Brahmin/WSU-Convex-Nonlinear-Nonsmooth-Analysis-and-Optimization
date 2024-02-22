@@ -96,7 +96,7 @@ function nelderMead(Xk, f::Function, pDict;
             actions[:extensionSuccess] += 1
             # extended point is even better! 
             # add it to the top of the simplex
-            Xk = hcat(xe, Xk[:, 2:p-1])
+            Xk = hcat(xe, Xk[:, 1:p-1])
             fbest = F_xe
             action = "extend"
         else 

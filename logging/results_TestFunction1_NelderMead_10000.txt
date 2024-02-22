@@ -1,0 +1,21 @@
+****************************
+Solver run has concluded.
+Function solved for: TestFunction1()
+Cause(s) for stopping:
+Simplex size lower limit reached!
+Convergence achieved in 83 iterations 😄
+****************************
+Method Used: NelderMead
+
+****************************
+***************************
+Optimal Nonzero Variables:
+x☆[1] = -0.08984201465447296
+x☆[2] = 0.7126564082041434
+***************************
+Number of fevals = 4
+Number of gevals = 0
+Number of evals = 4
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

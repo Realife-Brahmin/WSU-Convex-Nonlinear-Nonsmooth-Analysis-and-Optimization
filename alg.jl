@@ -34,7 +34,8 @@ alg_custom = create_algorithm_settings(method="GradientDescent", maxiter=500)
 function create_algorithm_settings(;
         # method="QuasiNewton",
         # method = "ConjugateGradientDescent",
-        method = "GradientDescent",
+        # method = "GradientDescent",
+        method = "NelderMead",
         maxiter=Int(1e4),
         gtol=1e-12,
         dftol=1e-15,
@@ -86,8 +87,23 @@ function create_algorithm_settings(;
                 alg_settings[:linesearch] = "QuasiNewton-SR1"
                 alg_settings[:c2] = -1.0
                 alg_settings[:progress] = 1
+        elseif alg_settings[:method] == "NelderMead"
+                # Adjustments for NelderMead
+                alg_settings[:linesearch] = "NA"
+                alg_settings[:gtol] = "NA"
+                alg_settings[:c1] = "NA"
+                alg_settings[:c2] = "NA"
+                alg_settings[:lambda] = "NA"
+                alg_settings[:lambdaMax] = "NA"
+                alg_settings[:DeltaTol] = 1e-12
+                alg_settings[:Delta] = 100.0
+                alg_settings[:progress] = 10
+                alg_settings[:alpha] = 1.0
+                alg_settings[:beta] = 0.5
+                alg_settings[:gamma] = 2.0
+                alg_settings[:delta] = 0.5
         else
-                warn("Bad condition.")
+                @warn "Bad condition."
         end
 
         return alg_settings

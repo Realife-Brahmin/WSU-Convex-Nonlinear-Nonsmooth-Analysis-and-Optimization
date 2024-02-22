@@ -1,7 +1,6 @@
 ****************************
 Solver run has concluded.
 Function solved for: dampedSHM()
-This was a function minimization problem.
 Cause(s) for stopping:
 Barely changing fval
 Convergence achieved in 44 iterations 😄

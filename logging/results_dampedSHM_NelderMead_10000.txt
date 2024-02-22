@@ -1,0 +1,26 @@
+****************************
+Solver run has concluded.
+Function solved for: dampedSHM()
+Cause(s) for stopping:
+Simplex size lower limit reached!
+Convergence achieved in 423 iterations 😄
+****************************
+Method Used: NelderMead
+
+****************************
+Optimal function value = 0.02902080839671226
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 13.781532269923805
+x☆[2] = 8.27770873528856
+x☆[3] = 0.021807353357801887
+x☆[4] = 1836.3521254736172
+x☆[5] = 911.440968919568
+x☆[6] = 4.244929147341486
+***************************
+Number of fevals = 8
+Number of gevals = 0
+Number of evals = 8
+**************************************************
+Tolerance critera used:
+Simplex Diameter Tolerance = 1.0e-12

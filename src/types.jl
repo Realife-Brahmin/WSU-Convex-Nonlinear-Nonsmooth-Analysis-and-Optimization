@@ -66,11 +66,88 @@ mutable struct SolStateType
 end
 
 
+"""
+    SolStateNMType(; k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0), Fkm1=zeros(0), Fk=zeros(0), Delta=0.0) -> Dict
+
+Create and return a dictionary representing the state of a solution at two consecutive iterations (k-1 and k) within a numerical method algorithm. This function is particularly useful in optimization algorithms such as the Nelder-Mead method.
+
+# Arguments
+- `k::Int=0`: The current iteration number. Defaults to 0.
+- `Xkm1::Matrix{Float64}=zeros(0, 0)`: A matrix representing the solution or state at iteration k-1. Defaults to an empty matrix, indicating no prior state.
+- `Xk::Matrix{Float64}=zeros(0, 0)`: A matrix representing the solution or state at the current iteration k. Defaults to an empty matrix.
+- `Fkm1::Vector{Float64}=zeros(0)`: A vector of function values at the solution `Xkm1` from iteration k-1. Defaults to an empty vector.
+- `Fk::Vector{Float64}=zeros(0)`: A vector of function values at the solution `Xk` for the current iteration. Defaults to an empty vector.
+- `Delta::Float64=0.0`: Size of the simplex ('diameter' i.e. distance Euclidean distance of the two furthest points). Initialized to 100.0.
+
+# Returns
+- `Dict`: A dictionary with keys `:k`, `:Xkm1`, `:Xk`, `:Fkm1`, `:Fk`, and `:Delta`, corresponding to the function's arguments.
+
+# Example
+```julia
+sol_state = SolStateNMType(k=1, Xkm1=rand(2, 2), Xk=rand(2, 2), Fkm1=rand(2), Fk=rand(2), Delta=1.0)
+```
+"""
 function SolStateNMType(; k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),
-    Fkm1=zeros(0), Fk=zeros(0), Delta=0.0)
-return Dict(:k => k, :Xkm1 => Xkm1, :Xk => Xk, :Fkm1 => Fkm1, :Fk => Fk, :Delta => Delta)
+    Fkm1=zeros(0), Fk=zeros(0), Delta=100.0)
+
+    return Dict(:k => k, :Xkm1 => Xkm1, :Xk => Xk, :Fkm1 => Fkm1, :Fk => Fk, :Delta => Delta)
+
 end
 
+"""
+    SolverStateNMType(; k=0, fevals=0, actions=Dict(...)) -> Dict
+
+Create and return a dictionary representing the state of a solver at a given iteration within a numerical method algorithm, specifically tailored for algorithms like the Nelder-Mead method. This function captures both the iteration number, the number of function evaluations, and a detailed account of various actions taken during the algorithm's execution.
+
+# Arguments
+- `k::Int=0`: The current iteration number. Defaults to 0.
+- `fevals::Int=0`: The total number of function evaluations performed up to this point. Defaults to 0.
+- `actions::Dict`: A dictionary mapping action names to the number of times each action was performed. The default actions and their initial counts are:
+    - `:extend => 0`: Counts how many times the algorithm performed an extension step.
+    - `:insideContract => 0`: Counts the number of inside contraction steps.
+    - `:outsideContract => 0`: Counts the number of outside contraction steps.
+    - `:reflect => 0`: Counts the number of reflection steps performed.
+    - `:shrink => 0`: Counts the number of shrink steps performed.
+    - `:sort => 0`: Counts the number of sorting operations performed on the vertices of the simplex. 
+    - `:insertIntoSorted => 0`: Counts the number of times a point was added to an already sorted simplex. 
+
+# Returns
+- `Dict`: A dictionary with keys `:k`, `:fevals`, and `:actions`, corresponding to the function's arguments.
+
+# Example
+```julia
+solver_state = SolverStateNMType(k=1, fevals=5, actions=Dict(:extend => 1, :reflect => 2))
+```
+"""
+function SolverStateNMType(; 
+    k=0, 
+    fevals=0, 
+    actions=Dict(:extend => 0, :extensionFailure => 0 , :extensionSuccess => 0,
+    :insideContract => 0, :insideContractFailure => 0, :insideContractSuccess => 0, :outsideContract => 0, 
+    :outsideContractFailure =>0, :outsideContractSuccess =>0,
+    :reflect => 0, :shrink => 0, :sort => 0, :insertIntoSorted => 0))
+
+    return Dict(:k => k, :fevals => fevals, :actions => actions)
+
+end
+
+mutable struct SolverStateType
+    k::Int
+    fevals::Int
+    gevals::Int
+    Hevals::Int
+    alpha_evals::Int # only current evals
+    success_ls::Bool
+
+    function SolverStateType(;
+        k=1,
+        fevals=0,
+        gevals=0,
+        Hevals=0,
+        success_ls=false)
+        new(k, fevals, gevals, Hevals, success_ls)
+    end
+end
 
 # # Example usage:
 # sol_state = SolStateNMType(k=0, Xkm1=Matrix{Float64}(undef, 3, 3), Xk=Matrix{Float64}(undef, 3, 3),

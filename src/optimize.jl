@@ -1,6 +1,7 @@
 include("linesearches.jl")
 include("findDirection.jl")
 include("types.jl")
+include("optimizeNM.jl")
 
 function optimize(pr; 
     verbose::Bool=false, 

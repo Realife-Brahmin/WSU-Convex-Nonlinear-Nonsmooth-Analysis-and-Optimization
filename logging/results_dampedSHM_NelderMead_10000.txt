@@ -8,6 +8,7 @@ Convergence achieved in 423 iterations 😄
 Method Used: NelderMead
 
 ****************************
+Optimal function value = 0.02902080839671226
 ***************************
 Optimal Nonzero Variables:
 x☆[1] = 13.781532269923805
@@ -22,4 +23,4 @@ Number of gevals = 0
 Number of evals = 8
 **************************************************
 Tolerance critera used:
-dftol = 1.0e-15
+Simplex Diameter Tolerance = 1.0e-12

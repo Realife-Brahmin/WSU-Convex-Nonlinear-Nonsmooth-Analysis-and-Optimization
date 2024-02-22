@@ -1,0 +1,21 @@
+****************************
+Solver run has concluded.
+Function solved for: sphere()
+Cause(s) for stopping:
+Simplex size lower limit reached!
+Convergence achieved in 76 iterations 😄
+****************************
+Method Used: NelderMead
+
+****************************
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 1.753840769243429e-9
+x☆[2] = -6.869447178565786e-10
+***************************
+Number of fevals = 4
+Number of gevals = 0
+Number of evals = 4
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

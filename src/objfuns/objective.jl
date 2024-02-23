@@ -2,7 +2,8 @@ using Base.Threads
 using DataFrames
 
 include("../helperFunctions.jl");
-include("../../alg.jl") # include alg.jl from parent directory
+include("boxConstraintPenalty.jl");
+include("../../alg.jl"); # include alg.jl from parent directory
 
 """
     generate_pr(functionName::Function, x0::Vector{Float64};

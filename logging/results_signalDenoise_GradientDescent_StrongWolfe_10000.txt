@@ -1,7 +1,6 @@
 ****************************
 Solver run has concluded.
 Function solved for: signalDenoise()
-This was a function minimization problem.
 Cause(s) for stopping:
 Too many iterations
 Failed to converge despite 10000 iterations! 😢

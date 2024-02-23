@@ -62,8 +62,6 @@ function dampedSHM(x::Vector{Float64},
 
     box = constraints[:box]
 
-    @unpack indices, lbs, ubs, barrier = box
-
     f = 0.0;
     g = zeros(Float64, n)
     for k = 1:M
@@ -77,22 +75,14 @@ function dampedSHM(x::Vector{Float64},
         Δyₖ = ŷₖ - yₖ
         f += (1/M)*Δyₖ^2
 
-        P = 0.0
-        for i ∈ eachindex(indices)
-            P += barrier*(min(0, x[i]-lbs[i])^2)
-            P += barrier*(min(0, ubs[i]-x[i])^2)
-        end
+        P = boxConstraintPenalty(x, box)
 
         f += P
 
         if getGradientToo
             g += (2/M)* Δyₖ * [1, Sₖ, A*tₖ*(τ^-2)*Sₖ, A*tₖ*Cₖ, A*tₖ^2*Cₖ, A*Cₖ]
 
-            gP = 0.0
-            for i ∈ eachindex(indices)
-                gP += -2 * barrier * min(0, x[i] - lbs[i])
-                gP += -2 * barrier * min(0, ubs[i] - x[i])
-            end
+            gP = boxConstraintGradient(x, box)
 
             g += gP
         end
@@ -112,10 +102,15 @@ rename!(df, [:x, :y])
 data = Matrix(df)
 x00 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
 
-# indices = []
-indices = [1, 3, 5]
-lbs = x00[indices]*0.95
-ubs = x00[indices]*1.05
+indices = [] # no constraint
+# indices = [1, 3, 5]
+indices = collect(1:n)
+# lazily automatically generating lower and upper bound values for the constrained decision variables from their own x0 value.
+# lbs = x00[indices]*0.95
+lbs = x00[indices] * 0.99
+# ubs = x00[indices]*1.05
+ubs = x00[indices] * 1.01
+
 barrier = 1e8
 box = Dict(:indices=>indices, :lbs=>lbs, :ubs=>ubs, :barrier=>barrier)
 constraints = Dict(:box => box)

@@ -3,24 +3,24 @@ Solver run has concluded.
 Function solved for: dampedSHM()
 Cause(s) for stopping:
 Simplex size lower limit reached!
-Convergence achieved in 1328 iterations 😄
+Convergence achieved in 3880 iterations 😄
 ****************************
 Method Used: NelderMead
 
 ****************************
-Optimal function value = 6.201036227185301
+Optimal function value = 0.49461310118513446
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 13.762235065991666
-x☆[2] = 0.023100000006868106
-x☆[3] = 897.4724174259128
-x☆[4] = 2.521499063909302e7
-x☆[5] = 1.2009969987824079e7
-x☆[6] = 55295.708435874985
+x☆[1] = 13.779180768590052
+x☆[2] = 8.382999761785783
+x☆[3] = 0.021779999385754426
+x☆[4] = 1818.0000000000018
+x☆[5] = 905.2956589910821
+x☆[6] = 4.2420000000644915
 ***************************
-Number of fevals = 12994
+Number of fevals = 37082
 Number of gevals = 0
-Number of evals = 12994
+Number of evals = 37082
 **************************************************
 Tolerance critera used:
 Simplex Diameter Tolerance = 1.0e-12

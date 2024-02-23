@@ -45,11 +45,11 @@ function optimizeNM(pr;
 
     X0, F0 = sortSimplex(X00, f, pDict)
     Delta0 = simplexDiameter(X0)
-    @unpack actions = solverState
+    @unpack actions, fevals = solverState
     actions[:sort] += 1
     fevals += (n+1)
     Fk = F0
-    @pack! solverState = fevals, actions
+    @pack! solverState = actions, fevals
 
     solState = SolStateNMType(Xk=X0, Fk=Fk, Delta=Delta0)
 
@@ -69,15 +69,13 @@ function optimizeNM(pr;
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_NM = printOrNot & verbose_ls
 
-        Xkp1, fkp1, actions_1NM = nelderMead(Xk, f, pDict, verbose=printOrNot_NM)
+        Xkp1, fkp1, actions_1NM, fevals_1NM = nelderMead(Xk, f, pDict, verbose=printOrNot_NM)
 
-        
-        @unpack actions = solverState
-        # @show actions
-        # @show actions_1NM
+        @unpack actions, fevals = solverState
+
+        fevals += fevals_1NM
         actions = merge(+, actions, actions_1NM)
-        # @show actions
-        @pack! solverState = actions
+        @pack! solverState = actions, fevals
 
         # I prefer to only number a completed iteration, as opposed to numbering an in-process/about-to-begin iteration
         k += 1

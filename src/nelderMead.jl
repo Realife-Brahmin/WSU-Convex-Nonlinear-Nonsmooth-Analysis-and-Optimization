@@ -493,16 +493,6 @@ function createInitialSimplexFromOnePoint(x0;
     return adjustedSimplex
 end
 
-
-# function NMStep2fevals(actions_1NM::Dict, n::Int)
-#     @unpack extend, insideContract, outsideContract, sort, insertIntoSorted
-# end
-# function f(v)
-#     x, y = v[1], v[2]
-#     f = (x-1)*x + (y+1)*y
-#     return f
-# end
-
 # simplex = Float64.([0 1 3;0 2 4])
 # # Create a sample simplex matrix
 # # simplex = Float64.([1 3 5; 2 4 6])  # 2x3 matrix, with vectors [1, 2], [3, 4], [5, 6] as columns

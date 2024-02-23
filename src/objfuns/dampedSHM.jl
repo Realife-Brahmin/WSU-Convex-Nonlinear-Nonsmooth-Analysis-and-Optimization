@@ -44,7 +44,6 @@ function dampedSHM(x::Vector{Float64},
     log::Bool=true,
     getGradientToo::Bool=true)
 
-    # data = p[:data]
     data = p[:params][:data]
     M = size(data, 1)
     nf = size(data, 2) - 1
@@ -54,7 +53,17 @@ function dampedSHM(x::Vector{Float64},
 
     n = length(x) # note that df's x (time) is different from function parameter x
     mags = p[:params][:mags]
-    A₀, A, τ, ω, α, ϕ = x.*mags
+
+    # A₀, A, τ, ω, α, ϕ = x.*mags
+    x = x .* mags
+    A₀, A, τ, ω, α, ϕ = x
+    
+    constraints = p[:params][:constraints]
+
+    box = constraints[:box]
+
+    @unpack indices, lbs, ubs, barrier = box
+
     f = 0.0;
     g = zeros(Float64, n)
     for k = 1:M
@@ -67,8 +76,25 @@ function dampedSHM(x::Vector{Float64},
         ŷₖ = A₀ + A*Sₖ
         Δyₖ = ŷₖ - yₖ
         f += (1/M)*Δyₖ^2
+
+        P = 0.0
+        for i ∈ eachindex(indices)
+            P += barrier*(min(0, x[i]-lbs[i])^2)
+            P += barrier*(min(0, ubs[i]-x[i])^2)
+        end
+
+        f += P
+
         if getGradientToo
             g += (2/M)* Δyₖ * [1, Sₖ, A*tₖ*(τ^-2)*Sₖ, A*tₖ*Cₖ, A*tₖ^2*Cₖ, A*Cₖ]
+
+            gP = 0.0
+            for i ∈ eachindex(indices)
+                gP += -2 * barrier * min(0, x[i] - lbs[i])
+                gP += -2 * barrier * min(0, ubs[i] - x[i])
+            end
+
+            g += gP
         end
     end
     
@@ -86,6 +112,7 @@ rename!(df, [:x, :y])
 data = Matrix(df)
 x00 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
 
+# indices = []
 indices = [1, 3, 5]
 lbs = x00[indices]*0.95
 ubs = x00[indices]*1.05

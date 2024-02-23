@@ -59,14 +59,10 @@ function optimizeNM(pr;
     while keepIterationsGoing
 
         @unpack k = solverState
-        # @show k
-        # @unpack Xk, Fk = solState
         @unpack Xk, fk = solState
 
         # saving the current iterates to solState
-        # Xkm1, Fkm1 = Xk, Fk
         Xkm1, fkm1 = Xk, fk
-        # @pack! solState = Xkm1, Fkm1
         @pack! solState = Xkm1, fkm1
 
         printOrNot = verbose && ((k - 1) % progress == 0)

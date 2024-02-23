@@ -102,7 +102,7 @@ rename!(df, [:x, :y])
 data = Matrix(df)
 x00 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
 
-# indices = [] # no constraint
+indices = [] # no constraint
 # indices = [1, 3, 5]
 # indices = collect(1:n)
 # lazily automatically generating lower and upper bound values for the constrained decision variables from their own x0 value.

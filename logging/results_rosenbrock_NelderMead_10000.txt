@@ -8,6 +8,7 @@ Failed to converge despite 10000 iterations! 😢
 Method Used: NelderMead
 
 ****************************
+Best function value = 1.5295351295151165e-24
 ***************************
 Best Known Nonzero Variables:
 x☆[1] = 1.0000000000000902
@@ -21,9 +22,9 @@ x☆[8] = 1.0000000000000742
 x☆[9] = 1.0000000000002316
 x☆[10] = 1.0000000000005391
 ***************************
-Number of fevals = 12
+Number of fevals = 124105
 Number of gevals = 0
-Number of evals = 12
+Number of evals = 124105
 **************************************************
 Tolerance critera used:
-dftol = 1.0e-15
+Simplex Diameter Tolerance = 1.0e-12

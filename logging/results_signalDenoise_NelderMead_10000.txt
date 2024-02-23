@@ -1,0 +1,36 @@
+****************************
+Solver run has concluded.
+Function solved for: signalDenoise()
+Cause(s) for stopping:
+Iteration limit reached!
+Failed to converge despite 10000 iterations! 😢
+****************************
+Method Used: NelderMead
+
+****************************
+Best function value = 7.579214753951398
+***************************
+Best Known Nonzero Variables:
+Only upto 15 values will be printed.
+x☆[1] = 5.45399100304212
+x☆[2] = 8.934000326135504
+x☆[3] = 15.066574544369466
+x☆[4] = 15.066574871612445
+x☆[5] = 15.06655106977886
+x☆[8] = 13.254606104208012
+x☆[9] = 12.12201963347016
+x☆[10] = 11.965219697084239
+x☆[12] = 13.136729488067253
+x☆[14] = 14.646454720301573
+x☆[16] = 14.862829874046923
+x☆[17] = 14.429599893787858
+x☆[18] = 14.067851085273738
+x☆[19] = 13.678163327131728
+x☆[20] = 13.501785369260789
+***************************
+Number of fevals = 232897
+Number of gevals = 0
+Number of evals = 232897
+**************************************************
+Tolerance critera used:
+Simplex Diameter Tolerance = 1.0e-12

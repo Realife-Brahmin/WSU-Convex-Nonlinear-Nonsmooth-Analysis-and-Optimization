@@ -79,7 +79,6 @@ function dampedSHM(x::Vector{Float64},
     end
 end
 
-
 rawDataFolder = "rawData/"
 filename = rawDataFolder * "FFD.csv"
 df = CSV.File(filename) |> DataFrame
@@ -87,20 +86,17 @@ rename!(df, [:x, :y])
 data = Matrix(df)
 x00 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
 
-# mags = ones(n)
-
-# for x in x00
-#     magnitude = 1.0
-#     while x / magnitude >= 1.0
-#         magnitude *= 10.0
-#     end
-#     push!(mags, magnitude)
-# end
+indices = [1, 3, 5]
+lbs = x00[indices]*0.95
+ubs = x00[indices]*1.05
+barrier = 1e8
+box = Dict(:indices=>indices, :lbs=>lbs, :ubs=>ubs, :barrier=>barrier)
+constraints = Dict(:box => box)
 
 n = length(x00)
 mags = ones(n)
 x0 = x00./mags;
-params = Dict(:data=>data, :x00=>x00, :mags=>mags);
+params = Dict(:data=>data, :x00=>x00, :mags=>mags, :constraints=>constraints);
 
 objective = dampedSHM;
 

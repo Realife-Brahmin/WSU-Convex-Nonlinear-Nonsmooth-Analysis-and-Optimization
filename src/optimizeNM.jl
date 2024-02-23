@@ -73,7 +73,10 @@ function optimizeNM(pr;
 
         
         @unpack actions = solverState
+        # @show actions
+        # @show actions_1NM
         actions = merge(+, actions, actions_1NM)
+        # @show actions
         @pack! solverState = actions
 
         # I prefer to only number a completed iteration, as opposed to numbering an in-process/about-to-begin iteration
@@ -116,7 +119,8 @@ function optimizeNM(pr;
 
     @unpack fevals = solverState
 
-    res = (converged=converged, statusMessage=statusMessage,    xvals=xvals, fvals=fvals, fevals=fevals, cause=causeForStopping, pr=pr)
+    res = (converged=converged, statusMessage=statusMessage,    xvals=xvals, fvals=fvals, fevals=fevals, cause=causeForStopping, pr=pr, solState=solState,
+    solverState=solverState)
 
     res = trim_array(res, k - 1)
 

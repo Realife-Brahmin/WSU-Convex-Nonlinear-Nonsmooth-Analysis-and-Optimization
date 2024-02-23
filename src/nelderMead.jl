@@ -92,6 +92,7 @@ function nelderMead(Xk, f::Function, pDict;
         xe = extend(xc, xw, gamma=gamma)
         actions[:extend] += 1
         F_xe = f(xe, pDict, getGradientToo = false)
+        fevals_1NM += 1
         if F_xe < F_xr
             myprintln(verbose, "Extension a success!")
             actions[:extensionSuccess] += 1
@@ -115,7 +116,9 @@ function nelderMead(Xk, f::Function, pDict;
             # just select it and move on
             myprintln(verbose, "Reflection better than second-worst point, so adding it to simplex")
             Xk = insertSortedSimplex(Xk, xr, f, pDict)
+            fevals_1NM += (n+1)
             fbest = f(Xk[:, 1], pDict, getGradientToo=false)
+            fevals_1NM += 1
             actions[:insertIntoSorted] += 1
         else
             F_xw = f(xw, pDict, getGradientToo = false)
@@ -133,7 +136,9 @@ function nelderMead(Xk, f::Function, pDict;
                     actions[:outsideContractSuccess] += 1
                     # choosing outside contracted point (it may or may not be a useful addition to the simplex)
                     Xk = insertSortedSimplex(Xk, xoc, f, pDict)
+                    fevals_1NM += (n+1)
                     fbest = f(Xk[:, 1], pDict, getGradientToo=false)
+                    fevals_1NM += 1
                     actions[:insertIntoSorted] += 1
                     # display(Xk)
                 else
@@ -155,7 +160,9 @@ function nelderMead(Xk, f::Function, pDict;
                     myprintln(verbose, "Inside Contract better than worst point, so adding it.")
                     actions[:insideContractSuccess] += 1
                     Xk = insertSortedSimplex(Xk, xic, f, pDict)
+                    fevals_1NM += (n+1)
                     fbest = f(Xk[:, 1], pDict, getGradientToo=false)
+                    fevals_1NM += 1
                     actions[:insertIntoSorted] += 1
                 else
                     # okay no improvment this time
@@ -166,7 +173,7 @@ function nelderMead(Xk, f::Function, pDict;
                     action = "shrink"
                     actions[:shrink] += 1
                     Xk, Fk = sortSimplex(Xk, f, pDict)
-
+                    fevals_1NM += (n+1)
                     fbest = Fk[1]
                     actions[:sort] += 1
                 end

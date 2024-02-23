@@ -6,6 +6,7 @@
 	],
 	"settings": {
 		"workbench.colorTheme": "Rosé Pine (no italics)",
-		"workbench.preferredDarkColorTheme": "Default Dark+"
+		"workbench.preferredDarkColorTheme": "Default Dark+",
+		"julia.environmentPath": "c:\\Users\\Aryan Ritwajeet Jha\\Documents\\documents_general\\math564_and_565"
 	}
 }

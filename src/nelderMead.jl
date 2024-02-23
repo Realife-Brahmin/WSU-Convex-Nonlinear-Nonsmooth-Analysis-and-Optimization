@@ -57,7 +57,7 @@ function nelderMead(Xk, f::Function, pDict;
     delta = 0.5,
     verbose::Bool = false)
 
-    fevals_NM = 0
+    fevals_1NM = 0
     n, p = size(Xk)
     if p != n+1
         error("p = $p != n+1 = $(n+1) shouldn't happen in Nelder Mead")
@@ -81,7 +81,7 @@ function nelderMead(Xk, f::Function, pDict;
     actions[:reflect] += 1
 
     F_xr, F_xb = f(xr, pDict, getGradientToo = false), f(xb, pDict, getGradientToo = false)
-    fevals_NM += 2
+    fevals_1NM += 2
 
     fbest = F_xb
 
@@ -109,7 +109,7 @@ function nelderMead(Xk, f::Function, pDict;
         end
     else
         F_xsw = f(xsw, pDict, getGradientToo = false)
-        fevals_NM += 1
+        fevals_1NM += 1
         if F_xr < F_xsw 
             # point satisfies minimum required criterion for addition to simplex
             # just select it and move on
@@ -119,7 +119,7 @@ function nelderMead(Xk, f::Function, pDict;
             actions[:insertIntoSorted] += 1
         else
             F_xw = f(xw, pDict, getGradientToo = false)
-            fevals_NM += 1
+            fevals_1NM += 1
             if F_xr < F_xw
                 # this point is technically better than the worst point in the simplex, but not particularly useful. Can perform some contracts on it.
                 myprintln(verbose, "Reflection only better than worst point. Trying outside contract.")
@@ -127,7 +127,7 @@ function nelderMead(Xk, f::Function, pDict;
                 action = "outsideContract"
                 actions[:outsideContract] += 1
                 F_xoc = f(xoc, pDict, getGradientToo = false)
-                fevals_NM += 1
+                fevals_1NM += 1
                 if F_xoc < F_xr
                     myprintln(verbose, "Outside Contract a success! Adding it to simplex.")
                     actions[:outsideContractSuccess] += 1
@@ -150,7 +150,7 @@ function nelderMead(Xk, f::Function, pDict;
                 action = "insideContract"
                 actions[:insideContract] += 1
                 F_xic = f(xic, pDict, getGradientToo = false)
-                fevals_NM += 1
+                fevals_1NM += 1
                 if F_xic < F_xw
                     myprintln(verbose, "Inside Contract better than worst point, so adding it.")
                     actions[:insideContractSuccess] += 1
@@ -174,7 +174,7 @@ function nelderMead(Xk, f::Function, pDict;
         end             
     end
 
-    return (Xk=Xk, fb=fbest, actions=actions)
+    return (Xk=Xk, fb=fbest, actions=actions, fevals_1NM=fevals_1NM)
 end
 
 """
@@ -486,6 +486,10 @@ function createInitialSimplexFromOnePoint(x0;
     return adjustedSimplex
 end
 
+
+# function NMStep2fevals(actions_1NM::Dict, n::Int)
+#     @unpack extend, insideContract, outsideContract, sort, insertIntoSorted
+# end
 # function f(v)
 #     x, y = v[1], v[2]
 #     f = (x-1)*x + (y+1)*y

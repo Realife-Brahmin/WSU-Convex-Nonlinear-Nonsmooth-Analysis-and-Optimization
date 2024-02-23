@@ -3,27 +3,28 @@ Solver run has concluded.
 Function solved for: TestFunction3()
 Cause(s) for stopping:
 Simplex size lower limit reached!
-Convergence achieved in 794 iterations 😄
+Convergence achieved in 1507 iterations 😄
 ****************************
 Method Used: NelderMead
 
 ****************************
+Optimal function value = 0.004487531175395623
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.1951494487387635
-x☆[2] = 0.47835877731341236
-x☆[3] = 0.19514944953706273
-x☆[4] = 0.19514945098922648
-x☆[5] = 0.1727817199537673
-x☆[6] = 0.22091597397402588
-x☆[7] = 0.2786752694425275
-x☆[8] = 0.1586198041122961
-x☆[9] = 0.0631802855030551
-x☆[10] = 0.0047593713859898825
+x☆[1] = 0.5155677571738255
+x☆[2] = 0.1691037506803869
+x☆[3] = 0.2614470122044761
+x☆[4] = 0.16910374529983818
+x☆[5] = 0.16641364932720024
+x☆[6] = 0.17071210489509223
+x☆[7] = 0.1704182441853646
+x☆[8] = 0.16980540625132123
+x☆[9] = 0.18323374994009456
+x☆[10] = 0.00419275498097297
 ***************************
-Number of fevals = 12
+Number of fevals = 20444
 Number of gevals = 0
-Number of evals = 12
+Number of evals = 20444
 **************************************************
 Tolerance critera used:
-dftol = 1.0e-15
+Simplex Diameter Tolerance = 1.0e-12

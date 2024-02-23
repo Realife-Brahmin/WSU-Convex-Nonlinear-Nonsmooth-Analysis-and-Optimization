@@ -102,14 +102,14 @@ rename!(df, [:x, :y])
 data = Matrix(df)
 x00 = [13.8, 8.3, 0.022, 1800, 900, 4.2]
 
-indices = [] # no constraint
+# indices = [] # no constraint
 # indices = [1, 3, 5]
-indices = collect(1:n)
+# indices = collect(1:n)
 # lazily automatically generating lower and upper bound values for the constrained decision variables from their own x0 value.
-# lbs = x00[indices]*0.95
-lbs = x00[indices] * 0.99
-# ubs = x00[indices]*1.05
-ubs = x00[indices] * 1.01
+# lbs = x00[indices]*0.80
+# lbs = x00[indices] * 0.99
+# ubs = x00[indices]*1.20
+# ubs = x00[indices] * 1.01
 
 barrier = 1e8
 box = Dict(:indices=>indices, :lbs=>lbs, :ubs=>ubs, :barrier=>barrier)

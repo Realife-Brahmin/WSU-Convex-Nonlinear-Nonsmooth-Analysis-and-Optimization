@@ -48,10 +48,10 @@ function optimizeNM(pr;
     @unpack actions, fevals = solverState
     actions[:sort] += 1
     fevals += (n+1)
-    Fk = F0
+    f0 = F0[:, 1]
     @pack! solverState = actions, fevals
 
-    solState = SolStateNMType(Xk=X0, Fk=Fk, Delta=Delta0)
+    solState = SolStateNMType(Xk=X0, fk=f0, Deltak=Delta0)
 
     keepIterationsGoing = true
     causeForStopping = []
@@ -60,12 +60,15 @@ function optimizeNM(pr;
 
         @unpack k = solverState
         # @show k
-        @unpack Xk, Fk = solState
+        # @unpack Xk, Fk = solState
+        @unpack Xk, fk = solState
 
         # saving the current iterates to solState
-        Xkm1, Fkm1 = Xk, Fk
-        @pack! solState = Xkm1, Fkm1
-        
+        # Xkm1, Fkm1 = Xk, Fk
+        Xkm1, fkm1 = Xk, fk
+        # @pack! solState = Xkm1, Fkm1
+        @pack! solState = Xkm1, fkm1
+
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_NM = printOrNot & verbose_ls
 
@@ -84,7 +87,7 @@ function optimizeNM(pr;
         fvals[k] = fkp1
 
         Deltak = simplexDiameter(Xk)
-        @pack! solState = Deltak
+        @pack! solState = Deltak # pre-emptively packing it into the solState, as it won't be mutated
 
         Xk, fk = Xkp1, fkp1
         @pack! solState = Xk, fk

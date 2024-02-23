@@ -34,7 +34,6 @@ pr = include("src/objfuns/"*String(functionName)*".jl")
     res = warm_start_optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
 end
 
-
 showresults(res)
 
 plotresults(res, savePlot=true)

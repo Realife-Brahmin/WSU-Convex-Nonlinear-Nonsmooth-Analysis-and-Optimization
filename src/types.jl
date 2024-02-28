@@ -132,6 +132,26 @@ function SolverStateNMType(;
 
 end
 
+function SolStateGAType(; k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),
+    Fkm1=zeros(0), Fk=zeros(0))
+
+    return Dict(:k => k, :Xkm1 => Xkm1, :Xk => Xk, :Fkm1 => Fkm1, :Fk => Fk)
+
+end
+
+function SolverStateGAType(;
+    k=0,
+    fevals=0,
+    actions=Dict(
+        :bothParentsSurvived => 0, :onlyOneParentSurvived => 0, :noParentSurvived =>0, :crossover => 0, :genFitnessImproved => 0,
+        :genFitnessNotImproved => 0,  :mutation => 0,
+        :mutationFailure => 0, :mutationSuccess => 0, :OneChild => 0, :OneChildOneParent => 0,
+        :OneChildBothParents => 0))
+
+    return Dict(:k => k, :fevals => fevals, :actions => actions)
+
+end
+
 mutable struct SolverStateType
     k::Int
     fevals::Int

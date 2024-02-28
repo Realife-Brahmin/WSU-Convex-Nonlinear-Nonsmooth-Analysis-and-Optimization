@@ -102,6 +102,9 @@ function create_algorithm_settings(;
                 alg_settings[:beta] = 0.5
                 alg_settings[:gamma] = 2.0
                 alg_settings[:delta] = 0.5
+        elseif alg_settings[:method] == "GeneticAlgorithm"
+                error("Define the GA parameters first.")
+                # alg_setting[:]
         else
                 @warn "Bad condition."
         end

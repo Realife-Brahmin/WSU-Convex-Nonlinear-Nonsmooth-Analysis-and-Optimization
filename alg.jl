@@ -116,7 +116,7 @@ function create_algorithm_settings(;
                 alg_settings[:Dist] = randn # probability distribution to choose value from for mutation
                 # randn() has a mean of zero and a stddev of 1.
                 alg_settings[:deviation] = 0.1 # magnitude of mutation allowed
-                
+                alg_settings[:parentsSurvive] = true
                 @error "Define the GA parameters first."
                 # alg_setting[:]
         else

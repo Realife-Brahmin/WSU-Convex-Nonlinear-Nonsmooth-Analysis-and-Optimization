@@ -7,7 +7,7 @@ function deriveNextGeneration(Xk::Matrix, f::Function, pDict::Dict;
     Xkp1 = myfill(Xk, -75.0)
     Fkp1 = myzeros(Fk)
     survived = zeros(p)
-    popSize = 0
+    popAdded = 0
     keepAddingToPopulation = true
     fevals = 0
     actions = Dict(
@@ -18,20 +18,21 @@ function deriveNextGeneration(Xk::Matrix, f::Function, pDict::Dict;
 
 
     # add the top survivor, it is assumed that Xk, Fk have the best values at the front
-    popSize += 1
-    Xkp1[:, popSize] = Xk[:, 1]
-    Fkp1[popSize] = Fk[1]
+    popAdded += 1
+    Xkp1[:, popAdded] = Xk[:, 1]
+    Fkp1[popAdded] = Fk[1]
 
     # TODO increment suitable actions for the top survivor
 
     while keepAddingToPopulation
 
-        if popSize >= p
+        if popAdded >= p
             keepAddingToPopulation = false
             myprintln(verbose, "Next Generation Complete.")
         end
 
         p1, p2 = selectParents(Xk, Fk)
+        fevals += p
         actions[:parentsSelected] += 1
 
         o = crossover(p1, p2) # offspring
@@ -41,7 +42,7 @@ function deriveNextGeneration(Xk::Matrix, f::Function, pDict::Dict;
         fevals += 1
         actions[:mutations] += mutations_1mut
 
-        Xkp1, Fkp1, popSize, survived, actions_1dAA = decideAndAdd(p1, p2, om, Xkp1, Fkp1, popSize, pDict) # select the child, and if choosing to let the parent survive by default, the best min(2, p-popSize) parents
+        Xkp1, Fkp1, popAdded, survived, actions_1dAA = decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, pDict) # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
         actions = merge(+, actions, actions_1dAA)
 
     end
@@ -118,17 +119,59 @@ function createInitialPopulation(x0, popSize, f, pDict; # increment fevals by p 
 
     F0 = ones(p) .+ maximum(fvals) .- fvals # F0, X0 are still corresponding
 
-    # Find the fittest individual (max in F0)
-    fittest_index = argmax(F0)
+    X0, F0 = fittestFirst(X0, F0)
+    # # Find the fittest individual (max in F0)
+    # fittest_index = argmax(F0)
 
-    # Swap the fittest individual to the front if it's not already there
-    if fittest_index != 1
-        X0[:, [1, fittest_index]] = X0[:, [fittest_index, 1]]
-        F0[1], F0[fittest_index] = F0[fittest_index], F0[1]
-    end
+    # # Swap the fittest individual to the front if it's not already there
+    # if fittest_index != 1
+    #     X0[:, [1, fittest_index]] = X0[:, [fittest_index, 1]]
+    #     F0[1], F0[fittest_index] = F0[fittest_index], F0[1]
+    # end
 
     return X0, F0
 
+end
+
+"""
+    fittestFirst(Xk::Matrix, Fk::Vector)
+
+Reorders a population matrix `Xk` and its corresponding fitness vector `Fk` to ensure that the fittest individual is positioned first. This operation is useful in genetic algorithms and other evolutionary strategies to easily track and access the current best solution.
+
+# Arguments
+- `Xk`: A matrix representing the current population, where each column is an individual's parameter vector.
+- `Fk`: A vector of fitness values corresponding to each individual in `Xk`. Higher values indicate better fitness, assuming a maximization problem.
+
+# Returns
+- `Xk`: The reordered population matrix with the fittest individual in the first column.
+- `Fk`: The reordered fitness vector with the fitness value of the fittest individual in the first index.
+
+# Method
+1. Identify the index of the fittest individual based on the maximum fitness value in `Fk`.
+2. If the fittest individual is not already in the first position, swap the first column of `Xk` with the column corresponding to the fittest individual. Perform a similar swap for the first element of `Fk` with the element at the fittest individual's index.
+
+# Usage Example
+```julia
+# Assume a population matrix `Xk` and their fitness values `Fk`
+Xk = [1.0 2.0; 3.0 4.0]  # Example population matrix
+Fk = [0.5, 0.7]          # Corresponding fitness values
+
+# Apply the function to reorder the population
+Xk, Fk = fittestFirst(Xk, Fk)
+
+# `Xk` and `Fk` now have the fittest individual in the first column/index
+```
+"""
+function fittestFirst(Xk::Matrix, Fk::Vector)
+    # Identify the index of the fittest individual
+    fittest_index = argmax(Fk)
+    # Swap to bring the fittest individual to the front if necessary
+    if fittest_index != 1
+        Xk[:, [1, fittest_index]] = Xk[:, [fittest_index, 1]]
+        Fk[1], Fk[fittest_index] = Fk[fittest_index], Fk[1]
+    end
+
+    return Xk, Fk
 end
 
 """

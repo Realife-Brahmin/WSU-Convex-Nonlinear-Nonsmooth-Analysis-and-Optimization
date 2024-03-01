@@ -1,6 +1,11 @@
 include("helperFunctions.jl")
 
-function deriveNextGeneration(Xk::Matrix, f::Function, pDict::Dict;
+function deriveNextGeneration(Xk::Matrix, 
+    f::Function, 
+    pDict::Dict;
+    delta = 0.1,
+    deviation = 0.1,
+    Dist = randn,
     verbose::Bool=false)
 
     n, p = size(Xk)
@@ -38,7 +43,8 @@ function deriveNextGeneration(Xk::Matrix, f::Function, pDict::Dict;
         o = crossover(p1, p2) # offspring
         actions[:crossover] += 1
 
-        om, mutations_1mut = mutate(o, f, pDict)
+        om, mutations_1mut = mutation(o, f, pDict, 
+        delta=delta, deviation=deviation, Dist=Dist)
         fevals += 1
         actions[:mutations] += mutations_1mut
 
@@ -317,6 +323,69 @@ function crossover(p1, p2)
     return o
 
 end
+
+"""
+    mutation(o, f, pDict; delta=0.1, deviation=0.1, Dist=randn, verbose=false)
+
+Applies mutations to the parameter vector of an offspring `o` with a certain probability and evaluates the mutated offspring's fitness.
+
+# Arguments
+- `o`: The offspring to be mutated, represented as a tuple containing its index (`idx`), parameter vector (`x`), and fitness value (`F`).
+- `f`: The fitness function used to evaluate the mutated offspring. It must accept an individual's parameter vector and a dictionary of additional parameters, returning a scalar fitness value.
+- `pDict`: A dictionary of parameters required by the fitness function.
+- `delta`: The probability of mutation for each element in the offspring's parameter vector.
+- `deviation`: The magnitude of mutation, influencing how much an individual parameter can change during mutation.
+- `Dist`: A distribution function used to generate random values for the mutation. The default is the standard normal distribution (`randn`).
+- `verbose`: If set to `true`, enables printing of function-related messages.
+
+# Returns
+- `om`: The mutated offspring, structured similarly to the input `o` but with the potentially altered parameter vector and newly evaluated fitness value.
+- `mutations`: The total number of mutations applied to the offspring.
+
+# Method
+1. Iterates over each element in the offspring's parameter vector.
+2. With probability `delta`, mutates the element by multiplying it by `(1 + deviation * Dist())`, where `Dist()` generates a random value from the specified distribution.
+3. After potentially mutating each element, evaluates the fitness of the mutated parameter vector using the provided fitness function `f` and parameters `pDict`.
+4. Constructs a new tuple for the mutated offspring with its index set to `-1` (indicating it is a new generation) and its fitness value updated based on the mutation.
+
+# Usage Example
+```julia
+# Define an offspring and the fitness function
+offspring = (idx=1, x=[1.0, 2.0], F=5.0)
+function your_fitness_function(x, pDict)
+    # Fitness calculation...
+end
+
+# Perform mutation on the offspring
+mutated_offspring, mutation_count = mutation(offspring, your_fitness_function, Dict(), delta=0.2)
+
+# mutated_offspring contains the potentially mutated parameter vector and its new fitness value
+```
+"""
+function mutation(o, f, pDict;
+    delta = 0.1,
+    deviation = 0.1,
+    Dist = randn,
+    verbose::Bool = false)
+
+    mutations = 0
+    xo = o.x
+    xom = deepcopy(xo)
+
+    for i ∈ eachindex(xom)
+        if rand() < delta
+            xom[i] *= (1 + deviation*Dist())
+            mutations += 1
+        end
+    end
+
+    Fom = f(xom, pDict, getGradientToo=false)
+
+    om = (idx=-1, x=xom, F=Fom)
+
+    return om, mutations
+end
+
 
 # pdf = [0.22915395984352244, 0.03417449314058, 0.13089575337747889, 0.22024884567883649, 0.02160210334521976, 0.14400617789385242, 0.21991866672050991]
 

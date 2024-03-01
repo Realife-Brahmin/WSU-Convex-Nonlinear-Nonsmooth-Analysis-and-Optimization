@@ -24,6 +24,9 @@ function optimizeGA(pr;
     maxiter = pr.alg[:maxiter]
     fvalRepeatTol = pr.alg[:fvalRepeatTol]
     popSize = pr.alg[:popSize]
+    deviation = pr.alg[:deviation]
+    delta = pr.alg[:delta]
+    Dist = pr.alg[:Dist]
 
     x0 = pr.x0
     n = length(x0)
@@ -46,7 +49,7 @@ function optimizeGA(pr;
 
     myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
 
-    X0, F0 = createInitialPopulation(x0, popSize, f, pDict, deviationFactor=0.1) # the first element of the next generation is expected to be the best one
+    X0, F0 = createInitialPopulation(x0, popSize, f, pDict, deviationFactor=deviation) # the first element of the next generation is expected to be the best one
 
     @unpack fevals = solverState
     fevals += popSize
@@ -77,7 +80,7 @@ function optimizeGA(pr;
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_GA = printOrNot & verbose_ls
 
-        Xkp1, Fkp1, actions_1GA, fevals_1GA = deriveNextGeneration(Xk, f, pDict, verbose=printOrNot_GA) # first element should be the best one
+        Xkp1, Fkp1, actions_1GA, fevals_1GA = deriveNextGeneration(Xk, f, pDict, delta = delta, deviation = deviation, Dist = Dist, verbose=printOrNot_GA) # first element should be the best one
 
         @unpack actions, fevals = solverState
 

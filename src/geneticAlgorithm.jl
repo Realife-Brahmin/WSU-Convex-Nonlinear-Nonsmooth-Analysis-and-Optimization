@@ -131,12 +131,45 @@ function createInitialPopulation(x0, popSize, f, pDict; # increment fevals by p 
 
 end
 
-# p1, p2 = selectParents(Xk, Fk)
+"""
+    selectParents(Xk, Fk)
+
+Selects two unique parents from a population for crossover in a genetic algorithm. The selection is based on the fitness values of the population members, ensuring that individuals with higher fitness have a greater chance of being selected.
+
+# Arguments
+- `Xk`: A matrix representing the current population, where each column is an individual in the population space.
+- `Fk`: A vector of fitness values corresponding to each individual in `Xk`. Higher values indicate better fitness.
+
+# Returns
+- `p1`, `p2`: Two tuples representing the selected parents. Each tuple contains:    
+    - `idx`: The index of the individual in the original population.
+    - `x`: The parameter vector of the selected individual.
+    - `F`: The fitness value of the selected individual.
+
+# Method
+1. Normalize the fitness values `Fk` to create a probability density function (pdf), where the probability of selecting each individual is proportional to its fitness.
+2. Use the `selectTwoUniqueIndices` function to choose two unique indices based on the pdf, ensuring diversity in parent selection.
+3. Extract the parameter vectors (`x`) and fitness values (`F`) for the selected indices from `Xk` and `Fk`, respectively.
+4. Package the selected individuals' information into tuples (`p1`, `p2`) for easy use in crossover and mutation operations.
+
+# Examples
+```julia
+# Assume a population matrix `Xk` and their fitness values `Fk`
+Xk = [1.0 2.0; 3.0 4.0]  # Example population
+Fk = [0.5, 0.7]          # Example fitness values
+
+# Select two parents from the population
+parent1, parent2 = selectParents(Xk, Fk)
+
+# Display the selected parents' details
+println("Parent 1: ", parent1)
+println("Parent 2: ", parent2)
+```
+"""
 function selectParents(Xk, Fk)
+
     pdf = Fk./sum(Fk)
-    # cdf = cumsum(pdf)
-    # cdf[end] = 1.0 # sometimes there are floating errors causing its value be like  0.999998 
-    # idx1, idx2 = selectTwoUniqueIndices(cdf)
+
     idx1, idx2 = selectTwoUniqueIndices(pdf)
 
     x1, x2 = Xk[:, idx1], Xk[:, idx2]
@@ -146,7 +179,12 @@ function selectParents(Xk, Fk)
     p2 = (idx=idx2, x=x2, F=F2)
 
     return p1, p2
+
 end
+
+# p1, p2 = selectParents(Xk, Fk);
+# p1.x
+# p2.x
 
 """
     selectTwoUniqueIndices(pdf::Vector)

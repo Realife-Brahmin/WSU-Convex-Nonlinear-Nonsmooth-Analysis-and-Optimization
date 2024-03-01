@@ -120,14 +120,6 @@ function createInitialPopulation(x0, popSize, f, pDict; # increment fevals by p 
     F0 = ones(p) .+ maximum(fvals) .- fvals # F0, X0 are still corresponding
 
     X0, F0 = fittestFirst(X0, F0)
-    # # Find the fittest individual (max in F0)
-    # fittest_index = argmax(F0)
-
-    # # Swap the fittest individual to the front if it's not already there
-    # if fittest_index != 1
-    #     X0[:, [1, fittest_index]] = X0[:, [fittest_index, 1]]
-    #     F0[1], F0[fittest_index] = F0[fittest_index], F0[1]
-    # end
 
     return X0, F0
 
@@ -279,6 +271,50 @@ function selectTwoUniqueIndices(pdf::Vector)
     idx2 = findfirst(≥(rand_val2), cdf)
 
     return idx1, idx2
+
+end
+
+"""
+    crossover(p1, p2)
+
+Performs crossover between two parent individuals to produce a single offspring. The offspring's attributes are a weighted average of the parents' attributes, with weights proportional to the parents' fitness values.
+
+# Arguments
+- `p1`: The first parent, represented as a tuple containing the parent's index (`idx`), parameter vector (`x`), and fitness value (`F`).
+- `p2`: The second parent, similarly represented.
+
+# Returns
+- `o`: The offspring, structured as a tuple containing its index (`idx`), parameter vector (`x`), and fitness value (`F`).
+
+# Method
+1. Extracts the indices, parameter vectors, and fitness values of the two parents.
+2. Calculates the weighting factor `theta` based on the relative fitness values of the parents. The parent with higher fitness has a greater influence on the offspring's attributes.
+3. Computes the offspring's parameter vector `x0` as a weighted average of the parents' parameter vectors, using `theta`.
+4. Initializes the offspring's index (`idx`) to `-1` and its fitness value (`F`) to `-1`. The index is set to `-1` to indicate that the offspring is not a part of the current generation, distinguishing it from its parents. The fitness value is also set to `-1`, an impossible value under the fitness formula, signifying that the offspring's fitness is yet to be evaluated, typically after mutation operations.
+
+# Usage Example
+```julia
+# Define two parents
+p1 = (idx=1, x=[1.0, 2.0], F=5.0)
+p2 = (idx=2, x=[2.0, 3.0], F=3.0)
+
+# Perform crossover to generate an offspring
+offspring = crossover(p1, p2)
+
+# offspring's parameter vector is a weighted average of p1 and p2's vectors
+```
+"""
+function crossover(p1, p2)
+    
+    idx1, x1, F1 = @unpack idx, x, F = p1
+    idx2, x2, F2 = @unpack idx, x, F = p2
+    theta = F1/(F1+F2)
+
+    x0 = theta*x1 + (1-theta)*x2
+
+    o = (idx=-1, x=x0, F=-1)
+
+    return o
 
 end
 

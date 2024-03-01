@@ -35,7 +35,8 @@ function create_algorithm_settings(;
         # method="QuasiNewton",
         # method = "ConjugateGradientDescent",
         # method = "GradientDescent",
-        method = "NelderMead",
+        # method = "NelderMead",,
+        method = "GeneticAlgorithm",
         maxiter=Int(1e4),
         gtol=1e-12,
         dftol=1e-15,
@@ -103,7 +104,20 @@ function create_algorithm_settings(;
                 alg_settings[:gamma] = 2.0
                 alg_settings[:delta] = 0.5
         elseif alg_settings[:method] == "GeneticAlgorithm"
-                error("Define the GA parameters first.")
+                alg_settings[:linesearch] = "NA"
+                alg_settings[:gtol] = "NA"
+                alg_settings[:c1] = "NA"
+                alg_settings[:c2] = "NA"
+                alg_settings[:lambda] = "NA"
+                alg_settings[:lambdaMax] = "NA"
+                alg_settings[:fvalRepeatTol] = 50
+                alg_settings[:popSize] = 10
+                alg_settings[:delta] = 0.1 # probability of mutation for each dimension of a point
+                alg_settings[:Dist] = randn # probability distribution to choose value from for mutation
+                # randn() has a mean of zero and a stddev of 1.
+                alg_settings[:deviation] = 0.1 # magnitude of mutation allowed
+                
+                @error "Define the GA parameters first."
                 # alg_setting[:]
         else
                 @warn "Bad condition."

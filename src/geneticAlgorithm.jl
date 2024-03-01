@@ -386,6 +386,44 @@ function mutation(o, f, pDict;
     return om, mutations
 end
 
+function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
+    verbose::Bool = false)
+
+    actions = Dict(
+    :bothParentsSurvived => 0, :onlyOneParentSurvived => 0, 
+    :noParentSurvived => 0, :crossover => 0, 
+    :genFitnessImproved => 0,
+    :genFitnessNotImproved => 0, :mutation => 0,
+    :mutationFailure => 0, :mutationSuccess => 0, :OneChild => 0, :OneChildOneParent => 0,
+    :OneChildBothParents => 0, :parentsSelected => 0)
+
+    n, p = size(Xkp1)
+
+    if popAdded < p
+        popAdded += 1 # add the child
+        Xkp1[:, popAdded] = om.x
+        Fkp1[popAdded] = om.F
+    end
+
+    if popAdded < p
+        if survived[p1.idx] == 0
+            popAdded += 1 # add the first parent
+            Xkp1[:, popAdded] = p1.x
+            Fkp1[popAdded] = p1.F
+            survived[p1.idx] = 1
+        end
+    end
+
+    if popAdded < p
+        popAdded += 1 # add the second parent
+        Xkp1[:, popAdded] = p2.x
+        Fkp1[popAdded] = p2.F
+    end
+
+
+    return Xkp1, Fkp1, popAdded, survived, actions
+    
+end
 
 # pdf = [0.22915395984352244, 0.03417449314058, 0.13089575337747889, 0.22024884567883649, 0.02160210334521976, 0.14400617789385242, 0.21991866672050991]
 

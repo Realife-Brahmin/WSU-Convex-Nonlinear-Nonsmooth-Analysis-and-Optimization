@@ -1,5 +1,7 @@
-include("types.jl")
 include("geneticAlgorithm.jl")
+# include("nelderMead.jl")
+include("sampleSpace.jl")
+include("types.jl")
 
 function optimizeGA(pr; 
     verbose::Bool=false, 
@@ -21,10 +23,13 @@ function optimizeGA(pr;
     progress = pr.alg[:progress]
     maxiter = pr.alg[:maxiter]
     fvalRepeatTol = pr.alg[:fvalRepeatTol]
+    popSize = pr.alg[:popSize]
 
     x0 = pr.x0
     n = length(x0)
     xk = x0
+
+    popSize = min(popSize, n+1)
 
     fvals = zeros(Float64, maxiter)
     xvals = zeros(Float64, n, maxiter)
@@ -41,12 +46,11 @@ function optimizeGA(pr;
 
     myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
 
-    X0, F0 = createInitialPopulation(x0, f, pDict, deviationFactor=0.1) # the first element of the next generation is expected to be the best one
+    X0, F0 = createInitialPopulation(x0, popSize, f, pDict, deviationFactor=0.1) # the first element of the next generation is expected to be the best one
 
-    @unpack actions, fevals = solverState
-    actions[:sort] += 1
-    fevals += (n+1)
-    @pack! solverState = actions, fevals
+    @unpack fevals = solverState
+    fevals += popSize
+    @pack! solverState = fevals
 
     solState = SolStateGAType(Xk=X0, Fk=F0)
 

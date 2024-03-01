@@ -131,6 +131,89 @@ function createInitialPopulation(x0, popSize, f, pDict; # increment fevals by p 
 
 end
 
+# p1, p2 = selectParents(Xk, Fk)
+function selectParents(Xk, Fk)
+    pdf = Fk./sum(Fk)
+    # cdf = cumsum(pdf)
+    # cdf[end] = 1.0 # sometimes there are floating errors causing its value be like  0.999998 
+    # idx1, idx2 = selectTwoUniqueIndices(cdf)
+    idx1, idx2 = selectTwoUniqueIndices(pdf)
+
+    x1, x2 = Xk[:, idx1], Xk[:, idx2]
+    F1, F2 = Fk[idx1], Fk[idx2]
+    
+    p1 = (idx=idx1, x=x1, F=F1)
+    p2 = (idx=idx2, x=x2, F=F2)
+
+    return p1, p2
+end
+
+"""
+    selectTwoUniqueIndices(pdf::Vector)
+
+Selects two unique indices based on the probability density function (pdf) of selection probabilities.
+
+# Arguments
+- `pdf`: A vector representing the probability density function for parent selection probabilities.
+
+# Returns
+- A tuple containing two unique indices selected based on the pdf.
+
+# Method
+1. Select the first index using the pdf and convert the pdf to a cdf for selection.
+2. Set the selected index's probability in the pdf to zero and renormalize the pdf.
+3. Convert the updated pdf to a cdf and select the second index.
+
+# Examples
+```julia
+pdf = [0.1, 0.2, 0.3, 0.4] # Example pdf for a population
+idx1, idx2 = selectTwoUniqueIndices(pdf)
+```
+"""
+function selectTwoUniqueIndices(pdf::Vector)
+    # Convert pdf to cdf for the first selection
+    # Select the first index
+    cdf = cumsum(pdf)
+    cdf[end] = 1.0
+    # @show cdf
+    rand_val1 = rand()
+    # @show rand_val1
+    # @show idx1 = findfirst(≥(rand_val1), cdf)
+    idx1 = findfirst(≥(rand_val1), cdf)
+
+
+    # Set the probability of the selected index to zero and renormalize pdf
+    pdfm1 = deepcopy(pdf)
+    pdfm1[idx1] = 0
+    pdfm1 /= sum(pdfm1)
+
+    # Convert the updated pdf to cdf for the second selection
+    cdf = cumsum(pdfm1)
+    # @show cdf
+    cdf[end] = 1.0
+
+    # Select the second index
+    rand_val2 = rand()
+    # @show rand_val2
+    idx2 = findfirst(≥(rand_val2), cdf)
+
+    return idx1, idx2
+
+end
+
+# pdf = [0.22915395984352244, 0.03417449314058, 0.13089575337747889, 0.22024884567883649, 0.02160210334521976, 0.14400617789385242, 0.21991866672050991]
+
+# cdf = [0.22915395984352244
+# 0.26332845298410246
+# 0.3942242063615813
+# 0.6144730520404178
+# 0.6360751553856376
+# 0.78008133327949
+# 0.9999999999999998];
+
+# cdf[end] = 1.0
+
+# selectTwoUniqueIndices(pdf)
 # x0 = pr.x0
 # f = pr.objective
 # n = length(x0)

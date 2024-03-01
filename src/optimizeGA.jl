@@ -27,6 +27,7 @@ function optimizeGA(pr;
     deviation = pr.alg[:deviation]
     delta = pr.alg[:delta]
     Dist = pr.alg[:Dist]
+    parentsSurvive = pr.alg[:parentsSurvive]
 
     x0 = pr.x0
     n = length(x0)
@@ -80,7 +81,8 @@ function optimizeGA(pr;
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_GA = printOrNot & verbose_ls
 
-        Xkp1, Fkp1, actions_1GA, fevals_1GA = deriveNextGeneration(Xk, f, pDict, delta = delta, deviation = deviation, Dist = Dist, verbose=printOrNot_GA) # first element should be the best one
+        Xkp1, Fkp1, actions_1GA, fevals_1GA = deriveNextGeneration(Xk, f, pDict, delta = delta, deviation = deviation, Dist = Dist,
+        parentsSurvive = parentsSurvive, verbose=printOrNot_GA) # first element should be the best one
 
         @unpack actions, fevals = solverState
 

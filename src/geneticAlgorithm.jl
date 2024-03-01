@@ -6,6 +6,7 @@ function deriveNextGeneration(Xk::Matrix,
     delta = 0.1,
     deviation = 0.1,
     Dist = randn,
+    parentsSurvive = true,
     verbose::Bool=false)
 
     n, p = size(Xk)
@@ -48,7 +49,7 @@ function deriveNextGeneration(Xk::Matrix,
         fevals += 1
         actions[:mutations] += mutations_1mut
 
-        Xkp1, Fkp1, popAdded, survived, actions_1dAA = decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, pDict) # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
+        Xkp1, Fkp1, popAdded, survived, actions_1dAA = decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded) # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
         actions = merge(+, actions, actions_1dAA)
 
     end

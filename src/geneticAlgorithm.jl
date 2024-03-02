@@ -1,6 +1,7 @@
 include("helperFunctions.jl")
 
-function deriveNextGeneration(Xk::Matrix, 
+function deriveNextGeneration(Xk,
+    Fk, 
     f::Function, 
     pDict::Dict;
     delta = 0.1,

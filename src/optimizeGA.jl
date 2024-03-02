@@ -107,7 +107,7 @@ function optimizeGA(pr;
             actions[:genFitnessImproved] = 1
             myprintln(verbose, "Fittest individual now even fitter!")
         end
-        @pack! solverState = actions
+        @pack! solverState = actions, fvalRepeats
 
         @pack! solState = fvalRepeats # pre-emptively packing it into the solState, as it won't be mutated
 

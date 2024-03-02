@@ -24,6 +24,15 @@ function showresults(res::NamedTuple;
 
         tolMsg = "Simplex Diameter Tolerance = $(res.pr[:alg][:DeltaTol])"
 
+    elseif method == "GeneticAlgorithm"
+
+        @unpack converged, statusMessage, xvals, fvals, fevals, cause = res
+        gevals = 0
+        result_txt = log_path * "results_" * string(pr.objective) * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
+        lsMsg = ""
+
+        tolMsg = "Generation Fitness Stangation Tolerance = $(res.pr[:alg][:fvalRepeatTol])"
+
     else
         @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals, cause = res
         result_txt = log_path * "results_" * string(pr.objective) * "_" * pr.alg[:method] * "_" * pr.alg[:linesearch] * "_" * string(pr.alg[:maxiter]) * ".txt"

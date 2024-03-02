@@ -42,6 +42,7 @@ function deriveNextGeneration(Xk,
         if popAdded >= p
             keepAddingToPopulation = false
             myprintln(verbose, "Next Generation Complete.")
+            break
         end
 
         p1, p2 = selectParents(Xk, Fk)
@@ -60,7 +61,7 @@ function deriveNextGeneration(Xk,
 
         # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
         Xkp1, Fkp1, popAdded, survived, actions_1dAA = 
-        decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived) 
+        decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived, verbose=true) 
         actions = merge(+, actions, actions_1dAA)
 
         println("popAdded = $popAdded after decideAndAdd()")
@@ -425,6 +426,7 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
         Xkp1[:, popAdded] = om.x
         Fkp1[popAdded] = om.F
         childrenAdded += 1
+        myprintln(verbose, "Adding child")
     end
 
     if popAdded < p
@@ -433,6 +435,9 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
             Xkp1[:, popAdded] = p1.x
             Fkp1[popAdded] = p1.F
             survived[p1.idx] = 1
+            myprintln(verbose, "Adding Parent 1")
+        else
+            myprintln(verbose, "Parent 1 already added")
         end
         parentsAdded += 1
     end
@@ -450,7 +455,8 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
         parentsAdded += 1
     end
 
-    @show popAdded 
+    # @show popAdded 
+    @show parentsAdded
 
     if parentsAdded == 2
         actions[:bothParentsSurvived] = 1

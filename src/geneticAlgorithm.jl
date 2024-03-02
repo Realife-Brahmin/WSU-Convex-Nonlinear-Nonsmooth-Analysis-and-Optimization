@@ -11,6 +11,7 @@ function deriveNextGeneration(Xk,
     verbose::Bool=false)
 
     n, p = size(Xk)
+    @show p
     Xkp1 = myfill(Xk, -75.0)
     Fkp1 = myzeros(Fk)
     survived = zeros(p)
@@ -52,12 +53,16 @@ function deriveNextGeneration(Xk,
         om, mutations_1mut = mutation(o, f, pDict, 
         delta=delta, deviation=deviation, Dist=Dist)
         fevals += 1
-        actions[:mutations] += mutations_1mut
+        actions[:mutation] += mutations_1mut
+
+        println("popAdded = $popAdded before decideAndAdd()")
 
         # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
         Xkp1, Fkp1, popAdded, survived, actions_1dAA = 
         decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived) 
         actions = merge(+, actions, actions_1dAA)
+
+        println("popAdded = $popAdded after decideAndAdd()")
 
     end
 
@@ -412,6 +417,8 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
     childrenAdded = 0
     parentsAdded = 0
 
+    @show popAdded 
+
     if popAdded < p
         popAdded += 1 # add the child
         Xkp1[:, popAdded] = om.x
@@ -436,13 +443,15 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
         parentsAdded += 1
     end
 
+    @show popAdded 
+
     if parentsAdded == 2
         actions[:bothParentsSurvived] = 1
     elseif parentsAdded == 1
         actions[:onlyOneParentSurvived] = 1
     elseif childrenAdded == 1
         actions[:noParentSurvived] = 1
-    else
+    elseif childrenAdded == 0
         @error "floc"
     end
 

@@ -11,7 +11,7 @@ function deriveNextGeneration(Xk,
     verbose::Bool=false)
 
     n, p = size(Xk)
-    @show p
+    # @show p
     Xkp1 = myfill(Xk, -75.0)
     Fkp1 = myzeros(Fk)
     survived = zeros(p)
@@ -57,14 +57,14 @@ function deriveNextGeneration(Xk,
         fevals += 1
         actions[:mutation] += mutations_1mut
 
-        println("popAdded = $popAdded before decideAndAdd()")
+        myprintln(verbose, "popAdded = $popAdded before decideAndAdd()")
 
         # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
         Xkp1, Fkp1, popAdded, survived, actions_1dAA = 
-        decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived, verbose=true) 
+        decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived, verbose=verbose, parentsSurvive=parentsSurvive) 
         actions = merge(+, actions, actions_1dAA)
 
-        println("popAdded = $popAdded after decideAndAdd()")
+        myprintln(verbose, "popAdded = $popAdded after decideAndAdd()")
 
     end
 
@@ -73,9 +73,11 @@ function deriveNextGeneration(Xk,
     if Fkp1[1] > Fk[1]
         actions[:genFitnessImproved] += 1
         myprintln(verbose, "Fittest individual now even fitter.")
-    else
+    elseif Fkp1[1] == Fk[1]
         actions[:genFitnessNotImproved] += 1
         myprintln(verbose, "Fittest individual has same fitness as previous generation.")
+    else
+        @error "How come fitness has decreased? Need to investigate."
     end
 
     return Xkp1, Fkp1, fevals, actions
@@ -402,6 +404,7 @@ function mutation(o, f, pDict;
 end
 
 function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
+    parentsSurvive::Bool = true,
     verbose::Bool = false)
 
     actions = Dict(
@@ -419,7 +422,7 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
     childrenAdded = 0
     parentsAdded = 0
 
-    @show popAdded 
+    # @show popAdded 
 
     if popAdded < p
         popAdded += 1 # add the child
@@ -429,7 +432,7 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
         myprintln(verbose, "Adding child")
     end
 
-    if popAdded < p
+    if popAdded < p && parentsSurvive
         if survived[p1.idx] == 0
             popAdded += 1 # add the first parent
             Xkp1[:, popAdded] = p1.x
@@ -442,7 +445,7 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
         parentsAdded += 1
     end
 
-    if popAdded < p
+    if popAdded < p && parentsSurvive
         if survived[p2.idx] == 0
             popAdded += 1 # add the second parent
             Xkp1[:, popAdded] = p2.x
@@ -456,7 +459,7 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
     end
 
     # @show popAdded 
-    @show parentsAdded
+    # @show parentsAdded
 
     if parentsAdded == 2
         actions[:bothParentsSurvived] = 1

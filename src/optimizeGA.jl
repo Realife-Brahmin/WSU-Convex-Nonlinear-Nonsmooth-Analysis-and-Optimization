@@ -68,9 +68,11 @@ function optimizeGA(pr;
         if k >= maxiter
             push!(causeForStopping, "Iteration limit reached!")
             keepIterationsGoing = false
+            break
         elseif fvalRepeats >= fvalRepeatTol
             push!(causeForStopping, "Fitness no longer generationally improving!")
             keepIterationsGoing = false
+            break
         end
 
         @unpack Xk, Fk = solState
@@ -101,11 +103,11 @@ function optimizeGA(pr;
         if fkp1 == fk
             fvalRepeats += 1
             actions[:genFitnessNotImproved] = 1
-            myprintln(verbose, "Generation Fitness not improved.")
+            myprintln(printOrNot_GA, "Generation Fitness not improved.")
         else
             fvalRepeats = 0
             actions[:genFitnessImproved] = 1
-            myprintln(verbose, "Fittest individual now even fitter!")
+            myprintln(printOrNot_GA, "Fittest individual now even fitter!")
         end
         @pack! solverState = actions, fvalRepeats
 

@@ -53,7 +53,9 @@ function deriveNextGeneration(Xk::Matrix,
         fevals += 1
         actions[:mutations] += mutations_1mut
 
-        Xkp1, Fkp1, popAdded, survived, actions_1dAA = decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded) # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
+        # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
+        Xkp1, Fkp1, popAdded, survived, actions_1dAA = 
+        decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived) 
         actions = merge(+, actions, actions_1dAA)
 
     end
@@ -406,10 +408,14 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
 
     n, p = size(Xkp1)
 
+    childrenAdded = 0
+    parentsAdded = 0
+
     if popAdded < p
         popAdded += 1 # add the child
         Xkp1[:, popAdded] = om.x
         Fkp1[popAdded] = om.F
+        childrenAdded += 1
     end
 
     if popAdded < p
@@ -419,14 +425,25 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
             Fkp1[popAdded] = p1.F
             survived[p1.idx] = 1
         end
+        parentsAdded += 1
     end
 
     if popAdded < p
         popAdded += 1 # add the second parent
         Xkp1[:, popAdded] = p2.x
         Fkp1[popAdded] = p2.F
+        parentsAdded += 1
     end
 
+    if parentsAdded == 2
+        actions[:bothParentsSurvived] = 1
+    elseif parentsAdded == 1
+        actions[:onlyOneParentSurvived] = 1
+    elseif childrenAdded == 1
+        actions[:noParentSurvived] = 1
+    else
+        @error "floc"
+    end
 
     return Xkp1, Fkp1, popAdded, survived, actions
     

@@ -143,10 +143,14 @@ function SolverStateGAType(;
     k=0,
     fevals=0,
     actions=Dict(
-        :bothParentsSurvived => 0, :onlyOneParentSurvived => 0, :noParentSurvived =>0, :crossover => 0, :genFitnessImproved => 0,
-        :genFitnessNotImproved => 0,  :mutation => 0,
-        :mutationFailure => 0, :mutationSuccess => 0, :OneChild => 0, :OneChildOneParent => 0,
-        :OneChildBothParents => 0))
+        :bothParentsSurvived => 0, 
+        :crossover => 0, 
+        :genFitnessImproved => 0,
+        :genFitnessNotImproved => 0,
+        :mutation => 0,
+        :noParentSurvived => 0,
+        :onlyOneParentSurvived => 0,  
+        :parentSelected => 0))
 
     return Dict(:k => k, :fevals => fevals, :actions => actions)
 

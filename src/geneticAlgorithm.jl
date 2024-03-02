@@ -17,10 +17,14 @@ function deriveNextGeneration(Xk::Matrix,
     keepAddingToPopulation = true
     fevals = 0
     actions = Dict(
-        :bothParentsSurvived => 0, :onlyOneParentSurvived => 0, :noParentSurvived => 0, :crossover => 0, :genFitnessImproved => 0,
-        :genFitnessNotImproved => 0, :mutation => 0,
-        :mutationFailure => 0, :mutationSuccess => 0, :OneChild => 0, :OneChildOneParent => 0,
-        :OneChildBothParents => 0, :parentsSelected => 0)
+        :bothParentsSurvived => 0, 
+        :crossover => 0, 
+        :genFitnessImproved => 0,
+        :genFitnessNotImproved => 0,
+        :mutation => 0,
+        :noParentSurvived => 0,  
+        :onlyOneParentSurvived => 0,
+        :parentsSelected => 0)
 
 
     # add the top survivor, it is assumed that Xk, Fk have the best values at the front
@@ -391,12 +395,14 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
     verbose::Bool = false)
 
     actions = Dict(
-    :bothParentsSurvived => 0, :onlyOneParentSurvived => 0, 
-    :noParentSurvived => 0, :crossover => 0, 
-    :genFitnessImproved => 0,
-    :genFitnessNotImproved => 0, :mutation => 0,
-    :mutationFailure => 0, :mutationSuccess => 0, :OneChild => 0, :OneChildOneParent => 0,
-    :OneChildBothParents => 0, :parentsSelected => 0)
+        :bothParentsSurvived => 0,
+        :crossover => 0,
+        :genFitnessImproved => 0,
+        :genFitnessNotImproved => 0,
+        :mutation => 0,
+        :noParentSurvived => 0,
+        :onlyOneParentSurvived => 0,
+        :parentsSelected => 0)
 
     n, p = size(Xkp1)
 

@@ -1,6 +1,7 @@
 include("linesearches.jl")
 include("findDirection.jl")
 include("types.jl")
+include("optimizeGA.jl")
 include("optimizeNM.jl")
 
 function optimize(pr; 
@@ -240,8 +241,13 @@ function warm_start_optimize(pr;
             x0 = extrapolate(xopt, factor)
             n = length(x0)
         end
+        
     elseif pr.alg[:method] == "NelderMead"
         @time res = optimizeNM(pr, verbose=verbose, verbose_ls=verbose_ls)
+
+    elseif pr.alg[:method] == "GeneticAlgorithm"
+        @time res = optimizeGA(pr, verbose=verbose,
+        verbose_ls=verbose_ls)
     else
         # @time res = optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
         @time res = optimize2(pr, verbose=verbose, verbose_ls=verbose_ls)

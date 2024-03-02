@@ -122,7 +122,7 @@ solver_state = SolverStateNMType(k=1, fevals=5, actions=Dict(:extend => 1, :refl
 """
 function SolverStateNMType(; 
     k=0, 
-    fevals=0, 
+    fevals=0,
     actions=Dict(:extend => 0, :extensionFailure => 0 , :extensionSuccess => 0,
     :insideContract => 0, :insideContractFailure => 0, :insideContractSuccess => 0, :outsideContract => 0, 
     :outsideContractFailure =>0, :outsideContractSuccess =>0,
@@ -142,6 +142,7 @@ end
 function SolverStateGAType(;
     k=0,
     fevals=0,
+    fvalRepeats=0,
     actions=Dict(
         :bothParentsSurvived => 0, 
         :crossover => 0, 
@@ -152,7 +153,7 @@ function SolverStateGAType(;
         :onlyOneParentSurvived => 0,  
         :parentSelected => 0))
 
-    return Dict(:k => k, :fevals => fevals, :actions => actions)
+    return Dict(:k => k, :fevals => fevals, :fvalRepeats => fvalRepeats, :actions => actions)
 
 end
 

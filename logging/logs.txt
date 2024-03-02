@@ -19799,3 +19799,19 @@ Adding Parent 2
 Fittest individual now even fitter!
 Adding child
 Adding Parent 1
+popAdded = 1 before decideAndAdd()
+Adding child
+Adding Parent 1
+Adding Parent 2
+popAdded = 4 after decideAndAdd()
+popAdded = 4 before decideAndAdd()
+Adding child
+Parent 1 already added
+Adding Parent 2
+popAdded = 6 after decideAndAdd()
+popAdded = 6 before decideAndAdd()
+Adding child
+popAdded = 7 after decideAndAdd()
+Next Generation Complete.
+Fittest individual has same fitness as previous generation.
+Fittest individual now even fitter!

@@ -104,6 +104,7 @@ function create_algorithm_settings(;
                 alg_settings[:gamma] = 2.0
                 alg_settings[:delta] = 0.5
         elseif alg_settings[:method] == "GeneticAlgorithm"
+                alg_settings[:maxiter] = 10
                 alg_settings[:linesearch] = "NA"
                 alg_settings[:gtol] = "NA"
                 alg_settings[:c1] = "NA"

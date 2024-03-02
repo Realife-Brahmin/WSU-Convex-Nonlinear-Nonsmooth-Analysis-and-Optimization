@@ -1,0 +1,26 @@
+****************************
+Solver run has concluded.
+Function solved for: dampedSHM()
+Cause(s) for stopping:
+Iteration limit reached!
+Failed to converge despite 10 iterations! 😢
+****************************
+Method Used: GeneticAlgorithm
+
+****************************
+Best function value = 10.607946651372306
+***************************
+Best Known Nonzero Variables:
+x☆[1] = 14.145000000000001
+x☆[2] = 8.761111111111111
+x☆[3] = 0.019975999999999997
+x☆[4] = 1877.142857142857
+x☆[5] = 891.8181818181819
+x☆[6] = 4.103076923076923
+***************************
+Number of fevals = 240
+Number of gevals = 0
+Number of evals = 240
+**************************************************
+Tolerance critera used:
+Generation Fitness Stangation Tolerance = 50

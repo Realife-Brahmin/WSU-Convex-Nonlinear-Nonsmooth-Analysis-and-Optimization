@@ -94,19 +94,26 @@ function optimizeGA(pr;
         k += 1
 
         xvals[:, k] = Xkp1[:, 1]
-        fkp1 = Fkp1[1]
-        fvals[k] = fkp1
+        fkp1 = Fkp1[1] # this is incorrect
+        fvals[k] = fkp1 # also incorrect
 
+        @unpack actions = solverState
         if fkp1 == fk
             fvalRepeats += 1
+            actions[:genFitnessNotImproved] = 1
+            myprintln(verbose, "Generation Fitness not improved.")
         else
             fvalRepeats = 0
+            actions[:genFitnessImproved] = 1
+            myprintln(verbose, "Fittest individual now even fitter!")
         end
+        @pack! solverState = actions
 
         @pack! solState = fvalRepeats # pre-emptively packing it into the solState, as it won't be mutated
 
         Xk, Fk = Xkp1, Fkp1
         @pack! solState = Xk, Fk
+
 
         @pack! solState = k
         @pack! solverState = k

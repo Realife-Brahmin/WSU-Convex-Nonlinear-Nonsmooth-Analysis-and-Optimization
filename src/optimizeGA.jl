@@ -81,7 +81,7 @@ function optimizeGA(pr;
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_GA = printOrNot & verbose_ls
 
-        Xkp1, Fkp1, actions_1GA, fevals_1GA = deriveNextGeneration(Xk, f, pDict, delta = delta, deviation = deviation, Dist = Dist,
+        Xkp1, Fkp1, actions_1GA, fevals_1GA = deriveNextGeneration(Xk, Fk, f, pDict, delta = delta, deviation = deviation, Dist = Dist,
         parentsSurvive = parentsSurvive, verbose=printOrNot_GA) # first element should be the best one
 
         @unpack actions, fevals = solverState

@@ -5,8 +5,8 @@ println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 
 verbose = false
 verbose = true;
-verbose_ls = false;
-# verbose_ls = true;
+# verbose_ls = false;
+verbose_ls = true;
 # verbose_ls = verbose & verbose_ls
 logging = true; 
 profiling = false;

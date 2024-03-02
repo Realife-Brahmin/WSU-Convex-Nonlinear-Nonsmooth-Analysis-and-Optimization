@@ -33,6 +33,7 @@ function deriveNextGeneration(Xk,
     popAdded += 1
     Xkp1[:, popAdded] = Xk[:, 1]
     Fkp1[popAdded] = Fk[1]
+    survived[popAdded] = 1
 
     # TODO increment suitable actions for the top survivor
 
@@ -437,9 +438,15 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
     end
 
     if popAdded < p
-        popAdded += 1 # add the second parent
-        Xkp1[:, popAdded] = p2.x
-        Fkp1[popAdded] = p2.F
+        if survived[p2.idx] == 0
+            popAdded += 1 # add the second parent
+            Xkp1[:, popAdded] = p2.x
+            Fkp1[popAdded] = p2.F
+            survived[p1.idx] = 1
+            myprintln(verbose, "Adding Parent 2")
+        else
+            myprintln(verbose, "Parent 2 already added")
+        end
         parentsAdded += 1
     end
 

@@ -1,26 +1,22 @@
 ****************************
 Solver run has concluded.
-Function solved for: dampedSHM()
+Function solved for: sphere()
 Cause(s) for stopping:
 Iteration limit reached!
-Failed to converge despite 10 iterations! 😢
+Failed to converge despite 10000 iterations! 😢
 ****************************
 Method Used: GeneticAlgorithm
 
 ****************************
-Best function value = 0.12484485829733592
+Best function value = 2.6206091399517303e-16
 ***************************
 Best Known Nonzero Variables:
-x☆[1] = 13.840025270332578
-x☆[2] = 8.079585563723928
-x☆[3] = 0.021224066930550806
-x☆[4] = 1847.92733414743
-x☆[5] = 882.5223335923641
-x☆[6] = 4.0663702403390785
+x☆[1] = 9.573299468435071e-9
+x☆[2] = 1.3054227333811597e-8
 ***************************
-Number of fevals = 294
+Number of fevals = 110004
 Number of gevals = 0
-Number of evals = 294
+Number of evals = 110004
 **************************************************
 Tolerance critera used:
 Generation Fitness Stangation Tolerance = 50

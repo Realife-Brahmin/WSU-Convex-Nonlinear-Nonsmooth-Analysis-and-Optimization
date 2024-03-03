@@ -1,7 +1,8 @@
 include("helperFunctions.jl")
 
 function deriveNextGeneration(Xk,
-    Fk, 
+    Fk,
+    fk, 
     f::Function, 
     pDict::Dict;
     delta = 0.1,
@@ -69,19 +70,23 @@ function deriveNextGeneration(Xk,
 
     end
 
+    Xkp1, Fkp1, fkp1 = reevaluateFitness(Xkp1, Fkp1, f, pDict, verbose=verbose)
+    fevals += p
+    
     Xkp1, Fkp1 = fittestFirst(Xkp1, Fkp1, verbose=verbose)
 
-    if Fkp1[1] > Fk[1]
+    if fkp1 < fk
         actions[:genFitnessImproved] += 1
         myprintln(verbose, "Fittest individual now even fitter.")
-    elseif Fkp1[1] == Fk[1]
+    elseif fkp1 == fk
         actions[:genFitnessNotImproved] += 1
         myprintln(verbose, "Fittest individual has same fitness as previous generation.")
     else
         @error "How come fitness has decreased? Need to investigate."
     end
 
-    return Xkp1, Fkp1, fevals, actions
+    return Xkp1, Fkp1, fkp1, fevals, actions
+end
 end
 
 """ # REDO
@@ -141,12 +146,13 @@ function createInitialPopulation(x0, popSize, f, pDict; # increment fevals by p 
         fvals[i] = f(X0[:, i], pDict, getGradientToo=false)
     end
 
+    f0 = minimum(fvals)
     F0 = ones(p) .+ maximum(fvals) .- fvals # F0, X0 are still corresponding
     X0, F0 = fittestFirst(X0, F0, verbose=verbose)
     myprintln(verbose, "Initial Generation created with fittest point $(X0[:, 1]) having fitness of $(F0[1]).")
 
 
-    return X0, F0
+    return X0, F0, f0
 
 end
 

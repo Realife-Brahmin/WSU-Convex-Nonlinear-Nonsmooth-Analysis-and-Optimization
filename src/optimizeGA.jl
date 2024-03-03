@@ -50,13 +50,13 @@ function optimizeGA(pr;
 
     myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
 
-    X0, F0 = createInitialPopulation(x0, popSize, f, pDict, deviationFactor=deviation, verbose=verbose) # the first element of the next generation is expected to be the best one
+    X0, F0, f0 = createInitialPopulation(x0, popSize, f, pDict, deviationFactor=deviation, verbose=verbose) # the first element of the next generation is expected to be the best one
 
     @unpack fevals = solverState
     fevals += popSize
     @pack! solverState = fevals
 
-    solState = SolStateGAType(Xk=X0, Fk=F0)
+    solState = SolStateGAType(Xk=X0, Fk=F0, fk=f0)
 
     keepIterationsGoing = true
     causeForStopping = []
@@ -75,15 +75,15 @@ function optimizeGA(pr;
             break
         end
 
-        @unpack Xk, Fk = solState
+        @unpack Xk, Fk, fk = solState
         # saving the current iterates to solState
-        Xkm1, Fkm1 = Xk, Fk
-        @pack! solState = Xkm1, Fkm1
+        Xkm1, Fkm1, fkm1 = Xk, Fk, fk
+        @pack! solState = Xkm1, Fkm1, fkm1
 
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_GA = printOrNot & verbose_ls
 
-        Xkp1, Fkp1, fevals_1GA, actions_1GA = deriveNextGeneration(Xk, Fk, f, pDict, delta=delta, deviation=deviation, Dist=Dist,
+        Xkp1, Fkp1, fkp1, fevals_1GA, actions_1GA = deriveNextGeneration(Xk, Fk, fk, f, pDict, delta=delta, deviation=deviation, Dist=Dist,
         parentsSurvive = parentsSurvive, verbose=printOrNot_GA) # first element should be the best one
 
         @unpack actions, fevals = solverState
@@ -96,9 +96,9 @@ function optimizeGA(pr;
         k += 1
 
         xvals[:, k] = Xkp1[:, 1]
-        fkp1 = Fkp1[1] # this is incorrect
+        # fkp1 = Fkp1[1] # this is incorrect
         fvals[k] = fkp1 # also incorrect
-
+        
         @unpack actions = solverState
         if fkp1 == fk
             fvalRepeats += 1
@@ -113,8 +113,8 @@ function optimizeGA(pr;
 
         @pack! solState = fvalRepeats # pre-emptively packing it into the solState, as it won't be mutated
 
-        Xk, Fk = Xkp1, Fkp1
-        @pack! solState = Xk, Fk
+        Xk, Fk, fk = Xkp1, Fkp1, fkp1
+        @pack! solState = Xk, Fk, fk
 
 
         @pack! solState = k

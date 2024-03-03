@@ -45,7 +45,7 @@ function deriveNextGeneration(Xk,
             break
         end
 
-        p1, p2 = selectParents(Xk, Fk)
+        p1, p2 = selectParents(Xk, Fk, verbose=verbose)
         fevals += p
         actions[:parentsSelected] += 1
 
@@ -53,7 +53,7 @@ function deriveNextGeneration(Xk,
         actions[:crossover] += 1
 
         om, mutations_1mut = mutation(o, f, pDict, 
-        delta=delta, deviation=deviation, Dist=Dist)
+        delta=delta, deviation=deviation, Dist=Dist, verbose=verbose)
         fevals += 1
         actions[:mutation] += mutations_1mut
 
@@ -61,7 +61,8 @@ function deriveNextGeneration(Xk,
 
         # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
         Xkp1, Fkp1, popAdded, survived, actions_1dAA = 
-        decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived, verbose=verbose, parentsSurvive=parentsSurvive) 
+            decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived, parentsSurvive=parentsSurvive, verbose=verbose)
+
         actions = merge(+, actions, actions_1dAA)
 
         myprintln(verbose, "popAdded = $popAdded after decideAndAdd()")
@@ -141,8 +142,9 @@ function createInitialPopulation(x0, popSize, f, pDict; # increment fevals by p 
     end
 
     F0 = ones(p) .+ maximum(fvals) .- fvals # F0, X0 are still corresponding
+    X0, F0 = fittestFirst(X0, F0, verbose=verbose)
+    myprintln(verbose, "Initial Generation created with fittest point $(X0[1]) having fitness of $(F0[1]).")
 
-    X0, F0 = fittestFirst(X0, F0)
 
     return X0, F0
 
@@ -177,11 +179,15 @@ Xk, Fk = fittestFirst(Xk, Fk)
 # `Xk` and `Fk` now have the fittest individual in the first column/index
 ```
 """
-function fittestFirst(Xk::Matrix, Fk::Vector)
+function fittestFirst(Xk::Matrix, Fk::Vector;
+    verbose::Bool = false)
     # Identify the index of the fittest individual
     fittest_index = argmax(Fk)
+    F_fittest = Fk[fittest_index]
+    myprintln(verbose, "Fittest Individual is at Index $(fittest_index) with Fitness of $(F_fittest).")
     # Swap to bring the fittest individual to the front if necessary
     if fittest_index != 1
+        myprintln(verbose, "Since the index is not 1, we swap it to become at index 1.")
         Xk[:, [1, fittest_index]] = Xk[:, [fittest_index, 1]]
         Fk[1], Fk[fittest_index] = Fk[fittest_index], Fk[1]
     end
@@ -224,7 +230,8 @@ println("Parent 1: ", parent1)
 println("Parent 2: ", parent2)
 ```
 """
-function selectParents(Xk, Fk)
+function selectParents(Xk, Fk;
+    verbose::Bool = false)
 
     pdf = Fk./sum(Fk)
 
@@ -236,6 +243,7 @@ function selectParents(Xk, Fk)
     p1 = (idx=idx1, x=x1, F=F1)
     p2 = (idx=idx2, x=x2, F=F2)
 
+    myprintln(verbose, "Choosing parents at indices $idx1 and $idx2 with Fitness values of $F1 and $F2.")
     return p1, p2
 
 end
@@ -266,7 +274,8 @@ pdf = [0.1, 0.2, 0.3, 0.4] # Example pdf for a population
 idx1, idx2 = selectTwoUniqueIndices(pdf)
 ```
 """
-function selectTwoUniqueIndices(pdf::Vector)
+function selectTwoUniqueIndices(pdf::Vector;
+    verbose::Bool = false)
     # Convert pdf to cdf for the first selection
     # Select the first index
     cdf = cumsum(pdf)
@@ -276,7 +285,7 @@ function selectTwoUniqueIndices(pdf::Vector)
     # @show rand_val1
     # @show idx1 = findfirst(≥(rand_val1), cdf)
     idx1 = findfirst(≥(rand_val1), cdf)
-
+    myprintln(verbose, "Choosing parent 1 at index $(idx1).")
 
     # Set the probability of the selected index to zero and renormalize pdf
     pdfm1 = deepcopy(pdf)
@@ -292,7 +301,7 @@ function selectTwoUniqueIndices(pdf::Vector)
     rand_val2 = rand()
     # @show rand_val2
     idx2 = findfirst(≥(rand_val2), cdf)
-
+    myprintln(verbose, "Choosing parent 2 at index $(idx2) from the remaining parents.")
     return idx1, idx2
 
 end
@@ -327,7 +336,8 @@ offspring = crossover(p1, p2)
 # offspring's parameter vector is a weighted average of p1 and p2's vectors
 ```
 """
-function crossover(p1, p2)
+function crossover(p1, p2;
+    verbose::Bool = false)
     
     idx1, x1, F1 = @unpack idx, x, F = p1
     idx2, x2, F2 = @unpack idx, x, F = p2

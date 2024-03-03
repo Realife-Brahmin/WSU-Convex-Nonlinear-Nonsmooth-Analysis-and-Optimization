@@ -50,7 +50,7 @@ function optimizeGA(pr;
 
     myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
 
-    X0, F0 = createInitialPopulation(x0, popSize, f, pDict, deviationFactor=deviation) # the first element of the next generation is expected to be the best one
+    X0, F0 = createInitialPopulation(x0, popSize, f, pDict, deviationFactor=deviation, verbose=verbose) # the first element of the next generation is expected to be the best one
 
     @unpack fevals = solverState
     fevals += popSize

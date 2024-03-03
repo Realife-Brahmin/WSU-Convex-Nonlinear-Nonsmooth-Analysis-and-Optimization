@@ -133,9 +133,9 @@ function SolverStateNMType(;
 end
 
 function SolStateGAType(; k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),
-    Fkm1=zeros(0), Fk=zeros(0))
+    Fkm1=zeros(0), Fk=zeros(0), fkm1=100.0, fk=100.0)
 
-    return Dict(:k => k, :Xkm1 => Xkm1, :Xk => Xk, :Fkm1 => Fkm1, :Fk => Fk)
+    return Dict(:k => k, :Xkm1 => Xkm1, :Xk => Xk, :Fkm1 => Fkm1, :Fk => Fk, :fkm1 => fkm1, :fk => fk)
 
 end
 

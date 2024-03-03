@@ -104,20 +104,22 @@ function create_algorithm_settings(;
                 alg_settings[:gamma] = 2.0
                 alg_settings[:delta] = 0.5
         elseif alg_settings[:method] == "GeneticAlgorithm"
-                alg_settings[:maxiter] = 10
+                alg_settings[:progress] = 1000
+                alg_settings[:maxiter] = 100000
                 alg_settings[:linesearch] = "NA"
                 alg_settings[:gtol] = "NA"
                 alg_settings[:c1] = "NA"
                 alg_settings[:c2] = "NA"
                 alg_settings[:lambda] = "NA"
                 alg_settings[:lambdaMax] = "NA"
-                alg_settings[:fvalRepeatTol] = 50
+                alg_settings[:fvalRepeatTol] = 100000
                 alg_settings[:popSize] = 10
-                alg_settings[:delta] = 0.1 # probability of mutation for each dimension of a point
+                alg_settings[:delta] = 0.3 # probability of mutation for each dimension of a point
                 alg_settings[:Dist] = randn # probability distribution to choose value from for mutation
                 # randn() has a mean of zero and a stddev of 1.
                 alg_settings[:deviation] = 0.1 # magnitude of mutation allowed
-                alg_settings[:parentsSurvive] = true
+                # alg_settings[:parentsSurvive] = true
+                alg_settings[:parentsSurvive] = false
                 # @error "Define the GA parameters first."
                 # alg_setting[:]
         else

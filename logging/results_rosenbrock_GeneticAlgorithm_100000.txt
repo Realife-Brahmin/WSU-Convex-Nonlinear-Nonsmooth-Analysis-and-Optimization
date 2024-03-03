@@ -1,0 +1,30 @@
+****************************
+Solver run has concluded.
+Function solved for: rosenbrock()
+Cause(s) for stopping:
+Iteration limit reached!
+Failed to converge despite 100000 iterations! 😢
+****************************
+Method Used: GeneticAlgorithm
+
+****************************
+Best function value = 0.04851286369918929
+***************************
+Best Known Nonzero Variables:
+x☆[1] = 0.9958838362745318
+x☆[2] = 1.0006775544093776
+x☆[3] = 0.9956314661738013
+x☆[4] = 0.9907142716828936
+x☆[5] = 0.9877815061623554
+x☆[6] = 0.9740335213076209
+x☆[7] = 0.9620212953971072
+x☆[8] = 0.9109611250715078
+x☆[9] = 0.8211736855703314
+x☆[10] = 0.6765399883646503
+***************************
+Number of fevals = 10900011
+Number of gevals = 0
+Number of evals = 10900011
+**************************************************
+Tolerance critera used:
+Generation Fitness Stangation Tolerance = 100000

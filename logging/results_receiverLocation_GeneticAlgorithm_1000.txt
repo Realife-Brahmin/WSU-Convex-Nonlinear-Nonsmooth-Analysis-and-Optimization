@@ -1,0 +1,36 @@
+****************************
+Solver run has concluded.
+Function solved for: receiverLocation()
+Cause(s) for stopping:
+Fitness no longer generationally improving!
+Convergence achieved in 604 iterations 😄
+****************************
+Method Used: GeneticAlgorithm
+
+****************************
+Optimal function value = -5.945733342933419
+***************************
+Optimal Nonzero Variables:
+Only upto 15 values will be printed.
+x☆[1] = 0.6552339172631276
+x☆[2] = 0.7456709196570643
+x☆[3] = 0.5206703637222602
+x☆[4] = 0.9452456385415628
+x☆[5] = 0.4187910921149359
+x☆[12] = 0.5078281612147574
+x☆[19] = 0.257586521651802
+x☆[26] = 0.2547392380827276
+x☆[32] = 0.5334508624008596
+x☆[38] = 0.9260326376851546
+x☆[46] = 0.06442026656854398
+x☆[47] = 1.0232435453680744
+x☆[48] = 0.2830222353455007
+x☆[49] = 0.3315196535135898
+x☆[50] = 0.3651051591303621
+***************************
+Number of fevals = 31307
+Number of gevals = 0
+Number of evals = 31307
+**************************************************
+Tolerance critera used:
+Generation Fitness Stangation Tolerance = 50

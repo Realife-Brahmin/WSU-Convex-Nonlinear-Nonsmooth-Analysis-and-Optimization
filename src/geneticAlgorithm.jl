@@ -72,7 +72,7 @@ function deriveNextGeneration(Xk,
 
     Xkp1, Fkp1, fkp1 = reevaluateFitness(Xkp1, Fkp1, f, pDict, verbose=verbose)
     fevals += p
-    
+
     Xkp1, Fkp1 = fittestFirst(Xkp1, Fkp1, verbose=verbose)
 
     if fkp1 < fk
@@ -80,7 +80,10 @@ function deriveNextGeneration(Xk,
         myprintln(verbose, "Fittest individual now even fitter.")
     elseif fkp1 == fk
         actions[:genFitnessNotImproved] += 1
-        myprintln(verbose, "Fittest individual has same fitness as previous generation.")
+        myprintln(verbose, "Fittest individual has same  fitness as previous generation.")
+    elseif fkp1 - fk < 1e-6 
+        actions[:genFitnessNotImproved] += 1
+        myprintln(verbose, "Fittest individual has pretty much same fitness as previous generation.")
     else
         @error "How come fitness has decreased? Need to investigate."
     end

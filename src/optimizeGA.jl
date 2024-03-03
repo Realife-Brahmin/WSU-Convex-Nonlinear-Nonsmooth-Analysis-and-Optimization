@@ -83,6 +83,8 @@ function optimizeGA(pr;
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_GA = printOrNot & verbose_ls
 
+        myprintln(printOrNot, "Iteration k = $(k)")
+
         Xkp1, Fkp1, fkp1, fevals_1GA, actions_1GA = deriveNextGeneration(Xk, Fk, fk, f, pDict, delta=delta, deviation=deviation, Dist=Dist,
         parentsSurvive = parentsSurvive, verbose=printOrNot_GA) # first element should be the best one
 

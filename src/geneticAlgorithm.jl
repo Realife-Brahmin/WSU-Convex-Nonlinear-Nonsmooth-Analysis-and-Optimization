@@ -57,19 +57,19 @@ function deriveNextGeneration(Xk,
         fevals += 1
         actions[:mutation] += mutations_1mut
 
-        myprintln(verbose, "popAdded = $popAdded before decideAndAdd()")
+        # myprintln(verbose, "popAdded = $popAdded before decideAndAdd()")
 
         # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
         Xkp1, Fkp1, popAdded, survived, actions_1dAA = 
-            decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived, parentsSurvive=parentsSurvive, verbose=verbose)
+            decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived, parentsSurvive=parentsSurvive, verbose=false)
 
         actions = merge(+, actions, actions_1dAA)
 
-        myprintln(verbose, "popAdded = $popAdded after decideAndAdd()")
+        # myprintln(verbose, "popAdded = $popAdded after decideAndAdd()")
 
     end
 
-    Xkp1, Fkp1 = fittestFirst(Xkp1, Fkp1)
+    Xkp1, Fkp1 = fittestFirst(Xkp1, Fkp1, verbose=verbose)
 
     if Fkp1[1] > Fk[1]
         actions[:genFitnessImproved] += 1
@@ -84,7 +84,7 @@ function deriveNextGeneration(Xk,
     return Xkp1, Fkp1, fevals, actions
 end
 
-"""
+""" # REDO
     createInitialPopulation(x0, popSize, f, pDict; deviationFactor = 0.1, verbose::Bool = false)
 
 Generates an initial population for a genetic algorithm, with individuals arrayed around a central point and scaled by a deviation factor. The population is then evaluated for fitness, and the fittest individual is positioned first in the population array.
@@ -143,14 +143,14 @@ function createInitialPopulation(x0, popSize, f, pDict; # increment fevals by p 
 
     F0 = ones(p) .+ maximum(fvals) .- fvals # F0, X0 are still corresponding
     X0, F0 = fittestFirst(X0, F0, verbose=verbose)
-    myprintln(verbose, "Initial Generation created with fittest point $(X0[1]) having fitness of $(F0[1]).")
+    myprintln(verbose, "Initial Generation created with fittest point $(X0[:, 1]) having fitness of $(F0[1]).")
 
 
     return X0, F0
 
 end
 
-"""
+""" # REDO
     fittestFirst(Xk::Matrix, Fk::Vector)
 
 Reorders a population matrix `Xk` and its corresponding fitness vector `Fk` to ensure that the fittest individual is positioned first. This operation is useful in genetic algorithms and other evolutionary strategies to easily track and access the current best solution.
@@ -195,7 +195,7 @@ function fittestFirst(Xk::Matrix, Fk::Vector;
     return Xk, Fk
 end
 
-"""
+""" # REDO
     selectParents(Xk, Fk)
 
 Selects two unique parents from a population for crossover in a genetic algorithm. The selection is based on the fitness values of the population members, ensuring that individuals with higher fitness have a greater chance of being selected.
@@ -229,7 +229,7 @@ parent1, parent2 = selectParents(Xk, Fk)
 println("Parent 1: ", parent1)
 println("Parent 2: ", parent2)
 ```
-"""
+""" 
 function selectParents(Xk, Fk;
     verbose::Bool = false)
 
@@ -252,7 +252,7 @@ end
 # p1.x
 # p2.x
 
-"""
+""" # REDO
     selectTwoUniqueIndices(pdf::Vector)
 
 Selects two unique indices based on the probability density function (pdf) of selection probabilities.
@@ -306,7 +306,7 @@ function selectTwoUniqueIndices(pdf::Vector;
 
 end
 
-"""
+""" # REDO
     crossover(p1, p2)
 
 Performs crossover between two parent individuals to produce a single offspring. The offspring's attributes are a weighted average of the parents' attributes, with weights proportional to the parents' fitness values.

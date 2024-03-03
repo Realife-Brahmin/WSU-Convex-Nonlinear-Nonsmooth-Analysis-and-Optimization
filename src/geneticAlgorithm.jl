@@ -87,6 +87,23 @@ function deriveNextGeneration(Xk,
 
     return Xkp1, Fkp1, fkp1, fevals, actions
 end
+
+function reevaluateFitness(Xkp1, Fkp1, f::Function, pDict::Dict;
+    verbose::Bool = false)
+
+    n, p = size(Xkp1)
+    fvals = zeros(p)
+
+    for i ∈ 1:p
+        fvals[i] = f(Xkp1[:, i], pDict, getGradientToo=false)
+    end
+
+    fkp1 = minimum(fvals)
+    Fkp1 = ones(p) .+ maximum(fvals) .- fvals # F0, X0 are still corresponding
+    Xkp1, Fkp1 = fittestFirst(Xkp1, Fkp1, verbose=verbose)
+    myprintln(verbose, "New Generation created with fittest point $(Xkp1[:, 1]) having fitness of $(Fkp1[1]).")
+
+    return Xkp1, Fkp1, fkp1
 end
 
 """ # REDO

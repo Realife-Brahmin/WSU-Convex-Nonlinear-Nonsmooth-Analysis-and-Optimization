@@ -81,7 +81,7 @@ function deriveNextGeneration(Xk,
     elseif fkp1 == fk
         actions[:genFitnessNotImproved] += 1
         myprintln(verbose, "Fittest individual has same  fitness as previous generation.")
-    elseif fkp1 - fk < 1e-6 
+    elseif fkp1 - fk < 1e-4 
         actions[:genFitnessNotImproved] += 1
         myprintln(verbose, "Fittest individual has pretty much same fitness as previous generation.")
     else

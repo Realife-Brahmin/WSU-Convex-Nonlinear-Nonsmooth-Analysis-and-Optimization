@@ -102,7 +102,7 @@ function optimizeGA(pr;
         fvals[k] = fkp1 # also incorrect
         
         @unpack actions = solverState
-        if abs(fkp1 - fk) < 1e-8
+        if abs(fkp1 - fk) < 1e-4
             fvalRepeats += 1
             actions[:genFitnessNotImproved] = 1
             myprintln(printOrNot_GA, "Generation Fitness not improved.")

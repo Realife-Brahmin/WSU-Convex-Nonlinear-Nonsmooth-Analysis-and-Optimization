@@ -109,36 +109,41 @@ function reevaluateFitness(Xkp1, Fkp1, f::Function, pDict::Dict;
     return Xkp1, Fkp1, fkp1
 end
 
-""" # REDO
-    createInitialPopulation(x0, popSize, f, pDict; deviationFactor = 0.1, verbose::Bool = false)
+"""
+    createInitialPopulation(x0, popSize, f, pDict; deviationFactor=0.1, verbose=false)
 
-Generates an initial population for a genetic algorithm, with individuals arrayed around a central point and scaled by a deviation factor. The population is then evaluated for fitness, and the fittest individual is positioned first in the population array.
+Generates an initial population for a genetic algorithm, positioning the fittest individual at the forefront of the population array. This setup provides a starting point for the evolutionary process, with diversity introduced via the Halton sequence and controlled spread around a central point `x0`.
 
 # Arguments
-- `x0`: A vector representing the central point in the parameter space around which the initial population is generated.
-- `popSize`: The size of the population, i.e., the number of individuals to generate.
-- `f`: The fitness function to be minimized. It must accept an individual's parameter vector and the parameter dictionary `pDict`, and it should return a scalar fitness value.
-- `pDict`: A dictionary containing additional parameters required by the fitness function.
-- `deviationFactor`: A factor that controls the spread of the initial population around the central point. Defaults to 0.1.
-- `verbose`: If `true`, enables the printing of function-related messages.
-
-The function uses a Halton sequence to create diverse starting points for the population, ensuring a broad and non-collapsing initial search space. The deviation factor is used to fine-tune the spread of the population around the initial central point `x0`.
-
-The fitness of each individual in the population is evaluated, and these values are used to determine the fittest individual. The population and fitness arrays are then adjusted to position the fittest individual at the start.
-
-# Notes
-- The Halton sequence is a low-discrepancy, quasi-random sequence used to generate sample points that are more uniformly distributed than with simple random sampling.
-- The fitness function evaluations will increment the total function evaluations count by the population size (`popSize`) after the call to this function.
-- The function assumes the fitness function is to be minimized and inverts the fitness values so that higher values represent fitter individuals.
+- `x0`: Central point in the parameter space, serving as a reference for generating the initial population.
+- `popSize`: Size of the population to be generated.
+- `f`: Fitness function used to evaluate each individual. It should accept a parameter vector and a dictionary of additional parameters `pDict`, returning a scalar fitness value.
+- `pDict`: Dictionary containing additional parameters required by the fitness function.
+- `deviationFactor`: Controls the variance of the initial population from the central point `x0`. Defaults to 0.1.
+- `verbose`: Enables detailed logging of the function's operations if set to `true`.
 
 # Returns
-- `X0`: An `n x p` matrix representing the initial population, where `n` is the number of parameters for each individual, and `p` is the population size.
-- `F0`: A vector of inverted fitness values corresponding to `X0`, with the fittest individual's fitness at the first index.
+- `X0`: A matrix of the initial population's parameter vectors, with dimensions `n x p`, where `n` is the number of parameters, and `p` is the population size. The fittest individual is placed in the first column.
+- `F0`: A vector of the inverted fitness values for the initial population, aligned with `X0`, positioning the highest fitness value first.
+- `f0`: The minimum fitness value among the initial population, indicating the fittest individual's performance.
+
+# Notes
+- Utilizes the Halton sequence for generating a diverse initial population around `x0`, ensuring a broad exploration of the parameter space.
+- Fitness values are calculated inversely to the objective function values to align with a maximization strategy: higher fitness values indicate better individuals.
+- The population and fitness arrays are adjusted so that the fittest individual based on `F0` is positioned first, facilitating direct access for further genetic operations.
 
 # Examples
 ```julia
+# Define the central point and population size
+x0 = [1.0, 2.0]
+popSize = 50
+
+# Define the fitness function and additional parameters
+your_fitness_function(x, pDict) = sum(x.^2)  # Example fitness function
+pDict = Dict()
+
 # Generate the initial population
-X0, F0 = createInitialPopulation(x0, popSize, your_fitness_function, pDict, deviationFactor=0.1)
+X0, F0, f0 = createInitialPopulation(x0, popSize, your_fitness_function, pDict, deviationFactor=0.1, verbose=true)
 ```
 """
 function createInitialPopulation(x0, popSize, f, pDict; # increment fevals by p after the call

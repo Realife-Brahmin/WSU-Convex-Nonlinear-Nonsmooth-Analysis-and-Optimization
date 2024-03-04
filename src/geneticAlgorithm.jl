@@ -348,34 +348,35 @@ function selectTwoUniqueIndices(pdf::Vector;
 
 end
 
-""" # REDO
-    crossover(p1, p2)
+"""
+    crossover(p1, p2; verbose=false)
 
-Performs crossover between two parent individuals to produce a single offspring. The offspring's attributes are a weighted average of the parents' attributes, with weights proportional to the parents' fitness values.
+Performs crossover between two parent individuals to produce an offspring. The offspring inherits attributes through a weighted average of the parents' attributes, with the weighting factor determined by the relative fitness of the parents.
 
 # Arguments
-- `p1`: The first parent, represented as a tuple containing the parent's index (`idx`), parameter vector (`x`), and fitness value (`F`).
-- `p2`: The second parent, similarly represented.
+- `p1`: A tuple representing the first parent, containing the parent's index (`idx`), parameter vector (`x`), and fitness value (`F`).
+- `p2`: A tuple representing the second parent, structured similarly to `p1`.
+- `verbose`: If set to `true`, prints detailed information about the crossover process.
 
 # Returns
-- `o`: The offspring, structured as a tuple containing its index (`idx`), parameter vector (`x`), and fitness value (`F`).
+- `o`: A tuple representing the offspring, which includes an index (`idx`), parameter vector (`x`), and fitness value (`F`). The index is set to `-1` to denote that the offspring is not part of the current generation, and the fitness value is also `-1`, indicating that it has not yet been evaluated.
 
 # Method
-1. Extracts the indices, parameter vectors, and fitness values of the two parents.
-2. Calculates the weighting factor `theta` based on the relative fitness values of the parents. The parent with higher fitness has a greater influence on the offspring's attributes.
-3. Computes the offspring's parameter vector `x0` as a weighted average of the parents' parameter vectors, using `theta`.
-4. Initializes the offspring's index (`idx`) to `-1` and its fitness value (`F`) to `-1`. The index is set to `-1` to indicate that the offspring is not a part of the current generation, distinguishing it from its parents. The fitness value is also set to `-1`, an impossible value under the fitness formula, signifying that the offspring's fitness is yet to be evaluated, typically after mutation operations.
+1. Extracts the parameter vectors (`x`) and fitness values (`F`) from both parents.
+2. Calculates the weighting factor `theta` as the ratio of the first parent's fitness to the sum of both parents' fitness values. This determines the influence of each parent on the offspring's attributes.
+3. Computes the offspring's parameter vector (`x0`) as a weighted average of the parents' parameter vectors, applying `theta`.
+4. Initializes the offspring's `idx` and `F` to `-1`, marking it as a new, unevaluated individual distinct from its parents.
 
 # Usage Example
 ```julia
-# Define two parents
+# Assume two parent tuples, each with an index, parameter vector, and fitness value
 p1 = (idx=1, x=[1.0, 2.0], F=5.0)
 p2 = (idx=2, x=[2.0, 3.0], F=3.0)
 
-# Perform crossover to generate an offspring
-offspring = crossover(p1, p2)
+# Generate an offspring through crossover
+offspring = crossover(p1, p2, verbose=true)
 
-# offspring's parameter vector is a weighted average of p1 and p2's vectors
+# The offspring's parameter vector is a weighted blend of the parents' vectors
 ```
 """
 function crossover(p1, p2;
@@ -474,8 +475,6 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
     childrenAdded = 0
     parentsAdded = 0
 
-    # @show popAdded 
-
     if popAdded < p
         popAdded += 1 # add the child
         Xkp1[:, popAdded] = om.x
@@ -509,9 +508,6 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
         end
         parentsAdded += 1
     end
-
-    # @show popAdded 
-    # @show parentsAdded
 
     if parentsAdded == 2
         actions[:bothParentsSurvived] = 1

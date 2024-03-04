@@ -1,5 +1,45 @@
 include("helperFunctions.jl")
 
+"""
+    deriveNextGeneration(Xk, Fk, fk, f::Function, pDict::Dict;
+        delta=0.1, dftol=1e-15, deviation=0.1,
+        Dist=randn, parentsSurvive=true, verbose::Bool=false)
+
+Facilitates the evolution of the current population (Xk, Fk) into the next generation, incorporating genetic operations such as crossover and mutation. It emphasizes the propagation of superior genetic material while introducing new variations to enhance the search for optimal solutions.
+
+# Parameters:
+- `Xk`: Matrix representing the current generation's population, where each column is an individual's parameter vector.
+- `Fk`: Vector of fitness values corresponding to `Xk`.
+- `fk`: Fitness value of the fittest individual in the current generation.
+- `f`: Fitness function for evaluating an individual's fitness.
+- `pDict`: Dictionary of additional parameters required by `f`.
+- `delta`: Mutation rate determining the likelihood of genetic mutations.
+- `dftol`: Fitness improvement tolerance to decide if the generation's fitness has improved.
+- `deviation`: Magnitude of deviation for mutations, influencing the extent of genetic variations.
+- `Dist`: Distribution function used for generating mutation deviations.
+- `parentsSurvive`: Boolean indicating whether parents are allowed to survive into the next generation.
+- `verbose`: Enables detailed logging for the evolutionary process.
+
+# Returns:
+- `Xkp1`: Next generation's population matrix.
+- `Fkp1`: Fitness vector for `Xkp1`.
+- `fkp1`: Fitness of the fittest individual in `Xkp1`.
+- `fevals`: Total number of fitness evaluations performed during the generation transition.
+- `actions`: Dictionary detailing the actions taken (e.g., number of mutations, crossovers).
+
+# Methodology:
+1. Initializes placeholders for the next generation's population and fitness vectors.
+2. Ensures the fittest individual from the current generation is carried over to the next.
+3. Sequentially selects parent pairs, generates offspring through crossover, applies mutations, and decides on their inclusion in the next generation based on the predefined criteria and population capacity.
+4. Reevaluates the fitness of the new generation, ensuring the population is ordered with the fittest individuals at the forefront.
+5. Assesses the generational fitness improvement to guide future evolutionary steps.
+
+# Examples:
+```julia
+# Assume the setup for a genetic algorithm is already defined
+Xkp1, Fkp1, fkp1, fevals, actions = deriveNextGeneration(Xk, Fk, fk, your_fitness_function, Dict(),  delta=0.1, deviation=0.1, parentsSurvive=true, verbose=true)
+```
+"""
 function deriveNextGeneration(Xk,
     Fk,
     fk, 
@@ -84,6 +124,38 @@ function deriveNextGeneration(Xk,
     return Xkp1, Fkp1, fkp1, fevals, actions
 end
 
+"""
+    reevaluateFitness(Xkp1, f::Function, pDict::Dict; verbose::Bool = false)
+
+Recalculates the fitness of each individual in the population after genetic operations like crossover and mutation. It then reorders the population so that the individual with the highest fitness is placed at the forefront. This function is pivotal in genetic algorithms for ensuring that the population evolves towards more optimal solutions over successive generations.
+
+## Parameters:
+- `Xkp1`: Matrix representing the new generation, where each column is an individual's parameter vector.
+- `f`: Fitness function used to evaluate the fitness of an individual. It must accept a parameter vector and a dictionary of additional parameters `pDict`, returning a scalar value representing the fitness.
+- `pDict`: Dictionary containing additional parameters required by the fitness function.
+- `verbose`: Boolean flag for logging detailed operations. When set to `true`, the function prints information about the reevaluation process.
+
+## Returns:
+- `Xkp1`: The updated population matrix with the fittest individual's parameter vector in the first column.
+- `Fkp1`: Vector of recalculated fitness values for the new generation, with the highest fitness at the first index.
+- `fkp1`: The fitness value of the fittest individual in the new generation.
+
+## Method:
+1. Iterates through each individual in the population, calculating their fitness using the provided fitness function `f` and parameters `pDict`.
+2. Generates a new vector of fitness values `Fkp1`, where higher values indicate better fitness.
+3. Identifies the individual with the highest fitness and reorders the population so this individual is at the forefront.
+4. Optionally logs the process and outcome if `verbose` is enabled, facilitating debugging and analysis of the genetic algorithm's performance.
+
+## Examples:
+```julia
+# Given a new generation matrix `Xkp1` and a fitness function
+Xkp1 = [1.0 2.0; 3.0 4.0]  # Example matrix for the new generation
+pDict = Dict()  # Parameters for the fitness function
+
+# Reevaluate fitness and reorder the population
+Xkp1, Fkp1, fkp1 = reevaluateFitness(Xkp1, your_fitness_function, pDict, verbose=true)
+```
+"""
 function reevaluateFitness(Xkp1, f::Function, pDict::Dict;
     verbose::Bool = false)
 
@@ -445,6 +517,47 @@ function mutation(o, f, pDict;
     return om, mutations
 end
 
+"""
+    decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
+        parentsSurvive::Bool=true, verbose::Bool=false)
+
+Evaluates and decides the addition of offspring and their parents to the next generation of a genetic algorithm based on predefined criteria and the current population status. It updates the population matrix and records actions taken during the process.
+
+## Parameters:
+- `p1`: A tuple representing the first parent, with structure (idx, x, F).
+- `p2`: A tuple representing the second parent, similar to `p1`.
+- `om`: A tuple representing the offspring, with structure (idx, x, F).
+- `Xkp1`: The current generation's population matrix, where each column represents an individual.
+- `Fkp1`: The fitness vector corresponding to `Xkp1`. (Note: Commented out in the implementation, indicating fitness values are managed elsewhere or later.)
+- `popAdded`: The number of individuals already added to the next generation.
+- `survived`: A dictionary tracking which parents have already been added to ensure no duplicates.
+- `parentsSurvive`: A boolean flag indicating if parents should survive to the next generation.
+- `verbose`: Enables detailed logging when set to `true`.
+
+## Returns:
+- `Xkp1`: Updated population matrix with new individuals added.
+- `popAdded`: Updated count of individuals added to the next generation.
+- `survived`: Updated dictionary of parent survival status.
+- `actions`: A dictionary detailing actions taken during the function's execution, useful for analysis and debugging.
+
+## Actions Dictionary Keys:
+- `:bothParentsSurvived`: Indicates both parents were added to the next generation.
+- `:onlyOneParentSurvived`: Indicates only one parent was added.
+- `:noParentSurvived`: Indicates no parent was added, only the offspring.
+- `:crossover`: Placeholder, usage not shown in the provided code.
+- `:genFitnessImproved`: Placeholder, usage not shown.
+- `:genFitnessNotImproved`: Placeholder, usage not shown.
+- `:mutation`: Placeholder, usage not shown.
+- `:parentsSelected`: Placeholder, usage not shown.
+
+## Usage Example:
+```julia
+# Assume parent tuples, offspring tuple, population matrix, and survival dictionary are defined
+Xkp1, popAdded, survived, actions = decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived, parentsSurvive=true, verbose=true)
+
+# The function updates the population matrix with new individuals and provides details of actions taken.
+```
+"""
 function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
     parentsSurvive::Bool = true,
     verbose::Bool = false)
@@ -511,28 +624,3 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
     return Xkp1, popAdded, survived, actions
     
 end
-
-# pdf = [0.22915395984352244, 0.03417449314058, 0.13089575337747889, 0.22024884567883649, 0.02160210334521976, 0.14400617789385242, 0.21991866672050991]
-
-# cdf = [0.22915395984352244
-# 0.26332845298410246
-# 0.3942242063615813
-# 0.6144730520404178
-# 0.6360751553856376
-# 0.78008133327949
-# 0.9999999999999998];
-
-# cdf[end] = 1.0
-
-# selectTwoUniqueIndices(pdf)
-# x0 = pr.x0
-# f = pr.objective
-# n = length(x0)
-# p = n+1
-# X0, F0 = createInitialPopulation(x0, p, f, pr.p)
-# function selectParents(Xk, Fk,;
-#     verbose::Bool = false)
-
-#     pdf = Fk./sum(Fk)
-#     cdf = cumsum(pdf)
-# end

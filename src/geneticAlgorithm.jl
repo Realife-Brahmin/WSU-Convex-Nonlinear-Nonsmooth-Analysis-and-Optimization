@@ -181,33 +181,35 @@ function createInitialPopulation(x0, popSize, f, pDict; # increment fevals by p 
 
 end
 
-""" # REDO
-    fittestFirst(Xk::Matrix, Fk::Vector)
+"""
+    fittestFirst(Xk::Matrix, Fk::Vector; verbose=false)
 
-Reorders a population matrix `Xk` and its corresponding fitness vector `Fk` to ensure that the fittest individual is positioned first. This operation is useful in genetic algorithms and other evolutionary strategies to easily track and access the current best solution.
+Reorders the population matrix `Xk` and the corresponding fitness vector `Fk` to position the fittest individual first. This adjustment is crucial for genetic algorithms and similar evolutionary methods, providing immediate access to the current optimal solution.
 
 # Arguments
-- `Xk`: A matrix representing the current population, where each column is an individual's parameter vector.
-- `Fk`: A vector of fitness values corresponding to each individual in `Xk`. Higher values indicate better fitness, assuming a maximization problem.
+- `Xk`: A matrix where each column represents the parameter vector of an individual in the population.
+- `Fk`: A vector containing the fitness values for each individual in `Xk`, with higher values indicating better fitness in the context of maximization.
+- `verbose`: If set to `true`, enables the output of detailed logging information during the operation.
 
 # Returns
-- `Xk`: The reordered population matrix with the fittest individual in the first column.
-- `Fk`: The reordered fitness vector with the fitness value of the fittest individual in the first index.
+- `Xk`: The updated population matrix with the fittest individual's parameter vector in the first column.
+- `Fk`: The updated fitness vector with the highest fitness value moved to the first position.
 
 # Method
-1. Identify the index of the fittest individual based on the maximum fitness value in `Fk`.
-2. If the fittest individual is not already in the first position, swap the first column of `Xk` with the column corresponding to the fittest individual. Perform a similar swap for the first element of `Fk` with the element at the fittest individual's index.
+1. Determine the index of the individual with the highest fitness value in `Fk`.
+2. If this individual is not already in the first position, perform a swap operation to move their data (both parameter vector and fitness value) to the front.
+3. Log detailed information if `verbose` is enabled, providing insights into the reordering process and the fitness of the relocated individual.
 
 # Usage Example
 ```julia
-# Assume a population matrix `Xk` and their fitness values `Fk`
-Xk = [1.0 2.0; 3.0 4.0]  # Example population matrix
-Fk = [0.5, 0.7]          # Corresponding fitness values
+# Given a population matrix `Xk` and corresponding fitness values `Fk`
+Xk = [1.0 2.0; 3.0 4.0]  # Example population
+Fk = [0.5, 0.7]          # Fitness values
 
-# Apply the function to reorder the population
-Xk, Fk = fittestFirst(Xk, Fk)
+# Reorder the population to highlight the fittest individual
+Xk, Fk = fittestFirst(Xk, Fk, verbose=true)
 
-# `Xk` and `Fk` now have the fittest individual in the first column/index
+# The output will show the fittest individual now at the first index, with logs if verbose is true
 ```
 """
 function fittestFirst(Xk::Matrix, Fk::Vector;
@@ -226,37 +228,38 @@ function fittestFirst(Xk::Matrix, Fk::Vector;
     return Xk, Fk
 end
 
-""" # REDO
-    selectParents(Xk, Fk)
+"""
+    selectParents(Xk, Fk; verbose=false)
 
-Selects two unique parents from a population for crossover in a genetic algorithm. The selection is based on the fitness values of the population members, ensuring that individuals with higher fitness have a greater chance of being selected.
+Selects two unique parents from a population for crossover in a genetic algorithm, ensuring that individuals with higher fitness have a greater chance of being selected. The selection process is probability-based, with each individual's chance of selection proportional to its fitness.
 
 # Arguments
-- `Xk`: A matrix representing the current population, where each column is an individual in the population space.
-- `Fk`: A vector of fitness values corresponding to each individual in `Xk`. Higher values indicate better fitness.
+- `Xk`: A matrix representing the current population, where each column corresponds to an individual's parameter vector.
+- `Fk`: A vector containing the fitness values for each individual in `Xk`. Higher values indicate better fitness, assuming a maximization problem.
+- `verbose`: If set to `true`, prints detailed information about the selection process.
 
 # Returns
-- `p1`, `p2`: Two tuples representing the selected parents. Each tuple contains:    
-    - `idx`: The index of the individual in the original population.
+- `p1`, `p2`: Tuples representing the selected parents. Each tuple contains:
+    - `idx`: The index of the individual in the population.
     - `x`: The parameter vector of the selected individual.
     - `F`: The fitness value of the selected individual.
 
 # Method
-1. Normalize the fitness values `Fk` to create a probability density function (pdf), where the probability of selecting each individual is proportional to its fitness.
-2. Use the `selectTwoUniqueIndices` function to choose two unique indices based on the pdf, ensuring diversity in parent selection.
-3. Extract the parameter vectors (`x`) and fitness values (`F`) for the selected indices from `Xk` and `Fk`, respectively.
-4. Package the selected individuals' information into tuples (`p1`, `p2`) for easy use in crossover and mutation operations.
+1. Normalize the fitness values in `Fk` to create a probability density function (pdf), ensuring the probability of selecting each individual is proportional to its fitness.
+2. Utilize the `selectTwoUniqueIndices` function to determine two unique indices based on the pdf, promoting diversity in the selection of parents.
+3. Retrieve the parameter vectors (`x`) and fitness values (`F`) for the selected indices from `Xk` and `Fk`, respectively.
+4. Organize the selected individuals' information into tuples (`p1`, `p2`) for subsequent use in crossover and mutation operations.
 
 # Examples
 ```julia
-# Assume a population matrix `Xk` and their fitness values `Fk`
-Xk = [1.0 2.0; 3.0 4.0]  # Example population
-Fk = [0.5, 0.7]          # Example fitness values
+# Given a population matrix `Xk` and corresponding fitness values `Fk`
+Xk = [1.0 2.0; 3.0 4.0]  # Example population matrix
+Fk = [0.5, 0.7]          # Corresponding fitness values
 
-# Select two parents from the population
+# Execute parent selection from the population
 parent1, parent2 = selectParents(Xk, Fk)
 
-# Display the selected parents' details
+# Output the details of the selected parents
 println("Parent 1: ", parent1)
 println("Parent 2: ", parent2)
 ```
@@ -283,26 +286,33 @@ end
 # p1.x
 # p2.x
 
-""" # REDO
-    selectTwoUniqueIndices(pdf::Vector)
+"""
+    selectTwoUniqueIndices(pdf::Vector; verbose::Bool=false)
 
-Selects two unique indices based on the probability density function (pdf) of selection probabilities.
+Selects two unique indices from a population based on the probability density function (pdf) representing selection probabilities for each individual.
 
 # Arguments
-- `pdf`: A vector representing the probability density function for parent selection probabilities.
+- `pdf`: A vector representing the probability density function for the selection probabilities of individuals within a population.
+- `verbose`: If `true`, prints detailed information about the selection process.
 
 # Returns
-- A tuple containing two unique indices selected based on the pdf.
+- A tuple containing two unique indices selected based on the pdf. These indices correspond to individuals within the population that have been chosen for further operations (e.g., crossover).
 
 # Method
-1. Select the first index using the pdf and convert the pdf to a cdf for selection.
-2. Set the selected index's probability in the pdf to zero and renormalize the pdf.
-3. Convert the updated pdf to a cdf and select the second index.
+1. Convert the input pdf to a cumulative distribution function (cdf) for the purpose of selection.
+2. Randomly select the first index by generating a random value and identifying its position within the cdf.
+3. Create a modified pdf (`pdfm1`) by setting the probability of the already selected index to zero, effectively removing it from consideration for the second selection. Renormalize `pdfm1` to ensure it sums to 1.
+4. Convert the updated `pdfm1` to a cdf and select the second index, ensuring it is different from the first.
+5. If `verbose` is `true`, print the indices of the selected parents.
 
 # Examples
 ```julia
-pdf = [0.1, 0.2, 0.3, 0.4] # Example pdf for a population
-idx1, idx2 = selectTwoUniqueIndices(pdf)
+pdf = [0.1, 0.2, 0.3, 0.4] # Example pdf representing selection probabilities
+idx1, idx2 = selectTwoUniqueIndices(pdf, verbose=true)
+
+# Output may show something like:
+# "Choosing parent 1 at index 3."
+# "Choosing parent 2 at index 1."
 ```
 """
 function selectTwoUniqueIndices(pdf::Vector;

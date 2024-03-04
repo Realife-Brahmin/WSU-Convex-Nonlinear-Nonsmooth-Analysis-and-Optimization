@@ -1,3 +1,9 @@
+logDefault = "./logging/logs.txt"
+if isfile(logDefault)
+    rm(logDefault)
+end
+    
+
 """
     myprintln(print_flag::Bool, message; log::Bool=true, log_path::String="./logging/logs.txt")
 

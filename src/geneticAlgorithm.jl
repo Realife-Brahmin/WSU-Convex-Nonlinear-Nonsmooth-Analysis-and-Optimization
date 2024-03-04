@@ -382,8 +382,11 @@ offspring = crossover(p1, p2, verbose=true)
 function crossover(p1, p2;
     verbose::Bool = false)
     
-    idx1, x1, F1 = @unpack idx, x, F = p1
-    idx2, x2, F2 = @unpack idx, x, F = p2
+    @unpack x, F = p1
+    x1, F1 = x, F
+    @unpack x, F = p2
+    x2, F2 = x, F
+
     theta = F1/(F1+F2)
 
     x0 = theta*x1 + (1-theta)*x2

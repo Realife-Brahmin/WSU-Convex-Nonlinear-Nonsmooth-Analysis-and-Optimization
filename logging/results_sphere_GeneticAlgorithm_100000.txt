@@ -1,6 +1,6 @@
 ****************************
 Solver run has concluded.
-Function solved for: rosenbrock()
+Function solved for: sphere()
 Cause(s) for stopping:
 Iteration limit reached!
 Failed to converge despite 100000 iterations! 😢
@@ -8,23 +8,15 @@ Failed to converge despite 100000 iterations! 😢
 Method Used: GeneticAlgorithm
 
 ****************************
-Best function value = 0.019185801936457837
+Best function value = 2.1284186176446132e-16
 ***************************
 Best Known Nonzero Variables:
-x☆[1] = 0.998055140925594
-x☆[2] = 0.9995214436872977
-x☆[3] = 0.9972359814905138
-x☆[4] = 0.997567411828592
-x☆[5] = 0.98609772566866
-x☆[6] = 0.9841595210982856
-x☆[7] = 0.9759577921388796
-x☆[8] = 0.9524452047613123
-x☆[9] = 0.904132415030133
-x☆[10] = 0.798456525913925
+x☆[1] = 1.1051545332051003e-8
+x☆[2] = 1.0072244292699765e-8
 ***************************
-Number of fevals = 10900011
+Number of fevals = 1100004
 Number of gevals = 0
-Number of evals = 10900011
+Number of evals = 1100004
 **************************************************
 Tolerance critera used:
 Generation Fitness Stangation Tolerance = 100000

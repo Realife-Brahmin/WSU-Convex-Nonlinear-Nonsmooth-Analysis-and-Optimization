@@ -6,6 +6,7 @@ function deriveNextGeneration(Xk,
     f::Function, 
     pDict::Dict;
     delta = 0.1,
+    dftol = 1e-15,
     deviation = 0.1,
     Dist = randn,
     parentsSurvive = true,
@@ -81,7 +82,7 @@ function deriveNextGeneration(Xk,
     elseif fkp1 == fk
         actions[:genFitnessNotImproved] += 1
         myprintln(verbose, "Fittest individual has same  fitness as previous generation.")
-    elseif fkp1 - fk < 1e-4 
+    elseif fkp1 - fk < dftol 
         actions[:genFitnessNotImproved] += 1
         myprintln(verbose, "Fittest individual has pretty much same fitness as previous generation.")
     else

@@ -28,6 +28,7 @@ function optimizeGA(pr;
     delta = pr.alg[:delta]
     Dist = pr.alg[:Dist]
     parentsSurvive = pr.alg[:parentsSurvive]
+    dftol = pr.alg[:dftol]
 
     x0 = pr.x0
     n = length(x0)
@@ -86,7 +87,7 @@ function optimizeGA(pr;
         myprintln(printOrNot, "Iteration k = $(k)")
 
         Xkp1, Fkp1, fkp1, fevals_1GA, actions_1GA = deriveNextGeneration(Xk, Fk, fk, f, pDict, delta=delta, deviation=deviation, Dist=Dist,
-        parentsSurvive = parentsSurvive, verbose=printOrNot_GA) # first element should be the best one
+        parentsSurvive = parentsSurvive, dftol = dftol, verbose=printOrNot_GA) # first element should be the best one
 
         @unpack actions, fevals = solverState
 
@@ -102,7 +103,7 @@ function optimizeGA(pr;
         fvals[k] = fkp1 # also incorrect
         
         @unpack actions = solverState
-        if abs(fkp1 - fk) < 1e-4
+        if abs(fkp1 - fk) < dftol
             fvalRepeats += 1
             actions[:genFitnessNotImproved] = 1
             myprintln(printOrNot_GA, "Generation Fitness not improved.")

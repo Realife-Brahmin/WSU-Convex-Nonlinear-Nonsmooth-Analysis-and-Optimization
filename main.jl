@@ -15,11 +15,11 @@ benchmarking = true;
 
 warmStart = true
 
-# functionName = "dampedSHM";
+functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
 # functionName = "pathtime"
 # functionName = "receiverLocation"
-functionName = "rosenbrock";
+# functionName = "rosenbrock";
 # functionName = "signalDenoise";
 # functionName = "sphere";
 # functionName = "TestFunction1";

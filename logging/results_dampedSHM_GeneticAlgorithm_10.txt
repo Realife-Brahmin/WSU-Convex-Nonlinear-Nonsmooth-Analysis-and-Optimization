@@ -2,25 +2,25 @@
 Solver run has concluded.
 Function solved for: dampedSHM()
 Cause(s) for stopping:
-Iteration limit reached!
-Failed to converge despite 10 iterations! 😢
+Fitness no longer generationally improving!
+Convergence achieved in 2 iterations 😄
 ****************************
 Method Used: GeneticAlgorithm
 
 ****************************
-Best function value = 0.12484485829733592
+Optimal function value = 1.27482931139549
 ***************************
-Best Known Nonzero Variables:
-x☆[1] = 13.840025270332578
-x☆[2] = 8.079585563723928
-x☆[3] = 0.021224066930550806
-x☆[4] = 1847.92733414743
-x☆[5] = 882.5223335923641
-x☆[6] = 4.0663702403390785
+Optimal Nonzero Variables:
+x☆[1] = 13.037787624923258
+x☆[2] = 8.0619396272552
+x☆[3] = 0.022345871437955217
+x☆[4] = 1866.3782794916651
+x☆[5] = 888.3930889291662
+x☆[6] = 4.0895521973100415
 ***************************
-Number of fevals = 294
+Number of fevals = 22
 Number of gevals = 0
-Number of evals = 294
+Number of evals = 22
 **************************************************
 Tolerance critera used:
-Generation Fitness Stangation Tolerance = 50
+Generation Fitness Stagnation Tolerance = 1.0 consecutive iterations at dftol = 1.0e-15.

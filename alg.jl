@@ -74,20 +74,24 @@ function create_algorithm_settings(;
         if alg_settings[:method] == "GradientDescent"
                 # Specific adjustments for GradientDescent
                 alg_settings[:progress] = 100
+                
         elseif alg_settings[:method] == "QuasiNewton"
                 # Adjustments for QuasiNewton
                 alg_settings[:linesearch] = "StrongWolfe"
                 alg_settings[:progress] = 1
+
         elseif alg_settings[:method] == "ConjugateGradientDescent"
                 # Adjustments for ConjugateGradientDescent
                 alg_settings[:linesearch] = "StrongWolfe"
                 alg_settings[:c2] = 0.5
                 alg_settings[:progress] = 1
+
         elseif alg_settings[:method] == "TrustRegion"
                 # Adjustments for TrustRegion
                 alg_settings[:linesearch] = "QuasiNewton-SR1"
                 alg_settings[:c2] = -1.0
                 alg_settings[:progress] = 1
+
         elseif alg_settings[:method] == "NelderMead"
                 # Adjustments for NelderMead
                 alg_settings[:linesearch] = "NA"
@@ -103,9 +107,12 @@ function create_algorithm_settings(;
                 alg_settings[:beta] = 0.5
                 alg_settings[:gamma] = 2.0
                 alg_settings[:delta] = 0.5
+
         elseif alg_settings[:method] == "GeneticAlgorithm"
-                alg_settings[:progress] = 1000
                 alg_settings[:maxiter] = 10000
+                # alg_settings[:maxiter] = 10
+                alg_settings[:progress] = alg_settings[:maxiter]/10
+                # alg_settings[:progress] = 1
                 alg_settings[:linesearch] = "NA"
                 alg_settings[:gtol] = "NA"
                 alg_settings[:c1] = "NA"
@@ -118,10 +125,8 @@ function create_algorithm_settings(;
                 alg_settings[:Dist] = randn # probability distribution to choose value from for mutation
                 # randn() has a mean of zero and a stddev of 1.
                 alg_settings[:deviation] = 0.1 # magnitude of mutation allowed
-                # alg_settings[:parentsSurvive] = true
-                alg_settings[:parentsSurvive] = false
-                # @error "Define the GA parameters first."
-                # alg_setting[:]
+                alg_settings[:parentsSurvive] = true
+                # alg_settings[:parentsSurvive] = false
         else
                 @warn "Bad condition."
         end

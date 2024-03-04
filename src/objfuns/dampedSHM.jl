@@ -84,7 +84,7 @@ function dampedSHM(x::Vector{Float64},
 
             gP = boxConstraintGradient(x, box)
 
-            g += gP
+            g .+= gP
         end
     end
     

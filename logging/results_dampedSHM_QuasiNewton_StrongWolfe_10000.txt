@@ -8,14 +8,14 @@ Convergence achieved in 44 iterations 😄
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 0.028953725320601743
+Optimal function value = 0.028953725320601798
 ***************************
 Optimal Nonzero Variables:
 x☆[1] = 13.781404159641683
 x☆[2] = 8.279361730327997
 x☆[3] = 0.02180256921199516
 x☆[4] = 1835.5478788810437
-x☆[5] = 932.6017631847704
+x☆[5] = 932.6017631847708
 x☆[6] = 4.248886529227258
 ***************************
 Number of fevals = 44

@@ -27538,3 +27538,357 @@ Iteration k = 96001
 Iteration k = 97001
 Iteration k = 98001
 Iteration k = 99001
+Fittest Individual is at Index 9 with Fitness of 1.3965232454829604.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [0.10125, 0.1814814814814815, 0.3204, 0.3844897959183674, 0.5318181818181819, 0.6230769230769231, 0.7041176470588235, 0.7957894736842106, 0.8804347826086957, 0.9620689655172414] having fitness of 1.3965232454829604.
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Iteration k = 3001
+Iteration k = 4001
+Iteration k = 5001
+Iteration k = 6001
+Iteration k = 7001
+Iteration k = 8001
+Iteration k = 9001
+Iteration k = 10001
+Iteration k = 11001
+Iteration k = 12001
+Iteration k = 13001
+Iteration k = 14001
+Iteration k = 15001
+Iteration k = 16001
+Iteration k = 17001
+Iteration k = 18001
+Iteration k = 19001
+Iteration k = 20001
+Iteration k = 21001
+Iteration k = 22001
+Iteration k = 23001
+Iteration k = 24001
+Iteration k = 25001
+Iteration k = 26001
+Iteration k = 27001
+Iteration k = 28001
+Iteration k = 29001
+Iteration k = 30001
+Iteration k = 31001
+Iteration k = 32001
+Iteration k = 33001
+Iteration k = 34001
+Iteration k = 35001
+Iteration k = 36001
+Iteration k = 37001
+Iteration k = 38001
+Iteration k = 39001
+Iteration k = 40001
+Iteration k = 41001
+Iteration k = 42001
+Iteration k = 43001
+Iteration k = 44001
+Iteration k = 45001
+Iteration k = 46001
+Iteration k = 47001
+Iteration k = 48001
+Iteration k = 49001
+Iteration k = 50001
+Iteration k = 51001
+Iteration k = 52001
+Iteration k = 53001
+Iteration k = 54001
+Iteration k = 55001
+Iteration k = 56001
+Iteration k = 57001
+Iteration k = 58001
+Iteration k = 59001
+Iteration k = 60001
+Iteration k = 61001
+Iteration k = 62001
+Iteration k = 63001
+Iteration k = 64001
+Iteration k = 65001
+Iteration k = 66001
+Iteration k = 67001
+Iteration k = 68001
+Iteration k = 69001
+Iteration k = 70001
+Iteration k = 71001
+Iteration k = 72001
+Iteration k = 73001
+Iteration k = 74001
+Iteration k = 75001
+Iteration k = 76001
+Iteration k = 77001
+Iteration k = 78001
+Iteration k = 79001
+Iteration k = 80001
+Iteration k = 81001
+Iteration k = 82001
+Iteration k = 83001
+Iteration k = 84001
+Iteration k = 85001
+Iteration k = 86001
+Iteration k = 87001
+Iteration k = 88001
+Iteration k = 89001
+Iteration k = 90001
+Iteration k = 91001
+Iteration k = 92001
+Iteration k = 93001
+Iteration k = 94001
+Iteration k = 95001
+Iteration k = 96001
+Iteration k = 97001
+Iteration k = 98001
+Iteration k = 99001
+Fittest Individual is at Index 9 with Fitness of 1.3965232454829604.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [0.10125, 0.1814814814814815, 0.3204, 0.3844897959183674, 0.5318181818181819, 0.6230769230769231, 0.7041176470588235, 0.7957894736842106, 0.8804347826086957, 0.9620689655172414] having fitness of 1.3965232454829604.
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Iteration k = 3001
+Iteration k = 4001
+Iteration k = 5001
+Iteration k = 6001
+Iteration k = 7001
+Iteration k = 8001
+Iteration k = 9001
+Iteration k = 10001
+Iteration k = 11001
+Iteration k = 12001
+Iteration k = 13001
+Iteration k = 14001
+Iteration k = 15001
+Iteration k = 16001
+Iteration k = 17001
+Iteration k = 18001
+Iteration k = 19001
+Iteration k = 20001
+Iteration k = 21001
+Iteration k = 22001
+Iteration k = 23001
+Iteration k = 24001
+Iteration k = 25001
+Iteration k = 26001
+Iteration k = 27001
+Iteration k = 28001
+Iteration k = 29001
+Iteration k = 30001
+Iteration k = 31001
+Iteration k = 32001
+Iteration k = 33001
+Iteration k = 34001
+Iteration k = 35001
+Iteration k = 36001
+Iteration k = 37001
+Iteration k = 38001
+Iteration k = 39001
+Iteration k = 40001
+Iteration k = 41001
+Iteration k = 42001
+Iteration k = 43001
+Iteration k = 44001
+Iteration k = 45001
+Iteration k = 46001
+Iteration k = 47001
+Iteration k = 48001
+Iteration k = 49001
+Iteration k = 50001
+Iteration k = 51001
+Iteration k = 52001
+Iteration k = 53001
+Iteration k = 54001
+Iteration k = 55001
+Iteration k = 56001
+Iteration k = 57001
+Iteration k = 58001
+Iteration k = 59001
+Iteration k = 60001
+Iteration k = 61001
+Iteration k = 62001
+Iteration k = 63001
+Iteration k = 64001
+Iteration k = 65001
+Iteration k = 66001
+Iteration k = 67001
+Iteration k = 68001
+Iteration k = 69001
+Iteration k = 70001
+Iteration k = 71001
+Iteration k = 72001
+Iteration k = 73001
+Iteration k = 74001
+Iteration k = 75001
+Iteration k = 76001
+Iteration k = 77001
+Iteration k = 78001
+Iteration k = 79001
+Iteration k = 80001
+Iteration k = 81001
+Iteration k = 82001
+Iteration k = 83001
+Iteration k = 84001
+Iteration k = 85001
+Iteration k = 86001
+Iteration k = 87001
+Iteration k = 88001
+Iteration k = 89001
+Iteration k = 90001
+Iteration k = 91001
+Iteration k = 92001
+Iteration k = 93001
+Iteration k = 94001
+Iteration k = 95001
+Iteration k = 96001
+Iteration k = 97001
+Iteration k = 98001
+Iteration k = 99001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Iteration k = 3001
+Iteration k = 4001
+Iteration k = 5001
+Iteration k = 6001
+Iteration k = 7001
+Iteration k = 8001
+Iteration k = 9001
+Iteration k = 10001
+Iteration k = 11001
+Iteration k = 12001
+Iteration k = 13001
+Iteration k = 14001
+Iteration k = 15001
+Iteration k = 16001
+Iteration k = 17001
+Iteration k = 18001
+Iteration k = 19001
+Iteration k = 20001
+Iteration k = 21001
+Iteration k = 22001
+Iteration k = 23001
+Iteration k = 24001
+Iteration k = 25001
+Iteration k = 26001
+Iteration k = 27001
+Iteration k = 28001
+Iteration k = 29001
+Iteration k = 30001
+Iteration k = 31001
+Iteration k = 32001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Iteration k = 3001
+Iteration k = 4001
+Iteration k = 5001
+Iteration k = 6001
+Iteration k = 7001
+Iteration k = 8001
+Iteration k = 9001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Iteration k = 3001
+Iteration k = 4001
+Iteration k = 5001
+Iteration k = 6001
+Iteration k = 7001
+Iteration k = 8001
+Iteration k = 9001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Iteration k = 3001
+Fittest Individual is at Index 7 with Fitness of 19.150251805601155.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [13.8, 8.3, 0.022, 1800.0, 900.0, 4.2] having fitness of 19.150251805601155.
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Iteration k = 3001
+Iteration k = 4001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Fittest Individual is at Index 5 with Fitness of 10.607946651372306.
+Since the index is not 1, we swap it to become at index 1.
+Initial Generation created with fittest point [14.145000000000001, 8.761111111111111, 0.019975999999999997, 1877.142857142857, 891.8181818181819, 4.103076923076923] having fitness of 10.607946651372306.
+Iteration k = 1
+Iteration k = 1001

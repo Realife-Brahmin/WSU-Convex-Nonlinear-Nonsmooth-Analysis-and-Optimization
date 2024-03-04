@@ -283,10 +283,6 @@ function selectParents(Xk, Fk;
 
 end
 
-# p1, p2 = selectParents(Xk, Fk);
-# p1.x
-# p2.x
-
 """
     selectTwoUniqueIndices(pdf::Vector; verbose::Bool=false)
 
@@ -322,10 +318,8 @@ function selectTwoUniqueIndices(pdf::Vector;
     # Select the first index
     cdf = cumsum(pdf)
     cdf[end] = 1.0
-    # @show cdf
     rand_val1 = rand()
-    # @show rand_val1
-    # @show idx1 = findfirst(≥(rand_val1), cdf)
+
     idx1 = findfirst(≥(rand_val1), cdf)
     myprintln(verbose, "Choosing parent 1 at index $(idx1).")
 
@@ -336,12 +330,10 @@ function selectTwoUniqueIndices(pdf::Vector;
 
     # Convert the updated pdf to cdf for the second selection
     cdf = cumsum(pdfm1)
-    # @show cdf
     cdf[end] = 1.0
 
     # Select the second index
     rand_val2 = rand()
-    # @show rand_val2
     idx2 = findfirst(≥(rand_val2), cdf)
     myprintln(verbose, "Choosing parent 2 at index $(idx2) from the remaining parents.")
     return idx1, idx2

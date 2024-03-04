@@ -15,7 +15,7 @@ function showresults(res::NamedTuple;
 
     @unpack pr = res
     @unpack method = pr[:alg]
-
+    
     if method == "NelderMead"
         @unpack converged, statusMessage, xvals, fvals, fevals, cause = res
         gevals = 0
@@ -27,11 +27,12 @@ function showresults(res::NamedTuple;
     elseif method == "GeneticAlgorithm"
 
         @unpack converged, statusMessage, xvals, fvals, fevals, cause = res
+        @unpack dftol = pr[:alg]
         gevals = 0
         result_txt = log_path * "results_" * string(pr.objective) * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
         lsMsg = ""
 
-        tolMsg = "Generation Fitness Stangation Tolerance = $(res.pr[:alg][:fvalRepeatTol])"
+        tolMsg = "Generation Fitness Stagnation Tolerance = $(res.pr[:alg][:fvalRepeatTol]) consecutive iterations at dftol = $(dftol)."
 
     else
         @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals, cause = res

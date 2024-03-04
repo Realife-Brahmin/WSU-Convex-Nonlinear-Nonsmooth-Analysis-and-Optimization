@@ -1,8 +1,27 @@
+"""
+    initializeLogFile(logPath::String)
+
+Initializes the logging environment by ensuring that the default log file is cleared at the start of the program. If the log file already exists, it is removed to start fresh, facilitating clean and relevant logging for the current execution.
+
+# Arguments
+- `logPath`: The file path to the log file. If the file exists, it will be removed.
+
+# Usage Example
+```julia
+# Specify the default log file path
 logDefault = "./logging/logs.txt"
-if isfile(logDefault)
-    rm(logDefault)
+
+# Initialize the log file, clearing any existing content
+initializeLogFile(logDefault)
+"""
+function initializeLogFile(logPath::String = "./logging/logs.txt")
+    if isfile(logPath)
+        rm(logPath)
+        println("Existing log file at '$logPath' removed.")
+    else
+        println("No existing log file found at '$logPath'. Starting fresh.")
+    end
 end
-    
 
 """
     myprintln(print_flag::Bool, message; log::Bool=true, log_path::String="./logging/logs.txt")
@@ -11,7 +30,11 @@ Print a message to the console if `print_flag` is `true`. Additionally, if `log`
 the message will also be written to a log file specified by `log_path`. By default, the log path
 is set to `"./logging/logs.txt"`.
 """
-function myprintln(print_flag::Bool, message; log::Bool=true, log_path::String="./logging/logs.txt")
+function myprintln(print_flag::Bool, message; 
+    log::Bool=true, 
+    log_path::String="./logging/logs.txt"
+    )
+    
     if print_flag
         println(message)
         if log

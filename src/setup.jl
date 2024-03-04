@@ -1,5 +1,5 @@
 using Pkg
-Pkg.activate(".")
+# Pkg.activate(".")
 Pkg.instantiate()
 
 using Base.Threads
@@ -18,6 +18,9 @@ include("../alg.jl") # include alg.jl from root directory
 include("objfuns/objective.jl");
 include("display.jl");
 include("helperFunctions.jl");
+
+initializeLogFile()
+
 include("findDirection.jl");
 
 include("optimize.jl");

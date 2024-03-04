@@ -3,6 +3,37 @@ include("geneticAlgorithm.jl")
 include("sampleSpace.jl")
 include("types.jl")
 
+"""
+    optimizeGA(pr; verbose=false, verbose_ls=false, log=true, log_path="./logging/")
+
+Executes a genetic algorithm (GA) optimization process based on predefined parameters and configurations. It iteratively evolves a population towards better solutions, assessing convergence criteria and logging progress throughout the optimization journey.
+
+## Parameters:
+- `pr`: A structure containing the problem definition, including the objective function, algorithm parameters, and initial conditions.
+- `verbose`: Enables general logging of the optimization process when set to `true`.
+- `verbose_ls`: Enables detailed logging specifically for the genetic algorithm's operations.
+- `log`: If `true`, enables logging to a file specified by `log_path`.
+- `log_path`: Directory path where the log file is saved, structured based on the objective function name, method, and iteration limit.
+
+## Returns:
+- A tuple containing the final state of the optimization process, including convergence status, final population and fitness values, total number of function evaluations, and a record of actions taken during the optimization.
+
+## Methodology:
+1. Initializes logging and solver state, unpacks genetic algorithm parameters from `pr`.
+2. Generates an initial population and evaluates its fitness.
+3. Enters the main optimization loop, performing parent selection, crossover, mutation, and population update in each iteration until convergence criteria are met.
+4. Logs detailed progress and decisions at each step if `verbose` options are enabled.
+5. Assesses the optimization's success based on fitness improvement and iteration count, returning comprehensive results and diagnostics.
+
+## Examples:
+```julia
+# Define the problem structure `pr` with the objective function, algorithm parameters, and initial conditions
+pr = defineProblem(objective=myObjectiveFunction, alg=setupGAParameters(), x0=initialCondition)
+
+# Execute the GA optimization
+results = optimizeGA(pr, verbose=true, log=true)
+```
+"""
 function optimizeGA(pr; 
     verbose::Bool=false, 
     verbose_ls::Bool=false,

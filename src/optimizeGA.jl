@@ -104,11 +104,11 @@ function optimizeGA(pr;
         @unpack actions = solverState
         if abs(fkp1 - fk) < dftol
             fvalRepeats += 1
-            actions[:genFitnessNotImproved] = 1
+            actions[:genFitnessNotImproved] += 1
             myprintln(printOrNot_GA, "Generation Fitness not improved.")
         else
             fvalRepeats = 0
-            actions[:genFitnessImproved] = 1
+            actions[:genFitnessImproved] += 1
             myprintln(printOrNot_GA, "Fittest individual now even fitter!")
         end
         @pack! solverState = actions, fvalRepeats

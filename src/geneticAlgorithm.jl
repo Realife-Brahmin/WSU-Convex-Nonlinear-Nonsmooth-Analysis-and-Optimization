@@ -62,7 +62,7 @@ function deriveNextGeneration(Xk,
         # myprintln(verbose, "popAdded = $popAdded before decideAndAdd()")
 
         # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
-        Xkp1, Fkp1, popAdded, survived, actions_1dAA = 
+        Xkp1, popAdded, survived, actions_1dAA = 
             decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived, parentsSurvive=parentsSurvive, verbose=false)
 
         actions = merge(+, actions, actions_1dAA)
@@ -71,7 +71,7 @@ function deriveNextGeneration(Xk,
 
     end
 
-    Xkp1, Fkp1, fkp1 = reevaluateFitness(Xkp1, Fkp1, f, pDict, verbose=verbose)
+    Xkp1, Fkp1, fkp1 = reevaluateFitness(Xkp1, f, pDict, verbose=verbose)
     fevals += p
 
     Xkp1, Fkp1 = fittestFirst(Xkp1, Fkp1, verbose=verbose)
@@ -92,7 +92,7 @@ function deriveNextGeneration(Xk,
     return Xkp1, Fkp1, fkp1, fevals, actions
 end
 
-function reevaluateFitness(Xkp1, Fkp1, f::Function, pDict::Dict;
+function reevaluateFitness(Xkp1, f::Function, pDict::Dict;
     verbose::Bool = false)
 
     n, p = size(Xkp1)
@@ -104,7 +104,9 @@ function reevaluateFitness(Xkp1, Fkp1, f::Function, pDict::Dict;
 
     fkp1 = minimum(fvals)
     Fkp1 = ones(p) .+ maximum(fvals) .- fvals # F0, X0 are still corresponding
+
     Xkp1, Fkp1 = fittestFirst(Xkp1, Fkp1, verbose=verbose)
+    
     myprintln(verbose, "New Generation created with fittest point $(Xkp1[:, 1]) having fitness of $(Fkp1[1]).")
 
     return Xkp1, Fkp1, fkp1
@@ -473,7 +475,7 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
     if popAdded < p
         popAdded += 1 # add the child
         Xkp1[:, popAdded] = om.x
-        Fkp1[popAdded] = om.F
+        # Fkp1[popAdded] = om.F
         childrenAdded += 1
         myprintln(verbose, "Adding child")
     end
@@ -482,7 +484,7 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
         if survived[p1.idx] == 0
             popAdded += 1 # add the first parent
             Xkp1[:, popAdded] = p1.x
-            Fkp1[popAdded] = p1.F
+            # Fkp1[popAdded] = p1.F
             survived[p1.idx] = 1
             myprintln(verbose, "Adding Parent 1")
         else
@@ -495,7 +497,7 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
         if survived[p2.idx] == 0
             popAdded += 1 # add the second parent
             Xkp1[:, popAdded] = p2.x
-            Fkp1[popAdded] = p2.F
+            # Fkp1[popAdded] = p2.F
             survived[p1.idx] = 1
             myprintln(verbose, "Adding Parent 2")
         else
@@ -514,7 +516,7 @@ function decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived;
         @error "floc"
     end
 
-    return Xkp1, Fkp1, popAdded, survived, actions
+    return Xkp1, popAdded, survived, actions
     
 end
 

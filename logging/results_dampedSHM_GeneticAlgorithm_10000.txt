@@ -3,24 +3,24 @@ Solver run has concluded.
 Function solved for: dampedSHM()
 Cause(s) for stopping:
 Fitness no longer generationally improving!
-Convergence achieved in 1821 iterations 😄
+Convergence achieved in 3554 iterations 😄
 ****************************
 Method Used: GeneticAlgorithm
 
 ****************************
-Optimal function value = 0.033104023958580864
+Optimal function value = 0.031649342875684446
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 13.76130701547896
-x☆[2] = 8.066568736338466
-x☆[3] = 0.022686105897237248
-x☆[4] = 1836.693543185591
-x☆[5] = 876.9823382857076
-x☆[6] = 4.2558171878316475
+x☆[1] = 13.782025309973545
+x☆[2] = 8.224137780852027
+x☆[3] = 0.021942178390909107
+x☆[4] = 1839.4431173758605
+x☆[5] = 818.6985409218853
+x☆[6] = 4.240783236813298
 ***************************
-Number of fevals = 12755
+Number of fevals = 24886
 Number of gevals = 0
-Number of evals = 12755
+Number of evals = 24886
 **************************************************
 Tolerance critera used:
-Generation Fitness Stangation Tolerance = 1000.0
+Generation Fitness Stagnation Tolerance = 1000.0 consecutive iterations at dftol = 1.0e-15.

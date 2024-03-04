@@ -99,7 +99,6 @@ function optimizeGA(pr;
         k += 1
 
         xvals[:, k] = Xkp1[:, 1]
-        # fkp1 = Fkp1[1] # this is incorrect
         fvals[k] = fkp1 # also incorrect
         
         @unpack actions = solverState

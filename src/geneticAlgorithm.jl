@@ -37,8 +37,6 @@ function deriveNextGeneration(Xk,
     Fkp1[popAdded] = Fk[1]
     survived[popAdded] = 1
 
-    # TODO increment suitable actions for the top survivor
-
     while keepAddingToPopulation
 
         if popAdded >= p
@@ -48,7 +46,6 @@ function deriveNextGeneration(Xk,
         end
 
         p1, p2 = selectParents(Xk, Fk, verbose=verbose)
-        # fevals += p
         actions[:parentsSelected] += 1
 
         o = crossover(p1, p2) # offspring
@@ -58,15 +55,11 @@ function deriveNextGeneration(Xk,
         delta=delta, deviation=deviation, Dist=Dist, verbose=verbose)
         actions[:mutation] += mutations_1mut
 
-        # myprintln(verbose, "popAdded = $popAdded before decideAndAdd()")
-
         # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
         Xkp1, popAdded, survived, actions_1dAA = 
             decideAndAdd(p1, p2, om, Xkp1, Fkp1, popAdded, survived, parentsSurvive=parentsSurvive, verbose=false)
 
         actions = merge(+, actions, actions_1dAA)
-
-        # myprintln(verbose, "popAdded = $popAdded after decideAndAdd()")
 
     end
 

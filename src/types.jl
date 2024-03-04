@@ -126,14 +126,17 @@ function SolverStateNMType(;
     actions=Dict(:extend => 0, :extensionFailure => 0 , :extensionSuccess => 0,
     :insideContract => 0, :insideContractFailure => 0, :insideContractSuccess => 0, :outsideContract => 0, 
     :outsideContractFailure =>0, :outsideContractSuccess =>0,
-    :reflect => 0, :shrink => 0, :sort => 0, :insertIntoSorted => 0))
+    :reflect => 0, :shrink => 0, :sort => 0, :insertIntoSorted => 0)
+    )
 
     return Dict(:k => k, :fevals => fevals, :actions => actions)
 
 end
 
-function SolStateGAType(; k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),
-    Fkm1=zeros(0), Fk=zeros(0), fkm1=100.0, fk=100.0)
+function SolStateGAType(; 
+    k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),
+    Fkm1=zeros(0), Fk=zeros(0), fkm1=100.0, fk=100.0
+    )
 
     return Dict(:k => k, :Xkm1 => Xkm1, :Xk => Xk, :Fkm1 => Fkm1, :Fk => Fk, :fkm1 => fkm1, :fk => fk)
 
@@ -150,8 +153,10 @@ function SolverStateGAType(;
         :genFitnessNotImproved => 0,
         :mutation => 0,
         :noParentSurvived => 0,
-        :onlyOneParentSurvived => 0,  
-        :parentSelected => 0))
+        :parentsSelected => 0,
+        :onlyOneParentSurvived => 0
+        )
+    )
 
     return Dict(:k => k, :fevals => fevals, :fvalRepeats => fvalRepeats, :actions => actions)
 

@@ -84,7 +84,7 @@ function optimizeGA(pr;
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_GA = printOrNot & verbose_ls
 
-        myprintln(printOrNot, "Iteration k = $(k)")
+        myprintln(printOrNot, "Iteration k = $(k)", log_path=log_txt)
 
         Xkp1, Fkp1, fkp1, fevals_1GA, actions_1GA = deriveNextGeneration(Xk, Fk, fk, f, pDict, delta=delta, deviation=deviation, Dist=Dist,
         parentsSurvive = parentsSurvive, dftol = dftol, verbose=printOrNot_GA) # first element should be the best one
@@ -105,11 +105,11 @@ function optimizeGA(pr;
         if abs(fkp1 - fk) < dftol
             fvalRepeats += 1
             actions[:genFitnessNotImproved] += 1
-            myprintln(printOrNot_GA, "Generation Fitness not improved.")
+            myprintln(printOrNot_GA, "Generation Fitness not improved.", log_path=log_txt)
         else
             fvalRepeats = 0
             actions[:genFitnessImproved] += 1
-            myprintln(printOrNot_GA, "Fittest individual now even fitter!")
+            myprintln(printOrNot_GA, "Fittest individual now even fitter!", log_path=log_txt)
         end
         @pack! solverState = actions, fvalRepeats
 

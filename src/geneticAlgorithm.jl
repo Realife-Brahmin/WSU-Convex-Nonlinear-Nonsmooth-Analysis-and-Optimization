@@ -45,14 +45,14 @@ function deriveNextGeneration(Xk,
             break
         end
 
-        p1, p2 = selectParents(Xk, Fk, verbose=verbose)
+        p1, p2 = selectParents(Xk, Fk, verbose=false)
         actions[:parentsSelected] += 1
 
         o = crossover(p1, p2) # offspring
         actions[:crossover] += 1
 
         om, mutations_1mut = mutation(o, f, pDict, 
-        delta=delta, deviation=deviation, Dist=Dist, verbose=verbose)
+        delta=delta, deviation=deviation, Dist=Dist, verbose=false)
         actions[:mutation] += mutations_1mut
 
         # select the child, and if choosing to let the parent survive by default, the best min(2, p-popAdded) parents
@@ -63,22 +63,22 @@ function deriveNextGeneration(Xk,
 
     end
 
-    Xkp1, Fkp1, fkp1 = reevaluateFitness(Xkp1, f, pDict, verbose=verbose)
+    Xkp1, Fkp1, fkp1 = reevaluateFitness(Xkp1, f, pDict, verbose=false)
     fevals += p
 
     Xkp1, Fkp1 = fittestFirst(Xkp1, Fkp1, verbose=verbose)
 
     if fkp1 < fk
         actions[:genFitnessImproved] += 1
-        myprintln(verbose, "Fittest individual now even fitter.")
+        myprintln(verbose, "Derived Gen: Fittest individual now even fitter.")
     elseif fkp1 == fk
         actions[:genFitnessNotImproved] += 1
-        myprintln(verbose, "Fittest individual has same fitness as previous generation.")
+        myprintln(verbose, "Derived Gen: Fittest individual has same fitness as previous generation.")
     elseif fkp1 - fk < dftol 
         actions[:genFitnessNotImproved] += 1
-        myprintln(verbose, "Fittest individual has pretty much same fitness as previous generation.")
+        myprintln(verbose, "Derived Gen: Fittest individual has pretty much same fitness as previous generation.")
     else
-        @error "How come fitness has decreased? Need to investigate."
+        @error "Derived Gen: How come fitness has decreased? Need to investigate."
     end
 
     return Xkp1, Fkp1, fkp1, fevals, actions
@@ -168,7 +168,7 @@ function createInitialPopulation(x0, popSize, f, pDict; # increment fevals by p 
 
     f0 = minimum(fvals)
     F0 = ones(p) .+ maximum(fvals) .- fvals # F0, X0 are still corresponding
-    X0, F0 = fittestFirst(X0, F0, verbose=verbose)
+    X0, F0 = fittestFirst(X0, F0, verbose=false)
     myprintln(verbose, "Initial Generation created with fittest point $(X0[:, 1]) having fitness of $(F0[1]).")
 
 

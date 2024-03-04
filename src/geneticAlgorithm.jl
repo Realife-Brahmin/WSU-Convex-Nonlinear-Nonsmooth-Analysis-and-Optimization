@@ -48,7 +48,7 @@ function deriveNextGeneration(Xk,
         end
 
         p1, p2 = selectParents(Xk, Fk, verbose=verbose)
-        fevals += p
+        # fevals += p
         actions[:parentsSelected] += 1
 
         o = crossover(p1, p2) # offspring
@@ -56,7 +56,6 @@ function deriveNextGeneration(Xk,
 
         om, mutations_1mut = mutation(o, f, pDict, 
         delta=delta, deviation=deviation, Dist=Dist, verbose=verbose)
-        fevals += 1
         actions[:mutation] += mutations_1mut
 
         # myprintln(verbose, "popAdded = $popAdded before decideAndAdd()")
@@ -81,7 +80,7 @@ function deriveNextGeneration(Xk,
         myprintln(verbose, "Fittest individual now even fitter.")
     elseif fkp1 == fk
         actions[:genFitnessNotImproved] += 1
-        myprintln(verbose, "Fittest individual has same  fitness as previous generation.")
+        myprintln(verbose, "Fittest individual has same fitness as previous generation.")
     elseif fkp1 - fk < dftol 
         actions[:genFitnessNotImproved] += 1
         myprintln(verbose, "Fittest individual has pretty much same fitness as previous generation.")

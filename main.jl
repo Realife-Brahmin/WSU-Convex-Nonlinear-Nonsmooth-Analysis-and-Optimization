@@ -2,7 +2,7 @@ include("src/setup.jl")
 
 println("You are currently using $(Threads.nthreads()) threads.")
 println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
-
+# revive this branch from my notebook
 # verbose = false
 verbose = true;
 verbose_ls = false;

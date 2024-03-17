@@ -32,7 +32,7 @@ function showresults(res::NamedTuple;
         result_txt = log_path * "results_" * string(pr.objective) * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
         lsMsg = ""
 
-        tolMsg = "Generation Fitness Stagnation Tolerance = $(res.pr[:alg][:fvalRepeatTol]) consecutive iterations at dftol = $(dftol)."
+        tolMsg = "Generation Fitness Stagnation Tolerance = $(Int(res.pr[:alg][:fvalRepeatTol])) consecutive iterations at dftol = $(dftol)."
 
     else
         @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals, cause = res

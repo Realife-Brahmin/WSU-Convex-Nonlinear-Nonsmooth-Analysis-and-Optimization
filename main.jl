@@ -28,7 +28,7 @@ functionName = "dampedSHM";
 # functionName = "nnloss";
 
 # include("src/objfuns/TestFunctions_own.jl")
-# functionName = "Rastrigin2d"
+functionName = "Rastrigin"
 
 pr = include("src/objfuns/"*String(functionName)*".jl")
 

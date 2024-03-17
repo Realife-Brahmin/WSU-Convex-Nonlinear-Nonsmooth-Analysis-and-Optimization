@@ -1,0 +1,12 @@
+Starting with initial point x = [0.4714476437467723, 0.20083118341657713, 0.44009127330670084, 0.31069381750538416, 0.4045677910085579, 0.4735978844302179, 0.18987933287709835].
+which has fval = 105.22743522848351
+Iteration k = 1
+Iteration k = 1001
+Iteration k = 2001
+Iteration k = 3001
+Iteration k = 4001
+Iteration k = 5001
+Iteration k = 6001
+Iteration k = 7001
+Iteration k = 8001
+Convergence achieved in 8179 iterations 😄

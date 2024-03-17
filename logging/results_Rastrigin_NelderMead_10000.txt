@@ -1,0 +1,25 @@
+****************************
+Solver run has concluded.
+Function solved for: Rastrigin()
+Cause(s) for stopping:
+Simplex size lower limit reached!
+Convergence achieved in 303 iterations 😄
+****************************
+Method Used: NelderMead
+
+****************************
+Optimal function value = 3.9798362283731663
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 0.9949586386245581
+x☆[2] = 0.9949586335954171
+x☆[3] = 0.9949586362311604
+x☆[4] = 9.50600640582262e-10
+x☆[5] = 0.9949586381777892
+***************************
+Number of fevals = 2973
+Number of gevals = 0
+Number of evals = 2973
+**************************************************
+Tolerance critera used:
+Simplex Diameter Tolerance = 1.0e-12

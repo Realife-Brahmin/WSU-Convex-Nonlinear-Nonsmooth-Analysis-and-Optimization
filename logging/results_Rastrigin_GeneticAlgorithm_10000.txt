@@ -1,26 +1,27 @@
 ****************************
 Solver run has concluded.
-Function solved for: dampedSHM()
+Function solved for: Rastrigin()
 Cause(s) for stopping:
 Fitness no longer generationally improving!
-Convergence achieved in 1608 iterations 😄
+Convergence achieved in 8179 iterations 😄
 ****************************
 Method Used: GeneticAlgorithm
 
 ****************************
-Optimal function value = 0.031635762327770704
+Optimal function value = 2.842170943040401e-14
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 13.765252495949037
-x☆[2] = 8.163036571774498
-x☆[3] = 0.021902933977719672
-x☆[4] = 1839.6176760572716
-x☆[5] = 829.3422938032782
-x☆[6] = 4.227801696350342
+x☆[1] = 5.420860701674136e-9
+x☆[2] = 7.980484201961263e-9
+x☆[3] = 4.9402155372714e-9
+x☆[4] = 3.6135173652073025e-9
+x☆[5] = 3.1847984037895955e-9
+x☆[6] = 6.818631701143223e-9
+x☆[7] = 6.462897749440856e-9
 ***************************
-Number of fevals = 11264
+Number of fevals = 65441
 Number of gevals = 0
-Number of evals = 11264
+Number of evals = 65441
 **************************************************
 Tolerance critera used:
 Generation Fitness Stagnation Tolerance = 1000 consecutive iterations at dftol = 1.0e-15.

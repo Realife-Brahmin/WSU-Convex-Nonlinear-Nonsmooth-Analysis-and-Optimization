@@ -1,0 +1,26 @@
+****************************
+Solver run has concluded.
+Function solved for: Rastrigin()
+Cause(s) for stopping:
+LineSearch failed.
+Barely changing fval
+Convergence achieved in 33 iterations 😄
+****************************
+Method Used: GradientDescent
+Linesearch method used: StrongWolfe
+****************************
+Optimal function value = 22.883952154295493
+***************************
+Optimal Nonzero Variables:
+x☆[1] = -1.9899122332474437
+x☆[2] = 0.9949586386201642
+x☆[3] = 3.9797838608348806
+x☆[4] = 0.9949586374373749
+x☆[5] = 0.9949586377081651
+***************************
+Number of fevals = 33
+Number of gevals = 32
+Number of evals = 193
+**************************************************
+Tolerance critera used:
+dftol = 1.0e-15

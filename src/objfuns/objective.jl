@@ -32,6 +32,7 @@ Generate a named tuple `pr` representing a problem with the provided parameters.
 f(x) = sum(x.^2)
 x0 = [1.0, 2.0, 3.0]
 problem = generate_pr(f, x0)
+```
 """
 function generate_pr(functionName::Function,
     x0::Vector{Float64};

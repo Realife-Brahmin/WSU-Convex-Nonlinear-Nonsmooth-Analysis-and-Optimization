@@ -3,25 +3,25 @@ Solver run has concluded.
 Function solved for: Rastrigin()
 Cause(s) for stopping:
 Fitness no longer generationally improving!
-Convergence achieved in 8179 iterations 😄
+Convergence achieved in 7842 iterations 😄
 ****************************
 Method Used: GeneticAlgorithm
 
 ****************************
-Optimal function value = 2.842170943040401e-14
+Optimal function value = 4.263256414560601e-14
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 5.420860701674136e-9
-x☆[2] = 7.980484201961263e-9
-x☆[3] = 4.9402155372714e-9
-x☆[4] = 3.6135173652073025e-9
-x☆[5] = 3.1847984037895955e-9
-x☆[6] = 6.818631701143223e-9
-x☆[7] = 6.462897749440856e-9
+x☆[1] = 7.260504964528012e-9
+x☆[2] = 7.0841321598151e-9
+x☆[3] = 8.88062489245054e-9
+x☆[4] = 6.870306640223812e-9
+x☆[5] = 4.436215339021986e-9
+x☆[6] = 4.129469713493342e-9
+x☆[7] = 5.468774133301379e-9
 ***************************
-Number of fevals = 65441
+Number of fevals = 62745
 Number of gevals = 0
-Number of evals = 65441
+Number of evals = 62745
 **************************************************
 Tolerance critera used:
 Generation Fitness Stagnation Tolerance = 1000 consecutive iterations at dftol = 1.0e-15.

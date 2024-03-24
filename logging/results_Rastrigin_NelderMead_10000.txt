@@ -3,23 +3,25 @@ Solver run has concluded.
 Function solved for: Rastrigin()
 Cause(s) for stopping:
 Simplex size lower limit reached!
-Convergence achieved in 303 iterations 😄
+Convergence achieved in 540 iterations 😄
 ****************************
 Method Used: NelderMead
 
 ****************************
-Optimal function value = 3.9798362283731663
+Optimal function value = 12.551378228190949
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.9949586386245581
-x☆[2] = 0.9949586335954171
-x☆[3] = 0.9949586362311604
-x☆[4] = 9.50600640582262e-10
-x☆[5] = 0.9949586381777892
+x☆[1] = -1.8407719481761398e-9
+x☆[2] = 5.818581668197246e-9
+x☆[3] = 1.328434505224348e-10
+x☆[4] = 0.9949586357871418
+x☆[5] = 0.9730005389923904
+x☆[6] = 0.23970961275914907
+x☆[7] = 0.977569122573434
 ***************************
-Number of fevals = 2973
+Number of fevals = 6131
 Number of gevals = 0
-Number of evals = 2973
+Number of evals = 6131
 **************************************************
 Tolerance critera used:
 Simplex Diameter Tolerance = 1.0e-12

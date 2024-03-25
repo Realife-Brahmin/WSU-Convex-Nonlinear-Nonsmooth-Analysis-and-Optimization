@@ -21,6 +21,11 @@ function fireLocation(x::Vector{Float64},
     
 end
 
+coords = [(10,12), (3,9), (2,3), (8,1)]
+angles_deg = [95, 84, 75, 63]
+m = tand.(90 .- angles_deg)
+coords_x = [x for (x, y) ∈ coords]
+coords_y = [y for (x, y) ∈ coords]
 n = length(x0)
 params = Dict();
 

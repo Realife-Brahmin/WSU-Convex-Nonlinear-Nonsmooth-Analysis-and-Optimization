@@ -1,5 +1,7 @@
 include("objective.jl")
 
+using Parameters
+
 function fireLocation(x::Vector{Float64}, 
     pDict;
     verbose::Bool=false,
@@ -21,12 +23,18 @@ function fireLocation(x::Vector{Float64},
     
 end
 
-coords = [(10,12), (3,9), (2,3), (8,1)]
 angles_deg = [95, 84, 75, 63]
 m = tand.(90 .- angles_deg)
-coords_x = [x for (x, y) ∈ coords]
-coords_y = [y for (x, y) ∈ coords]
+coords = [(10, 12), (3, 9), (2, 3), (8, 1)]
+coords_x, coords_y = first.(coords), last.(coords)
+c = coords_y - m.*coords_x
+B = hcat(-m, -ones(4))
+d = c
+x0 = [0, 0]
+
 n = length(x0)
+x = x0
+x0 = B\d
 params = Dict();
 
 objective = fireLocation;

@@ -32,11 +32,11 @@ alg_custom = create_algorithm_settings(method="GradientDescent", maxiter=500)
 ```
 """
 function create_algorithm_settings(;
-        method="QuasiNewton",
         # method = "ConjugateGradientDescent",
+        # method = "GeneticAlgorithm",
         # method = "GradientDescent",
         # method = "NelderMead",
-        # method = "GeneticAlgorithm",
+        method="QuasiNewton",
         maxiter=Int(1e4),
         gtol=1e-12,
         dftol=1e-15,
@@ -71,26 +71,35 @@ function create_algorithm_settings(;
         end
 
         # Logic for method-specific modifications, similar to your original struct
-        if alg_settings[:method] == "GradientDescent"
-                # Specific adjustments for GradientDescent
-                alg_settings[:progress] = 100
-                
-        elseif alg_settings[:method] == "QuasiNewton"
-                # Adjustments for QuasiNewton
-                alg_settings[:linesearch] = "StrongWolfe"
-                alg_settings[:progress] = 1
-
-        elseif alg_settings[:method] == "ConjugateGradientDescent"
+        if alg_settings[:method] == "ConjugateGradientDescent"
                 # Adjustments for ConjugateGradientDescent
                 alg_settings[:linesearch] = "StrongWolfe"
                 alg_settings[:c2] = 0.5
                 alg_settings[:progress] = 1
 
-        elseif alg_settings[:method] == "TrustRegion"
-                # Adjustments for TrustRegion
-                alg_settings[:linesearch] = "QuasiNewton-SR1"
-                alg_settings[:c2] = -1.0
-                alg_settings[:progress] = 1
+        elseif alg_settings[:method] == "GradientDescent"
+                # Specific adjustments for GradientDescent
+                alg_settings[:progress] = 100
+
+        elseif alg_settings[:method] == "GeneticAlgorithm"
+                alg_settings[:maxiter] = 10000
+                # alg_settings[:maxiter] = 10
+                alg_settings[:progress] = alg_settings[:maxiter] / 10
+                # alg_settings[:progress] = 1
+                alg_settings[:linesearch] = "NA"
+                alg_settings[:gtol] = "NA"
+                alg_settings[:c1] = "NA"
+                alg_settings[:c2] = "NA"
+                alg_settings[:lambda] = "NA"
+                alg_settings[:lambdaMax] = "NA"
+                alg_settings[:fvalRepeatTol] = alg_settings[:maxiter] / 10
+                alg_settings[:popSize] = 10
+                alg_settings[:delta] = 0.3 # probability of mutation for each dimension of a point
+                alg_settings[:Dist] = randn # probability distribution to choose value from for mutation
+                # randn() has a mean of zero and a stddev of 1.
+                alg_settings[:deviation] = 0.1 # magnitude of mutation allowed
+                alg_settings[:parentsSurvive] = true
+                # alg_settings[:parentsSurvive] = false
 
         elseif alg_settings[:method] == "NelderMead"
                 # Adjustments for NelderMead
@@ -108,25 +117,21 @@ function create_algorithm_settings(;
                 alg_settings[:gamma] = 2.0
                 alg_settings[:delta] = 0.5
 
-        elseif alg_settings[:method] == "GeneticAlgorithm"
-                alg_settings[:maxiter] = 10000
-                # alg_settings[:maxiter] = 10
-                alg_settings[:progress] = alg_settings[:maxiter]/10
-                # alg_settings[:progress] = 1
-                alg_settings[:linesearch] = "NA"
-                alg_settings[:gtol] = "NA"
-                alg_settings[:c1] = "NA"
-                alg_settings[:c2] = "NA"
-                alg_settings[:lambda] = "NA"
-                alg_settings[:lambdaMax] = "NA"
-                alg_settings[:fvalRepeatTol] = alg_settings[:maxiter]/10
-                alg_settings[:popSize] = 10
-                alg_settings[:delta] = 0.3 # probability of mutation for each dimension of a point
-                alg_settings[:Dist] = randn # probability distribution to choose value from for mutation
-                # randn() has a mean of zero and a stddev of 1.
-                alg_settings[:deviation] = 0.1 # magnitude of mutation allowed
-                alg_settings[:parentsSurvive] = true
-                # alg_settings[:parentsSurvive] = false
+        elseif alg_settings[:method] == "ProjectGradientCG"
+                @error "Need to define PGCG parameters first"
+                
+        elseif alg_settings[:method] == "QuasiNewton"
+                # Adjustments for QuasiNewton
+                alg_settings[:linesearch] = "StrongWolfe"
+                alg_settings[:progress] = 1
+
+
+        elseif alg_settings[:method] == "TrustRegion"
+                # Adjustments for TrustRegion
+                alg_settings[:linesearch] = "QuasiNewton-SR1"
+                alg_settings[:c2] = -1.0
+                alg_settings[:progress] = 1
+
         else
                 @warn "Bad condition."
         end

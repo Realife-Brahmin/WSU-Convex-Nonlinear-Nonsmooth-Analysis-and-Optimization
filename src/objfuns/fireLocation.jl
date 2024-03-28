@@ -10,7 +10,7 @@ function fireLocation(x::Vector{Float64},
     
     n = length(x)
     @unpack B, d = pDict
-    r = Bx - d
+    r = B*x - d
     f = 1//2 *sum(r.^2)
 
     if !getGradientToo
@@ -30,13 +30,15 @@ coords_x, coords_y = first.(coords), last.(coords)
 c = coords_y - m.*coords_x
 B = hcat(-m, -ones(4))
 d = c
-x0 = [0, 0]
 
 n = length(x0)
 x = x0
 x0 = B\d
-params = Dict();
+params = Dict(:B=>B, :d=>d);
 
 objective = fireLocation;
 
 pr = generate_pr(objective, x0, params=params)
+
+#test run
+f0 = fireLocation(x0, params)

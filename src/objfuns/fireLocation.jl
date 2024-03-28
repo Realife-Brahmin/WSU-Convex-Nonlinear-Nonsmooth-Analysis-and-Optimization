@@ -16,7 +16,8 @@ function fireLocation(x::Vector{Float64},
     if !getGradientToo
         return f
     elseif getGradientToo
-        g = sum(transpose(B)*r)
+        g = transpose(B)*r
+        return f, g
     else
         @error "floc"
     end

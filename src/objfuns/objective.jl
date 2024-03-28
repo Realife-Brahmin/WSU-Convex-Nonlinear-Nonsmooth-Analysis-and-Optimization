@@ -1,5 +1,6 @@
 using Base.Threads
 using DataFrames
+using Parameters
 
 include("../helperFunctions.jl");
 include("boxConstraintPenalty.jl");

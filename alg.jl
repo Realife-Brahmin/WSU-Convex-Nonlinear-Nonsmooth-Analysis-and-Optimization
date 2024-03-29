@@ -1,37 +1,9 @@
 include("src/helperFunctions.jl")
 
 
-
-"""
-        create_algorithm_settings(; kwargs...)
-
-Create a dictionary to store algorithm settings for optimization methods.
-
-# Arguments
-- `method::String="QuasiNewton"`: Specifies the optimization method.
-- `maxiter::Int=Int(1e4)`: Maximum number of iterations.
-- `gtol::Float64=1e-12`: Gradient tolerance for convergence.
-- `dftol::Float64=1e-15`: Function value difference tolerance.
-- `dxtol::Float64=1e-10`: Argument difference tolerance.
-- `lambda::Int=1`: Lambda parameter.
-- `lambdaMax::Int=100`: Maximum lambda value.
-- `linesearch::String="StrongWolfe"`: Type of line search to use.
-- `c1::Float64=1e-4`: Parameter for line search.
-- `c2::Float64=0.9`: Another parameter for line search.
-- `progress::Int=100`: Progress report frequency.
-
-Additional keyword arguments can be passed to override the default settings.
-
-# Returns
-- `Dict{Symbol, Any}`: A dictionary with the algorithm settings.
-
-# Examples
-```julia
-alg = create_algorithm_settings()
-alg_custom = create_algorithm_settings(method="GradientDescent", maxiter=500)
-```
-"""
 function create_algorithm_settings(;
+        problemType = "Unconstrained",
+        # problemType = "ECQP",
         # method = "ConjugateGradientDescent",
         # method = "GeneticAlgorithm",
         # method = "GradientDescent",
@@ -52,6 +24,7 @@ function create_algorithm_settings(;
 
         # Create a dictionary with default values
         alg_settings = Dict(
+                :problemType => problemType,
                 :method => method,
                 :maxiter => maxiter,
                 :gtol => gtol,
@@ -68,6 +41,22 @@ function create_algorithm_settings(;
         # Update dictionary with any keyword arguments provided
         for (key, value) in kwargs
                 alg_settings[key] = value
+        end
+
+        if alg_settings[:problemType] == "LP"
+                @error "Haven't accounted what to do for LPs"
+                
+        elseif alg_settings[:problemType] == "ECQP"
+                alg_settings[:method] = "ProjectedGradientCG"
+
+        elseif alg_settings[:problemType] == "QP" 
+                alg_settings[:method] = "ASQP"
+
+        elseif alg_settings[:problemType] == "Unconstrained"
+                # don't change method from whatever I specified
+
+        else
+                @error "Unknown method"
         end
 
         # Logic for method-specific modifications, similar to your original struct
@@ -117,11 +106,12 @@ function create_algorithm_settings(;
                 alg_settings[:gamma] = 2.0
                 alg_settings[:delta] = 0.5
 
-        elseif alg_settings[:method] == "ProjectGradientCG"
+        elseif alg_settings[:method] == "ProjectedGradientCG"
                 @error "Need to define PGCG parameters first"
                 
         elseif alg_settings[:method] == "QuasiNewton"
                 # Adjustments for QuasiNewton
+                alg_settings[:lambdaMax] = 1
                 alg_settings[:linesearch] = "StrongWolfe"
                 alg_settings[:progress] = 1
 

@@ -15,11 +15,11 @@ benchmarking = true;
 
 warmStart = true
 
-functionName = "dampedSHM";
+# functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
 # functionName = "pathtime"
 # functionName = "receiverLocation"
-# functionName = "rosenbrock";
+functionName = "rosenbrock";
 # functionName = "signalDenoise";
 # functionName = "sphere";
 # functionName = "TestFunction1";
@@ -28,7 +28,7 @@ functionName = "dampedSHM";
 # functionName = "nnloss";
 
 # include("src/objfuns/TestFunctions_own.jl")
-functionName = "Rastrigin"
+# functionName = "Rastrigin"
 
 pr = include("src/objfuns/"*String(functionName)*".jl")
 

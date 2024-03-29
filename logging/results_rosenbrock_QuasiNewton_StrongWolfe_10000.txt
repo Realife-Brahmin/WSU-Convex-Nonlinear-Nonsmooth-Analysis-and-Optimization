@@ -1,7 +1,6 @@
 ****************************
 Solver run has concluded.
 Function solved for: rosenbrock()
-This was a function minimization problem.
 Cause(s) for stopping:
 Barely changing fval
 Convergence achieved in 27 iterations 😄

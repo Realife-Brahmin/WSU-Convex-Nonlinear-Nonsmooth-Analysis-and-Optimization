@@ -37,12 +37,14 @@ problem = generate_pr(f, x0)
 """
 function generate_pr(functionName::Function,
     x0::Vector{Float64};
-    data = Matrix{Float64}(undef, 0, 0),
-    params = Dict())
+    problemType::String="Unconstrained",
+    data=Matrix{Float64}(undef, 0, 0),
+    params=Dict()
+)
 
-    p = Dict(:params=>params, :data=>data)
+    p = Dict(:params => params, :data => data)
 
     println("Problem (pr::NamedTuple) generated")
-    pr = (p=p, x0=x0, objective=functionName, alg=alg)
+    pr = (p=p, x0=x0, objective=functionName, alg=alg, problemType=problemType)
     return pr
 end

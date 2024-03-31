@@ -39,7 +39,7 @@ params = Dict(:B=>B, :d=>d);
 
 objective = fireLocation;
 
-pr = generate_pr(objective, x0, params=params)
+pr = generate_pr(objective, x0, params=params, problemType="ECQP")
 
 #test run
 f0 = fireLocation(x0, params)

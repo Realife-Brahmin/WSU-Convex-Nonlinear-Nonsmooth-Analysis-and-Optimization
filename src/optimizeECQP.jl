@@ -17,12 +17,6 @@ function optimizeECQP(pr;
 
     progress = pr.alg[:progress]
     maxiter = pr.alg[:maxiter]
-    fvalRepeatTol = pr.alg[:fvalRepeatTol]
-    popSize = pr.alg[:popSize]
-    deviation = pr.alg[:deviation]
-    delta = pr.alg[:delta]
-    Dist = pr.alg[:Dist]
-    parentsSurvive = pr.alg[:parentsSurvive]
     dftol = pr.alg[:dftol]
 
     x0 = pr.x0
@@ -65,8 +59,8 @@ function optimizeECQP(pr;
             push!(causeForStopping, "Iteration limit reached!")
             keepIterationsGoing = false
             break
-        elseif fvalRepeats >= fvalRepeatTol
-            push!(causeForStopping, "Fitness no longer generationally improving!")
+        elseif num < tol
+            push!(causeForStopping, "Convergence Tolerance Reached")
             keepIterationsGoing = false
             break
         end

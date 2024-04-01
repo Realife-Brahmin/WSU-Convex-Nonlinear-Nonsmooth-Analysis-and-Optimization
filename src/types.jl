@@ -133,32 +133,84 @@ function SolverStateNMType(;
 
 end
 
-function SolStatePGCGType(; k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),
-    fkm1=100.0, fk=100.0, Deltak=100.0)
+# function SolStatePGCGType(; km1=-1, k=0, xkm1=zeros(0), xk=zeros(0),
+#     rkm1=zeros(0), rk=zeros(0), gkm1=zeros(0), gk=zeros(0),
+#     dkm1=zeros(0), dk=zeros(0), tol=1e-6)
 
-    return Dict(:k => k, :Xkm1 => Xkm1, :Xk => Xk, :fkm1 => fkm1, :fk => fk, :Deltak => Deltak)
+#     return Dict(:km1 => km1, :k => k, :xkm1 => xkm1, :xk => xk,
+#         :rkm1 => rkm1, :rk => rk, :gkm1 => gkm1, :gk => gk,
+#         :dkm1 => dkm1, :dk => dk, :tol => tol)
+# end
 
-end
+# function initializePGCGState(xk, G, A, c; tol=1e-6)
+#     P = I - A' * ((A * A') \ I) * A  # Assuming I is appropriately sized identity matrix
+#     rk = G * xk + c
+#     ark = A * rk
+#     gk = rk - A' * ((A * A') \ ark)
+#     dk = -gk
+#     return Dict(:k => 0, :xk => xk, :rk => rk, :gk => gk, :dk => dk, :tol => tol)
+# end
 
-function SolverStatePGCGType(;
-    k=0,
-    fevals=0,
-    fvalRepeats=0,
-    actions=Dict(
-        :bothParentsSurvived => 0,
-        :crossover => 0,
-        :genFitnessImproved => 0,
-        :genFitnessNotImproved => 0,
-        :mutation => 0,
-        :noParentSurvived => 0,
-        :parentsSelected => 0,
-        :onlyOneParentSurvived => 0
+function SolStatePGCGType(xk, G, A, c; tol=1e-6)
+    # Dimensions
+    m, n = size(A)
+    I_n = Matrix{Float64}(I, n, n)  # n x n identity matrix for compatibility with G and xk
+
+    # Compute rk = G*xk + c
+    rk = G * xk + c
+
+    # Compute projection matrix P and apply it to rk for gk
+    # Note: Adjusting P's definition to ensure it matches your problem description
+    # P is used implicitly in the calculation of gk
+    AAT_inv = inv(A * A')
+    gk = rk - A' * (AAT_inv * (A * rk))
+
+    # Initialize dk
+    dk = -gk
+    fk = 100.0
+    fkm1 = 100.0
+
+    # Prepare the state dictionary with initial values
+    solState = Dict(
+        :km1 => -1, :k => 0,
+        :xkm1 => zeros(n), :xk => xk,
+        :rkm1 => zeros(n), :rk => rk,
+        :gkm1 => zeros(n), :gk => gk,
+        :dkm1 => zeros(n), :dk => dk,
+        :fkm1 => fkm1, :fk => fk,
+        :tol => tol
     )
-)
 
-    return Dict(:k => k, :fevals => fevals, :fvalRepeats => fvalRepeats, :actions => actions)
-
+    return solState
 end
+
+# To use this function, xk, G, A, and c need to be defined.
+# Example:
+# xk = randn(n)  # Initial xk, n-dimensional
+# G = randn(n, n)  # G, n x n matrix
+# A = randn(m, n)  # A, m x n matrix
+# c = randn(n)  # c, n-dimensional vector
+# solState = SolStatePGCGType(xk, G, A, c)
+
+# function SolverStatePGCGType(;
+#     k=0,
+#     fevals=0,
+#     fvalRepeats=0,
+#     actions=Dict(
+#         :bothParentsSurvived => 0,
+#         :crossover => 0,
+#         :genFitnessImproved => 0,
+#         :genFitnessNotImproved => 0,
+#         :mutation => 0,
+#         :noParentSurvived => 0,
+#         :parentsSelected => 0,
+#         :onlyOneParentSurvived => 0
+#     )
+# )
+
+#     return Dict(:k => k, :fevals => fevals, :fvalRepeats => fvalRepeats, :actions => actions)
+
+# end
 
 function SolStateGAType(; 
     k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),

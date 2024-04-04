@@ -133,35 +133,16 @@ function SolverStateNMType(;
 
 end
 
-# function SolStatePGCGType(; km1=-1, k=0, xkm1=zeros(0), xk=zeros(0),
-#     rkm1=zeros(0), rk=zeros(0), gkm1=zeros(0), gk=zeros(0),
-#     dkm1=zeros(0), dk=zeros(0), tol=1e-6)
 
-#     return Dict(:km1 => km1, :k => k, :xkm1 => xkm1, :xk => xk,
-#         :rkm1 => rkm1, :rk => rk, :gkm1 => gkm1, :gk => gk,
-#         :dkm1 => dkm1, :dk => dk, :tol => tol)
-# end
+function SolStatePGCGType(xk, G, c, A; 
+    fkm1=100.0,
+    fk=100.0,
+    tol=1e-6)
 
-# function initializePGCGState(xk, G, A, c; tol=1e-6)
-#     P = I - A' * ((A * A') \ I) * A  # Assuming I is appropriately sized identity matrix
-#     rk = G * xk + c
-#     ark = A * rk
-#     gk = rk - A' * ((A * A') \ ark)
-#     dk = -gk
-#     return Dict(:k => 0, :xk => xk, :rk => rk, :gk => gk, :dk => dk, :tol => tol)
-# end
+    # note that here the variable 'xk' here might be 'wk', which can have a different meaning than the original problem.
 
-function SolStatePGCGType(xk, G, A, c; tol=1e-6)
-    # Dimensions
-    m, n = size(A)
-    I_n = Matrix{Float64}(I, n, n)  # n x n identity matrix for compatibility with G and xk
-
-    # Compute rk = G*xk + c
     rk = G * xk + c
 
-    # Compute projection matrix P and apply it to rk for gk
-    # Note: Adjusting P's definition to ensure it matches your problem description
-    # P is used implicitly in the calculation of gk
     AAT_inv = inv(A * A')
     gk = rk - A' * (AAT_inv * (A * rk))
 

@@ -49,26 +49,11 @@ f0 = fireLocation(x0, params, getGradientToo=false)
 # Henceforth, x, n, m lose their original meanings, in favour of w, n+m, n+m
 G = vcat(hcat(zeros(n, n), zeros(n, m)), hcat(zeros(m, n), I(m)));
 A = hcat(B, -I(m))
+b = d
 c = zeros(n+m)
 
 pEQCP = Dict(:G=>G, :c=>c, :A=>A, :b=>b )
 
-function equalityConstrainedQP(w::Vector{Float64},
-    pDict;
-    verbose::Bool=false,
-    log::Bool=true,
-    getGradientToo::Bool=false)
+f0 = equalityConstrainedQP(w0, pEQCP)
 
-    @unpack G, A, c, b = pDict
-    f = 1//2*transpose(w)*G*w + transpose(w)*c
-
-    if getGradientToo
-        g = G*w + c
-        return f, g
-    else
-        return f
-    end
-    
-end
-
-solState = SolStatePGCGType(w0, G, A, c, fk=f0)
+solState = SolStatePGCGType(w0, G, c, A, fk=f0)

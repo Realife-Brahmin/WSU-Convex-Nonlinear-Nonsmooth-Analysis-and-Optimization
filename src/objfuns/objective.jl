@@ -5,6 +5,7 @@ using Parameters
 
 include("../helperFunctions.jl");
 include("boxConstraintPenalty.jl");
+include("equalityConstrainedQP.jl");
 include("../../alg.jl"); # include alg.jl from parent directory
 include("../types.jl")
 

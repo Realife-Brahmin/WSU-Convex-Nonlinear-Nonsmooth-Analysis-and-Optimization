@@ -1,5 +1,6 @@
 using Base.Threads
 using DataFrames
+using LinearAlgebra
 using Parameters
 
 include("../helperFunctions.jl");

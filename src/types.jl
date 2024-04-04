@@ -167,16 +167,15 @@ function SolStatePGCGType(xk, G, A, c; tol=1e-6)
 
     # Initialize dk
     dk = -gk
-    fk = 100.0
-    fkm1 = 100.0
+
 
     # Prepare the state dictionary with initial values
     solState = Dict(
         :km1 => -1, :k => 0,
-        :xkm1 => zeros(n), :xk => xk,
-        :rkm1 => zeros(n), :rk => rk,
-        :gkm1 => zeros(n), :gk => gk,
-        :dkm1 => zeros(n), :dk => dk,
+        :xkm1 => myzeros(xk), :xk => xk,
+        :rkm1 => myfill(rk, 22), :rk => rk,
+        :gkm1 => myfill(gk, 77), :gk => gk,
+        :dkm1 => myfill(dk, 33), :dk => dk,
         :fkm1 => fkm1, :fk => fk,
         :tol => tol
     )

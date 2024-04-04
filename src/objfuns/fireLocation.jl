@@ -25,16 +25,13 @@ function fireLocation(x::Vector{Float64},
 end
 
 angles_deg = [95, 84, 75, 63]
-m = tand.(90 .- angles_deg)
+m_line = tand.(90 .- angles_deg)
 coords = [(10, 12), (3, 9), (2, 3), (8, 1)]
 coords_x, coords_y = first.(coords), last.(coords)
-c = coords_y - m.*coords_x
-B = hcat(-m, -ones(4))
-d = c
-
-n = length(x0)
-x = x0
-x0 = B\d
+c_line = coords_y - m_line.*coords_x
+B = hcat(-m_line, -ones(4))
+m, n = size(B)
+d = c_line
 params = Dict(:B=>B, :d=>d);
 
 objective = fireLocation;

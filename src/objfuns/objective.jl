@@ -6,6 +6,7 @@ using Parameters
 include("../helperFunctions.jl");
 include("boxConstraintPenalty.jl");
 include("../../alg.jl"); # include alg.jl from parent directory
+include("../types.jl")
 
 """
     generate_pr(functionName::Function, x0::Vector{Float64};

@@ -12,6 +12,7 @@ function solveForNextPGCGIterate(xk, gk, dk, rk, num, G, A, AAT;
 
         dkp1 = -gkp1 + betak*dk
 
+        # adding fevals and actions as oargs for consistency across my opt algos
         fevals_1PGCG = 0
         actions_1PGCG = Dict()
 

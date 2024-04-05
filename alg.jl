@@ -107,7 +107,14 @@ function create_algorithm_settings(;
                 alg_settings[:delta] = 0.5
 
         elseif alg_settings[:method] == "ProjectedGradientCG"
-                @error "Need to define PGCG parameters first"
+                alg_settings[:linesearch] = "NA"
+                alg_settings[:gtol] = "NA"
+                alg_settings[:c1] = "NA"
+                alg_settings[:c2] = "NA"
+                alg_settings[:lambda] = "NA"
+                alg_settings[:lambdaMax] = "NA"
+                alg_settings[:tol] = 1e-6
+                alg_settings[:progress] => progress
                 
         elseif alg_settings[:method] == "QuasiNewton"
                 # Adjustments for QuasiNewton

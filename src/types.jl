@@ -164,6 +164,34 @@ function SolStatePGCGType(xk, G, c, A;
     return solState
 end
 
+"""
+    SolStateGAType(; k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),
+                    Fkm1=zeros(0), Fk=zeros(0), fkm1=100.0, fk=100.0)
+
+Construct a dictionary that encapsulates the solution state for a Genetic Algorithm (GA) at a given generation. This state includes information about the population and fitness scores.
+
+# Arguments
+- `k::Int=0`: The current generation number. Defaults to 0 for the initial generation.
+- `Xkm1::Matrix{Float64}`: The population matrix from the previous generation (k-1). Each row represents an individual in the population. Defaults to an empty matrix.
+- `Xk::Matrix{Float64}`: The current population matrix (at generation k). Analogous to `Xkm1`, each row represents an individual. Defaults to an empty matrix.
+- `Fkm1::Vector{Float64}`: The fitness vector for the previous generation's population. Each element corresponds to the fitness of the respective individual in `Xkm1`. Defaults to an empty vector.
+- `Fk::Vector{Float64}`: The fitness vector for the current generation's population. Each element corresponds to the fitness of the respective individual in `Xk`. Defaults to an empty vector.
+- `fkm1::Float64=100.0`: The best fitness value obtained in the previous generation. Defaults to 100.0.
+- `fk::Float64=100.0`: The best fitness value obtained in the current generation. Defaults to 100.0.
+
+# Returns
+- `Dict`: A dictionary object with keys corresponding to the argument names and their associated values, representing the state of the GA solver.
+
+# Example
+```julia
+# Initialize state with default values
+solverState = SolStateGAType()
+
+# Initialize state with a specific generation k and corresponding data
+solverState = SolStateGAType(k=3, Xkm1=rand(10, 5), Xk=rand(10, 5),
+                            Fkm1=rand(10), Fk=rand(10), fkm1=0.5, fk=0.3)
+```
+"""
 function SolStateGAType(; 
     k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),
     Fkm1=zeros(0), Fk=zeros(0), fkm1=100.0, fk=100.0
@@ -173,6 +201,33 @@ function SolStateGAType(;
 
 end
 
+"""
+    SolverStateGAType(; k=0, fevals=0, fvalRepeats=0, actions=Dict())
+
+Create a dictionary representing the state of a Genetic Algorithm (GA) solver. This state captures key metrics and event counts at a specific generation of the GA.
+
+# Arguments
+- `k::Int=0`: The current generation index. Initializes to 0, representing the starting generation.
+- `fevals::Int=0`: The cumulative number of fitness function evaluations conducted up to this generation.
+- `fvalRepeats::Int=0`: The count of fitness evaluations that resulted in the same fitness value, indicating potential stagnation in the population.
+- `actions::Dict`: A dictionary with keys representing different actions or events in the GA process and values indicating the count of each action/event. The default dictionary includes the following keys:
+    - `:bothParentsSurvived`: Count of occurrences where both parents survived to the next generation.
+    - `:crossover`: Count of crossover operations performed.
+    - `:genFitnessImproved`: Count of generations where fitness has improved.
+    - `:genFitnessNotImproved`: Count of generations where fitness has not improved.
+    - `:mutation`: Count of mutation operations performed.
+    - `:noParentSurvived`: Count of occurrences where neither parent survived to the next generation.
+    - `:parentsSelected`: Count of times parents have been selected for mating.
+    - `:onlyOneParentSurvived`: Count of occurrences where only one parent survived to the next generation.
+
+# Returns
+- `Dict`: A dictionary object encapsulating the GA solver's state.
+
+# Example
+```julia
+solverState = SolverStateGAType(k=5, fevals=100, fvalRepeats=10)
+```
+"""
 function SolverStateGAType(;
     k=0,
     fevals=0,

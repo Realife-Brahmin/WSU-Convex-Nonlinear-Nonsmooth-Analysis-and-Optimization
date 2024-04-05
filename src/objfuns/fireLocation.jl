@@ -37,14 +37,14 @@ x0 = B \ d
 r0 = B * x0 - d
 w0 = vcat(x0, r0)
 
-params = Dict(:B=>B, :d=>d);
+# params = Dict(:B=>B, :d=>d);
 
-objective = fireLocation;
+# objective = fireLocation;
 
 # pr = generate_pr(objective, x0, params=params, problemType="ECQP")
 
 #test run
-f0 = fireLocation(x0, params, getGradientToo=false)
+# f0 = fireLocation(x0, params, getGradientToo=false)
 
 # Henceforth, x, n, m lose their original meanings, in favour of w, n+m, n+m
 G = vcat(hcat(zeros(n, n), zeros(n, m)), hcat(zeros(m, n), I(m)));
@@ -52,8 +52,13 @@ A = hcat(B, -I(m))
 b = d
 c = zeros(n+m)
 
-pEQCP = Dict(:G=>G, :c=>c, :A=>A, :b=>b )
+pECQP = Dict(:G=>G, :c=>c, :A=>A, :b=>b )
 
-f0 = equalityConstrainedQP(w0, pEQCP)
+objective = equalityConstrainedQP
+params = pECQP
 
-solState = SolStatePGCGType(w0, G, c, A, fk=f0)
+pr = generate_pr(objective, w0, params=params, problemType="ECQP")
+
+# f0 = equalityConstrainedQP(w0, pECQP)
+
+# solState = SolStatePGCGType(w0, G, c, A, fk=f0)

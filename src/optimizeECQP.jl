@@ -33,11 +33,12 @@ function optimizeECQP(pr;
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     f = pr.objective
     pECQP = pr.p
-    @unpack G, c, A, b = pECQP
+    @unpack G, c, A, b = pECQP[:params]
 
-    # f0 = equalityConstrainedQP(w0, pECQP)
+    AAT = A*transpose(A)
+
     f0 = f(x0, pECQP, getGradientToo=false)
-
+    fk = f0
     solState = SolStatePGCGType(x0, G, c, A, fk=f0)
 
     @unpack fevals = solverState
@@ -56,7 +57,7 @@ function optimizeECQP(pr;
         @unpack xk, gk, dk, rk = solState
         # saving the current iterates to solState
         km1, xkm1, gkm1, dkm1, rkm1 = k, xk, gk, dk, rk
-
+        @show rk, gk
         num = transpose(rk)*gk
 
         if k >= maxiter
@@ -69,44 +70,33 @@ function optimizeECQP(pr;
             break
         end
 
-    
         @pack! solState = km1, xkm1, gkm1, dkm1, rkm1
 
         printOrNot = verbose && ((k - 1) % progress == 0)
-        printOrNot_GA = printOrNot & verbose_ls
+        printOrNot_ECQP = printOrNot & verbose_ls
 
         myprintln(printOrNot, "Iteration k = $(k)", log_path=log_txt)
-
-        
 
         @unpack actions, fevals = solverState
 
         xkp1, gkp1, dkp1, rkp1, fevals_1PGCG, actions_1PGCG = solveForNextPGCGIterate(xk, gk, dk, rk, num, G, A, AAT, verbose=printOrNot_ECQP)
+
+        fkp1 = f(xkp1, pECQP, getGradientToo=false)
+
+        fevals += fevals_1PGCG
+        actions = merge(+, actions, actions_1PGCG)
+
         @pack! solverState = actions, fevals
 
         # I prefer to only number a completed iteration, as opposed to numbering an in-process/about-to-begin iteration
         k += 1
 
-        xvals[:, k] = Xkp1[:, 1]
+        xvals[:, k] = xkp1
         fvals[k] = fkp1 # also incorrect
 
-        @unpack actions = solverState
-        if abs(fkp1 - fk) < dftol
-            fvalRepeats += 1
-            actions[:genFitnessNotImproved] += 1
-            myprintln(printOrNot_GA, "Generation Fitness not improved.", log_path=log_txt)
-        else
-            fvalRepeats = 0
-            actions[:genFitnessImproved] += 1
-            myprintln(printOrNot_GA, "Fittest individual now even fitter!", log_path=log_txt)
-        end
-        @pack! solverState = actions, fvalRepeats
+        xk, gk, dk, rk = xkp1, gkp1, dkp1, rkp1
 
-        @pack! solState = fvalRepeats # pre-emptively packing it into the solState, as it won't be mutated
-
-        Xk, Fk, fk = Xkp1, Fkp1, fkp1
-        @pack! solState = Xk, Fk, fk
-
+        @pack! solState = xk, gk, dk, rk
 
         @pack! solState = k
         @pack! solverState = k

@@ -56,9 +56,11 @@ c = zeros(n+m)
 pECQP = Dict(:G=>G, :c=>c, :A=>A, :b=>b )
 
 objective = equalityConstrainedQP
+objectiveOriginal = fireLocation
+objectiveString = string(objectiveOriginal)
 params = pECQP
 
-pr = generate_pr(objective, w0, params=params, problemType="ECQP")
+pr = generate_pr(objective, w0, params=params, problemType="ECQP"; objectiveString=objectiveString)
 
 # f0 = equalityConstrainedQP(w0, pECQP)
 

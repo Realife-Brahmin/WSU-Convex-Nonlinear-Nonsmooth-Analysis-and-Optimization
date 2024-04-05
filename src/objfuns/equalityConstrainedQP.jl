@@ -15,3 +15,10 @@ function equalityConstrainedQP(w::Vector{Float64},
     end
     
 end
+
+function normalizeLinearConstraints(B, d)
+    norms = norm.(eachrow(B))
+    B_normalized = B ./ norms
+    d_normalized = d ./ norms
+    return B_normalized, d_normalized
+end

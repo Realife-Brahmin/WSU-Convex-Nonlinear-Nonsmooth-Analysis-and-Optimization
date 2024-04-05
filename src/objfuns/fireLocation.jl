@@ -1,4 +1,5 @@
 include("objective.jl")
+include("equalityConstrainedQP.jl")
 
 using Parameters
 
@@ -29,12 +30,22 @@ m_line = tand.(90 .- angles_deg)
 coords = [(10, 12), (3, 9), (2, 3), (8, 1)]
 coords_x, coords_y = first.(coords), last.(coords)
 c_line = coords_y - m_line.*coords_x
-B = hcat(-m_line, -ones(4))
-m, n = size(B)
-d = c_line
+B_unnormalized = hcat(-m_line, -ones(4))
+
+m, n = size(B_unnormalized)
+d_unnormalized = c_line
+
+normalizeConstraints = false
+normalizeConstraints = true
+
+if normalizeConstraints
+    B, d = normalizeLinearConstraints(B_unnormalized, d_unnormalized)
+else
+    B, d =  B_unnormalized, d_unnormalized
+end
 
 x0 = B \ d
-x0 = myfill(x0, 1)
+x0 = myfill(x0, 1) # the original x0 is basically the perfect solution. Instead, for checking the ECQP solver, let's take something else, making sure there are no shape errors of course.
 r0 = B * x0 - d
 w0 = vcat(x0, r0)
 

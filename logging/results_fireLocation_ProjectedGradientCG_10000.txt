@@ -1,0 +1,26 @@
+****************************
+Solver run has concluded.
+Function solved for: fireLocation()
+Cause(s) for stopping:
+Convergence Tolerance Reached
+Convergence achieved in 17 iterations 😄
+****************************
+Method Used: ProjectedGradientCG
+
+****************************
+Optimal function value = 0.8134055507649024
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 27.511096688931975
+x☆[2] = -10.704775388015898
+x☆[3] = 0.23679783420379083
+x☆[4] = -0.8714446849973491
+x☆[5] = 0.8690976321842857
+x☆[6] = -0.2366249225414304
+***************************
+Number of fevals = 18
+Number of gevals = 0
+Number of evals = 18
+**************************************************
+Tolerance critera used:
+PGCG Tolerance = 1.0e-6

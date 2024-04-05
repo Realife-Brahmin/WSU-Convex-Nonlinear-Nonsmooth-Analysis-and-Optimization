@@ -2,7 +2,7 @@ function plot_fval_vs_iterations(res;
     savePlot=true)
     
         pr = res.pr
-        functionName = string(pr.objective)
+        functionName = pr.objectiveString
         theme(:dao)
         fvals = res.fvals
         itr = length(fvals)

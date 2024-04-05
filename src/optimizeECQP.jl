@@ -78,12 +78,12 @@ function optimizeECQP(pr;
 
         @unpack actions, fevals = solverState
 
-        xkp1, gkp1, dkp1, rkp1, fevals_1PGCG, actions_1PGCG = solveForNextPGCGIterate(xk, gk, dk, rk, num, G, A, AAT, verbose=printOrNot_ECQP)
+        xkp1, gkp1, dkp1, rkp1, fevals_1PGCG, actions_1PGCG = solveForNextPGCGIterate(xk, gk, dk, rk, num, G, A, AAT, verbose=printOrNot_ECQP) # last two oargs are bogus
 
         fkp1 = f(xkp1, pECQP, getGradientToo=false)
-
-        fevals += fevals_1PGCG
-        actions = merge(+, actions, actions_1PGCG)
+        fevals += 1
+        fevals += fevals_1PGCG # bogus, does nothing
+        actions = merge(+, actions, actions_1PGCG) # bogus, does nothing
 
         @pack! solverState = actions, fevals
 

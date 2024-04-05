@@ -18,9 +18,9 @@ x☆[4] = -0.8714446849973491
 x☆[5] = 0.8690976321842857
 x☆[6] = -0.2366249225414304
 ***************************
-Number of fevals = 1
+Number of fevals = 18
 Number of gevals = 0
-Number of evals = 1
+Number of evals = 18
 **************************************************
 Tolerance critera used:
 PGCG Tolerance = 1.0e-6

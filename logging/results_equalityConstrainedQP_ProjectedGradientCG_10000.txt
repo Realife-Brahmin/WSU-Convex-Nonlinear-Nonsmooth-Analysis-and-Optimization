@@ -1,0 +1,26 @@
+****************************
+Solver run has concluded.
+Function solved for: equalityConstrainedQP()
+Cause(s) for stopping:
+Convergence Tolerance Reached
+Convergence achieved in 0 iterations 😄
+****************************
+Method Used: ProjectedGradientCG
+
+****************************
+Optimal function value = 0.8134044783610334
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 27.513335927368416
+x☆[2] = -10.705764022445294
+x☆[3] = 0.2379823766113045
+x☆[4] = -0.8706914040113949
+x☆[5] = 0.8694862644829779
+x☆[6] = -0.2367772370828849
+***************************
+Number of fevals = 1
+Number of gevals = 0
+Number of evals = 1
+**************************************************
+Tolerance critera used:
+PGCG Tolerance = 1.0e-6

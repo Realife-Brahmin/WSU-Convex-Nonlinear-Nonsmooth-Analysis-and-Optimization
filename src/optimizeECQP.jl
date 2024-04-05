@@ -57,7 +57,6 @@ function optimizeECQP(pr;
         @unpack xk, gk, dk, rk = solState
         # saving the current iterates to solState
         km1, xkm1, gkm1, dkm1, rkm1 = k, xk, gk, dk, rk
-        @show rk, gk
         num = transpose(rk)*gk
 
         if k >= maxiter

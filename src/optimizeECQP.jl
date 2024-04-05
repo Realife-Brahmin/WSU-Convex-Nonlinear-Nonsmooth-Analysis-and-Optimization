@@ -18,12 +18,11 @@ function optimizeECQP(pr;
     progress = pr.alg[:progress]
     maxiter = pr.alg[:maxiter]
     dftol = pr.alg[:dftol]
+    tol = pr.alg[:tol]
 
     x0 = pr.x0
     n = length(x0)
     xk = x0
-
-    popSize = min(popSize, n + 1)
 
     fvals = zeros(Float64, maxiter)
     xvals = zeros(Float64, n, maxiter)
@@ -31,29 +30,32 @@ function optimizeECQP(pr;
     # doing this even though GA requires multiple f evals
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     f = pr.objective
-    pDict = pr.p
+    pECQP = pr.p
+    @unpack G, c, A, b = pECQP
 
-    fk = f(x0, pDict, getGradientToo=false)
+    # f0 = equalityConstrainedQP(w0, pECQP)
+    f0 = f(x0, pECQP, getGradientToo=false)
+
+    solState = SolStatePGCGType(x0, G, c, A, fk=f0)
+
     @unpack fevals = solverState
     fevals += 1
     @pack! solverState = fevals
 
     myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
 
-    X0, F0, f0 = createInitialPopulation(x0, popSize, f, pDict, deviationFactor=deviation, verbose=verbose) # the first element of the next generation is expected to be the best one
-
-    @unpack fevals = solverState
-    fevals += popSize
-    @pack! solverState = fevals
-
-    solState = SolStateECQPType(Xk=X0, Fk=F0, fk=f0)
-
     keepIterationsGoing = true
     causeForStopping = []
 
     while keepIterationsGoing
 
-        @unpack k, fvalRepeats = solverState
+        @unpack k = solverState
+
+        @unpack xk, gk, dk, rk = solState
+        # saving the current iterates to solState
+        km1, xkm1, gkm1, dkm1, rkm1 = k, xk, gk, dk, rk
+
+        num = transpose(rk)*gk
 
         if k >= maxiter
             push!(causeForStopping, "Iteration limit reached!")
@@ -65,18 +67,15 @@ function optimizeECQP(pr;
             break
         end
 
-        @unpack Xk, Fk, fk = solState
-        # saving the current iterates to solState
-        Xkm1, Fkm1, fkm1 = Xk, Fk, fk
-        @pack! solState = Xkm1, Fkm1, fkm1
+    
+        @pack! solState = km1, xkm1, gkm1, dkm1, rkm1
 
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_GA = printOrNot & verbose_ls
 
         myprintln(printOrNot, "Iteration k = $(k)", log_path=log_txt)
 
-        Xkp1, Fkp1, fkp1, fevals_1GA, actions_1GA = deriveNextGeneration(Xk, Fk, fk, f, pDict, delta=delta, deviation=deviation, Dist=Dist,
-            parentsSurvive=parentsSurvive, dftol=dftol, verbose=printOrNot_GA) # first element should be the best one
+        
 
         @unpack actions, fevals = solverState
 

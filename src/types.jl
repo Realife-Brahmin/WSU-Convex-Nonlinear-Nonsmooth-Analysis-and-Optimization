@@ -164,6 +164,16 @@ function SolStatePGCGType(xk, G, c, A;
     return solState
 end
 
+function SolverStateECQPType(;
+    k=0,
+    fevals=0,
+    actions=Dict()
+    )
+
+    return Dict(:k => k, :fevals => fevals, :actions => actions)
+
+end
+
 """
     SolStateGAType(; k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),
                     Fkm1=zeros(0), Fk=zeros(0), fkm1=100.0, fk=100.0)

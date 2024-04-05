@@ -40,7 +40,7 @@ function optimizeECQP(pr;
 
     f0 = f(x0, pECQP, getGradientToo=false)
     fk = f0
-    solState = SolStatePGCGType(x0, G, c, A, fk=f0)
+    solState = SolStatePGCGType(x0, G, c, A, fk=f0, tol=tol)
 
     @unpack fevals = solverState
     fevals += 1

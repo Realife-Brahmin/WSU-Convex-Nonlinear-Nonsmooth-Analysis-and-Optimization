@@ -5,10 +5,24 @@ function plot_fval_vs_iterations(res;
         functionName = string(pr.objective)
         theme(:dao)
         fvals = res.fvals
-        f = res.fvals[end]
-        x = res.xvals[:, end]
-        n = length(x)
         itr = length(fvals)
+        if itr == 0 # x0 is x☆
+            x0 = pr.x0
+            pDict = pr.p
+            f0 = pr.objective(x0, pDict, getGradientToo=false)
+            x☆ = x0
+            f☆ = f0
+            x = x☆
+            f = f☆
+        else
+            x☆ = xvals[:, itr]
+            f☆ = fvals[itr]
+            f = res.fvals[end]
+            x = res.xvals[:, end]
+        end
+
+        n = length(x)
+
     
         gr()
         p1 = Plots.plot(1:itr, fvals,
@@ -17,7 +31,7 @@ function plot_fval_vs_iterations(res;
             guidefont = font(15,"Computer Modern"),
             label = L"f",
             ylabel = L"f",
-            xlabel = L"itr",
+            xlabel = L"Iteration",
             linewidth = 3,
             markersize = 2,
             alpha = 1.0,

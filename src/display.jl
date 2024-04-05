@@ -82,7 +82,16 @@ function showresults(res::NamedTuple;
     
     n = size(xvals, 1)
     itr = size(xvals, 2)
+    if itr == 0 # x0 is x☆
+        x0 = pr.x0
+        pDict = pr.p
+        f0 = pr.objective(x0, pDict, getGradientToo=false)
+        x☆ = x0
+        f☆ = f0
+    else
     x☆ = xvals[:, itr]
+        f☆ = fvals[itr]
+    end
 
     myprintln1(v, "****************************")
     
@@ -96,7 +105,7 @@ function showresults(res::NamedTuple;
         @error "bad condition"
     end
 
-    fvalMessageMinimum = fvalPrefixMinimum*"$(fvals[itr])"
+    fvalMessageMinimum = fvalPrefixMinimum*"$(f☆)"
 
     myprintln1(v, fvalMessageMinimum)
 

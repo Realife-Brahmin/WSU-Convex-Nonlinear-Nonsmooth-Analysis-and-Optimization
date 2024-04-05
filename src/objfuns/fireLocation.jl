@@ -3,6 +3,44 @@ include("equalityConstrainedQP.jl")
 
 using Parameters
 
+"""
+    fireLocation(x::Vector{Float64}, pDict; verbose=false, log=true, getGradientToo=true)
+
+Calculate the squared residuals of fire location estimates from ranger stations and optionally return the gradient of the residuals.
+
+This function evaluates the sum of squares of residuals from predicted fire locations based on inputs from ranger stations. It's designed to support optimization algorithms, particularly those requiring objective function values and gradients.
+
+# Arguments
+- `x::Vector{Float64}`: A vector representing the estimated coordinates of the fire.
+- `pDict`: A dictionary containing problem-specific parameters. Must include:
+    - `B`: The matrix representing the directional vectors from ranger stations towards the fire.
+    - `d`: The vector representing distances or directional magnitudes towards the fire from each ranger station.
+
+# Keyword Arguments
+- `verbose::Bool=false`: If `true`, enables the printing of function-specific messages.
+- `log::Bool=true`: If `true`, logs execution details. Currently not used within the function but can be implemented for logging purposes.
+- `getGradientToo::Bool=true`: If `true`, the function also returns the gradient of the objective function with respect to `x`.
+
+# Returns
+- If `getGradientToo` is `false`, returns the sum of squares of residuals (`f`).
+- If `getGradientToo` is `true`, returns a tuple (`f`, `g`) where `f` is the sum of squares of residuals, and `g` is the gradient of `f` with respect to `x`.
+
+# Context
+This function is utilized in the context of locating a fire given observations from ranger stations. These stations, at known coordinates, observe the fire at specific angles, forming a system of equations `A*x = b`, where `x` represents the fire's location. This function computes the total residual squares (`f`) for an estimated point `x` from the respective 'lines' determined by the observations and the stations' locations. It's particularly useful as part of an Extended Constrained Quadratic Programming (ECQP) solver or other optimization frameworks that require an objective function and its gradient.
+
+# Example
+```julia
+# Assuming B and d are defined based on ranger station observations
+x_estimate = [1.0, 2.0]  # Initial estimate of the fire's location
+pDict = Dict(:B => B_matrix, :d => d_vector)
+
+# Calculate only the objective function value
+fval = fireLocation(x_estimate, pDict, getGradientToo=false)
+
+# Calculate both the objective function value and its gradient
+fval, grad = fireLocation(x_estimate, pDict)
+```
+"""
 function fireLocation(x::Vector{Float64}, 
     pDict;
     verbose::Bool=false,

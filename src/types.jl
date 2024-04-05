@@ -133,7 +133,50 @@ function SolverStateNMType(;
 
 end
 
+"""
+    SolStatePGCGType(xk, G, c, A; fkm1=100.0, fk=100.0, tol=1e-6) -> Dict
 
+Initializes the state dictionary for the Projected Gradient Conjugate Gradient (PGCG) Descent algorithm, applied to Extended Constrained Quadratic Programming (ECQP) problems. The state dictionary includes initial values for the algorithm's iterative process, encapsulating both vector quantities and scalar metrics that define the current and previous states.
+
+# Arguments
+- `xk`: The initial point (vector) in the optimization space, which could be denoted as `wk` in certain contexts, implying a specific interpretation related to the problem formulation.
+- `G`: The quadratic coefficient matrix from the objective function of the ECQP.
+- `c`: The linear coefficient vector from the objective function of the ECQP.
+- `A`: The matrix representing linear equality constraints in the ECQP.
+
+# Keyword Arguments
+- `fkm1=100.0`: The objective function value at the previous iteration's point. Default is set to a high value (100.0) as a placeholder.
+- `fk=100.0`: The objective function value at the initial point `xk`. Default is set to a high value (100.0) as a placeholder.
+- `tol=1e-6`: The tolerance level for convergence criteria. Default is `1e-6`.
+
+# Returns
+- `Dict`: A dictionary (`solState`) containing initial and placeholder values for the algorithm's state, including:
+    - Iteration counters `km1` and `k`
+    - Previous and current points `xkm1` and `xk`
+    - Residual vectors `rkm1` and `rk`
+    - Gradient vectors `gkm1` and `gk`
+    - Search direction vectors `dkm1` and `dk`
+    - Objective function values `fkm1` and `fk`
+    - Tolerance level `tol`
+
+# Special Functions
+- `myzeros(xk)`: A hypothetical function that generates a zero vector of the same dimension as `xk`.
+- `myfill(vector, value)`: A hypothetical function that fills a vector (of the same dimension as the input `vector`) with a specified `value`.
+
+The function calculates the initial residual `rk` and the gradient `gk` based on the input `xk`, `G`, `c`, and `A`. It also prepares the initial search direction `dk` and sets up placeholders for previous iterations' values to facilitate the PGCG algorithm's iterative process.
+
+# Example
+```julia
+# Define the ECQP problem parameters
+G = [2 0; 0 2]
+c = [-1; -1]
+A = [1 1]
+xk = [0.5; 0.5]
+
+# Initialize the solution state for the PGCG algorithm
+solState = SolStatePGCGType(xk, G, c, A)
+```
+"""
 function SolStatePGCGType(xk, G, c, A; 
     fkm1=100.0,
     fk=100.0,
@@ -164,6 +207,29 @@ function SolStatePGCGType(xk, G, c, A;
     return solState
 end
 
+"""
+    SolverStateECQPType(; k=0, fevals=0, actions=Dict()) -> Dict
+
+Initializes the state dictionary for an Extended Constrained Quadratic Programming (ECQP) solver. The state dictionary contains key metrics and action records that define the solver's current status and history of operations.
+
+# Keyword Arguments
+- `k::Int=0`: The current iteration index in the ECQP solver. Initializes to `0`, representing the starting iteration.
+- `fevals::Int=0`: The total number of objective function evaluations performed up to the current iteration. Useful for monitoring the computational cost of the solving process.
+- `actions::Dict`: A dictionary with keys representing different actions or events in the ECQP solving process and values indicating the count of each action/event. This could include actions such as "gradient evaluations", "constraint evaluations", "line searches", etc., depending on what is relevant to the ECQP solver's implementation.
+
+# Returns
+- `Dict`: A dictionary object encapsulating the ECQP solver's state, including iteration count, function evaluations, and actions taken.
+
+# Example
+```julia
+# Initialize an ECQP solver state with default values
+solverState = SolverStateECQPType()
+
+# Initialize an ECQP solver state with a custom iteration index and actions
+customActions = Dict("gradient evaluations" => 10, "line searches" => 5)
+solverStateCustom = SolverStateECQPType(k=3, fevals=15, actions=customActions)
+```
+"""
 function SolverStateECQPType(;
     k=0,
     fevals=0,

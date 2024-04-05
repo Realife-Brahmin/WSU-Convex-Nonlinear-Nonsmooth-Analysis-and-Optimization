@@ -1,6 +1,7 @@
 include("linesearches.jl")
 include("findDirection.jl")
 include("types.jl")
+include("optimizeECQP.jl")
 include("optimizeGA.jl")
 include("optimizeNM.jl")
 
@@ -241,6 +242,9 @@ function warm_start_optimize(pr;
             x0 = extrapolate(xopt, factor)
             n = length(x0)
         end
+    
+    elseif pr.alg[:method] == "ProjectedGradientCG"
+        @time res = optimizeECQP(pr, verbose=verbose, verbose_ls=verbose_ls)
         
     elseif pr.alg[:method] == "NelderMead"
         @time res = optimizeNM(pr, verbose=verbose, verbose_ls=verbose_ls)

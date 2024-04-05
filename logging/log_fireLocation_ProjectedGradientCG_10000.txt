@@ -1,4 +1,4 @@
-Starting with initial point x = [1.0, 1.0, -13.787397971733316, -9.789791529468646, -3.732050807568877, 1.5666781464610016].
-which has fval = 151.15752233314302
+Starting with initial point x = [1.0, 1.0, -13.734932759921616, -9.736162027147426, -3.604884260053753, 1.3959204498000914].
+which has fval = 149.19250668449445
 Iteration k = 1
-Convergence achieved in 17 iterations 😄
+Convergence achieved in 23 iterations 😄

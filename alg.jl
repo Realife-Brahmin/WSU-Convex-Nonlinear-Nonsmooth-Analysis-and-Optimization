@@ -2,8 +2,8 @@ include("src/helperFunctions.jl")
 
 
 function create_algorithm_settings(;
-        # problemType = "Unconstrained",
-        problemType = "ECQP",
+        problemType = "Unconstrained",
+        # problemType = "ECQP",
         # method = "ConjugateGradientDescent",
         # method = "GeneticAlgorithm",
         # method = "GradientDescent",

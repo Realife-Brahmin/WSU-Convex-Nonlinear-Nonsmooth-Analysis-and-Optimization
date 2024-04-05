@@ -221,36 +221,6 @@ function SolverStateGAType(;
 
 end
 
-mutable struct SolverStateType
-    k::Int
-    fevals::Int
-    gevals::Int
-    Hevals::Int
-    alpha_evals::Int # only current evals
-    success_ls::Bool
-
-    function SolverStateType(;
-        k=1,
-        fevals=0,
-        gevals=0,
-        Hevals=0,
-        success_ls=false)
-        new(k, fevals, gevals, Hevals, success_ls)
-    end
-end
-
-# # Example usage:
-# sol_state = SolStateNMType(k=0, Xkm1=Matrix{Float64}(undef, 3, 3), Xk=Matrix{Float64}(undef, 3, 3),
-#     Fkm1=Float64[], Fk=Float64[], Delta=0.1)
-
-# # Mutate the SolStateNMType instance within an iteration (if needed)
-# sol_state[:k] = 1
-# sol_state[:Xkm1] = rand(3, 3)
-# sol_state[:Xk] = rand(3, 3)
-# sol_state[:Fkm1] = rand(3)
-# sol_state[:Fk] = rand(3)
-# sol_state[:Delta] = 0.2
-# sol_state
 """
     SolverStateType
 

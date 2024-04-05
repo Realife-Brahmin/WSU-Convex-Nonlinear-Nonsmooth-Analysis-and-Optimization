@@ -1,3 +1,5 @@
+include("projectedGradientConjugateGradient.jl")
+
 function optimizeECQP(pr;
     verbose::Bool=false,
     verbose_ls::Bool=false,
@@ -79,8 +81,7 @@ function optimizeECQP(pr;
 
         @unpack actions, fevals = solverState
 
-        fevals += fevals_1GA
-        actions = merge(+, actions, actions_1GA)
+        xkp1, gkp1, dkp1, rkp1, fevals_1PGCG, actions_1PGCG = solveForNextPGCGIterate(xk, gk, dk, rk, num, G, A, AAT, verbose=printOrNot_ECQP)
         @pack! solverState = actions, fevals
 
         # I prefer to only number a completed iteration, as opposed to numbering an in-process/about-to-begin iteration

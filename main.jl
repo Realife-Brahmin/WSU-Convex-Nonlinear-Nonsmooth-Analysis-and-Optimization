@@ -31,7 +31,7 @@ functionName = "fireLocation";
 # include("src/objfuns/TestFunctions_own.jl")
 # functionName = "Rastrigin"
 
-pr = include("src/objfuns/"*String(functionName)*".jl")
+pr = include("src/objfuns/"*functionName*".jl")
 
 # res = @btime begin
 @time begin

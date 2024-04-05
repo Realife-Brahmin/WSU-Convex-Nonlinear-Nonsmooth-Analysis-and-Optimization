@@ -36,7 +36,7 @@ d = c_line
 x0 = B \ d
 r0 = B * x0 - d
 w0 = vcat(x0, r0)
-
+# w0 = ???
 # params = Dict(:B=>B, :d=>d);
 
 # objective = fireLocation;

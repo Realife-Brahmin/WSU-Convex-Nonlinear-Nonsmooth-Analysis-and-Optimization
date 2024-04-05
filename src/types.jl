@@ -164,34 +164,6 @@ function SolStatePGCGType(xk, G, c, A;
     return solState
 end
 
-# To use this function, xk, G, A, and c need to be defined.
-# Example:
-# xk = randn(n)  # Initial xk, n-dimensional
-# G = randn(n, n)  # G, n x n matrix
-# A = randn(m, n)  # A, m x n matrix
-# c = randn(n)  # c, n-dimensional vector
-# solState = SolStatePGCGType(xk, G, A, c)
-
-# function SolverStatePGCGType(;
-#     k=0,
-#     fevals=0,
-#     fvalRepeats=0,
-#     actions=Dict(
-#         :bothParentsSurvived => 0,
-#         :crossover => 0,
-#         :genFitnessImproved => 0,
-#         :genFitnessNotImproved => 0,
-#         :mutation => 0,
-#         :noParentSurvived => 0,
-#         :parentsSelected => 0,
-#         :onlyOneParentSurvived => 0
-#     )
-# )
-
-#     return Dict(:k => k, :fevals => fevals, :fvalRepeats => fvalRepeats, :actions => actions)
-
-# end
-
 function SolStateGAType(; 
     k=0, Xkm1=zeros(0, 0), Xk=zeros(0, 0),
     Fkm1=zeros(0), Fk=zeros(0), fkm1=100.0, fk=100.0

@@ -4,7 +4,7 @@ function equalityConstrainedQP(w::Vector{Float64},
     log::Bool=true,
     getGradientToo::Bool=false) # yes, false by default
 
-    @unpack G, A, c, b = pDict
+    @unpack G, A, c, b = pDict[:params]
     f = 1//2*transpose(w)*G*w + transpose(w)*c
 
     if getGradientToo

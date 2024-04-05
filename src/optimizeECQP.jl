@@ -6,7 +6,8 @@ function optimizeECQP(pr;
     log::Bool=true,
     log_path::String="./logging/")
 
-    log_txt = log_path * "log_" * string(pr.objective) * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
+    objString = pr.objectiveString
+    log_txt = log_path * "log_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
 
     if isfile(log_txt)
         rm(log_txt)

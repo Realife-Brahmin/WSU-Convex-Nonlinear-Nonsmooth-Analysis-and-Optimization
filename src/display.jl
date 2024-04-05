@@ -15,12 +15,13 @@ function showresults(res::NamedTuple;
 
     @unpack pr = res
     @unpack method = pr[:alg]
-    
+    objString = pr.objectiveString
+
     if method == "NelderMead"
         @unpack converged, statusMessage, xvals, fvals, fevals, cause = res
         gevals = 0
 
-        result_txt = log_path * "results_" * string(pr.objective) * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
+        result_txt = log_path * "results_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
 
         lsMsg = ""
 
@@ -32,7 +33,7 @@ function showresults(res::NamedTuple;
         @unpack dftol = pr[:alg]
         gevals = 0
 
-        result_txt = log_path * "results_" * string(pr.objective) * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
+        result_txt = log_path * "results_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
 
         lsMsg = ""
 
@@ -43,7 +44,7 @@ function showresults(res::NamedTuple;
         @unpack tol = pr[:alg]
         gevals = 0
 
-        result_txt = log_path * "results_" * string(pr.objective) * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
+        result_txt = log_path * "results_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
 
         lsMsg = ""
 
@@ -51,7 +52,7 @@ function showresults(res::NamedTuple;
 
     else
         @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals, cause = res
-        result_txt = log_path * "results_" * string(pr.objective) * "_" * pr.alg[:method] * "_" * pr.alg[:linesearch] * "_" * string(pr.alg[:maxiter]) * ".txt"
+        result_txt = log_path * "results_" * objString * "_" * pr.alg[:method] * "_" * pr.alg[:linesearch] * "_" * string(pr.alg[:maxiter]) * ".txt"
         lsMsg = "Linesearch method used: " * pr.alg[:linesearch]
 
         tolMsg = "dftol = $(res.pr.alg[:dftol])"
@@ -75,7 +76,7 @@ function showresults(res::NamedTuple;
     v = true
     myprintln1(v, "****************************")
     myprintln1(true, "Solver run has concluded.")
-    myprintln1(true, "Function solved for: $(pr.objective)()")
+    myprintln1(true, "Function solved for: $(objString)()")
     myprintln1(true, "Cause(s) for stopping:")
     causeForStopping = res.cause
     for msg ∈ causeForStopping

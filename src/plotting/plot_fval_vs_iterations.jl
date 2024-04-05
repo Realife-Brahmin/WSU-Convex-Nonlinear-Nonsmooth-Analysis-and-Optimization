@@ -15,10 +15,10 @@ function plot_fval_vs_iterations(res;
             x = x☆
             f = f☆
         else
-            x☆ = xvals[:, itr]
-            f☆ = fvals[itr]
-            f = res.fvals[end]
-            x = res.xvals[:, end]
+            x☆ = res.xvals[:, itr]
+            f☆ = res.fvals[itr]
+            f = f☆
+            x = x☆
         end
 
         n = length(x)

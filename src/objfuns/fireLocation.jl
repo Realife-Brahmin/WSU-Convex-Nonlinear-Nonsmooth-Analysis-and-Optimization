@@ -74,7 +74,7 @@ m, n = size(B_unnormalized)
 d_unnormalized = c_line
 
 normalizeConstraints = false
-normalizeConstraints = true
+# normalizeConstraints = true
 
 if normalizeConstraints
     B, d = normalizeLinearConstraints(B_unnormalized, d_unnormalized)

@@ -27,13 +27,17 @@ end
 # Define the quadratic and linear terms of the objective function
 G = [2 0; 0 2]
 c = [-4; -6]
-
+# c = zeros(2)
 # Define the constraints
 A = [1 1]
 b = [1]
 
 # Initial guess
-x0 = [0.5; 0.5]
+x0 = A\b
+# x0 = [0.5; 0.5]
+# frac = rand()
+# x0 = [frac, 1-frac]
+# x0 = [1.0, 0.0]
 
 pECQP = Dict(:G=>G, :c=>c, :A=>A, :b=>b )
 

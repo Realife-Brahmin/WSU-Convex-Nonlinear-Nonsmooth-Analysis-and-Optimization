@@ -160,7 +160,7 @@ function optimizeECQP(pr;
     res = (converged=converged, statusMessage=statusMessage, xvals=xvals, fvals=fvals, fevals=fevals, cause=causeForStopping, pr=pr, solState=solState,
         solverState=solverState)
 
-    res = trim_array(res, k - 1)
+    res = trim_array(res, k)
 
     return res
 

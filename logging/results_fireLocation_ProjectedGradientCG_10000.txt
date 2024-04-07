@@ -3,24 +3,24 @@ Solver run has concluded.
 Function solved for: fireLocation()
 Cause(s) for stopping:
 Convergence Tolerance Reached
-Convergence achieved in 23 iterations 😄
+Convergence achieved in 24 iterations 😄
 ****************************
 Method Used: ProjectedGradientCG
 
 ****************************
-Optimal function value = 0.7776096224183379
+Optimal function value = 0.8134044784516021
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 27.576438634542125
-x☆[2] = -10.717652180426414
-x☆[3] = 0.2544194650834276
-x☆[4] = -0.8606946609993322
-x☆[5] = 0.8350101348746181
-x☆[6] = -0.22902566626309584
+x☆[1] = 27.513315348638834
+x☆[2] = -10.705754936842142
+x☆[3] = 0.23797149060260836
+x☆[4] = -0.8706983267029059
+x☆[5] = 0.8694826929337991
+x☆[6] = -0.23677583729959728
 ***************************
-Number of fevals = 24
+Number of fevals = 25
 Number of gevals = 0
-Number of evals = 24
+Number of evals = 25
 **************************************************
 Tolerance critera used:
 PGCG Tolerance = 1.0e-10

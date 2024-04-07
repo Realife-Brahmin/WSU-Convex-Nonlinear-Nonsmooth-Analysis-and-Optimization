@@ -114,7 +114,7 @@ function create_algorithm_settings(;
                 alg_settings[:lambda] = "NA"
                 alg_settings[:lambdaMax] = "NA"
                 alg_settings[:tol] = 1e-10
-                alg_settings[:progress] => progress
+                alg_settings[:progress] => 1
                 
         elseif alg_settings[:method] == "QuasiNewton"
                 # Adjustments for QuasiNewton

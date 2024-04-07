@@ -8,11 +8,11 @@ Convergence achieved in 1 iterations 😄
 Method Used: ProjectedGradientCG
 
 ****************************
-Optimal function value = -4.5
+Optimal function value = -5.0
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.5
-x☆[2] = 0.5
+x☆[1] = -4.440892098500626e-16
+x☆[2] = 1.0000000000000004
 ***************************
 Number of fevals = 2
 Number of gevals = 0

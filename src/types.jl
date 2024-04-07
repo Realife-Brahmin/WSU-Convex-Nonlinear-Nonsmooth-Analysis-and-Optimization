@@ -186,8 +186,8 @@ function SolStatePGCGType(xk, G, c, A;
 
     rk = G * xk + c
 
-    AAT_inv = inv(A * A')
-    gk = rk - A' * (AAT_inv * (A * rk))
+    AAT_inv = inv(A * transpose(A))
+    gk = rk - transpose(A) * AAT_inv * A * rk
 
     # Initialize dk
     dk = -gk

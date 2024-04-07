@@ -17,7 +17,8 @@ warmStart = true
 
 # functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
-functionName = "fireLocation";
+functionName = "ecqpTestFunction1"
+# functionName = "fireLocation";
 # functionName = "nnloss";
 # functionName = "pathtime"
 # functionName = "receiverLocation"

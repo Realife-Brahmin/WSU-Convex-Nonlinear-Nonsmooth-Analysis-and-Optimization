@@ -1,0 +1,22 @@
+****************************
+Solver run has concluded.
+Function solved for: ecqpTestFunction1()
+Cause(s) for stopping:
+Convergence Tolerance Reached
+Convergence achieved in 1 iterations 😄
+****************************
+Method Used: ProjectedGradientCG
+
+****************************
+Optimal function value = -4.5
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 0.5
+x☆[2] = 0.5
+***************************
+Number of fevals = 2
+Number of gevals = 0
+Number of evals = 2
+**************************************************
+Tolerance critera used:
+PGCG Tolerance = 1.0e-10

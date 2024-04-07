@@ -48,7 +48,7 @@ function fireLocation(x::Vector{Float64},
     getGradientToo::Bool=true)
     
     n = length(x)
-    @unpack B, d = pDict
+    @unpack B, d = pDict[:params]
     r = B*x - d
     f = 1//2 *sum(r.^2)
 

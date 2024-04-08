@@ -1,0 +1,3 @@
+Starting with initial point x = [1.9999999999999996, -0.9999999999999999, 1.0].
+which has fval = -3.5000000000000018
+Convergence achieved in 0 iterations 😄

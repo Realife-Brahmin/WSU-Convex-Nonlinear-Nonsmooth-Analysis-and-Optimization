@@ -1,6 +1,7 @@
 include("objective.jl")
 include("equalityConstrainedQP.jl")
 
+using LinearAlgebra
 using Parameters
 
 # Nocedal and Wright Example 1 in QP formulation
@@ -12,8 +13,10 @@ A = [1 0 1; 0 1 1]
 b = [3, 0]
 
 # Initial guess
-x0 = A\b
+p = vec(nullspace(A))
 
+x00 = A\b
+x0 = x00 + rand()*p
 pECQP = Dict(:G=>G, :c=>c, :A=>A, :b=>b )
 
 objective = equalityConstrainedQP

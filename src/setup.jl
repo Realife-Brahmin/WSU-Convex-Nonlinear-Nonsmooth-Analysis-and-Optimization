@@ -6,6 +6,8 @@ using Base.Threads
 using BenchmarkTools
 using CSV
 using DataFrames
+using HiGHS
+using JuMP
 using LaTeXStrings
 using LinearAlgebra
 using Parameters

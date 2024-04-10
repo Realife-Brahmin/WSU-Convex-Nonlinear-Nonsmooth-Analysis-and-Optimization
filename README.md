@@ -1,4 +1,4 @@
-# MATH 564: Convex and Nonlinear Optimization and MATH 565 Nonsmooth Analysis and Optimization
+# MATH 564: Convex and Nonlinear Optimization and MATH 565: Nonsmooth Analysis and Optimization
 ## Prof. Thomas Asaki | Fall 2023 and Spring 2024
 <img src = "https://s3.wp.wsu.edu/uploads/sites/3144/2023/03/fall-preview-photo.jpg" height = 250pt> <img src = "https://s3.wp.wsu.edu/uploads/sites/227/2022/10/photo_serv_3668_large.jpg" height = 250pt>
  <!--  
@@ -8,20 +8,31 @@
 
 This repo contains a solver in julia , and different types of optimization problems to solve for.
 
-## Projects as part of the course:
+## Projects as part of the two courses:
 - Parameter Estimation (Estimating DampedSHM parameters)
 - Functional Estimation (Estimating a function which minimizes drag force)
 - Signal Denosing (Fitting a curve to data, choosing between abiding smoothness of curve or accuracy of fitting)
 - Neural Network Training (Detecting Liver Disease in a dataset of patients based on 10 features)
 - Minimum Time Trajectory (for a 2D Speed Matrix, and given points A and B on the plane, compute the trajectory minimizing the time of travel)
 - Final Project (Computing the optimal placement of a receiver, given the location of several transmitters)
+- Derivative Free Optimization Methods (implementation of Genetic Algorithm and Nelder Mead Simplex Method)
+- Equality Constrained Quadratic Programming (detecting location of fire based on some boundary constraints which can be expressed as an ECQP)
   
 ## LineSearch/TrustRegion Methods Used:
-- Conjugate Gradient Descent
 - Gradient Descent
 - Quasi Newton BFGS
-- SR1 based Trust Region Method
+- Projected Gradient Conjugate Gradient Method
+- Note: Conjugate Gradient Descent Method hasn't been supported in a while, and has issues.
+- Note: SR1 based Trust Region Method implementation has been indefinitely paused, in favour of more urgent tasks.
 
+## Heuristic Methods Available:
+- Genetic Algorithm
+- Nelder Mead Simplex Algorithm
+
+## Space Sampling Methods Available:
+- Halton Sequence Sampling
+- Latin Hypercube Sampling
+  
 ## Step-selection Algorithms Used:
 - Strong Wolfe + Bisection Interpolation
 - Armijo + Backtracking (support removed, always use Strong Wolfe henceforth

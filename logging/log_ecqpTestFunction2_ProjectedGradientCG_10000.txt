@@ -1,3 +1,3 @@
-Starting with initial point x = [1.6979435121047095, -1.3020564878952903, 1.3020564878952905].
-which has fval = -2.906952207782357
+Starting with initial point x = [1.9980324926868989, -1.001967507313101, 1.0019675073131011].
+which has fval = -3.499974837947322
 Convergence achieved in 1 iterations 😄

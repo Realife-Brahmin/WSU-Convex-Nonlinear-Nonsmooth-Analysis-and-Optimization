@@ -2,8 +2,8 @@ include("src/helperFunctions.jl")
 
 
 function create_algorithm_settings(;
-        # problemType = "Unconstrained",
-        problemType = "ECQP",
+        problemType = "Unconstrained",
+        # problemType = "ECQP",
         # method = "ConjugateGradientDescent",
         # method = "GeneticAlgorithm",
         # method = "GradientDescent",
@@ -54,7 +54,9 @@ function create_algorithm_settings(;
 
         elseif alg_settings[:problemType] == "Unconstrained"
                 # don't change method from whatever I specified
-
+                if alg_settings[:method] == "ProjectedGradientCG" # by mistake
+                        alg_settings[:method] = "QuasiNewton"
+                end
         else
                 @error "Unknown method"
         end
@@ -137,7 +139,7 @@ function create_algorithm_settings(;
 end
 
 # Example usage
-alg = create_algorithm_settings()
+# alg = create_algorithm_settings()
 
 
 

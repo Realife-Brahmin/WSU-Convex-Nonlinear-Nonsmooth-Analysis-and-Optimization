@@ -6,7 +6,7 @@ println("Your machine has a total of $(Sys.CPU_THREADS) available threads.")
 # verbose = false
 verbose = true;
 verbose_ls = false;
-verbose_ls = true;
+# verbose_ls = true;
 # verbose_ls = verbose & verbose_ls
 logging = true; 
 profiling = false;
@@ -29,7 +29,7 @@ warmStart = true
 # functionName = "TestFunction3";
 
 # functionName = "ecqpTestFunction1"
-functionName = "ecqpTestFunction2"
+# functionName = "ecqpTestFunction2"
 # functionName = "Rastrigin"
 
 pr = include("src/objfuns/"*functionName*".jl")

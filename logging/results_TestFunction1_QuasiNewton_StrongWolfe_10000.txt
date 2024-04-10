@@ -1,7 +1,6 @@
 ****************************
 Solver run has concluded.
 Function solved for: TestFunction1()
-This was a function minimization problem.
 Cause(s) for stopping:
 LineSearch failed.
 Barely changing fval

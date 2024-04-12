@@ -54,3 +54,33 @@ plot_convex_hull!(P4, "P4")
 
 # Display the plot
 display(plot!())
+
+function convertPolygonToInequalities(vertices)
+    # Number of vertices
+    p = length(vertices)
+
+    # Initialize A and b
+    A = zeros(p, 2)
+    b = zeros(p)
+
+    for k in 1:p
+        # Compute indices for current and next vertex
+        current_vertex = vertices[k]
+        next_vertex = vertices[mod(k, p)+1] # Ensures that after the last vertex, it goes back to the first
+
+        # Calculate the coefficients for the inequalities
+        A[k, :] = [next_vertex[2] - current_vertex[2], current_vertex[1] - next_vertex[1]]
+        b[k] = A[k, 1] * current_vertex[1] + A[k, 2] * current_vertex[2]
+    end
+
+    return A, b
+end
+
+# Example usage:
+# Define the vertices of the convex polygon P_j
+# P_j = [(1, 2), (4, 3), (3, 7), (1, 5)]
+
+# Convert to inequalities
+# A0, b0 = convertPolygonToInequalities(P0)
+# A1, b1 = convertPolygonToInequalities(P1)
+(A0, b0), (A1, b1), (A2, b2), (A3, b3), (A4, b4) = convertPolygonToInequalities.([P0, P1, P2, P3, P4])

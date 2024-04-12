@@ -30,15 +30,19 @@ c = [1, 3, 5, 2]
 n = length(c)
 Ae = [1 1 9 5; 3 5 0 8; 2 0 6 13]
 be = [7, 3, 5]
+A = [0 0 -1 -1]
+b = [-1]
 # pLP = Dict(:c => c, :Ae => Ae, :be => be, :A => A, :b => b)
 
 vector_model = Model(HiGHS.Optimizer)
 @variable(vector_model, x[1:n] >= 0)
 @constraint(vector_model, Ae * x .== be)
+@constraint(vector_model, A * x .>= b)
 @objective(vector_model, Min, c' * x)
 optimize!(vector_model)
 @assert is_solved_and_feasible(vector_model)
-objective_value(vector_model)
+xopt = value.(x)
+fopt = objective_value(vector_model)
 # objective = LPObjectiveFunction
 # objectiveOriginal = LPObjectiveFunction
 # objectiveString = string(objectiveOriginal)

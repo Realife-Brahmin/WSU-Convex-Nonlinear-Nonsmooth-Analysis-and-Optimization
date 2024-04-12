@@ -1,3 +1,7 @@
+using HiGHS
+using JuMP
+using Parameters
+
 function solveLP(pr;
     verbose::Bool=false,
     verbose_ls::Bool=false,

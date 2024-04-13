@@ -25,13 +25,6 @@ function transmissionLines(w::Vector{Float64},
     
 end
 
-P0 = [(0, 2), (-4, 0), (-3, -2), (0, -2), (1, -1)]
-P1 = [(3, 1), (5, 3), (2, 5), (2, 3)]
-P2 = [(1, -4), (1, -6), (4, -6), (4, -4)]
-P3 = [(-2, -4), (-6, -3), (-3, -6)]
-P4 = [(-4, 3), (-2, 4), (-2, 6), (-6, 3)]
-
-
 function convertPolygonToConstraints(vertices)
     # Number of vertices
     p = length(vertices)
@@ -71,10 +64,35 @@ function convertPolygonToConstraints(vertices)
     return Ae, be, A, b
 end
 
-# # Example usage for a polygon
-# P_polygon = [(0, 2), (-4, 0), (-3, -2), (0, -2), (1, -1)]
-# Ae_poly, be_poly, A_poly, b_poly = convertPolygonToConstraints(P_polygon)
+P0 = [(0, 2), (-4, 0), (-3, -2), (0, -2), (1, -1)]
+xcentral = (0, 0) # should ideally check that xcentral actually lies inside P0
+A0e, b0e, A0i, b0i = convertPolygonToConstraints(P0)
 
-# # Example usage for a line segment
-# P_line_segment = [(1, 2), (4, 3)]
-# Ae_line, be_line, A_line, b_line = convertPolygonToConstraints(P_line_segment)
+beta = 1.0
+factor = 1.5
+alpha = factor * beta
+x01, x02 = xcentral
+α, β = alpha, beta
+G = [α+β 0 -α 0;
+    0 α+β 0 -α;
+    -α 0 α 0;
+    0 -α 0 α]
+
+c = [-β * x01, -β * x02, 0, 0]
+
+c0 = 1 // 2 * β * norm(xcentral)^2
+P1 = [(3, 1), (5, 3), (2, 5), (2, 3)]
+P2 = [(1, -4), (1, -6), (4, -6), (4, -4)]
+P3 = [(-2, -4), (-6, -3), (-3, -6)]
+P4 = [(-4, 3), (-2, 4), (-2, 6), (-6, 3)]
+P = [P0, P1, P2, P3, P4]
+
+poly = 1 # Polyhedron Number, 0 reserved for the community with the power station
+
+Ape, bpe, Api, bpi = convertPolygonToConstraints(P[poly])
+
+
+pDict = Dict()
+@pack! pDict = G, c, c0, Ae, be, A, b, poly
+
+

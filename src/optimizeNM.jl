@@ -8,10 +8,10 @@ Conducts optimization using the Nelder-Mead simplex method, equipped with extens
 
 # Parameters
 - `pr`: A problem definition object that encapsulates the objective function, its parameters, and initial guesses, alongside specific algorithmic configurations like step sizes and termination criteria.
-  - `objective`: The objective function to minimize. It should accept a vector of parameters and a dictionary of additional parameters, returning a scalar value.
-  - `x0`: Initial guess for the parameters, serving as the starting point for the optimization.
-  - `p`: Additional parameters required by the objective function, packed into a dictionary.
-  - `alg`: A dictionary containing algorithm-specific parameters such as `alpha`, `beta`, `gamma`, `delta`, `progress`, `maxiter`, and `DeltaTol`.
+    - `objective`: The objective function to minimize. It should accept a vector of parameters and a dictionary of additional parameters, returning a scalar value.
+    - `x0`: Initial guess for the parameters, serving as the starting point for the optimization.
+    - `p`: Additional parameters required by the objective function, packed into a dictionary.
+    - `alg`: A dictionary containing algorithm-specific parameters such as `alpha`, `beta`, `gamma`, `delta`, `progress`, `maxiter`, and `DeltaTol`.
 - `verbose`: If set to `true`, enables the output of detailed information about each iteration's progress and decisions made by the algorithm.
 - `verbose_ls`: Controls verbosity for specific aspects of the algorithm, such as line search or simplex adjustments, offering granular insights into the algorithm's execution.
 - `log`: Activates the logging of detailed optimization steps and results to a file, aiding in post-optimization analysis.

@@ -1,6 +1,7 @@
 include("linesearches.jl")
 include("findDirection.jl")
 include("types.jl")
+include("optimizeASQP.jl")
 include("optimizeECQP.jl")
 include("optimizeGA.jl")
 include("optimizeNM.jl")
@@ -243,6 +244,9 @@ function warm_start_optimize(pr;
             n = length(x0)
         end
     
+    elseif pr.alg[:method] == "ActiveSetQP"
+        @time res = optimizeASQP(pr, verbose=verbose, verbsoe_ls=verbose_ls)
+
     elseif pr.alg[:method] == "ProjectedGradientCG"
         @time res = optimizeECQP(pr, verbose=verbose, verbose_ls=verbose_ls)
         

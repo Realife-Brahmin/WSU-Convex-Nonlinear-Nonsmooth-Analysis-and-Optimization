@@ -15,7 +15,7 @@ benchmarking = true;
 
 warmStart = true
 
-functionName = "dampedSHM";
+# functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
 # functionName = "fireLocation";
 # functionName = "nnloss";
@@ -24,6 +24,7 @@ functionName = "dampedSHM";
 # functionName = "rosenbrock";
 # functionName = "signalDenoise";
 # functionName = "sphere";
+functionName = "transmissionLines";
 # functionName = "TestFunction1";
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";

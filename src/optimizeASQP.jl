@@ -54,20 +54,59 @@ function optimizeASQP(pr;
     while keepIterationsGoing
 
         @unpack k = solverState
-
-        @unpack xk, gk, dk, rk = solState
+        @unpack xk, fk, Wk = solState
         # saving the current iterates to solState
-        km1, xkm1, gkm1, dkm1, rkm1 = k, xk, gk, dk, rk
-        num = transpose(rk)*gk
-
+        km1, xkm1, fkm1, Wkm1 = k, xk, fk, Wk
+        
         if k >= maxiter
             push!(causeForStopping, "Iteration limit reached!")
             keepIterationsGoing = false
             break
-        elseif num < tol
-            push!(causeForStopping, "Convergence Tolerance Reached")
-            keepIterationsGoing = false
-            break
+        end
+
+        pk = getStepDirection() # write a function to invoke ECQP
+        WIk = Wk[mE+1:end] # contains only indices for inequality constraints (like [5, 7, 8])
+        Awk = A[WIk .- mE] # contains only working set inequality constraints (like A[ [2, 4, 5], :])
+
+        if norm(pk) < tol # stationary point wrt Wk
+
+            lambdas = computeLagrangianMultipliers(xk, G, c, Awk)
+
+            lambda_min, jI_min = findmin(lambdas)
+
+            if lambda_min >= 0
+                myprintln(verbose, "0 vector is the only feasible descent direction")
+
+                push!(causeForStopping, "No feasible improvement step possible from here.")
+                keepIterationsGoing = false
+                break
+
+            else
+                j_min = jI_min + mE
+                myprintln(verbose, "Working set constraint $(j_min) prevents a feasible step the hardest.")
+                myprintln(verbose, "So removing constraint $(j_min) from the working set")
+                xkp1 = xk
+                fkp1 = fk
+                Wkp1 = vcat(Wk[1:j_min-1], Wk[j_min+1:end])
+
+            end
+
+        elseif norm(pk) > tol
+
+            alphak = 1.0
+            jBlockClosest = 0
+
+            for idx ∈ eachindex(WIk)
+                jI = WIk[idx] .- mE
+                den = Awk[jI, :]*pk
+                if den < 0
+                    # 
+
+
+        else
+
+            @error("floc")
+
         end
 
         @pack! solState = km1, xkm1, gkm1, dkm1, rkm1

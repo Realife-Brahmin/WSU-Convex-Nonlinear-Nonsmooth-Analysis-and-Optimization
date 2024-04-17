@@ -65,9 +65,13 @@ function optimizeASQP(pr;
         end
 
         pk = getStepDirection() # write a function to invoke ECQP
+        Iall = collect(mE+1:mE+mI) # vector of indices for all inequality constraints [4, 5, 6, 7, 8] where mE = 3 mI = 5
         WIk = Wk[mE+1:end] # contains only indices for inequality constraints (like [5, 7, 8])
-        Awk = A[WIk .- mE] # contains only working set inequality constraints (like A[ [2, 4, 5], :])
-
+        notWIk = setdiff(Iall, WIk) # [4, 6]
+        Awk = A[WIk .- mE, :] # contains only working set inequality constraints (like A[ [2, 4, 5], :])
+        Anotwk = A[notWIk .- mE, :] # A[ [1, ]]
+        bwk = A[WIk .- mE] # A[ [2, 4, 5], :]
+        bnotwk = b[notWIk .- mE]
         if norm(pk) < tol # stationary point wrt Wk
 
             lambdas = computeLagrangianMultipliers(xk, G, c, Awk)
@@ -96,13 +100,24 @@ function optimizeASQP(pr;
             alphak = 1.0
             jBlockClosest = 0
 
-            for idx ∈ eachindex(WIk)
-                jI = WIk[idx] .- mE
-                den = Awk[jI, :]*pk
+            for idx ∈ eachindex(Anotwk)
+                den = Anotwk[idx, :]*pk
                 if den < 0
-                    # 
+                    distance = (bnotwk[idx] - Anotwk[idx, :]*xk)/den
+                    if distance < alphak
+                        jBlockClosest = notWIk[idx]
+                        myprintln(printOrNot_ASQP, "Constraint $(jBlockClosest) outside the working set is blocking the current step the earliest among the checked ones.")
+                        alphak = distance
+                    end
+                end
+            end
 
-
+            if jBlockClosest == 0
+                myprintln(printOrNot_ASQP, "No outside inequality constraint is blocking our current step.")
+                Wkp1 = Wk
+                xkp1 = xk + pk
+            elseif jBockClosest > 0
+                myprintln(printOrNot_ASQP, "")
         else
 
             @error("floc")
@@ -112,13 +127,13 @@ function optimizeASQP(pr;
         @pack! solState = km1, xkm1, gkm1, dkm1, rkm1
 
         printOrNot = verbose && ((k - 1) % progress == 0)
-        printOrNot_ECQP = printOrNot & verbose_ls
+        printOrNot_ASQP = printOrNot & verbose_ls
 
         myprintln(printOrNot, "Iteration k = $(k)", log_path=log_txt)
 
         @unpack actions, fevals = solverState
 
-        xkp1, gkp1, dkp1, rkp1, fevals_1PGCG, actions_1PGCG = solveForNextPGCGIterate(xk, gk, dk, rk, num, G, A, AAT, verbose=printOrNot_ECQP) # last two oargs are bogus
+        xkp1, gkp1, dkp1, rkp1, fevals_1PGCG, actions_1PGCG = solveForNextPGCGIterate(xk, gk, dk, rk, num, G, A, AAT, verbose=printOrNot_ASQP) # last two oargs are bogus
 
         fkp1 = f(xkp1, pASQP, getGradientToo=false)
         fevals += 1

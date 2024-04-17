@@ -1,5 +1,37 @@
 using Parameters
 
+function SolStateASQPType(xk, Ae;
+    fkm1=100.0,
+    fk=100.0,
+    itol=1e-8)
+
+    mE = size(Ae, 1)
+    Wk = collect(1:mE)
+    # Prepare the state dictionary with initial values
+    solState = Dict(
+        :km1 => -1, :k => 0,
+        :xkm1 => myfill(xk, -27.0), :xk => xk,
+        :fkm1 => fkm1, :fk => fk,
+        :Wkm1 => -1 * Wk, # has no sense in reality
+        :Wk => Wk,
+        :itol => itol
+    )
+
+    return solState
+end
+
+function SolverStateASQPType(;
+    k=0,
+    fevals=0,
+    lagrevals=0,
+    actions=Dict()
+)
+
+    solverState = Dict(:k => k, :fevals => fevals, :lagrevals => lagrevals, :actions => actions)
+
+    return solverState
+end
+
 """
     SolStateType
 

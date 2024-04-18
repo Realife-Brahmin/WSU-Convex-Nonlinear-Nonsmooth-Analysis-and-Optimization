@@ -1,5 +1,5 @@
 include("objective.jl")
-include("equalityConstrainedQP.jl")
+include("../equalityConstrainedQP.jl")
 
 using LinearAlgebra
 using Parameters

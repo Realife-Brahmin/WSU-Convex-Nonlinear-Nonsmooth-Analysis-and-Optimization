@@ -42,7 +42,7 @@ macro packDict(vars_str)
 
     # Generate the dictionary packing expression
     esc(quote
-        dict_expr = Dict()
+        dict_expr = Dict{Symbol, Any}()
         for var in $(symbol_list)  # Ensure symbol_list is treated as a literal array of symbols
             dict_expr[var] = eval(var)
         end

@@ -1,2 +1,0 @@
-A wrapper function QPObjectiveFunction will be used to solve for the original problem of fireLocation
-Problem (pr::NamedTuple) generated

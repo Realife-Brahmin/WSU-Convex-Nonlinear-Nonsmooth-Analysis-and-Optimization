@@ -1,5 +1,5 @@
 include("objective.jl")
-include("../activeSetQuadraticProgramming.jl")
+include("../activeSetQP.jl")
 
 using Parameters
 

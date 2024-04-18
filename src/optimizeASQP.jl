@@ -1,5 +1,5 @@
 
-include("activeSetQuadraticProgramming.jl")
+include("activeSetQP.jl")
 # include("projectedGradientConjugateGradient.jl")
 
 function optimizeASQP(pr;

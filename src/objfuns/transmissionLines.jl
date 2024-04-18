@@ -1,5 +1,5 @@
 include("objective.jl")
-include("activeSetQuadraticProgramming.jl")
+include("../activeSetQuadraticProgramming.jl")
 
 using Parameters
 
@@ -90,9 +90,8 @@ P = [P0, P1, P2, P3, P4]
 poly = 1 # Polyhedron Number, 0 reserved for the community with the power station
 
 Ape, bpe, Api, bpi = convertPolygonToConstraints(P[poly])
+Ae, be, A, b = Ape, bpe, Api, bpi
 
+mE, mI = length(be), length(b)
 
-pDict = Dict()
-@pack! pDict = G, c, c0, Ae, be, A, b, poly
-
-
+pDict = @packDict "{G, c, c0, mE, Ae, be, mI, A, b, poly}"

@@ -44,13 +44,13 @@ function create_algorithm_settings(;
         end
 
         if alg_settings[:problemType] == "LP"
-                @error "Haven't accounted what to do for LPs"
-                
+                alg_settings[:method] = "LPSolver"
+
         elseif alg_settings[:problemType] == "ECQP"
                 alg_settings[:method] = "ProjectedGradientCG"
 
         elseif alg_settings[:problemType] == "QP" 
-                alg_settings[:method] = "ASQP"
+                alg_settings[:method] = "ActiveSetQP"
 
         elseif alg_settings[:problemType] == "Unconstrained"
                 # don't change method from whatever I specified
@@ -62,7 +62,18 @@ function create_algorithm_settings(;
         end
 
         # Logic for method-specific modifications, similar to your original struct
-        if alg_settings[:method] == "ConjugateGradientDescent"
+        if alg_settings[:method] == "ActiveSetQP"
+                alg_settings[:linesearch] = "NA"
+                alg_settings[:gtol] = "NA"
+                alg_settings[:c1] = "NA"
+                alg_settings[:c2] = "NA"
+                alg_settings[:lambda] = "NA"
+                alg_settings[:lambdaMax] = "NA"
+                alg_settings[:etol] = 1e-8
+                alg_settings[:itol] = 1e-8
+                alg_settings[:progress] => 1
+
+        elseif alg_settings[:method] == "ConjugateGradientDescent"
                 # Adjustments for ConjugateGradientDescent
                 alg_settings[:linesearch] = "StrongWolfe"
                 alg_settings[:c2] = 0.5
@@ -91,6 +102,9 @@ function create_algorithm_settings(;
                 alg_settings[:deviation] = 0.1 # magnitude of mutation allowed
                 alg_settings[:parentsSurvive] = true
                 # alg_settings[:parentsSurvive] = false
+        
+        elseif alg_settings[:method] == "LPSolver"
+                println("Utilizing JuMP+HiGHS to solve the LP Problem.")
 
         elseif alg_settings[:method] == "NelderMead"
                 # Adjustments for NelderMead

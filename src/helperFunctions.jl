@@ -1,4 +1,57 @@
 """
+    @packDict(vars_str)
+
+Create a dictionary from a string of variable names formatted as `"{var1, var2, var3, ...}"`.
+
+# Arguments
+- `vars_str::String`: A single string argument formatted with variable names enclosed in curly braces and separated by commas.
+
+# Returns
+- `Dict{Symbol, Any}`: Returns a dictionary where each key is a symbol corresponding to a variable name, and each value is the current value of that variable.
+
+# Usage
+The macro automates the creation of a dictionary by parsing a string containing variable names, which are separated by commas and enclosed in curly braces. It constructs a dictionary where keys are the variable names as symbols and values are their corresponding current values in the scope where the macro is invoked.
+
+# Notes
+- **Security**: Use caution with `eval()` as it will execute code with all available permissions, which can be a security risk if variable contents are not controlled.
+- **Scope**: Variables must be defined in the scope where the macro is called; otherwise, `eval()` will not be able to find and return their values.
+- **Performance**: Since `eval()` is used, the performance may be impacted if the macro is used in performance-critical parts of your application.
+
+# Examples
+```julia
+# Define some variables
+a = 10
+b = [1, 2, 3]
+c = "Hello, world!"
+
+# Create a dictionary from these variables using the macro
+myDict = @packDict "{a, b, c}"
+
+# Output the created dictionary
+println("Dictionary contents: ", myDict)
+
+# Expected Output
+Dictionary contents: Dict(:a => 10, :b => [1, 2, 3], :c => "Hello, world!")
+```
+"""
+macro packDict(vars_str)
+    # Remove the curly braces and split the string into symbols
+    vars = strip(vars_str[2:end-1])  # Strip out the enclosing braces
+    vars_list = split(vars, ",")     # Split the string into components based on commas
+    symbol_list = [Symbol(strip(v)) for v in vars_list]  # Convert strings to symbols and strip whitespace
+
+    # Generate the dictionary packing expression
+    esc(quote
+        dict_expr = Dict()
+        for var in $(symbol_list)  # Ensure symbol_list is treated as a literal array of symbols
+            dict_expr[var] = eval(var)
+        end
+        dict_expr
+    end)
+end
+
+
+"""
     initializeLogFile(logPath::String)
 
 Initializes the logging environment by ensuring that the default log file is cleared at the start of the program. If the log file already exists, it is removed to start fresh, facilitating clean and relevant logging for the current execution.

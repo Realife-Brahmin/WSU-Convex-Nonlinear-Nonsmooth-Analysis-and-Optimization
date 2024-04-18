@@ -1,4 +1,5 @@
 include("objective.jl")
+include("functionQP.jl")
 include("../equalityConstrainedQP.jl")
 
 using Parameters
@@ -104,7 +105,7 @@ c = zeros(n+m)
 
 pECQP = Dict(:G=>G, :c=>c, :A=>A, :b=>b )
 
-objective = equalityConstrainedQP
+objective = QPObjectiveFunction
 objectiveOriginal = fireLocation
 objectiveString = string(objectiveOriginal)
 params = pECQP

@@ -4,7 +4,7 @@ using LinearAlgebra
 using Parameters
 
 include("../helperFunctions.jl");
-# include("activeSetQuadraticProgramming")
+# include("../activeSetQP")
 include("boxConstraintPenalty.jl");
 include("../equalityConstrainedQP.jl");
 include("../../alg.jl"); # include alg.jl from parent directory

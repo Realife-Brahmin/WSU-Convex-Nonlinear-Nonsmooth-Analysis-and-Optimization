@@ -15,14 +15,10 @@ function optimizeASQP(pr;
         rm(log_txt)
     end # remove logfile if present for the run
 
-
     solverState = SolverStateASQPType()
-
-    # @unpack genetic parameters = pr.alg
 
     progress = pr.alg[:progress]
     maxiter = pr.alg[:maxiter]
-    dftol = pr.alg[:dftol]
     itol = pr.alg[:itol]
 
     x0 = pr.x0
@@ -36,7 +32,7 @@ function optimizeASQP(pr;
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     f = pr.objective
     pASQP = pr.p
-    @unpack G, c, Ae, be, A, b = pASQP[:params]
+    @unpack G, c, mE, Ae, be, mI, A, b = pASQP[:params]
 
     f0 = f(x0, pASQP, getGradientToo=false)
     fk = f0
@@ -54,6 +50,10 @@ function optimizeASQP(pr;
     while keepIterationsGoing
 
         @unpack k = solverState
+
+        printOrNot = verbose && ((k - 1) % progress == 0)
+        printOrNot_ASQP = printOrNot & verbose_ls
+
         @unpack xk, fk, Wk = solState
         # saving the current iterates to solState
         km1, xkm1, fkm1, Wkm1 = k, xk, fk, Wk
@@ -113,11 +113,22 @@ function optimizeASQP(pr;
             end
 
             if jBlockClosest == 0
-                myprintln(printOrNot_ASQP, "No outside inequality constraint is blocking our current step.")
+                myprintln(printOrNot_ASQP, "No inequality constraint outside the working set is blocking our current step.")
                 Wkp1 = Wk
                 xkp1 = xk + pk
-            elseif jBockClosest > 0
-                myprintln(printOrNot_ASQP, "")
+                fkp1 = f(xkp1, pASQP, getGradientToo=false)
+
+            elseif jBlockClosest > 0
+                myprintln(printOrNot_ASQP, "Constraint $(jBlockClosest) is blocking the step first, so we'll restrict our step accordingly and add it to the working set.")
+                Wkp1 = sort!(push!(Wk, jBlockClosest))
+                xkp1 = xk + alphak*pk
+                fkp1 = f(xkp1, pASQP, getGradientToo=false)
+
+            else
+                @error("floc")
+            
+            end
+
         else
 
             @error("floc")
@@ -126,8 +137,6 @@ function optimizeASQP(pr;
 
         @pack! solState = km1, xkm1, gkm1, dkm1, rkm1
 
-        printOrNot = verbose && ((k - 1) % progress == 0)
-        printOrNot_ASQP = printOrNot & verbose_ls
 
         myprintln(printOrNot, "Iteration k = $(k)", log_path=log_txt)
 

@@ -19,6 +19,7 @@ function optimizeASQP(pr;
 
     progress = pr.alg[:progress]
     maxiter = pr.alg[:maxiter]
+    etol = pr.alg[:etol]
     itol = pr.alg[:itol]
 
     x0 = pr.x0
@@ -50,19 +51,21 @@ function optimizeASQP(pr;
     while keepIterationsGoing
 
         @unpack k = solverState
+        myprintln(printOrNot, "Iteration k = $(k)", log_path=log_txt)
 
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_ASQP = printOrNot & verbose_ls
 
-        @unpack xk, fk, Wk = solState
-        # saving the current iterates to solState
-        km1, xkm1, fkm1, Wkm1 = k, xk, fk, Wk
-        
         if k >= maxiter
             push!(causeForStopping, "Iteration limit reached!")
             keepIterationsGoing = false
             break
         end
+
+        @unpack xk, fk, Wk = solState
+        # Since this iteration will be proceeded with, saving the current iterates to solState as the 'previous' iteration values
+        km1, xkm1, fkm1, Wkm1 = k, xk, fk, Wk
+        @pack! solState = km1, xkm1, fkm1, Wkm1
 
         pk = getStepDirection() # write a function to invoke ECQP
         Iall = collect(mE+1:mE+mI) # vector of indices for all inequality constraints [4, 5, 6, 7, 8] where mE = 3 mI = 5
@@ -135,21 +138,6 @@ function optimizeASQP(pr;
 
         end
 
-        @pack! solState = km1, xkm1, gkm1, dkm1, rkm1
-
-
-        myprintln(printOrNot, "Iteration k = $(k)", log_path=log_txt)
-
-        @unpack actions, fevals = solverState
-
-        xkp1, gkp1, dkp1, rkp1, fevals_1PGCG, actions_1PGCG = solveForNextPGCGIterate(xk, gk, dk, rk, num, G, A, AAT, verbose=printOrNot_ASQP) # last two oargs are bogus
-
-        fkp1 = f(xkp1, pASQP, getGradientToo=false)
-        fevals += 1
-        fevals += fevals_1PGCG # bogus, does nothing
-        actions = merge(+, actions, actions_1PGCG) # bogus, does nothing
-
-        @pack! solverState = actions, fevals
 
         # I prefer to only number a completed iteration, as opposed to numbering an in-process/about-to-begin iteration
         k += 1
@@ -157,10 +145,7 @@ function optimizeASQP(pr;
         xvals[:, k] = xkp1
         fvals[k] = fkp1 # also incorrect
 
-        xk, gk, dk, rk = xkp1, gkp1, dkp1, rkp1
-
-        @pack! solState = xk, gk, dk, rk
-
+        @pack! solState = xk, fk, Wk
         @pack! solState = k
         @pack! solverState = k
 

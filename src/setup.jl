@@ -3,7 +3,7 @@ using Pkg
 Pkg.instantiate()
 
 using Base.Threads
-using BenchmarkTools
+import BenchmarkTools as BT
 using CSV
 using DataFrames
 using HiGHS

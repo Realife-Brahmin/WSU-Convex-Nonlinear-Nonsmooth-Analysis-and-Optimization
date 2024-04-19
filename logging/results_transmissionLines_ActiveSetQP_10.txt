@@ -1,0 +1,25 @@
+****************************
+Solver run has concluded.
+Function solved for: transmissionLines()
+Cause(s) for stopping:
+No feasible improvement step possible from here.
+Convergence achieved in 4 iterations 😄
+****************************
+Method Used: ActiveSetQP
+
+****************************
+Optimal function value = 5.123233050120035e-9
+***************************
+Optimal Nonzero Variables:
+x☆[1] = 2.145642009850804e-5
+x☆[2] = -9.47041990568831e-5
+x☆[3] = 1.8743539396459674e-5
+x☆[4] = -0.00011788699778403355
+***************************
+Number of fevals = 1
+Number of gevals = 0
+Number of evals = 1
+**************************************************
+Tolerance critera used:
+PGCG Tolerance = 1.0e-8
+ASQP Tolerance = 1.0e-8

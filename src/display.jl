@@ -41,14 +41,14 @@ function showresults(res::NamedTuple;
     
     elseif method == "ProjectedGradientCG"
         @unpack converged, statusMessage, xvals, fvals, fevals, cause = res
-        @unpack tol = pr[:alg]
+        @unpack etol = pr[:alg]
         gevals = 0
 
         result_txt = log_path * "results_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
 
         lsMsg = ""
 
-        tolMsg = "PGCG Tolerance = $(tol)"
+        tolMsg = "PGCG Tolerance = $(etol)"
 
     else
         @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, fevals, gevals, cause = res

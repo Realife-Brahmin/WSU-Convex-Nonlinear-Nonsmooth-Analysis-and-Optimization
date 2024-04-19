@@ -12,12 +12,12 @@ Optimal function value = -3.5
 ***************************
 Optimal Nonzero Variables:
 x☆[1] = 2.0
-x☆[2] = -1.0
-x☆[3] = 1.0
+x☆[2] = -0.9999999999999994
+x☆[3] = 0.9999999999999994
 ***************************
 Number of fevals = 2
 Number of gevals = 0
 Number of evals = 2
 **************************************************
 Tolerance critera used:
-PGCG Tolerance = 1.0e-10
+PGCG Tolerance = 1.0e-8

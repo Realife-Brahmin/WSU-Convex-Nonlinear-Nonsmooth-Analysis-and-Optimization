@@ -1,1 +1,1 @@
-Convergence achieved in 24 iterations 😄
+Convergence achieved in 20 iterations 😄

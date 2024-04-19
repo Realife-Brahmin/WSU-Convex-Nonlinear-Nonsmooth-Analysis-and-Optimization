@@ -17,7 +17,18 @@ function showresults(res::NamedTuple;
     @unpack method = pr[:alg]
     objString = pr.objectiveString
 
-    if method == "NelderMead"
+    if method == "ActiveSetQP"
+        @unpack converged, statusMessage, xvals, fvals, fevals, cause = res
+        @unpack etol, itol = pr[:alg]
+        gevals = 0
+
+        result_txt = log_path * "results_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
+
+        lsMsg = ""
+
+        tolMsg = "PGCG Tolerance = $(etol)\n"*"ASQP Tolerance = $(itol)"
+
+    elseif method == "NelderMead"
         @unpack converged, statusMessage, xvals, fvals, fevals, cause = res
         gevals = 0
 

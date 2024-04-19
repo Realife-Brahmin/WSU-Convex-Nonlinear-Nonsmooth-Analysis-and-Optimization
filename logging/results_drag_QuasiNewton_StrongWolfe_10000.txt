@@ -1,7 +1,6 @@
 ****************************
 Solver run has concluded.
 Function solved for: drag()
-This was a function minimization problem.
 Cause(s) for stopping:
 LineSearch failed.
 Convergence achieved in 56 iterations 😄

@@ -1,0 +1,2 @@
+Begin with the solver:
+Failed to converge despite 10000 iterations! 😢

@@ -4,25 +4,25 @@ Function solved for: Rastrigin()
 Cause(s) for stopping:
 LineSearch failed.
 Barely changing fval
-Convergence achieved in 17 iterations 😄
+Convergence achieved in 23 iterations 😄
 ****************************
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = 0.9949590570932969
+Optimal function value = 1.9899181141865796
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = -4.2865336269920556e-10
-x☆[2] = -1.0876521949922994e-9
-x☆[3] = -6.95469010712149e-10
-x☆[4] = -2.723440743153813e-9
-x☆[5] = 0.9949586361445223
-x☆[6] = -6.811099613605009e-10
-x☆[7] = -1.6586510978137068e-9
+x☆[1] = 0.9949586371212393
+x☆[2] = 2.230195326787538e-10
+x☆[3] = 3.1912574732673817e-10
+x☆[4] = -9.135065616960115e-11
+x☆[5] = -4.5799835880347663e-10
+x☆[6] = -2.926210497914964e-10
+x☆[7] = 0.9949586371135716
 ***************************
-Number of fevals = 17
-Number of gevals = 16
-Number of evals = 129
+Number of fevals = 23
+Number of gevals = 22
+Number of evals = 177
 **************************************************
 Tolerance critera used:
 dftol = 1.0e-15

@@ -41,8 +41,8 @@ function optimize2(pr;
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     obj = pr.objective
     p = pr.p
-    data = p[:data]
-    M = max(size(data, 1), 1)
+    # data = p[:data]
+    # M = max(size(data, 1), 1)
 
     fk = obj(x0, p, getGradientToo=false)
     myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
@@ -232,7 +232,7 @@ function optimize2(pr;
     
     res = (converged=converged, statusMessage=statusMessage, fvals=fvals, 
     αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, gmagvals=gmagvals, 
-    gvals=gvals, M=M, fevals=fevals, gevals=gevals, cause=causeForStopping, 
+    gvals=gvals, fevals=fevals, gevals=gevals, cause=causeForStopping, 
     pr=pr)
 
     res = trim_array(res, k-1)

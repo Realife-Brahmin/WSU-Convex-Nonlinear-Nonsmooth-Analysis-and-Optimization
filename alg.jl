@@ -71,7 +71,8 @@ function create_algorithm_settings(;
                 alg_settings[:lambdaMax] = "NA"
                 alg_settings[:etol] = 1e-8
                 alg_settings[:itol] = 1e-8
-                alg_settings[:progress] => 1
+                alg_settings[:progress] = 1
+                alg_settings[:maxiter] = 10
 
         elseif alg_settings[:method] == "ConjugateGradientDescent"
                 # Adjustments for ConjugateGradientDescent
@@ -130,7 +131,7 @@ function create_algorithm_settings(;
                 alg_settings[:lambda] = "NA"
                 alg_settings[:lambdaMax] = "NA"
                 alg_settings[:etol] = 1e-8
-                alg_settings[:progress] => 1
+                alg_settings[:progress] = 1
                 
         elseif alg_settings[:method] == "QuasiNewton"
                 # Adjustments for QuasiNewton

@@ -64,6 +64,7 @@ function optimizeASQP(pr;
         end
 
         @unpack xk, fk, Wk = solState
+        myprintln(printOrNot_ASQP, "Current Working Set: $(Wk)")
         # Since this iteration will be proceeded with, saving the current iterates to solState as the 'previous' iteration values
         km1, xkm1, fkm1, Wkm1 = k, xk, fk, Wk
         @pack! solState = km1, xkm1, fkm1, Wkm1

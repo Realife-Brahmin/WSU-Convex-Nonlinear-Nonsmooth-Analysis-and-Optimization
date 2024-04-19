@@ -22,6 +22,8 @@ function getECQPStep(prASQP, solStateASQP;
     Ae = vcat(Ae, A[WIk .- mE, :])
     be = vcat(be, b[WIk .- mE])
 
+    myprintln(true, "Quick safety check: What's Ae*xk - be?")
+    myprintln(true, "$(Ae*xk - be)")
     subroutineCall = true
     # @show subroutineCall
     pECQP = @packDict "{G, c, Ae, be}"

@@ -59,7 +59,8 @@ function showresults(res::NamedTuple;
 
     end
 
-    params = pr.p[:params]
+    # params = pr.p[:params]
+    params = pr.p
 
     if isfile(result_txt)
         rm(result_txt) # remove results log file if already present

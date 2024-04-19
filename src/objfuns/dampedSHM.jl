@@ -1,50 +1,14 @@
 include("objective.jl")
+include("boxConstraintPenalty.jl")
 
-"""
-    dampedSHM(x::Vector{Float64}, p::Dict; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
-
-Computes the mean squared deviation of the predicted damped simple harmonic motion from the given data. The motion is modeled using a combination of exponential decay and sinusoidal functions.
-
-# Arguments
-- `x::Vector{Float64}`: A vector of parameters for the motion model. They are in the order [A₀, A, τ, ω, α, ϕ].
-
-- `p`: A Dict encapsulating the parameters and data.
-- `data::Matrix{Float64}`: A matrix where columns correspond to different features, and rows are individual observations. The last column is the target value y, while the other columns represent the feature values (in this case, time values).
-
-# Keyword Arguments
-- `verbose::Bool`: (default `false`) If set to true, the function prints additional information during its execution.
-
-- `log::Bool`: (default `true`) Placeholder for a logging functionality (not currently implemented in the function).
-
-- `getGradientToo::Bool`: (default `true`) Determines whether to compute and return the gradient along with the function value.
-
-# Returns
-- If `getGradientToo` is `true`, returns a tuple `(f, g)` where `f` is the computed function value, and `g` is the gradient.
-
-- If `getGradientToo` is `false`, returns only the function value `f`.
-
-# Example
-```julia
-data_matrix = [...]
-params_vector = [...]
-p = Dict(:params=>params_vector, :data=>data_matrix)
-x_values = [A₀_value, A_value, τ_value, ω_value, α_value, ϕ_value]
-f, g = dampedSHM(x_values, p)
-```
-# Notes
-The function computes the predicted damped harmonic motion using the model:
-    ŷ(t) = A₀ + A * exp(-t/τ) * sin((ω+α*t) * t + ϕ)
-    and then finds the mean squared deviation from the provided data.
-        
-    function dampedSHM(x::Vector{Float64}, p::Dict; verbose::Bool=false, log::Bool=true, getGradientToo::Bool=true)
-"""
 function dampedSHM(x::Vector{Float64}, 
     p;
     verbose::Bool=false,
     log::Bool=true,
     getGradientToo::Bool=true)
 
-    data = p[:params][:data]
+    # data = p[:params][:data]
+    data = p[:data]
     M = size(data, 1)
     nf = size(data, 2) - 1
     y = data[:, nf+1]
@@ -52,14 +16,14 @@ function dampedSHM(x::Vector{Float64},
     t = xf
 
     n = length(x) # note that df's x (time) is different from function parameter x
-    mags = p[:params][:mags]
-
+    # mags = p[:params][:mags]
+    mags = p[:mags]
     # A₀, A, τ, ω, α, ϕ = x.*mags
     x = x .* mags
     A₀, A, τ, ω, α, ϕ = x
     
-    constraints = p[:params][:constraints]
-
+    # constraints = p[:params][:constraints]
+    constraints = p[:constraints]
     box = constraints[:box]
 
     f = 0.0;

@@ -28,43 +28,74 @@ function transmissionLines(w::Vector{Float64},
     
 end
 
+function polyhedronCentroid(vertices)
+    # Extract x and y coordinates
+    x_coords = [vertex[1] for vertex in vertices]
+    y_coords = [vertex[2] for vertex in vertices]
+
+    # Compute averages
+    centroid_x = mean(x_coords)
+    centroid_y = mean(y_coords)
+
+    return (centroid_x, centroid_y)
+end
+
 function convertPolygonToConstraints(vertices)
     # Number of vertices
     p = length(vertices)
 
-    # Initialize A and b
-    A = zeros(p, 2)
-    b = zeros(p)
-    Ae = zeros(0, 2)
-    be = zeros(0)
-
-    # Check if the polygon is a line segment
+    # Check if the polygon is a line segment (only two vertices)
     if p == 2
-        # Polygon is a line segment; set Ae and be instead of A and b
+        # Set up the equality constraint (line equation)
         Ae = zeros(1, 2)
         be = zeros(1)
 
-        # Compute the line equation coefficients
-        Ae[1, :] = [vertices[2][2] - vertices[1][2], vertices[1][1] - vertices[2][1]]
-        be[1] = Ae[1, 1] * vertices[1][1] + Ae[1, 2] * vertices[1][2]
+        # Calculate the line equation coefficients using the given vertices
+        x1, y1 = vertices[1]
+        x2, y2 = vertices[2]
+        Ae[1, :] = [y2 - y1, x1 - x2]
+        be[1] = x1 * y2 - x2 * y1
 
-        # Clear the A and b for inequalities since it's a line segment
+        # No inequality constraints for a line segment
         A = zeros(0, 2)
         b = zeros(0)
     else
-        # Compute inequalities for a polygon
+        # Inequality constraints for a polygon
+        A = zeros(p, 2)
+        b = zeros(p)
+
         for k in 1:p
-            # Compute indices for current and next vertex
-            current_vertex = vertices[k]
-            next_vertex = vertices[mod(k, p)+1] # Ensures that after the last vertex, it goes back to the first
+            # Ensure vertices are cyclic by connecting the last to the first
+            xk, yk = vertices[k]
+            xkp1, ykp1 = vertices[mod(k, p)+1]
 
             # Calculate the coefficients for the inequalities
-            A[k, :] = [next_vertex[2] - current_vertex[2], current_vertex[1] - next_vertex[1]]
-            b[k] = A[k, 1] * current_vertex[1] + A[k, 2] * current_vertex[2]
+            A[k, :] = -[ykp1 - yk, xk - xkp1]
+            b[k] = -(xk * ykp1 - yk * xkp1)
         end
+
+        # No equality constraints for general polygons
+        Ae = zeros(0, 2)
+        be = zeros(0)
     end
 
     return Ae, be, A, b
+end
+
+function combineConstraints(A0e, b0e, Ape, bpe, A0i, b0i, Api, bpi)
+    # Get the sizes of the problem
+    nx = size(A0e, 2)  # Number of x variables
+    ny = size(Ape, 2)  # Number of y variables
+    mEx, mEy = length(b0e), length(bpe)
+    mIx, mIy = length(b0i), length(bpi)
+
+    Ae = vcat(hcat(A0e, zeros(mEx, ny)), hcat(zeros(mEy, nx), Ape))
+    be = vcat(b0e, bpe)
+    A = vcat(hcat(A0i, zeros(mIx, ny)), hcat(zeros(mIy, nx), Api))
+    b = vcat(b0i, bpi)
+
+    return Ae, be, A, b
+
 end
 
 P0 = [(0, 2), (-4, 0), (-3, -2), (0, -2), (1, -1)]
@@ -90,21 +121,28 @@ P3 = [(-2, -4), (-6, -3), (-3, -6)]
 P4 = [(-4, 3), (-2, 4), (-2, 6), (-6, 3)]
 P = [P0, P1, P2, P3, P4]
 
-poly = 1 # Polyhedron Number, 0 reserved for the community with the power station
 
-Ape, bpe, Api, bpi = convertPolygonToConstraints(P[poly])
-Ae, be, A, b = Ape, bpe, Api, bpi
+
+x0 = collect(polyhedronCentroid(P0))
+poly = 2 # Polyhedron Number, 0 reserved for the community with the power station
+Ape, bpe, Api, bpi = convertPolygonToConstraints(P[poly+1])
+y0 = collect(polyhedronCentroid(P[poly+1]))
+
+# w0 = vcat(x0, y0)
+
+# Ae, be, A, b = vcat(A0e, Ape), vcat(b0e, bpe), vcat(A0i, Api), vcat(b0i, bpi)
+Ae, be, A, b = combineConstraints(A0e, b0e, Ape, bpe, A0i, b0i, Api, bpi)
 lb = myfill(c, -Inf)
 ub = myfill(c, Inf)
 mE, mI = length(be), length(b)
 
 pQP = @packDict "{G, c, lb, ub, c0, mE, Ae, be, mI, A, b, poly}"
 
-x0, f0 = computeFeasiblePointForLinearConstraints(pQP)
+w0 = computeFeasiblePointForLinearConstraints(pQP)
 
 objective = QPObjectiveFunction
 objectiveOriginal = transmissionLines
 objectiveString = string(objectiveOriginal)
 # params = pQP
 
-pr = generate_pr(objective, x0, params=pQP, problemType="QP"; objectiveString=objectiveString)
+pr = generate_pr(objective, w0, params=pQP, problemType="QP"; objectiveString=objectiveString)

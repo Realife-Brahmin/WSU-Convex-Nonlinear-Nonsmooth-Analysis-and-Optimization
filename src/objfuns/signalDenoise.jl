@@ -10,7 +10,9 @@ function signalDenoise(x::Vector{Float64},
     getGradientToo::Bool=true)
 
     n = length(x)
-    params = p[:params]
+    # params = p[:params]
+    params = p
+
     
     @unpack d, p, alpha, beta, L, R, magnitudeString = params
 

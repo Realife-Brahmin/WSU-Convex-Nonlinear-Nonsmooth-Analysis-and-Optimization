@@ -1,5 +1,5 @@
 include("objective.jl")
-include("../equalityConstrainedQP.jl")
+include("functionQP.jl")
 
 using Parameters
 
@@ -16,7 +16,7 @@ x0 = A\b
 
 pECQP = Dict(:G=>G, :c=>c, :A=>A, :b=>b )
 
-objective = equalityConstrainedQP
+objective = QPObjectiveFunction
 objectiveString = "ecqpTestFunction1"
 params = pECQP
 

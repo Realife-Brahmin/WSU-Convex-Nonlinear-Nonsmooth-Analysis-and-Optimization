@@ -1,10 +1,10 @@
 include("objective.jl")
 
-function TestFunction3(x::Vector{Float64}, p;
+function TestFunction3(x::Vector{Float64}, pDict;
     getGradientToo::Bool=true)
     
     # p = p.params
-    p = p[:params]
+    @unpack p = pDict
     beta = p[1]
     n = length(x)
     t = zeros(Float64, n)
@@ -34,6 +34,6 @@ end
 
 objective = TestFunction3
 x0 = sort!(rand(10).^2, rev=true)
-params = Float64.([10])
-
-pr = generate_pr(objective, x0, params=params)
+p = Float64.([10])
+pDict = Dict(:p => p)
+pr = generate_pr(objective, x0, params=pDict)

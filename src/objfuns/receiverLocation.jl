@@ -45,7 +45,9 @@ function receiverLocation(
     log::Bool = true,
     getGradientToo::Bool = true)
 
-    params = p[:params]
+    # params = p[:params]
+    params = p
+
     @unpack P, pmean, μ = params # P is n x m, pmean is n-vector, μ is m-vector
 
     n = length(x)

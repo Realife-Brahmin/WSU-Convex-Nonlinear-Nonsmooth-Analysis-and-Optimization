@@ -14,7 +14,8 @@ function nnloss(w::Vector{Float64},
     getGradientToo::Bool=true)
 
     # p = p.params
-    params = p[:params]
+    # params = p[:params]
+    params = p
     trainData = params[:trainData]
     if size(trainData, 2) == 1
         X = reshape(trainData, length(trainData), 1)

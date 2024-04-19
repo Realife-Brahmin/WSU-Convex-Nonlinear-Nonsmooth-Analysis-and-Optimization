@@ -51,7 +51,7 @@ function showresults(res::NamedTuple;
         tolMsg = "PGCG Tolerance = $(tol)"
 
     else
-        @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, M, fevals, gevals, cause = res
+        @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, fevals, gevals, cause = res
         result_txt = log_path * "results_" * objString * "_" * pr.alg[:method] * "_" * pr.alg[:linesearch] * "_" * string(pr.alg[:maxiter]) * ".txt"
         lsMsg = "Linesearch method used: " * pr.alg[:linesearch]
 

@@ -1,4 +1,5 @@
 include("objective.jl")
+include("functionQP.jl")
 include("../activeSetQP.jl")
 
 using Parameters
@@ -10,7 +11,9 @@ function transmissionLines(w::Vector{Float64},
     getGradientToo::Bool=true)
     
     n = length(x)
-    @unpack B, d = pDict[:params]
+    # @unpack B, d = pDict[:params]
+    @unpack B, d = pDict
+
     r = B*x - d
     f = 1//2 *sum(r.^2)
 
@@ -91,8 +94,17 @@ poly = 1 # Polyhedron Number, 0 reserved for the community with the power statio
 
 Ape, bpe, Api, bpi = convertPolygonToConstraints(P[poly])
 Ae, be, A, b = Ape, bpe, Api, bpi
-
+lb = myfill(c, -Inf)
+ub = myfill(c, Inf)
 mE, mI = length(be), length(b)
 
-pDict = @packDict "{G, c, c0, mE, Ae, be, mI, A, b, poly}"
+pQP = @packDict "{G, c, lb, ub, c0, mE, Ae, be, mI, A, b, poly}"
 
+x0, f0 = computeFeasiblePointForLinearConstraints(pQP)
+
+objective = QPObjectiveFunction
+objectiveOriginal = transmissionLines
+objectiveString = string(objectiveOriginal)
+# params = pQP
+
+pr = generate_pr(objective, x0, params=pQP, problemType="QP"; objectiveString=objectiveString)

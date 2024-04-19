@@ -73,7 +73,7 @@ function optimizeECQP(pr;
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     f = pr.objective
     pECQP = pr.p
-    @unpack G, c, A, b = pECQP[:params]
+    @unpack G, c, A, b = pECQP
 
     AAT = A*transpose(A)
 

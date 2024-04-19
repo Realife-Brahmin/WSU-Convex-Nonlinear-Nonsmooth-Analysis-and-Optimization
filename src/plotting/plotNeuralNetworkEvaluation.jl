@@ -50,7 +50,8 @@ function check_training_accuracy(res;
     w_trained = res.xvals[:, end]
     classify = true
 
-    params = p[:params]
+    # params = p[:params]
+    params = p
 
     params[:classify] = classify
 
@@ -79,15 +80,16 @@ function check_test_accuracy(res;
     w_trained = res.xvals[:, end]
     classify = true
 
-    params = p[:params]
-    
+    # params = p[:params]
+    params = p
+
     params[:classify] = classify
     testData = params[:testData]
     testClassData = params[:testClassData]
     params[:trainData] = testData
     params[:classData] = testClassData
     
-    p[:params] = params
+    # p[:params] = params
 
     y_pred_test = vec(obj(w_trained, p))
     y_test = params[:classData]

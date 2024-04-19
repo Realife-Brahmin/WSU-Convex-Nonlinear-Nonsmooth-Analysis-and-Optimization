@@ -1,3 +1,5 @@
+include("objective.jl")
+
 function drag(x::Vector{Float64}, 
     p;
     verbose::Bool=false,
@@ -61,7 +63,7 @@ end
 
 ## NamedTuple pr (Problem) generation
 objective = drag;
-data = Matrix{Float64}(undef, 0, 0)
+# data = Matrix{Float64}(undef, 0, 0)
 # n = 800
 # n = 300
 n = 100
@@ -70,7 +72,9 @@ n = 100
 # n = 2^10
 # n = 2048
 x0 = Float64.(collect(LinRange(0.0, 1.0, n+2)[2:n+1]))
-params = Float64[]
-p = (params=params, data=data)
-println("Problem (pr::NamedTuple) generated")
-pr = (p=p, x0=x0, objective=objective, alg=alg)
+# params = Float64[]
+pDict = Dict()
+# p = (params=params, data=data)
+# println("Problem (pr::NamedTuple) generated")
+# pr = (p=p, x0=x0, objective=objective)
+pr = generate_pr(objective, x0, params=pDict)

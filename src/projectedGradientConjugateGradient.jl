@@ -1,5 +1,5 @@
 """
-    solveForNextPGCGIterate(xk, gk, dk, rk, num, G, A, AAT; verbose=false) -> Tuple
+        solveForNextPGCGIterate(xk, gk, dk, rk, num, G, A, AAT; verbose=false) -> Tuple
 
 Performs one iteration of the Projected Gradient Conjugate Gradient (PGCG) method for solving ECQP problems, calculating the next values of solution vector, gradient, search direction, and residual.
 

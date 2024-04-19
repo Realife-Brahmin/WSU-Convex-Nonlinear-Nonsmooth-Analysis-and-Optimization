@@ -1,44 +1,6 @@
 include("projectedGradientConjugateGradient.jl")
 
-"""
-    optimizeECQP(pr; verbose=false, verbose_ls=false, log=true, log_path="./logging/") -> Dict
 
-Solves an Extended Constrained Quadratic Programming (ECQP) problem using the Projected Gradient Conjugate Gradient (PGCG) method, providing detailed control over logging and verbosity levels throughout the optimization process.
-
-# Arguments
-- `pr`: A problem representation `NamedTuple` or `Dict` containing all necessary information for the ECQP problem, including the objective function, constraints, and algorithm-specific parameters.
-
-# Keyword Arguments
-- `verbose::Bool=false`: Enables detailed printing of the optimization process if set to `true`.
-- `verbose_ls::Bool=false`: Controls the verbosity of line search operations within the PGCG method. Effective when `verbose` is also `true`.
-- `log::Bool=true`: Activates logging of the optimization process to a file.
-- `log_path::String="./logging/"`: Specifies the directory path for saving log files related to the optimization process.
-
-# Returns
-- `Dict`: A dictionary containing the optimization results and states, including convergence status, the final values of variables, function evaluations, and solver states.
-
-# Notes
-- The function initializes solver and solution states, managing iterations through the PGCG method to minimize the objective function subject to equality constraints.
-- Logging is handled conditionally based on `log` and `verbose` flags, enabling both console output and file-based logging of the optimization journey.
-- The solver dynamically adapts to convergence criteria and iteration limits, ensuring robust handling of the ECQP problem.
-- `pr.alg` must be properly defined in the input `pr`, including keys for algorithmic parameters like `method`, `maxiter`, `dftol`, and `etol`.
-
-# Example
-```julia
-# Define ECQP problem parameters and algorithmic settings
-G = [2 0; 0 2]
-Ae = [1 1]
-c = [-1; -1]
-be = [0]
-x0 = [0.5; 0.5]
-alg_settings = Dict(:method => "PGCG", :maxiter => 100, :dftol => 1e-5, :etol => 1e-6, :progress => 10)
-
-pr = (objectiveString="MyObjective", alg=alg_settings, x0=x0, p=Dict(:params => Dict(:G => G, :c => c, :Ae => Ae, :be => be)))
-
-# Execute the optimization
-results = optimizeECQP(pr, verbose=true, log=true)
-```
-"""
 function optimizeECQP(pr;
     verbose::Bool=false,
     verbose_ls::Bool=false,
@@ -46,16 +8,18 @@ function optimizeECQP(pr;
     log_path::String="./logging/")
 
     objString = pr.objectiveString
+    pECQP = pr.p
+    @unpack G, c, Ae, be,subroutineCall = pECQP
+    verbose = verbose && !subroutineCall
+
     log_txt = log_path * "log_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
-
-    if isfile(log_txt)
-        rm(log_txt)
-    end # remove logfile if present for the run
-
+    if !subroutineCall
+        if isfile(log_txt)
+            rm(log_txt)
+        end # remove logfile if present for the run
+    end
 
     solverState = SolverStateECQPType()
-
-    # @unpack genetic parameters = pr.alg
 
     progress = pr.alg[:progress]
     maxiter = pr.alg[:maxiter]
@@ -70,10 +34,9 @@ function optimizeECQP(pr;
     xvals = zeros(Float64, n, maxiter)
 
     # doing this even though GA requires multiple f evals
-    myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
+    myprintln(verbose, "Starting with initial point x = $(xk).", log=verbose, log_path=log_txt)
     f = pr.objective
-    pECQP = pr.p
-    @unpack G, c, Ae, be = pECQP
+
 
     AAT = Ae*transpose(Ae)
 
@@ -85,7 +48,7 @@ function optimizeECQP(pr;
     fevals += 1
     @pack! solverState = fevals
 
-    myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
+    myprintln(verbose, "which has fval = $(fk)", log=verbose, log_path=log_txt)
 
     keepIterationsGoing = true
     causeForStopping = []
@@ -93,6 +56,11 @@ function optimizeECQP(pr;
     while keepIterationsGoing
 
         @unpack k = solverState
+
+        printOrNot = verbose && ((k - 1) % progress == 0)
+        printOrNot_ECQP = printOrNot & verbose_ls
+
+        myprintln(printOrNot, "Iteration k = $(k)", log=verbose, log_path=log_txt)
 
         @unpack xk, gk, dk, rk = solState
         # saving the current iterates to solState
@@ -110,11 +78,6 @@ function optimizeECQP(pr;
         end
 
         @pack! solState = km1, xkm1, gkm1, dkm1, rkm1
-
-        printOrNot = verbose && ((k - 1) % progress == 0)
-        printOrNot_ECQP = printOrNot & verbose_ls
-
-        myprintln(printOrNot, "Iteration k = $(k)", log_path=log_txt)
 
         @unpack actions, fevals = solverState
 
@@ -147,12 +110,12 @@ function optimizeECQP(pr;
     if k ≥ maxiter
         converged = false
         statusMessage = "Failed to converge despite $(maxiter) iterations! 😢"
-        myprintln(true, statusMessage, log=log, log_path=log_txt)
+        myprintln(!subroutineCall, statusMessage, log=log, log_path=log_txt)
         @warn statusMessage
     else
         converged = true
         statusMessage = "Convergence achieved in $(k) iterations 😄"
-        myprintln(true, statusMessage, log=log, log_path=log_txt)
+        myprintln(!subroutineCall, statusMessage, log=log, log_path=log_txt)
     end
 
     @unpack fevals = solverState

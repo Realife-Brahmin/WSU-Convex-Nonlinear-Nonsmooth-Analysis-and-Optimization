@@ -11,13 +11,17 @@ function getECQPStep(prASQP, solStateASQP;
 
     @unpack objective, p, objectiveString = prASQP
     objectiveStringECQP = objectiveString*"_ECQPsubroutine"
-    @unpack xk, Wk = solStateASQP
     problemTypeECQP = "ECQP"
     methodECQP = "ProjectedGradientCG"
 
     pASQP = p
-    # @unpack pASQP # but need to change some things
+    @unpack G, c, mE, Ae, be, A, b = pASQP
+    @unpack xk, Wk = solStateASQP
 
+    WIk = WIk[mE+1:end]
+    Ae = vcat(Ae, A[WIk .- mE, :])
+    be = vcat(be, b[WIk .- mE])
+    pECQP = @packDict "{G, c, Ae, be}"
     error("Okay I need to convert pASQP into pECQP")
 
     prECQP = generate_pr(objective, xk, problemType=problemTypeECQP, method=methodECQP, params=pECQP, objectiveString=objectiveStringECQP, verbose=false)
@@ -26,6 +30,12 @@ function getECQPStep(prASQP, solStateASQP;
     pk = xkp1 - xk
     return pk
     
+end
+
+function computeLagrangianMultiplierQP(xk, G, c, Awk)
+    rhs = G*xk + c
+    lambdask = Awk \ rhs
+    return lambdask
 end
 # c = [1, 3, 5, 2]
 # n = length(c)

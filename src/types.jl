@@ -209,7 +209,7 @@ xk = [0.5; 0.5]
 solState = SolStatePGCGType(xk, G, c, A)
 ```
 """
-function SolStatePGCGType(xk, G, c, A; 
+function SolStatePGCGType(xk, G, c, Ae; 
     fkm1=100.0,
     fk=100.0,
     etol=1e-8)
@@ -218,8 +218,8 @@ function SolStatePGCGType(xk, G, c, A;
 
     rk = G * xk + c
 
-    AAT_inv = inv(A * transpose(A))
-    gk = rk - transpose(A) * AAT_inv * A * rk
+    AAT_inv = inv(Ae * transpose(Ae))
+    gk = rk - transpose(Ae) * AAT_inv * Ae * rk
 
     # Initialize dk
     dk = -gk

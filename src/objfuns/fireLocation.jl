@@ -27,7 +27,7 @@ This function evaluates the sum of squares of residuals from predicted fire loca
 - If `getGradientToo` is `true`, returns a tuple (`f`, `g`) where `f` is the sum of squares of residuals, and `g` is the gradient of `f` with respect to `x`.
 
 # Context
-This function is utilized in the context of locating a fire given observations from ranger stations. These stations, at known coordinates, observe the fire at specific angles, forming a system of equations `A*x = b`, where `x` represents the fire's location. This function computes the total residual squares (`f`) for an estimated point `x` from the respective 'lines' determined by the observations and the stations' locations. It's particularly useful as part of an Extended Constrained Quadratic Programming (ECQP) solver or other optimization frameworks that require an objective function and its gradient.
+This function is utilized in the context of locating a fire given observations from ranger stations. These stations, at known coordinates, observe the fire at specific angles, forming a system of equations `Ae*x = be`, where `x` represents the fire's location. This function computes the total residual squares (`f`) for an estimated point `x` from the respective 'lines' determined by the observations and the stations' locations. It's particularly useful as part of an Extended Constrained Quadratic Programming (ECQP) solver or other optimization frameworks that require an objective function and its gradient.
 
 # Example
 ```julia
@@ -99,11 +99,11 @@ w0 = vcat(x0, r0)
 
 # Henceforth, x, n, m lose their original meanings, in favour of w, n+m, n+m
 G = vcat(hcat(zeros(n, n), zeros(n, m)), hcat(zeros(m, n), I(m)));
-A = hcat(B, -I(m))
-b = d
+Ae = hcat(B, -I(m))
+be = d
 c = zeros(n+m)
 
-pECQP = Dict(:G=>G, :c=>c, :A=>A, :b=>b )
+pECQP = Dict(:G=>G, :c=>c, :Ae=>Ae, :be=>be )
 
 objective = QPObjectiveFunction
 objectiveOriginal = fireLocation
@@ -114,4 +114,4 @@ pr = generate_pr(objective, w0, params=params, problemType="ECQP"; objectiveStri
 
 # f0 = equalityConstrainedQP(w0, pECQP)
 
-# solState = SolStatePGCGType(w0, G, c, A, fk=f0)
+# solState = SolStatePGCGType(w0, G, c, Ae, fk=f0)

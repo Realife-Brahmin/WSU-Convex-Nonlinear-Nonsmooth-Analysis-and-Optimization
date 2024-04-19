@@ -1,22 +1,31 @@
 include("objfuns/objective.jl")
 include("objfuns/functionLP.jl")
 include("objfuns/functionQP.jl")
-include("projectedGradientConjugateGradient.jl")
+include("optimizeECQP.jl")
 include("solveLP.jl")
 
-function getECQPStep(prASQP, pDict;
+function getECQPStep(prASQP, solStateASQP;
     verbose::Bool=false,
+    verbose_ls::Bool=false,
 )
-    error("Okay I still need to write a subroutine format of optimizeECQP")
-    solverState = SolverStateECQPType()
 
-    # @unpack genetic parameters = pr.alg
+    @unpack objective, p, objectiveString = prASQP
+    objectiveStringECQP = objectiveString*"_ECQPsubroutine"
+    @unpack xk, Wk = solStateASQP
+    problemTypeECQP = "ECQP"
+    methodECQP = "ProjectedGradientCG"
 
-    progress = pr.alg[:progress]
-    maxiter = pr.alg[:maxiter]
-    etol = pr.alg[:etol]
+    pASQP = p
+    # @unpack pASQP # but need to change some things
 
+    error("Okay I need to convert pASQP into pECQP")
+
+    prECQP = generate_pr(objective, xk, problemType=problemTypeECQP, method=methodECQP, params=pECQP, objectiveString=objectiveStringECQP, verbose=false)
+    res = optimizeECQP(prECQP, verbose=verbose, verbose_ls=verbose_ls, log=false)
+    xkp1 = res[:xvals][:, end]
+    pk = xkp1 - xk
     return pk
+    
 end
 # c = [1, 3, 5, 2]
 # n = length(c)

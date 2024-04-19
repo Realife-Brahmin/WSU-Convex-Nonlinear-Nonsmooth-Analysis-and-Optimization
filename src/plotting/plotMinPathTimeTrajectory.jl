@@ -7,7 +7,9 @@ function plotMinPathTimeTrajectory(res;
     Plots.theme(:dao)
     pr = res.pr
     p = pr[:p]
-    params = p[:params]
+    # params = p[:params]
+    params = p
+
     v = params[:v]
     mx, my = size(v)
     A = params[:A]

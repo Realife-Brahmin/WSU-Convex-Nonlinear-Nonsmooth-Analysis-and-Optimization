@@ -4,11 +4,12 @@ include("objective.jl")
 Generalized n-dim rosenbrock function with steepness parameter p[1]
 """
 function rosenbrock(x::Vector{Float64}, 
-    p; 
+    pDict; 
     getGradientToo::Bool=true, 
     verbose::Bool=false)
 
-    p = p[:params]
+    # p = p[:params]
+    @unpack p = pDict
     scale = p[1]
     n = length(x)
     f = 0.0
@@ -37,6 +38,7 @@ end
 
 objective = rosenbrock;
 n = 10
-params = Float64.([n])
-x0 = collect(1.0/params[1]:1.0/params[1]:1.0)
-pr = generate_pr(objective, x0, params=params)
+p = Float64.([n])
+pDict = Dict(:p => p)
+x0 = collect(1.0/p[1]:1.0/p[1]:1.0)
+pr = generate_pr(objective, x0, params=pDict)

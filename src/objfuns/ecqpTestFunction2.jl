@@ -1,5 +1,5 @@
 include("objective.jl")
-include("../equalityConstrainedQP.jl")
+include("functionQP.jl")
 
 using LinearAlgebra
 using Parameters
@@ -19,7 +19,7 @@ x00 = A\b
 x0 = x00 + rand()*p
 pECQP = Dict(:G=>G, :c=>c, :A=>A, :b=>b )
 
-objective = equalityConstrainedQP
+objective = QPObjectiveFunction
 objectiveString = "ecqpTestFunction2"
 params = pECQP
 

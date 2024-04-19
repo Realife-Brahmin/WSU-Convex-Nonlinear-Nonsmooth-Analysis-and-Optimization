@@ -11,7 +11,8 @@ function pathtime(x::Vector{Float64},
 
     n = Int(length(x)/2)
 
-    params = p[:params]
+    # params = p[:params]
+    params = p
     m = params[:m]
     w = x[1:n]
     z = x[n+1:2n]
@@ -65,7 +66,8 @@ function computeOptimalTrajectoryIndices(res)
     n = Int(length(wz_opt)/2)
 
     p = pr[:p]
-    params = p[:params]
+    # params = p[:params]
+    params = p
     m = params[:m]
     w = wz_opt[1:n]
     z = wz_opt[n+1:2n]

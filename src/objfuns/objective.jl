@@ -57,14 +57,14 @@ function generate_pr(functionName::Function,
     x0::Vector{Float64};
     problemType::String="Unconstrained",
     method::String="QuasiNewton",
-    data=Matrix{Float64}(undef, 0, 0),
+    # data=Matrix{Float64}(undef, 0, 0),
     params=Dict(),
     objectiveString::String="undefinedFunction",
     verbose::Bool=true,
 )
 
-    p = Dict(:params => params, :data => data)
-
+    # p = Dict(:params => params, :data => data)
+    p = params
     if objectiveString == "undefinedFunction"
         objectiveString = string(functionName)
     elseif objectiveString != string(functionName)

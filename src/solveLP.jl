@@ -4,7 +4,52 @@ using Parameters
 
 include("helperFunctions.jl")
 
+"""
+    computeFeasiblePointForLinearConstraints(pDict)
 
+Solve a linear feasibility problem defined by linear equality and inequality constraints to find a feasible point that satisfies all the constraints, including optional variable bounds.
+
+# Arguments
+- `pDict::Dict`: A dictionary containing the problem's parameters. Expected keys are:
+    - `lb`: Optional vector of lower bounds for the variables. If not provided, defaults to zero.
+    - `ub`: Optional vector of upper bounds for the variables. If not provided, defaults to infinity.
+    - `mE`: Not used in the function directly but expected for completeness.
+    - `mI`: Not used in the function directly but expected for completeness.
+    - `Ae`: Coefficient matrix for equality constraints.
+    - `be`: Right-hand side vector for equality constraints.
+    - `A`: Coefficient matrix for inequality constraints.
+    - `b`: Right-hand side vector for inequality constraints.
+
+# Returns
+- `xfeas`: A vector of variable values that satisfies all the given constraints.
+
+# Notes
+- Ensure that `Ae`, `be`, `A`, and `b` are correctly dimensioned and the lengths of `lb` and `ub` match the number of variables `n`.
+- The function throws an assertion error if no feasible solution is found, indicating that the model is either infeasible or unbounded. It is crucial to verify the model's feasibility before relying on the output.
+- Modify the `lb` and `ub` initialization lines to handle potential input issues more robustly, especially when defaults are applied. Incorrect bounds can lead to infeasible models or unintended solution spaces.
+- This function uses the HiGHS optimizer, known for its efficiency and accuracy in solving linear programming problems. Ensure that HiGHS is correctly installed and configured in your Julia environment.
+
+# Usage
+The function initializes a model using the HiGHS optimizer, defines the variables with their respective bounds, and sets up the constraints provided in `pDict`. It then solves this model to find a feasible point.
+
+# Example
+```julia
+# Define problem parameters
+Ae = [1 0; 0 1]
+be = [5; 5]
+A = [1 1; -1 -1]
+b = [10; -10]
+lb = [0, 0]
+ub = [10, 10]
+
+# Pack parameters into a dictionary
+pDict = Dict(:lb => lb, :ub => ub, :Ae => Ae, :be => be, :A => A, :b => b, :mE => size(Ae, 1), :mI => size(A, 1))
+
+# Compute a feasible point
+xfeas = computeFeasiblePointForLinearConstraints(pDict)
+println("Feasible point: ", xfeas)
+```
+"""
 function computeFeasiblePointForLinearConstraints(pDict;
     )
 

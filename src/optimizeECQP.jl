@@ -9,7 +9,13 @@ function optimizeECQP(pr;
 
     objString = pr.objectiveString
     pECQP = pr.p
-    @unpack G, c, Ae, be,subroutineCall = pECQP
+    if !haskey(pECQP, :subroutineCall)
+        subroutineCall = false
+        G, c, Ae, be
+    else
+        @unpack G, c, Ae, be, subroutineCall = pECQP
+    end
+
     verbose = verbose && !subroutineCall
 
     log_txt = log_path * "log_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"

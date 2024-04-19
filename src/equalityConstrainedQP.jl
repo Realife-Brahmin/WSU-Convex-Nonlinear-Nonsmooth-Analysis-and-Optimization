@@ -1,3 +1,5 @@
+using Parameters
+
 """
     normalizeLinearConstraints(B, d) -> (Matrix, Vector)
 
@@ -25,4 +27,29 @@ function normalizeLinearConstraints(B, d)
     B_normalized = B ./ norms
     d_normalized = d ./ norms
     return B_normalized, d_normalized
+end
+
+
+function solveECQPUsingLagrangian(pr)
+
+    if pr.problemType != "ECQP"
+        @error "Cannot solve Problem of Type $(pr.problemType) as an Equality Constrained Quadratic Programming Problem"
+    else
+        @unpack G, Ae, c, be = pr
+    end
+
+    # q(x) = 1//2*xT*G*x + xT*c
+    # s.t.
+    # Ae*x = be
+    n = size(G, 1)
+    m = size(Ae, 1)
+    KKT0 = [G -transpose(Ae); Ae zeros(m, m)] # the matrix containing relating x*, λ* with G, c, Ae, be
+
+    RHS0 = [-c; be]
+
+    wOpt = KKT0 \ RHS0
+
+    xOpt, lambdaOpt = wOpt[1:n], wOpt[n+1:end]
+
+    return xOpt, lambdaOpt
 end

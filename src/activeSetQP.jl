@@ -9,22 +9,21 @@ using Parameters
 function computeFeasiblePointForLinearConstraints(pDict;
     )
 
-    # @unpack lb, ub, mE, mI, Ae, be, A, b = pDict[:params]
     @unpack lb, ub, mE, mI, Ae, be, A, b = pDict
 
     n = size(Ae, 2)
     isempty(lb) ? lb = zeros(n) : lb = lb
     isempty(ub) ? ub = myfill(lb, Inf) : ub = ub
 
-    vector_model = Model(HiGHS.Optimizer)
-    @variable(vector_model, lb[i] .<= x[i=1:n] .<= ub[i])
-    @constraint(vector_model, Ae * x .== be)
-    @constraint(vector_model, A * x .>= b)
-    optimize!(vector_model)
-    @assert is_solved_and_feasible(vector_model)
-    xopt = value.(x)
+    model = Model(HiGHS.Optimizer)
+    @variable(model, lb[i] .<= x[i=1:n] .<= ub[i])
+    @constraint(model, Ae * x .== be)
+    @constraint(model, A * x .>= b)
+    optimize!(model)
+    @assert is_solved_and_feasible(model)
+    xfeas = value.(x)
 
-    return xopt
+    return xfeas
     
 end
 

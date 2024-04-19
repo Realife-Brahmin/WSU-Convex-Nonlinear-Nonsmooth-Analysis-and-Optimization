@@ -1,0 +1,8 @@
+Starting with initial point x = [0.0, -2.0, 1.0, -4.0].
+which has fval = 5.75
+Iteration k = 0
+Iteration k = 1
+Iteration k = 2
+Iteration k = 3
+Iteration k = 4
+Convergence achieved in 4 iterations 😄

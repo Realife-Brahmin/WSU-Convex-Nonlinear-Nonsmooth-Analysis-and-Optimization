@@ -30,6 +30,7 @@ function optimizeASQP(pr;
 
     # doing this even though GA requires multiple f evals
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
+
     f = pr.objective
     pASQP = pr.p
     @unpack G, c, mE, Ae, be, mI, A, b = pASQP
@@ -37,7 +38,7 @@ function optimizeASQP(pr;
     f0 = f(x0, pASQP, getGradientToo=false)
     fk = f0
     solState = SolStateASQPType(x0, Ae, fk=f0, itol=itol)
-
+    @show solState[:Wk]
     @unpack fevals = solverState
     fevals += 1
     @pack! solverState = fevals
@@ -50,10 +51,11 @@ function optimizeASQP(pr;
     while keepIterationsGoing
 
         @unpack k = solverState
-        myprintln(printOrNot, "Iteration k = $(k)", log_path=log_txt)
 
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_ASQP = printOrNot & verbose_ls
+
+        myprintln(printOrNot_ASQP, "Iteration k = $(k)", log_path=log_txt)
 
         if k >= maxiter
             push!(causeForStopping, "Iteration limit reached!")
@@ -66,7 +68,10 @@ function optimizeASQP(pr;
         km1, xkm1, fkm1, Wkm1 = k, xk, fk, Wk
         @pack! solState = km1, xkm1, fkm1, Wkm1
 
-        pk = getECQPStep(pr, solState, verbose=verbose, verbose_ls=printOrNot_ASQP) # write a function to invoke ECQP
+        myprintln(printOrNot_ASQP, "Let's try taking a step saisfying current active constraints.")
+        pk = getECQPStep(pr, solState, verbose=printOrNot_ASQP, verbose_ls=printOrNot_ASQP) # write a function to invoke ECQP
+        # @show pk
+
         Iall = collect(mE+1:mE+mI) # vector of indices for all inequality constraints [4, 5, 6, 7, 8] where mE = 3 mI = 5
         WIk = Wk[mE+1:end] # contains only indices for inequality constraints (like [5, 7, 8])
         notWIk = setdiff(Iall, WIk) # [4, 6]
@@ -74,38 +79,47 @@ function optimizeASQP(pr;
         Anotwk = A[notWIk .- mE, :] # A[ [1, ]]
         bwk = A[WIk .- mE] # A[ [2, 4, 5], :]
         bnotwk = b[notWIk .- mE]
-        if norm(pk) < tol # stationary point wrt Wk
+
+        if norm(pk) < itol # stationary point wrt Wk
+
+            myprintln(printOrNot_ASQP, "Step is too small, checking if this is a stationary point wrt all constraints.")
 
             lambdas = computeLagrangianMultipliersQP(xk, G, c, Awk)
 
             lambda_min, jI_min = findmin(lambdas)
 
             if lambda_min >= 0
-                myprintln(verbose, "0 vector is the only feasible descent direction")
-
+                myprintln(printOrNot_ASQP, "0 vector is the only feasible descent direction")
+                xkp1 = xk
+                fkp1 = fk
+                Wkp1 = Wk
                 push!(causeForStopping, "No feasible improvement step possible from here.")
                 keepIterationsGoing = false
                 break
 
             else
                 j_min = jI_min + mE
-                myprintln(verbose, "Working set constraint $(j_min) prevents a feasible step the hardest.")
-                myprintln(verbose, "So removing constraint $(j_min) from the working set")
+                myprintln(printOrNot_ASQP, "Working set constraint $(j_min) prevents a feasible step the hardest.")
+                myprintln(printOrNot_ASQP, "So removing constraint $(j_min) from the working set")
                 xkp1 = xk
                 fkp1 = fk
                 Wkp1 = vcat(Wk[1:j_min-1], Wk[j_min+1:end])
 
             end
 
-        elseif norm(pk) > tol
+        elseif norm(pk) >= itol
+
+            myprintln(printOrNot_ASQP, "Step pk of size $(norm(pk)) exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.")
 
             alphak = 1.0
             jBlockClosest = 0
 
-            for idx ∈ eachindex(Anotwk)
-                den = Anotwk[idx, :]*pk
+            for idx ∈ axes(Anotwk, 1) # axes(something, 1) returns the indices of the rows, so something like 1:5
+                # @show idx
+                # @show Anotwk
+                den = transpose(Anotwk[idx, :])*pk
                 if den < 0
-                    distance = (bnotwk[idx] - Anotwk[idx, :]*xk)/den
+                    distance = (bnotwk[idx] - transpose(Anotwk[idx, :])*xk)/den
                     if distance < alphak
                         jBlockClosest = notWIk[idx]
                         myprintln(printOrNot_ASQP, "Constraint $(jBlockClosest) outside the working set is blocking the current step the earliest among the checked ones.")
@@ -143,6 +157,8 @@ function optimizeASQP(pr;
 
         xvals[:, k] = xkp1
         fvals[k] = fkp1 # also incorrect
+
+        xk, fk, Wk = xkp1, fkp1, Wkp1
 
         @pack! solState = xk, fk, Wk
         @pack! solState = k

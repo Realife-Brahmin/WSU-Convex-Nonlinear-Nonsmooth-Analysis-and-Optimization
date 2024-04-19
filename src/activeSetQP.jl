@@ -18,23 +18,35 @@ function getECQPStep(prASQP, solStateASQP;
     @unpack G, c, mE, Ae, be, A, b = pASQP
     @unpack xk, Wk = solStateASQP
 
-    WIk = WIk[mE+1:end]
+    WIk = Wk[mE+1:end]
     Ae = vcat(Ae, A[WIk .- mE, :])
     be = vcat(be, b[WIk .- mE])
-    pECQP = @packDict "{G, c, Ae, be}"
-    error("Okay I need to convert pASQP into pECQP")
 
+    subroutineCall = true
+    # @show subroutineCall
+    pECQP = @packDict "{G, c, Ae, be}"
+    pECQP[:subroutineCall]=subroutineCall
+
+    # @show pECQP
     prECQP = generate_pr(objective, xk, problemType=problemTypeECQP, method=methodECQP, params=pECQP, objectiveString=objectiveStringECQP, verbose=false)
     res = optimizeECQP(prECQP, verbose=verbose, verbose_ls=verbose_ls, log=false)
-    xkp1 = res[:xvals][:, end]
+    
+    xvals = res[:xvals]
+    itr = size(xvals, 2)
+    if itr == 0 # x0 is xkp1
+        xkp1 = xk
+    else
+        xkp1 = xvals[:, itr]
+    end
+
     pk = xkp1 - xk
     return pk
     
 end
 
-function computeLagrangianMultiplierQP(xk, G, c, Awk)
+function computeLagrangianMultipliersQP(xk, G, c, Awk)
     rhs = G*xk + c
-    lambdask = Awk \ rhs
+    lambdask = transpose(Awk) \ rhs
     return lambdask
 end
 # c = [1, 3, 5, 2]

@@ -66,7 +66,7 @@ function optimizeASQP(pr;
         km1, xkm1, fkm1, Wkm1 = k, xk, fk, Wk
         @pack! solState = km1, xkm1, fkm1, Wkm1
 
-        pk = getStepDirection() # write a function to invoke ECQP
+        pk = getECQPStep(pr, solState, verbose=verbose, verbose_ls=printOrNot_ASQP) # write a function to invoke ECQP
         Iall = collect(mE+1:mE+mI) # vector of indices for all inequality constraints [4, 5, 6, 7, 8] where mE = 3 mI = 5
         WIk = Wk[mE+1:end] # contains only indices for inequality constraints (like [5, 7, 8])
         notWIk = setdiff(Iall, WIk) # [4, 6]
@@ -76,7 +76,7 @@ function optimizeASQP(pr;
         bnotwk = b[notWIk .- mE]
         if norm(pk) < tol # stationary point wrt Wk
 
-            lambdas = computeLagrangianMultipliers(xk, G, c, Awk)
+            lambdas = computeLagrangianMultipliersQP(xk, G, c, Awk)
 
             lambda_min, jI_min = findmin(lambdas)
 

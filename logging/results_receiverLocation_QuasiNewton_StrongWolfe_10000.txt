@@ -1,7 +1,6 @@
 ****************************
 Solver run has concluded.
 Function solved for: receiverLocation()
-This was a function minimization problem.
 Cause(s) for stopping:
 LineSearch failed.
 Barely changing fval
@@ -10,25 +9,25 @@ Convergence achieved in 2 iterations 😄
 Method Used: QuasiNewton
 Linesearch method used: StrongWolfe
 ****************************
-Optimal function value = -5.702840839724704
+Optimal function value = -5.784301758885327
 ***************************
 Optimal Nonzero Variables:
 Only upto 15 values will be printed.
-x☆[1] = 0.583515
-x☆[2] = 0.50893
-x☆[3] = 0.0781165
-x☆[4] = 0.3619
-x☆[5] = 0.730065
-x☆[12] = 0.1411405
-x☆[19] = 0.410215
-x☆[26] = 0.587
-x☆[32] = 0.42309949999999996
-x☆[38] = 0.685215
-x☆[46] = 0.176044
-x☆[47] = 0.44483500000000004
-x☆[48] = 0.629365
-x☆[49] = 0.44055999999999995
-x☆[50] = 0.324305
+x☆[1] = 0.47559999999999997
+x☆[2] = 0.39793
+x☆[3] = 0.55442
+x☆[4] = 0.42749000000000004
+x☆[5] = 0.494635
+x☆[12] = 0.4615705
+x☆[19] = 0.0623525
+x☆[26] = 0.44965
+x☆[32] = 0.67706
+x☆[38] = 0.438125
+x☆[46] = 0.465115
+x☆[47] = 0.70536
+x☆[48] = 0.6831400000000001
+x☆[49] = 0.181875
+x☆[50] = 0.463812
 ***************************
 Number of fevals = 2
 Number of gevals = 1

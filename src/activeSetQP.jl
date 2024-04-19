@@ -1,33 +1,23 @@
 include("objfuns/objective.jl")
 include("objfuns/functionLP.jl")
+include("objfuns/functionQP.jl")
+include("projectedGradientConjugateGradient.jl")
 include("solveLP.jl")
 
-using HiGHS
-using JuMP
-using Parameters
+function getECQPStep(prASQP, pDict;
+    verbose::Bool=false,
+)
+    error("Okay I still need to write a subroutine format of optimizeECQP")
+    solverState = SolverStateECQPType()
 
-function computeFeasiblePointForLinearConstraints(pDict;
-    )
+    # @unpack genetic parameters = pr.alg
 
-    @unpack lb, ub, mE, mI, Ae, be, A, b = pDict
+    progress = pr.alg[:progress]
+    maxiter = pr.alg[:maxiter]
+    etol = pr.alg[:etol]
 
-    n = size(Ae, 2)
-    isempty(lb) ? lb = zeros(n) : lb = lb
-    isempty(ub) ? ub = myfill(lb, Inf) : ub = ub
-
-    model = Model(HiGHS.Optimizer)
-    @variable(model, lb[i] .<= x[i=1:n] .<= ub[i])
-    @constraint(model, Ae * x .== be)
-    @constraint(model, A * x .>= b)
-    optimize!(model)
-    @assert is_solved_and_feasible(model)
-    xfeas = value.(x)
-
-    return xfeas
-    
+    return pk
 end
-
-
 # c = [1, 3, 5, 2]
 # n = length(c)
 # x0 = rand(n)

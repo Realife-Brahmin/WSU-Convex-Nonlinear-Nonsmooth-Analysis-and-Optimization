@@ -9,15 +9,15 @@ using Parameters
 G = [6 2 1;2 5 2; 1 2 4]
 c = [-8, -3, -3]
 # Define the constraints
-A = [1 0 1; 0 1 1]
-b = [3, 0]
+Ae = [1 0 1; 0 1 1]
+be = [3, 0]
 
 # Initial guess
-p = vec(nullspace(A))
+p = vec(nullspace(Ae))
 
-x00 = A\b
+x00 = Ae\be
 x0 = x00 + rand()*p
-pECQP = Dict(:G=>G, :c=>c, :A=>A, :b=>b )
+pECQP = Dict(:G=>G, :c=>c, :Ae=>Ae, :be=>be )
 
 objective = QPObjectiveFunction
 objectiveString = "ecqpTestFunction2"

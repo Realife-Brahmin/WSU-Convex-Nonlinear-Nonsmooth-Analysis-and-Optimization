@@ -7,14 +7,14 @@ using Parameters
 G = [2 0; 0 2]
 c = [-4; -6]
 # Define the constraints
-A = [1 1]
-b = [1]
+Ae = [1 1]
+be = [1]
 
 # Initial guess
-x0 = A\b
+x0 = Ae\be
 
 
-pECQP = Dict(:G=>G, :c=>c, :A=>A, :b=>b )
+pECQP = Dict(:G=>G, :c=>c, :Ae=>Ae, :be=>be )
 
 objective = QPObjectiveFunction
 objectiveString = "ecqpTestFunction1"

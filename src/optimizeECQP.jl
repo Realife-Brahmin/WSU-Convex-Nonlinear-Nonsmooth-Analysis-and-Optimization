@@ -27,13 +27,13 @@ Solves an Extended Constrained Quadratic Programming (ECQP) problem using the Pr
 ```julia
 # Define ECQP problem parameters and algorithmic settings
 G = [2 0; 0 2]
-A = [1 1]
+Ae = [1 1]
 c = [-1; -1]
-b = [0]
+be = [0]
 x0 = [0.5; 0.5]
 alg_settings = Dict(:method => "PGCG", :maxiter => 100, :dftol => 1e-5, :etol => 1e-6, :progress => 10)
 
-pr = (objectiveString="MyObjective", alg=alg_settings, x0=x0, p=Dict(:params => Dict(:G => G, :c => c, :A => A, :b => b)))
+pr = (objectiveString="MyObjective", alg=alg_settings, x0=x0, p=Dict(:params => Dict(:G => G, :c => c, :Ae => Ae, :be => be)))
 
 # Execute the optimization
 results = optimizeECQP(pr, verbose=true, log=true)
@@ -73,13 +73,13 @@ function optimizeECQP(pr;
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     f = pr.objective
     pECQP = pr.p
-    @unpack G, c, A, b = pECQP
+    @unpack G, c, Ae, be = pECQP
 
-    AAT = A*transpose(A)
+    AAT = Ae*transpose(Ae)
 
     f0 = f(x0, pECQP, getGradientToo=false)
     fk = f0
-    solState = SolStatePGCGType(x0, G, c, A, fk=f0, etol=etol)
+    solState = SolStatePGCGType(x0, G, c, Ae, fk=f0, etol=etol)
 
     @unpack fevals = solverState
     fevals += 1
@@ -118,7 +118,7 @@ function optimizeECQP(pr;
 
         @unpack actions, fevals = solverState
 
-        xkp1, gkp1, dkp1, rkp1, fevals_1PGCG, actions_1PGCG = solveForNextPGCGIterate(xk, gk, dk, rk, num, G, A, AAT, verbose=printOrNot_ECQP) # last two oargs are bogus
+        xkp1, gkp1, dkp1, rkp1, fevals_1PGCG, actions_1PGCG = solveForNextPGCGIterate(xk, gk, dk, rk, num, G, Ae, AAT, verbose=printOrNot_ECQP) # last two oargs are bogus
 
         fkp1 = f(xkp1, pECQP, getGradientToo=false)
         fevals += 1

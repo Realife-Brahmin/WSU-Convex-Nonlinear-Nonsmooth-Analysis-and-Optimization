@@ -17,7 +17,7 @@ warmStart = true
 
 # functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
-functionName = "fireLocation";
+# functionName = "fireLocation";
 # functionName = "nnloss"; functionName == "nnloss" ? verbose = false : verbose = verbose;
 # functionName = "pathtime"
 # functionName = "receiverLocation"
@@ -30,7 +30,7 @@ functionName = "fireLocation";
 # functionName = "TestFunction3";
 
 # functionName = "ecqpTestFunction1"
-# functionName = "ecqpTestFunction2"
+functionName = "ecqpTestFunction2"
 # functionName = "Rastrigin"
 
 pr = include("src/objfuns/"*functionName*".jl")

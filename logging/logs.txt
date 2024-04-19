@@ -1,2 +1,2 @@
-A wrapper function QPObjectiveFunction will be used to solve for the original problem of fireLocation
+A wrapper function QPObjectiveFunction will be used to solve for the original problem of ecqpTestFunction2
 Problem (pr::NamedTuple) generated

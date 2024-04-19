@@ -34,10 +34,16 @@ function optimizeASQP(pr;
     f = pr.objective
     pASQP = pr.p
     @unpack G, c, mE, Ae, be, mI, A, b = pASQP
+    
+    if haskey(pASQP, :Wk0)
+        Wk0 = pASQP[:Wk0]
+    else
+        Wk0 = collect(1:mE)
+    end
 
     f0 = f(x0, pASQP, getGradientToo=false)
     fk = f0
-    solState = SolStateASQPType(x0, Ae, fk=f0, itol=itol)
+    solState = SolStateASQPType(x0, Ae, fk=f0, Wk0=Wk0, itol=itol)
     @show solState[:Wk]
     @unpack fevals = solverState
     fevals += 1

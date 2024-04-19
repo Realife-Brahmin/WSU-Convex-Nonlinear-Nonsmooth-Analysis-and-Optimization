@@ -1,19 +1,24 @@
 using Parameters
 
 function SolStateASQPType(xk, Ae;
+    Wk0=[],
     fkm1=100.0,
     fk=100.0,
     itol=1e-8)
 
     mE = size(Ae, 1)
-    Wk = collect(1:mE)
+    
+    if isempty(Wk0)
+        Wk0 = collect(1:mE) # at least all the equality constraints (may be zero => still empty)
+    end
+
     # Prepare the state dictionary with initial values
     solState = Dict(
         :km1 => -1, :k => 0,
         :xkm1 => myfill(xk, -27.0), :xk => xk,
         :fkm1 => fkm1, :fk => fk,
-        :Wkm1 => -1 * Wk, # has no sense in reality
-        :Wk => Wk,
+        :Wkm1 => -1 * Wk0, # has no sense in reality
+        :Wk => Wk0,
         :itol => itol
     )
 

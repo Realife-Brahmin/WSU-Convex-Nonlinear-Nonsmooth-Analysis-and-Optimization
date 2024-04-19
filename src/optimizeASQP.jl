@@ -32,7 +32,7 @@ function optimizeASQP(pr;
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     f = pr.objective
     pASQP = pr.p
-    @unpack G, c, mE, Ae, be, mI, A, b = pASQP[:params]
+    @unpack G, c, mE, Ae, be, mI, A, b = pASQP
 
     f0 = f(x0, pASQP, getGradientToo=false)
     fk = f0

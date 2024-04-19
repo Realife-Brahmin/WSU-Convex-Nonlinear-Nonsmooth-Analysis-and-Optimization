@@ -245,7 +245,7 @@ function warm_start_optimize(pr;
         end
     
     elseif pr.alg[:method] == "ActiveSetQP"
-        @time res = optimizeASQP(pr, verbose=verbose, verbsoe_ls=verbose_ls)
+        @time res = optimizeASQP(pr, verbose=verbose, verbose_ls=verbose_ls)
 
     elseif pr.alg[:method] == "ProjectedGradientCG"
         @time res = optimizeECQP(pr, verbose=verbose, verbose_ls=verbose_ls)

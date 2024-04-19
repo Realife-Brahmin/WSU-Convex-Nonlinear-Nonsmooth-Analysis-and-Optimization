@@ -33,12 +33,12 @@ trainIndices, testIndices = partition(eachindex(y), 0.9, shuffle=true) # 70-30 s
 
 mach = machine(tree, X, y)
 # Step 6: Train the model
-fit!(mach, rows=trainIndices);
+# fit!(mach, rows=trainIndices);
 # rf_model = machine(model, X, y)
 # fit!(rf_model, rows=train)
 
 # Step 7: Evaluate the model
-predictions = predict(mach, X[testIndices, :])
+# predictions = predict(mach, X[testIndices, :])
 # rms = sqrt(predictions, y[test])
 
 

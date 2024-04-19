@@ -20,7 +20,7 @@ function create_spiral_matrix(size, high_speed, low_speed, thickness, loops)
     y_spiral = Int.(round.(size÷2 .+ r .* sin.(theta)))
     
     # Set high_speed values along the spiral path
-    for i in 1:length(x_spiral)
+    for i ∈ eachindex(x_spiral)
         x, y = x_spiral[i], y_spiral[i]
         # Ensure the indices are within the bounds of the matrix
         if x > 0 && x ≤ size && y > 0 && y ≤ size

@@ -1,6 +1,5 @@
 
 include("activeSetQP.jl")
-# include("projectedGradientConjugateGradient.jl")
 
 function optimizeASQP(pr;
     verbose::Bool=false,

@@ -212,7 +212,7 @@ solState = SolStatePGCGType(xk, G, c, A)
 function SolStatePGCGType(xk, G, c, A; 
     fkm1=100.0,
     fk=100.0,
-    tol=1e-6)
+    etol=1e-8)
 
     # note that here the variable 'xk' here might be 'wk', which can have a different meaning than the original problem.
 
@@ -233,7 +233,7 @@ function SolStatePGCGType(xk, G, c, A;
         :gkm1 => myfill(gk, 77), :gk => gk,
         :dkm1 => myfill(dk, 33), :dk => dk,
         :fkm1 => fkm1, :fk => fk,
-        :tol => tol
+        :etol => etol
     )
 
     return solState

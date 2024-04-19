@@ -21,7 +21,7 @@ Solves an Extended Constrained Quadratic Programming (ECQP) problem using the Pr
 - The function initializes solver and solution states, managing iterations through the PGCG method to minimize the objective function subject to equality constraints.
 - Logging is handled conditionally based on `log` and `verbose` flags, enabling both console output and file-based logging of the optimization journey.
 - The solver dynamically adapts to convergence criteria and iteration limits, ensuring robust handling of the ECQP problem.
-- `pr.alg` must be properly defined in the input `pr`, including keys for algorithmic parameters like `method`, `maxiter`, `dftol`, and `tol`.
+- `pr.alg` must be properly defined in the input `pr`, including keys for algorithmic parameters like `method`, `maxiter`, `dftol`, and `etol`.
 
 # Example
 ```julia
@@ -31,7 +31,7 @@ A = [1 1]
 c = [-1; -1]
 b = [0]
 x0 = [0.5; 0.5]
-alg_settings = Dict(:method => "PGCG", :maxiter => 100, :dftol => 1e-5, :tol => 1e-6, :progress => 10)
+alg_settings = Dict(:method => "PGCG", :maxiter => 100, :dftol => 1e-5, :etol => 1e-6, :progress => 10)
 
 pr = (objectiveString="MyObjective", alg=alg_settings, x0=x0, p=Dict(:params => Dict(:G => G, :c => c, :A => A, :b => b)))
 
@@ -60,7 +60,7 @@ function optimizeECQP(pr;
     progress = pr.alg[:progress]
     maxiter = pr.alg[:maxiter]
     dftol = pr.alg[:dftol]
-    tol = pr.alg[:tol]
+    etol = pr.alg[:etol]
 
     x0 = pr.x0
     n = length(x0)
@@ -79,7 +79,7 @@ function optimizeECQP(pr;
 
     f0 = f(x0, pECQP, getGradientToo=false)
     fk = f0
-    solState = SolStatePGCGType(x0, G, c, A, fk=f0, tol=tol)
+    solState = SolStatePGCGType(x0, G, c, A, fk=f0, etol=etol)
 
     @unpack fevals = solverState
     fevals += 1
@@ -103,7 +103,7 @@ function optimizeECQP(pr;
             push!(causeForStopping, "Iteration limit reached!")
             keepIterationsGoing = false
             break
-        elseif num < tol
+        elseif num < etol
             push!(causeForStopping, "Convergence Tolerance Reached")
             keepIterationsGoing = false
             break

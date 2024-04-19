@@ -1,20 +1,21 @@
 A wrapper function QPObjectiveFunction will be used to solve for the original problem of transmissionLines
 Problem (pr::NamedTuple) generated
+Current Working Set: Int64[]
 Let's try taking a step saisfying current active constraints.
-Step pk of size 4.582427372454542 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Quick safety check: What's Ae*xk - be?
+Float64[]
+Step pk of size 6.999941127878957 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 Constraint 6 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 6 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
+Current Working Set: [6]
 Let's try taking a step saisfying current active constraints.
-Step pk of size 4.582427372454542 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
-Constraint 9 outside the working set is blocking the current step the earliest among the checked ones.
-Constraint 9 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
-Let's try taking a step saisfying current active constraints.
-Step pk of size 4.582427372454542 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Quick safety check: What's Ae*xk - be?
+[0.0]
+Step pk of size 6.999941127878957 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 No inequality constraint outside the working set is blocking our current step.
+Current Working Set: [6]
 Let's try taking a step saisfying current active constraints.
-Step is too small, checking if this is a stationary point wrt all constraints.
-Working set constraint 1 prevents a feasible step the hardest.
-So removing constraint 1 from the working set
-Let's try taking a step saisfying current active constraints.
+Quick safety check: What's Ae*xk - be?
+[-17.9998229047231]
 Step is too small, checking if this is a stationary point wrt all constraints.
 0 vector is the only feasible descent direction

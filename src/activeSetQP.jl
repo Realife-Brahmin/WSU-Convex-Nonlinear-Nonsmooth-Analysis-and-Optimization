@@ -9,12 +9,15 @@ using Parameters
 function computeFeasiblePointForLinearConstraints(pDict;
     )
 
-    @unpack mE, mI, Ae, be, A, b = pDict[:params]
+    # @unpack lb, ub, mE, mI, Ae, be, A, b = pDict[:params]
+    @unpack lb, ub, mE, mI, Ae, be, A, b = pDict
 
     n = size(Ae, 2)
+    isempty(lb) ? lb = zeros(n) : lb = lb
+    isempty(ub) ? ub = myfill(lb, Inf) : ub = ub
 
     vector_model = Model(HiGHS.Optimizer)
-    @variable(vector_model, x[1:n])
+    @variable(vector_model, lb[i] .<= x[i=1:n] .<= ub[i])
     @constraint(vector_model, Ae * x .== be)
     @constraint(vector_model, A * x .>= b)
     optimize!(vector_model)

@@ -8,6 +8,7 @@ function optimizeECQP(pr;
 
     objString = pr.objectiveString
     pECQP = pr.p
+
     if !haskey(pECQP, :subroutineCall)
         myprintln(verbose, "Calling ECQP Solver Independently.")
         subroutineCall = false
@@ -17,7 +18,6 @@ function optimizeECQP(pr;
         @unpack G, c, Ae, be, subroutineCall = pECQP
     end
 
-    @show Ae, be
     verbose = verbose && !subroutineCall
 
     log_txt = log_path * "log_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
@@ -36,12 +36,20 @@ function optimizeECQP(pr;
     x0 = pr.x0
     n = length(x0)
     xk = x0
+    
+    myprintln(verbose, "Starting with initial point x = $(xk).", log=verbose, log_path=log_txt)
+
+    myprintln(false, "But first, a quick safety check to make sure we're inserting a feasible xk into our ECQP: What's Ae*xk - be?")
+    discrepancy = Ae*xk - be
+    if norm(discrepancy) < etol
+        myprintln(false, "It's a zero vector as it should be. All good!")
+    else
+        error("The residual is non-zero!. The ECQP solver cannot be allowed to proceed!")
+    end
 
     fvals = zeros(Float64, maxiter)
     xvals = zeros(Float64, n, maxiter)
 
-    # doing this even though GA requires multiple f evals
-    myprintln(verbose, "Starting with initial point x = $(xk).", log=verbose, log_path=log_txt)
     f = pr.objective
 
 

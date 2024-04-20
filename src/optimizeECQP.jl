@@ -1,6 +1,5 @@
 include("projectedGradientConjugateGradient.jl")
 
-
 function optimizeECQP(pr;
     verbose::Bool=false,
     verbose_ls::Bool=false,
@@ -10,12 +9,15 @@ function optimizeECQP(pr;
     objString = pr.objectiveString
     pECQP = pr.p
     if !haskey(pECQP, :subroutineCall)
+        myprintln(verbose, "Calling ECQP Solver Independently.")
         subroutineCall = false
         @unpack G, c, Ae, be = pECQP
     else
+        myprintln(verbose, "Calling ECQP Solver as a subroutine for ASQP.")
         @unpack G, c, Ae, be, subroutineCall = pECQP
     end
 
+    @show Ae, be
     verbose = verbose && !subroutineCall
 
     log_txt = log_path * "log_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
@@ -29,7 +31,6 @@ function optimizeECQP(pr;
 
     progress = pr.alg[:progress]
     maxiter = pr.alg[:maxiter]
-    dftol = pr.alg[:dftol]
     etol = pr.alg[:etol]
 
     x0 = pr.x0

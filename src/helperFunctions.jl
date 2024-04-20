@@ -71,33 +71,36 @@ initializeLogFile(logDefault)
 function initializeLogFile(logPath::String = "./logging/logs.txt")
     if isfile(logPath)
         rm(logPath)
-        println("Existing log file at '$logPath' removed.")
+        myprintln(true, "Existing log file at '$logPath' removed.", color=:yellow)
     else
-        println("No existing log file found at '$logPath'. Starting fresh.")
+        myprintln(true, "No existing log file found at '$logPath'. Starting fresh.", color=:yellow)
     end
 end
 
 """
-    myprintln(print_flag::Bool, message; log::Bool=true, log_path::String="./logging/logs.txt")
+    myprintln(print_flag::Bool, message; color=:normal, log::Bool=true, log_path::String="./logging/logs.txt")
 
-Print a message to the console if `print_flag` is `true`. Additionally, if `log` is `true`,
-the message will also be written to a log file specified by `log_path`. By default, the log path
-is set to `"./logging/logs.txt"`.
+Print a styled message to the console if `print_flag` is `true`. If `color` is specified, the message will
+be printed in the specified color. Additionally, if `log` is `true`, the message will also be written to a 
+log file specified by `log_path` without color styling. By default, the log path is set to `"./logging/logs.txt"`.
 """
-function myprintln(print_flag::Bool, message; 
-    log::Bool=true, 
+function myprintln(print_flag::Bool, message;
+    color=:normal,
+    log::Bool=true,
     log_path::String="./logging/logs.txt"
-    )
-    
+)
+
     if print_flag
-        println(message)
+        printstyled(message; color=color)  # Apply color styling
+        println()  # Move to the next line
         if log
             open(log_path, "a") do f  # append mode
-                println(f, message)
+                println(f, message)  # Log the message without color information
             end
         end
     end
 end
+
 
 
 """

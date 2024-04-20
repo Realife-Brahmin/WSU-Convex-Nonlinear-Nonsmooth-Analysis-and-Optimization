@@ -2,91 +2,44 @@ Existing log file at './logging/logs.txt' removed.
 You are currently using 16 threads.
 Your machine has a total of 12 available threads.
 *************************
+A wrapper function QPObjectiveFunction will be used to solve for the original problem of transmissionLines
 Problem (pr::NamedTuple) generated
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
+Current Working Set: Int64[]
+Let's try taking a step saisfying current active constraints.
+We start for a good feasible descent direction from current point xk = [0.0, -2.0, 1.0, -4.0]
+Step pk of size 4.582427372454542 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Constraint 6 outside the working set is blocking the current step the earliest among the checked ones.
+Constraint 6 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
+Current Working Set: [6]
+Let's try taking a step saisfying current active constraints.
+We start for a good feasible descent direction from current point xk = [0.0, -2.0, 1.0, -4.0]
+Step pk of size 4.51207602412448 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Constraint 9 outside the working set is blocking the current step the earliest among the checked ones.
+Constraint 9 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
+Current Working Set: [6, 9]
+Let's try taking a step saisfying current active constraints.
+We start for a good feasible descent direction from current point xk = [0.0, -2.0, 1.0, -4.0]
+Step pk of size 0.7211102550927979 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Constraint 3 outside the working set is blocking the current step the earliest among the checked ones.
+Constraint 3 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
+Current Working Set: [3, 6, 9]
+Let's try taking a step saisfying current active constraints.
+We start for a good feasible descent direction from current point xk = [0.0, -2.0, 1.0, -4.0]
+Step pk of size 0.6000000000000001 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Constraint 4 outside the working set is blocking the current step the earliest among the checked ones.
+Constraint 4 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
+Current Working Set: [3, 4, 6, 9]
+Let's try taking a step saisfying current active constraints.
+We start for a good feasible descent direction from current point xk = [0.0, -2.0, 1.0, -4.0]
+Step is too small, checking if this is a stationary point wrt all constraints.
+Working set constraint 1 prevents a feasible step the hardest. So removing it from the working set.
+Current Working Set: [4, 6, 9]
+Let's try taking a step saisfying current active constraints.
+We start for a good feasible descent direction from current point xk = [0.0, -2.0, 1.0, -4.0]
+Step pk of size 0.14142135623730956 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+No inequality constraint outside the working set is blocking our current step.
+Current Working Set: [4, 6, 9]
+Let's try taking a step saisfying current active constraints.
+We start for a good feasible descent direction from current point xk = [0.1, -1.9, 1.0, -4.0]
+Step is too small, checking if this is a stationary point wrt all constraints.
+0 vector is the only feasible descent direction

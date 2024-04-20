@@ -78,12 +78,12 @@ function optimizeASQP(pr;
         myprintln(printOrNot_ASQP, "Let's try taking a step saisfying current active constraints.")
         pk = getECQPStep(pr, solState, verbose=printOrNot_ASQP, verbose_ls=printOrNot_ASQP)
         
-        xkp1_pot = xk+pk
-        fkp1_pot = f(xk+pk, pASQP, getGradientToo=false)
+        # xkp1_pot = xk+pk
+        # fkp1_pot = f(xk+pk, pASQP, getGradientToo=false)
 
-        myprintln(printOrNot_ASQP, "Now that the step pk has been computed, wonder what's the 'better' potential value of fkp1 (if alpha=1 is permissible):")
-        myprintln(printOrNot_ASQP, "For xkp1_pot = $(xkp1_pot)")
-        myprintln(printOrNot_ASQP, "fkp1_pot = $(fkp1_pot)")
+        # myprintln(printOrNot_ASQP, "Now that the step pk has been computed, wonder what's the 'better' potential value of fkp1 (if alpha=1 is permissible):")
+        # myprintln(printOrNot_ASQP, "For xkp1_pot = $(xkp1_pot)")
+        # myprintln(printOrNot_ASQP, "fkp1_pot = $(fkp1_pot)")
         
         # @show pk
 

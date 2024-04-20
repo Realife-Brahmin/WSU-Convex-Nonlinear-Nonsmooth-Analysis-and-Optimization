@@ -76,8 +76,8 @@ function showresults(res::NamedTuple;
     end
     log, log_path = log, result_txt  # or whatever default values you have
 
-    function myprintln1(v, message)
-        myprintln(v, message, log=log, log_path=result_txt)
+    function myprintln1(v, message; color=:normal)
+        myprintln(v, message, log=log, log_path=result_txt, color=color)
     end
 
     
@@ -85,17 +85,17 @@ function showresults(res::NamedTuple;
 
     v = true
     myprintln1(v, "****************************")
-    myprintln1(true, "Solver run has concluded.")
-    myprintln1(true, "Function solved for: $(objString)()")
-    myprintln1(true, "Cause(s) for stopping:")
+    myprintln1(true, "Solver run has concluded.", color=:light_cyan)
+    myprintln1(true, "Function solved for: $(objString)()", color=:light_cyan)
+    myprintln1(true, "Cause(s) for stopping:", color=:light_cyan)
     causeForStopping = res.cause
     for msg ∈ causeForStopping
-        myprintln1(true, msg)
+        myprintln1(true, msg, color=:normal)
     end
     if converged == true
-        myprintln1(true, statusMessage)
+        myprintln1(true, statusMessage, color=:green)
     elseif converged == false
-        myprintln1(true, statusMessage)
+        myprintln1(true, statusMessage, color=:red)
     else
         @error "bad condition"
     end
@@ -133,23 +133,23 @@ function showresults(res::NamedTuple;
 
     fvalMessageMinimum = fvalPrefixMinimum*"$(f☆)"
 
-    myprintln1(v, fvalMessageMinimum)
+    myprintln1(v, fvalMessageMinimum, color=:green)
 
     myprintln1(v, "***************************")
-    myprintln1(v, xvalMessage)
+    myprintln1(v, xvalMessage, color=:green)
     if n <= 15
         # If the vector is short enough, print all elements
         for k in 1:n
-            myprintln1(v, "x☆[$k] = $(x☆[k])")
+            myprintln1(v, "x☆[$k] = $(x☆[k])", color=:light_green)
         end
     else
         # If the vector is long, print an even distribution of elements
-        myprintln1(v, "Only upto 15 values will be printed.")
+        myprintln1(v, "Only upto 15 values will be printed.", color=:light_green)
 
         mid_indices = round.(Int, LinRange(6, n-5, 7)[2:end-1])
         indices_to_print = unique([1:5; mid_indices; n-4:n])
         for k in indices_to_print
-            myprintln1(v, "x☆[$k] = $(x☆[k])")
+            myprintln1(v, "x☆[$k] = $(x☆[k])", color=:light_green)
         end
     end
 

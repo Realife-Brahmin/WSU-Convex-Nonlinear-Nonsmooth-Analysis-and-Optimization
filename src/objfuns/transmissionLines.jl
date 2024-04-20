@@ -124,7 +124,7 @@ P = [P0, P1, P2, P3, P4]
 
 
 x0 = collect(polyhedronCentroid(P0))
-poly = 3 # Polyhedron Number, 0 reserved for the community with the power station
+poly = 2 # Polyhedron Number, 0 reserved for the community with the power station
 Ape, bpe, Api, bpi = convertPolygonToConstraints(P[poly+1])
 y0 = collect(polyhedronCentroid(P[poly+1]))
 

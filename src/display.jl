@@ -1,12 +1,10 @@
 
 using DataFrames
-# using GR
 using LaTeXStrings
 using Parameters
 using Plots
 using Printf
 
-# include("utilities.jl")
 include("objfuns/objective.jl")
 
 function showresults(res::NamedTuple;

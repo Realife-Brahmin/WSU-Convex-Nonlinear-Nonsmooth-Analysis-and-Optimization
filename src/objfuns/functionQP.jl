@@ -1,6 +1,6 @@
 include("objective.jl")
 
-function QPObjectiveFunction(x::Vector{Float64},
+function QPObjectiveFunction(x::DenseVector,
     pDict;
     verbose::Bool=false,
     log::Bool=true,

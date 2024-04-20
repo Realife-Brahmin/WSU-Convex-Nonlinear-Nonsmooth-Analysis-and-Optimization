@@ -30,7 +30,7 @@ warmStart = true
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";
 
-functionName = "asqpTestFunction1";
+# functionName = "asqpTestFunction1";
 # functionName = "ecqpTestFunction1";
 # functionName = "ecqpTestFunction2";
 # functionName = "Rastrigin";

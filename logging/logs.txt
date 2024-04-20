@@ -1,39 +1,92 @@
-A wrapper function QPObjectiveFunction will be used to solve for the original problem of asqpTestFunction1
+Existing log file at './logging/logs.txt' removed.
+You are currently using 16 threads.
+Your machine has a total of 12 available threads.
+*************************
 Problem (pr::NamedTuple) generated
-Current Working Set: [3, 5]
-Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [2, 0]
-Calling ECQP Solver as a subroutine for ASQP.
-Step is too small, checking if this is a stationary point wrt all constraints.
-Working set constraint 1 prevents a feasible step the hardest. So removing it from the working set.
-Current Working Set: [5]
-Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [2, 0]
-Calling ECQP Solver as a subroutine for ASQP.
-Step pk of size 1.0 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
-No inequality constraint outside the working set is blocking our current step.
-Current Working Set: [5]
-Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [1.0, 0.0]
-Calling ECQP Solver as a subroutine for ASQP.
-Step is too small, checking if this is a stationary point wrt all constraints.
-Working set constraint 1 prevents a feasible step the hardest. So removing it from the working set.
-Current Working Set: Int64[]
-Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [1.0, 0.0]
-Calling ECQP Solver as a subroutine for ASQP.
-Step pk of size 2.5 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
-Constraint 1 outside the working set is blocking the current step the earliest among the checked ones.
-Constraint 1 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
-Current Working Set: [1]
-Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [1.0, 1.5]
-Calling ECQP Solver as a subroutine for ASQP.
-Step pk of size 0.4472135954999578 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
-No inequality constraint outside the working set is blocking our current step.
-Current Working Set: [1]
-Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [1.4, 1.7]
-Calling ECQP Solver as a subroutine for ASQP.
-Step is too small, checking if this is a stationary point wrt all constraints.
-0 vector is the only feasible descent direction
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓

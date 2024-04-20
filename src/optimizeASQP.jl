@@ -44,7 +44,7 @@ function optimizeASQP(pr;
     f0 = f(x0, pASQP, getGradientToo=false)
     fk = f0
     solState = SolStateASQPType(x0, Ae, fk=f0, Wk0=Wk0, itol=itol)
-    @show solState[:Wk]
+    # @show solState[:Wk]
     @unpack fevals = solverState
     fevals += 1
     @pack! solverState = fevals
@@ -76,7 +76,15 @@ function optimizeASQP(pr;
         @pack! solState = km1, xkm1, fkm1, Wkm1
 
         myprintln(printOrNot_ASQP, "Let's try taking a step saisfying current active constraints.")
-        pk = getECQPStep(pr, solState, verbose=printOrNot_ASQP, verbose_ls=printOrNot_ASQP) # write a function to invoke ECQP
+        pk = getECQPStep(pr, solState, verbose=printOrNot_ASQP, verbose_ls=printOrNot_ASQP)
+        
+        xkp1_pot = xk+pk
+        fkp1_pot = f(xk+pk, pASQP, getGradientToo=false)
+
+        myprintln(printOrNot_ASQP, "Now that the step pk has been computed, wonder what's the 'better' potential value of fkp1 (if alpha=1 is permissible):")
+        myprintln(printOrNot_ASQP, "For xkp1_pot = $(xkp1_pot)")
+        myprintln(printOrNot_ASQP, "fkp1_pot = $(fkp1_pot)")
+        
         # @show pk
 
         Iall = collect(mE+1:mE+mI) # vector of indices for all inequality constraints [4, 5, 6, 7, 8] where mE = 3 mI = 5

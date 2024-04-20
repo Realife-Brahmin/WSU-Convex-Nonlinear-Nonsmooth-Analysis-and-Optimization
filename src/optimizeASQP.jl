@@ -187,15 +187,17 @@ function optimizeASQP(pr;
 
     @unpack k = solverState
 
+    myprintln(true, "*"^50, log=log, log_path=log_txt)
+
     if k ≥ maxiter
         converged = false
         statusMessage = "Failed to converge despite $(maxiter) iterations! 😢"
-        myprintln(true, statusMessage, log=log, log_path=log_txt)
+        myprintln(true, statusMessage, log=log, log_path=log_txt, color=:red)
         @warn statusMessage
     else
         converged = true
         statusMessage = "Convergence achieved in $(k) iterations 😄"
-        myprintln(true, statusMessage, log=log, log_path=log_txt)
+        myprintln(true, statusMessage, log=log, log_path=log_txt, color=:green)
     end
 
     @unpack fevals = solverState

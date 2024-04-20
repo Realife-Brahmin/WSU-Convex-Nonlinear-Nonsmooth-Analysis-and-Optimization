@@ -3,35 +3,37 @@ Problem (pr::NamedTuple) generated
 Current Working Set: [3, 5]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [2, 0]
-Let's look at the Ae and be being inserted into ECQP solver in order to represent our current Wk:
-Quick safety check: What's Ae*xk - be?
-All good, the residual is a zero vector as it should be.
 Calling ECQP Solver as a subroutine for ASQP.
-Now that the step pk has been computed, wonder what's the 'better' potential value of fkp1 (if alpha=1 is permissible):
-For xkp1_pot = [1.0, 2.5]
-fkp1_pot = 0.0
-Step pk of size 2.692582403567252 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step is too small, checking if this is a stationary point wrt all constraints.
+Working set constraint 1 prevents a feasible step the hardest. So removing it from the working set.
+Current Working Set: [5]
+Let's try taking a step saisfying current active constraints.
+We start for a good feasible descent direction from current point xk = [2, 0]
+Calling ECQP Solver as a subroutine for ASQP.
+Step pk of size 1.0 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+No inequality constraint outside the working set is blocking our current step.
+Current Working Set: [5]
+Let's try taking a step saisfying current active constraints.
+We start for a good feasible descent direction from current point xk = [1.0, 0.0]
+Calling ECQP Solver as a subroutine for ASQP.
+Step is too small, checking if this is a stationary point wrt all constraints.
+Working set constraint 1 prevents a feasible step the hardest. So removing it from the working set.
+Current Working Set: Int64[]
+Let's try taking a step saisfying current active constraints.
+We start for a good feasible descent direction from current point xk = [1.0, 0.0]
+Calling ECQP Solver as a subroutine for ASQP.
+Step pk of size 2.5 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 Constraint 1 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 1 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
-Current Working Set: [1, 3, 5]
+Current Working Set: [1]
 Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [1.3333333333333335, 1.6666666666666665]
-Let's look at the Ae and be being inserted into ECQP solver in order to represent our current Wk:
-Quick safety check: What's Ae*xk - be?
+We start for a good feasible descent direction from current point xk = [1.0, 1.5]
 Calling ECQP Solver as a subroutine for ASQP.
-Now that the step pk has been computed, wonder what's the 'better' potential value of fkp1 (if alpha=1 is permissible):
-For xkp1_pot = [1.0, 2.5]
-fkp1_pot = 0.0
-Step pk of size 0.8975274678557508 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step pk of size 0.4472135954999578 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 No inequality constraint outside the working set is blocking our current step.
-Current Working Set: [1, 3, 5]
+Current Working Set: [1]
 Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [1.0, 2.5]
-Let's look at the Ae and be being inserted into ECQP solver in order to represent our current Wk:
-Quick safety check: What's Ae*xk - be?
+We start for a good feasible descent direction from current point xk = [1.4, 1.7]
 Calling ECQP Solver as a subroutine for ASQP.
-Now that the step pk has been computed, wonder what's the 'better' potential value of fkp1 (if alpha=1 is permissible):
-For xkp1_pot = [1.0, 2.5]
-fkp1_pot = 0.0
 Step is too small, checking if this is a stationary point wrt all constraints.
 0 vector is the only feasible descent direction

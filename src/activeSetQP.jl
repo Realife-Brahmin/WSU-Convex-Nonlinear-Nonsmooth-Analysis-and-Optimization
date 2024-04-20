@@ -24,6 +24,9 @@ function getECQPStep(prASQP, solStateASQP;
     Ae = vcat(Ae, A[WIk .- mE, :])
     be = vcat(be, b[WIk .- mE])
 
+    myprintln(verbose, "Let's look at the Ae and be being inserted into ECQP solver in order to represent our current Wk:")
+    @show Ae, be
+
     myprintln(verbose, "Quick safety check: What's Ae*xk - be?")
     rk = Ae*xk - be
     if norm(rk) < etol
@@ -31,7 +34,7 @@ function getECQPStep(prASQP, solStateASQP;
     else
         @error "What? The residual is non-zero!. Then ECQP will give infeasible results as well."
     end
-    
+
     subroutineCall = true
     # @show subroutineCall
     pECQP = @packDict "{G, c, Ae, be}"
@@ -39,6 +42,8 @@ function getECQPStep(prASQP, solStateASQP;
 
     # @show pECQP
     prECQP = generate_pr(objective, xk, problemType=problemTypeECQP, method=methodECQP, params=pECQP, objectiveString=objectiveStringECQP, verbose=false)
+
+    @show prECQP.p
     res = optimizeECQP(prECQP, verbose=verbose, verbose_ls=verbose_ls, log=false)
     
     xvals = res[:xvals]

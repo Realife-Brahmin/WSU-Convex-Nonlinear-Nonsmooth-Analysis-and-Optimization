@@ -9,6 +9,7 @@ function getECQPStep(prASQP, solStateASQP;
     verbose_ls::Bool=false,
 )
 
+    @unpack etol, itol = pr.alg
     @unpack objective, p, objectiveString = prASQP
     objectiveStringECQP = objectiveString*"_ECQPsubroutine"
     problemTypeECQP = "ECQP"
@@ -18,16 +19,23 @@ function getECQPStep(prASQP, solStateASQP;
     @unpack G, c, mE, Ae, be, A, b = pASQP
     @unpack xk, Wk = solStateASQP
 
+    myprintln(verbose, "We start for a good feasible descent direction from current point xk = $(xk)")
     WIk = Wk[mE+1:end]
     Ae = vcat(Ae, A[WIk .- mE, :])
     be = vcat(be, b[WIk .- mE])
 
-    myprintln(true, "Quick safety check: What's Ae*xk - be?")
-    myprintln(true, "$(Ae*xk - be)")
+    myprintln(verbose, "Quick safety check: What's Ae*xk - be?")
+    rk = Ae*xk - be
+    if norm(rk) < etol
+        myprintln(verbose, "All good, the residual is a zero vector as it should be.")
+    else
+        @error "What? The residual is non-zero!. Then ECQP will give infeasible results as well."
+    end
+    
     subroutineCall = true
     # @show subroutineCall
     pECQP = @packDict "{G, c, Ae, be}"
-    pECQP[:subroutineCall]=subroutineCall
+    pECQP[:subroutineCall] = subroutineCall
 
     # @show pECQP
     prECQP = generate_pr(objective, xk, problemType=problemTypeECQP, method=methodECQP, params=pECQP, objectiveString=objectiveStringECQP, verbose=false)

@@ -1,0 +1,6 @@
+Starting with initial point x = [2, 0].
+which has fval = 0.0
+Iteration k = 0
+Iteration k = 1
+Iteration k = 2
+Convergence achieved in 2 iterations 😄

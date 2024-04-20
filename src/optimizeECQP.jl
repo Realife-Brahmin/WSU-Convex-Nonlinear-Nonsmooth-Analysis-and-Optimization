@@ -10,11 +10,11 @@ function optimizeECQP(pr;
     pECQP = pr.p
 
     if !haskey(pECQP, :subroutineCall)
-        myprintln(verbose, "Calling ECQP Solver Independently.")
+        myprintln(false, "Calling ECQP Solver Independently.")
         subroutineCall = false
         @unpack G, c, Ae, be = pECQP
     else
-        myprintln(verbose, "Calling ECQP Solver as a subroutine for ASQP.")
+        myprintln(false, "Calling ECQP Solver as a subroutine for ASQP.")
         @unpack G, c, Ae, be, subroutineCall = pECQP
     end
 

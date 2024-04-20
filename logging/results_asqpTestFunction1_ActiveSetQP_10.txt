@@ -8,7 +8,7 @@ Convergence achieved in 5 iterations 😄
 Method Used: ActiveSetQP
 
 ****************************
-Optimal function value = 0.8000000000000007
+Optimal function value = 0.7999999999999989
 ***************************
 Optimal Nonzero Variables:
 x☆[1] = 1.4

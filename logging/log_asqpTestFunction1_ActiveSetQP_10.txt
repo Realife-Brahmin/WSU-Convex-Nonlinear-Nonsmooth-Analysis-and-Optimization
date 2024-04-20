@@ -13,4 +13,5 @@ Iteration k = 3
 Iteration k = 4
 ----------
 Iteration k = 5
+**************************************************
 Convergence achieved in 5 iterations 😄

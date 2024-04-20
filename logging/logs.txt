@@ -3,8 +3,10 @@ Problem (pr::NamedTuple) generated
 Current Working Set: [3, 5]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [2, 0]
+Let's look at the Ae and be being inserted into ECQP solver in order to represent our current Wk:
 Quick safety check: What's Ae*xk - be?
 All good, the residual is a zero vector as it should be.
+Calling ECQP Solver as a subroutine for ASQP.
 Now that the step pk has been computed, wonder what's the 'better' potential value of fkp1 (if alpha=1 is permissible):
 For xkp1_pot = [1.0, 2.5]
 fkp1_pot = 0.0
@@ -14,7 +16,9 @@ Constraint 1 is blocking the step first, so we'll restrict our step accordingly 
 Current Working Set: [1, 3, 5]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [1.3333333333333335, 1.6666666666666665]
+Let's look at the Ae and be being inserted into ECQP solver in order to represent our current Wk:
 Quick safety check: What's Ae*xk - be?
+Calling ECQP Solver as a subroutine for ASQP.
 Now that the step pk has been computed, wonder what's the 'better' potential value of fkp1 (if alpha=1 is permissible):
 For xkp1_pot = [1.0, 2.5]
 fkp1_pot = 0.0
@@ -23,7 +27,9 @@ No inequality constraint outside the working set is blocking our current step.
 Current Working Set: [1, 3, 5]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [1.0, 2.5]
+Let's look at the Ae and be being inserted into ECQP solver in order to represent our current Wk:
 Quick safety check: What's Ae*xk - be?
+Calling ECQP Solver as a subroutine for ASQP.
 Now that the step pk has been computed, wonder what's the 'better' potential value of fkp1 (if alpha=1 is permissible):
 For xkp1_pot = [1.0, 2.5]
 fkp1_pot = 0.0

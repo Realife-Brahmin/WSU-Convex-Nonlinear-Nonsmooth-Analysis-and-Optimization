@@ -1,8 +1,8 @@
 include("src/setup.jl")
 
-printstyled("You are currently using $(Threads.nthreads()) threads.\n", color=:yellow)
-printstyled("Your machine has a total of $(Sys.CPU_THREADS) available threads.\n", color=:yellow)
-printstyled("*"^25*"\n", color=:normal)
+myprintln(true, "You are currently using $(Threads.nthreads()) threads.", color=:yellow)
+myprintln(true, "Your machine has a total of $(Sys.CPU_THREADS) available threads.", color=:yellow)
+myprintln(true, "*"^25)
 # revive this branch from my notebook
 verbose = false
 verbose = true;

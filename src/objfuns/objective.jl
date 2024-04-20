@@ -12,7 +12,7 @@ include("../types.jl")
 
 
 function generate_pr(functionName::Function,
-    x0::Vector{Float64};
+    x0::Vector;
     problemType::String="Unconstrained",
     method::String="QuasiNewton",
     params=Dict(),

@@ -7,7 +7,7 @@ Create a dictionary from a string of variable names formatted as `"{var1, var2, 
 - `vars_str::String`: A single string argument formatted with variable names enclosed in curly braces and separated by commas.
 
 # Returns
-- `Dict{Symbol, Any}`: Returns a dictionary where each key is a symbol corresponding to a variable name, and each value is the current value of that variable.
+- `Dict{Symbol, Any}`: Returns a dictionary where each key is a symbol corresponding to a variable name, and each value is the current value of that variable at the time the macro is invoked.
 
 # Usage
 The macro automates the creation of a dictionary by parsing a string containing variable names, which are separated by commas and enclosed in curly braces. It constructs a dictionary where keys are the variable names as symbols and values are their corresponding current values in the scope where the macro is invoked.
@@ -16,6 +16,7 @@ The macro automates the creation of a dictionary by parsing a string containing 
 - **Security**: Use caution with `eval()` as it will execute code with all available permissions, which can be a security risk if variable contents are not controlled.
 - **Scope**: Variables must be defined in the scope where the macro is called; otherwise, `eval()` will not be able to find and return their values.
 - **Performance**: Since `eval()` is used, the performance may be impacted if the macro is used in performance-critical parts of your application.
+- **Mutation Warning**: If a variable is modified (mutated) after being initially defined, the `@packDict` macro will still pack the original value from when it was first introduced into the scope, unless the variable is reassigned. Reassignment must occur in the same or a broader scope than where `@packDict` is invoked.
 
 # Examples
 ```julia

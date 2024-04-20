@@ -17,6 +17,7 @@ This repo contains a solver in julia , and different types of optimization probl
 - Final Project (Computing the optimal placement of a receiver, given the location of several transmitters)
 - Derivative Free Optimization Methods (implementation of Genetic Algorithm and Nelder Mead Simplex Method)
 - Equality Constrained Quadratic Programming (detecting location of fire based on some boundary constraints which can be expressed as an ECQP)
+- Active Set Quadratic Programming (finding optimal locations for substations in various communities to minimize electric transmission losses)
   
 ## LineSearch/TrustRegion Methods Used:
 - Gradient Descent

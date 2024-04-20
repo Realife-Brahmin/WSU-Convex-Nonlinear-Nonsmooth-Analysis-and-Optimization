@@ -19,3 +19,5 @@ Quick safety check: What's Ae*xk - be?
 [-17.9998229047231]
 Step is too small, checking if this is a stationary point wrt all constraints.
 0 vector is the only feasible descent direction
+A wrapper function QPObjectiveFunction will be used to solve for the original problem of asqpTestFunction1
+Problem (pr::NamedTuple) generated

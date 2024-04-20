@@ -1,6 +1,16 @@
 Starting with initial point x = [2, 0].
 which has fval = 7.25
+*************************
+----------
 Iteration k = 0
+----------
 Iteration k = 1
+----------
 Iteration k = 2
-Convergence achieved in 2 iterations 😄
+----------
+Iteration k = 3
+----------
+Iteration k = 4
+----------
+Iteration k = 5
+Convergence achieved in 5 iterations 😄

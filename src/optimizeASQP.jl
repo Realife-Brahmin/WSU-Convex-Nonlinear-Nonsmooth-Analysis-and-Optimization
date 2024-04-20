@@ -54,12 +54,16 @@ function optimizeASQP(pr;
     keepIterationsGoing = true
     causeForStopping = []
 
+    myprintln(verbose, "*"^25, log_path=log_txt)
+
     while keepIterationsGoing
 
         @unpack k = solverState
 
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_ASQP = printOrNot & verbose_ls
+
+        myprintln(verbose, "-"^10, log_path=log_txt)
 
         myprintln(printOrNot_ASQP, "Iteration k = $(k)", log_path=log_txt)
 
@@ -114,8 +118,8 @@ function optimizeASQP(pr;
 
             else
                 j_min = jI_min + mE
-                myprintln(printOrNot_ASQP, "Working set constraint $(j_min) prevents a feasible step the hardest.")
-                myprintln(printOrNot_ASQP, "So removing constraint $(j_min) from the working set")
+                myprintln(printOrNot_ASQP, "Working set constraint $(j_min) prevents a feasible step the hardest. So removing it from the working set.")
+                # myprintln(printOrNot_ASQP, "So removing constraint $(j_min) from the working set")
                 xkp1 = xk
                 fkp1 = fk
                 Wkp1 = vcat(Wk[1:j_min-1], Wk[j_min+1:end])

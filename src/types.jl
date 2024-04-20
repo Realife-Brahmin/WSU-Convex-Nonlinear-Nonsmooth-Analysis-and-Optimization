@@ -170,50 +170,7 @@ function SolverStateNMType(;
 
 end
 
-"""
-    SolStatePGCGType(xk, G, c, A; fkm1=100.0, fk=100.0, tol=1e-6) -> Dict
 
-Initializes the state dictionary for the Projected Gradient Conjugate Gradient (PGCG) Descent algorithm, applied to Extended Constrained Quadratic Programming (ECQP) problems. The state dictionary includes initial values for the algorithm's iterative process, encapsulating both vector quantities and scalar metrics that define the current and previous states.
-
-# Arguments
-- `xk`: The initial point (vector) in the optimization space, which could be denoted as `wk` in certain contexts, implying a specific interpretation related to the problem formulation.
-- `G`: The quadratic coefficient matrix from the objective function of the ECQP.
-- `c`: The linear coefficient vector from the objective function of the ECQP.
-- `A`: The matrix representing linear equality constraints in the ECQP.
-
-# Keyword Arguments
-- `fkm1=100.0`: The objective function value at the previous iteration's point. Default is set to a high value (100.0) as a placeholder.
-- `fk=100.0`: The objective function value at the initial point `xk`. Default is set to a high value (100.0) as a placeholder.
-- `tol=1e-6`: The tolerance level for convergence criteria. Default is `1e-6`.
-
-# Returns
-- `Dict`: A dictionary (`solState`) containing initial and placeholder values for the algorithm's state, including:
-    - Iteration counters `km1` and `k`
-    - Previous and current points `xkm1` and `xk`
-    - Residual vectors `rkm1` and `rk`
-    - Gradient vectors `gkm1` and `gk`
-    - Search direction vectors `dkm1` and `dk`
-    - Objective function values `fkm1` and `fk`
-    - Tolerance level `tol`
-
-# Special Functions
-- `myzeros(xk)`: A hypothetical function that generates a zero vector of the same dimension as `xk`.
-- `myfill(vector, value)`: A hypothetical function that fills a vector (of the same dimension as the input `vector`) with a specified `value`.
-
-The function calculates the initial residual `rk` and the gradient `gk` based on the input `xk`, `G`, `c`, and `A`. It also prepares the initial search direction `dk` and sets up placeholders for previous iterations' values to facilitate the PGCG algorithm's iterative process.
-
-# Example
-```julia
-# Define the ECQP problem parameters
-G = [2 0; 0 2]
-c = [-1; -1]
-A = [1 1]
-xk = [0.5; 0.5]
-
-# Initialize the solution state for the PGCG algorithm
-solState = SolStatePGCGType(xk, G, c, A)
-```
-"""
 function SolStatePGCGType(xk, G, c, Ae; 
     fkm1=100.0,
     fk=100.0,
@@ -228,7 +185,6 @@ function SolStatePGCGType(xk, G, c, Ae;
 
     # Initialize dk
     dk = -gk
-
 
     # Prepare the state dictionary with initial values
     solState = Dict(

@@ -1,5 +1,5 @@
 Starting with initial point x = [2, 0].
-which has fval = 0.0
+which has fval = 7.25
 Iteration k = 0
 Iteration k = 1
 Iteration k = 2

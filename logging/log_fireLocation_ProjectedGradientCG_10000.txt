@@ -1,1 +1,24 @@
+Starting with initial point x = [1.0, 1.0, -13.787397971733316, -9.789791529468646, -3.732050807568877, 1.5666781464610016].
+which has fval = 151.15752233314302
+Iteration k = 0
+Iteration k = 1
+Iteration k = 2
+Iteration k = 3
+Iteration k = 4
+Iteration k = 5
+Iteration k = 6
+Iteration k = 7
+Iteration k = 8
+Iteration k = 9
+Iteration k = 10
+Iteration k = 11
+Iteration k = 12
+Iteration k = 13
+Iteration k = 14
+Iteration k = 15
+Iteration k = 16
+Iteration k = 17
+Iteration k = 18
+Iteration k = 19
+Iteration k = 20
 Convergence achieved in 20 iterations 😄

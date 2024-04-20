@@ -8,7 +8,13 @@ function QPObjectiveFunction(x::DenseVector,
 
     n = length(x)
     @unpack G, c = pDict
-    f = 1 // 2 * transpose(x) * G * x + transpose(x) * c
+    if haskey(pDict, :c0)
+        c0 = pDict[:c0]
+    else
+        c0 = 0.0
+    end
+
+    f = 1 // 2 * transpose(x) * G * x + transpose(x) * c + c0
 
     if !getGradientToo
         return f

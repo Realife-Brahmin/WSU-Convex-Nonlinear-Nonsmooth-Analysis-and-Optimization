@@ -24,27 +24,19 @@ function getECQPStep(prASQP, solStateASQP;
     Ae = vcat(Ae, A[WIk .- mE, :])
     be = vcat(be, b[WIk .- mE])
 
-    myprintln(verbose, "Let's look at the Ae and be being inserted into ECQP solver in order to represent our current Wk:")
-    @show Ae, be
-
-    myprintln(verbose, "Quick safety check to make sure we're inserting a feasible xk into our ECQP: What's Ae*xk - be?")
-    rk = Ae*xk - be
-    if norm(rk) < etol
-        myprintln(verbose, "It's a zero vector as it should be.")
-    else
-        error("The residual is non-zero!. Then ECQP will give infeasible results as well.")
-    end
+    # myprintln(verbose, "Let's look at the Ae and be being inserted into ECQP solver in order to represent our current Wk:")
+    # @show Ae, be
 
     subroutineCall = true
     # @show subroutineCall
     pDictECQP = Dict(:G=>G, :c=>c, :Ae=>Ae, :be=>be, :subroutineCall=>subroutineCall)
     # pDictECQP = @packDict "{G, c, Ae, be}"
     # pDictECQP[:subroutineCall] = subroutineCall
-    @show pDictECQP
+    # @show pDictECQP
     # @show pDictECQP
     prECQP = generate_pr(objective, xk, problemType=problemTypeECQP, method=methodECQP, params=pDictECQP, objectiveString=objectiveStringECQP, verbose=false)
 
-    @show prECQP.p
+    # @show prECQP.p
     res = optimizeECQP(prECQP, verbose=verbose, verbose_ls=verbose_ls, log=false)
     
     xvals = res[:xvals]

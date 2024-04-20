@@ -11,7 +11,7 @@ function optimizeECQP(pr;
     pECQP = pr.p
     if !haskey(pECQP, :subroutineCall)
         subroutineCall = false
-        G, c, Ae, be
+        @unpack G, c, Ae, be = pECQP
     else
         @unpack G, c, Ae, be, subroutineCall = pECQP
     end

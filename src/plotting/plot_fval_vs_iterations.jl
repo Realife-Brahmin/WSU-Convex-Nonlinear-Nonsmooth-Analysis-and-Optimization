@@ -1,10 +1,25 @@
 function plot_fval_vs_iterations(res;
     savePlot=true)
-    
-        pr = res.pr
+
+        if typeof(res) <: Vector
+            numRuns = length(res)
+            for runNum ∈ 1:numRuns
+                res1 = res[runNum]
+                plot_fval_vs_iterations(res1)
+            end
+
+            return
+
+        else
+
+            res1 = res
+
+        end
+
+        pr = res1.pr
         functionName = pr.objectiveString
         theme(:dao)
-        fvals = res.fvals
+        fvals = res1.fvals
         itr = length(fvals)
         if itr == 0 # x0 is x☆
             x0 = pr.x0
@@ -15,8 +30,8 @@ function plot_fval_vs_iterations(res;
             x = x☆
             f = f☆
         else
-            x☆ = res.xvals[:, itr]
-            f☆ = res.fvals[itr]
+            x☆ = res1.xvals[:, itr]
+            f☆ = res1.fvals[itr]
             f = f☆
             x = x☆
         end

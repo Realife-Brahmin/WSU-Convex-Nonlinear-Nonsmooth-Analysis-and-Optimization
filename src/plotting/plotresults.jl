@@ -4,6 +4,7 @@ include("plotDenoisedSignal.jl")
 include("plotReceiverLocationPlot.jl")
 include("plotNeuralNetworkEvaluation.jl")
 include("plotMinPathTimeTrajectory.jl")
+include("plotTransmissionLines.jl")
 
 function plotresults(res;
     savePlot::Bool=true)
@@ -28,7 +29,8 @@ function plotresults(res;
     elseif functionName == "pathtime"
         plotMinPathTimeTrajectory(res, savePlot=savePlot,
         plotTrajectory=false)
-
+    elseif functionName == "transmissionLines"
+        plotTransmissionLines(res, savePlot=savePlot)
     else
         println("Nothing to plot.")
     end

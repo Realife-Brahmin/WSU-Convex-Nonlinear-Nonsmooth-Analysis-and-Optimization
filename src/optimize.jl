@@ -245,7 +245,21 @@ function warm_start_optimize(pr;
         end
     
     elseif pr.alg[:method] == "ActiveSetQP"
-        @time res = optimizeASQP(pr, verbose=verbose, verbose_ls=verbose_ls)
+
+        if functionName == "transmissionLines"
+            myprintln(verbose, "We're gonna iterate over each area, get the optimal transmission tower locations, and plot them into a figure.", color=:magenta)
+            @unpack numOuterAreas = pr.p
+            myprintln(verbose, "There are $(numOuterAreas) communities which need to be connected to the central community with the power station.", color=:magenta)
+            res = Vector{Any}(undef, numOuterAreas)
+            for poly ∈ 1:numOuterAreas
+                @pack! pr.p = poly
+                @time resPoly = optimizeASQP(pr, verbose=verbose, verbose_ls=verbose_ls)
+                res[poly] = resPoly
+            end
+            # @error("Figure out what to do.")
+        else
+            @time res = optimizeASQP(pr, verbose=verbose, verbose_ls=verbose_ls)
+        end
 
     elseif pr.alg[:method] == "ProjectedGradientCG"
         @time res = optimizeECQP(pr, verbose=verbose, verbose_ls=verbose_ls)

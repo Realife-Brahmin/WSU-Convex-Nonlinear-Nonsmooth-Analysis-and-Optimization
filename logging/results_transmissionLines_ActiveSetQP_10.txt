@@ -3,18 +3,18 @@ Solver run has concluded.
 Function solved for: transmissionLines()
 Cause(s) for stopping:
 No feasible improvement step possible from here.
-Convergence achieved in 6 iterations 😄
+Convergence achieved in 3 iterations 😄
 ****************************
 Method Used: ActiveSetQP
 
 ****************************
-Optimal function value = 5.7250000000000005
+Optimal function value = 7.000000007140727
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.1
-x☆[2] = -1.9
-x☆[3] = 1.0
-x☆[4] = -4.0
+x☆[1] = -0.8000952069358873
+x☆[2] = 1.5999523965320572
+x☆[3] = -2.000134878942973
+x☆[4] = 3.999932560528514
 ***************************
 Number of fevals = 1
 Number of gevals = 0

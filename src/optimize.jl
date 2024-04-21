@@ -252,8 +252,8 @@ function warm_start_optimize(pr;
             myprintln(verbose, "There are $(numOuterAreas) communities which need to be connected to the central community with the power station.", color=:magenta)
             res = Vector{Any}(undef, numOuterAreas)
             for poly ∈ 1:numOuterAreas
-                @pack! pr.p = poly
-                @time resPoly = optimizeASQP(pr, verbose=verbose, verbose_ls=verbose_ls)
+                prPoly = preparePolyProblem(poly=poly)
+                @time resPoly = optimizeASQP(prPoly, verbose=verbose, verbose_ls=verbose_ls)
                 res[poly] = resPoly
             end
             # @error("Figure out what to do.")

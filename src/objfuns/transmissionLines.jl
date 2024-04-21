@@ -120,7 +120,7 @@ P2 = [(1, -4), (1, -6), (4, -6), (4, -4)]
 P3 = [(-2, -4), (-6, -3), (-3, -6)]
 P4 = [(-4, 3), (-2, 4), (-2, 6), (-6, 3)]
 P = [P0, P1, P2, P3, P4]
-
+numOuterAreas = length(P)-1
 
 
 x0 = collect(polyhedronCentroid(P0))
@@ -136,7 +136,7 @@ lb = myfill(c, -Inf)
 ub = myfill(c, Inf)
 mE, mI = length(be), length(b)
 
-pQP = @packDict "{G, c, lb, ub, c0, mE, Ae, be, mI, A, b, poly}"
+pQP = @packDict "{G, c, lb, ub, c0, mE, Ae, be, mI, A, b, poly, numOuterAreas}"
 
 w0 = computeFeasiblePointForLinearConstraints(pQP)
 

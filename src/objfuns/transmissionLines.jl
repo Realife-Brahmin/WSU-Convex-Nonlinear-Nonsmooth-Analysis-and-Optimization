@@ -102,9 +102,9 @@ function preparePolyProblem(;poly::Int=1,
     beta::Float64=1.0,
     factor::Float64=1.5)
 
-P0 = [(0, 2), (-4, 0), (-3, -2), (0, -2), (1, -1)]
-xcentral = (0, 0) # should ideally check that xcentral actually lies inside P0
-A0e, b0e, A0i, b0i = convertPolygonToConstraints(P0)
+    P0 = [(0, 2), (-4, 0), (-3, -2), (0, -2), (1, -1)]
+    xcentral = (0, 0) # should ideally check that xcentral actually lies inside P0
+    A0e, b0e, A0i, b0i = convertPolygonToConstraints(P0)
     P1 = [(3, 1), (5, 3), (2, 5), (2, 3)]
     P2 = [(1, -4), (1, -6), (4, -6), (4, -4)]
     P3 = [(-2, -4), (-6, -3), (-3, -6)]
@@ -116,53 +116,44 @@ A0e, b0e, A0i, b0i = convertPolygonToConstraints(P0)
         error("Polyhedron number must be a natural number not exceeding $(numOuterAreas)")
     end
 
-alpha = factor * beta
+    alpha = factor * beta
 
     if alpha < beta
         error("α must be greater than or equal to β")
     end
 
-x01, x02 = xcentral
-α, β = alpha, beta
+    x01, x02 = xcentral
+    α, β = alpha, beta
 
-G = [α+β 0 -α 0;
-    0 α+β 0 -α;
-    -α 0 α 0;
-    0 -α 0 α]
+    G = [α+β 0 -α 0;
+        0 α+β 0 -α;
+        -α 0 α 0;
+        0 -α 0 α]
 
-c = [-β * x01, -β * x02, 0, 0]
+    c = [-β * x01, -β * x02, 0, 0]
 
-c0 = 1 // 2 * β * norm(xcentral)^2
-P1 = [(3, 1), (5, 3), (2, 5), (2, 3)]
-P2 = [(1, -4), (1, -6), (4, -6), (4, -4)]
-P3 = [(-2, -4), (-6, -3), (-3, -6)]
-P4 = [(-4, 3), (-2, 4), (-2, 6), (-6, 3)]
-P = [P0, P1, P2, P3, P4]
-numOuterAreas = length(P)-1
+    c0 = 1 // 2 * β * norm(xcentral)^2
 
+    x0 = collect(polyhedronCentroid(P0))
+    Ape, bpe, Api, bpi = convertPolygonToConstraints(P[poly+1])
+    y0 = collect(polyhedronCentroid(P[poly+1]))
 
-x0 = collect(polyhedronCentroid(P0))
-poly = 2 # Polyhedron Number, 0 reserved for the community with the power station
-Ape, bpe, Api, bpi = convertPolygonToConstraints(P[poly+1])
-y0 = collect(polyhedronCentroid(P[poly+1]))
+    Ae, be, A, b = combineConstraints(A0e, b0e, Ape, bpe, A0i, b0i, Api, bpi)
+    lb = myfill(c, -Inf)
+    ub = myfill(c, Inf)
+    mE, mI = length(be), length(b)
 
-# w0 = vcat(x0, y0)
+    # @show G
+    pQP = Dict(:G=>G, :c=>c, :lb=>lb, :ub=>ub, :c0=>c0, :mE=>mE, :Ae=>Ae, :be=>be, :mI=>mI, :A=>A, :b=>b, :poly=>poly, :numOuterAreas=>numOuterAreas)
+    # pQP = @packDict "{G, c, lb, ub, c0, mE, Ae, be, mI, A, b, poly, numOuterAreas}" # does not work now that the variables are defined inside the function (local scope) instead of outside in Main (global scope)
 
-# Ae, be, A, b = vcat(A0e, Ape), vcat(b0e, bpe), vcat(A0i, Api), vcat(b0i, bpi)
-Ae, be, A, b = combineConstraints(A0e, b0e, Ape, bpe, A0i, b0i, Api, bpi)
-lb = myfill(c, -Inf)
-ub = myfill(c, Inf)
-mE, mI = length(be), length(b)
+    w0 = computeFeasiblePointForLinearConstraints(pQP)
 
-pQP = @packDict "{G, c, lb, ub, c0, mE, Ae, be, mI, A, b, poly, numOuterAreas}"
+    objective = QPObjectiveFunction
+    objectiveOriginal = transmissionLines
+    objectiveString = string(objectiveOriginal)
 
-w0 = computeFeasiblePointForLinearConstraints(pQP)
-
-objective = QPObjectiveFunction
-objectiveOriginal = transmissionLines
-objectiveString = string(objectiveOriginal)
-
-pr = generate_pr(objective, w0, params=pQP, problemType="QP"; objectiveString=objectiveString)
+    pr = generate_pr(objective, w0, params=pQP, problemType="QP"; objectiveString=objectiveString)
 
     return pr
 

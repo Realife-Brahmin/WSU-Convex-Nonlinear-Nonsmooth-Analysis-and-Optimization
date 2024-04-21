@@ -98,15 +98,33 @@ function combineConstraints(A0e, b0e, Ape, bpe, A0i, b0i, Api, bpi)
 
 end
 
+function preparePolyProblem(;poly::Int=1,
+    beta::Float64=1.0,
+    factor::Float64=1.5)
+
 P0 = [(0, 2), (-4, 0), (-3, -2), (0, -2), (1, -1)]
 xcentral = (0, 0) # should ideally check that xcentral actually lies inside P0
 A0e, b0e, A0i, b0i = convertPolygonToConstraints(P0)
+    P1 = [(3, 1), (5, 3), (2, 5), (2, 3)]
+    P2 = [(1, -4), (1, -6), (4, -6), (4, -4)]
+    P3 = [(-2, -4), (-6, -3), (-3, -6)]
+    P4 = [(-4, 3), (-2, 4), (-2, 6), (-6, 3)]
+    P = [P0, P1, P2, P3, P4]
+    numOuterAreas = length(P)-1
 
-beta = 1.0
-factor = 1.5
+    if poly < 1
+        error("Polyhedron number must be a natural number not exceeding $(numOuterAreas)")
+    end
+
 alpha = factor * beta
+
+    if alpha < beta
+        error("α must be greater than or equal to β")
+    end
+
 x01, x02 = xcentral
 α, β = alpha, beta
+
 G = [α+β 0 -α 0;
     0 α+β 0 -α;
     -α 0 α 0;
@@ -143,6 +161,11 @@ w0 = computeFeasiblePointForLinearConstraints(pQP)
 objective = QPObjectiveFunction
 objectiveOriginal = transmissionLines
 objectiveString = string(objectiveOriginal)
-# params = pQP
 
 pr = generate_pr(objective, w0, params=pQP, problemType="QP"; objectiveString=objectiveString)
+
+    return pr
+
+end
+
+pr = preparePolyProblem()

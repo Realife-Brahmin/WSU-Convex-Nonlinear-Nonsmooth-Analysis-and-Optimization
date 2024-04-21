@@ -144,8 +144,8 @@ function preparePolyProblem(;poly::Int=1,
     mE, mI = length(be), length(b)
 
     # @show G
-    pQP = Dict(:G=>G, :c=>c, :lb=>lb, :ub=>ub, :c0=>c0, :mE=>mE, :Ae=>Ae, :be=>be, :mI=>mI, :A=>A, :b=>b, :poly=>poly, :numOuterAreas=>numOuterAreas)
-    # pQP = @packDict "{G, c, lb, ub, c0, mE, Ae, be, mI, A, b, poly, numOuterAreas}" # does not work now that the variables are defined inside the function (local scope) instead of outside in Main (global scope)
+    pQP = Dict(:G=>G, :c=>c, :lb=>lb, :ub=>ub, :c0=>c0, :mE=>mE, :Ae=>Ae, :be=>be, :mI=>mI, :A=>A, :b=>b, :poly=>poly, :numOuterAreas=>numOuterAreas, :P=>P)
+    # pQP = @packDict "{G, c, lb, ub, c0, mE, Ae, be, mI, A, b, poly, numOuterAreas, P}" # does not work now that the variables are defined inside the function (local scope) instead of outside in Main (global scope)
 
     w0 = computeFeasiblePointForLinearConstraints(pQP)
 

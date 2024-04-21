@@ -7,16 +7,30 @@ using Printf
 
 include("objfuns/objective.jl")
 
-function showresults(res::NamedTuple;
+function showresults(res;
     log::Bool=true,
     log_path::String="./logging/")
 
-    @unpack pr = res
+    if typeof(res) <: Vector
+        numRuns = length(res)
+        for runNum ∈ 1:numRuns
+            res1 = res[runNum]
+            showresults(res1)
+        end
+
+        return
+
+    else
+        
+        res1 = res
+    end
+
+    @unpack pr = res1
     @unpack method = pr[:alg]
     objString = pr.objectiveString
 
     if method == "ActiveSetQP"
-        @unpack converged, statusMessage, xvals, fvals, fevals, cause = res
+        @unpack converged, statusMessage, xvals, fvals, fevals, cause = res1
         @unpack etol, itol = pr[:alg]
         gevals = 0
 
@@ -27,18 +41,18 @@ function showresults(res::NamedTuple;
         tolMsg = "PGCG Tolerance = $(etol)\n"*"ASQP Tolerance = $(itol)"
 
     elseif method == "NelderMead"
-        @unpack converged, statusMessage, xvals, fvals, fevals, cause = res
+        @unpack converged, statusMessage, xvals, fvals, fevals, cause = res1
         gevals = 0
 
         result_txt = log_path * "results_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
 
         lsMsg = ""
 
-        tolMsg = "Simplex Diameter Tolerance = $(res.pr[:alg][:DeltaTol])"
+        tolMsg = "Simplex Diameter Tolerance = $(res1.pr[:alg][:DeltaTol])"
 
     elseif method == "GeneticAlgorithm"
 
-        @unpack converged, statusMessage, xvals, fvals, fevals, cause = res
+        @unpack converged, statusMessage, xvals, fvals, fevals, cause = res1
         @unpack dftol = pr[:alg]
         gevals = 0
 
@@ -46,10 +60,10 @@ function showresults(res::NamedTuple;
 
         lsMsg = ""
 
-        tolMsg = "Generation Fitness Stagnation Tolerance = $(Int(res.pr[:alg][:fvalRepeatTol])) consecutive iterations at dftol = $(dftol)."
+        tolMsg = "Generation Fitness Stagnation Tolerance = $(Int(res1.pr[:alg][:fvalRepeatTol])) consecutive iterations at dftol = $(dftol)."
     
     elseif method == "ProjectedGradientCG"
-        @unpack converged, statusMessage, xvals, fvals, fevals, cause = res
+        @unpack converged, statusMessage, xvals, fvals, fevals, cause = res1
         @unpack etol = pr[:alg]
         gevals = 0
 
@@ -60,11 +74,11 @@ function showresults(res::NamedTuple;
         tolMsg = "PGCG Tolerance = $(etol)"
 
     else
-        @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, fevals, gevals, cause = res
+        @unpack converged, statusMessage, fvals, αvals, backtrackVals, xvals, fevals, gevals, cause = res1
         result_txt = log_path * "results_" * objString * "_" * pr.alg[:method] * "_" * pr.alg[:linesearch] * "_" * string(pr.alg[:maxiter]) * ".txt"
         lsMsg = "Linesearch method used: " * pr.alg[:linesearch]
 
-        tolMsg = "dftol = $(res.pr.alg[:dftol])"
+        tolMsg = "dftol = $(res1.pr.alg[:dftol])"
 
     end
 
@@ -88,7 +102,7 @@ function showresults(res::NamedTuple;
     myprintln1(true, "Solver run has concluded.", color=:light_cyan)
     myprintln1(true, "Function solved for: $(objString)()", color=:light_cyan)
     myprintln1(true, "Cause(s) for stopping:", color=:light_cyan)
-    causeForStopping = res.cause
+    causeForStopping = res1.cause
     for msg ∈ causeForStopping
         myprintln1(true, msg, color=:normal)
     end

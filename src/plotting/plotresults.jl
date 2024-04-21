@@ -10,8 +10,12 @@ function plotresults(res;
     
     plot_fval_vs_iterations(res, savePlot=savePlot)
 
-    pr = res.pr
-    functionName = string(pr.objective)
+    if typeof(res) <: Vector
+        functionName = res[1].pr[:objectiveString]
+    else
+        functionName = res.pr[:objectiveString]
+    end
+
     if functionName == "drag"
         plotDragCurve(res, savePlot=savePlot)
     # elseif functionName == "receiverLocation"

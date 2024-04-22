@@ -3,6 +3,36 @@ using Plots.PlotMeasures
 using Colors
 using ColorSchemes
 
+"""
+    plot_convex_hull!(points, label; color=:black)
+
+Add a convex hull polygon and its vertices to an existing plot.
+
+# Arguments
+- `points::Vector{Tuple{Real,Real}}`: A vector of 2D points (tuples) that define the vertices of the convex hull.
+- `label::String`: The label for the convex hull in the plot legend.
+
+# Keyword Arguments
+- `color::Symbol`: The color of the convex hull edges and vertices (default: `:black`).
+
+# Description
+This function takes a series of points defining the convex hull, connects them in order to form a closed polygon, and plots this polygon on the current plot. Additionally, it scatters the vertices with a specified color. The first point is repeated at the end to close the polygon. This function is intended to be used with an existing plot and will modify it in place.
+
+# Examples
+```julia
+# Assume existing plot p
+p = plot(aspect_ratio=:equal)
+
+# Define points for convex hull
+points = [(0, 0), (1, 2), (2, 1), (1, 0)]
+
+# Plot convex hull on plot p
+plot_convex_hull!(points, "My Hull", color=:blue)
+
+# Display the plot
+display(p)
+```
+"""
 function plot_convex_hull!(points, label; color=:black)
     x_coords = [p[1] for p in points]
     y_coords = [p[2] for p in points]
@@ -11,12 +41,66 @@ function plot_convex_hull!(points, label; color=:black)
     scatter!(x_coords, y_coords, label="", color=color, markersize=2, alpha=0.5)
 end
 
+"""
+    pickColor(arr, num::Int)
+
+Select a color from a provided array based on an index number.
+
+# Arguments
+- `arr::Vector`: An array of colors or any elements from which to select.
+- `num::Int`: The index number used to pick an element from the array.
+
+# Returns
+- An element from `arr` corresponding to the provided index `num`.
+
+# Description
+Given an array `arr` and an integer `num`, this function returns the element at the position in the array that corresponds to `num` modulo the length of `arr`. This is useful for cycling through a list of colors or elements when the number of items to color may exceed the length of the color array. It effectively makes the color array circular.
+
+# Examples
+```julia
+color_array = [:red, :green, :blue]
+picked_color = pickColor(color_array, 5)
+# Since 5 modulo the length of color_array (3) is 2, picked_color will be :blue
+```
+"""
 function pickColor(arr, num::Int)
     n = length(arr)
     numArr = mod(num, n)
     return arr[numArr+1]
 end
 
+"""
+    calculatePlotLimits(P; buffer=1.0)
+
+Calculate the x and y limits for a plot based on the provided set of convex hulls with an optional buffer.
+
+# Arguments
+- `P::Vector{Vector{Tuple{Real,Real}}}`: A vector of vectors, where each inner vector contains tuples representing points of a convex hull.
+
+# Keyword Arguments
+- `buffer::Float64`: An optional buffer space to add around the calculated limits (default: `1.0`).
+
+# Returns
+- `(xlims, ylims)`: A tuple containing the x and y limits for the plot.
+
+# Description
+This function iterates through a set of points defining multiple convex hulls, identifies the minimum and maximum x and y values, and calculates the limits for plotting these hulls. It adds an optional buffer to each limit to ensure that the hulls are not plotted on the very edge of the plot, enhancing visual appeal and readability.
+
+# Examples
+```julia
+# Define a set of convex hulls
+P = [
+    [(0, 0), (1, 2), (2, 1)],
+    [(1, 1), (2, 3), (3, 2)]
+]
+
+# Calculate plot limits with a buffer
+xlims, ylims = calculatePlotLimits(P, buffer=0.5)
+
+# Set the calculated limits in a plot
+plot(xlims=xlims, ylims=ylims)
+```
+"""
 function calculatePlotLimits(P; buffer=1.0)
     # Initialize min and max values
     x_min, x_max, y_min, y_max = Inf, -Inf, Inf, -Inf

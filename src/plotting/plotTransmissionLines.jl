@@ -60,20 +60,20 @@ function plotTransmissionLines(resVec; savePlot=false)
     foptAll = 0.0
 
     color_palette = [
-        colorant"MidnightBlue",
-        colorant"CornflowerBlue",
-        colorant"DarkSlateGray",
         colorant"Firebrick",
+        colorant"CornflowerBlue",
+        colorant"purple4",
+        colorant"MidnightBlue",
         colorant"DarkOliveGreen",
         colorant"SaddleBrown",
     ]
 
     # Define a second color palette with different shades
     color_palette2 = [
-        colorant"MidnightBlue",
-        colorant"CornflowerBlue",
-        colorant"DarkSlateGray",
         colorant"Firebrick",
+        colorant"CornflowerBlue",
+        colorant"purple4",
+        colorant"MidnightBlue",
         colorant"DarkOliveGreen",
         colorant"SaddleBrown",
     ]
@@ -110,7 +110,7 @@ function plotTransmissionLines(resVec; savePlot=false)
 
         scatter!([xoptPoly[1]], [xoptPoly[2]], label=xPolyStringLatex, color=color, markershape=:rect, markersize=6)
         scatter!([yoptPoly[1]], [yoptPoly[2]], label=yPolySringLatex, color=color2,
-        markershape=:star5, markersize=8)
+        markershape=:star5, markersize=9)
 
 
         plot!([xcentral[1], xoptPoly[1]], [xcentral[2], xoptPoly[2]], color=color, label="", linewidth=2, linestyle=:dash)

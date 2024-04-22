@@ -5,8 +5,8 @@ function plot_convex_hull!(points, label; color=:black)
     x_coords = [p[1] for p in points]
     y_coords = [p[2] for p in points]
     # Close the polygon by repeating the first point at the end
-    plot!([x_coords; x_coords[1]], [y_coords; y_coords[1]], label=label, color=color)
-    scatter!(x_coords, y_coords, label="", color=color, markersize=3, alpha=0.5)
+    plot!([x_coords; x_coords[1]], [y_coords; y_coords[1]], label=label, color=color, linewidth=2)
+    scatter!(x_coords, y_coords, label="", color=color, markersize=2, alpha=0.5)
 end
 
 function pickColor(arr::Vector, num::Int)
@@ -15,16 +15,41 @@ function pickColor(arr::Vector, num::Int)
     return arr[numArr+1]
 end
 
+function calculatePlotLimits(P; buffer=1.0)
+    # Initialize min and max values
+    x_min, x_max, y_min, y_max = Inf, -Inf, Inf, -Inf
+
+    # Iterate through all hulls and update the min and max values
+    for hull in P
+        for (x, y) in hull
+            x_min = min(x_min, x)
+            x_max = max(x_max, x)
+            y_min = min(y_min, y)
+            y_max = max(y_max, y)
+        end
+    end
+
+    # Apply the buffer to each limit
+    xlims = (x_min - buffer, x_max + buffer)
+    ylims = (y_min - buffer, y_max + buffer)
+
+    return xlims, ylims
+end
+
+
 function plotTransmissionLines(resVec; savePlot=false)
 
     res1 = resVec[1]
     @unpack pr = res1
     @unpack P, xcentral, alpha, beta = pr[:p]  # Ensure correct extraction path if needed
     factor = alpha / beta
+
+    xlims, ylims = calculatePlotLimits(P)
+
     numPoly = length(resVec)
 
     theme(:dao)
-
+    # theme(:dracula)
     # Define a color palette for the polyhedrons and their points   
 
     p1 = plot(aspect_ratio=:equal)
@@ -55,7 +80,7 @@ function plotTransmissionLines(resVec; savePlot=false)
     # Plot central polyhedron and its central point
     # plot_convex_hull!(P[1], "P0", color=color)
     plot_convex_hull!(P[1], "", color=color)
-    scatter!([xcentral[1]], [xcentral[2]], label=L"x_0", markersize=5, color=color)
+    scatter!([xcentral[1]], [xcentral[2]], label=L"x_0", markersize=6, color=color)
 
     polyPlotted += 1
 
@@ -92,7 +117,10 @@ function plotTransmissionLines(resVec; savePlot=false)
 
     formatted_foptAll = @sprintf("%.4f", foptAll)
 
-    plot!(p1, title="Optimal Transmission Tower Locations\n" * "α = $(alpha) and β = $(beta) | f = $(formatted_foptAll)")
+    plot!(p1, title="Optimal Transmission Tower Locations\n" * "α = $(alpha) and β = $(beta) | f = $(formatted_foptAll)",
+    xlim=xlims,
+    ylim=ylims,
+    size=(600,600))
     # Display the plot
     display(p1)
 

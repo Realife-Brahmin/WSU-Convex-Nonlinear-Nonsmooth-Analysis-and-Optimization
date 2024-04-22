@@ -7,6 +7,39 @@ using Printf
 
 include("objfuns/objective.jl")
 
+"""
+    showresults(res; log::Bool=true, log_path::String="./logging/")
+
+Generate detailed logs and outputs for optimization results, handling both single and multiple run scenarios.
+
+# Arguments
+- `res`: The result or vector of results from optimization processes. Each result should contain detailed optimization data including the problem setup, final solution, and diagnostic information.
+
+# Keyword Arguments
+- `log::Bool=true`: Indicates whether to log the results to a file.
+- `log_path::String="./logging/"`: The directory path where result logs should be saved. This path is used to construct the filename for saving the results.
+
+# Notes
+- This function is designed to provide a comprehensive log of the optimization process, making it invaluable for detailed analysis and troubleshooting.
+- Ensure the `log_path` directory exists or is created before running this function to avoid errors in file handling.
+- The function is capable of handling various optimization methods and adjusts its output based on the specific method and settings used in each optimization result.
+- Depending on the method, additional specific information like tolerance levels and line search details are reported to provide full insight into the optimization behavior.
+
+# Description
+This function iterates through the optimization results, processing and logging detailed information about each run. It supports both individual and batch optimization results. For each result, it extracts and logs detailed information including the optimization method used, convergence status, final and best function values, solution vectors, and other diagnostic statistics.
+
+# Usage
+- For single optimization results, it processes the contained information and logs it accordingly.
+- For vectors containing multiple optimization results, it recursively calls itself to handle and log each individual result.
+
+# Examples
+```julia
+# Assuming `results` is a single optimization result or a vector of results
+showresults(results, log=true, log_path="./logs/")
+
+# This will process and log detailed information about the optimization process for each result in `results`.
+```
+"""
 function showresults(res;
     log::Bool=true,
     log_path::String="./logging/")

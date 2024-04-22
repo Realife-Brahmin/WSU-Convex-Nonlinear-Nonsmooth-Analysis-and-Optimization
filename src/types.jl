@@ -1,5 +1,42 @@
 using Parameters
 
+"""
+    SolStateASQPType(xk, Ae; Wk0=[], fkm1=100.0, fk=100.0, itol=1e-8)
+
+Initialize the solution state for an Active Set Quadratic Programming (ASQP) solver.
+
+# Arguments
+- `xk::Vector{Float64}`: The initial point in the parameter space where the solver starts.
+- `Ae::Matrix{Float64}`: The matrix representing equality constraints.
+
+# Keyword Arguments
+- `Wk0::Vector{Int}=[]`: Initial set of active (working) constraints indices. If empty, defaults to indices of all equality constraints.
+- `fkm1::Float64=100.0`: The function value at the previous iteration (initially set to a high value to represent uninitialized state).
+- `fk::Float64=100.0`: The function value at the current iteration (initially set to a high value to represent uninitialized state).
+- `itol::Float64=1e-8`: The iteration tolerance for convergence checking.
+
+# Returns
+- `solState::Dict`: A dictionary containing the state of the ASQP solver, encapsulating various metrics and values such as iteration counts, function values, and active constraint sets.
+
+# Description
+This function sets up and returns a dictionary encapsulating the necessary state for the ASQP algorithm. It initializes the state with default values for function evaluations and active constraints based on the provided equality constraints matrix `Ae`. This state aids in guiding the iterative process of the ASQP solver by tracking previous and current values necessary for convergence checks and updates.
+
+# Usage
+The `SolStateASQPType` is particularly useful at the beginning of an optimization process to set up the required state information for managing constraint activation and deactivation across iterations.
+
+# Example
+```julia
+# Define initial conditions and problem parameters
+xk = [0.5, 0.5]  # Initial guess for variables
+Ae = [1 0; 0 1]  # Equality constraint coefficients matrix
+
+# Initialize the solver state for an ASQP optimization
+solState = SolStateASQPType(xk, Ae)
+
+# Example output of the initial solver state
+println("Initial Solver State: ", solState)
+```
+"""
 function SolStateASQPType(xk, Ae;
     Wk0=[],
     fkm1=100.0,
@@ -25,6 +62,35 @@ function SolStateASQPType(xk, Ae;
     return solState
 end
 
+"""
+    SolverStateASQPType(; k=0, fevals=0, lagrevals=0, actions=Dict())
+
+Initialize the solver state for an Active Set Quadratic Programming (ASQP) method.
+
+# Keyword Arguments
+- `k::Int=0`: The current iteration number.
+- `fevals::Int=0`: The number of function evaluations performed.
+- `lagrevals::Int=0`: The number of Lagrangian multiplier evaluations performed.
+- `actions::Dict=Dict()`: A dictionary to store additional information about actions taken during the solver's execution.
+
+# Returns
+- `solverState::Dict`: A dictionary containing the state of the ASQP solver, including iteration counts and evaluations.
+
+# Description
+This function creates and returns a dictionary that records various aspects of the state of an ASQP solver, such as the iteration count, number of function evaluations, number of Lagrangian multiplier evaluations, and other actions. This state is used to track progress and manage the execution flow of the optimization process.
+
+# Usage
+`SolverStateASQPType` is typically used at the initialization stage of an ASQP solver to set up the initial state of the solver. It can be updated in subsequent iterations to reflect ongoing progress and actions.
+
+# Example
+```julia
+# Initialize the solver state for an ASQP optimization
+solverState = SolverStateASQPType()
+
+# Print the initial state of the solver
+println("Initial Solver State: ", solverState)
+```
+"""
 function SolverStateASQPType(;
     k=0,
     fevals=0,
@@ -170,7 +236,46 @@ function SolverStateNMType(;
 
 end
 
+"""
+    SolStatePGCGType(xk, G, c, Ae; fkm1=100.0, fk=100.0, etol=1e-8)
 
+Initialize the solution state for the Projected Gradient Conjugate Gradient (PGCG) method.
+
+# Arguments
+- `xk::Vector{Float64}`: The initial point or current point in the parameter space.
+- `G::Matrix{Float64}`: The Hessian matrix or an approximation of the Hessian of the quadratic part of the objective function.
+- `c::Vector{Float64}`: The vector of linear coefficients of the objective function.
+- `Ae::Matrix{Float64}`: The matrix representing equality constraints.
+
+# Keyword Arguments
+- `fkm1::Float64=100.0`: The function value at the previous iteration.
+- `fk::Float64=100.0`: The function value at the current iteration.
+- `etol::Float64=1e-8`: The error tolerance for convergence checking.
+
+# Returns
+- `solState::Dict`: A dictionary containing the state of the optimization process, including various vectors and parameters like gradients, residuals, and function values.
+
+# Description
+This function sets up and returns a dictionary encapsulating the state needed for the PGCG algorithm. It initializes residuals, gradients, and search directions based on the provided matrix and vector inputs. This state aids in guiding subsequent iterations of the PGCG solver by tracking previous and current values necessary for convergence checks and updates.
+
+# Usage
+The `SolStatePGCGType` is typically called at the beginning of an optimization process to initialize necessary variables and state information.
+
+# Example
+```julia
+# Define initial conditions and problem parameters
+xk = [0.5, 0.5]  # Initial guess
+G = [2 0; 0 2]   # Hessian matrix of the objective function
+c = [-1; -1]     # Linear coefficients of the objective function
+Ae = [1 0; 0 1]  # Equality constraint coefficients
+
+# Initialize the solver state
+solState = SolStatePGCGType(xk, G, c, Ae)
+
+# Example output of the initial solver state
+println("Initial Solver State: ", solState)
+```
+"""
 function SolStatePGCGType(xk, G, c, Ae; 
     fkm1=100.0,
     fk=100.0,

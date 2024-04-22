@@ -185,37 +185,49 @@ function optimize(pr;
 end
 
 """
-    warm_start_optimize(pr; nStart::Int = 4, factor::Int = 2, verbose=false, verbose_ls=false) -> NamedTuple
+    trailoredOptimize(pr; nStart=4, factor=2, verbose=false, verbose_ls=false)
 
-Conducts warm start optimization for estimating a monotonic function that minimizes a drag function, progressively refining the solution by increasing the number of points defining the function. This approach is currently specialized for the 'drag' objective function and will perform a standard single-shot optimization for other objectives.
+Dynamically orchestrates optimization based on the provided problem record and method, adapting parameters and strategies accordingly.
 
 # Arguments
-- `pr`: A NamedTuple containing the problem definition and settings for optimization.
-- `nStart::Int`: The starting number of points for the warm start optimization process.
-- `factor::Int`: The factor by which the number of points is increased in each extrapolation step.
-- `verbose`: A Boolean flag for verbose output during optimization.
-- `verbose_ls`: A Boolean flag for verbose output during line search.
+- `pr`: The problem record containing all necessary settings, including the initial point, problem data, algorithm configuration, and optimization method.
 
-# Behavior
-For the 'drag' objective function, the method starts with `nStart` points, optimizes, and then uses the result to extrapolate a finer initial guess for the next round, increasing the number of points each time by the specified `factor`. This continues until `nMax` points are reached, which depends on the optimization method used:
-- `QuasiNewton`: `nMax` is set to 1024.
-- `ConjugateGradientDescent`: `nMax` is set to 1024.
-- Other methods default to `nMax` of 512.
+# Keyword Arguments
+- `nStart::Int=4`: Starting size of the problem dimension for methods requiring warm starts.
+- `factor::Int=2`: The factor by which the problem dimension is increased on each warm start iteration.
+- `verbose::Bool=false`: Enables verbose output, providing detailed logs of the optimization process.
+- `verbose_ls::Bool=false`: Enables verbose output specifically for line search operations.
 
-For objective functions other than 'drag', `warm_start_optimize` performs a single-shot optimization using the `optimize` function.
-
-# Returns
-- `res`: A NamedTuple containing the results of the optimization process.
+# Description
+This function serves as a universal gateway to various optimization methods, deciding and executing an appropriate strategy based on the method specified in `pr`. It supports a range of methods, from gradient-based to evolutionary algorithms, and includes specific logic for handling warm starts in a scalable manner for certain problem types.
 
 # Notes
-This function is designed for use with optimization problems where a good initial guess can significantly speed up convergence. The current implementation is tuned for the 'drag' function; using it with other objectives will not leverage the warm start capability.
+- The function is particularly robust in scenarios where adaptive strategies can leverage problem structure and solver capabilities to enhance optimization performance.
+- Ensure all required data fields are correctly populated in `pr` to avoid runtime errors.
+- Use verbose flags to monitor detailed progression for troubleshooting and performance analysis.
+- Each optimization method within the function has specific requirements and behaviors; users should be familiar with these before executing the function.
 
-Example usage:
+# Usage
+This function is designed to be versatile, catering to different needs and providing flexibility in handling various optimization scenarios, making it especially useful for experimental and complex optimization landscapes.
+
+# Example
 ```julia
-pr = (objective=drag, alg=alg, x0=[0.25, 0.5, 0.75], ...)
-result = warm_start_optimize(pr, verbose=true, verbose_ls=false)
+# Define the problem with specific parameters and method
+pr = {
+    objectiveString: "QuadraticObjective",
+    p: {G: Matrix, c: Vector, Ae: Matrix, be: Vector},
+    alg: {method: "ActiveSetQP", maxiter: 100, progress: 10},
+    x0: [initial_guess]
+}
+
+# Execute the adaptive optimization
+result = trailoredOptimize(pr, verbose=true)
+
+# Process and utilize the results
+println("Optimization result: ", result)
+```
 """
-function warm_start_optimize(pr; 
+function tailoredOptimize(pr; 
     nStart::Int = 4,
     factor::Int = 2,
     verbose=false, 

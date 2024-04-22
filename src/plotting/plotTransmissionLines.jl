@@ -1,5 +1,7 @@
 using Plots
 using Plots.PlotMeasures
+using Colors
+using ColorSchemes
 
 function plot_convex_hull!(points, label; color=:black)
     x_coords = [p[1] for p in points]
@@ -9,7 +11,7 @@ function plot_convex_hull!(points, label; color=:black)
     scatter!(x_coords, y_coords, label="", color=color, markersize=2, alpha=0.5)
 end
 
-function pickColor(arr::Vector, num::Int)
+function pickColor(arr, num::Int)
     n = length(arr)
     numArr = mod(num, n)
     return arr[numArr+1]
@@ -57,20 +59,24 @@ function plotTransmissionLines(resVec; savePlot=false)
 
     foptAll = 0.0
 
-    # color_palette2 = [:red, :blue, :green, :orange, :purple, :yellow, :cyan, :magenta]
-
     color_palette = [
-        :lightcoral,  # Similar to red but lighter
-        :deepskyblue, # Similar to blue but with a different shade
-        :limegreen,   # A brighter variant of green
-        :sandybrown,  # Earthy orange tone
-        :plum,        # A softer purple
-        :gold,        # A yellow with more depth
-        :lightseagreen, # A variant of cyan
-        :orchid       # A different tone within the magenta family
+        colorant"MidnightBlue",
+        colorant"CornflowerBlue",
+        colorant"DarkSlateGray",
+        colorant"Firebrick",
+        colorant"DarkOliveGreen",
+        colorant"SaddleBrown",
     ]
 
-    color_palette2 = [:red, :blue, :green, :orange, :purple, :yellow, :cyan, :magenta]
+    # Define a second color palette with different shades
+    color_palette2 = [
+        colorant"MidnightBlue",
+        colorant"CornflowerBlue",
+        colorant"DarkSlateGray",
+        colorant"Firebrick",
+        colorant"DarkOliveGreen",
+        colorant"SaddleBrown",
+    ]
 
 
     polyPlotted = 0
@@ -80,7 +86,7 @@ function plotTransmissionLines(resVec; savePlot=false)
     # Plot central polyhedron and its central point
     # plot_convex_hull!(P[1], "P0", color=color)
     plot_convex_hull!(P[1], "", color=color)
-    scatter!([xcentral[1]], [xcentral[2]], label=L"x_0", markersize=6, color=color)
+    scatter!([xcentral[1]], [xcentral[2]], label=L"x_0", markersize=8, color=color)
 
     polyPlotted += 1
 
@@ -102,8 +108,9 @@ function plotTransmissionLines(resVec; savePlot=false)
         # Extract and plot optimal points for this polyhedron
         xoptPoly, yoptPoly = woptPoly[1:2], woptPoly[3:4]
 
-        scatter!([xoptPoly[1]], [xoptPoly[2]], label=xPolyStringLatex, color=color, markersize=5)
-        scatter!([yoptPoly[1]], [yoptPoly[2]], label=yPolySringLatex, color=color2, markersize=5)
+        scatter!([xoptPoly[1]], [xoptPoly[2]], label=xPolyStringLatex, color=color, markershape=:rect, markersize=6)
+        scatter!([yoptPoly[1]], [yoptPoly[2]], label=yPolySringLatex, color=color2,
+        markershape=:star5, markersize=8)
 
 
         plot!([xcentral[1], xoptPoly[1]], [xcentral[2], xoptPoly[2]], color=color, label="", linewidth=2, linestyle=:dash)

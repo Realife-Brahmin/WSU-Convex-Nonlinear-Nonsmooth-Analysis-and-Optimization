@@ -11,40 +11,36 @@ Problem (pr::NamedTuple) generated
 Current Working Set: Int64[]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [0.0, -2.0, 2.0, 5.0]
-Step pk of size 5.744431859265909 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step pk of size 5.744557549895084 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 Constraint 8 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 8 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
 Current Working Set: [8]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [0.0, -2.0, 2.0, 5.0]
-Step pk of size 5.517177174843583 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step pk of size 5.657186028340488 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 Constraint 5 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 9 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 9 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
 Current Working Set: [8, 9]
 Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [0.48001128652670794, -1.199939227534439, 2.0, 3.0]
-Step pk of size 3.0851287033815704 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+We start for a good feasible descent direction from current point xk = [0.693348000537764, -1.1999463751347987, 2.0, 3.0]
+Step pk of size 3.939690590177101 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 Constraint 5 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 5 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
 Current Working Set: [5, 8, 9]
 Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [0.7255801315635937, -0.17674039469078107, 1.9999999999999998, 3.0]
-Step pk of size 1.725275861875278 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
-No inequality constraint outside the working set is blocking our current step.
-Current Working Set: [5, 8, 9]
+We start for a good feasible descent direction from current point xk = [0.8616570285786627, -0.5849710857359879, 2.0, 3.0]
+Step pk of size 2.745880623269161 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Constraint 1 outside the working set is blocking the current step the earliest among the checked ones.
+Constraint 1 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
+Current Working Set: [1, 5, 8, 9]
 Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [0.17999999999999972, 1.4600000000000002, 1.9999999999999998, 3.0]
+We start for a good feasible descent direction from current point xk = [-1.1102230246251565e-16, 1.9999999999999996, 2.0000000000000004, 3.0]
 Step is too small, checking if this is a stationary point wrt all constraints.
-Working set constraint 2 prevents a feasible step the hardest. So removing it from the working set.
-Current Working Set: [5, 9]
+Working set constraint 3 prevents a feasible step the hardest. So removing it from the working set.
+Current Working Set: [1, 5, 9]
 Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [0.17999999999999972, 1.4600000000000002, 1.9999999999999998, 3.0]
-Step pk of size 1.5906493884806379 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
-No inequality constraint outside the working set is blocking our current step.
-Current Working Set: [5, 9]
-Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [0.43687506776367857, 0.6893747967089685, 2.6116073041891985, 1.7767853916216052]
+We start for a good feasible descent direction from current point xk = [-1.1102230246251565e-16, 1.9999999999999996, 2.0000000000000004, 3.0]
 Step is too small, checking if this is a stationary point wrt all constraints.
 0 vector is the only feasible descent direction
 A wrapper function QPObjectiveFunction will be used to solve for the original problem of transmissionLines
@@ -52,70 +48,55 @@ Problem (pr::NamedTuple) generated
 Current Working Set: Int64[]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [0.0, -2.0, 1.0, -4.0]
-Step pk of size 4.582427372454542 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step pk of size 4.582429776505659 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 Constraint 6 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 6 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
 Current Working Set: [6]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [0.0, -2.0, 1.0, -4.0]
-Step pk of size 4.51207602412448 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step pk of size 4.555192932610534 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Constraint 5 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 9 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 9 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
 Current Working Set: [6, 9]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [0.0, -2.0, 1.0, -4.0]
-Step pk of size 0.7211102550927979 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step pk of size 1.7035909785574186 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 Constraint 3 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 3 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
 Current Working Set: [3, 6, 9]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [0.0, -2.0, 1.0, -4.0]
-Step pk of size 0.6000000000000001 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step pk of size 0.8666666666666667 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 Constraint 4 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 4 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
 Current Working Set: [3, 4, 6, 9]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [0.0, -2.0, 1.0, -4.0]
 Step is too small, checking if this is a stationary point wrt all constraints.
-Working set constraint 1 prevents a feasible step the hardest. So removing it from the working set.
-Current Working Set: [4, 6, 9]
-Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [0.0, -2.0, 1.0, -4.0]
-Step pk of size 0.14142135623730956 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
-No inequality constraint outside the working set is blocking our current step.
-Current Working Set: [4, 6, 9]
-Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [0.1, -1.9, 1.0, -4.0]
-Step is too small, checking if this is a stationary point wrt all constraints.
 0 vector is the only feasible descent direction
 A wrapper function QPObjectiveFunction will be used to solve for the original problem of transmissionLines
 Problem (pr::NamedTuple) generated
 Current Working Set: Int64[]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [0.0, -2.0, -6.0, -3.0]
-Step pk of size 6.999941127878957 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step pk of size 6.999947902958802 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 Constraint 6 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 6 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
 Current Working Set: [6]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [0.0, -2.0, -6.0, -3.0]
-Step pk of size 5.161073961454088 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step pk of size 5.438111687922983 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 Constraint 3 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 3 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
 Current Working Set: [3, 6]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [0.0, -2.0, -6.0, -3.0]
-Step pk of size 4.859717407628824 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
-Constraint 8 outside the working set is blocking the current step the earliest among the checked ones.
-Constraint 8 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
-Current Working Set: [3, 6, 8]
-Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [-0.6977785247258318, -2.0, -2.0, -4.000000000000001]
-Step pk of size 0.5022214752741684 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step pk of size 4.003899962720353 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 No inequality constraint outside the working set is blocking our current step.
-Current Working Set: [3, 6, 8]
+Current Working Set: [3, 6]
 Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [-1.2000000000000002, -2.0, -2.0, -4.000000000000001]
+We start for a good feasible descent direction from current point xk = [-2.7659860105482537, -1.9999999999999998, -3.1915193471665724, -3.7021201632083556]
 Step is too small, checking if this is a stationary point wrt all constraints.
 0 vector is the only feasible descent direction
 A wrapper function QPObjectiveFunction will be used to solve for the original problem of transmissionLines
@@ -123,22 +104,22 @@ Problem (pr::NamedTuple) generated
 Current Working Set: Int64[]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [0.0, -2.0, -2.0, 4.0]
-Step pk of size 4.898924806059126 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step pk of size 4.898923231560197 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 Constraint 6 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 6 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
 Current Working Set: [6]
 Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [0.0, -2.0, -2.0, 4.0]
-Step pk of size 4.5606862855306645 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+Step pk of size 5.73486664928759 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 Constraint 1 outside the working set is blocking the current step the earliest among the checked ones.
 Constraint 1 is blocking the step first, so we'll restrict our step accordingly and add it to the working set.
 Current Working Set: [1, 6]
 Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [-0.9600562478531551, 1.519971876073423, -2.0000658960568, 3.9999670519716006]
-Step pk of size 0.17884189725136573 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
+We start for a good feasible descent direction from current point xk = [-1.0947979254026483, 1.4526010372986757, -2.0000691205396914, 3.999965439730153]
+Step pk of size 0.32948282904709125 exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.
 No inequality constraint outside the working set is blocking our current step.
 Current Working Set: [1, 6]
 Let's try taking a step saisfying current active constraints.
-We start for a good feasible descent direction from current point xk = [-0.8000952069358873, 1.5999523965320572, -2.000134878942973, 3.999932560528514]
+We start for a good feasible descent direction from current point xk = [-0.8000995266644718, 1.5999502366677656, -2.0001077295303844, 3.9999461352348065]
 Step is too small, checking if this is a stationary point wrt all constraints.
 0 vector is the only feasible descent direction

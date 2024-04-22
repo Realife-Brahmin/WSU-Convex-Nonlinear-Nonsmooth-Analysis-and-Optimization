@@ -4,6 +4,42 @@ include("objfuns/functionQP.jl")
 include("optimizeECQP.jl")
 include("solveLP.jl")
 
+"""
+    getECQPStep(prASQP, solStateASQP; verbose=false, verbose_ls=false)
+
+Calculate a single ECQP step within an ASQP framework to adjust the search direction based on active constraints.
+
+# Arguments
+- `prASQP`: The problem record for the ASQP solver, containing the current problem settings and state.
+- `solStateASQP`: The current solver state of the ASQP, including variables such as `xk` (current point) and `Wk` (working set of constraints).
+
+# Keyword Arguments
+- `verbose::Bool=false`: Enables detailed output throughout the process for debugging and insights.
+- `verbose_ls::Bool=false`: Activates detailed logging specifically for line search processes within the ECQP subroutine.
+
+# Description
+This function orchestrates a single iteration step of the ECQP subroutine as part of a broader ASQP process. It modifies the active set of constraints to incorporate changes in the working set, constructs an ECQP problem based on these constraints, and then invokes the `optimizeECQP` function to solve it. The solution of the ECQP step informs the adjustment of the search direction in the ASQP solver.
+
+The function aggregates constraints based on the active set indices, formulates an ECQP problem using these constraints, and computes a feasible descent direction based on the solution of the ECQP. It returns the difference between the newly computed solution point and the current point as the search direction for the next ASQP iteration.
+
+# Notes
+- The function performs a pre-run check to ensure the feasibility of the input `xk` against the modified constraints `Ae*xk = be`.
+- Errors in constraint setup or parameter definitions may lead to infeasible solutions or non-convergence within the ECQP solver.
+- `verbose` and `verbose_ls` flags should be used judiciously to avoid excessive output, especially in large-scale optimization problems.
+
+# Example
+```julia
+# Assuming existing ASQP problem setup and solver state
+prASQP = generate_pr(...)  # Generate ASQP problem setup
+solStateASQP = SolStateASQPType(...)  # Current state of the ASQP solver
+
+# Compute the ECQP step
+pk = getECQPStep(prASQP, solStateASQP, verbose=true)
+
+# Utilize the computed step in the ASQP solver
+# Continue with ASQP iterations
+```
+"""
 function getECQPStep(prASQP, solStateASQP;
     verbose::Bool=false,
     verbose_ls::Bool=false,

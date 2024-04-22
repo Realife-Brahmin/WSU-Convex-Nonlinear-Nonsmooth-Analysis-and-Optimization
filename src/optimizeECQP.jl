@@ -1,5 +1,55 @@
 include("projectedGradientConjugateGradient.jl")
 
+"""
+    optimizeECQP(pr; verbose=false, verbose_ls=false, log=true, log_path="./logging/")
+
+Executes an optimization cycle using the Extended Conjugate Quadratic Programming (ECQP) method.
+
+# Arguments
+- `pr`: The problem record containing all necessary settings, including the initial point, problem data, and algorithm configuration.
+
+# Keyword Arguments
+- `verbose::Bool=false`: Enables verbose output, providing detailed logs of the optimization process.
+- `verbose_ls::Bool=false`: Enables verbose output specifically for line search operations.
+- `log::Bool=true`: Flag to enable or disable logging of the optimization process.
+- `log_path::String="./logging/"`: The directory path where the log files will be stored.
+
+# Returns
+- A tuple containing:
+    - `converged::Bool`: A boolean flag indicating if the optimization converged.
+    - `statusMessage::String`: A message describing the outcome of the optimization.
+    - `xvals::Matrix{Float64}`: The history of x values throughout the iterations.
+    - `fvals::Vector{Float64}`: The history of objective function values throughout the iterations.
+    - `fevals::Int`: Total number of function evaluations performed.
+    - Other state and control data from the optimization process.
+
+# Description
+This function orchestrates the ECQP solver by initializing the solver state, managing iterations, and handling convergence checks. It leverages active set strategies to efficiently navigate the solution space and applies the Projected Gradient Conjugate Gradient (PGCG) method within each iteration to adjust the search direction and step size. 
+
+Verbose outputs and logging are managed based on user settings, providing insights into the internal workings and progression of the solver. The function is designed to handle both standalone and subroutine calls within a larger optimization framework, such as Active Set Quadratic Programming (ASQP).
+
+# Notes
+- The function performs a pre-run check to ensure the feasibility of the initial point against the equality constraints `Ae * x = be`.
+- If discrepancies are found that exceed the error tolerance (`etol`), the solver will not proceed, ensuring robustness in the face of potentially erroneous inputs.
+
+# Examples
+```julia
+# Define the problem settings and initial conditions
+pr = {
+    objectiveString: "QuadraticObjective",
+    p: {G: Matrix, c: Vector, Ae: Matrix, be: Vector},
+    alg: {method: "PGCG", maxiter: 100, progress: 10, etol: 1e-8},
+    x0: [initial_guess]
+}
+
+# Perform optimization
+result = optimizeECQP(pr, verbose=true, log_path="/path/to/logs/")
+
+# Analyze the results
+println("Optimization converged: ", result.converged)
+println("Final objective value: ", result.fvals[end])
+```
+"""
 function optimizeECQP(pr;
     verbose::Bool=false,
     verbose_ls::Bool=false,

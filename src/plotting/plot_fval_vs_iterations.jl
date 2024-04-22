@@ -1,3 +1,37 @@
+"""
+    plot_fval_vs_iterations(res; savePlot=true)
+
+Plot the progression of function values against iterations for a given optimization result or multiple runs.
+
+# Arguments
+- `res`: The result or a vector of results from optimization processes. Each result must contain `pr`, `fvals`, and `xvals` as part of its structure.
+
+# Keyword Arguments
+- `savePlot::Bool=true`: Flag to determine whether to save the plot to a file. If true, the plot is saved under the processed data directory.
+
+# Returns
+- `p1`: A plot object representing the function value progression over iterations.
+
+# Description
+This function visualizes the optimization performance by plotting function values against iteration numbers. It supports handling either a single result or a collection of results from multiple optimization runs. When given multiple results, it recursively calls itself to plot each individual result. 
+
+The function extracts necessary data such as function values and iteration counts from the optimization result and uses this data to create a plot. For single runs, it plots the function value over each iteration, highlighting the minimum function value achieved and the corresponding iteration.
+
+# Notes
+- The plot includes a title that provides information about the minimum function value reached, the optimization method used, and other relevant details.
+- The plots are saved in a structured directory format using the base directory `dirname(dirname(@__DIR__))` appended with `/processedData/`.
+- It is important to ensure that each result in `res` contains all necessary data (`pr`, `fvals`, `xvals`) for the function to process and plot the information correctly.
+- The function employs the `Plots` library with the `GR` backend specified for plotting.
+- Plot aesthetics such as fonts, labels, and line properties are customized to enhance readability and presentation quality.
+
+# Example
+```julia
+# Assuming `results` is a single optimization result or a vector of results
+plot_fval_vs_iterations(results, savePlot=true)
+
+# This will generate a plot for each optimization run in `results`, displaying function values against iterations and saving the plots if `savePlot` is true.
+```
+"""
 function plot_fval_vs_iterations(res;
     savePlot=true)
 

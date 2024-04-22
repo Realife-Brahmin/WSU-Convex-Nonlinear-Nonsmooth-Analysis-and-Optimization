@@ -38,6 +38,9 @@ function calculatePlotLimits(P; buffer=1.0)
     return xlims, ylims
 end
 
+function annotateWithOffset(x, y, txt; xoff=0.3, yoff=0.3)
+    annotate!(x + xoff, y + yoff, text(txt, 8, :center, :bottom))
+end
 
 function plotTransmissionLines(resVec; savePlot=false)
 
@@ -53,6 +56,9 @@ function plotTransmissionLines(resVec; savePlot=false)
     theme(:dao)
     # theme(:dracula)
     # Define a color palette for the polyhedrons and their points   
+    # Offsets for the annotations
+    xoff = 0.3  # Adjust as needed
+    yoff = 0.3  # Adjust as needed
 
     p1 = plot(aspect_ratio=:equal)
 
@@ -87,8 +93,10 @@ function plotTransmissionLines(resVec; savePlot=false)
     # plot_convex_hull!(P[1], "P0", color=color)
     plot_convex_hull!(P[1], "", color=color)
     scatter!([xcentral[1]], [xcentral[2]], label=L"x_0", markersize=8, color=color)
+    annotate!(xcentral[1], xcentral[2], text("x0", 8, :center, :bottom))
 
     polyPlotted += 1
+
 
     # Plot each set of points for other polyhedrons
     for polyNum in 1:numPoly
@@ -109,12 +117,17 @@ function plotTransmissionLines(resVec; savePlot=false)
         xoptPoly, yoptPoly = woptPoly[1:2], woptPoly[3:4]
 
         scatter!([xoptPoly[1]], [xoptPoly[2]], label=xPolyStringLatex, color=color, markershape=:rect, markersize=6)
+        
         scatter!([yoptPoly[1]], [yoptPoly[2]], label=yPolySringLatex, color=color2,
         markershape=:star5, markersize=9)
 
+        # Annotate the points directly on the plot
+        annotate!(xoptPoly[1], xoptPoly[2], text("x$(polyNum)", 8, :right, :center))
+
+        annotate!(yoptPoly[1], yoptPoly[2], text("y$(polyNum)", 8, :right, :center))
+
 
         plot!([xcentral[1], xoptPoly[1]], [xcentral[2], xoptPoly[2]], color=color, label="", linewidth=2, linestyle=:dash)
-        # plot!([xcentral[1], xcentral[2]], [xoptPoly[1], xoptPoly[2]], color=color, label="", linewidth=2)
 
         plot!([xoptPoly[1], yoptPoly[1]], [xoptPoly[2], yoptPoly[2]], color=color2, label="", linewidth=2, linestyle=:dash)
 

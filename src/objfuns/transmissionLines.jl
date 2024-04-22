@@ -100,7 +100,7 @@ end
 
 function preparePolyProblem(;poly::Int=1,
     beta::Float64=1.0,
-    factor::Float64=1.5)
+    factor::Float64=7.5)
 
     P0 = [(0, 2), (-4, 0), (-3, -2), (0, -2), (1, -1)]
     xcentral = (0, 0) # should ideally check that xcentral actually lies inside P0

@@ -100,14 +100,15 @@ end
 
 function preparePolyProblem(;poly::Int=1,
     beta::Float64=1.0,
-    factor::Float64=7.5)
+    factor::Float64=1.5)
 
     P0 = [(0, 2), (-4, 0), (-3, -2), (0, -2), (1, -1)]
     xcentral = (0, 0) # should ideally check that xcentral actually lies inside P0
     A0e, b0e, A0i, b0i = convertPolygonToConstraints(P0)
     P1 = [(3, 1), (5, 3), (2, 5), (2, 3)]
     P2 = [(1, -4), (1, -6), (4, -6), (4, -4)]
-    P3 = [(-2, -4), (-6, -3), (-3, -6)]
+    # P3 = [(-2, -4), (-6, -3), (-3, -6)] # problem statement
+    P3 = [(-6, -3), (-3, -6)] # modification for testing equality constraint
     P4 = [(-4, 3), (-2, 4), (-2, 6), (-6, 3)]
     P = [P0, P1, P2, P3, P4]
     numOuterAreas = length(P)-1

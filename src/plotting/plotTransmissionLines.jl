@@ -38,8 +38,16 @@ function calculatePlotLimits(P; buffer=1.0)
     return xlims, ylims
 end
 
-function annotateWithOffset(x, y, txt; xoff=0.3, yoff=0.3)
-    annotate!(x + xoff, y + yoff, text(txt, 8, :center, :bottom))
+function annotateWithOffset(x, y, txt; xoff=0.5, yoff=0.0)
+    annotate!(x + xoff, y + yoff, text(txt, 12, :center, :bottom))
+end
+
+function calculateCentroid(vertices)
+    x_coords = [vertex[1] for vertex in vertices]
+    y_coords = [vertex[2] for vertex in vertices]
+    centroid_x = mean(x_coords)
+    centroid_y = mean(y_coords)
+    return (centroid_x, centroid_y)
 end
 
 function plotTransmissionLines(resVec; savePlot=false)
@@ -54,11 +62,6 @@ function plotTransmissionLines(resVec; savePlot=false)
     numPoly = length(resVec)
 
     theme(:dao)
-    # theme(:dracula)
-    # Define a color palette for the polyhedrons and their points   
-    # Offsets for the annotations
-    xoff = 0.3  # Adjust as needed
-    yoff = 0.3  # Adjust as needed
 
     p1 = plot(aspect_ratio=:equal)
 
@@ -90,10 +93,13 @@ function plotTransmissionLines(resVec; savePlot=false)
     color2 = pickColor(color_palette2, polyPlotted)
 
     # Plot central polyhedron and its central point
-    # plot_convex_hull!(P[1], "P0", color=color)
     plot_convex_hull!(P[1], "", color=color)
-    scatter!([xcentral[1]], [xcentral[2]], label=L"x_0", markersize=8, color=color)
-    annotate!(xcentral[1], xcentral[2], text("x0", 8, :center, :bottom))
+    scatter!([xcentral[1]], [xcentral[2]], label=L"x_0", markersize=7, color=color)
+    annotateWithOffset(xcentral[1], xcentral[2], L"x_0", xoff=-0.5, yoff=-0.2)
+
+    centroid = calculateCentroid(P[polyPlotted+1])
+    polyLabel = LaTeXString("\$P_{$polyPlotted}\$")
+    annotateWithOffset(centroid[1], centroid[2], polyLabel)
 
     polyPlotted += 1
 
@@ -109,6 +115,11 @@ function plotTransmissionLines(resVec; savePlot=false)
         color2 = pickColor(color_palette2, polyPlotted)
 
         plot_convex_hull!(P[polyNum+1], polyString, color=color)
+
+        centroid = calculateCentroid(P[polyPlotted+1])
+        polyLabel = LaTeXString("\$P_{$polyPlotted}\$")
+        annotateWithOffset(centroid[1], centroid[2], polyLabel)
+
         resPoly = resVec[polyNum]
         woptPoly = resPoly.xvals[:, end]
         foptPoly = resPoly.fvals[end]
@@ -116,15 +127,15 @@ function plotTransmissionLines(resVec; savePlot=false)
         # Extract and plot optimal points for this polyhedron
         xoptPoly, yoptPoly = woptPoly[1:2], woptPoly[3:4]
 
-        scatter!([xoptPoly[1]], [xoptPoly[2]], label=xPolyStringLatex, color=color, markershape=:rect, markersize=6)
+        scatter!([xoptPoly[1]], [xoptPoly[2]], label=xPolyStringLatex, color=color, markershape=:rect, markersize=5)
         
         scatter!([yoptPoly[1]], [yoptPoly[2]], label=yPolySringLatex, color=color2,
         markershape=:star5, markersize=9)
 
         # Annotate the points directly on the plot
-        annotate!(xoptPoly[1], xoptPoly[2], text("x$(polyNum)", 8, :right, :center))
+        annotateWithOffset(xoptPoly[1], xoptPoly[2], xPolyStringLatex, xoff=-0.5, yoff=-0.1)
 
-        annotate!(yoptPoly[1], yoptPoly[2], text("y$(polyNum)", 8, :right, :center))
+        annotateWithOffset(yoptPoly[1], yoptPoly[2], yPolySringLatex)
 
 
         plot!([xcentral[1], xoptPoly[1]], [xcentral[2], xoptPoly[2]], color=color, label="", linewidth=2, linestyle=:dash)

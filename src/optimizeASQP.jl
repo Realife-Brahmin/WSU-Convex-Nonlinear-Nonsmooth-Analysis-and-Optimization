@@ -1,6 +1,62 @@
 
 include("activeSetQP.jl")
 
+"""
+    optimizeASQP(pr; verbose=false, verbose_ls=false, log=true, log_path="./logging/")
+
+Executes an optimization cycle using the Active Set Quadratic Programming (ASQP) method, focusing on dynamic working set adjustments.
+
+# Arguments
+- `pr`: The problem record containing all necessary settings, including the initial point, problem data, and algorithm configuration.
+
+# Keyword Arguments
+- `verbose::Bool=false`: Enables verbose output, providing detailed logs of the optimization process.
+- `verbose_ls::Bool=false`: Enables verbose output specifically for line search operations.
+- `log::Bool=true`: Flag to enable or disable logging of the optimization process.
+- `log_path::String="./logging/"`: The directory path where the log files will be stored.
+
+# Returns
+- A tuple containing:
+    - `converged::Bool`: A boolean flag indicating if the optimization converged.
+    - `statusMessage::String`: A message describing the outcome of the optimization.
+    - `xvals::Matrix{Float64}`: The history of x values throughout the iterations.
+    - `fvals::Vector{Float64}`: The history of objective function values throughout the iterations.
+    - `fevals::Int`: Total number of function evaluations performed.
+    - Other state and control data from the optimization process.
+
+# Description
+This function orchestrates the ASQP solver by managing iterations, handling convergence checks, and dynamically adjusting the active set of constraints. The solver employs strategies that involve both adding and removing constraints from the active set based on their impact on feasible directions and potential improvements in the objective function.
+
+# Key Processes in Working Set Adjustments:
+1. **Addition of Constraints**: When the current step direction is blocked by constraints not currently in the active set, these constraints are considered for addition to ensure that subsequent steps respect all relevant constraints.
+2. **Removal of Constraints**: If the solution becomes feasible or optimal with respect to a subset of the active constraints, some constraints may be removed to explore potentially better solutions in a less restricted feasible region.
+
+These processes are critical for navigating through the constraints' landscape, where the solver iteratively adjusts the active set and computes new search directions, incorporating feedback from the optimization process to refine the set of active constraints.
+
+# Notes
+- The function checks the feasibility of the initial point against the equality constraints `Ae * x = be`.
+- Discrepancies that exceed the error tolerance (`etol`) prevent the solver from proceeding, ensuring robustness in potentially erroneous inputs.
+- The solver's behavior and efficacy are highly dependent on accurate and dynamic management of the active set, which directly influences the convergence and efficiency of the optimization.
+
+# Example
+```julia
+# Define the problem settings and initial conditions
+pr = {
+    objectiveString: "QuadraticObjective",
+    p: {G: Matrix, c: Vector, Ae: Matrix, be: Vector},
+    alg: {method: "ProjectedGradientCG", maxiter: 100, progress: 10, etol: 1e-8},
+    x0: [initial_guess]
+}
+
+# Perform optimization
+result = optimizeASQP(pr, verbose=true, log_path="/path/to/logs/")
+
+# Analyze the results
+println("Optimization converged: ", result.converged)
+println("Final objective value: ", result.fvals[end])
+
+```
+"""
 function optimizeASQP(pr;
     verbose::Bool=false,
     verbose_ls::Bool=false,

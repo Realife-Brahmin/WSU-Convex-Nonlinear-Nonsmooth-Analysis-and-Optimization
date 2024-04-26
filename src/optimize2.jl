@@ -2,11 +2,6 @@ include("linesearches.jl");
 include("findDirection.jl");
 include("types.jl");
 
-include("getCandidateStep.jl");
-include("checkQualityOfCandidateStep.jl");
-include("updateTRegionParams.jl");
-include("updateTRModelParams.jl");
-
 function optimize2(pr; 
     verbose::Bool=false, 
     verbose_ls::Bool=false,
@@ -16,7 +11,7 @@ function optimize2(pr;
     method = pr.alg[:method]
     linesearchMethod = pr.alg[:linesearch]
     if method == "TrustRegion"
-        linesearchMethod = "QuasiNewton-SR1"
+        @error("Trust Region No longer supported")
     end
 
     log_txt = log_path*"log_"*string(pr.objective)*"_"*method*"_"*linesearchMethod*"_"*string(pr.alg[:maxiter])*".txt"
@@ -53,8 +48,7 @@ function optimize2(pr;
     elseif method == "ConjugateGradientDescent"
         CGState = CGStateType()
     elseif method == "TrustRegion"
-        SR1params = SR1paramsType()
-        TRparams = TRparamsType()
+        @error("Trust Region No longer supported")
     end
     
     fevals += 1
@@ -106,7 +100,7 @@ function optimize2(pr;
             @unpack justRestarted = CGState 
         
         elseif method == "TrustRegion"
-            SR1params = updateTRModelParams(SR1params, solState)
+            @error("Trust Region No longer supported")
 
         else
             pk = findDirection(pr, gk)
@@ -138,35 +132,7 @@ function optimize2(pr;
 
         elseif method == "TrustRegion"
 
-            @unpack xk = solState
-            y = xk
-
-            keepFindingCandidate = true
-            
-            while keepFindingCandidate
-                pj = getCandidateStep(SR1params, TRparams)
-                ρk, fj, solverState = checkQualityOfCandidateStep(SR1params, pr, solState, pj, solverState)
-                
-                y, TRparams = updateTRegionParams(TRparams, ρk, pj, y)
-
-                @unpack Delta, Delta_min = TRparams
-                @unpack xk = solState
-                
-                if y != xk
-                    keepFindingCandidate = false
-                    myprintln(verbose_ls, "A new valid candidate step has been found")
-                    xkm1 = xk
-                    xk = y
-                    @pack! solState = xkm1, xk
-
-                elseif Delta < Delta_min
-                    keepFindingCandidate = false
-                    myprintln(verbose_ls, "Trust Region Radius too small now.")
-                else
-                    myprintln(verbose_ls, "Keep Finding Candidate")
-                end
-
-            end
+            @error("Trust Region No longer supported")
 
         else
             @error "floc"
@@ -189,11 +155,7 @@ function optimize2(pr;
             keepIterationsGoing = false
         end
         if method == "TrustRegion"
-            @unpack Delta, Delta_min = TRparams
-            if Delta < Delta_min
-                push!(causeForStopping, "Trust Region Radius too small")
-                keepIterationsGoing = false
-            end
+            @error("Trust Region No longer supported")
         end
         if k == maxiter
             push!(causeForStopping, "Too many iterations")

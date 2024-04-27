@@ -2,35 +2,35 @@ include("objective.jl")
 
 using Parameters
 
-function cE01(x, p, getGradientToo::Bool=false)
+# function cE01(x, p, getGradientToo::Bool=false)
     
 
-    if !getGradientToo
-        return f
-    elseif getGradientToo
-        return f, g
-    else
-        @error("floc")
-    end
+#     if !getGradientToo
+#         return f
+#     elseif getGradientToo
+#         return f, g
+#     else
+#         @error("floc")
+#     end
 
-    @error("floc")
+#     @error("floc")
 
-end
+# end
 
-function cI01(x, p, getGradientToo::Bool=false)
+# function cI01(x, p, getGradientToo::Bool=false)
 
 
-    if !getGradientToo
-        return f
-    elseif getGradientToo
-        return f, g
-    else
-        @error("floc")
-    end
+#     if !getGradientToo
+#         return f
+#     elseif getGradientToo
+#         return f, g
+#     else
+#         @error("floc")
+#     end
 
-    @error("floc")
+#     @error("floc")
 
-end
+# end
 
 G = [2 0; 0 2]
 c = [-2, -5]
@@ -45,21 +45,23 @@ A = [1 -2; -1 -2; -1 2; 1 0; 0 1]
 b = [-2, -6, -2, 0, 0]
 mE, mI = length(be), length(b)
 
-pQP = @packDict "{G, c, lb, ub, c0, mE, Ae, be, mI, A, b, Wk0}"
+# pQP = @packDict "{G, c, lb, ub, c0, mE, Ae, be, mI, A, b, Wk0}"
 
 
-objective = QPObjectiveFunction
-objectiveOriginal = QPObjectiveFunction
+# objective = QPObjectiveFunction
+# objectiveOriginal = QPObjectiveFunction
 objectiveString = "alpTestFunction01" # Ex 16.3 in Nocedal and Wright
 # params = pQP
 
-pr = generate_pr(objective, w0, params=pQP, problemType="ALP"; objectiveString=objectiveString)
+# pr = generate_pr(objective, w0, params=pQP, problemType="ALP"; objectiveString=objectiveString)
 
 using JuMP, NLPModelsJuMP, Percival
-model = Model(NLPModelsJuMP.Optimizer)
-set_attribute(model, "solver", Percival.PercivalSolver)
-@variable(model, x[i=1:2], start = [-1.2; 1.0][i])
-@objective(model, Min, (x[1] - 1)^2 + 100 * (x[2] - x[1]^2)^2)
-@constraint(model, x[1]^2 + x[2]^2 == 1)
-optimize!(model)
-solution_summary(model)
+nlp = Model(NLPModelsJuMP.Optimizer)
+set_attribute(nlp, "solver", Percival.PercivalSolver)
+@variable(nlp, x[i=1:2], start = [-1.2; 1.0][i])
+@objective(nlp, Min, (x[1] - 1)^2 + 100 * (x[2] - x[1]^2)^2)
+@constraint(nlp, x[1]^2 + x[2]^2 == 1)
+optimize!(nlp)
+solution_summary(nlp)
+# value.(nlp)
+x_optimal = [value(x[i]) for i ∈ eachindex(x)]s

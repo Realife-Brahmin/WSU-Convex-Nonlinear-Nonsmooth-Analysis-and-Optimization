@@ -8,7 +8,8 @@ function SolStateALPType(xk; # xk is actually wk = [xk (original variables); yk 
     fkm1=100.0,
     fk=100.0,
     etol=1e-8,
-    gtol=1e-8
+    gtol=1e-8,
+    dxtol=1e-8,
     )
     # N = length(xk) # actually n+mI
     
@@ -21,7 +22,8 @@ function SolStateALPType(xk; # xk is actually wk = [xk (original variables); yk 
         :fkm1 => fkm1, :fk => fk,
         :gkm1 => myfill(xk, 11.3), :gk => myfill(xk, 22.7),
         :etol => etol,
-        :gtol => gtol
+        :gtol => gtol,
+        :dxtol => dxtol,
     )
 
     return solState

@@ -16,7 +16,7 @@ benchmarking = true;
 
 warmStart = true
 
-# functionName = "dampedSHM";
+functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
 # functionName = "fireLocation";
 # functionName = "nnloss"; functionName == "nnloss" ? verbose = false : verbose = verbose;

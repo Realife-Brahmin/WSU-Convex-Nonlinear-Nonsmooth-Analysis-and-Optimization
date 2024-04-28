@@ -131,3 +131,7 @@ Let's try taking a step saisfying current active constraints.
 We start for a good feasible descent direction from current point xk = [-0.8000952069358873, 1.5999523965320572, -2.000134878942973, 3.999932560528514]
 Step is too small, checking if this is a stationary point wrt all constraints.
 0 vector is the only feasible descent direction
+Problem (pr::NamedTuple) generated
+Problem (pr::NamedTuple) generated
+Problem (pr::NamedTuple) generated
+Problem (pr::NamedTuple) generated

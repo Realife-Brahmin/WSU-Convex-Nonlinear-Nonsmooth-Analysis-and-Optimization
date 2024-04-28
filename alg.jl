@@ -81,7 +81,6 @@ function create_algorithm_settings(;
 
         elseif alg_settings[:method] == "AugmentedLagrangian"
 
-                @error("Ensure correct parameters are placed for ALP")
                 alg_settings[:linesearch] = "NA"
                 alg_settings[:gtol] = "NA"
                 alg_settings[:c1] = "NA"
@@ -89,7 +88,8 @@ function create_algorithm_settings(;
                 alg_settings[:lambda] = "NA"
                 alg_settings[:lambdaMax] = "NA"
                 alg_settings[:etol] = 1e-8
-                alg_settings[:itol] = 1e-8
+                alg_settings[:gtol] = 1e-8
+                alg_settings[:dxtol] = 1e-8
                 alg_settings[:progress] = 1
                 alg_settings[:maxiter] = 10
 

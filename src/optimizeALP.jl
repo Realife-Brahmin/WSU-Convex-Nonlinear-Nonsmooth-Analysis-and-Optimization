@@ -82,7 +82,7 @@ function optimizeALP(pr;
         @pack! solState = km1, xkm1, fkm1, gkm1, lambdakm1, mukm1
 
         myprintln(printOrNot_ALP, "Let's try solving for the Augmented Lagrangian problem with λ = $(lambdak) and μ = $(muk).")
-        xkp1, fkp1 = solveAugmentedLagrangianFunction(pr, solState, verbose=printOrNot_ALP, verbose_ls=printOrNot_ALP)
+        xkp1, fkp1, cxkp1, iter_unc = solveAugmentedLagrangianFunction(pr, solState, verbose=printOrNot_ALP, verbose_ls=printOrNot_ALP)
         
         normdxk = norm(xkp1 - x)
 
@@ -98,8 +98,8 @@ function optimizeALP(pr;
         elseif normdxk >= dxtol
 
             myprintln(printOrNot_ALP, "Change of size $(normdxk) exceeds tolerance, so will update λ and μ.")
-            lambdakp1 = something(lambdak) #do
-            mukp1 = somethingtoo(muk) #do
+            lambdakp1 = lambdak - transpose(muk)*cxkp1
+            mukp1 = muk*( 1 + 10*exp(-iter_unc/n) )
 
         else
 

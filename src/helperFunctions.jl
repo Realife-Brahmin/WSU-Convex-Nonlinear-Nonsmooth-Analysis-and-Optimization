@@ -179,11 +179,24 @@ function trim_array(nt::NamedTuple, itrMax::Int)
     # Create a dictionary to hold the trimmed arrays
     trimmed_dict = Dict()
 
+    # Convert the keys of the named tuple to a set
+    keys_set = Set(keys(nt))
+
+    # Define the keys you want to remove as another set
+    keys_to_remove = Set([:xopt, :fopt])
+
+    # Use set difference to remove the specified keys
+    @show filtered_keys_set = setdiff(keys_set, keys_to_remove)
+
+    # If you need to work with a vector of keys afterwards
+    @show filtered_keys_vector = collect(filtered_keys_set)
+
     # Iterate over each key in the NamedTuple
-    for key in keys(nt)
+    for key in filtered_keys_vector
         # Get the array using getproperty
         arr = getproperty(nt, key)
         
+        # @show key
         # Check if it's a 1D array and trim it
         if eltype(arr) ∈ (Int64, Float64) && isa(arr, AbstractVector)
             arr = arr[1:itrMax]

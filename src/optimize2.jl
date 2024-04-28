@@ -192,9 +192,12 @@ function optimize2(pr;
         myprintln(true, statusMessage, log=log, log_path=log_txt)
     end
     
+    xopt, fopt = extractBestResults(pr, k, xvals, fvals)
+
     res = (converged=converged, statusMessage=statusMessage, fvals=fvals, 
-    αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, gmagvals=gmagvals, 
-    gvals=gvals, fevals=fevals, gevals=gevals, cause=causeForStopping, 
+    αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, xopt=xopt,
+    gmagvals=gmagvals, 
+    gvals=gvals, fevals=fevals, fopt=fopt, gevals=gevals, cause=causeForStopping, 
     pr=pr)
 
     res = trim_array(res, k-1)

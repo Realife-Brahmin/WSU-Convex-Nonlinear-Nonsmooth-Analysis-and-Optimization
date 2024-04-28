@@ -51,15 +51,14 @@ function ALOBJ(w, psubDict;
     cE = econ(x, psubDict, getGradientToo=false)
     cI = icon(x, psubDict, getGradientToo=false)
 
-    Y = diagm(y)
-    # y2 = transpose(y)*y
+    Y = diagm(y) # mI x mI diagonal matrix
     c = vcat(cE, cI - transpose(y) * y) # mE+mI vector
     F = f - transpose(lambda)*c + 1//2 * mu * transpose(c) * c
 
     if !getGradientToo
         return F
     elseif getGradientToo
-        G = vcat(g, zeros(mI)) - vcat( hcat(cE, cI), zeros(mI, n) - 2*Y) * (lambda - mu*c) # where are lambda and mu coming from
+        G = vcat(g, zeros(mI)) - ( vcat( hcat(cE, cI), zeros(mI, n) - 2*Y) * (lambda - mu*c) )
         return F, G
     else
         @error("floc")

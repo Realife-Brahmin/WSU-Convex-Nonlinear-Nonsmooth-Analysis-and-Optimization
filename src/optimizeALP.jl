@@ -134,7 +134,8 @@ function optimizeALP(pr;
 
     res = (converged=converged, statusMessage=statusMessage, 
             xvals=xvals, xopt=xopt, 
-            fvals=fvals, fopt=fopt, fevals=fevals,
+            fvals=fvals, fopt=fopt, 
+            fevals=fevals,
             cause=causeForStopping, 
             pr=pr, 
             solState=solState,

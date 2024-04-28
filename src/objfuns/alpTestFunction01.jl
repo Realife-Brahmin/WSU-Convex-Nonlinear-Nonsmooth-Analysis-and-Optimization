@@ -5,12 +5,13 @@ using Parameters
 
 function cE01(x, p, getGradientToo::Bool=false)
     
-    f = x[1]^2 + x[2]^2 - 1
+    cE[1] = x[1]^2 + x[2]^2 - 1
+
     if !getGradientToo
-        return f
+        return cE
     elseif getGradientToo
-        g = [2*x[1], 2*x[2]]
-        return f, g
+        hE = [2*x[1], 2*x[2]]
+        return cE, hE
     else
         @error("floc")
     end
@@ -22,12 +23,20 @@ end
 mE = 1
 
 function cI01(x, p, getGradientToo::Bool=false)
-    f = x[1]^3 + x[2]
+    mI = 2
+    cI = zeros(mI)
+    cI[1] = x[1]^3 + x[2]
+    cI[2] = x[1]^2 + 2*x[2]^2 + 3
     if !getGradientToo
-        return f
+        return cI
     elseif getGradientToo
-        g = [3*x[1]^2, 1]
-        return f, g
+        n = length(x)
+        hI = zeros(mI, n)
+        hI[1, 1] = 3*x[1]^2
+        hI[1, 2] = 1
+        hI[2, 1] = 2*x[1]
+        hI[2, 2] = 4*x[2]
+        return cI, hI
     else
         @error("floc")
     end

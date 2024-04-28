@@ -26,13 +26,16 @@ function optimize2(pr;
     maxiter = pr.alg[:maxiter]
     x0 = pr.x0
     xk = x0
+    n = length(xk)
 
     if !haskey(p, :subroutineCall)
         myprintln(false, "Calling Unconstrained Solver Independently.")
         subroutineCall = false
     else
         myprintln(p, "Calling Unconstrained Solver as a subroutine for ALP.")
-        @unpack subroutineCall = p
+        @unpack subroutineCall, tk = p
+        maxiter = 2*n # as dictated by ALP
+        gtol = tk
     end
 
     log_txt = log_path * "log_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
@@ -64,8 +67,6 @@ function optimize2(pr;
     
     fevals += 1
     @pack! solverState = fevals
-
-    n = length(xk)
 
     fvals, αvals, gmagvals = [zeros(Float64, maxiter) for _ in 1:3]
     backtrackVals = zeros(Int64, maxiter)

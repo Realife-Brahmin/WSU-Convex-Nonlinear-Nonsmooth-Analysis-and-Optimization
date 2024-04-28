@@ -19,27 +19,26 @@ function optimizeALP(pr;
     progress = pr.alg[:progress]
     maxiter = pr.alg[:maxiter]
     etol = pr.alg[:etol]
-    itol = pr.alg[:itol]
+    dxtol = pr.alg[:dxtol]
+    gtol = pr.alg[:gtol]
 
-    x0 = pr.x0
+    x0 = pr.x0 # actually w0
     n = length(x0)
     xk = x0
 
     fvals = zeros(Float64, maxiter)
     xvals = zeros(Float64, n, maxiter)
 
-    # doing this even though GA requires multiple f evals
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
 
     f = pr.objective
     pALP = pr.p
-    @unpack G, c, mE, Ae, be, mI, A, b = pALP
-    
+    @unpack mE, econ, mI, icon = pALP
 
     f0 = f(x0, pALP, getGradientToo=false)
     fk = f0
-    solState = SolStateALPType(x0, Ae, fk=f0, Wk0=Wk0, itol=itol)
-    # @show solState[:Wk]
+    solState = SolStateALPType(x0, fk=f0, etol=etol)
+
     @unpack fevals = solverState
     fevals += 1
     @pack! solverState = fevals
@@ -68,26 +67,32 @@ function optimizeALP(pr;
             break
         end
 
-        @unpack xk, fk, Wk = solState
-        myprintln(printOrNot_ALP, "Current Working Set: $(Wk)")
+        @unpack xk, fk, gk, lambdak, muk = solState
+
         # Since this iteration will be proceeded with, saving the current iterates to solState as the 'previous' iteration values
-        km1, xkm1, fkm1, Wkm1 = k, xk, fk, Wk
-        @pack! solState = km1, xkm1, fkm1, Wkm1
+        km1, xkm1, fkm1, gkm1, lambdakm1, mukm1 = k, xk, fk, gk, lambdak, muk
+        @pack! solState = km1, xkm1, fkm1, gkm1, lambdakm1, mukm1
 
-        myprintln(printOrNot_ALP, "Let's try taking a step saisfying current active constraints.")
-        pk = getECQPStep(pr, solState, verbose=printOrNot_ALP, verbose_ls=printOrNot_ALP)
+        myprintln(printOrNot_ALP, "Let's try solving for the Augmented Lagrangian problem with λ = $(lambdak) and μ = $(muk).")
+        xkp1, fkp1 = solveAugmentedLagrangianFunction(pr, solState, verbose=printOrNot_ALP, verbose_ls=printOrNot_ALP)
+        
+        normdxk = norm(xkp1 - x)
 
-        if norm(pk) < itol # stationary point wrt Wk
+        if normdxk < dxtol
 
-            myprintln(printOrNot_ALP, "Step is too small, checking if this is a stationary point wrt all constraints.")
+            myprintln(printOrNot_ALP, "Change is too small, perhaps I will check if equality constraints are satisfied.")
+            lambdakp1 = lambdak
+            mukp1 = muk
+            push!(causeForStopping, "Change in decision variables too small!")
+            keepIterationsGoing = false
+            break
 
-            lambdas = computeLagrangianMultipliersQP(xk, G, c, Awk)
+        elseif normdxk >= dxtol
 
-            lambda_min, jI_min = findmin(lambdas)
+            myprintln(printOrNot_ALP, "Change of size $(normdxk) exceeds tolerance, so will update λ and μ.")
+            lambdakp1 = something(lambdak) #do
+            mukp1 = somethingtoo(muk) #do
 
-        elseif norm(pk) >= itol
-
-            myprintln(printOrNot_ALP, "Step pk of size $(norm(pk)) exceeds tolerance, so proceeding with checking if any 'outside' constraints are blocking it.")
         else
 
             @error("floc")
@@ -98,11 +103,11 @@ function optimizeALP(pr;
         k += 1
 
         xvals[:, k] = xkp1
-        fvals[k] = fkp1 # also incorrect
+        fvals[k] = fkp1
 
-        xk, fk, Wk = xkp1, fkp1, Wkp1
+        xk, fk, lambdak, muk = xkp1, fkp1, lambdakp1, mukp1
 
-        @pack! solState = xk, fk, Wk
+        @pack! solState = xk, fk, gk, lambdak, muk
         @pack! solState = k
         @pack! solverState = k
 
@@ -123,10 +128,17 @@ function optimizeALP(pr;
         myprintln(true, statusMessage, log=log, log_path=log_txt, color=:green)
     end
 
+    xopt, fopt = extractBestResults(pr, itr, xvals, fvals)
+
     @unpack fevals = solverState
 
-    res = (converged=converged, statusMessage=statusMessage, xvals=xvals, fvals=fvals, fevals=fevals, cause=causeForStopping, pr=pr, solState=solState,
-        solverState=solverState)
+    res = (converged=converged, statusMessage=statusMessage, 
+            xvals=xvals, xopt=xopt, 
+            fvals=fvals, fopt=fopt, fevals=fevals,
+            cause=causeForStopping, 
+            pr=pr, 
+            solState=solState,
+            solverState=solverState)
 
     res = trim_array(res, k)
 

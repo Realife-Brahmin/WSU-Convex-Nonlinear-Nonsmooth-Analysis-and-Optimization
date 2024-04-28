@@ -33,13 +33,14 @@ warmStart = true
 # functionName = "asqpTestFunction1";
 # functionName = "ecqpTestFunction1";
 # functionName = "ecqpTestFunction2";
+# functionName = "alpTestFunction01";
 # functionName = "Rastrigin";
 
 pr = include("src/objfuns/"*functionName*".jl")
 
 # res = @btime begin
 @time begin
-    res = warm_start_optimize(pr, verbose=verbose, verbose_ls=verbose_ls)
+    res = tailoredOptimize(pr, verbose=verbose, verbose_ls=verbose_ls)
 end
 
 showresults(res)

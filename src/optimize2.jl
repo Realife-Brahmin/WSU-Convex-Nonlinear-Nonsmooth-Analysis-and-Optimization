@@ -14,12 +14,6 @@ function optimize2(pr;
         @error("Trust Region No longer supported")
     end
 
-    log_txt = log_path*"log_"*string(pr.objective)*"_"*method*"_"*linesearchMethod*"_"*string(pr.alg[:maxiter])*".txt"
-
-    if isfile(log_txt)
-        rm(log_txt)
-    end # remove logfile if present for the run
-
     solverState = SolverStateType()
     solState = SolStateType(xk=pr.x0)
 
@@ -32,6 +26,23 @@ function optimize2(pr;
     maxiter = pr.alg[:maxiter]
     x0 = pr.x0
     xk = x0
+
+    if !haskey(p, :subroutineCall)
+        myprintln(false, "Calling Unconstrained Solver Independently.")
+        subroutineCall = false
+    else
+        myprintln(p, "Calling Unconstrained Solver as a subroutine for ALP.")
+        @unpack subroutineCall = p
+    end
+
+    log_txt = log_path * "log_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
+    if !subroutineCall
+        if isfile(log_txt)
+            rm(log_txt)
+        end # remove logfile if present for the run
+    end
+
+    verbose = verbose && !subroutineCall
 
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     obj = pr.objective
@@ -184,12 +195,12 @@ function optimize2(pr;
     if k ≥ maxiter
         converged = false
         statusMessage = "Failed to converge despite $(maxiter) iterations! 😢"
-        myprintln(true, statusMessage, log=log,  log_path=log_txt)
+        myprintln(!subroutineCall, statusMessage, log=log, log_path=log_txt)
         @warn statusMessage
     else
         converged = true
         statusMessage = "Convergence achieved in $(k) iterations 😄"
-        myprintln(true, statusMessage, log=log, log_path=log_txt)
+        myprintln(!subroutineCall, statusMessage, log=log, log_path=log_txt)
     end
     
     xopt, fopt = extractBestResults(pr, k, xvals, fvals)

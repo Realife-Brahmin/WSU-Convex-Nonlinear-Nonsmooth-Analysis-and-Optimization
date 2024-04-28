@@ -133,6 +133,7 @@ function optimizeALP(pr;
     @unpack fevals = solverState
 
     res = (converged=converged, statusMessage=statusMessage, 
+            iter=k,
             xvals=xvals, xopt=xopt, 
             fvals=fvals, fopt=fopt, 
             fevals=fevals,

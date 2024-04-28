@@ -1,5 +1,39 @@
 using Parameters
 
+function SolStateALPType(xk; # xk is actually wk = [xk (original variables); yk (inequality slack variables)]
+    fkm1=100.0,
+    fk=100.0,
+    etol=1e-8,
+    gtol=1e-8
+    )
+    # N = length(xk) # actually n+mI
+    
+    # Prepare the state dictionary with initial values
+    solState = Dict(
+        :km1 => -1, :k => 0,
+        :xkm1 => myfill(xk, -27.0), :xk => xk,
+        :fkm1 => fkm1, :fk => fk,
+        :gkm1 => myfill(xk, 11.3), :gk => myfill(xk, 22.7),
+        :etol => etol,
+        :gtol => gtol
+    )
+
+    return solState
+end
+
+function SolverStateALPType(;
+    k=0,
+    fevals=0,
+    gevals=0,
+    lagrevals=0,
+    actions=Dict()
+)
+
+    solverState = Dict(:k => k, :fevals => fevals, :gevals=>gevals, :lagrevals => lagrevals, :actions => actions)
+
+    return solverState
+end
+
 """
     SolStateASQPType(xk, Ae; Wk0=[], fkm1=100.0, fk=100.0, itol=1e-8)
 

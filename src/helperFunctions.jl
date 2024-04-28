@@ -152,30 +152,9 @@ function myfill(array, value)
     return fill(T(value), size(array))
 end
 
-"""
-    trim_array(nt::NamedTuple, itrMax::Int) -> NamedTuple
 
-Trim arrays within a NamedTuple to a predetermined maximum length or size.
-
-# Arguments
-- `nt::NamedTuple`: A NamedTuple containing arrays as values.
-- `itrMax::Int`: Maximum size for arrays. 1D arrays exceeding this length will be trimmed. 
-For 2D arrays, both rows and columns will be trimmed if they exceed this size.
-
-# Returns
-- A new NamedTuple with trimmed arrays.
-
-# Example
-nt = (a = [1, 2, 3, 4, 5], b = [6, 7, 8, 9, 10], c = rand(10, 10), d = 11)
-trimmed_nt = trim_array(nt, 3)
-println(trimmed_nt)
-
-# Notes
-- This function is designed to handle 1D (vectors) and 2D arrays (matrices). 
-Other data structures remain unchanged.
-- It utilizes a dictionary as an intermediary data structure before converting back to a NamedTuple.
-"""
-function trim_array(nt::NamedTuple, itrMax::Int)
+function trim_array(nt::NamedTuple, itrMax::Int;
+    keys_to_remove::Vector{Symbol}=[:xopt, :fopt])
     # Create a dictionary to hold the trimmed arrays
     trimmed_dict = Dict()
 
@@ -183,7 +162,7 @@ function trim_array(nt::NamedTuple, itrMax::Int)
     keys_set = Set(keys(nt))
 
     # Define the keys you want to remove as another set
-    keys_to_remove = Set([:xopt, :fopt])
+    keys_to_remove = Set(keys_to_remove)    
 
     # Use set difference to remove the specified keys
     @show filtered_keys_set = setdiff(keys_set, keys_to_remove)

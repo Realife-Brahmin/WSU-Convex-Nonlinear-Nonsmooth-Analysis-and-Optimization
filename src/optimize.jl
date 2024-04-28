@@ -6,37 +6,26 @@ include("optimizeECQP.jl")
 include("optimizeGA.jl")
 include("optimizeNM.jl")
 
-function optimize(pr; 
-    verbose::Bool=false, 
-    verbose_ls::Bool=false,
-    log::Bool=true,
-    log_path::String="./logging/")
+function extractBestResults(pr, itr, xvals, fvals)
+    # Initialize the optimal solution and function value
+    xopt, fopt = nothing, nothing
 
-    log_txt = log_path*"log_"*string(pr.objective)*"_"*pr.alg[:method]*"_"*pr.alg.linesearch*"_"*string(pr.alg.maxiter)*".txt"
-
-    if isfile(log_txt)
-        rm(log_txt)
-    end # remove logfile if present for the run
-
-    solverState = SolverStateType()
-    solState = SolStateType(xk=pr.x0)
-
-    # Initial settings
-    fevals = 0
-    gevals = 0
-    dftol = pr.alg.dftol
-    gtol = pr.alg.gtol
-    progress = pr.alg.progress
-    maxiter = pr.alg.maxiter
-    linesearchMethod = pr.alg.linesearch
+    # Check if there were any iterations
+    if itr == 0
+        # If no iterations were done, use the initial values as the optimal values
     x0 = pr.x0
-    xk = x0
+        pDict = pr.p
+        f0 = pr.objective(x0, pDict, getGradientToo=false)
+        xopt = x0
+        fopt = f0
+    else
+        # If iterations were done, extract the optimal values from the last iteration
+        xopt = xvals[:, itr]
+        fopt = fvals[itr]
+    end
 
-    myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
-    obj = pr.objective
-    p = pr.p
-    data = p[:data]
-    M = max(size(data, 1), 1)
+    return xopt, fopt
+end
 
     fk = obj(x0, p, getGradientToo=false)
     myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)

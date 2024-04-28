@@ -13,44 +13,29 @@ function solveAugmentedLagrangianFunction(prALP, solStateALP;
 
     @unpack etol, itol = pr.alg
     @unpack objective, p, objectiveString = prALP
-    objectiveStringECQP = objectiveString * "_ECQPsubroutine"
-    problemTypeECQP = "ECQP"
-    methodECQP = "ProjectedGradientCG"
+    objectiveUnc = ALOBJ
+    objectiveStringUnc = objectiveString * "_ALPsubroutine"
+    problemTypeUnc = "Unconstrained"
+    methodUnc = "QuasiNewton"
 
-    pDictALP = p
-    @unpack G, c, mE, Ae, be, A, b = pDictALP
-    @unpack xk, Wk = solStateALP
+    pDictALP = p # p is indeed pDict from the original problem
+    @unpack mE, econ, mI, icon  = pDictALP
+    @unpack xk, lambdak, muk = solStateALP
 
-    myprintln(verbose, "We start for a good feasible descent direction from current point xk = $(xk)")
-    WIk = Wk[mE+1:end]
-    Ae = vcat(Ae, A[WIk.-mE, :])
-    be = vcat(be, b[WIk.-mE])
-
-    # myprintln(verbose, "Let's look at the Ae and be being inserted into ECQP solver in order to represent our current Wk:")
-    # @show Ae, be
+    myprintln(verbose, "From the current point xk = $(xk)")
 
     subroutineCall = true
-    # @show subroutineCall
-    pDictECQP = Dict(:G => G, :c => c, :Ae => Ae, :be => be, :subroutineCall => subroutineCall)
-    # pDictECQP = @packDict "{G, c, Ae, be}"
-    # pDictECQP[:subroutineCall] = subroutineCall
-    # @show pDictECQP
-    # @show pDictECQP
-    prECQP = generate_pr(objective, xk, problemType=problemTypeECQP, method=methodECQP, params=pDictECQP, objectiveString=objectiveStringECQP, verbose=false)
 
-    # @show prECQP.p
-    res = optimizeECQP(prECQP, verbose=verbose, verbose_ls=verbose_ls, log=false)
+    addendum = Dict(:subroutineCall => subroutineCall, :lambda => lambdak, :mu => muk, :objectiveALP => objectiveUnc)
+    pDictUnc = merge(deepcopy(p), addendum)
 
-    xvals = res[:xvals]
-    itr = size(xvals, 2)
-    if itr == 0 # x0 is xkp1
-        xkp1 = xk
-    else
-        xkp1 = xvals[:, itr]
-    end
+    prUnc = generate_pr(objective, xk, problemType=problemTypeUnc, method=methodUnc, params=pDictUnc, objectiveString=objectiveStringUnc, verbose=false)
 
-    pk = xkp1 - xk
-    return pk
+    res = optimize2(prUnc, verbose=verbose, verbose_ls=verbose_ls, log=false)
+
+    @unpack xopt, fopt = res
+
+    return xopt, fopt
 
 end
 

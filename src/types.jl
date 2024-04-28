@@ -13,7 +13,7 @@ function SolStateALPType(xk; # xk is actually wk = [xk (original variables); yk 
     # N = length(xk) # actually n+mI
     
     # Prepare the state dictionary with initial values
-    solState = Dict(
+    solState = Dict( # again, all xks actually represent wks
         :km1 => -1, :k => 0,
         :lambdakm1 => lambdakm1, :lambdak => lambdak,
         :mukm1 => mukm1, :muk => muk,

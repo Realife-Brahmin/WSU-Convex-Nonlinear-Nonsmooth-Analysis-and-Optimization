@@ -206,7 +206,7 @@ function optimize2(pr;
     
     xopt, fopt = extractBestResults(pr, k, xvals, fvals)
 
-    res = (converged=converged, statusMessage=statusMessage, fvals=fvals, 
+    res = (converged=converged, statusMessage=statusMessage, iter=k, fvals=fvals, 
     αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, xopt=xopt,
     gmagvals=gmagvals, 
     gvals=gvals, fevals=fevals, fopt=fopt, gevals=gevals, cause=causeForStopping, 

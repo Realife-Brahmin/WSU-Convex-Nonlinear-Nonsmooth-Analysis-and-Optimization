@@ -1,6 +1,10 @@
 using Parameters
 
 function SolStateALPType(xk; # xk is actually wk = [xk (original variables); yk (inequality slack variables)]
+    lambdakm1=zeros(0),
+    lambdak=zeros(0),
+    mukm1=zeros(0),
+    muk=zeros(0),
     fkm1=100.0,
     fk=100.0,
     etol=1e-8,
@@ -11,6 +15,8 @@ function SolStateALPType(xk; # xk is actually wk = [xk (original variables); yk 
     # Prepare the state dictionary with initial values
     solState = Dict(
         :km1 => -1, :k => 0,
+        :lambdakm1 => lambdakm1, :lambdak => lambdak,
+        :mukm1 => mukm1, :muk => muk,
         :xkm1 => myfill(xk, -27.0), :xk => xk,
         :fkm1 => fkm1, :fk => fk,
         :gkm1 => myfill(xk, 11.3), :gk => myfill(xk, 22.7),

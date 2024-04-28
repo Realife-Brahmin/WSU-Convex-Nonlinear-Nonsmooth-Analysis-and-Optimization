@@ -75,11 +75,11 @@ function optimizeALP(pr;
 
         end
 
-        @unpack xk, fk, gk, lambdak, muk = solState
+        @unpack xk, fk, gk, lambdak, muk, tk = solState
 
         # Since this iteration will be proceeded with, saving the current iterates to solState as the 'previous' iteration values
-        km1, xkm1, fkm1, gkm1, lambdakm1, mukm1 = k, xk, fk, gk, lambdak, muk
-        @pack! solState = km1, xkm1, fkm1, gkm1, lambdakm1, mukm1
+        km1, xkm1, fkm1, gkm1, lambdakm1, mukm1, tkm1 = k, xk, fk, gk, lambdak, muk, tk
+        @pack! solState = km1, xkm1, fkm1, gkm1, lambdakm1, mukm1, tkm1
 
         myprintln(printOrNot_ALP, "Let's try solving for the Augmented Lagrangian problem with λ = $(lambdak) and μ = $(muk).")
         xkp1, fkp1, cxkp1, iter_unc = solveAugmentedLagrangianFunction(pr, solState, verbose=printOrNot_ALP, verbose_ls=printOrNot_ALP)
@@ -91,6 +91,7 @@ function optimizeALP(pr;
             myprintln(printOrNot_ALP, "Change is too small, perhaps I will check if equality constraints are satisfied.")
             lambdakp1 = lambdak
             mukp1 = muk
+            tkp1 = tk
             push!(causeForStopping, "Change in decision variables too small!")
             keepIterationsGoing = false
             break
@@ -100,6 +101,7 @@ function optimizeALP(pr;
             myprintln(printOrNot_ALP, "Change of size $(normdxk) exceeds tolerance, so will update λ and μ.")
             lambdakp1 = lambdak - transpose(muk)*cxkp1
             mukp1 = muk*( 1 + 10*exp(-iter_unc/n) )
+            tkp1 = tk/2
 
         else
 
@@ -113,9 +115,9 @@ function optimizeALP(pr;
         xvals[:, k] = xkp1
         fvals[k] = fkp1
 
-        xk, fk, lambdak, muk = xkp1, fkp1, lambdakp1, mukp1
+        xk, fk, lambdak, muk, tk = xkp1, fkp1, lambdakp1, mukp1, tkp1
 
-        @pack! solState = xk, fk, gk, lambdak, muk
+        @pack! solState = xk, fk, gk, lambdak, muk, tk
         @pack! solState = k
         @pack! solverState = k
 

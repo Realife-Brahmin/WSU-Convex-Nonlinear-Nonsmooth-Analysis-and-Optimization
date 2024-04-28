@@ -4,12 +4,14 @@ function SolStateALPType(xk; # xk is actually wk = [xk (original variables); yk 
     lambdakm1=zeros(0),
     lambdak=zeros(0),
     mukm1=zeros(0),
-    muk=zeros(0),
+    tkm1=0.0,
     fkm1=100.0,
     fk=100.0,
     etol=1e-8,
     gtol=1e-8,
     dxtol=1e-8,
+    ttol=1e-6,
+    mutol=1e6,
     )
     # N = length(xk) # actually n+mI
     
@@ -17,16 +19,20 @@ function SolStateALPType(xk; # xk is actually wk = [xk (original variables); yk 
     solState = Dict( # again, all xks actually represent wks
         :km1 => -1, :k => 0,
         :lambdakm1 => lambdakm1, :lambdak => lambdak,
-        :mukm1 => mukm1, :muk => muk,
+        :mukm1 => mukm1, :muk => myfill(xk, 1.0),
+        :tkm1 => tkm1, :tk => 1.0,
         :xkm1 => myfill(xk, -27.0), :xk => xk,
         :fkm1 => fkm1, :fk => fk,
         :gkm1 => myfill(xk, 11.3), :gk => myfill(xk, 22.7),
         :etol => etol,
         :gtol => gtol,
         :dxtol => dxtol,
+        :ttol => ttol,
+        :mutol => mutol
     )
 
     return solState
+
 end
 
 function SolverStateALPType(;

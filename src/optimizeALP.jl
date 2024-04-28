@@ -21,6 +21,7 @@ function optimizeALP(pr;
     etol = pr.alg[:etol]
     dxtol = pr.alg[:dxtol]
     gtol = pr.alg[:gtol]
+    mutol = pr.alg[:mutol]
 
     x0 = pr.x0 # actually w0
     n = length(x0)
@@ -65,6 +66,13 @@ function optimizeALP(pr;
             push!(causeForStopping, "Iteration limit reached!")
             keepIterationsGoing = false
             break
+
+        elseif muk >= mutol
+
+            myprintln(printOrNot_ALP, "μ has exceeded the limit of $(mutol) !")
+            keepIterationsGoing = false
+            break
+
         end
 
         @unpack xk, fk, gk, lambdak, muk = solState

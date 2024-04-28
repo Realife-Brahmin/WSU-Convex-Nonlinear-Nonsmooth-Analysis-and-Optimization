@@ -128,7 +128,7 @@ function optimizeALP(pr;
         myprintln(true, statusMessage, log=log, log_path=log_txt, color=:green)
     end
 
-    xopt, fopt = extractBestResults(pr, itr, xvals, fvals)
+    xopt, fopt = extractBestResults(pr, k, xvals, fvals)
 
     @unpack fevals = solverState
 

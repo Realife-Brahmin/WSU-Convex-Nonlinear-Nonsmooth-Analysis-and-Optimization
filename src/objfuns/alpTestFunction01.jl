@@ -71,8 +71,15 @@ objectiveString = "alpTestFunction01"
 problemType = "Constrained"
 econ = cE01
 icon = cI01
-pALP = Dict(:n=>n, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
-# pr = generate_pr(objective, x0, params=pALP, problemType=problemType; objectiveString=objectiveString)
+pDictALP = Dict(:n=>n, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
+pr = generate_pr(objective, x0, params=pDictALP, problemType=problemType; objectiveString=objectiveString)
+
+objectiveUnc = ALOBJ
+subroutineCall = true
+muk = 1.0
+lambdak = 1.0
+addendum = Dict(:subroutineCall => subroutineCall, :lambda => lambdak, :mu => muk, :objectiveALP => objectiveUnc)
+pDictUnc = merge(deepcopy(pDictALP), addendum)
 
 using JuMP, Ipopt
 

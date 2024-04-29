@@ -209,3 +209,8 @@ Optimal decision variables are w = [1.0000000000140168, 2.0, 1.00000000000096, 0
 Optimal objective value is f = -8.881784197001252e-16
 Optimal decision variables are w = [1.5000000040167658, 1.499999995983234, 1.2247448730314376, -8.425525429416496e-29]
 Optimal objective value is f = 0.500000008033533
+Problem (pr::NamedTuple) generated
+Problem (pr::NamedTuple) generated
+Problem (pr::NamedTuple) generated
+Problem (pr::NamedTuple) generated
+Problem (pr::NamedTuple) generated

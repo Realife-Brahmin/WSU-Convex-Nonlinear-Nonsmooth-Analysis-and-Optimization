@@ -6,6 +6,15 @@ include("optimize2.jl") # to call QN-BFGS
 using LinearAlgebra
 using Parameters
 
+function combinedConstraintsALP(wk, pDictUnc)
+    @unpack n, mE, mI, econ, icon = pDictUnc
+    xk, yk = wk[1:n], wk[n+1:end]
+    cE = econ(xk, pDictUnc, getGradientToo=false)
+    cI = icon(xk, pDictUnc, getGradientToo=false)
+    c = vcat(cE, cI - transpose(yk)*yk)
+    return c
+end
+
 function solveAugmentedLagrangianFunction(prALP, solStateALP;
     verbose::Bool=false,
     verbose_ls::Bool=false,
@@ -20,7 +29,7 @@ function solveAugmentedLagrangianFunction(prALP, solStateALP;
 
     pDictALP = p # p is indeed pDict from the original problem
     @unpack mE, econ, mI, icon  = pDictALP
-    @unpack xk, lambdak, muk = solStateALP
+    @unpack xk, lambdak, muk = solStateALP # again, xk is actually wk
 
     myprintln(verbose, "From the current point xk = $(xk)")
 
@@ -34,8 +43,8 @@ function solveAugmentedLagrangianFunction(prALP, solStateALP;
     res = optimize2(prUnc, verbose=verbose, verbose_ls=verbose_ls, log=false)
 
     @unpack xopt, fopt, iter = res
-    conviol = combinedConstraintsALP(econ, icon, xk, pDictUnc) #do # constraint violations
-    return xopt, fopt, conviol, iter
+    coptUnc = combinedConstraintsALP(xopt, pDictUnc) #do # constraint violations
+    return xopt, fopt, coptUnc, iter
 
 end
 

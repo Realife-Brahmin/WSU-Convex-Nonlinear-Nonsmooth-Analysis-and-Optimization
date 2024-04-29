@@ -35,7 +35,7 @@ function solveAugmentedLagrangianFunction(prALP, solStateALP;
 
     subroutineCall = true
 
-    addendum = Dict(:subroutineCall => subroutineCall, :lambda => lambdak, :mu => muk, :objectiveALP => objectiveUnc)
+    addendum = Dict(:subroutineCall => subroutineCall, :lambda => lambdak, :mu => muk, :objective => objective, :objectiveUnc => objectiveUnc)
     pDictUnc = merge(deepcopy(pDictALP), addendum)
 
     prUnc = generate_pr(objective, xk, problemType=problemTypeUnc, method=methodUnc, params=pDictUnc, objectiveString=objectiveStringUnc, verbose=false)
@@ -51,12 +51,14 @@ end
 function ALOBJ(w, psubDict;
     getGradientToo::Bool=false)
 
-    @unpack n, lambda, mu, mE, mI, econ, icon, objectiveALP = psubDict
+    @unpack n, lambda, mu, mE, mI, econ, icon, objective = psubDict
+    @show n, w 
     # n = length(w) - mI # length of x
     x = w[1:n]
     y = w[n+1:end]
+    # error("Okay we're done.")
 
-    f, g = objectiveALP(x, psubDict, getGradientToo=true)
+    f, g = objective(x, psubDict, getGradientToo=true)
     cE = econ(x, psubDict, getGradientToo=false)
     cI = icon(x, psubDict, getGradientToo=false)
 

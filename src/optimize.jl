@@ -1,6 +1,7 @@
 include("linesearches.jl")
 include("findDirection.jl")
 include("types.jl")
+include("optimizeALP.jl")
 include("optimizeASQP.jl")
 include("optimizeECQP.jl")
 include("optimizeGA.jl")
@@ -278,6 +279,10 @@ function tailoredOptimize(pr;
             n = length(x0)
         end
     
+    elseif pr.alg[:method] == "AugmentedLagrangian"
+
+        @time res = optimizeALP(pr, verbose=verbose, verbose_ls=verbose_ls)
+
     elseif pr.alg[:method] == "ActiveSetQP"
 
         if functionName == "transmissionLines"

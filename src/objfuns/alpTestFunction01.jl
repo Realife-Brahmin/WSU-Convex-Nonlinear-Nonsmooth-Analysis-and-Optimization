@@ -3,8 +3,9 @@ include("../AugmentedLagrangian.jl")
 
 using Parameters
 
-function cE01(x, p, getGradientToo::Bool=false)
-    
+function cE01(x, p; getGradientToo::Bool=false)
+    mE = 1
+    cE = zeros(mE)
     cE[1] = x[1]^2 + x[2]^2 - 1
 
     if !getGradientToo
@@ -22,11 +23,11 @@ end
 
 mE = 1
 
-function cI01(x, p, getGradientToo::Bool=false)
+function cI01(x, p; getGradientToo::Bool=false)
     mI = 2
     cI = zeros(mI)
     cI[1] = x[1]^3 + x[2]
-    cI[2] = x[1]^2 + 2*x[2]^2 + 3
+    cI[2] = x[1]^2 + 2*x[2]^2 - 3
     if !getGradientToo
         return cI
     elseif getGradientToo
@@ -45,7 +46,7 @@ function cI01(x, p, getGradientToo::Bool=false)
 
 end
 
-mI = 1
+mI = 2
 
 function alpTestFunction01(x, p, getGradientToo::Bool=true)
     f = (x[1]-1)^2 + 100*(x[2]-x[1]^2)^2
@@ -70,18 +71,33 @@ pALP = Dict(:mE=>mE, :econ=>cE01, :mI=>mI, :icon=>cI01)
 # lambda = zeros(mE+mI)
 # mu = 1e1*ones(mE+mI)
 
-x0 = [-1.2, 1.0]
-
-# using JuMP, NLPModelsJuMP, Percival
-# nlp = Model(NLPModelsJuMP.Optimizer)
-# set_attribute(nlp, "solver", Percival.PercivalSolver)
-# @variable(nlp, x[i=1:2], start = x0[i])
+# x0 = [-1.2, 1.0]
+x0 = [3, 0]
+n = length(x0)
+# y0 = sqrt.(max.(0, cI01(x0, pALP, getGradientToo=false)))
+y0 = zeros(2)
+w0 = vcat(x0, y0)
+using JuMP, NLPModelsJuMP, Percival
+nlp = Model(NLPModelsJuMP.Optimizer)
+set_attribute(nlp, "solver", Percival.PercivalSolver)
+@variable(nlp, w[i=1:4], start = w0[i])
+# @variable(nlp, x[i=1:n], start = x0[i])
+# @variable(nlp, y[i=1:mI], start = y0[i])
+@objective(nlp, Min, (w[1]-1)^2 + (w[2]-2)^2)
 # @objective(nlp, Min, (x[1] - 1)^2 + 100 * (x[2] - x[1]^2)^2)
-# @constraint(nlp, x[1]^2 + x[2]^2 == 1)
-# @constraint(nlp, x[1]^3 + x[2] >= 0)
-# optimize!(nlp)
-# solution_summary(nlp)
-# # value.(nlp)
-# x_optimal = [value(x[i]) for i ∈ eachindex(x)]
+# @objective(nlp, Min, (w[1] - 1)^2 + 100 * (w[2] - w[1]^2)^2)
+# @constraint(nlp, w[1]^2 + w[2]^2 - 1 == 0)
+@constraint(nlp, w[1] + w[2] - 3 == 0)
+# @constraint(nlp, w[1]^3 + w[2] - w[3]^2 == 0 )
+@constraint(nlp, w[1] - w[3]^2 == 0)
+@constraint(nlp, w[2] - 1 - w[4]^2 == 0)
+# @constraint(nlp, w[1]^2 + 2*w[2]^2 - 3 - w[4]^2 == 0)
+# @constraint(nlp, x[1] >= 0)
+# @constraint(nlp, x[1]^2 + 2*x[2]^2 - 3 >= 0)
+optimize!(nlp)
+solution_summary(nlp)
+w_optimal = [value(w[i]) for i ∈ eachindex(w)]
 
-pr = generate_pr(objective, x0, params=pALP, problemType=problemType; objectiveString=objectiveString)
+# x_optimal = [value(x[i]) for i ∈ eachindex(x)]
+# y_optimal = [value(y[i]) for i ∈ eachindex(y)]
+# pr = generate_pr(objective, x0, params=pALP, problemType=problemType; objectiveString=objectiveString)

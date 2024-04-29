@@ -51,8 +51,8 @@ end
 function ALOBJ(w, psubDict;
     getGradientToo::Bool=false)
 
-    @unpack lambda, mu, mE, mI, econ, icon, objectiveALP = psubDict
-    n = length(w) - mI # length of x
+    @unpack n, lambda, mu, mE, mI, econ, icon, objectiveALP = psubDict
+    # n = length(w) - mI # length of x
     x = w[1:n]
     y = w[n+1:end]
 

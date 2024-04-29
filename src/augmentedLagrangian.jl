@@ -36,7 +36,7 @@ function solveAugmentedLagrangianFunction(prALP, solStateALP;
     subroutineCall = true
 
     addendum = Dict(:subroutineCall => subroutineCall, :lambda => lambdak, :mu => muk, :objectiveALP => objectiveUnc)
-    pDictUnc = merge(deepcopy(p), addendum)
+    pDictUnc = merge(deepcopy(pDictALP), addendum)
 
     prUnc = generate_pr(objective, xk, problemType=problemTypeUnc, method=methodUnc, params=pDictUnc, objectiveString=objectiveStringUnc, verbose=false)
 

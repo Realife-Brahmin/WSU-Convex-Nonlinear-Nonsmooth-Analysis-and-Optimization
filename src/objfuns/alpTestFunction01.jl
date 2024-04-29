@@ -4,6 +4,7 @@ include("../AugmentedLagrangian.jl")
 using Parameters
 
 x0 = rand(2)
+xk = x0
 n = length(x0)
 
 function cE01(x, p;
@@ -57,6 +58,10 @@ function cI01(x, p;
 end
 
 mI = 2
+y0 = rand(mI)
+yk = y0
+w0 = vcat(x0, y0)
+wk = w0
 
 function alpTestFunction01(x, p;
     getGradientToo::Bool=true)
@@ -81,14 +86,17 @@ problemType = "Constrained"
 econ = cE01
 icon = cI01
 pDictALP = Dict(:n=>n, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
-pr = generate_pr(objective, x0, params=pDictALP, problemType=problemType; objectiveString=objectiveString)
+pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString)
 
 objectiveUnc = ALOBJ
 subroutineCall = true
 muk = 1.0
-lambdak = 1.0
-addendum = Dict(:subroutineCall => subroutineCall, :lambda => lambdak, :mu => muk, :objectiveALP => objectiveUnc)
+m = mE+mI
+lambdak = ones(m)
+addendum = Dict(:subroutineCall => subroutineCall, :lambda => lambdak, :mu => muk, :objective => objective, :objectiveUnc => objectiveUnc)
 pDictUnc = merge(deepcopy(pDictALP), addendum)
+# xk = x0
+F, G = ALOBJ(wk, pDictUnc, getGradientToo=true)
 
 using JuMP, Ipopt
 
@@ -97,8 +105,7 @@ model = Model(Ipopt.Optimizer)
 # x0 = [1, 2]
 slackifyInequalities = false
 slackifyInequalities = true
-n = length(x0)
-y0 = rand(mI)
+# n = length(x0)
 @variable(model, x[i=1:n], start = x0[i])
 @variable(model, y[i=1:mI], start = y0[i])
 @objective(model, Min, (x[1] - 1)^2 + (x[2] - 2)^2)

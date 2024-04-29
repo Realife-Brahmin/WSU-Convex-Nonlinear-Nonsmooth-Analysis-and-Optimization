@@ -27,7 +27,7 @@ function cI01(x, p; getGradientToo::Bool=false)
     mI = 2
     cI = zeros(mI)
     cI[1] = x[1]^3 + x[2]
-    cI[2] = x[1]^2 + 2*x[2]^2 - 3
+    cI[2] = x[1]^2 + 2*x[2]^2 - 1.1
     if !getGradientToo
         return cI
     elseif getGradientToo
@@ -49,11 +49,11 @@ end
 mI = 2
 
 function alpTestFunction01(x, p, getGradientToo::Bool=true)
-    f = (x[1]-1)^2 + 100*(x[2]-x[1]^2)^2
+    f = (x[1]-1)^2 + (x[2]-2)^2
     if !getGradientToo
         return f
     elseif getGradientToo
-        g = [2*(x[1]-1) - 400*x[1]*(x[2]-x[1]^2), 200*(x[2]-x[1]^2)]
+        g = [2*(x[1]-1), 2*(x[2]-2)]
         return f, g
     else
         @error("floc")
@@ -66,7 +66,9 @@ objective = alpTestFunction01
 objectiveOriginal = alpTestFunction01
 objectiveString = "alpTestFunction01"
 problemType = "Constrained"
-pALP = Dict(:mE=>mE, :econ=>cE01, :mI=>mI, :icon=>cI01)
+econ = cE01
+icon = cI01
+pALP = Dict(:mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
 # pr = generate_pr(objective, x0, params=pALP, problemType=problemType; objectiveString=objectiveString)
 
 using JuMP, Ipopt

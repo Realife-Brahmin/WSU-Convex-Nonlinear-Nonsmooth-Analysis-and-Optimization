@@ -3,7 +3,7 @@ using Parameters
 function SolStateALPType(xk; # xk is actually wk = [xk (original variables); yk (inequality slack variables)]
     lambdakm1=zeros(0),
     lambdak=zeros(0),
-    mukm1=zeros(0),
+    mukm1=0.0,
     tkm1=0.0,
     fkm1=100.0,
     fk=100.0,
@@ -19,7 +19,7 @@ function SolStateALPType(xk; # xk is actually wk = [xk (original variables); yk 
     solState = Dict( # again, all xks actually represent wks
         :km1 => -1, :k => 0,
         :lambdakm1 => lambdakm1, :lambdak => lambdak,
-        :mukm1 => mukm1, :muk => myfill(xk, 1.0),
+        :mukm1 => mukm1, :muk => 1.0,
         :tkm1 => tkm1, :tk => 1.0,
         :xkm1 => myfill(xk, -27.0), :xk => xk,
         :fkm1 => fkm1, :fk => fk,

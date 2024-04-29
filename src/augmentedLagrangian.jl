@@ -60,14 +60,20 @@ function ALOBJ(w, psubDict;
     cE = econ(x, psubDict, getGradientToo=false)
     cI = icon(x, psubDict, getGradientToo=false)
 
-    Y = diagm(y) # mI x mI diagonal matrix
-    c = vcat(cE, cI - transpose(y) * y) # mE+mI vector
+    c = vcat(cE, cI - transpose(y) * y) # mE+mI length c vector
     F = f - transpose(lambda)*c + 1//2 * mu * transpose(c) * c
 
     if !getGradientToo
         return F
     elseif getGradientToo
-        G = vcat(g, zeros(mI)) - ( vcat( hcat(cE, cI), zeros(mI, n) - 2*Y) * (lambda - mu*c) )
+        _ , hE = econ(x, psubDict, getGradientToo=true)
+        _ , hI = icon(x, psubDict, getGradientToo=true)
+        h = vcat(hE, hI) # mxn matrix
+        Y = diagm(y) # mI x mI diagonal matrix to be used in gradient of inequality constraints
+        hy = vcat( zeros(mE, mI), -2 * Y)
+        dL1dw = vcat( g, zeros(mI) ) # (Nx1) vector # derivative of first lagrangian term (f(x) wrt w)
+        dL23dw = vcat(transpose(h), transpose(hy)) * (-lambda + mu * c) # (Nx1) vector # concatenated derivatives of second and third lagrangian terms (-λ*c(w) + 1//2*μ*transpose(c(w))*c(w)) wrt w)
+        G = dL1dw + dL23dw
         return F, G
     else
         @error("floc")

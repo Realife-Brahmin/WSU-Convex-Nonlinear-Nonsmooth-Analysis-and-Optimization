@@ -60,7 +60,7 @@ function ALOBJ(w, psubDict;
     cE = econ(x, psubDict, getGradientToo=false)
     cI = icon(x, psubDict, getGradientToo=false)
 
-    c = vcat(cE, cI - transpose(y) * y) # mE+mI length c vector
+    c = vcat(cE, cI - y.^2) # mE+mI length c vector
     F = f - transpose(lambda)*c + 1//2 * mu * transpose(c) * c
 
     if !getGradientToo

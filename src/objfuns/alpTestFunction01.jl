@@ -72,51 +72,31 @@ pALP = Dict(:mE=>mE, :econ=>cE01, :mI=>mI, :icon=>cI01)
 using JuMP, Ipopt
 
 model = Model(Ipopt.Optimizer)
-x0 = [-1.2, 1.0]
+# x0 = [-1.2, 1.0]
+x0 = rand(2)
+# x0 = [1, 2]
+slackifyInequalities = false
+slackifyInequalities = true
 n = length(x0)
-y0 = zeros(mI)
-# @variable(model, w[i=1:4], start = [1.21, 1.79, 1.1, sqrt(0.79)][i])
+y0 = rand(mI)
 @variable(model, x[i=1:n], start = x0[i])
 @variable(model, y[i=1:mI], start = y0[i])
-
 @objective(model, Min, (x[1] - 1)^2 + (x[2] - 2)^2)
+@constraint(model, x[1]^2 + x[2]^2 - 1 == 0) # regular equality constraint
 
-# @objective(model, Min, (w[1] - 1)^2 + (w[2] - 2)^2)
-
-# Constraint equations assuming w[3] and w[4] are slack variables for the inequalities
-# w[1]^2 <= 1 => w[1]^2 - w[3]^2 = 0 (slack variable w[3] squared)
-# w[2] - 1 <= 0 => w[2] - 1 - w[4]^2 = 0 (slack variable w[4] squared)
-# We also have an equality constraint w[1] + w[2] = 5
-# cI[1] = x[1]^3 + x[2]
-# cI[2] = x[1]^2 + 2 * x[2]^2 - 3
-# Rewrite the constraints to use the slack variables
-# @constraint(model, w[1] - w[3]^2 == 0) # Equality constraint with slack variable w[3]
-@constraint(model, x[1] + x[2] - 3 == 0)
-
-# @constraint(model, x[1] - y[1]^2 == 0)
-# @constraint(model, x[2] - 1 - y[2]^2 == 0)
-
-# @constraint(model, x[1] + w[2] == 5) # Regular equality constraint
-# @constraint(model, x[1]^2 + 2*x[2]^2 - y[2]^2 == 0) # Regular equality constraint
+if slackifyInequalities
+    @constraint(model, x[1]^3 + x[2] - y[1]^2 == 0) 
+    @constraint(model, x[1]^2 + 2 * x[2]^2 - 1.1 - y[2]^2 == 0)
+else
+    @constraint(model, x[1]^3 + x[2] >= 0)
+    @constraint(model, x[1]^2 + 2 * x[2]^2 - 1.1 >= 0)
+end
 
 optimize!(model)
-
-# w_optimal = [value(w[i]) for i in 1:4]
 xopt = [value(x[i]) for i ∈ 1:n]
 yopt = [value(y[i]) for i ∈ 1:mI]
 f_optimal = objective_value(model)
-
-# Call the function to solve the problem
-# println("Optimal w: ", w_optimal)
 println("Optimal Variables x: ", xopt)
 println("Optimal Slack Variables y: ", yopt)
 println("Optimal objective value: ", f_optimal)
-
-
-# optimize!(nlp)
-# println(solution_summary(nlp))
-# wopt = [value(w[i]) for i ∈ eachindex(w)]
-# fopt = objective_value(nlp)
-# myprintln(true, "Optimal decision variables are w = $(wopt)")
-# myprintln(true, "Optimal objective value is f = $(fopt)")
 

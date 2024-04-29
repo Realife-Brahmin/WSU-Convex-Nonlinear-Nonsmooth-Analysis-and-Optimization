@@ -6,7 +6,9 @@ using Parameters
 x0 = rand(2)
 n = length(x0)
 
-function cE01(x, p; getGradientToo::Bool=false)
+function cE01(x, p;
+    getGradientToo::Bool=true)
+
     mE = 1
     cE = zeros(mE)
     cE[1] = x[1]^2 + x[2]^2 - 1
@@ -26,7 +28,9 @@ end
 
 mE = 1
 
-function cI01(x, p; getGradientToo::Bool=false)
+function cI01(x, p;
+    getGradientToo::Bool=true)
+
     mI = 2
     cI = zeros(mI)
     cI[1] = x[1]^3 + x[2]
@@ -51,7 +55,9 @@ end
 
 mI = 2
 
-function alpTestFunction01(x, p, getGradientToo::Bool=true)
+function alpTestFunction01(x, p;
+    getGradientToo::Bool=true)
+
     f = (x[1]-1)^2 + (x[2]-2)^2
     if !getGradientToo
         return f

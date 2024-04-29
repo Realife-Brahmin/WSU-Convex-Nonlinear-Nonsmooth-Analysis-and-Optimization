@@ -3,6 +3,9 @@ include("../AugmentedLagrangian.jl")
 
 using Parameters
 
+x0 = rand(2)
+n = length(x0)
+
 function cE01(x, p; getGradientToo::Bool=false)
     mE = 1
     cE = zeros(mE)
@@ -68,14 +71,13 @@ objectiveString = "alpTestFunction01"
 problemType = "Constrained"
 econ = cE01
 icon = cI01
-pALP = Dict(:mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
+pALP = Dict(:n=>n, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
 # pr = generate_pr(objective, x0, params=pALP, problemType=problemType; objectiveString=objectiveString)
 
 using JuMP, Ipopt
 
 model = Model(Ipopt.Optimizer)
 # x0 = [-1.2, 1.0]
-x0 = rand(2)
 # x0 = [1, 2]
 slackifyInequalities = false
 slackifyInequalities = true

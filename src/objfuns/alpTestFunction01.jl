@@ -16,7 +16,10 @@ function cE01(x, p;
     if !getGradientToo
         return cE
     elseif getGradientToo
-        hE = [2*x[1], 2*x[2]]
+        n = length(x)
+        hE = zeros(mE, n)
+        hE[1, 1] = 2*x[1]
+        hE[1, 2] = 2*x[2]
         return cE, hE
     else
         @error("floc")

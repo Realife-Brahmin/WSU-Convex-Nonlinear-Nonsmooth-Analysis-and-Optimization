@@ -16,7 +16,7 @@ benchmarking = true;
 
 warmStart = true
 
-functionName = "dampedSHM";
+# functionName = "dampedSHM";
 # functionName = "drag"; functionName == "drag" ? verbose = false : verbose = verbose  
 # functionName = "fireLocation";
 # functionName = "nnloss"; functionName == "nnloss" ? verbose = false : verbose = verbose;
@@ -33,7 +33,7 @@ functionName = "dampedSHM";
 # functionName = "asqpTestFunction1";
 # functionName = "ecqpTestFunction1";
 # functionName = "ecqpTestFunction2";
-# functionName = "alpTestFunction01";
+functionName = "alpTestFunction01";
 # functionName = "Rastrigin";
 
 pr = include("src/objfuns/"*functionName*".jl")

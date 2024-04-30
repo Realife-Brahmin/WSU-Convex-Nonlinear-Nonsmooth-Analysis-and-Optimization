@@ -54,7 +54,8 @@ function optimizeALP(pr;
     while keepIterationsGoing
 
         @unpack k = solverState
-
+        muk = solState[:muk] # separately calling it here to not break my pattern later
+        
         printOrNot = verbose && ((k - 1) % progress == 0)
         printOrNot_ALP = printOrNot & verbose_ls
 

@@ -82,14 +82,15 @@ function create_algorithm_settings(;
         elseif alg_settings[:method] == "AugmentedLagrangian"
 
                 alg_settings[:linesearch] = "NA"
-                alg_settings[:gtol] = "NA"
-                alg_settings[:c1] = "NA"
-                alg_settings[:c2] = "NA"
-                alg_settings[:lambda] = "NA"
-                alg_settings[:lambdaMax] = "NA"
+                # alg_settings[:gtol] = "NA"
+                # alg_settings[:c1] = "NA"
+                # alg_settings[:c2] = "NA"
+                # alg_settings[:lambda] = "NA"
+                # alg_settings[:lambdaMax] = "NA"
                 alg_settings[:etol] = 1e-8
                 alg_settings[:gtol] = 1e-8
                 alg_settings[:dxtol] = 1e-8
+                alg_settings[:mutol] = 1e6
                 alg_settings[:progress] = 1
                 alg_settings[:maxiter] = 10
 

@@ -20,7 +20,7 @@ function solveAugmentedLagrangianFunction(prALP, solStateALP;
     verbose_ls::Bool=false,
 )
 
-    @unpack etol, itol = pr.alg
+    @unpack etol, mutol, dxtol, gtol = pr.alg
     @unpack objective, p, objectiveString = prALP
     objectiveUnc = ALOBJ
     objectiveStringUnc = objectiveString * "_ALPsubroutine"
@@ -29,7 +29,7 @@ function solveAugmentedLagrangianFunction(prALP, solStateALP;
 
     pDictALP = p # p is indeed pDict from the original problem
     @unpack mE, econ, mI, icon  = pDictALP
-    @unpack xk, lambdak, muk = solStateALP # again, xk is actually wk
+    @unpack xk, lambdak, muk, tk = solStateALP # again, xk is actually wk
 
     myprintln(verbose, "From the current point xk = $(xk)")
 
@@ -39,11 +39,16 @@ function solveAugmentedLagrangianFunction(prALP, solStateALP;
 
     pDictUnc = merge(deepcopy(pDictALP), addendum)
 
-    prUnc = generate_pr(objective, xk, problemType=problemTypeUnc, method=methodUnc, params=pDictUnc, objectiveString=objectiveStringUnc, verbose=false)
+    @show pDictUnc
 
-    res = optimize2(prUnc, verbose=verbose, verbose_ls=verbose_ls, log=false)
+    prUnc = generate_pr(objectiveUnc, xk, problemType=problemTypeUnc, method=methodUnc, params=pDictUnc, objectiveString=objectiveStringUnc, verbose=false)
 
-    @unpack xopt, fopt, iter = res
+    @show prUnc
+
+    # error("Stop here.")
+    resUnc = optimize2(prUnc, verbose=verbose, verbose_ls=verbose_ls, log=false)
+
+    @unpack xopt, fopt, iter = resUnc
     coptUnc = combinedConstraintsALP(xopt, pDictUnc) #do # constraint violations
     return xopt, fopt, coptUnc, iter
 

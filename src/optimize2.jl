@@ -28,16 +28,20 @@ function optimize2(pr;
     xk = x0
     n = length(xk)
 
+    p = pr.p
+    @show p
+    
     if !haskey(p, :subroutineCall)
-        myprintln(false, "Calling Unconstrained Solver Independently.")
+        myprintln(true, "Calling Unconstrained Solver Independently.")
         subroutineCall = false
     else
-        myprintln(p, "Calling Unconstrained Solver as a subroutine for ALP.")
-        @unpack subroutineCall, tk = p
+        myprintln(true, "Calling Unconstrained Solver as a subroutine for ALP.")
+        @unpack subroutineCall, tau = p
         maxiter = 2*n # as dictated by ALP
-        gtol = tk
+        gtol = tau
     end
 
+    objString = pr.objectiveString
     log_txt = log_path * "log_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
     if !subroutineCall
         if isfile(log_txt)
@@ -49,7 +53,7 @@ function optimize2(pr;
 
     myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
     obj = pr.objective
-    p = pr.p
+    # p = pr.p
     # data = p[:data]
     # M = max(size(data, 1), 1)
 
@@ -57,12 +61,15 @@ function optimize2(pr;
     myprintln(verbose, "which has fval = $(fk)", log_path=log_txt)
     @pack! solState = fk
 
+    @show method
     if method == "QuasiNewton"
         QNState = QNStateType()
     elseif method == "ConjugateGradientDescent"
         CGState = CGStateType()
     elseif method == "TrustRegion"
         @error("Trust Region No longer supported")
+    else
+        @error("Unknown findDirection method.")
     end
     
     fevals += 1
@@ -98,6 +105,7 @@ function optimize2(pr;
         gevals += 1
 
         @pack! solState = fk, gk, gmagk
+        @show fk, gk
         @pack! solverState = fevals, gevals
 
         if method == "QuasiNewton"

@@ -1,3 +1,5 @@
+using Parameters 
+
 include("helperFunctions.jl")
 include("types.jl")
 
@@ -8,7 +10,17 @@ function findDirection(
     verbose::Bool=false)
 
     n = length(gk)
-    method = pr.alg[:method]
+    @unpack p = pr
+    # method = pr.alg[:method]
+    if !haskey(p, :subroutineCall)
+        myprintln(false, "Linesearch direction being found as part of an independent solver.")
+        subroutineCall = false
+        method = pr.alg[:method]
+    else
+        myprintln(false, "Linesearch direction being found as part of a subroutine.")
+        @unpack subroutineCall,  = p
+        method = pr.alg[:method]
+    end
     
     if method == "GradientDescent"
         Bk = I(n)

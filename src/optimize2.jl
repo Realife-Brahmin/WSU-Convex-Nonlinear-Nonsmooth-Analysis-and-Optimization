@@ -202,15 +202,18 @@ function optimize2(pr;
     
     @unpack k = solverState
 
+    @show xvals, fvals
     if k ≥ maxiter
         converged = false
         statusMessage = "Failed to converge despite $(maxiter) iterations! 😢"
-        myprintln(!subroutineCall, statusMessage, log=log, log_path=log_txt)
+        # myprintln(!subroutineCall, statusMessage, log=log, log_path=log_txt)
+        myprintln(true, statusMessage, log=log, log_path=log_txt)
         @warn statusMessage
     else
         converged = true
         statusMessage = "Convergence achieved in $(k) iterations 😄"
-        myprintln(!subroutineCall, statusMessage, log=log, log_path=log_txt)
+        myprintln(true, statusMessage, log=log, log_path=log_txt)
+        # myprintln(!subroutineCall, statusMessage, log=log, log_path=log_txt)
     end
     
     xopt, fopt = extractBestResults(pr, k-1, xvals, fvals)
@@ -221,6 +224,9 @@ function optimize2(pr;
     gvals=gvals, fevals=fevals, fopt=fopt, gevals=gevals, cause=causeForStopping, 
     pr=pr)
 
+    @show keys(res)
+
     res = trim_array(res, k-1)
+    @show res[:xopt], res[:fopt]
     return res
 end

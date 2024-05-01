@@ -92,7 +92,7 @@ function create_algorithm_settings(;
                 alg_settings[:dxtol] = 1e-8
                 alg_settings[:mutol] = 1e6
                 alg_settings[:progress] = 1
-                alg_settings[:maxiter] = 10
+                alg_settings[:maxiter] = 100
 
         elseif alg_settings[:method] == "ConjugateGradientDescent"
                 # Adjustments for ConjugateGradientDescent

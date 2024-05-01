@@ -1,0 +1,41 @@
+Starting with initial point w = [0.5215745334843974, 0.022730828272794157, 0.7156904293011893, 0.5494716580294144].
+which has fval = 4.1384843044734625
+*************************
+----------
+Iteration k = 0
+----------
+Iteration k = 1
+----------
+Iteration k = 2
+----------
+Iteration k = 3
+----------
+Iteration k = 4
+----------
+Iteration k = 5
+----------
+Iteration k = 6
+----------
+Iteration k = 7
+----------
+Iteration k = 8
+----------
+Iteration k = 9
+----------
+Iteration k = 10
+----------
+Iteration k = 11
+----------
+Iteration k = 12
+----------
+Iteration k = 13
+----------
+Iteration k = 14
+----------
+Iteration k = 15
+----------
+Iteration k = 16
+----------
+Iteration k = 17
+**************************************************
+Convergence achieved in 17 iterations 😄

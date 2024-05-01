@@ -23,22 +23,26 @@ function optimizeALP(pr;
     gtol = pr.alg[:gtol]
     mutol = pr.alg[:mutol]
 
-    x0 = pr.x0 # actually w0
-    n = length(x0)
-    xk = x0
-
-    fvals = zeros(Float64, maxiter)
-    xvals = zeros(Float64, n, maxiter)
-
-    myprintln(verbose, "Starting with initial point x = $(xk).", log_path=log_txt)
+    w0 = pr.x0 # actually w0
+    N = length(w0)
+    wk = w0
 
     f = pr.objective
     pALP = pr.p
-    @unpack mE, econ, mI, icon = pALP
+    @unpack n, m, mE, econ, mI, icon = pALP
 
+    fvals = zeros(Float64, maxiter)
+    xvals = zeros(Float64, N, maxiter)
+
+    myprintln(verbose, "Starting with initial point w = $(wk).", log_path=log_txt)
+
+
+
+    lambdak0 = rand(m)
+    x0, y0 = w0[1:n], w0[n+1:end]
     f0 = f(x0, pALP, getGradientToo=false)
     fk = f0
-    solState = SolStateALPType(x0, fk=f0, etol=etol)
+    solState = SolStateALPType(w0, lambdak=lambdak0, fk=f0, etol=etol) # again, x0 is actually w0
 
     @unpack fevals = solverState
     fevals += 1
@@ -76,16 +80,16 @@ function optimizeALP(pr;
 
         end
 
-        @unpack xk, fk, gk, lambdak, muk, tk = solState
+        @unpack wk, fk, gk, lambdak, muk, tk = solState
 
         # Since this iteration will be proceeded with, saving the current iterates to solState as the 'previous' iteration values
-        km1, xkm1, fkm1, gkm1, lambdakm1, mukm1, tkm1 = k, xk, fk, gk, lambdak, muk, tk
-        @pack! solState = km1, xkm1, fkm1, gkm1, lambdakm1, mukm1, tkm1
+        km1, wkm1, fkm1, gkm1, lambdakm1, mukm1, tkm1 = k, wk, fk, gk, lambdak, muk, tk
+        @pack! solState = km1, wkm1, fkm1, gkm1, lambdakm1, mukm1, tkm1
 
         myprintln(printOrNot_ALP, "Let's try solving for the Augmented Lagrangian problem with λ = $(lambdak) and μ = $(muk).")
-        xkp1, fkp1, cxkp1, iter_unc = solveAugmentedLagrangianFunction(pr, solState, verbose=printOrNot_ALP, verbose_ls=printOrNot_ALP)
+        wkp1, fkp1, cxkp1, iter_unc = solveAugmentedLagrangianFunction(pr, solState, verbose=printOrNot_ALP, verbose_ls=printOrNot_ALP)
         
-        normdxk = norm(xkp1 - x)
+        normdxk = norm(wkp1 - wk)
 
         if normdxk < dxtol
 
@@ -113,12 +117,12 @@ function optimizeALP(pr;
         # I prefer to only number a completed iteration, as opposed to numbering an in-process/about-to-begin iteration
         k += 1
 
-        xvals[:, k] = xkp1
+        xvals[:, k] = wkp1
         fvals[k] = fkp1
 
-        xk, fk, lambdak, muk, tk = xkp1, fkp1, lambdakp1, mukp1, tkp1
+        wk, fk, lambdak, muk, tk = wkp1, fkp1, lambdakp1, mukp1, tkp1
 
-        @pack! solState = xk, fk, gk, lambdak, muk, tk
+        @pack! solState = wk, fk, gk, lambdak, muk, tk
         @pack! solState = k
         @pack! solverState = k
 

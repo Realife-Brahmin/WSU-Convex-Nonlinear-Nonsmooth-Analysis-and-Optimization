@@ -1,5 +1,27 @@
-Starting with initial point x = [0.8125836891404016, 0.38745542492318985, 0.40108861657729333, 0.9760382259181443].
-which has fval = 2.6354248801858717
+Starting with initial point w = [0.5903336648269876, 0.8729283057839036, 0.4016336669421037, 0.2909647083259468].
+which has fval = 1.4381171100772292
 *************************
 ----------
 Iteration k = 0
+----------
+Iteration k = 1
+----------
+Iteration k = 2
+----------
+Iteration k = 3
+----------
+Iteration k = 4
+----------
+Iteration k = 5
+----------
+Iteration k = 6
+----------
+Iteration k = 7
+----------
+Iteration k = 8
+----------
+Iteration k = 9
+----------
+Iteration k = 10
+**************************************************
+Failed to converge despite 10 iterations! 😢

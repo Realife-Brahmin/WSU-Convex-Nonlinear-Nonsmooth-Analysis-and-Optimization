@@ -29,7 +29,7 @@ function optimize2(pr;
     n = length(xk)
 
     p = pr.p
-    @show p
+    # @show p
     
     if !haskey(p, :subroutineCall)
         myprintln(true, "Calling Unconstrained Solver Independently.")
@@ -95,7 +95,7 @@ function optimize2(pr;
 
         myprintln(printOrNot, "Iteration $(k):", log_path=log_txt)
 
-        @show xk, p
+        # @show xk, p
         fk, gk = obj(xk, p, getGradientToo=true)
         @checkForNaN fk
         @checkForNaN gk
@@ -106,7 +106,7 @@ function optimize2(pr;
         gevals += 1
 
         @pack! solState = fk, gk, gmagk
-        @show fk, gk
+        # @show fk, gk
         @pack! solverState = fevals, gevals
 
         if method == "QuasiNewton"
@@ -202,7 +202,7 @@ function optimize2(pr;
     
     @unpack k = solverState
 
-    @show xvals, fvals
+    # @show xvals, fvals
     if k ≥ maxiter
         converged = false
         statusMessage = "Failed to converge despite $(maxiter) iterations! 😢"
@@ -224,9 +224,9 @@ function optimize2(pr;
     gvals=gvals, fevals=fevals, fopt=fopt, gevals=gevals, cause=causeForStopping, 
     pr=pr)
 
-    @show keys(res)
+    # @show keys(res)
 
     res = trim_array(res, k-1)
-    @show res[:xopt], res[:fopt]
+    # @show res[:xopt], res[:fopt]
     return res
 end

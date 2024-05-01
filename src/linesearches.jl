@@ -45,7 +45,7 @@ function StrongWolfe(pr::NamedTuple,
 
     j = 1
     xj = xk; fj = fk; gj = gk
-    @show xj, fj, fk, gj
+    # @show xj, fj, fk, gj
     while keepSearching
 
         @unpack alphaj = interpolParams

@@ -213,7 +213,7 @@ function optimize2(pr;
         myprintln(!subroutineCall, statusMessage, log=log, log_path=log_txt)
     end
     
-    xopt, fopt = extractBestResults(pr, k, xvals, fvals)
+    xopt, fopt = extractBestResults(pr, k-1, xvals, fvals)
 
     res = (converged=converged, statusMessage=statusMessage, iter=k, fvals=fvals, 
     αvals=αvals, backtrackVals=backtrackVals, xvals=xvals, xopt=xopt,

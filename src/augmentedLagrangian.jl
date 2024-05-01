@@ -22,6 +22,7 @@ function solveAugmentedLagrangianFunction(prALP, solStateALP;
 
     @unpack etol, mutol, dxtol, gtol = pr.alg
     @unpack objective, p, objectiveString = prALP
+    objectiveALP = objective
     objectiveUnc = ALOBJ
     objectiveStringUnc = objectiveString * "_ALPsubroutine"
     problemTypeUnc = "Unconstrained"
@@ -29,21 +30,21 @@ function solveAugmentedLagrangianFunction(prALP, solStateALP;
 
     pDictALP = p # p is indeed pDict from the original problem
     @unpack mE, econ, mI, icon  = pDictALP
-    @unpack xk, lambdak, muk, tk = solStateALP # again, xk is actually wk
+    @unpack wk, lambdak, muk, tk = solStateALP # again, wk is actually wk
 
-    myprintln(verbose, "From the current point xk = $(xk)")
+    myprintln(verbose, "From the current point wk = $(wk)")
 
     subroutineCall = true
 
-    addendum = Dict(:subroutineCall => subroutineCall, :lambda => lambdak, :mu => muk, :objective => objectiveUnc, :tau => tk)
+    addendum = Dict(:subroutineCall => subroutineCall, :lambda => lambdak, :mu => muk, :objective => objectiveUnc, :objectiveALP => objectiveALP, :tau => tk)
 
     pDictUnc = merge(deepcopy(pDictALP), addendum)
 
-    @show pDictUnc
+    # @show pDictUnc
 
-    prUnc = generate_pr(objectiveUnc, xk, problemType=problemTypeUnc, method=methodUnc, params=pDictUnc, objectiveString=objectiveStringUnc, verbose=false)
+    prUnc = generate_pr(objectiveUnc, wk, problemType=problemTypeUnc, method=methodUnc, params=pDictUnc, objectiveString=objectiveStringUnc, verbose=false)
 
-    @show prUnc
+    # @show prUnc
 
     # error("Stop here.")
     resUnc = optimize2(prUnc, verbose=verbose, verbose_ls=verbose_ls, log=false)
@@ -57,14 +58,16 @@ end
 function ALOBJ(w, psubDict;
     getGradientToo::Bool=false)
 
-    @unpack n, lambda, mu, mE, mI, econ, icon, objective = psubDict
-    @show n, w 
+    @unpack n, m, lambda, mu, mE, mI, econ, icon, objectiveALP = psubDict
+    # @show n, w 
     # n = length(w) - mI # length of x
     x = w[1:n]
     y = w[n+1:end]
     # error("Okay we're done.")
 
-    f, g = objective(x, psubDict, getGradientToo=true)
+    @show x, psubDict
+    
+    f, g = objectiveALP(x, psubDict, getGradientToo=true)
     cE = econ(x, psubDict, getGradientToo=false)
     cI = icon(x, psubDict, getGradientToo=false)
 

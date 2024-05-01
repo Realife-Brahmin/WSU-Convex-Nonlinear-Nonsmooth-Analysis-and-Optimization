@@ -11,7 +11,7 @@ function combinedConstraintsALP(wk, pDictUnc)
     xk, yk = wk[1:n], wk[n+1:end]
     cE = econ(xk, pDictUnc, getGradientToo=false)
     cI = icon(xk, pDictUnc, getGradientToo=false)
-    c = vcat(cE, cI - transpose(yk)*yk)
+    c = vcat(cE, cI - yk.^2)
     return c
 end
 
@@ -65,7 +65,7 @@ function ALOBJ(w, psubDict;
     y = w[n+1:end]
     # error("Okay we're done.")
 
-    @show x, psubDict
+    # @show x, psubDict
     
     f, g = objectiveALP(x, psubDict, getGradientToo=true)
     cE = econ(x, psubDict, getGradientToo=false)

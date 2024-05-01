@@ -10,6 +10,10 @@ n = length(x0)
 function alpTestFunction01(x, p;
     getGradientToo::Bool=true)
 
+    if length(x) != 2
+        @error "alpTestFunction01 expects a length 2 vector"
+    end
+
     f = (x[1] - 1)^2 + (x[2] - 2)^2
     if !getGradientToo
         return f
@@ -25,6 +29,10 @@ end
 
 function cE01(x, p;
     getGradientToo::Bool=true)
+
+    if length(x) != 2
+        @error "cE01 expects a length 2 vector"
+    end
 
     mE = 1
     cE = zeros(mE)
@@ -51,6 +59,10 @@ mE = 1
 function cI01(x, p;
     getGradientToo::Bool=true)
 
+    if length(x) != 2
+        @error "cI01 expects a length 2 vector"
+    end
+
     mI = 2
     cI = zeros(mI)
     cI[1] = x[1]^3 + x[2]
@@ -76,6 +88,7 @@ end
 mI = 2
 y0 = rand(mI)
 yk = y0
+m = mE+mI
 w0 = vcat(x0, y0)
 wk = w0
 
@@ -85,7 +98,7 @@ objectiveString = "alpTestFunction01"
 problemType = "Constrained"
 econ = cE01
 icon = cI01
-pDictALP = Dict(:n=>n, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
+pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
 pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString)
 
 # objectiveUnc = ALOBJ

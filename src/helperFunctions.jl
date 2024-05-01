@@ -153,44 +153,83 @@ function myfill(array, value)
 end
 
 
+# function trim_array(nt::NamedTuple, itrMax::Int;
+#     keys_to_remove::Vector{Symbol}=[:xopt, :fopt])
+#     # Create a dictionary to hold the trimmed arrays
+#     trimmed_dict = Dict()
+
+#     # Convert the keys of the named tuple to a set
+#     keys_set = Set(keys(nt))
+
+#     # Define the keys you want to remove as another set
+#     keys_to_remove = Set(keys_to_remove)    
+
+#     # Use set difference to remove the specified keys
+#     @show filtered_keys_set = setdiff(keys_set, keys_to_remove)
+
+#     # If you need to work with a vector of keys afterwards
+#     @show filtered_keys_vector = collect(filtered_keys_set)
+
+#     # Iterate over each key in the NamedTuple
+#     for key in filtered_keys_vector
+#         # Get the array using getproperty
+#         arr = getproperty(nt, key)
+        
+#         # @show key
+#         # Check if it's a 1D array and trim it
+#         if eltype(arr) ∈ (Int64, Float64) && isa(arr, AbstractVector)
+#             arr = arr[1:itrMax]
+#         # Check if it's a 2D array and trim it
+#         elseif eltype(arr) ∈ (Int64, Float64) && isa(arr, AbstractMatrix)
+#             arr = arr[:, 1:itrMax]
+#         end
+
+#         # Store the trimmed array in the dictionary
+#         trimmed_dict[key] = arr
+#     end
+    
+#     # Convert the dictionary back to a NamedTuple and return
+
+#     @show trimmed_dict[:xopt], trimmed_dict[:fopt]
+#     return NamedTuple(trimmed_dict)
+# end
+
 function trim_array(nt::NamedTuple, itrMax::Int;
-    keys_to_remove::Vector{Symbol}=[:xopt, :fopt])
-    # Create a dictionary to hold the trimmed arrays
+    keys_to_not_trim::Vector{Symbol}=[:xopt, :fopt])
+    # Create a dictionary to hold the possibly modified values
     trimmed_dict = Dict()
 
     # Convert the keys of the named tuple to a set
     keys_set = Set(keys(nt))
 
-    # Define the keys you want to remove as another set
-    keys_to_remove = Set(keys_to_remove)    
-
-    # Use set difference to remove the specified keys
-    @show filtered_keys_set = setdiff(keys_set, keys_to_remove)
-
-    # If you need to work with a vector of keys afterwards
-    @show filtered_keys_vector = collect(filtered_keys_set)
+    # Define the keys you want to potentially trim as another set
+    keys_to_trim_set = setdiff(keys_set, keys_to_not_trim)
 
     # Iterate over each key in the NamedTuple
-    for key in filtered_keys_vector
-        # Get the array using getproperty
-        arr = getproperty(nt, key)
-        
-        # @show key
-        # Check if it's a 1D array and trim it
-        if eltype(arr) ∈ (Int64, Float64) && isa(arr, AbstractVector)
-            arr = arr[1:itrMax]
-        # Check if it's a 2D array and trim it
-        elseif eltype(arr) ∈ (Int64, Float64) && isa(arr, AbstractMatrix)
-            arr = arr[:, 1:itrMax]
+    for key in keys(nt)
+        # Get the current value using getproperty
+        value = getproperty(nt, key)
+
+        # Decide if the key's value needs trimming
+        if key in keys_to_trim_set
+            # Check if it's a 1D array and trim it
+            if isa(value, AbstractVector) && eltype(value) in (Int64, Float64)
+                value = value[1:itrMax]
+                # Check if it's a 2D array and trim it
+            elseif isa(value, AbstractMatrix) && eltype(value) in (Int64, Float64)
+                value = value[:, 1:itrMax]
+            end
         end
 
-        # Store the trimmed array in the dictionary
-        trimmed_dict[key] = arr
+        # Store the original or trimmed value in the dictionary
+        trimmed_dict[key] = value
     end
-    
+        @show trimmed_dict[:xopt], trimmed_dict[:fopt]
+
     # Convert the dictionary back to a NamedTuple and return
     return NamedTuple(trimmed_dict)
 end
+
 
 """
     extrapolate(xopt::Vector{Float64}, factor::Int) -> Vector{Float64}

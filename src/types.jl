@@ -1,6 +1,6 @@
 using Parameters
 
-function SolStateALPType(xk; # xk is actually wk = [xk (original variables); yk (inequality slack variables)]
+function SolStateALPType(wk;
     lambdakm1=zeros(0),
     lambdak=zeros(0),
     mukm1=0.0,
@@ -21,9 +21,9 @@ function SolStateALPType(xk; # xk is actually wk = [xk (original variables); yk 
         :lambdakm1 => lambdakm1, :lambdak => lambdak,
         :mukm1 => mukm1, :muk => 1.0,
         :tkm1 => tkm1, :tk => 1.0,
-        :xkm1 => myfill(xk, -27.0), :xk => xk,
+        :wkm1 => myfill(wk, -27.0), :wk => wk,
         :fkm1 => fkm1, :fk => fk,
-        :gkm1 => myfill(xk, 11.3), :gk => myfill(xk, 22.7),
+        :gkm1 => myfill(wk, 11.3), :gk => myfill(wk, 22.7),
         :etol => etol,
         :gtol => gtol,
         :dxtol => dxtol,

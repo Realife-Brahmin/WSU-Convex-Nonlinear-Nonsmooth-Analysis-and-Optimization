@@ -95,7 +95,8 @@ function optimize2(pr;
 
         myprintln(printOrNot, "Iteration $(k):", log_path=log_txt)
 
-        fk, gk = obj(xk, p)
+        @show xk, p
+        fk, gk = obj(xk, p, getGradientToo=true)
         @checkForNaN fk
         @checkForNaN gk
 

@@ -41,9 +41,26 @@ function propellorObj(x, p;
 end
 
 D, alpha, n, T, Q = df[1, :]
-N = size(df, 1)
-ex = []
-# for j = 0:N
+M = size(df, 1)
+
+N = 3
+
+function constructEx(N)
+    ex = Vector{Int}[]
+    for j = 0:N
+        for k = 0:j
+            for l = 0:k
+                # This generates the tuple (j-k, k-l, l) which corresponds to the powers of x, y, z
+                exElem = [(j - k), (k - l), l]
+                push!(ex, exElem)
+            end
+        end
+    end
+    return ex
+end
+
+constructEx(N)
+
 # function cE01(x, p;
 #     getGradientToo::Bool=true)
 
@@ -115,8 +132,9 @@ objectiveString = "propellorObj"
 problemType = "Constrained"
 econ = nothing
 icon = propellorIcons
-pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
-pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString)
+;
+# pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
+# pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString)
 
 # objectiveUnc = ALOBJ
 # subroutineCall = true

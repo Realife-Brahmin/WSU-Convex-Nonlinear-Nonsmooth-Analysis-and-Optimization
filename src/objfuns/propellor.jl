@@ -3,22 +3,35 @@ include("../AugmentedLagrangian.jl")
 
 using Parameters
 
+rawDataFolder = "rawData/"
+filename = rawDataFolder * "PropData.csv"
+df = CSV.File(filename, header=false) |> DataFrame
+rename!(df, [:D, :alpha, :n, :T, :Q])
+data = Matrix(df)
+
 x0 = rand(2)
 xk = x0
 n = length(x0)
 
-function propellor(x, p;
+function propellorObj(x, p;
     getGradientToo::Bool=true)
 
     if length(x) != 2
         @error "alpTestFunction01 expects a length 2 vector"
     end
 
-    f = (x[1] - 1)^2 + (x[2] - 2)^2
+    Q = 0
+    # b = p[:b]
+    m = length(p[:b])
+    for r = 1:m
+        Q += p[:b][r] * prod(x .^ p[:pw][r, :])
+    end
+    f = x[1]*x[3]*Q
+
     if !getGradientToo
         return f
     elseif getGradientToo
-        g = [2 * (x[1] - 1), 2 * (x[2] - 2)]
+        # compute g yourself
         return f, g
     else
         @error("floc")
@@ -27,6 +40,10 @@ function propellor(x, p;
     @error("floc")
 end
 
+D, alpha, n, T, Q = df[1, :]
+N = size(df, 1)
+ex = []
+# for j = 0:N
 # function cE01(x, p;
 #     getGradientToo::Bool=true)
 
@@ -92,9 +109,9 @@ m = mE+mI
 w0 = vcat(x0, y0)
 wk = w0
 
-objective = propellor
-objectiveOriginal = propellor
-objectiveString = "propellor"
+objective = propellorObj
+objectiveOriginal = propellorObj
+objectiveString = "propellorObj"
 problemType = "Constrained"
 econ = nothing
 icon = propellorIcons

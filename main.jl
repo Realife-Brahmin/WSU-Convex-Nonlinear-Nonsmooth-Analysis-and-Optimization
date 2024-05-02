@@ -21,6 +21,7 @@ warmStart = true
 # functionName = "fireLocation";
 # functionName = "nnloss"; functionName == "nnloss" ? verbose = false : verbose = verbose;
 # functionName = "pathtime"
+# functionName = "propellor"
 # functionName = "receiverLocation"
 # functionName = "rosenbrock";
 # functionName = "signalDenoise";
@@ -30,10 +31,10 @@ warmStart = true
 # functionName = "TestFunction2";
 # functionName = "TestFunction3";
 
+functionName = "alpTestFunction01";
 # functionName = "asqpTestFunction1";
 # functionName = "ecqpTestFunction1";
 # functionName = "ecqpTestFunction2";
-# functionName = "alpTestFunction01";
 # functionName = "Rastrigin";
 
 pr = include("src/objfuns/"*functionName*".jl")

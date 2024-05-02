@@ -73,6 +73,17 @@ function showresults(res;
 
         tolMsg = "PGCG Tolerance = $(etol)\n"*"ASQP Tolerance = $(itol)"
 
+    elseif method == "AugmentedLagrangian"
+        @unpack converged, statusMessage, xvals, fvals, fevals, cause = res1
+        @unpack dxtol = pr[:alg]
+        gevals = 0
+
+        result_txt = log_path * "results_" * objString * "_" * pr.alg[:method] * "_" * string(pr.alg[:maxiter]) * ".txt"
+
+        lsMsg = ""
+
+        tolMsg = "dx Tolerance = $(dxtol)"
+
     elseif method == "NelderMead"
         @unpack converged, statusMessage, xvals, fvals, fevals, cause = res1
         gevals = 0

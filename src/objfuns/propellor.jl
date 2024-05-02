@@ -134,7 +134,7 @@ function findOptimalPolynomialDegrees(M, X, T, Q)
     end
 
     myprintln(true, "Best polynomial fits for Thrust T and Torque Q have been found to be $(NT) and $(NQ) respectively.")
-    
+
     return NT_best, NQ_best, aT_best, aQ_best
 end
 
@@ -173,13 +173,16 @@ mE = 0
 function propellorIcons(x, p;
     getGradientToo::Bool=true)
 
-    if length(x) != 2
-        @error "propellorIcons expects a length 2 vector"
+    if length(x) != 3
+        @error "propellorIcons expects a length 3 vector"
     end
 
-    mI = 2
+    mI = 6
     cI = zeros(mI)
-    cI[1] = x[1]^3 + x[2]
+    cI[1] = x[1] - 4
+    cI[2] = x[2] - 10
+    cI[3] = x[3] - 7
+    cI[4] = 1 - x[1]
     cI[2] = x[1]^2 + 2*x[2]^2 - 1.1
     if !getGradientToo
         return cI

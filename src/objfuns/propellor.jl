@@ -1,14 +1,20 @@
 include("objective.jl")
 include("../AugmentedLagrangian.jl")
 
+using CSV
+using DataFrames
 using Parameters
 
 rawDataFolder = "rawData/"
 filename = rawDataFolder * "PropData.csv"
 df = CSV.File(filename, header=false) |> DataFrame
 rename!(df, [:D, :alpha, :n, :T, :Q])
-data = Matrix(df)
+df.D /= maximum(df.D)
+df.alpha /= maximum(df.alpha)
+df.n /= maximum(df.n)
 
+data = Matrix(df)
+# data[:, 1]
 x0 = rand(2)
 xk = x0
 n = length(x0)
@@ -43,8 +49,6 @@ end
 D, alpha, n, T, Q = df[1, :]
 M = size(df, 1)
 
-N = 3
-
 function constructEx(N)
     ex = Vector{Int}[]
     for j = 0:N
@@ -58,8 +62,64 @@ function constructEx(N)
     end
     return ex
 end
+# ex = constructEx(N)
+X = data[:, 1:3]
+# X = X[:]
+T = data[:, 4]
+Q = data[:, 5]
 
-constructEx(N)
+function findFitCoeffs(N, M, X, T)
+    ex = constructEx(N)
+    R = length(ex)
+    AT = zeros(R, R)
+    BT = zeros(R)
+    for r = 1:R
+        Tk = T[r]
+        x, y, z = X[r, :]
+        temp = x.^ex[r][1] .* y.^ex[r][2] .* z.^ex[r][3]
+        BT[r] = sum(Tk .* temp)
+        for c = 1:R
+            p = ex[r] + ex[c]
+            AT[r, c] = sum( x.^p[1] .* y.^p[2] .* z.^p[3] )
+        end
+    end
+    a = AT\BT
+    return a
+end
+
+function computePoynomialEstimate(N, X, a)
+    R = length(a)
+    ex = constructEx(N)
+    estimate = 0.0
+    x, y, z = X
+    for r = 1:R
+        temp = x .^ ex[r][1] .* y .^ ex[r][2] .* z .^ ex[r][3]
+        estimate += a[r] * temp
+    end
+    return estimate
+end
+
+N = 2
+
+aT = findFitCoeffs(N, M, X, T)
+aQ = findFitCoeffs(N, M, X, Q)
+
+global discTTotal, discQTotal = 0.0, 0.0
+for i = 1:M
+    global X, T, Q
+    local Xi, Ti, Qi = X[i, :], T[i], Q[i]
+    local discT = (computePoynomialEstimate(N, Xi, aT) - Ti)^2
+    global discTTotal += discT
+    # println("Discrepancy in estimation of Thrust T of $(discT) for index $(i)")
+    local discQ = (computePoynomialEstimate(N, Xi, aQ) - Qi)^2
+    global discQTotal += discQ
+    # println("Discrepancy in estimation of Torque Q of $(discQ) for index $(i)")
+end
+
+global discTTotal, discQTotal
+println("Total Discrepancy in polynomial of order $(N) estimation of Thrust T: $(discTTotal/M)")
+println("Total Discrepancy in polynomial of order $(N) estimation of Thrust T: $(discTTotal/M)")
+
 
 # function cE01(x, p;
 #     getGradientToo::Bool=true)

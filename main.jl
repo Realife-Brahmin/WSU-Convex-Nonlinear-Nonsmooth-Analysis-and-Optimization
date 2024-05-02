@@ -33,7 +33,7 @@ warmStart = true
 # functionName = "asqpTestFunction1";
 # functionName = "ecqpTestFunction1";
 # functionName = "ecqpTestFunction2";
-functionName = "alpTestFunction01";
+# functionName = "alpTestFunction01";
 # functionName = "Rastrigin";
 
 pr = include("src/objfuns/"*functionName*".jl")

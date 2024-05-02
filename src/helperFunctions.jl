@@ -224,7 +224,7 @@ function trim_array(nt::NamedTuple, itrMax::Int;
         # Store the original or trimmed value in the dictionary
         trimmed_dict[key] = value
     end
-        @show trimmed_dict[:xopt], trimmed_dict[:fopt]
+        # @show trimmed_dict[:xopt], trimmed_dict[:fopt]
 
     # Convert the dictionary back to a NamedTuple and return
     return NamedTuple(trimmed_dict)

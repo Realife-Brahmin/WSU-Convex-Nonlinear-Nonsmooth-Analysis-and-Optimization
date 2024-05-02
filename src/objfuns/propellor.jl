@@ -133,6 +133,8 @@ function findOptimalPolynomialDegrees(M, X, T, Q)
         end
     end
 
+    myprintln(true, "Best polynomial fits for Thrust T and Torque Q have been found to be $(NT) and $(NQ) respectively.")
+    
     return NT_best, NQ_best, aT_best, aQ_best
 end
 

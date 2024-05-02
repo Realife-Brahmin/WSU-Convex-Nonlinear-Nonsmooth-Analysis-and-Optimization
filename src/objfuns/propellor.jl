@@ -84,16 +84,19 @@ function findFitCoeffs(N, M, X, T)
     return a
 end
 
-function computePoynomialEstimate(N, X, a)
+function computePolynomialEstimate(N, X, a)
     R = length(a)
     ex = constructEx(N)
-    estimate = 0.0
-    x, y, z = X
-    for r = 1:R
-        temp = x .^ ex[r][1] .* y .^ ex[r][2] .* z .^ ex[r][3]
-        estimate += a[r] * sum(temp)
+    M = size(X, 1)
+    T_est = zeros(M)
+    for i = 1:M
+        x, y, z = X[i, :]
+        for r = 1:R
+            temp = x .^ ex[r][1] .* y .^ ex[r][2] .* z .^ ex[r][3]
+            T_est[i] += a[r] .* temp
+        end
     end
-    return estimate
+    return T_est
 end
 
 function findOptimalPolynomialDegrees(M, X, T, Q)
@@ -103,19 +106,16 @@ function findOptimalPolynomialDegrees(M, X, T, Q)
     minDiscQ = Inf
     NQ_best = 1
     aQ_best = []
-    
+
     for (NT, NQ) in zip(1:6, 1:6)
         discTTotal, discQTotal = 0.0, 0.0
         aT = findFitCoeffs(NT, M, X, T)
         aQ = findFitCoeffs(NQ, M, X, Q)
 
-        for i = 1:M
-            Xi, Ti, Qi = X[i, :], T[i], Q[i]
-            discT = (computePoynomialEstimate(NT, Xi, aT) - Ti)^2
-            discQ = (computePoynomialEstimate(NQ, Xi, aQ) - Qi)^2
-            discTTotal += discT
-            discQTotal += discQ
-        end
+        discT = sum((computePolynomialEstimate(NT, X, aT) - T).^2)
+        discQ = sum((computePolynomialEstimate(NQ, X, aQ) - Q).^2)
+        discTTotal += discT
+        discQTotal += discQ
 
         avgDiscT = discTTotal / M
         avgDiscQ = discQTotal / M
@@ -223,33 +223,3 @@ icon = propellorIcons
 # pDictUnc = merge(deepcopy(pDictALP), addendum)
 # # xk = x0
 # F, G = ALOBJ(wk, pDictUnc, getGradientToo=true)
-
-# using JuMP, Ipopt
-
-# model = Model(Ipopt.Optimizer)
-# # x0 = [-1.2, 1.0]
-# # x0 = [1, 2]
-# slackifyInequalities = false
-# slackifyInequalities = true
-# # n = length(x0)
-# @variable(model, x[i=1:n], start = x0[i])
-# @variable(model, y[i=1:mI], start = y0[i])
-# @objective(model, Min, (x[1] - 1)^2 + (x[2] - 2)^2)
-# @constraint(model, x[1]^2 + x[2]^2 - 1 == 0) # regular equality constraint
-
-# if slackifyInequalities
-#     @constraint(model, x[1]^3 + x[2] - y[1]^2 == 0) 
-#     @constraint(model, x[1]^2 + 2 * x[2]^2 - 1.1 - y[2]^2 == 0)
-# else
-#     @constraint(model, x[1]^3 + x[2] >= 0)
-#     @constraint(model, x[1]^2 + 2 * x[2]^2 - 1.1 >= 0)
-# end
-
-# optimize!(model)
-# xopt = [value(x[i]) for i ∈ 1:n]
-# yopt = [value(y[i]) for i ∈ 1:mI]
-# f_optimal = objective_value(model)
-# println("Optimal Variables x: ", xopt)
-# println("Optimal Slack Variables y: ", yopt)
-# println("Optimal objective value: ", f_optimal)
-

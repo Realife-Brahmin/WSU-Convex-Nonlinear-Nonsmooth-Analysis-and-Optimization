@@ -2,8 +2,8 @@ using LinearAlgebra
 using Parameters
 using Test
 
-include("helperFunctions.jl")
-include("types.jl")
+include("../helperFunctions.jl")
+include("../types.jl")
 
 
 function getCandidateStep(SR1params::Dict,

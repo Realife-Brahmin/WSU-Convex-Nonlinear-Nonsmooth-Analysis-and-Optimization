@@ -1,7 +1,7 @@
 using Parameters
 
-include("helperFunctions.jl")
-include("types.jl")
+include("../helperFunctions.jl")
+include("../types.jl")
 
 function updateTRModelParams(SR1params::Dict,
     # k::Int,

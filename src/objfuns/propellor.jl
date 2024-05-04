@@ -35,6 +35,27 @@ begin
     n = length(x0)
 end
 
+"""
+    constructEx(N::Int) -> Vector{Vector{Int}}
+
+Construct an array of power tuples for all terms in a polynomial in three variables (x, y, z) up to degree `N`.
+
+# Arguments
+- `N::Int`: The maximum total degree of the polynomial.
+
+# Returns
+- `Vector{Vector{Int}}`: An array of vectors, where each vector `[a, b, c]` represents a term `x^a * y^b * z^c` in the polynomial.
+
+# Notes
+This function generates all possible power combinations for a polynomial of three variables, `x`, `y`, and `z`. It iterates through all combinations of powers that sum up to values from `0` to `N`. Each combination `[a, b, c]` represents the powers of `x`, `y`, and `z` respectively, making up a term in the polynomial. The function is specifically tailored for polynomials in exactly three variables.
+
+# Example
+```julia
+N = 2
+powers = constructEx(N)
+# Output will include combinations like [0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 1, 0], etc., up to the degree N.
+```
+"""
 function constructEx(N)
     pw = Vector{Int}[]
     for j = 0:N
@@ -49,6 +70,31 @@ function constructEx(N)
     return pw
 end
 
+"""
+    findFitCoeffs(N::Int, X::Matrix{Float64}, T::Vector{Float64}) -> (Vector{Float64}, Vector{Vector{Int}})
+
+Compute the coefficients for a polynomial fit of degree `N` for a given set of data points and corresponding output values.
+
+# Arguments
+- `N::Int`: The degree of the polynomial.
+- `X::Matrix{Float64}`: A matrix where each row represents a data point with three variables (e.g., Degree, alpha, and n_RPM for a propeller).
+- `T::Vector{Float64}`: A vector containing the output values (e.g., Thrust or Torque) corresponding to each row in `X`.
+
+# Returns
+- `(Vector{Float64}, Vector{Vector{Int}})`: A tuple where the first element is a vector of coefficients for the polynomial terms, and the second element is a vector of vectors, each representing the powers of the polynomial terms.
+
+# Notes
+This function generates a matrix of coefficients (`AT`) and a vector (`BT`) for solving the linear system `AT * a = BT` to find the polynomial coefficients. The polynomial terms are generated for three variables up to the specified degree `N`. The function is tailored for problems involving exactly three input variables.
+
+# Example
+```julia
+N = 2
+X = [1.0 2.0 3.0; 4.0 5.0 6.0; 7.0 8.0 9.0]
+T = [1, 2, 3]
+a, pw = findFitCoeffs(N, X, T)
+# `a` will contain the coefficients of the polynomial fit, and `pw` will show the corresponding powers of each term.
+```
+"""
 function findFitCoeffs(N, X, T)
     pw = constructEx(N)
     R = length(pw)
@@ -68,6 +114,31 @@ function findFitCoeffs(N, X, T)
     return a, pw
 end
 
+"""
+    computePolynomialEstimate(X::Matrix{Float64}, pw::Vector{Vector{Int}}, a::Vector{Float64}) -> Vector{Float64}
+
+Calculate the estimated values of a polynomial function based on the provided coefficients and exponents for each term.
+
+# Arguments
+- `X::Matrix{Float64}`: A matrix where each row represents a data point with three variables (e.g., inputs such as Degree, alpha, and n_RPM for a propeller).
+- `pw::Vector{Vector{Int}}`: A vector of vectors, where each inner vector contains the powers of the variables for each term of the polynomial. The `pw` vector is generated to include all possible combinations of powers up to a given maximum degree `N`.
+- `a::Vector{Float64}`: A vector containing the coefficients for each term of the polynomial.
+
+# Returns
+- `Vector{Float64}`: A vector of estimated values calculated from the polynomial for each data point in `X`.
+
+# Notes
+The function computes the polynomial estimate for each data point in `X` by summing up the contributions of each polynomial term, which is defined by the coefficients in `a` and the variable powers in `pw`. This function is specifically designed for polynomial terms involving exactly three variables. It is intended to be used with a set of powers `pw` that encompasses all combinations of powers up to degree `N`, ensuring comprehensive representation of the polynomial space.
+
+# Example
+```julia
+X = [1.0 2.0 3.0; 4.0 5.0 6.0; 7.0 8.0 9.0]
+pw = [[2, 0, 1], [1, 1, 1], [0, 2, 2]]
+a = [0.5, 0.2, 0.1]
+T_est = computePolynomialEstimate(X, pw, a)
+# `T_est` will contain the estimated output values for each data point in `X`.
+```
+"""
 function computePolynomialEstimate(X, pw, a)
     R = length(a)
     M = size(X, 1)

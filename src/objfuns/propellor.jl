@@ -291,7 +291,7 @@ function propellorObj(x, p;
         @error "propellorObj expects a length 3 vector"
     end
 
-    @unpack p = n, lb, ub, R, aQ, pw
+    @unpack p = n, lb, ub, R, aQ, pwQ
     Q = 0
 
     if n != 3
@@ -300,7 +300,7 @@ function propellorObj(x, p;
 
     # R = length(aQ)
     for r = 1:R
-        Q += aQ[r] * prod(x .^ pw[r, :])
+        Q += aQ[r] * prod(x .^ pwQ[r, :])
     end
 
     f = x[1] * x[3] * Q

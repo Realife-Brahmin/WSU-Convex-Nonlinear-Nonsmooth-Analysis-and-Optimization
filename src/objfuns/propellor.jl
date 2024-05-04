@@ -37,6 +37,7 @@ begin
     xk = x0
     n = length(x0)
     T0 = T[pointNum]
+    Q0 = Q[pointNum]
 end
 
 """
@@ -288,29 +289,26 @@ NT, NQ, aT, aQ, pwT, pwQ = findOptimalPolynomialDegrees(M, X, T, Q)
 function propellorObj(x, p;
     getGradientToo::Bool=true)
 
-    if length(x) != 3
+    @unpack n, aQ, pwQ = p
+
+    if length(x) != 3 || n != 3
         @error "propellorObj expects a length 3 vector"
     end
 
-    @unpack p = n, lb, ub, R, aQ, pwQ
-    Q = 0
-
-    if n != 3
-        @error "Discrepancy between x and pDict[:n]"
-    end
-
-    # R = length(aQ)    
-    for r = 1:R
-        Q += aQ[r] * prod(x .^ pwQ[r, :])
-    end
-
-    f = x[1] * x[3] * Q
+    R = length(aQ)
+    polyTerms_1toR = computePolynomialTerms(x, pwQ)
+    Q_est_1toR = aQ.*polyTerms_1toR
+    f_est_1toR = x[1] * x[3] * Q_est_1toR
+    f = sum(f_est_1toR)
 
     if !getGradientToo
         return f
     elseif getGradientToo
-        # compute g yourself
-        return f, g # do
+        g = zeros(n)
+        g[1] = sum([f_est_1toR[r] *  (pwQ[r][1] + 1) / x[1] for r ∈ 1:R])
+        g[2] = sum([f_est_1toR[r] * pwQ[r][2] / x[2] for r ∈ 1:R])
+        g[3] = sum([f_est_1toR[r] * (pwQ[r][3] + 1) / x[3] for r ∈ 1:R])
+        return f, g
     else
         @error("floc")
     end
@@ -401,8 +399,12 @@ problemType = "Constrained"
 econ = propellorEcons
 icon = propellorIcons
 
-pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon, :NT=>NT, :pwT => pwT, :aT=>aT, :NQ=>NQ, :pwQ=>:pwQ, :aQ=>aQ, :lb=>lb, :ub=>ub, :T0=>T0)
+pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon, :NT=>NT, :pwT => pwT, :aT=>aT, :NQ=>NQ, :pwQ=>pwQ, :aQ=>aQ, :lb=>lb, :ub=>ub, :T0=>T0)
 
 pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString);
 
-propellorEcons(xk, pDictALP)
+# f, g = propellorObj(xk, pDictALP)
+# diff_FOM = f - Q0*xk[1]*xk[3]
+# cI0, hI0 = propellorIcons(xk, pDictALP)
+# cE0, hE0 = propellorEcons(xk, pDictALP)
+

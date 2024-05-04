@@ -86,17 +86,19 @@ function findOptimalPolynomialDegrees(M, X, T, Q)
     minDiscT = Inf
     NT_best = 1
     aT_best = []
+    pwT_best = []
     minDiscQ = Inf
     NQ_best = 1
     aQ_best = []
+    pwQ_best = []
 
     for (NT, NQ) in zip(1:6, 1:6)
         discTTotal, discQTotal = 0.0, 0.0
-        aT = findFitCoeffs(NT, X, T)
-        aQ = findFitCoeffs(NQ, X, Q)
+        aT, pwT = findFitCoeffs(NT, X, T)
+        aQ, pwQ = findFitCoeffs(NQ, X, Q)
 
-        discT = sum((computePolynomialEstimate(NT, X, aT) - T).^2)
-        discQ = sum((computePolynomialEstimate(NQ, X, aQ) - Q).^2)
+        discT = sum((computePolynomialEstimate(X, pwT, aT) - T).^2)
+        discQ = sum((computePolynomialEstimate(X, pwQ, aQ) - Q).^2)
         discTTotal += discT
         discQTotal += discQ
 
@@ -108,21 +110,22 @@ function findOptimalPolynomialDegrees(M, X, T, Q)
             minDiscT = avgDiscT
             NT_best = NT
             aT_best = aT
+            pwT_best = pwT
         end
         if avgDiscQ < minDiscQ
             minDiscQ = avgDiscQ
             NQ_best = NQ
             aQ_best = aQ
+            pwQ_best = pwQ
         end
     end
 
     myprintln(true, "Best polynomial fits for Thrust T and Torque Q have been found to be $(NT_best) and $(NQ_best) respectively.")
 
-    return NT_best, NQ_best, aT_best, aQ_best
+    return NT_best, NQ_best, aT_best, aQ_best, pwT_best, pwQ_best
 end
 
-NT, NQ, aT, aQ = findOptimalPolynomialDegrees(M, X, T, Q)
-pwT, pwQ = constructEx.([NT, NQ])
+NT, NQ, aT, aQ, pwT, pwQ = findOptimalPolynomialDegrees(M, X, T, Q)
 
 function propellorObj(x, p;
     getGradientToo::Bool=true)

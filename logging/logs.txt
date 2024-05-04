@@ -63,3 +63,38 @@ Let's try solving for the Augmented Lagrangian problem with λ = [-1.23606870877
 From the current point wk = [0.4472132387071784, 0.8944273613985926, 0.9919021449146866, 0.8366602076334387]
 Calling Unconstrained Solver as a subroutine for ALP.
 Change is too small, perhaps I will check if equality constraints are satisfied.
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated
+Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
+Problem (pr::NamedTuple) generated

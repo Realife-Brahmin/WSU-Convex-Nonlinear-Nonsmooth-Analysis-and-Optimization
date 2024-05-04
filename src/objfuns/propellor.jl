@@ -30,11 +30,12 @@ begin
     lb = lb0 ./ maxVals0
     ub = ub0 ./ maxVals0
 
-    pointNum = rand(1:M)
+    # pointNum = rand(1:M)
+    pointNum = 50
     # ratio = rand()
     # x0 = lb*ratio + (1-ratio)*ub
     x0 = X[pointNum, :]
-    xk = x0
+    # xk = x0
     n = length(x0)
     T0 = T[pointNum]
     Q0 = Q[pointNum]

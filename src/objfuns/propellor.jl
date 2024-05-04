@@ -29,10 +29,14 @@ begin
     ub0 = [4, 10, 7]
     lb = lb0 ./ maxVals0
     ub = ub0 ./ maxVals0
-    ratio = rand()
-    x0 = lb*ratio + (1-ratio)*ub
+
+    pointNum = rand(1:M)
+    # ratio = rand()
+    # x0 = lb*ratio + (1-ratio)*ub
+    x0 = X[pointNum, :]
     xk = x0
     n = length(x0)
+    T0 = T[pointNum]
 end
 
 """

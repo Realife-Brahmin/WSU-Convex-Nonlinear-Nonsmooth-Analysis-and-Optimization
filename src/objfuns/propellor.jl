@@ -409,3 +409,15 @@ pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; object
 # cI0, hI0 = propellorIcons(xk, pDictALP)
 # cE0, hE0 = propellorEcons(xk, pDictALP)
 
+# objectiveUnc = ALOBJ
+# subroutineCall = true
+# muk = 1.0
+# m = mE+mI
+# lambdak = ones(m)
+# addendum = Dict(:subroutineCall => subroutineCall, :lambda => lambdak, :mu => muk, :objectiveALP => objective, :objectiveUnc => objectiveUnc)
+# pDictUnc = merge(deepcopy(pDictALP), addendum)
+# F, G = ALOBJ(w0, pDictUnc, getGradientToo=true)
+
+# F, G = ALOBJ(w0, pDictUnc, getGradientToo=true)
+
+

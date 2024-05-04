@@ -115,33 +115,42 @@ function findFitCoeffs(N, X, T)
 end
 
 """
-    computePolynomialEstimate(X::Matrix{Float64}, pw::Vector{Vector{Int}}, a::Vector{Float64}) -> Vector{Float64}
+    computePolynomialEstimate(X, pw, a)
 
-Calculate the estimated values of a polynomial function based on the provided coefficients and exponents for each term.
+Estimates the values of a polynomial function based on provided coefficients over a set of input data points.
 
 # Arguments
-- `X::Matrix{Float64}`: A matrix where each row represents a data point with three variables (e.g., inputs such as Degree, alpha, and n_RPM for a propeller).
-- `pw::Vector{Vector{Int}}`: A vector of vectors, where each inner vector contains the powers of the variables for each term of the polynomial. The `pw` vector is generated to include all possible combinations of powers up to a given maximum degree `N`.
-- `a::Vector{Float64}`: A vector containing the coefficients for each term of the polynomial.
+- `X::Union{AbstractVector, AbstractMatrix}`: Input data points. Each row represents a single set of variables (x, y, z).
+- `pw::Vector{Vector{Int}}`: Powers of each variable in the polynomial terms.
+- `a::Vector`: Coefficients for each polynomial term.
 
 # Returns
-- `Vector{Float64}`: A vector of estimated values calculated from the polynomial for each data point in `X`.
+- `T_est::Vector{Float64}`: Estimated values of the polynomial at each data point in `X`.
+
+# Details
+This function computes the polynomial value for each data point specified in `X`. The polynomial is defined by the terms in `pw` and their corresponding coefficients in `a`.
 
 # Notes
-The function computes the polynomial estimate for each data point in `X` by summing up the contributions of each polynomial term, which is defined by the coefficients in `a` and the variable powers in `pw`. This function is specifically designed for polynomial terms involving exactly three variables. It is intended to be used with a set of powers `pw` that encompasses all combinations of powers up to degree `N`, ensuring comprehensive representation of the polynomial space.
+- `X` can either be a matrix of multiple data points or a single vector for one data point. If it's a vector, it is reshaped internally for consistent processing.
+- If `X` is provided as a single vector, it is treated as a single data point.
 
-# Example
+# Examples
 ```julia
-X = [1.0 2.0 3.0; 4.0 5.0 6.0; 7.0 8.0 9.0]
-pw = [[2, 0, 1], [1, 1, 1], [0, 2, 2]]
-a = [0.5, 0.2, 0.1]
+X = [1 2 3; 4 5 6]  # Two points in R^3
+pw = [[1, 0, 0], [0, 1, 1]]  # Corresponds to x and y*z
+a = [2, 3]  # Coefficients for x and y*z
+
+# Compute polynomial estimates
 T_est = computePolynomialEstimate(X, pw, a)
-# `T_est` will contain the estimated output values for each data point in `X`.
 ```
 """
 function computePolynomialEstimate(X, pw, a)
     R = length(a)
     M = size(X, 1)
+    if ndims(X) == 1  # X is a single vector treated as one data point
+        M = 1  # There is just one data point
+        X = reshape(X, 1, :)  # Reshape X to be a 1xN matrix for consistency
+    end
     T_est = zeros(M)
     for i = 1:M
         x, y, z = X[i, :]

@@ -490,6 +490,7 @@ slackifyInequalities = false
 # end
 
 using JuMP, Ipopt
+import ForwardDiff as FD
 
 model = Model(Ipopt.Optimizer)
 
@@ -501,7 +502,23 @@ dynamic_polyQ = sum(aQ[r] * prod(x[j]^pwQ[r][j] for j in 1:3) for r in eachindex
 dynamic_polyT = sum(aT[r] * prod(x[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
 
 # Assuming `dynamic_polyQ` and `dynamic_polyT` are defined similarly as before
-@objective(model, Min, x[1] * x[3] * dynamic_polyQ)
+
+function objective_function(x_vals)
+    # Assuming aQ, pwQ are accessible here and x_vals is a vector [x1, x2, x3]
+    dynamic_polyQ = sum(aQ[r] * prod(x_vals[j]^pwQ[r][j] for j in 1:3) for r in eachindex(aQ))
+    return x_vals[1] * x_vals[3] * dynamic_polyQ
+end
+
+@expression(model, objfun, x[1] * x[3] * dynamic_polyQ)
+@expression(model, cE, dynamic_polyT - T0)
+# @expression(model, cI1to3, ub .- x)
+# @expression(model, cI4to6, x .- lb)
+@expression(model, cI, vcat(ub .- x, x .- lb))
+
+
+# @objective(model, Min, x[1] * x[3] * dynamic_polyQ)
+@objective(model, Min, objfun)
+
 
 # Store constraint references
 eq_constraint_ref = @constraint(model, dynamic_polyT - T0 == 0)
@@ -510,17 +527,17 @@ eq_constraint_ref = @constraint(model, dynamic_polyT - T0 == 0)
 ineq_constraint_refs = []
 if slackifyInequalities
     for i in 1:3
-        push!(ineq_constraint_refs, @constraint(model, x[i] - lb[i] - y[i]^2 == 0))
+        push!(ineq_constraint_refs, @constraint(model, ub[i] - x[i] - y[i+3]^2 == 0))
     end
     for i in 1:3
-        push!(ineq_constraint_refs, @constraint(model, ub[i] - x[i] - y[i+3]^2 == 0))
+        push!(ineq_constraint_refs, @constraint(model, x[i] - lb[i] - y[i]^2 == 0))
     end
 else
     for i in 1:n
-        push!(ineq_constraint_refs, @constraint(model, x[i] - lb[i] >= 0))
+        push!(ineq_constraint_refs, @constraint(model, ub[i] - x[i] >= 0))
     end
     for i in 1:n
-        push!(ineq_constraint_refs, @constraint(model, ub[i] - x[i] >= 0))
+        push!(ineq_constraint_refs, @constraint(model, x[i] - lb[i] >= 0))
     end
 end
 
@@ -533,14 +550,29 @@ println("Optimal Variables x: ", xopt)
 println("Optimal Slack Variables y: ", yopt)
 println("Optimal objective value: ", f_optimal)
 
-# Accessing dual values
-eq_constraint_dual = dual(eq_constraint_ref)
-println("Dual value for equality constraint: ", eq_constraint_dual)
 
-# If inequality constraints are used
-for ref in ineq_constraint_refs
-    println("Dual value for constraint: ", dual(ref))
+gradient_obj = FD.gradient(objective_function, xopt)
+println("Gradient of the objective at the optimum: ", gradient_obj)
+
+
+
+function cEf(x_vals)
+    # Assuming aQ, pwQ are accessible here and x_vals is a vector [x1, x2, x3]
+    dynamic_polyQ = sum(aT[r] * prod(x_vals[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
+    cEfval = dynamic_polyQ - T0
+    return cEfval
 end
+
+FD.gradient(cEf, xopt)
+# Accessing dual values
+
+# eq_constraint_dual = dual(eq_constraint_ref)
+# println("Dual value for equality constraint: ", eq_constraint_dual)
+
+# # If inequality constraints are used
+# for ref in ineq_constraint_refs
+#     println("Dual value for constraint: ", dual(ref))
+# end
 
 
 

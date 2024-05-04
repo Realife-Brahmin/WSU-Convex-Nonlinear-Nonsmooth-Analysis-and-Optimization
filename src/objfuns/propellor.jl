@@ -68,15 +68,14 @@ function findFitCoeffs(N, X, T)
     return a, pw
 end
 
-function computePolynomialEstimate(N, X, a)
+function computePolynomialEstimate(X, pw, a)
     R = length(a)
-    ex = constructEx(N)
     M = size(X, 1)
     T_est = zeros(M)
     for i = 1:M
         x, y, z = X[i, :]
         for r = 1:R
-            temp = x .^ ex[r][1] .* y .^ ex[r][2] .* z .^ ex[r][3]
+            temp = x .^ pw[r][1] .* y .^ pw[r][2] .* z .^ pw[r][3]
             T_est[i] += a[r] .* temp
         end
     end

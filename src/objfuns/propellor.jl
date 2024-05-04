@@ -5,47 +5,35 @@ using CSV
 using DataFrames
 using Parameters
 
-rawDataFolder = "rawData/"
-filename = rawDataFolder * "PropData.csv"
-df = CSV.File(filename, header=false) |> DataFrame
-rename!(df, [:D, :alpha, :n, :T, :Q])
-df.D /= maximum(df.D)
-df.alpha /= maximum(df.alpha)
-df.n /= maximum(df.n)
+begin
+    rawDataFolder = "rawData/"
+    filename = rawDataFolder * "PropData.csv"
+    df0 = CSV.File(filename, header=false) |> DataFrame
+    rename!(df0, [:D, :alpha, :n, :T, :Q])
+    # finding the maximium of the unnormalized variables, against which the variables as well as the lower and upper bounds will be normalized
+    maxVals0 = maximum.([df0.D, df0.alpha, df0.n])
 
-data = Matrix(df)
-x0 = rand(2)
-xk = x0
-n = length(x0)
+    df = deepcopy(df0)
+    df.D /= maxVals0[1] # Dmax0 
+    df.alpha /= maxVals0[2] # alphamax0
+    df.n /= maxVals0[3] # nmax0
+    data = Matrix(df)
 
-function propellorObj(x, p;
-    getGradientToo::Bool=true)
+    M = size(data, 1)
 
-    if length(x) != 2
-        @error "alpTestFunction01 expects a length 2 vector"
-    end
+    X = data[:, 1:3]
+    T = data[:, 4]
+    Q = data[:, 5]
 
-    Q = 0
-    # b = p[:b]
-    m = length(p[:b])
-    for r = 1:m
-        Q += p[:b][r] * prod(x .^ p[:pw][r, :])
-    end
-    f = x[1]*x[3]*Q
-
-    if !getGradientToo
-        return f
-    elseif getGradientToo
-        # compute g yourself
-        return f, g
-    else
-        @error("floc")
-    end
-
-    @error("floc")
+    lb0 = [1, 0, 1]
+    ub0 = [4, 10, 7]
+    lb = lb0 ./ maxVals0
+    ub = ub0 ./ maxVals0
+    ratio = rand()
+    x0 = lb*ratio + (1-ratio)*ub
+    xk = x0
+    n = length(x0)
 end
-
-M = size(df, 1)
 
 function constructEx(N)
     ex = Vector{Int}[]
@@ -61,11 +49,7 @@ function constructEx(N)
     return ex
 end
 
-X = data[:, 1:3]
-T = data[:, 4]
-Q = data[:, 5]
-
-function findFitCoeffs(N, M, X, T)
+function findFitCoeffs(N, X, T)
     ex = constructEx(N)
     R = length(ex)
     AT = zeros(R, R)
@@ -109,8 +93,8 @@ function findOptimalPolynomialDegrees(M, X, T, Q)
 
     for (NT, NQ) in zip(1:6, 1:6)
         discTTotal, discQTotal = 0.0, 0.0
-        aT = findFitCoeffs(NT, M, X, T)
-        aQ = findFitCoeffs(NQ, M, X, Q)
+        aT = findFitCoeffs(NT, X, T)
+        aQ = findFitCoeffs(NQ, X, Q)
 
         discT = sum((computePolynomialEstimate(NT, X, aT) - T).^2)
         discQ = sum((computePolynomialEstimate(NQ, X, aQ) - Q).^2)
@@ -133,66 +117,104 @@ function findOptimalPolynomialDegrees(M, X, T, Q)
         end
     end
 
-    myprintln(true, "Best polynomial fits for Thrust T and Torque Q have been found to be $(NT) and $(NQ) respectively.")
+    myprintln(true, "Best polynomial fits for Thrust T and Torque Q have been found to be $(NT_best) and $(NQ_best) respectively.")
 
     return NT_best, NQ_best, aT_best, aQ_best
 end
 
 NT, NQ, aT, aQ = findOptimalPolynomialDegrees(M, X, T, Q)
 
+function propellorObj(x, p;
+    getGradientToo::Bool=true)
 
-# function cE01(x, p;
-#     getGradientToo::Bool=true)
+    if length(x) != 3
+        @error "propellorObj expects a length 3 vector"
+    end
 
-#     if length(x) != 2
-#         @error "cE01 expects a length 2 vector"
-#     end
+    @unpack p = n, lb, ub, R, aQ, pw
+    Q = 0
 
-#     mE = 1
-#     cE = zeros(mE)
-#     cE[1] = x[1]^2 + x[2]^2 - 1
+    if n != 3
+        @error "Discrepancy between x and pDict[:n]"
+    end
 
-#     if !getGradientToo
-#         return cE
-#     elseif getGradientToo
-#         n = length(x)
-#         hE = zeros(mE, n)
-#         hE[1, 1] = 2*x[1]
-#         hE[1, 2] = 2*x[2]
-#         return cE, hE
-#     else
-#         @error("floc")
-#     end
+    # R = length(aQ)
+    for r = 1:R
+        Q += aQ[r] * prod(x .^ pw[r, :])
+    end
 
-#     @error("floc")
+    f = x[1] * x[3] * Q
 
-# end
+    if !getGradientToo
+        return f
+    elseif getGradientToo
+        # compute g yourself
+        return f, g # do
+    else
+        @error("floc")
+    end
 
-mE = 0
+    @error("floc")
+end
+
+mE = 1
+
+function propellorEcons(x, p;
+    getGradientToo::Bool=true)
+
+    @unpack n, mE, aT, NT, T0 = p
+
+    if length(x) != 3 || n != 3
+        @error "propellorEcons expects a length 3 vector"
+    end
+
+    mE = 1
+    cE = zeros(mE)
+    cE[1] = computePolynomialEstimate(NT, x, aT) - T0
+    
+    if !getGradientToo
+        return cE
+    elseif getGradientToo
+        hE = zeros(mE, n)
+        # do : compute hE
+        return cE, hE
+    else
+        @error("floc")
+    end
+
+    @error("floc")
+
+end
+
+mI = 6
+y0 = rand(mI)
+yk = y0
 
 function propellorIcons(x, p;
     getGradientToo::Bool=true)
 
-    if length(x) != 3
+    @unpack n, mI, lb, ub, = p
+
+    if length(x) != 3 || n != 3
         @error "propellorIcons expects a length 3 vector"
     end
 
     mI = 6
     cI = zeros(mI)
-    cI[1] = x[1] - 4
-    cI[2] = x[2] - 10
-    cI[3] = x[3] - 7
-    cI[4] = 1 - x[1]
-    cI[2] = x[1]^2 + 2*x[2]^2 - 1.1
+    cI[1] = ub[1] - x[1]
+    cI[2] = ub[2] - x[2]
+    cI[3] = ub[3] - x[3]
+    cI[4] = x[1] - lb[1]
+    cI[5] = x[2] - lb[2]
+    cI[6] = x[3] - lb[3]
+
     if !getGradientToo
         return cI
     elseif getGradientToo
         n = length(x)
         hI = zeros(mI, n)
-        hI[1, 1] = 3*x[1]^2
-        hI[1, 2] = 1
-        hI[2, 1] = 2*x[1]
-        hI[2, 2] = 4*x[2]
+        hI[1:3, :] = -I(3)
+        hI[4:6, :] = I(3)
         return cI, hI
     else
         @error("floc")
@@ -202,9 +224,6 @@ function propellorIcons(x, p;
 
 end
 
-mI = 2
-y0 = rand(mI)
-yk = y0
 m = mE+mI
 w0 = vcat(x0, y0)
 wk = w0
@@ -213,18 +232,10 @@ objective = propellorObj
 objectiveOriginal = propellorObj
 objectiveString = "propellorObj"
 problemType = "Constrained"
-econ = nothing
+econ = propellorEcons
 icon = propellorIcons
-;
-# pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
-# pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString)
+T0 = T[20]
 
-# objectiveUnc = ALOBJ
-# subroutineCall = true
-# muk = 1.0
-# m = mE+mI
-# lambdak = ones(m)
-# addendum = Dict(:subroutineCall => subroutineCall, :lambda => lambdak, :mu => muk, :objective => objective, :objectiveUnc => objectiveUnc)
-# pDictUnc = merge(deepcopy(pDictALP), addendum)
-# # xk = x0
-# F, G = ALOBJ(wk, pDictUnc, getGradientToo=true)
+pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon, :NT=>NT, :aT=>aT, :NQ=>NQ, :aQ=>aQ, :lb=>lb, :ub=>ub, :T0=>T0)
+
+pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString);

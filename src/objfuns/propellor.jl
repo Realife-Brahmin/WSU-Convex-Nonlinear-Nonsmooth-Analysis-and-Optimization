@@ -406,25 +406,10 @@ pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; object
 
 using JuMP, Ipopt
 model = Model(Ipopt.Optimizer)
-# x0 = [-1.2, 1.0]
-# x0 = [1, 2]
+
 slackifyInequalities = false
 slackifyInequalities = true
 # n = length(x0)
-
-# pwQ = [
-#     [0, 0, 0], # Constant term
-#     [1, 0, 0], # x
-#     [0, 1, 0], # y
-#     [0, 0, 1], # z
-#     [2, 0, 0], # x^2
-#     [1, 1, 0], # xy
-#     [1, 0, 1], # xz
-#     [0, 2, 0], # y^2
-#     [0, 1, 1], # yz
-#     [0, 0, 2]  # z^2
-# ]
-
 
 @variable(model, x[i=1:n], start = x0[i])
 
@@ -440,10 +425,10 @@ dynamic_polyT = sum(aT[r] * prod(x[j]^pwT[r][j] for j in 1:3) for r in eachindex
 @constraint(model, dynamic_polyT - T0 == 0)
 
 if slackifyInequalities
-    @constraint(model, x - lb - y[1:3].^2 .== 0) # regular equality constraint
+    @constraint(model, x - lb - y[1:3].^2 .== 0) # slackified equality constraints
     @constraint(model, ub - x - y[4:6].^2 .== 0)
 else
-    @constraint(model, x >= lb) # regular equality constraint
+    @constraint(model, x >= lb) # regular inequality constraint
     @constraint(model, x <= ub)
 end
 
@@ -454,6 +439,55 @@ f_optimal = objective_value(model)
 println("Optimal Variables x: ", xopt)
 println("Optimal Slack Variables y: ", yopt)
 println("Optimal objective value: ", f_optimal)
+
+using JuMP, Ipopt, ForwardDiff
+
+# Assuming your model is already defined and solved as above
+# Objective value
+# f_optimal = objective_value(model)
+# println("Optimal objective value: ", f_optimal)
+
+# Gradient of the Objective (assuming definition is available)
+# Define your objective as a function if possible
+function objective_function(x_vals)
+    # Assuming aQ, pwQ are accessible here and x_vals is a vector [x1, x2, x3]
+    dynamic_polyQ = sum(aQ[r] * prod(x_vals[j]^pwQ[r][j] for j in 1:3) for r in eachindex(aQ))
+    return x_vals[1] * x_vals[3] * dynamic_polyQ
+end
+
+# Use ForwardDiff to calculate the gradient at the optimal point
+xopt = [value(x[i]) for i ∈ 1:n]
+gradient_obj = ForwardDiff.gradient(objective_function, xopt)
+println("Gradient of the objective at the optimum: ", gradient_obj)
+
+# Constraint values and duals
+# For equality constraint
+eq_constraint_value = value(dynamic_polyT - T0)
+# eq_constraint_dual = dual(dynamic_polyT - T0 == 0)  # adjust this according to how you've named the constraint
+println("Equality constraint value: ", eq_constraint_value)
+# println("Dual value (Lagrangian Multiplier) for equality constraint: ", eq_constraint_dual)
+
+# For inequality constraints (if slackified, otherwise adjust as needed)
+if slackifyInequalities
+    for i in 1:3
+        println("Slackified inequality constraint $(i) value: ", value(x[i] - lb[i] - y[i]^2))
+        # println("Dual for slackified inequality constraint $(i): ", dual(model[:x[i]-lb[i]-y[i]^2==0]))
+    end
+    for i in 1:3
+        println("Slackified inequality constraint $(i+3) value: ", value(ub[i] - x[i] - y[i+3]^2))
+        # println("Dual for slackified inequality constraint $(i): ", dual(model[:x[i]-lb[i]-y[i]^2==0]))
+    end
+else
+    for i in 1:n
+        println("Inequality constraint $(i) (x[i] >= lb[i]): ", value(x[i] - lb[i]))
+        # println("Dual for inequality constraint $(i): ", dual(model[:x[i]>=lb[i]]))
+    end
+    for i in 1:n
+        println("Inequality constraint $(i+3) (x[i] <= ub[i]): ", value(ub[i] - x[i] - y[i+3]^2))
+        # println("Dual for slackified inequality constraint $(i): ", dual(model[:x[i]-lb[i]-y[i]^2==0]))
+    end
+end
+
 
 # f, g = propellorObj(xk, pDictALP)
 # diff_FOM = f - Q0*xk[1]*xk[3]

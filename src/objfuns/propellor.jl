@@ -323,7 +323,7 @@ mE = 1
 function propellorEcons(x, p;
     getGradientToo::Bool=true)
 
-    @unpack n, mE, aT, NT, T0 = p
+    @unpack n, mE, pwT, aT, NT, T0 = p
 
     if length(x) != 3 || n != 3
         @error "propellorEcons expects a length 3 vector"
@@ -331,13 +331,17 @@ function propellorEcons(x, p;
 
     mE = 1
     cE = zeros(mE)
-    cE[1] = computePolynomialEstimate(NT, x, aT) - T0
+    R = length(aT)
+    polyTerms_1toR = computePolynomialTerms(x, pwT)
+    cE[1] = sum(aT.*polyTerms_1toR) - T0
     
     if !getGradientToo
         return cE
     elseif getGradientToo
         hE = zeros(mE, n)
-        # do : compute hE
+        for i = 1:n
+            hE[1, i] = sum([aT[r] * polyTerms_1toR[r] * pwT[r][i] / x[i] for r = 1:R])
+        end
         return cE, hE
     else
         @error("floc")
@@ -395,8 +399,9 @@ objectiveString = "propellorObj"
 problemType = "Constrained"
 econ = propellorEcons
 icon = propellorIcons
-T0 = T[20]
 
 pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon, :NT=>NT, :pwT => pwT, :aT=>aT, :NQ=>NQ, :pwQ=>:pwQ, :aQ=>aQ, :lb=>lb, :ub=>ub, :T0=>T0)
 
 pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString);
+
+propellorEcons(xk, pDictALP)

@@ -404,6 +404,57 @@ pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon, :NT=>N
 
 pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString);
 
+using JuMP, Ipopt
+model = Model(Ipopt.Optimizer)
+# x0 = [-1.2, 1.0]
+# x0 = [1, 2]
+slackifyInequalities = false
+slackifyInequalities = true
+# n = length(x0)
+
+# pwQ = [
+#     [0, 0, 0], # Constant term
+#     [1, 0, 0], # x
+#     [0, 1, 0], # y
+#     [0, 0, 1], # z
+#     [2, 0, 0], # x^2
+#     [1, 1, 0], # xy
+#     [1, 0, 1], # xz
+#     [0, 2, 0], # y^2
+#     [0, 1, 1], # yz
+#     [0, 0, 2]  # z^2
+# ]
+
+
+@variable(model, x[i=1:n], start = x0[i])
+
+dynamic_polyQ = sum(aQ[r] * prod(x[j]^pwQ[r][j] for j in 1:3) for r in eachindex(aQ))
+
+dynamic_polyT = sum(aT[r] * prod(x[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
+
+
+@variable(model, y[i=1:mI], start = y0[i])
+# @objective(model, Min, x[1]*x[3]*computePolynomialEstimate(x, pwQ, aQ))
+@objective(model, Min, x[1] * x[3] * dynamic_polyQ)  # Assuming you want to include this term x[1]*x[3]*dynamic_polyQ in your objective
+
+@constraint(model, dynamic_polyT - T0 == 0)
+
+if slackifyInequalities
+    @constraint(model, x - lb - y[1:3].^2 .== 0) # regular equality constraint
+    @constraint(model, ub - x - y[4:6].^2 .== 0)
+else
+    @constraint(model, x >= lb) # regular equality constraint
+    @constraint(model, x <= ub)
+end
+
+optimize!(model)
+xopt = [value(x[i]) for i ∈ 1:n]
+yopt = [value(y[i]) for i ∈ 1:mI]
+f_optimal = objective_value(model)
+println("Optimal Variables x: ", xopt)
+println("Optimal Slack Variables y: ", yopt)
+println("Optimal objective value: ", f_optimal)
+
 # f, g = propellorObj(xk, pDictALP)
 # diff_FOM = f - Q0*xk[1]*xk[3]
 # cI0, hI0 = propellorIcons(xk, pDictALP)

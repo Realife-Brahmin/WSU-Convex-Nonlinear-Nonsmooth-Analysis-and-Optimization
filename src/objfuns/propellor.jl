@@ -563,14 +563,24 @@ end
 
 FD.gradient(x -> cEf2(x, pDictALP), xopt)
 
-function cEf(x_vals, pw, a, T0)
-    # Assuming aQ, pwQ are accessible here and x_vals is a vector [x1, x2, x3]
-    dynamic_polyT = sum(a[r] * prod(x_vals[j]^pw[r][j] for j in 1:3) for r in eachindex(a))
-    cEfval = dynamic_polyT - T0
-    return cEfval
+# function cEf(x_vals, pw, a, T0)
+#     # Assuming aQ, pwQ are accessible here and x_vals is a vector [x1, x2, x3]
+#     dynamic_polyT = sum(a[r] * prod(x_vals[j]^pw[r][j] for j in 1:3) for r in eachindex(a))
+#     cEfval = dynamic_polyT - T0
+#     return cEfval
+# end
+# FD.gradient(x -> cEf(x, pwT, aT, T0), xopt)
+
+function cIf(x, pDictALP)
+    @unpack n, lb, ub, mI = pDictALP
+    cI = zeros(mI)
+    cI[1:3] = ub .- x[1:3]
+    cI[4:6] = x[1:3] .- lb
+    return cI
 end
 
-FD.gradient(x -> cEf(x, pwT, aT, T0), xopt)
+cIf(xopt, pDictALP)
+FD.gradient(x -> cIf(x, pDictALP), xopt)
 # Accessing dual values
 
 # eq_constraint_dual = dual(eq_constraint_ref)

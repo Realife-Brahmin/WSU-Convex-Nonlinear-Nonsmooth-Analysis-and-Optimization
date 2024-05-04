@@ -554,11 +554,18 @@ println("Optimal objective value: ", f_optimal)
 gradient_obj = FD.gradient(objective_function, xopt)
 println("Gradient of the objective at the optimum: ", gradient_obj)
 
+function cEf2(x_vals, pDict)
+    @unpack pwT, aT, T0 = pDict
+    dynamic_polyT = sum(aT[r] * prod(x_vals[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
+    cEfval = dynamic_polyT - T0
+    return cEfval
+end
 
+FD.gradient(x -> cEf2(x, pDictALP), xopt)
 
 function cEf(x_vals, pw, a, T0)
     # Assuming aQ, pwQ are accessible here and x_vals is a vector [x1, x2, x3]
-    dynamic_polyT = sum(a[r] * prod(x_vals[j]^pw[r][j] for j in 1:3) for r in eachindex(aT))
+    dynamic_polyT = sum(a[r] * prod(x_vals[j]^pw[r][j] for j in 1:3) for r in eachindex(a))
     cEfval = dynamic_polyT - T0
     return cEfval
 end

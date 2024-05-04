@@ -408,7 +408,7 @@ using JuMP, Ipopt
 model = Model(Ipopt.Optimizer)
 
 slackifyInequalities = false
-slackifyInequalities = true
+# slackifyInequalities = true
 # n = length(x0)
 
 @variable(model, x[i=1:n], start = x0[i])
@@ -440,12 +440,8 @@ println("Optimal Variables x: ", xopt)
 println("Optimal Slack Variables y: ", yopt)
 println("Optimal objective value: ", f_optimal)
 
-using JuMP, Ipopt, ForwardDiff
-
-# Assuming your model is already defined and solved as above
-# Objective value
-# f_optimal = objective_value(model)
-# println("Optimal objective value: ", f_optimal)
+using JuMP, Ipopt
+import ForwardDiff as FD
 
 # Gradient of the Objective (assuming definition is available)
 # Define your objective as a function if possible
@@ -455,14 +451,17 @@ function objective_function(x_vals)
     return x_vals[1] * x_vals[3] * dynamic_polyQ
 end
 
-# Use ForwardDiff to calculate the gradient at the optimal point
+# Use FD to calculate the gradient at the optimal point
 xopt = [value(x[i]) for i ∈ 1:n]
-gradient_obj = ForwardDiff.gradient(objective_function, xopt)
+gradient_obj = FD.gradient(objective_function, xopt)
 println("Gradient of the objective at the optimum: ", gradient_obj)
 
 # Constraint values and duals
 # For equality constraint
+
 eq_constraint_value = value(dynamic_polyT - T0)
+
+
 # eq_constraint_dual = dual(dynamic_polyT - T0 == 0)  # adjust this according to how you've named the constraint
 println("Equality constraint value: ", eq_constraint_value)
 # println("Dual value (Lagrangian Multiplier) for equality constraint: ", eq_constraint_dual)
@@ -470,21 +469,21 @@ println("Equality constraint value: ", eq_constraint_value)
 # For inequality constraints (if slackified, otherwise adjust as needed)
 if slackifyInequalities
     for i in 1:3
-        println("Slackified inequality constraint $(i) value: ", value(x[i] - lb[i] - y[i]^2))
+        println("Slackified inequality constraint $(i+3) value: ", value(ub[i] - x[i] - y[i+3]^2))
         # println("Dual for slackified inequality constraint $(i): ", dual(model[:x[i]-lb[i]-y[i]^2==0]))
     end
     for i in 1:3
-        println("Slackified inequality constraint $(i+3) value: ", value(ub[i] - x[i] - y[i+3]^2))
+        println("Slackified inequality constraint $(i) value: ", value(x[i] - lb[i] - y[i]^2))
         # println("Dual for slackified inequality constraint $(i): ", dual(model[:x[i]-lb[i]-y[i]^2==0]))
     end
 else
     for i in 1:n
-        println("Inequality constraint $(i) (x[i] >= lb[i]): ", value(x[i] - lb[i]))
-        # println("Dual for inequality constraint $(i): ", dual(model[:x[i]>=lb[i]]))
+        println("Inequality constraint $(i+3) (x[i] <= ub[i]): ", value(ub[i] - x[i]))
+        # println("Dual for slackified inequality constraint $(i): ", dual(model[:x[i]-lb[i]-y[i]^2==0]))
     end
     for i in 1:n
-        println("Inequality constraint $(i+3) (x[i] <= ub[i]): ", value(ub[i] - x[i] - y[i+3]^2))
-        # println("Dual for slackified inequality constraint $(i): ", dual(model[:x[i]-lb[i]-y[i]^2==0]))
+        println("Inequality constraint $(i) (x[i] >= lb[i]): ", value(x[i] - lb[i]))
+        # println("Dual for inequality constraint $(i): ", dual(model[:x[i]>=lb[i]]))
     end
 end
 

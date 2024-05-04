@@ -153,6 +153,39 @@ function computePolynomialEstimate(X, pw, a)
     return T_est
 end
 
+"""
+    findOptimalPolynomialDegrees(M::Int, X::Matrix{Float64}, T::Vector{Float64}, Q::Vector{Float64}) -> Tuple
+
+Finds the optimal polynomial degrees for fitting polynomial models to two sets of data (Thrust T and Torque Q) and returns the best degrees and their corresponding coefficients and power vectors.
+
+# Arguments
+- `M::Int`: Number of data points.
+- `X::Matrix{Float64}`: A matrix of input data where each row represents a data point and columns represent variables (e.g., Degree, alpha, n_RPM for a propeller).
+- `T::Vector{Float64}`: A vector of target values for Thrust.
+- `Q::Vector{Float64}`: A vector of target values for Torque.
+
+# Returns
+- `NT_best::Int`: Optimal polynomial degree for Thrust.
+- `NQ_best::Int`: Optimal polynomial degree for Torque.
+- `aT_best::Vector{Float64}`: Coefficients of the best fitting polynomial for Thrust.
+- `aQ_best::Vector{Float64}`: Coefficients of the best fitting polynomial for Torque.
+- `pwT_best::Vector{Vector{Int}}`: Powers of each term in the best fitting polynomial for Thrust.
+- `pwQ_best::Vector{Vector{Int}}`: Powers of each term in the best fitting polynomial for Torque.
+
+# Notes
+The function iterates over polynomial degrees from 1 to 6 for both Thrust and Torque, computes the total discrepancy between the actual data and the polynomial estimates, and identifies the degree which results in the minimum discrepancy. The discrepancy is calculated as the sum of squared differences between the estimated and actual values. This process is conducted independently for both Thrust and Torque.
+
+# Example
+```julia
+M = 100
+X = rand(M, 3)  # Example input matrix with 3 variables
+T = rand(M)     # Random Thrust values
+Q = rand(M)     # Random Torque values
+NT_best, NQ_best, aT_best, aQ_best, pwT_best, pwQ_best = findOptimalPolynomialDegrees(M, X, T, Q)
+# Now `NT_best` and `NQ_best` hold the optimal polynomial degrees for Thrust and Torque, respectively,
+# and `aT_best`, `aQ_best`, `pwT_best`, `pwQ_best` contain the coefficients and power vectors for the best fits.
+```
+"""
 function findOptimalPolynomialDegrees(M, X, T, Q)
     minDiscT = Inf
     NT_best = 1

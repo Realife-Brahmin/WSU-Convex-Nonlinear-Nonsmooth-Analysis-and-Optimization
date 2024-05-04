@@ -556,14 +556,14 @@ println("Gradient of the objective at the optimum: ", gradient_obj)
 
 
 
-function cEf(x_vals)
+function cEf(x_vals, pw, a, T0)
     # Assuming aQ, pwQ are accessible here and x_vals is a vector [x1, x2, x3]
-    dynamic_polyQ = sum(aT[r] * prod(x_vals[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
-    cEfval = dynamic_polyQ - T0
+    dynamic_polyT = sum(a[r] * prod(x_vals[j]^pw[r][j] for j in 1:3) for r in eachindex(aT))
+    cEfval = dynamic_polyT - T0
     return cEfval
 end
 
-FD.gradient(cEf, xopt)
+FD.gradient(x -> cEf(x, pwT, aT, T0), xopt)
 # Accessing dual values
 
 # eq_constraint_dual = dual(eq_constraint_ref)

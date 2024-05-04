@@ -163,6 +163,50 @@ function computePolynomialEstimate(X, pw, a)
 end
 
 """
+    computePolynomialEstimateTermwise(Xi, pw, a)
+
+Calculates the individual term contributions of a polynomial for a single data point.
+
+# Arguments
+- `Xi::AbstractVector`: A single data point in R^3, typically represented as [x, y, z].
+- `pw::Vector{Vector{Int}}`: Powers for each variable in the polynomial terms.
+- `a::Vector`: Coefficients corresponding to each term in the polynomial.
+
+# Returns
+- `T_est_1toR::Vector{Float64}`: The computed values of each polynomial term for the given data point `Xi`.
+
+# Details
+This function is used to compute the contribution of each term of the polynomial individually for a single data point, which is useful for debugging or understanding the influence of each term.
+
+# Notes
+- The input `Xi` must always be a vector of length 3, representing a single point in R^3. This function is specifically designed for term-by-term evaluation where each term's contribution is isolated.
+- This function can be used to analyze or visualize how each polynomial term affects the overall polynomial evaluation, which can be useful in polynomial regression diagnostics.
+
+# Examples
+```julia
+Xi = [2, 3, 4]  # A single data point
+pw = [[2, 0, 0], [0, 1, 1]]  # Powers for x^2 and y*z
+a = [1, -1]  # Coefficients for x^2 and y*z
+
+# Calculate individual term contributions
+T_est_terms = computePolynomialEstimateTermwise(Xi, pw, a)
+```
+"""
+function computePolynomialEstimateTermwise(Xi, pw, a)
+
+    R = length(a)
+
+    T_est_1toR = zeros(R)
+    x, y, z = Xi
+    for r = 1:R
+        temp = x .^ pw[r][1] .* y .^ pw[r][2] .* z .^ pw[r][3]
+        T_est_1toR[r] += a[r] .* temp
+    end
+
+    return T_est_1toR
+end
+
+"""
     findOptimalPolynomialDegrees(M::Int, X::Matrix{Float64}, T::Vector{Float64}, Q::Vector{Float64}) -> Tuple
 
 Finds the optimal polynomial degrees for fitting polynomial models to two sets of data (Thrust T and Torque Q) and returns the best degrees and their corresponding coefficients and power vectors.

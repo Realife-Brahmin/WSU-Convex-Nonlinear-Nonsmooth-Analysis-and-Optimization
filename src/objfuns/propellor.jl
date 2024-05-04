@@ -167,47 +167,44 @@ function computePolynomialEstimate(X, pw, a)
 end
 
 """
-    computePolynomialEstimateTermwise(Xi, pw, a)
+    computePolynomialTerms(Xi, pw)
 
-Calculates the individual term contributions of a polynomial for a single data point.
+Calculates the polynomial term values for a single data point without applying any coefficients.
 
 # Arguments
 - `Xi::AbstractVector`: A single data point in R^3, typically represented as [x, y, z].
 - `pw::Vector{Vector{Int}}`: Powers for each variable in the polynomial terms.
-- `a::Vector`: Coefficients corresponding to each term in the polynomial.
 
 # Returns
-- `T_est_1toR::Vector{Float64}`: The computed values of each polynomial term for the given data point `Xi`.
+- `polyTerms_1toR::Vector{Float64}`: The computed values of each polynomial term for the given data point `Xi`.
 
 # Details
-This function is used to compute the contribution of each term of the polynomial individually for a single data point, which is useful for debugging or understanding the influence of each term.
+This function is used to compute the values of each polynomial term (without coefficients) for a given single data point. It is particularly useful for analyzing the structure and behavior of polynomial terms over a grid or specific points in the input space.
 
 # Notes
-- The input `Xi` must always be a vector of length 3, representing a single point in R^3. This function is specifically designed for term-by-term evaluation where each term's contribution is isolated.
-- This function can be used to analyze or visualize how each polynomial term affects the overall polynomial evaluation, which can be useful in polynomial regression diagnostics.
+- The input `Xi` should be a vector of length 3, representing a single point in R^3. The function is designed to handle term calculation for any polynomial defined over three variables.
+- Unlike previous implementations that calculate weighted sums of these terms to produce a polynomial estimate, this function purely focuses on the raw term values, which can be useful for visualizing and understanding the contributions of individual terms before they are combined in a weighted sum.
 
 # Examples
 ```julia
 Xi = [2, 3, 4]  # A single data point
 pw = [[2, 0, 0], [0, 1, 1]]  # Powers for x^2 and y*z
-a = [1, -1]  # Coefficients for x^2 and y*z
 
-# Calculate individual term contributions
-T_est_terms = computePolynomialEstimateTermwise(Xi, pw, a)
+# Calculate individual polynomial terms
+poly_terms = computePolynomialTerms(Xi, pw)
 ```
 """
-function computePolynomialEstimateTermwise(Xi, pw, a)
+function computePolynomialTerms(Xi, pw)
 
-    R = length(a)
+    R = length(pw)
 
-    T_est_1toR = zeros(R)
+    polyTerms_1toR = zeros(R)
     x, y, z = Xi
     for r = 1:R
-        temp = x .^ pw[r][1] .* y .^ pw[r][2] .* z .^ pw[r][3]
-        T_est_1toR[r] += a[r] .* temp
+        polyTerms_1toR[r] = x .^ pw[r][1] .* y .^ pw[r][2] .* z .^ pw[r][3]
     end
 
-    return T_est_1toR
+    return polyTerms_1toR
 end
 
 """

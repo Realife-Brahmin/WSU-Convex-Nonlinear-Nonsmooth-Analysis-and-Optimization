@@ -299,7 +299,7 @@ function propellorObj(x, p;
         @error "Discrepancy between x and pDict[:n]"
     end
 
-    # R = length(aQ)
+    # R = length(aQ)    
     for r = 1:R
         Q += aQ[r] * prod(x .^ pwQ[r, :])
     end
@@ -333,14 +333,15 @@ function propellorEcons(x, p;
     cE = zeros(mE)
     R = length(aT)
     polyTerms_1toR = computePolynomialTerms(x, pwT)
-    cE[1] = sum(aT.*polyTerms_1toR) - T0
+    T_est_1toR = aT.*polyTerms_1toR
+    cE[1] = sum(T_est_1toR) - T0
     
     if !getGradientToo
         return cE
     elseif getGradientToo
         hE = zeros(mE, n)
         for i = 1:n
-            hE[1, i] = sum([aT[r] * polyTerms_1toR[r] * pwT[r][i] / x[i] for r = 1:R])
+            hE[1, i] = sum([T_est_1toR[r] * pwT[r][i] / x[i] for r = 1:R])
         end
         return cE, hE
     else

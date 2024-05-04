@@ -123,6 +123,7 @@ function findOptimalPolynomialDegrees(M, X, T, Q)
 end
 
 NT, NQ, aT, aQ = findOptimalPolynomialDegrees(M, X, T, Q)
+pwT, pwQ = constructEx.([NT, NQ])
 
 function propellorObj(x, p;
     getGradientToo::Bool=true)
@@ -236,6 +237,6 @@ econ = propellorEcons
 icon = propellorIcons
 T0 = T[20]
 
-pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon, :NT=>NT, :aT=>aT, :NQ=>NQ, :aQ=>aQ, :lb=>lb, :ub=>ub, :T0=>T0)
+pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon, :NT=>NT, :pwT => pwT, :aT=>aT, :NQ=>NQ, :pwQ=>:pwQ, :aQ=>aQ, :lb=>lb, :ub=>ub, :T0=>T0)
 
 pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString);

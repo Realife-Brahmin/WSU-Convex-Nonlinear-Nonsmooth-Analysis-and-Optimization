@@ -36,36 +36,36 @@ begin
 end
 
 function constructEx(N)
-    ex = Vector{Int}[]
+    pw = Vector{Int}[]
     for j = 0:N
         for k = 0:j
             for l = 0:k
                 # This generates the tuple (j-k, k-l, l) which corresponds to the powers of x, y, z
                 exElem = [(j - k), (k - l), l]
-                push!(ex, exElem)
+                push!(pw, exElem)
             end
         end
     end
-    return ex
+    return pw
 end
 
 function findFitCoeffs(N, X, T)
-    ex = constructEx(N)
-    R = length(ex)
+    pw = constructEx(N)
+    R = length(pw)
     AT = zeros(R, R)
     BT = zeros(R)
     for r = 1:R
         Tk = T[r]
         x, y, z = X[r, :]
-        temp = x.^ex[r][1] .* y.^ex[r][2] .* z.^ex[r][3]
+        temp = x.^pw[r][1] .* y.^pw[r][2] .* z.^pw[r][3]
         BT[r] = sum(Tk .* temp)
         for c = 1:R
-            p = ex[r] + ex[c]
+            p = pw[r] + pw[c]
             AT[r, c] = sum( x.^p[1] .* y.^p[2] .* z.^p[3] )
         end
     end
     a = AT\BT
-    return a
+    return a, pw
 end
 
 function computePolynomialEstimate(N, X, a)

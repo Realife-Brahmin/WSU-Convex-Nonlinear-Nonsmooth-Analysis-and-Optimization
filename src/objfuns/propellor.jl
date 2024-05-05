@@ -407,88 +407,6 @@ pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; object
 slackifyInequalities = false
 # slackifyInequalities = true
 
-# using JuMP, Ipopt
-# model = Model(Ipopt.Optimizer)
-
-
-# # n = length(x0)
-
-# @variable(model, x[i=1:n], start = x0[i])
-
-# dynamic_polyQ = sum(aQ[r] * prod(x[j]^pwQ[r][j] for j in 1:3) for r in eachindex(aQ))
-
-# dynamic_polyT = sum(aT[r] * prod(x[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
-
-
-# @variable(model, y[i=1:mI], start = y0[i])
-# # @objective(model, Min, x[1]*x[3]*computePolynomialEstimate(x, pwQ, aQ))
-# @objective(model, Min, x[1] * x[3] * dynamic_polyQ)  # Assuming you want to include this term x[1]*x[3]*dynamic_polyQ in your objective
-
-# @constraint(model, dynamic_polyT - T0 == 0)
-
-# if slackifyInequalities
-#     @constraint(model, x - lb - y[1:3].^2 .== 0) # slackified equality constraints
-#     @constraint(model, ub - x - y[4:6].^2 .== 0)
-# else
-#     @constraint(model, x >= lb) # regular inequality constraint
-#     @constraint(model, x <= ub)
-# end
-
-# optimize!(model)
-# xopt = [value(x[i]) for i ∈ 1:n]
-# yopt = [value(y[i]) for i ∈ 1:mI]
-# f_optimal = objective_value(model)
-# println("Optimal Variables x: ", xopt)
-# println("Optimal Slack Variables y: ", yopt)
-# println("Optimal objective value: ", f_optimal)
-
-# using JuMP, Ipopt
-# import ForwardDiff as FD
-
-# # Gradient of the Objective (assuming definition is available)
-# # Define your objective as a function if possible
-# function objective_function(x_vals)
-#     # Assuming aQ, pwQ are accessible here and x_vals is a vector [x1, x2, x3]
-#     dynamic_polyQ = sum(aQ[r] * prod(x_vals[j]^pwQ[r][j] for j in 1:3) for r in eachindex(aQ))
-#     return x_vals[1] * x_vals[3] * dynamic_polyQ
-# end
-
-# # Use FD to calculate the gradient at the optimal point
-# xopt = [value(x[i]) for i ∈ 1:n]
-# gradient_obj = FD.gradient(objective_function, xopt)
-# println("Gradient of the objective at the optimum: ", gradient_obj)
-
-# # Constraint values and duals
-# # For equality constraint
-
-# eq_constraint_value = value(dynamic_polyT - T0)
-
-
-# eq_constraint_dual = dual(dynamic_polyT - T0 == 0)  # adjust this according to how you've named the constraint
-# println("Equality constraint value: ", eq_constraint_value)
-# println("Dual value (Lagrangian Multiplier) for equality constraint: ", eq_constraint_dual)
-
-# For inequality constraints (if slackified, otherwise adjust as needed)
-# if slackifyInequalities
-#     for i in 1:3
-#         println("Slackified inequality constraint $(i+3) value: ", value(ub[i] - x[i] - y[i+3]^2))
-#         # println("Dual for slackified inequality constraint $(i): ", dual(model[:x[i]-lb[i]-y[i]^2==0]))
-#     end
-#     for i in 1:3
-#         println("Slackified inequality constraint $(i) value: ", value(x[i] - lb[i] - y[i]^2))
-#         # println("Dual for slackified inequality constraint $(i): ", dual(model[:x[i]-lb[i]-y[i]^2==0]))
-#     end
-# else
-#     for i in 1:n
-#         println("Inequality constraint $(i+3) (x[i] <= ub[i]): ", value(ub[i] - x[i]))
-#         # println("Dual for slackified inequality constraint $(i): ", dual(model[:x[i]-lb[i]-y[i]^2==0]))
-#     end
-#     for i in 1:n
-#         println("Inequality constraint $(i) (x[i] >= lb[i]): ", value(x[i] - lb[i]))
-#         # println("Dual for inequality constraint $(i): ", dual(model[:x[i]>=lb[i]]))
-#     end
-# end
-
 using JuMP, Ipopt
 import ForwardDiff as FD
 
@@ -511,12 +429,8 @@ end
 
 @expression(model, objfun, x[1] * x[3] * dynamic_polyQ)
 @expression(model, cE, dynamic_polyT - T0)
-# @expression(model, cI1to3, ub .- x)
-# @expression(model, cI4to6, x .- lb)
 @expression(model, cI, vcat(ub .- x, x .- lb))
 
-
-# @objective(model, Min, x[1] * x[3] * dynamic_polyQ)
 @objective(model, Min, objfun)
 
 
@@ -554,22 +468,14 @@ println("Optimal objective value: ", f_optimal)
 gradient_obj = FD.gradient(objective_function, xopt)
 println("Gradient of the objective at the optimum: ", gradient_obj)
 
-function cEf2(x_vals, pDict)
+function cEf(x_vals, pDict)
     @unpack pwT, aT, T0 = pDict
     dynamic_polyT = sum(aT[r] * prod(x_vals[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
     cEfval = dynamic_polyT - T0
     return cEfval
 end
 
-FD.gradient(x -> cEf2(x, pDictALP), xopt)
-
-# function cEf(x_vals, pw, a, T0)
-#     # Assuming aQ, pwQ are accessible here and x_vals is a vector [x1, x2, x3]
-#     dynamic_polyT = sum(a[r] * prod(x_vals[j]^pw[r][j] for j in 1:3) for r in eachindex(a))
-#     cEfval = dynamic_polyT - T0
-#     return cEfval
-# end
-# FD.gradient(x -> cEf(x, pwT, aT, T0), xopt)
+FD.gradient(x -> cEf(x, pDictALP), xopt)
 
 function cIf(x, pDictALP)
     @unpack n, lb, ub, mI = pDictALP

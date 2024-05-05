@@ -480,7 +480,7 @@ FD.gradient(x -> cEf(x, pDictALP), xopt)
 function cIf(x, pDictALP)
     @unpack n, lb, ub, mI = pDictALP
     # Ensure `cI` is initialized correctly within the function scope
-    cI = Vector{typeof(x[1])}(undef, mI)  # Use the same type as `x` elements for compatibility with autodiff
+    cI = Vector{eltype(x)}(undef, mI)  # Use the same type as `x` elements for compatibility with autodiff
 
     # Fill in the values based on constraints
     for i in 1:3

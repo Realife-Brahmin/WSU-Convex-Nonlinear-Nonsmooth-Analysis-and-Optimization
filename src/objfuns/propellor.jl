@@ -573,23 +573,19 @@ FD.gradient(x -> cEf2(x, pDictALP), xopt)
 
 function cIf(x, pDictALP)
     @unpack n, lb, ub, mI = pDictALP
-    cI = zeros(mI)
-    cI[1:3] = ub .- x[1:3]
-    cI[4:6] = x[1:3] .- lb
+    # Ensure `cI` is initialized correctly within the function scope
+    cI = Vector{typeof(x[1])}(undef, mI)  # Use the same type as `x` elements for compatibility with autodiff
+
+    # Fill in the values based on constraints
+    for i in 1:3
+        cI[i] = ub[i] - x[i]      # Constraints for upper bounds
+        cI[i+3] = x[i] - lb[i]    # Constraints for lower bounds
+    end
     return cI
 end
 
 cIf(xopt, pDictALP)
-FD.gradient(x -> cIf(x, pDictALP), xopt)
-# Accessing dual values
-
-# eq_constraint_dual = dual(eq_constraint_ref)
-# println("Dual value for equality constraint: ", eq_constraint_dual)
-
-# # If inequality constraints are used
-# for ref in ineq_constraint_refs
-#     println("Dual value for constraint: ", dual(ref))
-# end
+jacobian_cIf = FD.jacobian(x -> cIf(x, pDictALP), xopt)
 
 
 

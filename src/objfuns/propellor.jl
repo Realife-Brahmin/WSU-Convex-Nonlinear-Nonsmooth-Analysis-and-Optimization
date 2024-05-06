@@ -459,23 +459,25 @@ optimize!(model)
 
 xopt = [value(x[i]) for i ∈ 1:n]
 yopt = [value(y[i]) for i ∈ 1:mI]
-f_optimal = objective_value(model)
+fopt = objective_value(model)
 println("Optimal Variables x: ", xopt)
 println("Optimal Slack Variables y: ", yopt)
-println("Optimal objective value: ", f_optimal)
+println("Optimal objective value: ", fopt)
 
 
-gradient_obj = FD.gradient(objective_function, xopt)
+gopt = gradient_obj = FD.gradient(objective_function, xopt)
 println("Gradient of the objective at the optimum: ", gradient_obj)
 
-function cEf(x_vals, pDict)
-    @unpack pwT, aT, T0 = pDict
-    dynamic_polyT = sum(aT[r] * prod(x_vals[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
-    cEfval = dynamic_polyT - T0
-    return cEfval
+function cEf(x, pDict)
+    @unpack mE, pwT, aT, T0 = pDict
+    cE = Vector{eltype(x)}(undef, mE)  # Use the same type as `x` elements for compatibility with autodiff
+    dynamic_polyT = sum(aT[r] * prod(x[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
+    cE[1] = dynamic_polyT - T0
+    return cE
 end
 
-FD.gradient(x -> cEf(x, pDictALP), xopt)
+cEopt = cEf(xopt, pDictALP)
+hEopt = FD.jacobian(x -> cEf(x, pDictALP), xopt)
 
 function cIf(x, pDictALP)
     @unpack n, lb, ub, mI = pDictALP
@@ -490,10 +492,21 @@ function cIf(x, pDictALP)
     return cI
 end
 
-cIf(xopt, pDictALP)
-jacobian_cIf = FD.jacobian(x -> cIf(x, pDictALP), xopt)
+cIopt = cIf(xopt, pDictALP)
+hIopt = FD.jacobian(x -> cIf(x, pDictALP), xopt)
 
+using Test
 
+fmine, gmine = objective(xopt, pDictALP, getGradientToo=true)
+cEmine, hEmine = econ(xopt, pDictALP, getGradientToo=true)
+cImine, hImine = icon(xopt, pDictALP, getGradientToo=true)
+
+@test fmine ≈ fopt
+@test gmine ≈ gopt
+@test cEmine ≈ cEopt
+@test hEmine ≈ hEopt
+@test cImine ≈ cIopt
+@test hImine ≈ hIopt
 
 # f, g = propellorObj(xk, pDictALP)
 # diff_FOM = f - Q0*xk[1]*xk[3]

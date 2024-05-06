@@ -36,8 +36,8 @@ function optimize2(pr;
         subroutineCall = false
     else
         myprintln(true, "Calling Unconstrained Solver as a subroutine for ALP.")
-        @unpack subroutineCall, tau = p
-        maxiter = 2*n # as dictated by ALP
+        @unpack nx, subroutineCall, tau = p
+        maxiter = 2*nx # as dictated by ALP
         gtol = tau
     end
 

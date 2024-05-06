@@ -36,7 +36,7 @@ begin
     # x0 = lb*ratio + (1-ratio)*ub
     x0 = X[pointNum, :]
     # xk = x0
-    n = length(x0)
+    nx = length(x0)
     T0 = T[pointNum]
     Q0 = Q[pointNum]
 end
@@ -290,9 +290,9 @@ NT, NQ, aT, aQ, pwT, pwQ = findOptimalPolynomialDegrees(M, X, T, Q)
 function propellorObj(x, p;
     getGradientToo::Bool=true)
 
-    @unpack n, aQ, pwQ = p
+    @unpack nx, aQ, pwQ = p
 
-    if length(x) != 3 || n != 3
+    if length(x) != 3 || nx != 3
         @error "propellorObj expects a length 3 vector"
     end
 
@@ -305,7 +305,7 @@ function propellorObj(x, p;
     if !getGradientToo
         return f
     elseif getGradientToo
-        g = zeros(n)
+        g = zeros(nx)
         g[1] = sum([f_est_1toR[r] *  (pwQ[r][1] + 1) / x[1] for r ∈ 1:R])
         g[2] = sum([f_est_1toR[r] * pwQ[r][2] / x[2] for r ∈ 1:R])
         g[3] = sum([f_est_1toR[r] * (pwQ[r][3] + 1) / x[3] for r ∈ 1:R])
@@ -322,9 +322,9 @@ mE = 1
 function propellorEcons(x, p;
     getGradientToo::Bool=true)
 
-    @unpack n, mE, pwT, aT, NT, T0 = p
+    @unpack nx, mE, pwT, aT, NT, T0 = p
 
-    if length(x) != 3 || n != 3
+    if length(x) != 3 || nx != 3
         @error "propellorEcons expects a length 3 vector"
     end
 
@@ -338,8 +338,8 @@ function propellorEcons(x, p;
     if !getGradientToo
         return cE
     elseif getGradientToo
-        hE = zeros(mE, n)
-        for i = 1:n
+        hE = zeros(mE, nx)
+        for i = 1:nx
             hE[1, i] = sum([T_est_1toR[r] * pwT[r][i] / x[i] for r = 1:R])
         end
         return cE, hE
@@ -358,9 +358,9 @@ yk = y0
 function propellorIcons(x, p;
     getGradientToo::Bool=true)
 
-    @unpack n, mI, lb, ub, = p
+    @unpack nx, mI, lb, ub, = p
 
-    if length(x) != 3 || n != 3
+    if length(x) != 3 || nx != 3
         @error "propellorIcons expects a length 3 vector"
     end
 
@@ -376,8 +376,8 @@ function propellorIcons(x, p;
     if !getGradientToo
         return cI
     elseif getGradientToo
-        n = length(x)
-        hI = zeros(mI, n)
+        nx = length(x)
+        hI = zeros(mI, nx)
         hI[1:3, :] = -I(3)
         hI[4:6, :] = I(3)
         return cI, hI
@@ -400,7 +400,7 @@ problemType = "Constrained"
 econ = propellorEcons
 icon = propellorIcons
 
-pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon, :NT=>NT, :pwT => pwT, :aT=>aT, :NQ=>NQ, :pwQ=>pwQ, :aQ=>aQ, :lb=>lb, :ub=>ub, :T0=>T0)
+pDictALP = Dict(:nx=>nx, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon, :NT=>NT, :pwT => pwT, :aT=>aT, :NQ=>NQ, :pwQ=>pwQ, :aQ=>aQ, :lb=>lb, :ub=>ub, :T0=>T0)
 
 pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString);
 
@@ -414,7 +414,7 @@ pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; object
 
 #     model = Model(Ipopt.Optimizer)
 
-#     @variable(model, x[i=1:n], start = x0[i])
+#     @variable(model, x[i=1:nx], start = x0[i])
 #     @variable(model, y[i=1:mI], start = y0[i])
 
 #     dynamic_polyQ = sum(aQ[r] * prod(x[j]^pwQ[r][j] for j in 1:3) for r in eachindex(aQ))
@@ -449,17 +449,17 @@ pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; object
 #             push!(ineq_constraint_refs, @constraint(model, x[i] - lb[i] - y[i]^2 == 0))
 #         end
 #     else
-#         for i in 1:n
+#         for i in 1:nx
 #             push!(ineq_constraint_refs, @constraint(model, ub[i] - x[i] >= 0))
 #         end
-#         for i in 1:n
+#         for i in 1:nx
 #             push!(ineq_constraint_refs, @constraint(model, x[i] - lb[i] >= 0))
 #         end
 #     end
 
 #     optimize!(model)
 
-#     xopt = [value(x[i]) for i ∈ 1:n]
+#     xopt = [value(x[i]) for i ∈ 1:nx]
 #     yopt = [value(y[i]) for i ∈ 1:mI]
 #     fopt = objective_value(model)
 #     println("Optimal Variables x: ", xopt)
@@ -482,7 +482,7 @@ pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; object
 #     hEopt = FD.jacobian(x -> cEf(x, pDictALP), xopt)
 
 #     function cIf(x, pDictALP)
-#         @unpack n, lb, ub, mI = pDictALP
+#         @unpack nx, lb, ub, mI = pDictALP
 #         # Ensure `cI` is initialized correctly within the function scope
 #         cI = Vector{eltype(x)}(undef, mI)  # Use the same type as `x` elements for compatibility with autodiff
 

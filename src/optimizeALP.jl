@@ -29,7 +29,7 @@ function optimizeALP(pr;
 
     f = pr.objective
     pALP = pr.p
-    @unpack n, m, mE, econ, mI, icon = pALP
+    @unpack nx, m, mE, econ, mI, icon = pALP
 
     fvals = zeros(Float64, maxiter)
     xvals = zeros(Float64, N, maxiter)
@@ -39,7 +39,7 @@ function optimizeALP(pr;
 
 
     lambdak0 = rand(m)
-    x0, y0 = w0[1:n], w0[n+1:end]
+    x0, y0 = w0[1:nx], w0[nx+1:end]
     f0 = f(x0, pALP, getGradientToo=false)
     fk = f0
     solState = SolStateALPType(w0, lambdak=lambdak0, fk=f0, etol=etol) # again, x0 is actually w0
@@ -105,7 +105,7 @@ function optimizeALP(pr;
 
             myprintln(printOrNot_ALP, "Change of size $(normdxk) exceeds tolerance, so will update λ and μ.")
             lambdakp1 = lambdak - transpose(muk)*cxkp1
-            mukp1 = muk*( 1 + 10*exp(-iter_unc/n) )
+            mukp1 = muk*( 1 + 10*exp(-iter_unc/nx) )
             tkp1 = tk/2
 
         else

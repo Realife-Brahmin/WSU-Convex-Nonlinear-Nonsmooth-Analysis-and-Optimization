@@ -4,8 +4,9 @@ include("../AugmentedLagrangian.jl")
 using Parameters
 
 x0 = rand(2)
+# x0 = ones(2)
 xk = x0
-n = length(x0)
+nx = length(x0)
 
 function alpTestFunction01(x, p;
     getGradientToo::Bool=true)
@@ -41,8 +42,8 @@ function cE01(x, p;
     if !getGradientToo
         return cE
     elseif getGradientToo
-        n = length(x)
-        hE = zeros(mE, n)
+        nx = length(x)
+        hE = zeros(mE, nx)
         hE[1, 1] = 2*x[1]
         hE[1, 2] = 2*x[2]
         return cE, hE
@@ -70,8 +71,8 @@ function cI01(x, p;
     if !getGradientToo
         return cI
     elseif getGradientToo
-        n = length(x)
-        hI = zeros(mI, n)
+        nx = length(x)
+        hI = zeros(mI, nx)
         hI[1, 1] = 3*x[1]^2
         hI[1, 2] = 1
         hI[2, 1] = 2*x[1]
@@ -87,6 +88,7 @@ end
 
 mI = 2
 y0 = rand(mI)
+# y0 = zeros(mI)
 yk = y0
 m = mE+mI
 w0 = vcat(x0, y0)
@@ -98,7 +100,7 @@ objectiveString = "alpTestFunction01"
 problemType = "Constrained"
 econ = cE01
 icon = cI01
-pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
+pDictALP = Dict(:nx=>nx, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon)
 pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString)
 
 # objectiveUnc = ALOBJ
@@ -118,8 +120,8 @@ pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; object
 # # x0 = [1, 2]
 # slackifyInequalities = false
 # slackifyInequalities = true
-# # n = length(x0)
-# @variable(model, x[i=1:n], start = x0[i])
+# # nx = length(x0)
+# @variable(model, x[i=1:nx], start = x0[i])
 # @variable(model, y[i=1:mI], start = y0[i])
 # @objective(model, Min, (x[1] - 1)^2 + (x[2] - 2)^2)
 # @constraint(model, x[1]^2 + x[2]^2 - 1 == 0) # regular equality constraint
@@ -133,7 +135,7 @@ pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; object
 # end
 
 # optimize!(model)
-# xopt = [value(x[i]) for i ∈ 1:n]
+# xopt = [value(x[i]) for i ∈ 1:nx]
 # yopt = [value(y[i]) for i ∈ 1:mI]
 # f_optimal = objective_value(model)
 # println("Optimal Variables x: ", xopt)

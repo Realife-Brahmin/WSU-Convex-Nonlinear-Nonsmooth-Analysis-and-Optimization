@@ -53,7 +53,7 @@ function StrongWolfe(pr::NamedTuple,
         fj = obj(xj, p, getGradientToo=false)
         fevals += 1
 
-        verbose = true
+        # verbose = true
 
         if StrongWolfe1(fk, fj, gk, pk, alphaj)
             myprintln1(verbose, "SW1 satisfied for αⱼ = $(alphaj)")

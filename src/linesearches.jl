@@ -9,7 +9,7 @@ function StrongWolfe(pr::NamedTuple,
     solverState::SolverStateType;
 
     alphaLo::Float64=0.0, 
-    alphaHi::Float64=100.0,
+    alphaHi::Float64=1.0,
     alpha0=nothing,
     alphatol::Float64=1e-13,
     verbose::Bool=false,
@@ -53,10 +53,12 @@ function StrongWolfe(pr::NamedTuple,
         fj = obj(xj, p, getGradientToo=false)
         fevals += 1
 
+        verbose = true
+
         if StrongWolfe1(fk, fj, gk, pk, alphaj)
             myprintln1(verbose, "SW1 satisfied for αⱼ = $(alphaj)")
             SW1_satisfied_once = true
-            fj, gj = obj(xj, p, getGradientToo=true)
+            @show fj, gj = obj(xj, p, getGradientToo=true)
             fevals += 1; gevals += 1
             if StrongWolfe2(gk, gj, pk)
                 myprintln1(verbose, "SW2 satisfied for αⱼ = $(alphaj)")

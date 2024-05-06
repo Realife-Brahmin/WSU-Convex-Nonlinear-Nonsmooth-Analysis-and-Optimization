@@ -1,25 +1,20 @@
 ****************************
 Solver run has concluded.
-Function solved for: propellorObj()
+Function solved for: alpTestFunction01()
 Cause(s) for stopping:
 Iteration limit reached!
-Failed to converge despite 2 iterations! 😢
+Failed to converge despite 20 iterations! 😢
 ****************************
 Method Used: AugmentedLagrangian
 
 ****************************
-Best function value = -13.303343639664192
+Best function value = 1.5278642285384125
 ***************************
 Best Known Nonzero Variables:
-x☆[1] = 1.35360107562906
-x☆[2] = 1.15854562204406
-x☆[3] = -0.6056810934562349
-x☆[4] = 0.4639339864772336
-x☆[5] = 0.4395707615066127
-x☆[6] = -1.0004281228508392
-x☆[7] = -0.40975636083323363
-x☆[8] = 1.08430894108635
-x☆[9] = -0.1465434083210484
+x☆[1] = 0.4469567918027847
+x☆[2] = 0.8945576298167989
+x☆[3] = 0.9918905257259059
+x☆[4] = 0.8368038073917702
 ***************************
 Number of fevals = 1
 Number of gevals = 0

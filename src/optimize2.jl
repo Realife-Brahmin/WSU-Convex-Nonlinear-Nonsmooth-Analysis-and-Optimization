@@ -111,6 +111,7 @@ function optimize2(pr;
 
         if method == "QuasiNewton"
             @pack! QNState = k, xk, fk, gk
+            @show k, xk, fk, gk
             pk, QNState = findDirection(pr, gk, QNState=QNState)
             # @show pk
 
@@ -135,7 +136,8 @@ function optimize2(pr;
 
                 solState, solverState = StrongWolfe(pr, solState, solverState,
                 verbose=printOrNot_ls)
-
+                @show solState.xk
+                # @show solverState
 
             elseif linesearchMethod == "Armijo"
                 @error "Armijo no longer supported."

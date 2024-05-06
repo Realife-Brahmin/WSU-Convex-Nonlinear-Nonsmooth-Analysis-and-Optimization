@@ -7,8 +7,8 @@ using LinearAlgebra
 using Parameters
 
 function combinedConstraintsALP(wk, pDictUnc)
-    @unpack n, mE, mI, econ, icon = pDictUnc
-    xk, yk = wk[1:n], wk[n+1:end]
+    @unpack nx, mE, mI, econ, icon = pDictUnc
+    xk, yk = wk[1:nx], wk[nx+1:end]
     cE = econ(xk, pDictUnc, getGradientToo=false)
     cI = icon(xk, pDictUnc, getGradientToo=false)
     c = vcat(cE, cI - yk.^2)
@@ -32,6 +32,7 @@ function solveAugmentedLagrangianFunction(prALP, solStateALP;
     @unpack mE, econ, mI, icon  = pDictALP
     @unpack wk, lambdak, muk, tk = solStateALP # again, wk is actually wk
 
+    @show wk, lambdak, muk, tk
     myprintln(verbose, "From the current point wk = $(wk)")
 
     subroutineCall = true
@@ -58,11 +59,11 @@ end
 function ALOBJ(w, psubDict;
     getGradientToo::Bool=false)
 
-    @unpack n, m, lambda, mu, mE, mI, econ, icon, objectiveALP = psubDict
-    # @show n, w 
-    # n = length(w) - mI # length of x
-    x = w[1:n]
-    y = w[n+1:end]
+    @unpack nx, m, lambda, mu, mE, mI, econ, icon, objectiveALP = psubDict
+    # @show nx, w 
+    # nx = length(w) - mI # length of x
+    x = w[1:nx]
+    y = w[nx+1:end]
     # error("Okay we're done.")
 
     # @show x, psubDict

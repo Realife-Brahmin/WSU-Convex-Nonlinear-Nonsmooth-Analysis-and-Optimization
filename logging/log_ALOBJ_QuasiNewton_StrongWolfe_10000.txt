@@ -332,3 +332,667 @@ SW1 satisfied for αⱼ = 0.9999999999998863
 SW2 NOT satisfied. αⱼ ↑
 SW1 satisfied for αⱼ = 0.9999999999999432
 SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 6.103515625e-5
+SW2 satisfied for αⱼ = 6.103515625e-5
+SW1 satisfied for αⱼ = 0.0009765625
+SW2 satisfied for αⱼ = 0.0009765625
+SW1 satisfied for αⱼ = 0.00048828125
+SW2 satisfied for αⱼ = 0.00048828125
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.015625
+SW2 satisfied for αⱼ = 0.015625
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.25
+SW2 satisfied for αⱼ = 0.25
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.25
+SW2 satisfied for αⱼ = 0.25
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.5
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.75
+SW2 satisfied for αⱼ = 0.75
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.25
+SW2 satisfied for αⱼ = 0.25
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 5.960464477539063e-8
+SW2 satisfied for αⱼ = 5.960464477539063e-8
+SW1 satisfied for αⱼ = 3.814697265625e-6
+SW2 satisfied for αⱼ = 3.814697265625e-6
+SW1 satisfied for αⱼ = 4.547473508864641e-13
+SW2 satisfied for αⱼ = 4.547473508864641e-13
+SW1 satisfied for αⱼ = 1.9073486328125e-6
+SW2 satisfied for αⱼ = 1.9073486328125e-6
+SW1 satisfied for αⱼ = 3.814697265625e-6
+SW2 satisfied for αⱼ = 3.814697265625e-6
+SW1 satisfied for αⱼ = 3.814697265625e-6
+SW2 satisfied for αⱼ = 3.814697265625e-6
+SW1 satisfied for αⱼ = 3.0517578125e-5
+SW2 satisfied for αⱼ = 3.0517578125e-5
+SW1 satisfied for αⱼ = 2.384185791015625e-7
+SW2 satisfied for αⱼ = 2.384185791015625e-7
+SW1 satisfied for αⱼ = 0.000244140625
+SW2 satisfied for αⱼ = 0.000244140625
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.5
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.75
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.96875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.984375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9921875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.99609375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.998046875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9990234375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.99951171875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999755859375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9998779296875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.99993896484375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999969482421875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999847412109375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999923706054688
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999961853027344
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999980926513672
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999990463256836
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999995231628418
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999997615814209
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999998807907104
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999403953552
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999701976776
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999850988388
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999925494194
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999962747097
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999981373549
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999990686774
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999995343387
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999997671694
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999998835847
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999417923
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999708962
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999854481
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999999999992724
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999999999996362
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999999999998181
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999990905
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999995453
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999997726
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999998863
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999999432
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 6.103515625e-5
+SW2 satisfied for αⱼ = 6.103515625e-5
+SW1 satisfied for αⱼ = 0.0009765625
+SW2 satisfied for αⱼ = 0.0009765625
+SW1 satisfied for αⱼ = 0.00048828125
+SW2 satisfied for αⱼ = 0.00048828125
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.25
+SW2 satisfied for αⱼ = 0.25
+SW1 satisfied for αⱼ = 0.015625
+SW2 satisfied for αⱼ = 0.015625
+SW1 satisfied for αⱼ = 0.25
+SW2 satisfied for αⱼ = 0.25
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.015625
+SW2 satisfied for αⱼ = 0.015625
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 0.25
+SW2 satisfied for αⱼ = 0.25
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 0.5
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.75
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.96875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.984375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9921875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.99609375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.998046875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9990234375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.99951171875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999755859375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9998779296875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.99993896484375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999969482421875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999847412109375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999923706054688
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999961853027344
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999980926513672
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999990463256836
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999995231628418
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999997615814209
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999998807907104
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999403953552
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999701976776
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999850988388
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999925494194
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999962747097
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999981373549
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999990686774
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999995343387
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999997671694
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999998835847
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999417923
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999708962
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999854481
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999999999992724
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999999999996362
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999999999998181
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999990905
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999995453
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999997726
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999998863
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999999432
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.001953125
+SW2 satisfied for αⱼ = 0.001953125
+SW1 satisfied for αⱼ = 6.103515625e-5
+SW2 satisfied for αⱼ = 6.103515625e-5
+SW1 satisfied for αⱼ = 0.0009765625
+SW2 satisfied for αⱼ = 0.0009765625
+SW1 satisfied for αⱼ = 0.00048828125
+SW2 satisfied for αⱼ = 0.00048828125
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.25
+SW2 satisfied for αⱼ = 0.25
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.5
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.75
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.96875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.984375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9921875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.99609375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.998046875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9990234375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.99951171875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999755859375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9998779296875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.99993896484375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999969482421875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999847412109375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999923706054688
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999961853027344
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999980926513672
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999990463256836
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999995231628418
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999997615814209
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999998807907104
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999403953552
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999701976776
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999850988388
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999925494194
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999962747097
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999981373549
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999990686774
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999995343387
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999997671694
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999998835847
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999417923
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999708962
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999854481
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999999999992724
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999999999996362
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999999999998181
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999990905
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999995453
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999997726
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999998863
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999999432
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 6.103515625e-5
+SW2 satisfied for αⱼ = 6.103515625e-5
+SW1 satisfied for αⱼ = 0.0009765625
+SW2 satisfied for αⱼ = 0.0009765625
+SW1 satisfied for αⱼ = 0.00048828125
+SW2 satisfied for αⱼ = 0.00048828125
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.015625
+SW2 satisfied for αⱼ = 0.015625
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.5
+SW2 satisfied for αⱼ = 0.5
+SW1 satisfied for αⱼ = 0.5
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.75
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.96875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.984375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9921875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.99609375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.998046875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9990234375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.99951171875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999755859375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9998779296875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.99993896484375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999969482421875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999847412109375
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999923706054688
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999961853027344
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999980926513672
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999990463256836
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999995231628418
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999997615814209
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999998807907104
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999403953552
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999701976776
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999850988388
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999925494194
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999962747097
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999981373549
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999990686774
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999995343387
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999997671694
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999998835847
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999417923
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999708962
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999854481
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999999999992724
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999999999996362
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.999999999998181
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999990905
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999995453
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999997726
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999998863
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.9999999999999432
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 6.103515625e-5
+SW2 satisfied for αⱼ = 6.103515625e-5
+SW1 satisfied for αⱼ = 0.0009765625
+SW2 satisfied for αⱼ = 0.0009765625
+SW1 satisfied for αⱼ = 0.00048828125
+SW2 satisfied for αⱼ = 0.00048828125
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.015625
+SW2 satisfied for αⱼ = 0.015625
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 1.52587890625e-5
+SW2 satisfied for αⱼ = 1.52587890625e-5
+SW1 satisfied for αⱼ = 0.0009765625
+SW2 satisfied for αⱼ = 0.0009765625
+SW1 satisfied for αⱼ = 0.0009765625
+SW2 satisfied for αⱼ = 0.0009765625
+SW1 satisfied for αⱼ = 0.001953125
+SW2 satisfied for αⱼ = 0.001953125
+SW1 satisfied for αⱼ = 0.0078125
+SW2 satisfied for αⱼ = 0.0078125
+SW1 satisfied for αⱼ = 0.015625
+SW2 satisfied for αⱼ = 0.015625
+SW1 satisfied for αⱼ = 6.103515625e-5
+SW2 satisfied for αⱼ = 6.103515625e-5
+SW1 satisfied for αⱼ = 0.0009765625
+SW2 satisfied for αⱼ = 0.0009765625
+SW1 satisfied for αⱼ = 0.00048828125
+SW2 satisfied for αⱼ = 0.00048828125
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.015625
+SW2 satisfied for αⱼ = 0.015625
+SW1 satisfied for αⱼ = 1.52587890625e-5
+SW2 satisfied for αⱼ = 1.52587890625e-5
+SW1 satisfied for αⱼ = 0.0009765625
+SW2 satisfied for αⱼ = 0.0009765625
+SW1 satisfied for αⱼ = 0.00048828125
+SW2 satisfied for αⱼ = 0.00048828125
+SW1 satisfied for αⱼ = 0.015625
+SW2 satisfied for αⱼ = 0.015625
+SW1 satisfied for αⱼ = 0.015625
+SW2 satisfied for αⱼ = 0.015625
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.0078125
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.01171875
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.013671875
+SW2 satisfied for αⱼ = 0.013671875
+SW1 satisfied for αⱼ = 4.76837158203125e-7
+SW2 satisfied for αⱼ = 4.76837158203125e-7
+SW1 satisfied for αⱼ = 0.0078125
+SW2 satisfied for αⱼ = 0.0078125
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.0078125
+SW2 satisfied for αⱼ = 0.0078125
+SW1 satisfied for αⱼ = 0.0078125
+SW2 satisfied for αⱼ = 0.0078125
+SW1 satisfied for αⱼ = 9.313225746154785e-10
+SW2 satisfied for αⱼ = 9.313225746154785e-10
+SW1 satisfied for αⱼ = 1.4901161193847656e-8
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 2.2351741790771484e-8
+SW2 satisfied for αⱼ = 2.2351741790771484e-8
+SW1 satisfied for αⱼ = 3.725290298461914e-9
+SW2 satisfied for αⱼ = 3.725290298461914e-9
+SW1 satisfied for αⱼ = 4.76837158203125e-7
+SW2 satisfied for αⱼ = 4.76837158203125e-7
+SW1 satisfied for αⱼ = 9.5367431640625e-7
+SW2 satisfied for αⱼ = 9.5367431640625e-7
+SW1 satisfied for αⱼ = 1.9073486328125e-6
+SW2 satisfied for αⱼ = 1.9073486328125e-6
+SW1 satisfied for αⱼ = 0.0078125
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.009765625
+SW2 satisfied for αⱼ = 0.009765625
+SW1 satisfied for αⱼ = 1.9073486328125e-6
+SW2 satisfied for αⱼ = 1.9073486328125e-6
+SW1 satisfied for αⱼ = 0.00390625
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 0.005859375
+SW2 satisfied for αⱼ = 0.005859375
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.0078125
+SW2 satisfied for αⱼ = 0.0078125
+SW1 satisfied for αⱼ = 0.015625
+SW2 satisfied for αⱼ = 0.015625
+SW1 satisfied for αⱼ = 4.76837158203125e-7
+SW2 NOT satisfied. αⱼ ↑
+SW1 satisfied for αⱼ = 7.152557373046875e-7
+SW2 satisfied for αⱼ = 7.152557373046875e-7
+SW1 satisfied for αⱼ = 2.9103830456733704e-11
+SW2 satisfied for αⱼ = 2.9103830456733704e-11
+SW1 satisfied for αⱼ = 9.313225746154785e-10
+SW2 satisfied for αⱼ = 9.313225746154785e-10
+SW1 satisfied for αⱼ = 9.5367431640625e-7
+SW2 satisfied for αⱼ = 9.5367431640625e-7
+SW1 satisfied for αⱼ = 7.62939453125e-6
+SW2 satisfied for αⱼ = 7.62939453125e-6
+SW1 satisfied for αⱼ = 4.76837158203125e-7
+SW2 satisfied for αⱼ = 4.76837158203125e-7
+SW1 satisfied for αⱼ = 6.103515625e-5
+SW2 satisfied for αⱼ = 6.103515625e-5
+SW1 satisfied for αⱼ = 0.0009765625
+SW2 satisfied for αⱼ = 0.0009765625
+SW1 satisfied for αⱼ = 0.00048828125
+SW2 satisfied for αⱼ = 0.00048828125
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 3.0517578125e-5
+SW2 satisfied for αⱼ = 3.0517578125e-5
+SW1 satisfied for αⱼ = 0.001953125
+SW2 satisfied for αⱼ = 0.001953125
+SW1 satisfied for αⱼ = 0.0009765625
+SW2 satisfied for αⱼ = 0.0009765625
+SW1 satisfied for αⱼ = 0.001953125
+SW2 satisfied for αⱼ = 0.001953125
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.015625
+SW2 satisfied for αⱼ = 0.015625
+SW1 satisfied for αⱼ = 6.103515625e-5
+SW2 satisfied for αⱼ = 6.103515625e-5
+SW1 satisfied for αⱼ = 0.0009765625
+SW2 satisfied for αⱼ = 0.0009765625
+SW1 satisfied for αⱼ = 0.00048828125
+SW2 satisfied for αⱼ = 0.00048828125
+SW1 satisfied for αⱼ = 0.0625
+SW2 satisfied for αⱼ = 0.0625
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 6.103515625e-5
+SW2 satisfied for αⱼ = 6.103515625e-5
+SW1 satisfied for αⱼ = 0.00390625
+SW2 satisfied for αⱼ = 0.00390625
+SW1 satisfied for αⱼ = 0.001953125
+SW2 satisfied for αⱼ = 0.001953125
+SW1 satisfied for αⱼ = 0.03125
+SW2 satisfied for αⱼ = 0.03125
+SW1 satisfied for αⱼ = 0.125
+SW2 satisfied for αⱼ = 0.125
+SW1 satisfied for αⱼ = 0.015625
+SW2 satisfied for αⱼ = 0.015625

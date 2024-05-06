@@ -2,19 +2,18 @@
 Solver run has concluded.
 Function solved for: alpTestFunction01()
 Cause(s) for stopping:
-Change in decision variables too small!
-Convergence achieved in 15 iterations 😄
+Convergence achieved in 24 iterations 😄
 ****************************
 Method Used: AugmentedLagrangian
 
 ****************************
-Optimal function value = 1.5278640450015306
+Optimal function value = 1.5278642373975864
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.44721296708174946
-x☆[2] = 0.8944275075256785
-x☆[3] = 0.9919021359484709
-x☆[4] = 0.8366603681417479
+x☆[1] = 0.44742709213621873
+x☆[2] = 0.8943202789011451
+x☆[3] = 0.9919129671105964
+x☆[4] = 0.8365452146245731
 ***************************
 Number of fevals = 1
 Number of gevals = 0

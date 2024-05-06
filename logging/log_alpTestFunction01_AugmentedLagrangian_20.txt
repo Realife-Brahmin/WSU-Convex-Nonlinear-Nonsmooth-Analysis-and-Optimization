@@ -1,5 +1,5 @@
-Starting with initial point w = [0.04577035378388816, 0.37347321561792146, 0.608641718097238, 0.1697881583505525].
-which has fval = 3.5561435980300304
+Starting with initial point w = [0.19105119667880488, 0.2879269722349532, 0.6329078833487113, 0.6830216199267056].
+which has fval = 3.5855922187953686
 *************************
 ----------
 Iteration k = 0
@@ -43,13 +43,5 @@ Iteration k = 18
 Iteration k = 19
 ----------
 Iteration k = 20
-----------
-Iteration k = 21
-----------
-Iteration k = 22
-----------
-Iteration k = 23
-----------
-Iteration k = 24
 **************************************************
-Convergence achieved in 24 iterations 😄
+Failed to converge despite 20 iterations! 😢

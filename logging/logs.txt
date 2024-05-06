@@ -2,134 +2,101 @@ Existing log file at './logging/logs.txt' removed.
 You are currently using 16 threads.
 Your machine has a total of 12 available threads.
 *************************
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
 Problem (pr::NamedTuple) generated
-Let's try solving for the Augmented Lagrangian problem with λ = [0.6520495624318424, 0.5736886013451411, 0.613632954606227, 0.7814479831804608, 0.5061182140677172, 0.8826639101164653, 0.22293919758033165] and μ = 1.0.
-From the current point wk = [0.8875, 0.7565130260521041, 0.9440459110473458, 0.32723373200060357, 0.7878889043163191, 0.8513292814842016, 0.6006349858090984, 0.2310146797994973, 0.7360661305459952]
+Let's try solving for the Augmented Lagrangian problem with λ = [0.7252540543466499, 0.9837065776249031, 0.7405730861676177] and μ = 1.0.
+From the current point wk = [0.04577035378388816, 0.37347321561792146, 0.608641718097238, 0.1697881583505525]
 Calling Unconstrained Solver as a subroutine for ALP.
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-Change of size 41.95950504596096 exceeds tolerance, so will update λ and μ.
-Let's try solving for the Augmented Lagrangian problem with λ = [32.96762360602768, 330.66610330024963, 640.1760310587512, 78.07559056549157, 194.08407855654477, 236.89391423037122, 10.108529679161823] and μ = 1.0177610354573439.
-From the current point wk = [10.199283891032511, 6.805376986418558, -9.24924004203277, -17.913490190576262, -25.17457100182131, -9.356692085616185, 14.266297495619161, 15.582574476211347, 0.702053001270701]
+Change of size 1.4507345023945615 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-0.03362015266882068, 0.4454963696072344, 0.08352775595169704] and μ = 1.820849986238988.
+From the current point wk = [0.5758781013508336, 1.1946709251505327, 0.9205663418077006, 1.1954361112997967]
 Calling Unconstrained Solver as a subroutine for ALP.
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-SW1 NOT satisfied. αⱼ ↓
-Line search failed... Bad direction or optimal point?
-Change of size 2.501841349678841e12 exceeds tolerance, so will update λ and μ.
+Change of size 0.1619699121958727 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.0812097102017046, -0.0766875472992069, -0.2584574364728975] and μ = 3.3154946723865226.
+From the current point wk = [0.6315531478632544, 1.0846522879240814, 1.0245842462428691, 1.2099521945294123]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.5697366721089329 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-0.5233887573118997, 0.25656981285613095, 0.4233094905144625] and μ = 6.037018428590438.
+From the current point wk = [0.25303550699352134, 0.8761999530467572, 0.9964517920703264, 0.8397084097029887]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.2689496167879453 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.5327272156085665, 0.13109203115235443, 0.03136422241998038] and μ = 10.992504922623414.
+From the current point wk = [0.45461070293634925, 0.9800615578080343, 1.0262707389624524, 0.9812178942390084]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.207140545230898 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.152531875864006, 0.1595067100571094, 0.4796376416388382] and μ = 20.01570243709085.
+From the current point wk = [0.4602594779679806, 0.8680866511009759, 0.9839575064800904, 0.8122607770641617]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.06663197694063656 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.3494181948625414, -0.06425362846627608, -0.20057393387223016] and μ = 36.445591507140556.
+From the current point wk = [0.4206830981900681, 0.9126129102324674, 0.9878682878794705, 0.8418521364667558]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.0556166270388403 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.3975819492856278, 0.06365097504591472, 0.09708844800706445] and μ = 66.36195479424866.
+From the current point wk = [0.4673072532276853, 0.8848420513962322, 0.995188544654211, 0.8321263660368382]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.03123597614303118 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.1771303490086904, -0.1342820996267206, -0.09979924762081446] and μ = 120.83516447390002.
+From the current point wk = [0.4391675022250406, 0.896554486568689, 0.9890769724128672, 0.8351772947785497]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.020766775653837798 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.3559262400101713, -0.032541895798311696, 0.10273359359487316] and μ = 220.0227075694867.
+From the current point wk = [0.45821553922520203, 0.8896730789012919, 0.993339150032748, 0.8334710333832803]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.013158450662905491 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.3163895019572285, -0.10557326287314693, -0.13823856483907515] and μ = 400.62834405016474.
+From the current point wk = [0.4464797840619768, 0.8946933041694238, 0.9916473828725343, 0.8361825157693161]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.00204623813457395 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.2131784083091217, 0.059290432348789154, 0.1516059937935077] and μ = 729.484114750691.
+From the current point wk = [0.4482482815655299, 0.8937649887018382, 0.9920894464136288, 0.8362306541281086]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.0034300730916762613 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.2795766833706017, -0.10843457438955749, -0.14336718960066785] and μ = 1328.281140305356.
+From the current point wk = [0.4454812467839153, 0.8953421020083646, 0.9917255216132721, 0.8374509787937772]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.005941739188123912 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.2658155189455451, 0.05082752016554272, 0.05479366712708411] and μ = 2418.6006960465147.
+From the current point wk = [0.4503138043799395, 0.8928645571728765, 0.9921190589824153, 0.8350724179709201]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.005325936803352676 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.251422037681089, -0.14430069979810084, -0.10156938383782768] and μ = 4403.909044113903.
+From the current point wk = [0.4459868603990248, 0.8950361831740555, 0.9917984675469607, 0.8372688742672868]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.004210434830902076 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.230490266090048, 0.12791380667915164, 0.1169393617952145] and μ = 8018.857722372555.
+From the current point wk = [0.4494011823549559, 0.8933273892027525, 0.9920438011365458, 0.8355110342176862]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.003755538313142764 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.4796092342389477, -0.40120832702557163, -0.3983667944725635] and μ = 14601.13697343447.
+From the current point wk = [0.4463751765938818, 0.8948632679694926, 0.9918356181905067, 0.8371063691136517]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.00339488197493665 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.1617242748589054, 0.17518123274851605, 0.3213660232573352] and μ = 26586.480057151733.
+From the current point wk = [0.4491014555159035, 0.8934685844541526, 0.9920122396338461, 0.8356516218432017]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.003269633119098238 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.7833768372404903, -0.6596983616308182, -1.0167426209094566] and μ = 48409.991846207864.
+From the current point wk = [0.4464739167365913, 0.8948097138249267, 0.9918558145694384, 0.8370528512700932]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.002716075777570234 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.151434109433147, 0.05087416939048983, 0.5481545518434172] and μ = 88147.3329869971.
+From the current point wk = [0.44865795237028416, 0.8936962503008932, 0.9919793665410072, 0.8358901002773041]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.0012405431205598251 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.6062427462250173, -0.5191223996168421, -1.221490837934359] and μ = 160503.07005637718.
+From the current point wk = [0.44765893064654916, 0.8942072698507216, 0.9919228749244119, 0.8364160000267065]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.0015250178603722266 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.513610796301244, -0.08375163000934965, 0.25984146592638924] and μ = 292252.01290346973.
+From the current point wk = [0.44643172459544905, 0.8948173769768148, 0.9918641569133263, 0.8370823079678733]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.001350879808696167 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.3086361103289128, -0.2097266793550074, -0.9229211735957814] and μ = 532147.0736735994.
+From the current point wk = [0.447518379999062, 0.8942743416872863, 0.9919171462856673, 0.8364937834636365]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.0005275702841790257 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [-1.581414100276724, -0.30893928883821226, 0.05217444661748749] and μ = 968959.9917756912.
+From the current point wk = [0.4470949964665982, 0.8944867672209605, 0.9918962442373196, 0.8367251171754151]
+Calling Unconstrained Solver as a subroutine for ALP.
+Change of size 0.0004130986283029233 exceeds tolerance, so will update λ and μ.
+μ has exceeded the limit of 1.0e6 !

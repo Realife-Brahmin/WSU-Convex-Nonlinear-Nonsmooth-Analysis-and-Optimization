@@ -163,10 +163,10 @@ function optimize2(pr;
         # @show xkm1, xk, fkm1, fk, gkm1, gk, gmagkm1, gmagk
         myprintln(printOrNot, "Iteration $(k): x = $(xk) is a better point with new fval = $(fk).", log_path=log_txt)
 
-        if !usingCGD && !justRestarted && abs(fk - fkm1) < dftol
-            push!(causeForStopping, "Barely changing fval")
-            keepIterationsGoing = false
-        end
+        # if !usingCGD && !justRestarted && abs(fk - fkm1) < dftol
+        #     push!(causeForStopping, "Barely changing fval")
+        #     keepIterationsGoing = false
+        # end
         if !usingCGD && !justRestarted && gmagkm1 < gtol
             push!(causeForStopping, "Too small gradient at previous step.")
             keepIterationsGoing = false

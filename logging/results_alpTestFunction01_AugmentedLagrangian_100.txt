@@ -2,18 +2,18 @@
 Solver run has concluded.
 Function solved for: alpTestFunction01()
 Cause(s) for stopping:
-Convergence achieved in 24 iterations 😄
+Convergence achieved in 23 iterations 😄
 ****************************
 Method Used: AugmentedLagrangian
 
 ****************************
-Optimal function value = 1.5278642373975864
+Optimal function value = 19788.000390137517
 ***************************
 Optimal Nonzero Variables:
-x☆[1] = 0.44742709213621873
-x☆[2] = 0.8943202789011451
-x☆[3] = 0.9919129671105964
-x☆[4] = 0.8365452146245731
+x☆[1] = 0.80910924090942
+x☆[2] = -0.5025892793894692
+x☆[3] = 0.0
+x☆[4] = 0.0
 ***************************
 Number of fevals = 1
 Number of gevals = 0

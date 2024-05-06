@@ -87,8 +87,8 @@ function cI01(x, p;
 end
 
 mI = 2
-y0 = rand(mI)
-# y0 = zeros(mI)
+# y0 = rand(mI)
+y0 = zeros(mI)
 yk = y0
 m = mE+mI
 w0 = vcat(x0, y0)

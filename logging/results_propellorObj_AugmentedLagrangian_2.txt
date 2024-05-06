@@ -1,0 +1,29 @@
+****************************
+Solver run has concluded.
+Function solved for: propellorObj()
+Cause(s) for stopping:
+Iteration limit reached!
+Failed to converge despite 2 iterations! 😢
+****************************
+Method Used: AugmentedLagrangian
+
+****************************
+Best function value = -3.0926781460220903e49
+***************************
+Best Known Nonzero Variables:
+x☆[1] = 1.9983290466705454e12
+x☆[2] = 4.97537316816047e11
+x☆[3] = -3.482458598463953e11
+x☆[4] = 4.600152200999615e11
+x☆[5] = 1.2465122692223428e12
+x☆[6] = 5.669074608702342e10
+x☆[7] = -2.1517129740133746e11
+x☆[8] = -2.866233264553836e11
+x☆[9] = -5.4808620546076e8
+***************************
+Number of fevals = 1
+Number of gevals = 0
+Number of evals = 1
+**************************************************
+Tolerance critera used:
+dx Tolerance = 1.0e-8

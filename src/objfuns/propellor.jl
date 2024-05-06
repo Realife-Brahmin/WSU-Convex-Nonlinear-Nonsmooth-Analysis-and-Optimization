@@ -404,109 +404,113 @@ pDictALP = Dict(:n=>n, :m=>m, :mE=>mE, :econ=>econ, :mI=>mI, :icon=>icon, :NT=>N
 
 pr = generate_pr(objective, w0, params=pDictALP, problemType=problemType; objectiveString=objectiveString);
 
-slackifyInequalities = false
-# slackifyInequalities = true
+# Check my functions against JuMP+Ipopt
+# begin
+#     slackifyInequalities = false
+#     # slackifyInequalities = true
 
-using JuMP, Ipopt
-import ForwardDiff as FD
+#     using JuMP, Ipopt
+#     import ForwardDiff as FD
 
-model = Model(Ipopt.Optimizer)
+#     model = Model(Ipopt.Optimizer)
 
-@variable(model, x[i=1:n], start = x0[i])
-@variable(model, y[i=1:mI], start = y0[i])
+#     @variable(model, x[i=1:n], start = x0[i])
+#     @variable(model, y[i=1:mI], start = y0[i])
 
-dynamic_polyQ = sum(aQ[r] * prod(x[j]^pwQ[r][j] for j in 1:3) for r in eachindex(aQ))
+#     dynamic_polyQ = sum(aQ[r] * prod(x[j]^pwQ[r][j] for j in 1:3) for r in eachindex(aQ))
 
-dynamic_polyT = sum(aT[r] * prod(x[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
+#     dynamic_polyT = sum(aT[r] * prod(x[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
 
-# Assuming `dynamic_polyQ` and `dynamic_polyT` are defined similarly as before
+#     # Assuming `dynamic_polyQ` and `dynamic_polyT` are defined similarly as before
 
-function objective_function(x_vals)
-    # Assuming aQ, pwQ are accessible here and x_vals is a vector [x1, x2, x3]
-    dynamic_polyQ = sum(aQ[r] * prod(x_vals[j]^pwQ[r][j] for j in 1:3) for r in eachindex(aQ))
-    return x_vals[1] * x_vals[3] * dynamic_polyQ
-end
+#     function objective_function(x_vals)
+#         # Assuming aQ, pwQ are accessible here and x_vals is a vector [x1, x2, x3]
+#         dynamic_polyQ = sum(aQ[r] * prod(x_vals[j]^pwQ[r][j] for j in 1:3) for r in eachindex(aQ))
+#         return x_vals[1] * x_vals[3] * dynamic_polyQ
+#     end
 
-@expression(model, objfun, x[1] * x[3] * dynamic_polyQ)
-@expression(model, cE, dynamic_polyT - T0)
-@expression(model, cI, vcat(ub .- x, x .- lb))
+#     @expression(model, objfun, x[1] * x[3] * dynamic_polyQ)
+#     @expression(model, cE, dynamic_polyT - T0)
+#     @expression(model, cI, vcat(ub .- x, x .- lb))
 
-@objective(model, Min, objfun)
-
-
-# Store constraint references
-eq_constraint_ref = @constraint(model, dynamic_polyT - T0 == 0)
-
-# Inequality constraints with slack variables or bounds
-ineq_constraint_refs = []
-if slackifyInequalities
-    for i in 1:3
-        push!(ineq_constraint_refs, @constraint(model, ub[i] - x[i] - y[i+3]^2 == 0))
-    end
-    for i in 1:3
-        push!(ineq_constraint_refs, @constraint(model, x[i] - lb[i] - y[i]^2 == 0))
-    end
-else
-    for i in 1:n
-        push!(ineq_constraint_refs, @constraint(model, ub[i] - x[i] >= 0))
-    end
-    for i in 1:n
-        push!(ineq_constraint_refs, @constraint(model, x[i] - lb[i] >= 0))
-    end
-end
-
-optimize!(model)
-
-xopt = [value(x[i]) for i ∈ 1:n]
-yopt = [value(y[i]) for i ∈ 1:mI]
-fopt = objective_value(model)
-println("Optimal Variables x: ", xopt)
-println("Optimal Slack Variables y: ", yopt)
-println("Optimal objective value: ", fopt)
+#     @objective(model, Min, objfun)
 
 
-gopt = gradient_obj = FD.gradient(objective_function, xopt)
-println("Gradient of the objective at the optimum: ", gradient_obj)
+#     # Store constraint references
+#     eq_constraint_ref = @constraint(model, dynamic_polyT - T0 == 0)
 
-function cEf(x, pDict)
-    @unpack mE, pwT, aT, T0 = pDict
-    cE = Vector{eltype(x)}(undef, mE)  # Use the same type as `x` elements for compatibility with autodiff
-    dynamic_polyT = sum(aT[r] * prod(x[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
-    cE[1] = dynamic_polyT - T0
-    return cE
-end
+#     # Inequality constraints with slack variables or bounds
+#     ineq_constraint_refs = []
+#     if slackifyInequalities
+#         for i in 1:3
+#             push!(ineq_constraint_refs, @constraint(model, ub[i] - x[i] - y[i+3]^2 == 0))
+#         end
+#         for i in 1:3
+#             push!(ineq_constraint_refs, @constraint(model, x[i] - lb[i] - y[i]^2 == 0))
+#         end
+#     else
+#         for i in 1:n
+#             push!(ineq_constraint_refs, @constraint(model, ub[i] - x[i] >= 0))
+#         end
+#         for i in 1:n
+#             push!(ineq_constraint_refs, @constraint(model, x[i] - lb[i] >= 0))
+#         end
+#     end
 
-cEopt = cEf(xopt, pDictALP)
-hEopt = FD.jacobian(x -> cEf(x, pDictALP), xopt)
+#     optimize!(model)
 
-function cIf(x, pDictALP)
-    @unpack n, lb, ub, mI = pDictALP
-    # Ensure `cI` is initialized correctly within the function scope
-    cI = Vector{eltype(x)}(undef, mI)  # Use the same type as `x` elements for compatibility with autodiff
+#     xopt = [value(x[i]) for i ∈ 1:n]
+#     yopt = [value(y[i]) for i ∈ 1:mI]
+#     fopt = objective_value(model)
+#     println("Optimal Variables x: ", xopt)
+#     println("Optimal Slack Variables y: ", yopt)
+#     println("Optimal objective value: ", fopt)
 
-    # Fill in the values based on constraints
-    for i in 1:3
-        cI[i] = ub[i] - x[i]      # Constraints for upper bounds
-        cI[i+3] = x[i] - lb[i]    # Constraints for lower bounds
-    end
-    return cI
-end
 
-cIopt = cIf(xopt, pDictALP)
-hIopt = FD.jacobian(x -> cIf(x, pDictALP), xopt)
+#     gopt = gradient_obj = FD.gradient(objective_function, xopt)
+#     println("Gradient of the objective at the optimum: ", gradient_obj)
 
-using Test
+#     function cEf(x, pDict)
+#         @unpack mE, pwT, aT, T0 = pDict
+#         cE = Vector{eltype(x)}(undef, mE)  # Use the same type as `x` elements for compatibility with autodiff
+#         dynamic_polyT = sum(aT[r] * prod(x[j]^pwT[r][j] for j in 1:3) for r in eachindex(aT))
+#         cE[1] = dynamic_polyT - T0
+#         return cE
+#     end
 
-fmine, gmine = objective(xopt, pDictALP, getGradientToo=true)
-cEmine, hEmine = econ(xopt, pDictALP, getGradientToo=true)
-cImine, hImine = icon(xopt, pDictALP, getGradientToo=true)
+#     cEopt = cEf(xopt, pDictALP)
+#     hEopt = FD.jacobian(x -> cEf(x, pDictALP), xopt)
 
-@test fmine ≈ fopt
-@test gmine ≈ gopt
-@test cEmine ≈ cEopt
-@test hEmine ≈ hEopt
-@test cImine ≈ cIopt
-@test hImine ≈ hIopt
+#     function cIf(x, pDictALP)
+#         @unpack n, lb, ub, mI = pDictALP
+#         # Ensure `cI` is initialized correctly within the function scope
+#         cI = Vector{eltype(x)}(undef, mI)  # Use the same type as `x` elements for compatibility with autodiff
+
+#         # Fill in the values based on constraints
+#         for i in 1:3
+#             cI[i] = ub[i] - x[i]      # Constraints for upper bounds
+#             cI[i+3] = x[i] - lb[i]    # Constraints for lower bounds
+#         end
+#         return cI
+#     end
+
+#     cIopt = cIf(xopt, pDictALP)
+#     hIopt = FD.jacobian(x -> cIf(x, pDictALP), xopt)
+
+#     using Test
+
+#     fmine, gmine = objective(xopt, pDictALP, getGradientToo=true)
+#     cEmine, hEmine = econ(xopt, pDictALP, getGradientToo=true)
+#     cImine, hImine = icon(xopt, pDictALP, getGradientToo=true)
+
+#     @test fmine ≈ fopt
+#     @test gmine ≈ gopt
+#     @test cEmine ≈ cEopt
+#     @test hEmine ≈ hEopt
+#     @test cImine ≈ cIopt
+#     @test hImine ≈ hIopt
+
+# end
 
 # f, g = propellorObj(xk, pDictALP)
 # diff_FOM = f - Q0*xk[1]*xk[3]

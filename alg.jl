@@ -16,7 +16,7 @@ function create_algorithm_settings(;
         dftol=1e-15,
         dxtol=1e-10,
         lambda=1,
-        lambdaMax=100,
+        lambdaMax=1,
         linesearch="StrongWolfe",
         c1=1e-4,
         c2=0.9,
@@ -92,7 +92,7 @@ function create_algorithm_settings(;
                 alg_settings[:dxtol] = 1e-8
                 alg_settings[:mutol] = 1e6
                 alg_settings[:progress] = 1
-                alg_settings[:maxiter] = 100
+                alg_settings[:maxiter] = 2
 
         elseif alg_settings[:method] == "ConjugateGradientDescent"
                 # Adjustments for ConjugateGradientDescent

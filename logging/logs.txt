@@ -1,42 +1,135 @@
 Existing log file at './logging/logs.txt' removed.
 You are currently using 16 threads.
-Your machine has a total of 20 available threads.
+Your machine has a total of 12 available threads.
 *************************
 Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
 Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
-Best polynomial fits for Thrust T and Torque Q have been found to be 2 and 2 respectively.
-Problem (pr::NamedTuple) generated
+Let's try solving for the Augmented Lagrangian problem with λ = [0.6520495624318424, 0.5736886013451411, 0.613632954606227, 0.7814479831804608, 0.5061182140677172, 0.8826639101164653, 0.22293919758033165] and μ = 1.0.
+From the current point wk = [0.8875, 0.7565130260521041, 0.9440459110473458, 0.32723373200060357, 0.7878889043163191, 0.8513292814842016, 0.6006349858090984, 0.2310146797994973, 0.7360661305459952]
+Calling Unconstrained Solver as a subroutine for ALP.
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+Change of size 41.95950504596096 exceeds tolerance, so will update λ and μ.
+Let's try solving for the Augmented Lagrangian problem with λ = [32.96762360602768, 330.66610330024963, 640.1760310587512, 78.07559056549157, 194.08407855654477, 236.89391423037122, 10.108529679161823] and μ = 1.0177610354573439.
+From the current point wk = [10.199283891032511, 6.805376986418558, -9.24924004203277, -17.913490190576262, -25.17457100182131, -9.356692085616185, 14.266297495619161, 15.582574476211347, 0.702053001270701]
+Calling Unconstrained Solver as a subroutine for ALP.
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+SW1 NOT satisfied. αⱼ ↓
+Line search failed... Bad direction or optimal point?
+Change of size 2.501841349678841e12 exceeds tolerance, so will update λ and μ.
